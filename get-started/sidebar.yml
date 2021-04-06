@@ -1,6 +1,8 @@
 section: get-started
 title: Get started
 entries:
+  - title: Install Astra Enterprise
+  - title: Set up Astra Enterprise
   - title: Get started with Astra Enterprise
     entries:
       - title: Quick start

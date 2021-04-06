@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: setup/setup_overview.html
+permalink: get-started/setup_overview.html
 keywords:
 summary:
 ---
@@ -8,7 +8,7 @@ summary:
 = Set up Astra Enterprise overview
 :hardbreaks:
 :icons: font
-:imagesdir: ../media/setup/
+:imagesdir: ../media/get-started/
 
 After you install Astra Enterprise, you'll want to set up some initial configurations.
 

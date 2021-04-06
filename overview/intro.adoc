@@ -29,7 +29,7 @@ Both Astra Service and Astra Enterprise offer critical capabilities for Kubernet
 * Identify the health of your apps
 
 
-link:requirements.html[Learn about cluster requirements].
+link:../concepts/requirements.html[Learn about cluster requirements].
 
 == How Astra Enterprise works
 

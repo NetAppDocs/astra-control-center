@@ -6,7 +6,6 @@ sidebar:
     - section: release-notes
     - section: concepts
     - section: get-started
-    - section: setup
     - section: use
     - section: solutions
     - section: support
@@ -20,11 +19,11 @@ homepage:
       links:
         - title: Learn about Astra Service
           url: https://docs.netapp.com/us-en/get-started/intro.html
-        - title: What's new with Astra Service
+        - title: What's new in Astra Service
           url: https://docs.netapp.com/us-en/release-notes/whats-new.html
         - title: Try it out
-        - title: Get started with Astra Service & Google Cloud
-        - title: Get started with Astra Service & Microsoft Azure
+        - title: Get started with Google Cloud
+        - title: Get started with Microsoft Azure
     - title: Use Astra Service
       links:
         - title: Manage accounts
@@ -45,10 +44,10 @@ homepage:
       links:
         - title: Learn about Astra Enterprise
           url: /overview/intro.html
-        - title: What's new with Astra Enterprise
+        - title: What's new in Astra Enterprise
           url: /release-notes/whats-new.html
         - title: Try it out
-        - title: Download and install Astra Enterprise
+        - title: Install Astra Enterprise
     - title: Use Astra Enterprise
       links:
         - title: Manage accounts
@@ -58,9 +57,9 @@ homepage:
           url: /use/protect-apps.html
         - title: Migrate apps
           url: /use/clone-apps.html
-    - title: Use Astra Entrprise in VMware
+    - title: Use Astra Enterprise in VMware
       links:
-        - title: Get started using Astra Enterprise in VMware
+        - title: Get started in VMware
         - title: Manage apps using VMware
         - title: Protect apps using VMware
         - title: Migrate apps using VMware
@@ -70,13 +69,12 @@ homepage:
         - title: API reference
     - title: Demos & tutorials
       links:
-        - title: Astra Enterprise videos
+        - title: Astra videos
           url: /get-started/videos.html
-        - title: NetApp University Astra training (login required)
+        - title: NetApp University training (login required)
     - title: Blogs & community
       links:
         - title: Slack
-          summary: Ask questions, exchange ideas, and share best practices.
           url: https://netapppub.slack.com/#astra
         - title: NetApp Community
         - title: Kubernetes Hub
