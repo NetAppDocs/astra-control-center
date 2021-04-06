@@ -1,0 +1,13 @@
+---
+sidebar: sidebar
+permalink: concepts/architecture.html
+keywords: astra, astra enterprise, architecture
+summary:
+---
+
+= Architecture and components
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/concepts/
+
+Here is an overview of the various components of the Astra Enterprise environment.

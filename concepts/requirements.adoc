@@ -1,0 +1,63 @@
+---
+sidebar: sidebar
+permalink: concepts/requirements.html
+keywords: kubernetes cluster, cluster requirements, version requirements, supported versions, apps, supported apps, mariadb, mysql, postgres, kubernetes version, ubuntu, image type, networking
+summary: Get started by verifying support for your Kubernetes clusters, apps, and web browser.
+---
+
+= Requirements
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/concepts/
+
+Get started by verifying support for your Kubernetes clusters, apps, licenses, and web browser.
+
+== Kubernetes cluster requirements
+
+A Kubernetes cluster must meet the following requirements so you can discover and manage it from Astra Enterprise.
+
+Kubernetes deployment:: Astra Enterprise supports Kubernetes clusters. The cluster should already exist in your environment.
++
+On-prem Kubernetes clusters and clusters managed by other cloud managed services are not supported at this time.
+
+Kubernetes version:: A cluster must be running Kubernetes version 1.17 or later.
+
+Image type:: The image type for each worker node must be Ubuntu.
+
+Cluster state:: Clusters must be running in a healthy state and have at least one online worker node.
+
+Private clusters:: If the cluster is private, it must have the https://cloud.google.com/kubernetes-engine/docs/concepts/private-cluster-concept[master authorized network^] set to allow the Astra IP addresses:
+*	54.164.233.140/32
+*	3.218.120.204/32
+*	34.193.99.138/32
+
+== Supported apps
+
+Astra Enterprise supports all applications running on your Kubernetes clusters. link:../release-notes/known-limitations.html
+
+NetApp has validated some apps to ensure the safety and consistency of the snapshots and backups. link:../learn/validated-vs-standard.html[Learn the difference between a validated app and a standard app].
+
+No matter which type of app that you use with Astra Enterprise, you should always test the backup and restore workflow yourself to ensure that you can meet your disaster recovery requirements.
+
+== License
+
+Astra Enterprise requires an Astra Enterprise license.
+
+You can use Astra Enterprise in a 90-day trial with an evaluation license.
+
+== Load balancing
+
+To support successful load balancing, you should use a load balancer with an external IP.
+
+== Trident
+
+Astra Enterprise requires that Trident already be installed and configured to work with ONTAP as the storage backend.
+
+== Networking
+
+
+
+
+== Supported web browsers
+
+Astra Enterprise supports recent versions of Firefox, Safari, and Chrome with a minimum resolution of 1280 x 720.

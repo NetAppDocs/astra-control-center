@@ -1,0 +1,20 @@
+---
+sidebar: sidebar
+permalink: setup/setup_overview.html
+keywords:
+summary:
+---
+
+= Set up Astra Enterprise overview
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/setup/
+
+After you install Astra Enterprise, you'll want to set up some initial configurations.
+
+
+== Add a license
+
+== Add a bucket
+
+== Set up email notifications

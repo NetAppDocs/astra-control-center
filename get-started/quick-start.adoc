@@ -1,0 +1,55 @@
+---
+sidebar: sidebar
+permalink: get-started/quick-start.html
+keywords: get started, quick start
+summary: Get started with Astra in a few steps.
+---
+
+= Quick start for Astra Enterprise
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/get-started/
+
+This page provides a high-level overview of the steps that you need to complete to get started with Astra Enterprise. The links within each step take you to a page that provides more details.
+
+==== image:number1.png[Number 1] Review Kubernetes cluster requirements
+
+[role="quick-margin-list"]
+* Astra supports Kubernetes clusters with Trident support of an ONTAP storage backend.
+* Clusters must be running a healthy state, with at least one online worker node.
+* The cluster must be running Kubernetes version 1.17 or later.
+* The image type for each worker node must be **Ubuntu**.
+
+[role="quick-margin-para"]
+link:requirements.html[Learn more about the Kubernetes cluster requirements].
+
+==== image:number2.png[Number 2] Download and install Astra Enterprise
+[role="quick-margin-list"]
+* You install Astra Enterprise in your local environment and let Astra Enterprise do this:
+** Discover your Kubernetes clusters.
+** Discover your Trident configuration backed by the ONTAP storage backend.
++
+For our first go, you'll install the images on OpenShift registry. We'll add more options later.
+
+[role="quick-margin-para"]
+link:../concepts/requirements.html[Learn more about Astra Enterprise requirements].
+
+==== image:number3.png[Number 3] Complete some initial setup tasks
+
+[role="quick-margin-list"]
+.. Create an Astra Admin account
+.. Set up licensing
+.. Add an object store bucket that will store your app backups.
+.. Add users and configure role-based access control (RBAC)
+
+
+[role="quick-margin-para"]
+link:../setup/setup.html[Learn more about initial setup process].
+
+==== image:number4.png[Number 4] Add your first compute
+
+[role="quick-margin-para"]
+After you log in, click *Add Compute* to start managing compute with Astra Enterprise.
+
+[role="quick-margin-para"]
+link:add-first-cluster.html[Learn more about adding compute].
