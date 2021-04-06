@@ -14,7 +14,10 @@ After you install Astra Enterprise, you'll want to set up some initial configura
 
 
 == Add a license
+TBD
 
 == Add a bucket
+TBD
 
 == Set up email notifications
+TBD 
