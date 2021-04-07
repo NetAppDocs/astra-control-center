@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: concepts/requirements.html
+permalink: learn/requirements.html
 keywords: kubernetes cluster, cluster requirements, version requirements, supported versions, apps, supported apps, mariadb, mysql, postgres, kubernetes version, ubuntu, image type, networking
 summary: Get started by verifying support for your Kubernetes clusters, apps, and web browser.
 ---
@@ -55,7 +55,7 @@ Astra Enterprise requires that Trident already be installed and configured to wo
 
 == Networking
 
-TBD 
+TBD
 
 
 

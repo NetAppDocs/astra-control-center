@@ -1,12 +1,11 @@
 sidebar:
   entries:
-    - title: Astra Enterprise docs
+    - title: Astra docs
       url: /index.html
-    - section: overview
     - section: release-notes
-    - section: concepts
     - section: get-started
     - section: use
+    - section: learn
     - section: solutions
     - section: support
     - title: Legal notices
@@ -14,69 +13,54 @@ sidebar:
 
 homepage:
   tiles:
-    - title: Get started with Astra Service
+    - title: Get started
       #image: ./media/outline_directions_run_black_18dp.png
       links:
-        - title: Learn about Astra Service
-          url: https://docs.netapp.com/us-en/get-started/intro.html
-        - title: What's new in Astra Service
-          url: https://docs.netapp.com/us-en/release-notes/whats-new.html
-        - title: Try it out
-        - title: Get started with Google Cloud
-        - title: Get started with Microsoft Azure
-    - title: Use Astra Service
-      links:
-        - title: Manage accounts
-        - title: Manage apps
-          url: https://docs.netapp.com/us-en/use/manage-apps.html
-        - title: Protect apps
-          url: https://docs.netapp.com/us-en/use/protect-apps.html
-        - title: Migrate apps
-          url: https://docs.netapp.com/us-en/use/clone-apps.html
-        - title: Set up billing
-          url: https://docs.netapp.com/us-en/use/set-up-billing.html
-    - title: Use Astra Service <unique thing>
-      links:
-        - title: Do something in Astra Service
-        - title: Do something in Astra Service
-    - title: Get started with Astra Enterprise
-      #image: ./media/outline_directions_run_black_18dp.png
-      links:
-        - title: Learn about Astra Enterprise
-          url: /overview/intro.html
-        - title: What's new in Astra Enterprise
+        - title: Learn about Astra
+          summary: Understand how Astra works.
+          url: /get-started/intro.html
+        - title: What's new
+          summary: Learn what's new with Astra.
           url: /release-notes/whats-new.html
-        - title: Try it out
-        - title: Install Astra Enterprise
-    - title: Use Astra Enterprise
+        - title: Quick start
+          summary: Get started quickly with Astra.
+          url: /get-started/quick-start.html
+        - title: FAQ
+          summary: Read frequently asked questions.
+          url: /get-started/faq.html
+    - title: Use Astra
       links:
-        - title: Manage accounts
-        - title: Manage apps
+        - title: Manage applications
+          summary: Start managing your apps from Astra.
           url: /use/manage-apps.html
-        - title: Protect apps
+        - title: Protect your apps
+          summary: Create recovery points for your apps in case of failure.
           url: /use/protect-apps.html
-        - title: Migrate apps
+        - title: Migrate an app
+          summary: Migrate an app to another cluster.
           url: /use/clone-apps.html
-    - title: Use Astra Enterprise in VMware
-      links:
-        - title: Get started in VMware
-        - title: Manage apps using VMware
-        - title: Protect apps using VMware
-        - title: Migrate apps using VMware
-    - title: Use Astra API
-      links:
-        - title: Get started with the Astra API
-        - title: API reference
+        - title: Set up billing
+          summary: Set up billing for the Premium Plan.
+          url: /use/set-up-billing.html
     - title: Demos & tutorials
       links:
         - title: Astra videos
+          summary: Watch videos that show how to use Astra.
           url: /get-started/videos.html
-        - title: NetApp University training (login required)
+        - title: Deploy MariaDB
+          summary: Deploy MariaDB from a Helm chart and register it with Astra.
+          url: /solutions/mariadb-deploy-from-helm-chart.html
+        - title: Deploy MySQL
+          summary: Deploy MySQL from a Helm chart and register it with Astra.
+          url: /solutions/mysql-deploy-from-helm-chart.html
     - title: Blogs & community
       links:
         - title: Slack
+          summary: Ask questions, exchange ideas, and share best practices.
           url: https://netapppub.slack.com/#astra
-        - title: NetApp Community
+        - title: Stateful Lessons for a Multi-Cloud World
+          summary: How Astra provides robust storage, easy-to-consume data services, and application and data portability.
+          url: https://blog.netapp.com/project-astra-stateful-lessons
         - title: Kubernetes Hub
+          summary: A curated collection of blog postings to learn more about Kubernetes and persistent storage.
           url: https://cloud.netapp.com/kubernetes-hub
-        - title: Where to get help
