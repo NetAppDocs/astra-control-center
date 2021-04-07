@@ -1,0 +1,67 @@
+---
+sidebar: sidebar
+permalink: get-started/install_overview.html
+keywords:
+summary:
+---
+
+= Install Astra Enterprise overview
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/get-started/
+
+To install Astra Enterprise, you'll do the following basic steps:
+
+* Download Astra Enterprise from the NetApp Support Site
+* Install Astra Enterprise using the command-line utility.
+* Connect to the Astra UI and complete your setup.
+
+== Prepare for the Astra Enterprise deployment
+Check for any external dependencies and infrastructure needs:
+
+* Obtain a trail license from NetApp.
+* Obtain permissions and instructions on how to load NetApp-supplied images into your organization's local image repository.
+* Obtain the URL of the image registry where you will upload the images.
+* Obtain a Kubernetes cluster that meets the Astra Enterprise requirements.
+* If you will use SSO, obtain SSO integration configuration details.
+* Configure Trident with the ONTAP storage backend.
+* Install an external load balancer and set a static IP or IP range of that load balancer.
+* Acquire an internal domain name that is routed from an internal DNS and point the domain name to the static IP or IP range using internal DNS servers, such as astra.company.com
+* Set a default storage provider in the Kubernetes cluster that is backed by a Trident storage class configured to work with ONTAP.
+
+
+
+== Download Astra Enterprise
+
+. Download the Astra Enterprise images from the NetApp Support Site.
+. Install the images in your local image repository.
+.
+
+== Install Astra Enterprise using the CLI
+
+. Install Astra Enterprise.
++
+Astra Enterprise does the following:
+
+* Obtains the Astra Enterprise images from your local repository and installs Astra Enterprise.
+* Creates a default account.
+* Creates a default admin user.
+* Determines from Kubernetes that all Astra Enterprise pods are running.
+
+
+
+== Connect to the Astra UI
+
+
+. Log into the Astra UI with the default user credentials.
+. Enter a new password.
+.
+
+== Installing Astra Enterprise without access to the Internet
+
+Installing Astra Enterprise requires that you download the installer utility, license and image bundle from the NetApp Support Site and transfer it to the environment you need.
+
+
+== What's next
+
+Complete the deployment by performing some setup tasks.

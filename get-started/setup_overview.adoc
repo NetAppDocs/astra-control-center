@@ -12,12 +12,214 @@ summary:
 
 After you install Astra Enterprise, you'll want to set up some initial configurations.
 
+== Log in to Astra Enterprise
+
+. For the first log in, log in to the Admin account.
+. Select Account Settings.
+.
+
 
 == Add a license
-TBD
+
+Before adding a license, you need to obtain the license information.
+
+=== Obtain a license
+
+. (WHERE do you get the license info???)
+
+=== Add license information with the UI
+
+. From Account Settings, select *Licenses*
+. Select *Add a license*.
+. Paste in the license information.
++
+Astra Enterprise functionality is now enabled.
+
+=== Add license information with the API
+
+. To list licenses, enter the following:
++
+----
+GET /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/licenses?include=name,id
+----
+
+. To add a license, enter the following:
++
+----
+POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/licenses
+----
 
 == Add a bucket
-TBD
+If you want to protect and back up your apps, you will need to add a storage bucket.
+
+=== Add a bucket with the UI
+
+. From the Astra UI, select ???
+. Select a cloud to which you want to add the bucket.
+
+. Enter the following:
++
+* Name: Name of the bucket provider
+* Type: Bucket provider type, such as ONTAP S3, Generic S3, or StorageGRID S3.
+* If you selected an existing bucket, Region and Zone are already filled in.
+* Credentials: Bucket provider credentials
+* IP address or DNS name: For ONTAP S3, the IP address/DNS name also enables you to select the name of an already defined ONTAP storage provider.
+
+
+
+
+=== Add a bucket with the API
+
+. To list bucket providers, enter the following:
++
+----
+GET /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/topology/v1/bucketProviders?include=name,state,id
+----
+
+. To add a bucket, enter the following:
++
+----
+POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/credentials
+POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/topology/v1/bucketProviders
+----
 
 == Set up email notifications
-TBD 
+To receive notifications, you'll need to set up SMTP email notifications.
+
+. From the Astra UI, select *Account Settings*.
+. Select *Notifications*.
+. Select *Set up email server*.
+. Enter or select the following information:
++
+* Server URL
+* Port
+* Secure method: SSL or TLS
+* Keep alive: Yes or No
+* Authentication enabled: Yes or No
+* Username and password
+
+. Enter the SMTP configuration values.
+. Verify the SMTP server by sending a test email to your email address.
+. Select the *Send test email* option.
+
+== Configure SSO
+
+. Prepare PingFederate for use as an SSO provider for Astra Enterprise. See https://docs.pingidentity.com/bundle/pingfederate-102/page/ird1564002990806.html[Configure PingFederate authorization server settings].
+. Enable SSO for Astra Enterprise.
+.. Select *Account Settings*.
+.. Select *Security*.
+.. Select *Configure an OIDC Authentication service* option.
+. Enter the following:
++
+* OIDC URL: The URL of the OIDC authentication service you configured.
+* Client ID: Enter a unique ID that the client provides to the Resource Server to identify itself. This ID is included with every request that the client makes.
+* Name: Enter a descriptive name for the client instance. This name appears when you are prompted for authorization.
+* Certificate: Enter a TLS certificate for communication with the authentication service.
+
+
+== Connect to Cloud Insights
+
+From Cloud Insights, you first obtain an API token, which you will use later in Astra Enterprise.
+
+=== Obtain a Cloud Insights API token key
+. Log into Cloud Insights.
+. Select (WHAT ???)
+
+=== Enter Cloud Insights connection information in Astra Enterprise
+. From the Astra UI, select *Account Settings*.
+. Select *Support*.
+. In the Cloud Insights tile, select *Connect to Cloud Insights*.
+. Enter the following:
++
+* Cloud Insights API key
+* Cloud Insights tenant URL
+
+. Validate the Cloud Insights connection on the Dashboard.
+
+== Add a role
+
+. From the Astra UI, select *Roles*.
+. Select *Add role*.
+. Enter the name of the role and the scope of the role.
+
+== Add users and specify roles
+
+For information about role-based access control, see LINK. ???
+
+=== Add users with the Astra UI
+. From the Astra UI, select *Accounts*.
+. Select *Manage Users and Roles*.
+. Select *Add a user*.
+. Enter the user account information and select a role.
++
+The new user receives an email notification and clicks on the Join link.
+
+
+
+=== Add users with the Astra API
+
+
+. To list user accounts, enter the following:
++
+----
+GET /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/users?include=name,id
+----
+
+. To add a user account, enter the following:
++
+----
+POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/users
+POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/credentials
+POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/roles
+----
+
+== Add a private cloud
+
+You can add, monitor, and remove private clouds in an Astra Enterprise deployment. You might want to add a private cloud when a new geographic site used for data protection is added.
+
+. From the Astra UI, select *Clouds*.
+. Select *Add Private Cloud*.
+. Enter the following:
++
+* A name for the cloud
+* The region of the cloud
+* The zone of the cloud
+
+
+== Add ONTAP storage backend
+
+. From the Astra UI, select *Storage backends*.
+. Select *Import*.
+. Select *ONTAP* as the type of storage to import.
+. Enter the following:
++
+* Name: Name or address of the ONTAP system
+* Username and password: Username and password of the ONTAP admin user
+. From a list of storage VMs from ONTAP, select the storage VM to manage with Astra
+
+== Add a Kubernetes cluster
+
+=== Add a Kubernetes cluster with the Astra UI
+
+. From the Astra UI, select *Clouds*.
+. Select the cloud to which you want to add the cluster.
+. Select *Add Cluster*.
+. Enter the following:
++
+* Name of the cluster
+* Cluster credentials
+
+=== Add a Kubernetes cluster with the Astra API
+
+. To list clusters, enter the following:
++
+----
+GET /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/topology/v1/clouds/2f9e63fa-8ba8-414a-a57c-0f3042b80682/clusters?include=name,id
+----
+
+. To add a cluster, enter the following:
++
+----
+POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/credentials
+POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/topology/v1/clouds/2f9e63fa-8ba8-414a-a57c-0f3042b80682/clusters
+----

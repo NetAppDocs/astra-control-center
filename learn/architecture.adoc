@@ -11,3 +11,27 @@ summary:
 :imagesdir: ../media/concepts/
 
 Here is an overview of the various components of the Astra Enterprise environment.
+
+
+
+== Astra Enterprise components
+
+* *Kubernetes clusters*: Kubernetes is a portable, extensible, open-source platform for managing containerized workloads and services, that facilitates both declarative configuration and automation. Astra provides management services for applications hosted in a Kubernetes cluster.
+
+* *Host disks*: This includes any media attached to the Kubernetes worker nodes and exposed as a block device, such as HDDs, SSDs, and NVMe.
+
+* *Trident*: As a fully supported open source storage provisioner and orchestrator maintained by NetApp, Trident enables you to create storage volumes for containerized applications managed by Docker and Kubernetes. When deployed with Astra Enterprise, Trident includes a configured ONTAP storage backend.
+
+* *ONTAP storage backend*: Astra Enterprise includes an ONTAP AFF and FAS storage backend. As a storage software and hardware platform, ONTAP provides core storage services, support for multiple storage access protocols, and storage management functionality, such as snapshots and mirroring.
+
+* *Cloud Insights*:  A NetApp cloud infrastructure monitoring tool, Cloud Insights is offered as a service. With Cloud Insights, you can monitor performance and utilization for your Kubernetes clusters. Cloud Insights correlates storage usage to workloads.
+
+== Astra interfaces
+
+You can complete tasks using different interfaces:
+
+* *Astra user interface (UI)*: Both Astra Service and Astra Enterprise use the same web-based UI where you can manage, migrate and protect apps. Use the UI to manage user accounts and configuration settings.
+
+* *Astra API*: Both Astra Service and Astra Enterprise use the same Astra API. Using the API, you can perform the same tasks that you would using the UI.
+
+To perform app management, you can also use VMware. Astra manages Kubernetes clusters running within VM guests and enables you to migrate VM apps into Kubernetes clusters that support VM execution.

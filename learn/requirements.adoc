@@ -16,20 +16,25 @@ Get started by verifying support for your Kubernetes clusters, apps, licenses, a
 
 A Kubernetes cluster must meet the following requirements so you can discover and manage it from Astra Enterprise.
 
-Kubernetes deployment:: Astra Enterprise supports Kubernetes clusters. The cluster should already exist in your environment.
-+
-On-prem Kubernetes clusters and clusters managed by other cloud managed services are not supported at this time.
+* *Kubernetes deployment* Astra Enterprise supports Kubernetes clusters. The cluster should already be deployed in your environment.
 
-Kubernetes version:: A cluster must be running Kubernetes version 1.17 or later.
+* *Kubernetes version* A cluster must be running Kubernetes version 1.17 or later.
 
-Image type:: The image type for each worker node must be Ubuntu.
+* *Image type* The image type for each worker node must be Ubuntu.
 
-Cluster state:: Clusters must be running in a healthy state and have at least one online worker node.
+* *Image repository*: You must have an existing image repository.
 
-Private clusters:: If the cluster is private, it must have the https://cloud.google.com/kubernetes-engine/docs/concepts/private-cluster-concept[master authorized network^] set to allow the Astra IP addresses:
-*	54.164.233.140/32
-*	3.218.120.204/32
-*	34.193.99.138/32
+* *Cluster state*: Clusters must be running in a healthy state and have at least one online worker node.
+
+* *Private clusters* If the cluster is private, it must have the https://cloud.google.com/kubernetes-engine/docs/concepts/private-cluster-concept[master authorized network^] set to allow the Astra IP addresses:
+** 54.164.233.140/32
+**	3.218.120.204/32
+**	34.193.99.138/32
+
+* Compute and memory requirements*
+
+* *Trident*: Astra Enterprise requires that Trident already be installed and configured to work with ONTAP as the storage backend.
+
 
 == Supported apps
 
@@ -49,9 +54,6 @@ You can use Astra Enterprise in a 90-day trial with an evaluation license.
 
 To support successful load balancing, you should use a load balancer with an external IP.
 
-== Trident
-
-Astra Enterprise requires that Trident already be installed and configured to work with ONTAP as the storage backend.
 
 == Networking
 

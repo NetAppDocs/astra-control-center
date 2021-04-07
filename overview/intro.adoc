@@ -15,8 +15,8 @@ Astra is a Kubernetes application data lifecycle management service that simplif
 == Implementations
 Astra offers the following implementations:
 
-* Astra Service:
-* Astra Enterprise:
+* Astra Service: This NetApp service offering is run in the cloud and enables you to manage clusters and apps in public clouds.
+* Astra Enterprise: This offering operates on your Kubernetes clusters in your on-premise data center and enables you to manage on-premise Kubernetes clusters and VM clusters.
 
 == Features
 
@@ -66,3 +66,5 @@ For our first go, you'll install the images on OpenShift registry. We'll add mor
 * You then use Astra to manage these apps, and start creating snapshots, backups, and clones.
 
 Note that Astra continually watches your compute for state changes, so it's aware of any new apps that you add along the way.
+
+* You can monitor capacity and IOPS for your Kubernetes clusters using Cloud Insights, a NetApp cloud infrastructure monitoring tool that is offered as a service.
