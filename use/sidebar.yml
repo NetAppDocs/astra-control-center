@@ -7,6 +7,8 @@ entries:
     entries:
       - title: Start managing apps
         url: /use/manage-apps.html
+      - title: Define a custom app
+        url: /use/define-custom-app.html
       - title: Protect apps
         url: /use/protect-apps.html
       - title: Restore apps

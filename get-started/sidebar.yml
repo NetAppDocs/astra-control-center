@@ -1,16 +1,16 @@
 section: get-started
 title: Get started
 entries:
+  - title: Quick start
+    url: /get-started/quick-start.html
   - title: Install Astra Enterprise
+    url: /get-started/install_overview.html
   - title: Set up Astra Enterprise
-  - title: Get started with Astra Enterprise
-    entries:
-      - title: Quick start
-        url: /get-started/quick-start.html
-      - title: Manage compute from Astra Enterprise
-        url: /get-started/add-first-cluster.html
-      - title: What's next?
-        url: /get-started/whats-next.html
+    url: /get-started/setup_overview.html
+  - title: Manage compute from Astra Enterprise
+    url: /get-started/add-first-cluster.html
+  - title: What's next?
+    url: /get-started/whats-next.html
   - title: Videos
     url: /get-started/videos.html
   - title: FAQ

@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: learn/define-custom-app.html
+permalink: use/define-custom-app.html
 keywords:
 summary: Creating a custom app lets you group elements of your Kubernetes cluster into a single app.
 ---
@@ -8,7 +8,7 @@ summary: Creating a custom app lets you group elements of your Kubernetes cluste
 = Define a custom app
 :hardbreaks:
 :icons: font
-:imagesdir: ../media/concepts/
+:imagesdir: ../media/use/
 
 [.lead]
 Creating a custom app lets you group elements of your Kubernetes cluster into a single app.

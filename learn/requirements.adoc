@@ -16,11 +16,11 @@ Get started by verifying support for your Kubernetes clusters, apps, licenses, a
 
 A Kubernetes cluster must meet the following requirements so you can discover and manage it from Astra Enterprise.
 
-* *Kubernetes deployment* Astra Enterprise supports Kubernetes clusters. The cluster should already be deployed in your environment.
+* *Kubernetes deployment*: Astra Enterprise supports Kubernetes clusters. The cluster should already be deployed in your environment.
 
-* *Kubernetes version* A cluster must be running Kubernetes version 1.17 or later.
+* *Kubernetes version*: A cluster must be running Kubernetes version 1.17 or later.
 
-* *Image type* The image type for each worker node must be Ubuntu.
+* *Image type*: The image type for each worker node must be Ubuntu.
 
 * *Image repository*: You must have an existing image repository.
 
@@ -31,14 +31,14 @@ A Kubernetes cluster must meet the following requirements so you can discover an
 **	3.218.120.204/32
 **	34.193.99.138/32
 
-* Compute and memory requirements*
+* *Compute and memory requirements*:
 
-* *Trident*: Astra Enterprise requires that Trident already be installed and configured to work with ONTAP as the storage backend.
+* *Trident*: Astra Enterprise requires that Trident already be installed and configured to work with NetApp ONTAP as the storage backend.
 
 
 == Supported apps
 
-Astra Enterprise supports all applications running on your Kubernetes clusters. link:../release-notes/known-limitations.html
+Astra Enterprise supports all applications running on your Kubernetes clusters. See link:../release-notes/known-limitations.html[Known limitations].
 
 NetApp has validated some apps to ensure the safety and consistency of the snapshots and backups. link:../learn/validated-vs-standard.html[Learn the difference between a validated app and a standard app].
 
@@ -48,7 +48,7 @@ No matter which type of app that you use with Astra Enterprise, you should alway
 
 Astra Enterprise requires an Astra Enterprise license.
 
-You can use Astra Enterprise in a 90-day trial with an evaluation license.
+If you want to try Astra Enterprise, you can use a 90-day evaluation license.
 
 == Load balancing
 

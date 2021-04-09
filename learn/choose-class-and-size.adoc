@@ -11,7 +11,7 @@ summary: Astra uses Cloud Volumes Service for Google Cloud as the backend storag
 :imagesdir: ../media/concepts/
 
 [.lead]
-Astra uses Cloud Volumes Service for Google Cloud as the backend storage for persistent volumes. You should understand how choosing a service type, storage class, and persistent volume size can help you meet your performance objectives.
+Astra Enterprise uses Trident as the backend storage for persistent volumes. You should understand how choosing a service type, storage class, and persistent volume size can help you meet your performance objectives.
 
 == Overview
 

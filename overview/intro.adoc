@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: get-started/intro.html
+permalink: overview/intro.html
 keywords: introduction, how astra works, how Astra works, what Astra is, concept, understanding, overview
 summary: Astra is a Kubernetes application data lifecycle management service that simplifies operations for stateful applications. Easily back up Kubernetes apps, migrate data to a different cluster, and instantly create working application clones.
 ---
@@ -8,7 +8,7 @@ summary: Astra is a Kubernetes application data lifecycle management service tha
 = Intro to Astra
 :hardbreaks:
 :icons: font
-:imagesdir: ../media/get-started/
+:imagesdir: ../media/overview/
 
 Astra is a Kubernetes application data lifecycle management service that simplifies operations for stateful applications. Easily back up Kubernetes apps, migrate data to a different cluster, and instantly create working application clones.
 
