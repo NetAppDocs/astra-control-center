@@ -12,33 +12,22 @@ summary: Many of the pages on this doc site include videos that show how to comp
 
 Many of the pages on this doc site include videos that show you how to complete a task for Astra. If you're just interested in videos, we've made it easy for you by collecting all of the videos on this single page (kind of like a playlist).
 
-== Videos for setting up Google Cloud
+== Videos for setting up Astra Enterprise
 
-The following videos show how to complete set up requirements in Google Cloud before you can discover Kubernetes clusters running in GCP.
+The following videos show how to complete set up requirements before you can discover Kubernetes clusters running on-premise.
 
 === Enable APIs
 
-Your project needs permissions to access specific Google Cloud APIs. The following video shows how to enable the APIs from the Google Cloud console. link:set-up-google-cloud.html#enable-apis-in-your-project[Learn more about enabling APIs].
+Your project needs permissions to access specific Astra APIs. The following video shows how to enable the APIs. link:set-up-google-cloud.html#enable-apis-in-your-project[Learn more about enabling APIs].
 
 video::get-started/video-enable-gcp-apis.mp4[width=848, height=480]
 
-=== Create a service account
 
-Astra uses a Google Cloud service account to facilitate Kubernetes application data management on your behalf. The following video shows how to create the service account from the Google Cloud console. link:set-up-google-cloud.html#create-a-service-account[Learn more about creating a service account].
+== Videos for using Astra Enterprise
 
-video::get-started/video-create-gcp-service-account.mp4[width=848, height=480]
+The following videos show how to complete common tasks using Astra Enterprise.
 
-=== Create a service account key
-
-Astra uses a service account key to establish the identity of the service account that you just set up. The following video shows how to create the service account key from the Google Cloud console. link:set-up-google-cloud.html#create-a-service-account-key-2[Learn more about creating a service account key].
-
-video::get-started/video-create-gcp-service-account-key.mp4[width=848, height=480]
-
-== Videos for using Astra
-
-The following videos show how to complete common tasks using Astra.
-
-=== Manage compute from Astra
+=== Manage compute from Astra Enterprise
 
 After you log in to Astra, your first step is to add Kubernetes compute. link:add-first-cluster.html[Learn more about managing compute].
 

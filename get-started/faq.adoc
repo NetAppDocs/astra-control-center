@@ -5,7 +5,7 @@ keywords: faq, frequently asked questions
 summary: This FAQ can help if you're just looking for a quick answer to a question.
 ---
 
-= Frequently asked questions for Astra
+= Frequently asked questions for Astra Enterprise
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/
@@ -14,45 +14,34 @@ This FAQ can help if you're just looking for a quick answer to a question.
 
 == Overview
 
-Astra aims to simplify your application data lifecycle management operations for Kubernetes native applications. Astra supports Kubernetes clusters running on Google Kubernetes Engine (GKE) on Google Cloud Platform (GCP).
+Astra aims to simplify your application data lifecycle management operations for Kubernetes native applications. Astra supports Kubernetes clusters running in the cloud and on-premise.
 
-The following sections provide answers to some additional questions that you might come across as you use Astra. For any additional clarifications, please reach out to astra.feedback@netapp.com
+The following sections provide answers to some additional questions that you might come across as you use Astra Enterprise. For additional clarifications, please reach out to astra.feedback@netapp.com
 
 == Access to Astra
 
-*Why do I need to provide so many details when registering for Astra?*
 
-Astra requires accurate customer information when registering. This information is required to go through a Global Trade Compliance (GTC) check.
-
-*Why am I getting a “Registration Failed” error when registering for Astra?*
-
-Astra requires you to provide accurate customer information in the onboarding section. You will get a "Registration Failed" error if you provided incorrect information. Other accounts that you are a member of also get locked.
-
-*What's the Astra URL?*
+*What's the Astra Enterprise URL?*
 
 You can access Astra at https://astra.netapp.io.
 
-*I sent an email invitation to a colleague, but they haven't received it. What should I do?*
+*I set up email notifications and tested an email to a colleague, but it hasn't been received. What should I do?*
 
-Ask them to check their spam folder for an email from do-not-reply@netapp.com, or search their inbox for "invitation." You can also remove the user and attempt to re-add them.
+Ask them to check their spam folder for an email from do-not-reply@netapp.com, or search their inbox for "astra." You can also remove the user and attempt to re-add them.
 
-*I upgraded to the Premium Plan from the Free Plan. Will I get charged for the first 10 applications?*
+*I am using the Trial license. How to I change to the full license?*
 
-Yes. After upgrading to the Premium Plan, Astra starts charging you for all managed applications in your account.
+ANSWER TBD.
 
-*I upgraded to the Premium Plan in the middle of a month. Will I get charged for the entire month?*
+*I am using the Trial license. Can I still use the Persistent Volume Claim functionality in Trident?*
 
-No, billing starts from the time that you upgraded to the Premium Plan.
-
-*I am using the Free Plan, will I get charged for the Persistent Volume Claims used from Cloud Volumes Service for GCP?*
-
-Yes, you will be charged for the Persistent Volumes used from Cloud Volumes Service for Google Cloud.
+Yes, you can test out the Persistent Volumes functionality with the Trial license.  (TRUE???)
 
 == Registering Kubernetes clusters
 
 *Can I add a private cluster to Astra?*
 
-Yes, you can add private clusters to Astra. To create a Google Kubernetes Engine (GKE) private cluster, https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Project_Astra/How_to_create_a_private_GKE_cluster_to_work_with_project_Astra[follow the instructions in this knowledgebase article^].
+Yes, you can add private clusters to Astra. To create private cluster, https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Project_Astra/How_to_create_a_private_GKE_cluster_to_work_with_project_Astra[follow the instructions in this knowledgebase article^].
 
 Private clusters must have the https://cloud.google.com/kubernetes-engine/docs/concepts/private-cluster-concept[master authorized network^] set to allow the Astra IP addresses:
 
@@ -60,23 +49,16 @@ Private clusters must have the https://cloud.google.com/kubernetes-engine/docs/c
 * 3.218.120.204/32
 * 34.193.99.138/32
 
-*Can my GCP cluster reside on a shared VPC?*
+*Can my cluster reside on a shared VPC?*
 
 No, Astra can’t manage clusters that reside in a shared VPC. This is a known limitation.
 
-*Where can I find my service account credentials on GCP?*
 
-After you log in to the https://console.cloud.google.com/[Google Cloud Console^], your service account details will be in the *IAM and Admin* section. For more details, refer to link:set-up-google-cloud.html[how to set up Google Cloud for Astra].
+*I would like to add different clusters from different projects. Is this supported in Astra?*
 
-*Do I need to install CSI drivers on my GKE cluster before adding it to Astra?*
+No, this isn't a supported configuration. Only a single project is supported. (TRUE??? )
 
-No. When your GKE cluster is added to Astra, the service will automatically install NetApp’s Trident Container Storage Interface (CSI) driver on the Kubernetes cluster. This CSI driver is used to provision persistent volumes backed by NetApp Cloud Volumes Service for Google Cloud.
-
-*I would like to add different GKE clusters from different GCP projects. Is this supported in Astra?*
-
-No, this isn't a supported configuration. Only a single GCP project is supported.
-
-*I need to add worker nodes to my GKE cluster after adding to Astra. What should I do?*
+*I need to add worker nodes to my Kubernetes cluster after adding to Astra. What should I do?*
 
 New worker nodes can be added to existing pools, or new pools can be created as long as they are the Ubuntu image type. These will be automatically discovered by Astra. If the new nodes are not visible in Astra, check if the new worker nodes are running the supported image type. You can also verify the health of the new worker nodes by using the `kubectl get nodes` command.
 
@@ -91,13 +73,13 @@ Alternatively, delete the PVCs and PVs. This will remove the volume from Cloud V
 
 NOTE: If you forget step 3, or if you used a storage class with the reclaim policy set to _retain_, the volume will remain in Cloud Volumes Service indefinitely. If this happens and you want to delete the volume, then you'll need to delete the volume manually.
 
-*What happens to my applications and data after removing the GKE cluster from Astra?*
+*What happens to my applications and data after removing the Kubernetes cluster from Astra?*
 
-Removing a GKE cluster from Astra will not make any changes to the cluster's configuration (applications and persistent storage). Any Astra snapshots or backups taken of applications on that cluster will be unavailable to restore. Volume snapshot data stored within Cloud Volumes Service will not be removed. Persistent Storage backups created by Astra will remain within the Google Cloud object store, but they are unavailable for restore.
+Removing a cluster from Astra will not make any changes to the cluster's configuration (applications and persistent storage). Any Astra snapshots or backups taken of applications on that cluster will be unavailable to restore. Persistent Storage backups created by Astra will remain within Astra Enterprise, but they are unavailable for restore.
 
-WARNING: Always remove a cluster from Astra before you delete it through GCP. Deleting a cluster from GCP while it's still being managed by Astra can cause problems for your Astra account.
+WARNING: Always remove a cluster from Astra before you delete it through any other methods. Deleting a cluster using another tool while it's still being managed by Astra can cause problems for your Astra account.
 
-*Will NetApp Trident be uninstalled when I remove a GKE cluster from Astra?*
+*Will NetApp Trident be uninstalled when I remove a Kubernetes cluster from Astra?*
 
 Trident will not be uninstalled from a cluster when you remove it from Astra.
 
@@ -107,9 +89,9 @@ Trident will not be uninstalled from a cluster when you remove it from Astra.
 
 When applications are not listed in *Discovered Apps*, check the status and health of the Kubernetes pod by running `kubectl get pod -A |grep [pod name]`. If the pods are healthy and running, check to see if the application is listed under *Ignored Apps*.
 
-*I don’t see any of my application’s PVCs bound to GCP CVS. What's wrong?*
+*I don’t see any of my application’s PVCs bound to XYZ. What's wrong?*
 
-The NetApp Trident operator sets the default storage class to `netapp-cvs-premium` after it's successfully added to Astra. When an application's PVCs are not bound to Cloud Volumes Services for Google Cloud, there are a few steps that you can take:
+The NetApp Trident operator sets the default storage class to `netapp-cvs-premium` after it's successfully added to Astra. When an application's PVCs are not bound to XYZ, there are a few steps that you can take:
 
 * Run `kubectl get sc` and check the default storage class.
 * Check the yaml file or Helm chart that was used to deploy the application and see if a different storage class is defined.
@@ -141,6 +123,6 @@ In some situations, Astra will automatically create a snapshot as part of perfor
 
 Yes. A snapshot operation on an application by Astra includes snapshot of all the PVs that are bound to the application’s PVCs.
 
-*Can I manage snapshots taken by Astra directly through the Cloud Volumes Service snapshot management interface or object storage?*
+*Can I manage snapshots taken by Astra directly through a different interface or object storage?*
 
 No. Snapshots and backups taken by Astra can only be managed with Astra.

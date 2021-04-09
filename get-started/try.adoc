@@ -1,16 +1,18 @@
 ---
 sidebar: sidebar
-permalink: get-started/quick-start.html
-keywords: get started, quick start
-summary: Get started with Astra in a few steps.
+permalink: get-started/try.html
+keywords: get started, trial, 90-day license, try, astra, enterprise
+summary: Try out Astra Enterprise.
 ---
 
-= Quick start for Astra Enterprise
+= Try out Astra Enterprise
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/get-started/
 
-This page provides a high-level overview of the steps that you need to complete to get started with Astra Enterprise. The links within each step take you to a page that provides more details.
+You might want to try Astra Enterprise out for a short time. You can with the 90-day trial license.
+Here's how.
+
 
 ==== image:number1.png[Number 1] Review Kubernetes cluster requirements
 
