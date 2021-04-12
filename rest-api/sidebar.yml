@@ -2,7 +2,7 @@ section: rest-api
 title: Astra API
 entries:
   - title: Overview
-    url: /rest-api/coming-soon.html
+    url: /rest-api/api-intro.html
   - title: Get started with the API
     url: /rest-api/coming-soon.html
   - title: Examples
