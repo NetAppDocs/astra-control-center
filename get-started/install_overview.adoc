@@ -34,30 +34,59 @@ Check for any external dependencies and infrastructure needs:
 
 == Download Astra Enterprise
 
-. Download the Astra Enterprise images from the NetApp Support Site.
+. Download the Astra Enterprise images from the NetApp Support Site:
++
+* Astra Container image
+* Astra Enterprise Operator image
 . Install the images in your local image repository.
 
 
 == Install Astra Enterprise using the command-line utility
 
-. ???
-. ???
+. Change to the where you downloaded the Astra images.
+. Extract both images and change directories to the Astra directory.
 
++
+----
+cd ~/Downloads
+tar -xxf astra-v20.6 tar.gz
+cd astra-v20.6
+helm install -n astra ./astra
+----
+
+. In the command-line utility, edit the helm values to identify the "astra" namespace.
+. Use Helm 3 to install the Astra Enterprise Operator to a Kubernetes cluster running in your data center.
++
+NOTE: The Astra Helm repo must be available in your private registry.
+
+. Load all Astra Container images into a private Docker registry running in your data center.
+. Configure an Astra Enterprise custom resource (CR).
+. Apply the CR to your Kubernetes cluster.
+. Optionally, specify the storage class to use for Astra itself (rather than the default Kubernetes storage class).
+. Optionally, specify the IP and host names to use for ingress (rather than use one assigned by Kubernetes).
+. Optionally, specify the initial administrative credentials (rather than getting a prompt at your initial logon).
+. Optionally, specify the on-premise container registry to use (rather than the public NetApp registry).
+
++
 Astra Enterprise does the following:
 
 * Obtains the Astra Enterprise images from your local repository and installs Astra Enterprise.
-* Creates a default account.
-* Creates a default admin user.
+* Installs the Astra components into the "astra" namespace.
+* Creates a default administrative user called "admin" with a default one-time password of the UUID for this instance of Astra Enterprise. When the installation completes, a message displays the application UUID URL and default credential. This credential is unique to each instance of Astra Enterprise.
 * Determines from Kubernetes that all Astra Enterprise pods are running.
 * Installs and connects you to the Astra UI.
 
+. Make note of the one-time UUID URL and default credential that is displayed.
 
 
 == Connect to the Astra UI
 
-The Astra install tool connects you to the Astra UI.
+The Astra command-line installation tool connects you to the Astra UI.
 
 . Log into the Astra UI with the default user credentials.
++
+You will be prompted to change the password.
+
 . Enter a new password.
 
 

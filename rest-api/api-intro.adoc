@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: rest-api/intro.html
+permalink: rest-api/api-intro.html
 keywords: introduction, how astra works, api, rest api
 summary: Astra is a Kubernetes application data lifecycle management service that simplifies operations for stateful applications. Easily back up Kubernetes apps, migrate data to a different cluster, and instantly create working application clones.
 ---
@@ -10,10 +10,10 @@ summary: Astra is a Kubernetes application data lifecycle management service tha
 :icons: font
 :imagesdir: ../media/rest-api/
 
-Astra is a Kubernetes application data lifecycle management service that simplifies operations for stateful applications. Easily back up Kubernetes apps, migrate data to a different cluster, and instantly create working application clones.
+Astra is a Kubernetes application data lifecycle management service that simplifies operations for stateful applications. Easily back up Kubernetes apps, migrate data to a different cluster, and instantly create working application clones. To set up and manage your Kubernetes apps, you can use either the Astra UI or the Astra API. 
 
 == Get started with Astra API
-TBD
+Coming soon
 
 == Astra API reference
-TBD
+Coming soon
