@@ -15,42 +15,22 @@ Astra Enterprise uses Trident with ONTAP as the backend storage for persistent v
 
 == Overview
 
-*??? REDO all for Astra Enterprise* 
+*??? REDO all for Astra Enterprise*
 
 Astra Enterprise discovers and uses the already-deployed resources, including ONTAP, Trident, and associated storage classes.
 
 === Storage classes
 
-Three service levels are supported with the CVS-Performance service type: Standard, Premium, and Extreme. When you add compute to Astra, you're prompted to choose either Standard, Premium, or Extreme as the default storage class for persistent volumes. Each of these service levels are designed for different capacity and bandwidth needs.
+Three service levels are supported: Standard, Premium, and Extreme. When you add compute to Astra, you're prompted to choose either Standard, Premium, or Extreme as the default storage class for persistent volumes. Each of these service levels are designed for different capacity and bandwidth needs.
 
-The names of the storage classes are _netapp-cvs-standard_, _netapp-cvs-premium_, and _netapp-cvs-extreme_.
 
-https://cloud.google.com/solutions/partners/netapp-cloud-volumes/selecting-the-appropriate-service-level-and-allocated-capacity-for-netapp-cloud-volumes-service#service_levels[Learn more about these service levels in the Cloud Volumes Service for Google Cloud docs^].
 
 === Persistent volume size and performance
 
-https://cloud.google.com/solutions/partners/netapp-cloud-volumes/selecting-the-appropriate-service-level-and-allocated-capacity-for-netapp-cloud-volumes-service#service_levels[As the Google Cloud docs explain^], the allowed bandwidth for each service level is per GiB of provisioned capacity. That means larger volumes will provide better performance.
+The allowed bandwidth for each service level is per GiB of provisioned capacity. That means larger volumes will provide better performance.
 
-Be sure to read through the Google Cloud page linked to above. It includes cost comparisons and examples that can help you better understand how to couple a service level with volume size to meet your performance objectives.
-
-=== Minimum volume size
-
-Astra provisions persistent volumes using a minimum volume size of 100 GiB with the CVS-Performance service type, even if the PVC asks for a smaller volume size. For example, if the PVC in a Helm chart asks for 6 GiB, Astra automatically provisions a 100 GiB volume.
-
-== CVS service type
-
-Learn more about the CVS service type before you choose a storage class and create persistent volumes.
-
-=== Storage class
-
-One service level is supported with the CVS service type: Standard. When you manage clusters in regions where the CVS service type is supported, Astra uses the Standard service level as the default storage class for persistent volumes. The storage class is named _netapp-cvs-standard_.
-
-https://cloud.google.com/solutions/partners/netapp-cloud-volumes/service-levels[Learn more about the Standard service level in the Cloud Volumes Service for Google Cloud docs^].
-
-=== Persistent volume size and performance
-
-The allowed bandwidth for the CVS service type is per GiB of provisioned capacity. That means larger volumes will provide better performance.
+??? See Trident information that provides cost comparisons and examples that can help you better understand how to couple a service level with volume size to meet your performance objectives.
 
 === Minimum volume size
 
-Astra provisions persistent volumes using a minimum volume size of 1 TiB with the CVS service type, even if the PVC asks for a smaller volume size.
+Astra provisions persistent volumes using a minimum volume size of 100 GiB with the minimum service type, even if the PVC asks for a smaller volume size. For example, if the PVC in a Helm chart asks for 6 GiB, Astra automatically provisions a 100 GiB volume.
