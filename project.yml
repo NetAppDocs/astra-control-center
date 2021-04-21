@@ -3,8 +3,8 @@ sidebar:
     - title: Astra Enterprise docs
       url: /index.html
     - section: release-notes
-    - section: learn
     - section: get-started
+    - section: learn
     - section: use
     - section: solutions
     - section: rest-api
