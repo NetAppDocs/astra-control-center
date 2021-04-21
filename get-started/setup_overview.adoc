@@ -5,12 +5,12 @@ keywords:
 summary:
 ---
 
-= Set up Astra Enterprise overview
+= Set up Astra Enterprise
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/get-started/
 
-After you install Astra Enterprise, you'll want to set up some initial configurations.
+After you install Astra Enterprise, you'll want to set up things like accounts, licenses, storage buckets, and role-based access control.
 
 == Log in to Astra Enterprise
 
@@ -29,12 +29,12 @@ If you didn't create an admin account with the command-line installation utility
 
 Before adding a license, you need to obtain the license information.
 
-=== Obtain a license
+==== Retrieve your license information
 
 . (WHERE do you get the license info???)
 . Copy the license information to the clipboard.
 
-=== Add license information with the UI
+==== Add license information with the UI
 
 . From the Dashboard when you first login, select *Manage Licenses*.
 +
@@ -48,7 +48,7 @@ Alternatively, from the left navigation, select *Account* > *Licenses*.
 +
 Astra Enterprise functionality is now enabled.
 
-=== Add license information with the API
+==== Add license information with the API
 
 . To list licenses, enter the following:
 +
@@ -132,6 +132,9 @@ To receive notifications, you'll need to set up SMTP email notifications.
 
 == Connect to Cloud Insights
 
+Using NetApp Cloud Insights, you gain insight into your complete infrastructure. You can monitor all your on-premise resources.
+Learn more about how Cloud Insights can help you monitor your Kubernetes clusters on-premise.
+
 From Cloud Insights, you first obtain an API token, which you will use later in Astra Enterprise.
 
 === Obtain a Cloud Insights API token key
@@ -149,18 +152,21 @@ From Cloud Insights, you first obtain an API token, which you will use later in 
 
 . Validate the Cloud Insights connection on the Dashboard.
 
-== Add a role
+== Set up role-based access
+You'll want to govern who has access to different options. Do this by configuring role-based access.
+
+=== Add a role
 
 . From the Astra UI, select *Roles*.
 . Select *Add role*.
 . Enter the name of the role and the scope of the role.
 
-== Add users and specify roles
+=== Add users and specify roles
 
 For information about role-based access control, see LINK. ???
 
-=== Add users with the Astra UI
-. From the Astra UI, select *Accounts* > *Users*. 
+==== Add users with the Astra UI
+. From the Astra UI, select *Accounts* > *Users*.
 . Select *Manage Users and Roles*.
 . Select *Add a user*.
 . Enter the user account information and select a role.
@@ -169,7 +175,7 @@ The new user receives an email notification and clicks on the Join link.
 
 
 
-=== Add users with the Astra API
+==== Add users with the Astra API
 
 
 . To list user accounts, enter the following:

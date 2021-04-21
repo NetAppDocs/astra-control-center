@@ -15,8 +15,8 @@ Astra is a Kubernetes application data lifecycle management service that simplif
 == Implementations
 Astra offers the following implementations:
 
-* Astra Service:
-* Astra Enterprise:
+* Astra Service: This NetApp service offering enables you to manage clusters and apps in public clouds and is run in the cloud.
+* Astra Enterprise: This NetApp offering enables you to manage on-premise Kubernetes and VM clusters in your data center.
 
 == Features
 
@@ -29,7 +29,37 @@ Both Astra Service and Astra Enterprise offer critical capabilities for Kubernet
 * Identify the health of your apps
 
 
-link:requirements.html[Learn about cluster requirements].
+link:/learn/requirements.html[Learn about cluster requirements].
+
+== Supported apps
+
+Astra supports all applications running on your Kubernetes clusters.
+
+NetApp has validated some apps to ensure the safety and consistency of the snapshots and backups. Learn the difference between a link:/learn/validated-vs-standard.html[validated app and a standard app].
+
+No matter which type of app that you use with Astra, you should always test the backup and restore workflow yourself to ensure that you can meet your disaster recovery requirements.
+
+== How Astra Service works
+
+Astra is a NetApp-managed cloud service that is always on and updated with the latest capabilities. It utilizes several components to enable application data lifecycle management.
+
+At a high level, Astra works like this:
+
+* You get started with Astra by setting up your cloud provider and by registering for an Astra account.
+** For GKE clusters, Astra uses NetApp Cloud Volumes Service for Google Cloud as the backend storage for your persistent volumes.
+** For AKS clusters, Astra uses Azure NetApp Files as the backend storage for your persistent volumes.
+* You add your first Kubernetes compute to Astra. Astra then does the following:
+** Creates an object store in your cloud provider account, which is where backup copies are stored.
+** Creates a new admin role and Kubernetes service account on the cluster.
+** Uses that new admin role to install NetApp’s Trident on the cluster and to create one or more storage classes.
+** Astra uses Trident to provision persistent volumes for your apps.
+* At this point, you can add apps to your cluster. Persistent volumes will be provisioned on the new default storage class.
+** Learn about storage classes for GKE clusters.
+** Learn about storage classes for AKS clusters.
+* You then use Astra to manage these apps, and start creating snapshots, backups, and clones.
+
+Note that Astra continually watches your compute for state changes, so it’s aware of any new apps that you add along the way.
+
 
 == How Astra Enterprise works
 

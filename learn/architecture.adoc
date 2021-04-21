@@ -24,7 +24,7 @@ Here is an overview of the various components of the Astra Enterprise environmen
 
 * *ONTAP storage backend*: Astra Enterprise includes an ONTAP AFF and FAS storage backend. As a storage software and hardware platform, ONTAP provides core storage services, support for multiple storage access protocols, and storage management functionality, such as snapshots and mirroring.
 
-* *Cloud Insights*:  A NetApp cloud infrastructure monitoring tool, Cloud Insights is offered as a service. With Cloud Insights, you can monitor performance and utilization for your Kubernetes clusters. Cloud Insights correlates storage usage to workloads.
+* *Cloud Insights*:  A NetApp cloud infrastructure monitoring tool, Cloud Insights enables you to monitor performance and utilization for your Kubernetes clusters. Cloud Insights correlates storage usage to workloads.
 
 == Astra interfaces
 

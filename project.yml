@@ -2,7 +2,6 @@ sidebar:
   entries:
     - title: Astra Enterprise docs
       url: /index.html
-    - section: overview
     - section: release-notes
     - section: learn
     - section: get-started
@@ -23,7 +22,7 @@ homepage:
         - title: What's new in Astra Enterprise
           url: /release-notes/whats-new.html
         - title: Try it out
-          url: /get-started/try.html
+          url: /get-started/quick-start.html
         - title: Install Astra Enterprise
           url: /get-started/install_overview.html
     - title: Use Astra Enterprise
@@ -42,7 +41,7 @@ homepage:
         - title: Manage apps using VMware
         - title: Protect apps using VMware
         - title: Migrate apps using VMware
-    - title: Get started with Astra Service
+    - title: Use Astra Service
       #image: ./media/outline_directions_run_black_18dp.png
       links:
         - title: Learn about Astra Service
@@ -54,22 +53,24 @@ homepage:
           url: https://docs.netapp.com/us-en/astra/get-started/set-up-google-cloud.html
         - title: Get started with Microsoft Azure
           url: https://docs.netapp.com/us-en/astra/get-started/set-up-azure.html
-    - title: Use Astra Service
+#    - title: Use Astra Service
+#      links:
+#        - title: Manage accounts
+#          url: https://docs.netapp.com/us-en/astra/use/manage-users.html
+#        - title: Manage apps
+#          url: https://docs.netapp.com/us-en/astra/use/manage-apps.html
+#        - title: Protect apps
+#          url: https://docs.netapp.com/us-en/astra/use/protect-apps.html
+#        - title: Migrate apps
+#          url: https://docs.netapp.com/us-en/astra/use/clone-apps.html
+#        - title: Set up billing
+#          url: https://docs.netapp.com/us-en/astra/use/set-up-billing.html
+    - title: Solution briefs
       links:
-        - title: Manage accounts
-          url: https://docs.netapp.com/us-en/astra/use/manage-users.html
-        - title: Manage apps
-          url: https://docs.netapp.com/us-en/astra/use/manage-apps.html
-        - title: Protect apps
-          url: https://docs.netapp.com/us-en/astra/use/protect-apps.html
-        - title: Migrate apps
-          url: https://docs.netapp.com/us-en/astra/use/clone-apps.html
-        - title: Set up billing
-          url: https://docs.netapp.com/us-en/astra/use/set-up-billing.html
-    - title: Use Astra Service <unique thing>
-      links:
-        - title: Do something in Astra Service
-        - title: Do something in Astra Service
+        - title: DataStax Enterprise & Apache Cassandra with Astra
+        - title: PostgreSQL DBaaS with Astra
+        - title: MySQL DBaaS with Astra
+        - title: Simplify Jenkins lifecycle management
     - title: Use Astra API
       links:
         - title: Get started with the Astra API
