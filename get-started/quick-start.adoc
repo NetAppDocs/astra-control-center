@@ -21,7 +21,7 @@ This page provides a high-level overview of the steps that you need to complete 
 * The image type for each worker node must be **Ubuntu**.
 
 [role="quick-margin-para"]
-link:../learn/requirements.html[Learn more about the Kubernetes cluster requirements].
+link:../concepts/requirements.html[Learn more about the Kubernetes cluster requirements].
 
 ==== image:number2.png[Number 2] Download and install Astra Enterprise
 [role="quick-margin-list"]

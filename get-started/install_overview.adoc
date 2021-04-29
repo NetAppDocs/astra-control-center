@@ -20,15 +20,19 @@ To install Astra Enterprise, you'll do the following basic steps:
 == Prepare for the Astra Enterprise deployment
 Check for any external dependencies and infrastructure needs:
 
-* Obtain a trail license from NetApp.
-* Obtain permissions and instructions on how to load NetApp-supplied images into your organization's local image repository.
-* Obtain the URL of the image registry where you will upload the images.
-* Obtain a Kubernetes cluster that meets the Astra Enterprise requirements.
-* If you will use SSO, obtain SSO integration configuration details.
-* Configure Trident with the ONTAP storage backend.
-* Install an external load balancer and set a static IP or IP range of that load balancer.
-* Acquire an internal domain name that is routed from an internal DNS and point the domain name to the static IP or IP range using internal DNS servers, such as astra.company.com
-* Set a default storage provider in the Kubernetes cluster that is backed by a Trident storage class configured to work with ONTAP.
+. Review the link:/concepts/requirements.html[Requirements].
+. Obtain a trial license from NetApp.
+. Obtain permissions and instructions on how to load NetApp-supplied images into your organization's local image repository.
+. Obtain the URL of the image registry where you will upload the images.
+. Obtain a Kubernetes cluster that meets the Astra Enterprise requirements.
+. If you will use SSO, obtain SSO integration configuration details.
+. Configure Trident with the ONTAP storage backend.
+. Install an external load balancer on the Kubernetes cluster and set a static IP or IP range of that load balancer. The K8s cluster be configured to listen on this reachable IP address.
+. Acquire an internal domain name that is routed from an internal DNS and point the domain name to the static IP or IP range using internal DNS servers, such as astra.company.com. The DNS name should point to their load-balanced IP address using their internal DNS server (or /etc/hosts for individual machines).
+. Set a default storage provider in the Kubernetes cluster that is backed by a Trident storage class configured to work with ONTAP.
+. Create a namespace for Astra Enterprise.
++
+NOTE: The Astra Enterprise operator will install into a namespace called _ae-operator-system_ and the Astra application will be located in a namespace called _pcloud_. Both the Astra Enterprise Operator and the Astra application will be installed into the same namespace when the product releases.
 
 
 
@@ -38,23 +42,73 @@ Check for any external dependencies and infrastructure needs:
 +
 * Astra Container image
 * Astra Enterprise Operator image
-. Install the images in your local image repository.
+
+. Install the Astra images in your local image repository, tagged for your private registry.
 
 
 == Install Astra Enterprise using the command-line utility
 
 . Change to the where you downloaded the Astra images.
-. Extract both images and change directories to the Astra directory.
+. Extract both images, change directories to the Astra directory, and list the contents.
 
 +
 ----
 cd ~/Downloads
 tar -xxf astra-v20.6 tar.gz
 cd astra-v20.6
-helm install -n astra ./astra
+ls -al
+-rw-r--r--@ 1 ahaid staff 459 Apr 15 16:06 astra_enterprise.yaml
+-rw-r--r--@ 1 ahaid staff 331 Apr 15 16:06 astra_enterprise_min.yaml
+-rw-r--r--@ 1 ahaid staff 10555 Apr 15 16:06 astra_enterprise_operator_deploy.yaml
+-rwxr-xr-x@ 1 ahaid staff 11353 Apr 15 16:06 astractl
+drwxr-xr-x@ 32 ahaid staff 1024 Apr 15 16:05 images
+
+----
+. Run the astractl CLI, which will use the active kubeconfig on your machine to complete the installation:
++
+----
+$ ./astractl deploy
+Welcome to AstraEnterprise Interactive Installer
+
+Please verify that the following Kubernetes cluster is where you wish to install AstraEnterprise: se-openlab-astra-enterprise-03 [yn]: y
+
+Enter the private docker registry to load AstraEnterprise images: docker.repo.eng.netapp.com/astra-codev
+Does your private docker registry require login credentials [yn]: n
+
+... images get pushed here ...
+
+kubectl apply -f apply.astra_enterprise_operator_deploy.yaml
+namespace/ae-operator-system created
+customresourcedefinition.apiextensions.k8s.io/astraenterprises.astra.netapp.com created
+role.rbac.authorization.k8s.io/ae-operator-leader-election-role created
+clusterrole.rbac.authorization.k8s.io/ae-operator-manager-role created
+clusterrole.rbac.authorization.k8s.io/ae-operator-metrics-reader created
+clusterrole.rbac.authorization.k8s.io/ae-operator-proxy-role created
+rolebinding.rbac.authorization.k8s.io/ae-operator-leader-election-rolebinding created
+clusterrolebinding.rbac.authorization.k8s.io/ae-operator-manager-rolebinding created
+clusterrolebinding.rbac.authorization.k8s.io/ae-operator-proxy-rolebinding created
+configmap/ae-operator-manager-config created
+service/ae-operator-controller-manager-metrics-service created
+deployment.apps/ae-operator-controller-manager created
+kubectl apply -n pcloud -f apply.astra_enterprise_min.yaml
+namespace/pcloud created
+astraenterprise.astra.netapp.com/astra created
+
+Waiting for AstraEnterprise instance to complete deployment
+.....................................................................................
+
+AstraEnterprise deployment complete
+Note: If running locally without a DNS entry, you may need to create an entry in /etc/hosts "127.0.0.1 codev.astra.netapp.io"
+
+AstraEnterprise UI: https://codev.astra.netapp.io
 ----
 
 . In the command-line utility, edit the helm values to identify the "astra" namespace.
++
+----
+helm install -n astra ./astra
+----
+
 . Use Helm 3 to install the Astra Enterprise Operator to a Kubernetes cluster running in your data center.
 +
 NOTE: The Astra Helm repo must be available in your private registry.
@@ -66,6 +120,46 @@ NOTE: The Astra Helm repo must be available in your private registry.
 . Optionally, specify the IP and host names to use for ingress (rather than use one assigned by Kubernetes).
 . Optionally, specify the initial administrative credentials (rather than getting a prompt at your initial logon).
 . Optionally, specify the on-premise container registry to use (rather than the public NetApp registry).
+
+. Verify the installation. Run 'kubctl get pods -n pcloud' and look for the status of each pod to be "Running" or "Complete".
+----
+$ kubectl get pods -n pcloud
+NAME                                         READY   STATUS      RESTARTS   AGE
+activity-6986485c96-n5ns7                    1/1     Running     0          7h12m
+ae-helm-repo-866d467dbf-fsn4d                1/1     Running     0          7h13m
+ae-post-deployment-8fsvs                     0/1     Completed   0          7h10m
+asup-6b5d87c565-56n2l                        1/1     Running     0          7h12m
+billing-55cf654d86-7ngqp                     1/1     Running     2          7h12m
+cloud-extension-699bd96896-q24qt             1/1     Running     1          7h12m
+composite-compute-76bfd89f46-g9kp5           1/1     Running     0          7h12m
+composite-volume-6cc58f5fc7-pfr5m            1/1     Running     0          7h12m
+credentials-549cd7d8f9-tvdf2                 1/1     Running     0          7h12m
+entitlement-7bc45b6bd4-c7vjd                 1/1     Running     3          7h12m
+features-5bc664dd6d-q98v6                    1/1     Running     0          7h12m
+graphql-server-57dbb544b8-2kzvf              1/1     Running     0          7h12m
+identity-76d965648-gbr85                     1/1     Running     0          7h12m
+krakend-55fd947b79-cg2ct                     1/1     Running     0          7h12m
+license-6bcf458478-fbfx5                     1/1     Running     0          7h12m
+metrics-ingestion-service-85f5dfc595-6s5p6   1/1     Running     0          7h12m
+nats-0                                       1/1     Running     0          7h13m
+nats-1                                       1/1     Running     0          7h13m
+nats-2                                       1/1     Running     0          7h13m
+nautilus-754bcc778c-xn4nc                    1/1     Running     0          7h12m
+openapi-69c6b98955-r6828                     1/1     Running     0          7h12m
+polaris-mongodb-arbiter-0                    1/1     Running     0          7h13m
+polaris-mongodb-primary-0                    2/2     Running     0          7h13m
+polaris-mongodb-secondary-0                  2/2     Running     0          7h13m
+polaris-ui-6f88ccc5fd-jdnhz                  1/1     Running     0          7h12m
+polaris-vault-0                              1/1     Running     0          7h13m
+storage-provider-74c59cd7c4-bqnnf            1/1     Running     0          7h12m
+support-649b779cd5-7kdlb                     1/1     Running     0          7h12m
+tenancy-9c46cbd87-zfcvq                      1/1     Running     0          7h12m
+traefik-5f4fd4b499-7fwxg                     1/1     Running     0          7h10m
+traefik-5f4fd4b499-xrgks                     1/1     Running     0          7h10m
+trident-svc-77c68c8598-4xl9m                 1/1     Running     0          7h12m
+----
+
+.
 
 +
 Astra Enterprise does the following:
@@ -83,12 +177,22 @@ Astra Enterprise does the following:
 
 The Astra command-line installation tool connects you to the Astra UI.
 
+. Using your DNS server or local /etc/hosts file, point 'codev.astra.netapp.io' to your load-balanced IP address.
 . Log into the Astra UI with the default user credentials.
 +
 You will be prompted to change the password.
 
 . Enter a new password.
 
+== Troubleshooting the installation
+
+If any of the services are in Error status, you can inspect the logs with "kubectl logs -n pcloud `pod name`". Look for API response codes in the 400 to 500 range. Those will indicate the place where a failure happened.
+
+. To inspect the AE Operator logs, enter the following:
++
+----
+$ kubectl logs --follow -n ae-operator-system $(kubectl get pods -n ae-operator-system -o name)  -c manager
+----
 
 == What's next
 

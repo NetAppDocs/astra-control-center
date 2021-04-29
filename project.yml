@@ -4,7 +4,7 @@ sidebar:
       url: /index.html
     - section: release-notes
     - section: get-started
-    - section: learn
+    - section: concepts
     - section: use
     - section: solutions
     - section: rest-api

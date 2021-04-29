@@ -15,7 +15,7 @@ After you set up your environment, you're ready to create a Kubernetes cluster a
 
 == Create a Kubernetes cluster
 
-If you don't have a cluster yet, create a cluster in Kubernetes link:../learn/requirements.html[that meets Astra requirements].
+If you don't have a cluster yet, create a cluster in Kubernetes link:../concepts/requirements.html[that meets Astra requirements].
 
 == Start managing Kubernetes compute
 
@@ -39,7 +39,7 @@ Follow the prompts to add the compute.
 Pay careful attention to the Eligible tab. If a warning appears, hover over the warning to determine if there's an issue with the compute. For example, it might identify that the cluster doesn't have a worker node.
 . Select the default storage class that you'd like to use with this compute.
 +
-link:../learn/choose-class-and-size.html[Learn about choosing a storage class].
+link:../concepts/choose-class-and-size.html[Learn about choosing a storage class].
 
 . *Review & Approve*: Review the configuration details and click *Add compute*.
 

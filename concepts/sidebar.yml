@@ -1,0 +1,11 @@
+section: concepts
+title: Concepts
+entries:
+  - title: Requirements
+    url: /concepts/requirements.html
+  - title: Architecture and components
+    url: /concepts/architecture.html
+  - title: Validated vs standard apps
+    url: /concepts/validated-vs-standard.html
+  - title: Service type, storage class, and PV size
+    url: /concepts/choose-class-and-size.html

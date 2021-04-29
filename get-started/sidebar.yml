@@ -2,7 +2,7 @@ section: get-started
 title: Get started
 entries:
   - title: Intro to Astra
-    url: /learn/intro.html
+    url: /get-started/intro.html
   - title: Quick start for Astra Enterprise
     url: /get-started/quick-start.html
   - title: Install Astra Enterprise

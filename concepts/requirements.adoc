@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: learn/requirements.html
+permalink: concepts/requirements.html
 keywords: kubernetes cluster, cluster requirements, version requirements, supported versions, apps, supported apps, mariadb, mysql, postgres, kubernetes version, ubuntu, image type, networking
 summary: Get started by verifying support for your Kubernetes clusters, apps, and web browser.
 ---
