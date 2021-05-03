@@ -25,30 +25,51 @@ If you didn't create an admin account with the command-line installation utility
 . After changing the admin password, select *Account Settings*.
 . Enter the admin account email and password.
 
-== Add a license
+== Try Astra Enterprise with an Evaluation license
+You can try Astra Enterprise with an Evaluation license, which lets you use Astra Enterprise for 90 days from the date you downloaded Astra Enterprise.
+
+=== Convert an Evaluation license to a full license
+
+After working with your NetApp sales rep, you receive the license and serial number.
+
+. Log in to the NetApp Support Site.
+. Access the Astra Enterprise Download page, enter the serial number, and download the full NetApp license file (NLF).
+. Log in to the Astra Enterprise UI.
+. From the left navigation, select *Account* > *Licenses*.
++
+Alternatively, from the Astra Enterprise UI Dashboard, select *Upgrade license*.
+
+. In the Account > Licenses page, select the Status drop-down menu and select *Update license*.
+. Continue with instructions in <<Add a license>>.
+
+== Add or update a license
 
 Before adding a license, you need to obtain the license information.
 
-==== Retrieve your license information
+==== Retrieve license information
+When you downloaded Astra Enterprise from the Astra Enterprise Download page on the NetApp Support Site, you also downloaded the NetApp license file (NLF).
 
-. (WHERE do you get the license info???)
 . Copy the license information to the clipboard.
 
-==== Add license information with the UI
+
+==== Add a license with the UI
+Use the license information that you obtained from the NetApp Support Site.
 
 . From the Dashboard when you first login, select *Manage Licenses*.
 +
 Alternatively, from the left navigation, select *Account* > *Licenses*.
 
-. Do one of the following:
-+
-* To manually enter your license information, select *Add a license*. Paste in the license information. ??? I might have this backwards - if you want to manually enter info, you upload it maybe. If you want to get it from NSS, you click Add license.
-* To upload a license from the NetApp Support Site, select *Upload Astra Enterprise license*. Enter your NetApp Support Site credentials to access your existing licenses and select *Log in*. Astra displays the licensing information on the Licenses tab.
+. Select *Add a license*.
+. Locate the NLS license file that you downloaded.
+. Select *Apply*.
 
-+
+The Account page displays the license information, expiration date (for Evaluation licenses), serial number, and CPU units used.
+
 Astra Enterprise functionality is now enabled.
 
-==== Add license information with the API
+
+
+==== Add a license with the API
 
 . To list licenses, enter the following:
 +
@@ -61,6 +82,15 @@ GET /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/licenses?include=name
 ----
 POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/licenses
 ----
+
+=== Update a license
+
+If you need to update your license information, you can easily do so.
+
+. From the left navigation, select *Account* > *Licenses*.
+. In the Account > Licenses page, select the Status drop-down menu and select *Update license*.
+. Continue with instructions in <<Add a license>>.
+
 
 == Add a bucket
 If you want to protect and back up your apps, you will need to add a storage bucket.

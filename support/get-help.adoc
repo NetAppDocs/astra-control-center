@@ -12,13 +12,15 @@ summary: NetApp provides support for Astra in a variety of ways. Extensive free 
 
 NetApp provides support for Astra in a variety of ways. Extensive free self-support options are available 24x7, such as knowledgebase (KB) articles and a Slack channel. Your Astra account includes remote technical support via web ticketing.
 
+TIP: If you have an Astra Enterprise Evaluation license, you can get technical support. 
+
 You must first link:register-support.html[activate support for your NetApp serial number] in order to use these non self-service support options. A NetApp Support Site (NSS) SSO account is required for chat and web ticketing along with case management.
 
 You can access support options from the Astra UI by selecting the *Support* tab from the main menu.
 
 image:screenshot-support.gif[]
 
-== Self support
+== Self support options
 
 These options are available for free 24x7:
 
@@ -34,11 +36,41 @@ This is the doc site that you're currently viewing.
 +
 Go to the containers channel in thePub workspace to connect with peers and experts.
 
+* Get support bundle information
++ Generate a support bundle to provide to NetApp Technical Support for troubleshooting.
+
 * Feedback email
 +
 Send an email to astra.feedback@netapp.com to let us know your thoughts, ideas, or concerns.
 
-== Subscription support
+== Get support bundle information from Astra Enterprise
+To troubleshoot issues, you might want to generate a support bundle and provide it to NetApp Technical Support.
+
+The Astra Enterprise support bundle includes the following information:
+* TBD
+* Trident information
+
+
+Before you begin, you might want to check to see whether your external connections are configured to enable uploads of support bundles to NetApp Support.
+. Select *Accounts* > *Connections*.
+. Check the external connections in *Connection settings*.
+
+
+.Steps
+. From the Astra UI left navigation, select *Support*.
+. In the Support bundle tile, select *Generate*.
+. From the Generate a Support Bundle page, select the timeframe of 24 hours, 48 hours, or 7 days.
+. Check the *Upload the bundle to the NetApp Support Site*.
+. Select *Generate Bundle*.
++
+When the support bundle is ready, a notification appears on the *Accounts* > *Notification* page in the Alerts area.
+
+If the generation failed or partially completed, an icon appears on the Generate bundle page. Select the icon to see the message.
+. Select the *Download* icon.
+
+
+
+== Subscription support for Astra Service
 
 In addition to the self-support options above, you can work with a NetApp Support Engineer to resolve any issues after you link:register-support.html[activate support for your NetApp serial number].
 
