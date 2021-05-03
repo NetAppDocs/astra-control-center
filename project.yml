@@ -15,7 +15,7 @@ sidebar:
 homepage:
   tiles:
     - title: Get started with Astra Enterprise
-      #image: ./media/outline_directions_run_black_18dp.png
+      #image: ./media/outline_directions_run_black_18dp.png 
       links:
         - title: Learn about Astra Enterprise
           url: /overview/intro.html
