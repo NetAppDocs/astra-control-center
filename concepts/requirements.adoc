@@ -35,7 +35,6 @@ A Kubernetes cluster must meet the following requirements so you can discover an
 
 * *Trident*: Astra Enterprise requires that Trident already be installed and configured to work with NetApp ONTAP as the storage backend.
 
-
 == Supported apps
 
 Astra Enterprise supports all applications running on your Kubernetes clusters. See link:../release-notes/known-limitations.html[Known limitations].
@@ -52,15 +51,13 @@ If you want to try Astra Enterprise, you can use a 90-day evaluation license.
 
 == Load balancing
 
-To support successful load balancing, you should use a load balancer with an external IP.
-
+Astra Enterprise requires the Kubernetes cluster to have a load balancer installed and configured with an accessible external IP address. In the internal DNS server configuration, you should point the chosen DNS name for Astra Enterprise to the load-balanced IP address.
 
 == Networking
 
 TBD
 
 
-
 == Supported web browsers
 
-Astra Enterprise supports recent versions of Firefox, Safari, and Chrome with a minimum resolution of 1280 x 720.
+Astra Enterprise supports recent versions of Firefox, Safari, and Chrome with a minimum screen resolution of 1280 x 720.
