@@ -48,6 +48,16 @@ NOTE: The Astra Enterprise operator will install into a namespace called _ae-ope
 
 == Install Astra Enterprise using the command-line utility
 
+Using the command-line utility, Astra Enterprise does the following:
+
+* Obtains the Astra Enterprise images from your local repository and installs Astra Enterprise.
+* Installs the Astra components into the "astra" namespace.
+* Creates a default account.
+* Creates a default administrative user called "admin" with a default one-time password of the UUID for this instance of Astra Enterprise. When the installation completes, a message displays the application UUID URL and default credential. This credential is unique to each instance of Astra Enterprise.
+* Determines from Kubernetes that all Astra Enterprise pods are running.
+* Installs and connects you to the Astra UI.
+
+.Steps
 . Change to the where you downloaded the Astra images.
 . Extract both images, change directories to the Astra directory, and list the contents.
 
@@ -161,14 +171,6 @@ trident-svc-77c68c8598-4xl9m                 1/1     Running     0          7h12
 
 .
 
-+
-Astra Enterprise does the following:
-
-* Obtains the Astra Enterprise images from your local repository and installs Astra Enterprise.
-* Installs the Astra components into the "astra" namespace.
-* Creates a default administrative user called "admin" with a default one-time password of the UUID for this instance of Astra Enterprise. When the installation completes, a message displays the application UUID URL and default credential. This credential is unique to each instance of Astra Enterprise.
-* Determines from Kubernetes that all Astra Enterprise pods are running.
-* Installs and connects you to the Astra UI.
 
 . Make note of the one-time UUID URL and default credential that is displayed.
 
@@ -178,13 +180,13 @@ Astra Enterprise does the following:
 The Astra command-line installation tool connects you to the Astra UI.
 
 . Using your DNS server or local /etc/hosts file, point 'codev.astra.netapp.io' to your load-balanced IP address.
-. Log into the Astra UI with the default user credentials.
+. Log into the Astra UI with the default admin credentials.
 +
 You will be prompted to change the password.
 
 . Enter a new password.
 
-== Troubleshooting the installation
+== Troubleshoot the installation
 
 If any of the services are in Error status, you can inspect the logs with "kubectl logs -n pcloud `pod name`". Look for API response codes in the 400 to 500 range. Those will indicate the place where a failure happened.
 
