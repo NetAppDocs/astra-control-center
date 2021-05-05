@@ -16,7 +16,10 @@ Get started by verifying support for your Kubernetes clusters, apps, licenses, a
 
 A Kubernetes cluster must meet the following requirements so you can discover and manage it from Astra Enterprise.
 
-* *Kubernetes deployment*: Astra Enterprise supports Kubernetes clusters. The cluster should already be deployed in your environment and you should have permissions to manage the existing Kubernetes cluster.
+* *Kubernetes deployment*: Astra Enterprise supports Kubernetes clusters. The cluster should already be deployed in your environment and you should have permissions to manage the existing Kubernetes cluster. This cluster should be preconfigured with the following:
+** Load balancer with a static IP or IP range
+** Internal domain name that is routed from an internal DNS server and points to the static IP
+** Default storage provider in the Kubernetes cluster that is backed by a Trident storage class to work with ONTAP.
 
 * *Kubernetes version*: A cluster must be running Kubernetes version 1.17 or later.
 
@@ -34,6 +37,17 @@ A Kubernetes cluster must meet the following requirements so you can discover an
 * *Compute and memory requirements*:
 
 * *Trident*: Astra Enterprise requires that Trident already be installed and configured to work with NetApp ONTAP as the storage backend.
+
+== Access to the internet
+
+You should determine whether you have outside access to the internet. If you do not, some functionality might be limited, such as monitoring data from NetApp Cloud Insights, Support data, or Licensing information.
+
+If you do have access to the internet, decide which of the following NetApp systems you will authorize Astra Enterprise to integrate with:
+
+* Cloud Insights for monitoring and metrics
+* Active IQ and SmartSolve for supportability
+* IPA for license automation
+
 
 == Supported apps
 
@@ -60,4 +74,16 @@ TBD
 
 == Supported web browsers
 
-Astra Enterprise supports recent versions of Firefox, Safari, and Chrome with a minimum screen resolution of 1280 x 720.
+Astra Enterprise supports recent versions of Firefox, Safari, and Chrome with a minimum resolution of 1280 x 720.
+
+== Integration with your organization's options:
+
+Before you deploy Astra Enterprise, you should determine which internal integrations should occur, including the following:
+
+* Single sign on
+* SMTP server for email notifications
+
+If you want to integrate these options, you should obtain the following:
+
+* SSO integration confirmation details
+* SMTP server configuration details
