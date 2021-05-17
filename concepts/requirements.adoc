@@ -31,8 +31,8 @@ A Kubernetes cluster must meet the following requirements so you can discover an
 
 * *Private clusters* If the cluster is private, it must have the https://cloud.google.com/kubernetes-engine/docs/concepts/private-cluster-concept[master authorized network^] set to allow the Astra IP addresses:
 ** 54.164.233.140/32
-**	3.218.120.204/32
-**	34.193.99.138/32
+** 3.218.120.204/32
+** 34.193.99.138/32
 
 * *Compute and memory requirements*:
 
@@ -47,7 +47,6 @@ If you do have access to the internet, decide which of the following NetApp syst
 * Cloud Insights for monitoring and metrics
 * Active IQ and SmartSolve for supportability
 * IPA for license automation
-
 
 == Supported apps
 
