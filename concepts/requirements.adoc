@@ -36,7 +36,7 @@ A Kubernetes cluster must meet the following requirements so you can discover an
 
 * *Compute and memory requirements*:
 
-* *Trident*: Astra Enterprise requires that Trident version 21.01 or newer already be installed and configured to work with NetApp ONTAP as the storage backend.
+* *Trident* and *ONTAP*: Astra Enterprise requires that Trident version 21.01 or newer already be installed and configured to work with NetApp ONTAP version 9.5 or newer as the storage backend.
 
 == Access to the internet
 
