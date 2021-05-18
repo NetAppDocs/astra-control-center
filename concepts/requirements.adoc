@@ -16,10 +16,12 @@ Get started by verifying support for your Kubernetes clusters, apps, licenses, a
 
 A Kubernetes cluster must meet the following requirements so you can discover and manage it from Astra Control Center.
 
-* *Kubernetes deployment*: Astra Control Center supports Kubernetes clusters. The cluster should already be deployed in your environment and you should have permissions to manage the existing Kubernetes cluster. This cluster should be preconfigured with the following:
-** Load balancer with a static IP or IP range
-** Internal domain name that is routed from an internal DNS server and points to the static IP
-** Default storage provider in the Kubernetes cluster that is backed by a Trident storage class to work with ONTAP.
+*OpenShift*: If your Kubernetes cluster is managed as part of the Red Hat OpenShift Container Platform, Astra Control Center requires OpenShift 4.6 or newer.
+
+* *Kubernetes deployment*: The Kubernetes cluster you use for Astra Control Center should already be deployed in your environment and you should have permissions to manage the cluster. This cluster should be preconfigured with the following:
+** A load balancer with a static IP address or IP address range
+** An internal domain name that is routed from an internal DNS server and points to the static IP address
+** A default storage provider in the Kubernetes cluster that is backed by a Trident storage class to work with ONTAP.
 
 * *Kubernetes version*: A cluster must be running Kubernetes version 1.17 or later.
 
@@ -36,7 +38,7 @@ A Kubernetes cluster must meet the following requirements so you can discover an
 
 * *Compute and memory requirements*:
 
-* *Trident* and *ONTAP* storage configuration: Astra Control Center requires that Trident version 21.01 or newer already be installed and configured to work with NetApp ONTAP version 9.5 or newer as the storage backend.
+* *Trident / ONTAP storage configuration*: Astra Control Center requires that Trident version 21.01 or newer already be installed and configured to work with NetApp ONTAP version 9.5 or newer as the storage backend.
 
 == Access to the internet
 
@@ -58,7 +60,7 @@ No matter which type of app that you use with Astra Control Center, you should a
 
 == License
 
-Astra Control Center requires an Astra Control Center license.
+Astra Control Center requires an Astra Control Center license for full functionality.
 
 If you want to try Astra Control Center, you can use a 90-day evaluation license.
 
@@ -66,16 +68,11 @@ If you want to try Astra Control Center, you can use a 90-day evaluation license
 
 Astra Control Center requires the Kubernetes cluster to have a load balancer installed and configured with an accessible external IP address. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
 
-== Networking
-
-TBD
-
-
 == Supported web browsers
 
 Astra Control Center supports recent versions of Firefox, Safari, and Chrome with a minimum resolution of 1280 x 720.
 
-== Integration with your organization's options:
+== Integration with your organization:
 
 Before you deploy Astra Control Center, you should determine which internal integrations should occur, including the following:
 
