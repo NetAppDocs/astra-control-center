@@ -70,7 +70,7 @@ Astra Control Center requires the Kubernetes cluster to have a load balancer ins
 
 == Networking requirements
 
-Astra Control Center communicates using the following TCP ports. You should ensure that these ports are allowed through any firewalls:
+Astra Control Center communicates using the following TCP ports. You should ensure that these ingress ports are allowed through any firewalls, and configure firewalls to allow any HTTPS egress traffic originating from the Astra network:
 
 |===
 |Product |Port |Protocol |Direction |Purpose
@@ -80,16 +80,6 @@ Astra Control Center communicates using the following TCP ports. You should ensu
 |HTTPS
 |Ingress
 |UI / API access
-
-|*TBD*
-|HTTPS
-|Ingress
-|Metrics Inbound from managed clusters
-
-|*TBD*
-|HTTPS
-|Ingress
-|Logging Inbound from managed clusters
 
 |9090
 |HTTPS
