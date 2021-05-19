@@ -77,56 +77,78 @@ Astra Control Center communicates using the following TCP ports. You should ensu
 
 .13+|Astra Control Center
 |443
-.15+|HTTPS
+|HTTPS
 |Ingress
 |UI / API access
 
 |*TBD*
+|HTTPS
 |Ingress
 |Metrics Inbound from managed clusters
 
 |*TBD*
+|HTTPS
 |Ingress
 |Logging Inbound from managed clusters
 
 |9090
+|HTTPS
 |Ingress
 |OpenMetrics to Metrics consumer (Prometheus)
 
-.9+|n/a
+|n/a
+|HTTPS
 |Ingress
 |CI/fluentbit/telegraf data to Cloud Insights
 
+|n/a
+|HTTPS
 |Egress
 |Fleuntbit to logs consumer (Elastic Search)
 
+|n/a
+|HTTPS
 |Egress
 |ASUP to NetApp AIQ
 
+|n/a
+|HTTPS
 |Egress
 |Bucket service communication with Bucket Provider
 
+|n/a
+|HTTPS
 |Egress
 |Metrics flow from OnTap
 
+|n/a
+|HTTPS
 |Egress
 |Storage Backend service communication with OnTap
 
+|n/a
+|HTTPS
 |Egress
 |Cloud extension communication with managed cluster
 
+|n/a
+|HTTPS
 |Egress
 |Nautilus communication with managed cluster
 
+|n/a
+|HTTPS
 |Egress
 |Trident service communication with managed cluster’s Trident
 
 .2+|Trident
 |34571
+|HTTPS
 |Ingress
 |Node Pod communication
 
 |9220
+|HTTPS
 |Ingress
 |Metrics Endpoint
 |===
