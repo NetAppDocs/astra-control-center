@@ -1,71 +1,67 @@
 ---
 sidebar: sidebar
 permalink: get-started/install_overview.html
-keywords:
-summary:
+keywords: Astra, Astra control center, install, deploy, download
+summary: To install Astra Control Center and addressing some environment prerequisites, you'll download the bundle and install using a CLI.
 ---
 
-= Install Astra Enterprise overview
+= Install Astra Control Center overview
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/get-started/
 
-To install Astra Enterprise, you'll do the following basic steps:
+To install Astra Control Center, you'll do the following basic steps:
 
-* <<Prepare for the Astra Enterprise deployment>>
-* <<Download Astra Enterprise>>
-* <<Install Astra Enterprise using the command-line utility>>
+* <<Prepare for the Astra Control Center deployment>>
+* <<Install Astra Control Center using the command-line utility>>
 * <<Connect to the Astra UI>>
 
-== Prepare for the Astra Enterprise deployment
+== Prepare for the Astra Control Center deployment
 Check for any external dependencies and infrastructure needs:
 
 . Review the link:/concepts/requirements.html[Requirements].
 . Obtain a trial license from NetApp.
 . Obtain permissions and instructions on how to load NetApp-supplied images into your organization's local image repository.
 . Obtain the URL of the image registry where you will upload the images.
-. Obtain a Kubernetes cluster that meets the Astra Enterprise requirements.
+. Obtain a Kubernetes cluster that meets the Astra Control Center requirements.
 . If you will use SSO, obtain SSO integration configuration details.
 . Configure Trident with the ONTAP storage backend.
 . Install an external load balancer on the Kubernetes cluster and set a static IP or IP range of that load balancer. The K8s cluster be configured to listen on this reachable IP address.
 . Acquire an internal domain name that is routed from an internal DNS and point the domain name to the static IP or IP range using internal DNS servers, such as astra.company.com. The DNS name should point to their load-balanced IP address using their internal DNS server (or /etc/hosts for individual machines).
 . Set a default storage provider in the Kubernetes cluster that is backed by a Trident storage class configured to work with ONTAP.
-. Create a namespace for Astra Enterprise.
+. Create a namespace for Astra Control Center.
 +
-NOTE: The Astra Enterprise operator will install into a namespace called _ae-operator-system_ and the Astra application will be located in a namespace called _pcloud_. Both the Astra Enterprise Operator and the Astra application will be installed into the same namespace when the product releases.
+NOTE: The Astra Control Center operator will install into a namespace called _ae-operator-system_ and the Astra application will be located in a namespace called _pcloud_. Both the Astra Control Center Operator and the Astra application will be installed into the same namespace when the product releases.
 
+== Install Astra Control Center using the command-line utility
 
+To install Astra Control Center, you'll download the installation bundle from the NetApp Support Site and install it in your environment using a CLI. You can use this procedure to install Astra Control Center in connected or dark site environments.
 
-== Download Astra Enterprise
+.About this task
+The Astra Control Center installer does the following:
 
-. Download the Astra Enterprise images from the NetApp Support Site:
-+
-* Astra Container image
-* Astra Enterprise Operator image
-
-. Install the Astra images in your local image repository, tagged for your private registry.
-
-
-== Install Astra Enterprise using the command-line utility
-
-Using the command-line utility, Astra Enterprise does the following:
-
-* Obtains the Astra Enterprise images from your local repository and installs Astra Enterprise.
-* Installs the Astra components into the "astra" namespace.
+* Installs the Astra components into the `astra` namespace.
 * Creates a default account.
-* Creates a default administrative user called "admin" with a default one-time password of the UUID for this instance of Astra Enterprise. When the installation completes, a message displays the application UUID URL and default credential. This credential is unique to each instance of Astra Enterprise.
-* Determines from Kubernetes that all Astra Enterprise pods are running.
+* Creates a default administrative user called `admin` with a default one-time password of the UUID for this instance of Astra Control Center. When the installation completes, a message displays the application UUID URL and default credential. This credential is unique to each instance of Astra Control Center.
+* Determines from Kubernetes that all Astra Control Center pods are running.
 * Installs and connects you to the Astra UI.
 
 .Steps
-. Change to the where you downloaded the Astra images.
+. Download the Astra Control Center bundle (`astra-enterprise-21.07.xx.tar.gz`) from the NetApp Support Site.
+The bundle contains the following images:
++
+* Astra Container
+* Astra Control Center Operator
+
+. Load the Astra bundle in your local image repository, tagged for your private registry.
+. Change to the directory where you downloaded the Astra images.
 . Extract both images, change directories to the Astra directory, and list the contents.
 
 +
 ----
 cd ~/Downloads
-tar -xxf astra-v20.6 tar.gz
-cd astra-v20.6
+tar -xvzf astra-enterprise-21.07.xx.tar.gz
+cd astra-enterprise-21.07
 ls -al
 -rw-r--r--@ 1 ahaid staff 459 Apr 15 16:06 astra_enterprise.yaml
 -rw-r--r--@ 1 ahaid staff 331 Apr 15 16:06 astra_enterprise_min.yaml
@@ -74,7 +70,7 @@ ls -al
 drwxr-xr-x@ 32 ahaid staff 1024 Apr 15 16:05 images
 
 ----
-. Run the astractl CLI, which will use the active kubeconfig on your machine to complete the installation:
+. Run the `astractl` CLI, which will use the active kubeconfig on your machine to complete the installation:
 +
 ----
 $ ./astractl deploy
@@ -113,25 +109,25 @@ Note: If running locally without a DNS entry, you may need to create an entry in
 AstraEnterprise UI: https://codev.astra.netapp.io
 ----
 
-. In the command-line utility, edit the helm values to identify the "astra" namespace.
+. In the command-line utility, edit the Helm values to identify the `astra` namespace.
 +
 ----
 helm install -n astra ./astra
 ----
 
-. Use Helm 3 to install the Astra Enterprise Operator to a Kubernetes cluster running in your data center.
+. Use Helm 3 to install the Astra Control Center Operator to a Kubernetes cluster running in your data center.
 +
 NOTE: The Astra Helm repo must be available in your private registry.
 
 . Load all Astra Container images into a private Docker registry running in your data center.
-. Configure an Astra Enterprise custom resource (CR).
+. Configure an Astra Control Center custom resource (CR).
 . Apply the CR to your Kubernetes cluster.
 . Optionally, specify the storage class to use for Astra itself (rather than the default Kubernetes storage class).
 . Optionally, specify the IP and host names to use for ingress (rather than use one assigned by Kubernetes).
 . Optionally, specify the initial administrative credentials (rather than getting a prompt at your initial logon).
 . Optionally, specify the on-premise container registry to use (rather than the public NetApp registry).
 
-. Verify the installation. Run 'kubctl get pods -n pcloud' and look for the status of each pod to be "Running" or "Complete".
+. Verify the installation. Run `kubctl get pods -n pcloud` and look for the status of each pod to be `Running` or `Complete`.
 ----
 $ kubectl get pods -n pcloud
 NAME                                         READY   STATUS      RESTARTS   AGE
@@ -172,25 +168,25 @@ trident-svc-77c68c8598-4xl9m                 1/1     Running     0          7h12
 .
 
 
-. Make note of the one-time UUID URL and default credential that is displayed.
+. Note the one-time UUID URL and default credential that is displayed.
 
 
 == Connect to the Astra UI
 
 The Astra command-line installation tool connects you to the Astra UI.
 
-. Using your DNS server or local /etc/hosts file, point 'codev.astra.netapp.io' to your load-balanced IP address.
+. Using your DNS server or local `/etc/hosts` file, point `codev.astra.netapp.io` to your load-balanced IP address.
 . Log into the Astra UI with the default admin credentials.
 +
-You will be prompted to change the password.
+You will be prompted to change the default password.
 
 . Enter a new password.
 
 == Troubleshoot the installation
 
-If any of the services are in Error status, you can inspect the logs with "kubectl logs -n pcloud `pod name`". Look for API response codes in the 400 to 500 range. Those will indicate the place where a failure happened.
+If any of the services are in Error status, you can inspect the logs with `kubectl logs -n pcloud `pod name``. Look for API response codes in the 400 to 500 range. Those indicate the place where a failure happened.
 
-. To inspect the AE Operator logs, enter the following:
+. To inspect the ACC Operator logs, enter the following:
 +
 ----
 $ kubectl logs --follow -n ae-operator-system $(kubectl get pods -n ae-operator-system -o name)  -c manager
@@ -199,7 +195,3 @@ $ kubectl logs --follow -n ae-operator-system $(kubectl get pods -n ae-operator-
 == What's next
 
 Complete the deployment by performing link:setup_overview.html[setup tasks].
-
-== Installing Astra Enterprise without access to the Internet
-
-Installing Astra Enterprise requires that you download the installer utility, license and image bundle from the NetApp Support Site and transfer it to the environment you need.
