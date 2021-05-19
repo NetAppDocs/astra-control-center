@@ -68,6 +68,69 @@ If you want to try Astra Control Center, you can use a 90-day evaluation license
 
 Astra Control Center requires the Kubernetes cluster to have a load balancer installed and configured with an accessible external IP address. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
 
+== Networking requirements
+
+Astra Control Center communicates using the following TCP ports. You should ensure that these ports are allowed through any firewalls:
+
+|===
+|Product |Port |Protocol |Direction |Purpose
+
+.13+|Astra Control Center
+|443
+.15+|HTTPS
+|Ingress
+|UI / API access
+
+|*TBD*
+|Ingress
+|Metrics Inbound from managed clusters
+
+|*TBD*
+|Ingress
+|Logging Inbound from managed clusters
+
+|9090
+|Ingress
+|OpenMetrics to Metrics consumer (Prometheus)
+
+.9+|n/a
+|Ingress
+|CI/fluentbit/telegraf data to Cloud Insights
+
+|Egress
+|Fleuntbit to logs consumer (Elastic Search)
+
+|Egress
+|ASUP to NetApp AIQ
+
+|Egress
+|Bucket service communication with Bucket Provider
+
+|Egress
+|Metrics flow from OnTap
+
+|Egress
+|Storage Backend service communication with OnTap
+
+|Egress
+|Cloud extension communication with managed cluster
+
+|Egress
+|Nautilus communication with managed cluster
+
+|Egress
+|Trident service communication with managed cluster’s Trident
+
+.2+|Trident
+|34571
+|Ingress
+|Node Pod communication
+
+|9220
+|Ingress
+|Metrics Endpoint
+|===
+
 == Supported web browsers
 
 Astra Control Center supports recent versions of Firefox, Safari, and Chrome with a minimum resolution of 1280 x 720.
