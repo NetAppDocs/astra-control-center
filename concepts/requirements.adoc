@@ -16,6 +16,11 @@ Get started by verifying support for your Kubernetes clusters, apps, licenses, a
 
 A Kubernetes cluster must meet the following requirements so you can discover and manage it from Astra Control Center.
 
+*Astra Control Center namespace*: You need to prepare two Kubernetes namespaces before deploying Astra Control Center:
+
+* ae-operator-system (Used by Astra Control Center operator)
+* pcloud (Used by Astra Control Center application)
+
 *OpenShift*: If your Kubernetes cluster is managed as part of the Red Hat OpenShift Container Platform, Astra Control Center requires OpenShift 4.6 or newer.
 
 * *Kubernetes deployment*: The Kubernetes cluster you use for Astra Control Center should already be deployed in your environment and you should have permissions to manage the cluster. This cluster should be preconfigured with the following:
@@ -27,7 +32,7 @@ A Kubernetes cluster must meet the following requirements so you can discover an
 
 * *Image type*: The image type for each worker node must be Ubuntu.
 
-* *Image repository*: You must have an existing image repository.
+* *Image registry*: You must have an existing private Docker image registry to which you can push Astra Control Center build images. You must have tagged the images for the private container registry.
 
 * *Cluster state*: Clusters must be running in a healthy state and have at least one online worker node.
 
