@@ -89,37 +89,37 @@ Astra Control Center communicates using the following TCP ports. You should ensu
 |9090
 |HTTPS
 |Ingress
-|OpenMetrics to Metrics consumer (Prometheus)
+|Metrics data to Metrics consumer (Prometheus)
 
 |n/a
 |HTTPS
 |Ingress
-|CI/fluentbit/telegraf data to Cloud Insights
+|Data to Cloud Insights
 
 |n/a
 |HTTPS
 |Egress
-|Fleuntbit to logs consumer (Elastic Search)
+|Log processing data to logs consumer (Elastic Search)
 
 |n/a
 |HTTPS
 |Egress
-|ASUP to NetApp AIQ
+|NetApp AutoSupport messages to NetApp Active IQ
 
 |n/a
 |HTTPS
 |Egress
-|Bucket service communication with Bucket Provider
+|Bucket service communication with bucket provider
 
 |n/a
 |HTTPS
 |Egress
-|Metrics flow from OnTap
+|Metrics flow from ONTAP
 
 |n/a
 |HTTPS
 |Egress
-|Storage Backend service communication with OnTap
+|Storage Backend service communication with ONTAP
 
 |n/a
 |HTTPS
@@ -140,12 +140,12 @@ Astra Control Center communicates using the following TCP ports. You should ensu
 |34571
 |HTTPS
 |Ingress
-|Node Pod communication
+|Node pod communication
 
 |9220
 |HTTPS
 |Ingress
-|Metrics Endpoint
+|Metrics endpoint
 |===
 
 == Supported web browsers
