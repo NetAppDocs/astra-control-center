@@ -161,7 +161,7 @@ Astra Control Center communicates using the following TCP ports. You should ensu
 
 Astra Control Center supports recent versions of Firefox, Safari, and Chrome with a minimum resolution of 1280 x 720.
 
-== Integration with your organization:
+== Integration with your organization
 
 Before you deploy Astra Control Center, you should determine which internal integrations should occur, including the following:
 
