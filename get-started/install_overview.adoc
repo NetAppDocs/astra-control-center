@@ -53,61 +53,105 @@ The bundle contains the following images:
 * Astra Container
 * Astra Control Center Operator
 
-. Load the Astra bundle in your local image repository, tagged for your private registry.
-. Change to the directory where you downloaded the Astra images.
-. Extract both images, change directories to the Astra directory, and list the contents.
+. Extract the images:
 
 +
 ----
-cd ~/Downloads
 tar -xvzf astra-enterprise-21.07.xx.tar.gz
+----
+
+. Change to the Astra directory and list the extracted package contents.
++
+----
 cd astra-enterprise-21.07
 ls -al
+----
++
+Sample return:
++
+----
+total 96
 -rw-r--r--@ 1 ahaid staff 459 Apr 15 16:06 astra_enterprise.yaml
 -rw-r--r--@ 1 ahaid staff 331 Apr 15 16:06 astra_enterprise_min.yaml
 -rw-r--r--@ 1 ahaid staff 10555 Apr 15 16:06 astra_enterprise_operator_deploy.yaml
--rwxr-xr-x@ 1 ahaid staff 11353 Apr 15 16:06 astractl
 drwxr-xr-x@ 32 ahaid staff 1024 Apr 15 16:05 images
-
 ----
-. Run the `astractl` CLI, which will use the active kubeconfig on your machine to complete the installation:
+. Use the following script to load ACC image to your local registry, tag the local repo image, and push to your local repo:
 +
 ----
-$ ./astractl deploy
-Welcome to AstraEnterprise Interactive Installer
+export REGISTRY=docker.repo.eng.netapp.com/ahaid/astra
 
-Please verify that the following Kubernetes cluster is where you wish to install AstraEnterprise: se-openlab-astra-enterprise-03 [yn]: y
-
-Enter the private docker registry to load AstraEnterprise images: docker.repo.eng.netapp.com/astra-codev
-Does your private docker registry require login credentials [yn]: n
-
-... images get pushed here ...
-
-kubectl apply -f apply.astra_enterprise_operator_deploy.yaml
-namespace/ae-operator-system created
-customresourcedefinition.apiextensions.k8s.io/astraenterprises.astra.netapp.com created
-role.rbac.authorization.k8s.io/ae-operator-leader-election-role created
-clusterrole.rbac.authorization.k8s.io/ae-operator-manager-role created
-clusterrole.rbac.authorization.k8s.io/ae-operator-metrics-reader created
-clusterrole.rbac.authorization.k8s.io/ae-operator-proxy-role created
-rolebinding.rbac.authorization.k8s.io/ae-operator-leader-election-rolebinding created
-clusterrolebinding.rbac.authorization.k8s.io/ae-operator-manager-rolebinding created
-clusterrolebinding.rbac.authorization.k8s.io/ae-operator-proxy-rolebinding created
-configmap/ae-operator-manager-config created
-service/ae-operator-controller-manager-metrics-service created
-deployment.apps/ae-operator-controller-manager created
-kubectl apply -n pcloud -f apply.astra_enterprise_min.yaml
-namespace/pcloud created
-astraenterprise.astra.netapp.com/astra created
-
-Waiting for AstraEnterprise instance to complete deployment
-.....................................................................................
-
-AstraEnterprise deployment complete
-Note: If running locally without a DNS entry, you may need to create an entry in /etc/hosts "127.0.0.1 codev.astra.netapp.io"
-
-AstraEnterprise UI: https://codev.astra.netapp.io
+for astraImageFile in $(ls images/*.tar) ; do
+   astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image: //')  # Load to local cache. And store the name of the loaded image trimming the 'Loaded image: '
+   docker tag ${astraImage} ${REGISTRY}/${astraImage}                              # Tag with local image repo.
+   docker push ${REGISTRY}/${astraImage}                                           # Push to the local repo.
+done
 ----
+
+. Prepare the ACC Operator to be installed by doing the following:
+
+* Ensure the credentials for the registry match.
+* Edit the AE Operator deployment yaml to refer to your local registry and secret.
++
+----
+# If REGISTRY requires creds
+# Make sure secret names match
+$ kubectl create namespace ae-operator-system
+$ kubectl create secret docker-registry -n ae-operator-system astra-registry-cred --docker-server=registry.localhost:5000 --docker-username=testuser --docker-password=testpassword
+
+
+# Edit AE Operator Deployment. Look for two image references and the image pull policy. Change them to reference your local registry and secret (if you created a secret above).
+$ vim astra_enterprise_operator_deploy.yaml
+# image: "registry.localhost:5000/gcr.io/kubebuilder/kube-rbac-proxy:v0.5.0"
+# image: "registry.localhost:5000/ae-operator:0.0.11"
+# imagePullSecrets:
+# - name: astra-registry-cred  #if no secret, comment this entire line out
+----
+
+. Install the ACC Operator:
++
+----
+$ kubectl apply -f astra_enterprise_operator_deploy.yaml
+namespace/ae-operator-system unchanged
+customresourcedefinition.apiextensions.k8s.io/astraenterprises.astra.netapp.com configured
+role.rbac.authorization.k8s.io/ae-operator-leader-election-role unchanged
+clusterrole.rbac.authorization.k8s.io/ae-operator-manager-role configured
+clusterrole.rbac.authorization.k8s.io/ae-operator-metrics-reader unchanged
+clusterrole.rbac.authorization.k8s.io/ae-operator-proxy-role unchanged
+rolebinding.rbac.authorization.k8s.io/ae-operator-leader-election-rolebinding unchanged
+clusterrolebinding.rbac.authorization.k8s.io/ae-operator-manager-rolebinding configured
+clusterrolebinding.rbac.authorization.k8s.io/ae-operator-proxy-rolebinding unchanged
+configmap/ae-operator-manager-config unchanged
+service/ae-operator-controller-manager-metrics-service unchanged
+deployment.apps/ae-operator-controller-manager configured
+----
+. Prepare to install ACC by doing the following:
+
+* Customize a namespace.
+* Ensure you have the correct image registry credentials.
+* Edit the yaml and add the registry name and secret.
++
+----
+# Make a namespace for Astra Enterprise
+$ kubectl create namespace pcloud
+
+# If REGISTRY requires creds
+# Make sure imageRegistry.Name and .Secret match
+$ kubectl create secret docker-registry -n pcloud astra-registry-cred --docker-server=registry.localhost:5000 --docker-username=testuser --docker-password=testpassword
+
+# Edit yaml - set registry name and secret. If no secret delete that line
+$ vim astra_enterprise_min.yaml
+# imageRegistry:
+# name: "registry.localhost:5000"
+# secret: "astra-registry-cred"
+----
+. Install ACC:
++
+----
+$ kubectl apply -n pcloud -f astra_enterprise_min.yaml
+----
+
+START HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 . In the command-line utility, edit the Helm values to identify the `astra` namespace.
 +
