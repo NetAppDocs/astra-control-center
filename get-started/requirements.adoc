@@ -74,7 +74,12 @@ If you do have access to the internet, decide which of the following NetApp syst
 
 == License
 
-Astra Control Center requires an Astra Control Center license for full functionality.
+Astra Control Center requires an Astra Control Center license for full functionality. Without a license, you will be unable to:
+
+// * Add clusters (de-scoped for Q2 release)
+* Define custom apps
+* Create snapshots or clones of existing apps
+* Configure data protection policies
 
 If you want to try Astra Control Center, you can use a 90-day evaluation license.
 
