@@ -35,7 +35,7 @@ NOTE: The Astra Control Center operator will install into a namespace called _ae
 
 == Install Astra Control Center using the command-line utility
 
-To install Astra Control Center, you'll download the installation bundle from the NetApp Support Site and install it in your environment using a CLI. You can use this procedure to install Astra Control Center in connected or dark site environments.
+To install Astra Control Center, you'll download the installation bundle from the NetApp Support Site and perform a series a commands to install Astra Control Center Operator and Astra Control Center in your environment. You can use this procedure to install Astra Control Center in connected or dark site environments.
 
 .About this task
 The Astra Control Center installer does the following:
@@ -47,39 +47,27 @@ The Astra Control Center installer does the following:
 * Installs and connects you to the Astra UI.
 
 .Steps
-. Download the Astra Control Center bundle (`astra-enterprise-21.07.xx.tar.gz`) from the NetApp Support Site.
+. Download the Astra Control Center bundle (`astra-control-center-21.06.9.tar.gz`) from the NetApp Support Site.
 The bundle contains the following images:
 +
 * Astra Container
 * Astra Control Center Operator
 
 . Extract the images:
-
 +
 ----
 tar -xvzf astra-enterprise-21.07.xx.tar.gz
 ----
 
-. Change to the Astra directory and list the extracted package contents.
+. Change to the Astra directory.
 +
 ----
-cd astra-enterprise-21.07
-ls -al
-----
-+
-Sample return:
-+
-----
-total 96
--rw-r--r--@ 1 ahaid staff 459 Apr 15 16:06 astra_enterprise.yaml
--rw-r--r--@ 1 ahaid staff 331 Apr 15 16:06 astra_enterprise_min.yaml
--rw-r--r--@ 1 ahaid staff 10555 Apr 15 16:06 astra_enterprise_operator_deploy.yaml
-drwxr-xr-x@ 32 ahaid staff 1024 Apr 15 16:05 images
+cd astra-control-center-21.06.9
 ----
 . Use the following script to load ACC image to your local registry, tag the local repo image, and push to your local repo:
 +
 ----
-export REGISTRY=docker.repo.eng.netapp.com/ahaid/astra
+export REGISTRY=<URL_of_Docker_Registry>
 
 for astraImageFile in $(ls images/*.tar) ; do
    astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image: //')  # Load to local cache. And store the name of the loaded image trimming the 'Loaded image: '
@@ -90,28 +78,38 @@ done
 
 . Prepare the ACC Operator to be installed by doing the following:
 
-* Ensure the credentials for the registry match.
-* Edit the AE Operator deployment yaml to refer to your local registry and secret.
+.. Create a namespace and secret for ACC operator. If your registry requires credentials, ensure that the credentials for the registry match.
 +
 ----
-# If REGISTRY requires creds
-# Make sure secret names match
-$ kubectl create namespace ae-operator-system
-$ kubectl create secret docker-registry -n ae-operator-system astra-registry-cred --docker-server=registry.localhost:5000 --docker-username=testuser --docker-password=testpassword
+kubectl create namespace ae-operator-system
 
-
-# Edit AE Operator Deployment. Look for two image references and the image pull policy. Change them to reference your local registry and secret (if you created a secret above).
-$ vim astra_enterprise_operator_deploy.yaml
-# image: "registry.localhost:5000/gcr.io/kubebuilder/kube-rbac-proxy:v0.5.0"
-# image: "registry.localhost:5000/ae-operator:0.0.11"
-# imagePullSecrets:
-# - name: astra-registry-cred  #if no secret, comment this entire line out
+kubectl create secret docker-registry -n ae-operator-system astra-registry-cred --docker-server=registry.localhost:5000 --docker-username=<username> --docker-password=<password>
 ----
 
-. Install the ACC Operator:
+.. Edit the ACC Operator deployment yaml to refer to your local registry and secret.
 +
 ----
-$ kubectl apply -f astra_enterprise_operator_deploy.yaml
+vim astra_enterprise_operator_deploy.yaml
+----
+... Change the following image references to refer to your local registry.
+* `image: "registry.localhost:5000/gcr.io/kubebuilder/kube-rbac-proxy:v0.5.0"`
+* `image: "registry.localhost:5000/ae-operator:0.0.11"`
+
+... Change the image pull policy to refer to your registry's credentials. If your registry does not require secrets, comment out this entire line.
++
+----
+imagePullSecrets:
+- name: astra-registry-cred
+----
+
+. Install the ACC Operator using the following script:
++
+----
+kubectl apply -f astra_enterprise_operator_deploy.yaml
+----
++
+Sample response:
+----
 namespace/ae-operator-system unchanged
 customresourcedefinition.apiextensions.k8s.io/astraenterprises.astra.netapp.com configured
 role.rbac.authorization.k8s.io/ae-operator-leader-election-role unchanged
@@ -127,20 +125,24 @@ deployment.apps/ae-operator-controller-manager configured
 ----
 . Prepare to install ACC by doing the following:
 
-* Customize a namespace.
-* Ensure you have the correct image registry credentials.
-* Edit the yaml and add the registry name and secret.
+.. Customize a namespace.
 +
 ----
-# Make a namespace for Astra Enterprise
-$ kubectl create namespace pcloud
-
-# If REGISTRY requires creds
-# Make sure imageRegistry.Name and .Secret match
-$ kubectl create secret docker-registry -n pcloud astra-registry-cred --docker-server=registry.localhost:5000 --docker-username=testuser --docker-password=testpassword
-
-# Edit yaml - set registry name and secret. If no secret delete that line
-$ vim astra_enterprise_min.yaml
+kubectl create namespace pcloud
+----
+.. Create a namespace and secret for your ACC registery. If your registry requires credentials, ensure that the imageRegistry.Name and .Secret for the registry match.
++
+----
+kubectl create secret docker-registry -n pcloud astra-registry-cred --docker-server=registry.localhost:5000 --docker-username=testuser --docker-password=testpassword
+----
+.. Edit the ACC Operator deployment yaml to refer to your local registry and secret.
++
+----
+vim astra_enterprise_min.yaml
+----
+... Change the image registry details to refer to your registry. If your registry does not require secrets, delete the entire `secret` line.
++
+----
 # imageRegistry:
 # name: "registry.localhost:5000"
 # secret: "astra-registry-cred"
@@ -151,7 +153,8 @@ $ vim astra_enterprise_min.yaml
 $ kubectl apply -n pcloud -f astra_enterprise_min.yaml
 ----
 
-START HERE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+== Helm install?
 
 . In the command-line utility, edit the Helm values to identify the `astra` namespace.
 +
