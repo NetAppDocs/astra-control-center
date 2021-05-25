@@ -1,6 +1,6 @@
 sidebar:
   entries:
-    - title: Astra Enterprise docs
+    - title: Astra Control Center docs
       url: /index.html
     - section: release-notes
     - section: get-started
@@ -14,18 +14,18 @@ sidebar:
 
 homepage:
   tiles:
-    - title: Get started with Astra Enterprise
-      #image: ./media/outline_directions_run_black_18dp.png 
+    - title: Get started with Astra Control Center
+      #image: ./media/outline_directions_run_black_18dp.png
       links:
-        - title: Learn about Astra Enterprise
+        - title: Learn about Astra Control Center
           url: /overview/intro.html
-        - title: What's new in Astra Enterprise
+        - title: What's new in Astra Control Center
           url: /release-notes/whats-new.html
         - title: Try it out
           url: /get-started/quick-start.html
-        - title: Install Astra Enterprise
+        - title: Install Astra Control Center
           url: /get-started/install_overview.html
-    - title: Use Astra Enterprise
+    - title: Use Astra Control Center
       links:
         - title: Manage accounts
           url: /use/manage-accounts.html
@@ -35,7 +35,7 @@ homepage:
           url: /use/protect-apps.html
         - title: Migrate apps
           url: /use/clone-apps.html
-    - title: Use Astra Enterprise in VMware
+    - title: Use Astra Control Center in VMware
       links:
         - title: Get started in VMware
         - title: Manage apps using VMware
