@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: get-started/prepare_to_install.html
-keywords: prepare, install, kubernetes cluster, cluster requirements, version requirements, supported versions, apps, supported apps, mariadb, mysql, postgres, kubernetes version, ubuntu, image type, networking
+keywords: prepare, install, kubernetes cluster, cluster requirements
 summary: Prepare to install Astra Control Center.
 ---
 
