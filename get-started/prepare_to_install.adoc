@@ -14,7 +14,7 @@ Follow these steps to prepare your environment for Astra Control Center.
 
 .Steps
 
-. Review the link:/concepts/requirements.html[Requirements].
+. Review the link:/get-started/requirements.html[Requirements].
 . Obtain a trial license or full license from NetApp.
 . Obtain permissions and instructions on how to load NetApp-supplied images into your organization's local image repository.
 . Obtain the URL of the image registry where you will upload the images.
