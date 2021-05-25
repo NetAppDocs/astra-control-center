@@ -26,7 +26,7 @@ Follow these steps to prepare your environment for Astra Control Center.
 . Set a default storage provider in the Kubernetes cluster that is backed by a Trident storage class configured to work with ONTAP.
 . Create a namespace for Astra Control Center.
 +
-NOTE: Both the Astra Control Center Operator and the Astra Control Center application are installed into the _ae-operator-system_ namespace.
+NOTE: Both the Astra Control Center operator and the Astra Control Center application are installed into the _ae-operator-system_ namespace.
 
 
 == What's next
