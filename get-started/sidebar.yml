@@ -5,6 +5,8 @@ entries:
     url: /get-started/intro.html
   - title: Astra Control Center requirements
     url: /get-started/requirements.html
+  - title: Prepare to install Astra Control Center
+    url: /get-started/prepare_to_install.html
   - title: Quick start for Astra Control Center
     url: /get-started/quick-start.html
   - title: Install Astra Control Center
