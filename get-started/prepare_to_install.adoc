@@ -1,0 +1,34 @@
+---
+sidebar: sidebar
+permalink: get-started/prepare_to_install.html
+keywords: prepare, install, kubernetes cluster, cluster requirements, version requirements, supported versions, apps, supported apps, mariadb, mysql, postgres, kubernetes version, ubuntu, image type, networking
+summary: Prepare to install Astra Control Center.
+---
+
+= Prepare to install Astra Control Center
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/get-started/
+
+Follow these steps to prepare your environment for Astra Control Center.
+
+.Steps
+
+. Review the link:/get-started/requirements.html[Requirements].
+. Obtain a trial license or full license from NetApp.
+. Obtain permissions and instructions on how to load NetApp-supplied images into your organization's local image repository.
+. Obtain the URL of the image registry where you will upload the images.
+. Obtain a Kubernetes cluster that meets the Astra Control Center requirements.
+. If you will use Single Sign-On (SSO), obtain SSO integration configuration details.
+. Configure Trident with the ONTAP storage backend.
+. Install an external load balancer on the Kubernetes cluster and set a static IP or IP range of that load balancer. The Kubernetes cluster be configured to listen on this reachable IP address.
+. Acquire an internal domain name that is resolved by an internal DNS and point the domain name to the static IP address or IP address range using internal DNS servers, such as `astra.company.com`. The DNS name should point to the load-balanced IP address using the internal DNS server (or `/etc/hosts` for individual machines).
+. Set a default storage provider in the Kubernetes cluster that is backed by a Trident storage class configured to work with ONTAP.
+. Create a namespace for Astra Control Center.
++
+NOTE: Both the Astra Control Center Operator and the Astra Control Center application are installed into the _ae-operator-system_ namespace.
+
+
+== What's next
+
+View the link:quick-start.adoc[quick start^] overview or link:install_overview.adoc[begin installation^].

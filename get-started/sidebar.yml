@@ -3,13 +3,17 @@ title: Get started
 entries:
   - title: Intro to Astra
     url: /get-started/intro.html
-  - title: Quick start for Astra Enterprise
+  - title: Astra Control Center requirements
+    url: /get-started/requirements.html
+  - title: Prepare to install Astra Control Center
+    url: /get-started/prepare_to_install.html
+  - title: Quick start for Astra Control Center
     url: /get-started/quick-start.html
   - title: Install Astra Enterprise
     url: /get-started/install_acc.html
   - title: Set up Astra Enterprise
     url: /get-started/setup_overview.html
-  - title: Manage compute from Astra Enterprise
+  - title: Manage compute from Astra Control Center
     url: /get-started/add-first-cluster.html
   - title: What's next?
     url: /get-started/whats-next.html
