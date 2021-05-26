@@ -12,11 +12,10 @@ summary: To install Astra Control Center after addressing some environmental pre
 
 To install Astra Control Center, you'll do the following basic steps:
 
-* link:../requirements.html[Prepare for the Astra Control Center deployment]
-* <<Install Astra Control Center using the command-line utility>>
+* <<Install Astra Control Center>>
 * <<Log in to the Astra Control Center UI>>
 
-== Install Astra Control Center using the command-line utility
+== Install Astra Control Center
 
 To install Astra Control Center, you'll download the installation bundle from the NetApp Support Site and perform a series a commands to install Astra Control Center Operator and Astra Control Center in your environment. You can use this procedure to install Astra Control Center in connected or dark site environments.
 
@@ -26,14 +25,14 @@ Prepare your environment for Astra Control Center deployment: xxxxx.
 .About this task
 The Astra Control Center installation process does the following:
 
-* Installs the Astra components into the `astra` namespace.
+* Installs the Astra components into the `pcloud` namespace.
 * Creates a default account.
-* Creates a default administrative user called `admin` with a default one-time password of `ACC-<UUID_of_installation>` for this instance of Astra Control Center. This credential is unique to each instance of Astra Control Center.
+* Creates a default administrative user called `admin` with a default one-time password of `ACC-<UUID_of_installation>` for this instance of Astra Control Center.
 * Helps you determine that all Astra Control Center pods are running.
 * Installs the Astra UI.
 
 .Steps
-. Download the Astra Control Center bundle (`astra-control-center-21.06.9.tar.gz`) from the NetApp Support Site.
+. Download the Astra Control Center bundle (`astra-control-center-21.06.9.tar.gz`) from the https://mysupport.netapp.com/site/products/all/details/astra/downloads-tab[NetApp Support Site].
 The bundle contains the following images:
 +
 * Astra Container
@@ -42,7 +41,7 @@ The bundle contains the following images:
 . Extract the images:
 +
 ----
-tar -xvzf astra-control-center-21.06.9.tar.gz
+tar -vxzf astra-control-center-21.06.9.tar.gz
 ----
 
 . Change to the Astra directory.
@@ -66,7 +65,7 @@ done
 .. Change `[Docker_registry_path]` to the registry path where you pushed the images in the previous step.
 .. Change `[Docker_registry_secret]` to the k8s secret with your registry credentials in it. Delete the `secret` line if credentials are not used with your registry.
 .. Change `astraAddress` to the FQDN you want to use in your browser to access Astra. Copy this FQDN for use in a <<Log in to the Astra Control Center UI,later step>>.
-.. Change `email` to the default initial administrator address. You can change this and add additional administrator roles after installation is complete.
+.. Change `email` to the default initial administrator address.Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>.
 
 +
 ----
@@ -251,7 +250,7 @@ After installing ACC, you will change the password for the default administrator
 
 == Troubleshoot the installation
 
-If any of the services are in Error status, you can inspect the logs with `kubectl logs -n pcloud `pod name``. Look for API response codes in the 400 to 500 range. Those indicate the place where a failure happened.
+If any of the services are in `Error` status, you can inspect the logs. Look for API response codes in the 400 to 500 range. Those indicate the place where a failure happened.
 
 . To inspect the ACC Operator logs, enter the following:
 +
