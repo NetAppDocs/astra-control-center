@@ -24,7 +24,7 @@ homepage:
         - title: Try it out
           url: /get-started/quick-start.html
         - title: Install Astra Enterprise
-          url: /get-started/install_overview.html
+          url: /get-started/install_acc.html
     - title: Use Astra Enterprise
       links:
         - title: Manage accounts

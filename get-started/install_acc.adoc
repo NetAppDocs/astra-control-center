@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: get-started/install_overview.html
+permalink: get-started/install_acc.html
 keywords: Astra, Astra control center, install, deploy, download
 summary: To install Astra Control Center after addressing some environmental prerequisites, you'll download the bundle and install following the steps described.
 ---
@@ -12,7 +12,7 @@ summary: To install Astra Control Center after addressing some environmental pre
 
 To install Astra Control Center, you'll do the following basic steps:
 
-* Prepare for the Astra Control Center deployment[xxxx]
+* link:../requirements.html[Prepare for the Astra Control Center deployment]
 * <<Install Astra Control Center using the command-line utility>>
 * <<Log in to the Astra Control Center UI>>
 

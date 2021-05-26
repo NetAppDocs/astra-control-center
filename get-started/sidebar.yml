@@ -6,7 +6,7 @@ entries:
   - title: Quick start for Astra Enterprise
     url: /get-started/quick-start.html
   - title: Install Astra Enterprise
-    url: /get-started/install_overview.html
+    url: /get-started/install_acc.html
   - title: Set up Astra Enterprise
     url: /get-started/setup_overview.html
   - title: Manage compute from Astra Enterprise
