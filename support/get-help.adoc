@@ -42,6 +42,10 @@ Go to the containers channel in thePub workspace to connect with peers and exper
 +
 Send an email to astra.feedback@netapp.com to let us know your thoughts, ideas, or concerns.
 
+* Create a support case
++
+Log in to https://mysupport.netapp.com/site/[NetApp Support Site^] to create a support case.
+
 == Generate support bundle to provide to NetApp Support
 Astra Control Center enables the admin user to generate bundles, which include information useful to NetApp Support, including logs, events for all the components of the Astra deployment, metrics, and topology information about the clusters and apps under management. This feature is enabled by default. You can upload support bundles to NetApp Support Site (NSS) directly from the Astra Control Center UI.
 
@@ -73,30 +77,3 @@ NOTE: If you have an airgapped installation, you should download the support bun
 TIP: The notifications bell icon at the top-right side of the UI provides information about events related to the support bundle, such as when the bundle is successfully created, when the bundle creation fails, when the bundle could not be uploaded, when the bundle could not be downloaded, and so on.
 . Perform the following steps for generating the support bundle by using the API:
 .. Need info from Brenda.
-== Subscription support for Astra Service
-
-In addition to the self-support options above, you can work with a NetApp Support Engineer to resolve any issues after you link:register-support.html[activate support for your NetApp serial number].
-
-Once your Astra serial number is activated, you can access NetApp technical support resources by creating a https://mysupport.netapp.com/site/cases/mine/create[Support ticket].
-
-Select *Cloud Data Services > Astra*.
-
-Use your "941" serial number to open the web ticket. link:register-support.html[Learn more about your serial number].
-
-image:screenshot-web-ticket.gif[]
-
-//* https://www.netapp.com/us/contact-us/support.aspx[Phone]
-//+
-//For reporting new issues or calling about existing tickets. This method is best for P1 or immediate assistance.
-
-//* https://www.netapp.com/us/forms/sales-contact.aspx[Contact sales]
-//+
-//You can also request sales support.
-
-//Your Astra serial number is visible within the service from the Support menu option. If you are experiencing issues accessing the service and have registered a serial number with NetApp previously, you can contact projectastra.support@netapp.com for assistance. You can also view your Astra serial number from the NetApp Support Site as follows:
-
-//. Login to https://mysupport.netapp.com/[mysupport.netapp.com].
-
-//.	From the Products > My Products menu tab, select the Product Family *SaaS Cloud Volume* to locate all your registered serial numbers:
-
-//image::diagram_support_list_registered_systems.png[View Installed Systems]
