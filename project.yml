@@ -6,8 +6,8 @@ sidebar:
     - section: get-started
     - section: concepts
     - section: use
-    - section: solutions
     - section: rest-api
+    - section: solutions
     - section: support
     - title: Legal notices
       url: /legal-notices.html
@@ -23,9 +23,9 @@ homepage:
           url: /release-notes/whats-new.html
         - title: Try it out
           url: /get-started/quick-start.html
-        - title: Install Astra Control Center
-          url: /get-started/install_overview.html
-    - title: Use Astra Control Center
+        - title: Install Astra Enterprise
+          url: /get-started/install_acc.html
+    - title: Use Astra Enterprise
       links:
         - title: Manage accounts
           url: /use/manage-accounts.html
