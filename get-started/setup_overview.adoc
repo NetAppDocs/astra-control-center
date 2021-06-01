@@ -17,7 +17,6 @@ After you install Astra Enterprise, you'll want to set up things like accounts, 
 . For the first log in, log in to the Admin account.
 . If you didn't change the admin password, on your first log in, you'll be prompted to change it.
 
-
 == Create an Astra admin account
 (NOT SURE IF THIS DONE AFTER YOU log into the UI for first time or during the CLI tool.)
 If you didn't create an admin account with the command-line installation utility, you'll need to do so now.
@@ -30,7 +29,7 @@ You can try Astra Enterprise with an Evaluation license, which lets you use Astr
 
 === Convert an Evaluation license to a full license
 
-After working with your NetApp sales rep, you receive the license and serial number.
+After working with your NetApp sales contact, you receive the license and serial number.
 
 . Log in to the NetApp Support Site.
 . Access the Astra Enterprise Download page, enter the serial number, and download the full NetApp license file (NLF).
@@ -40,19 +39,18 @@ After working with your NetApp sales rep, you receive the license and serial num
 Alternatively, from the Astra Enterprise UI Dashboard, select *Upgrade license*.
 
 . In the Account > Licenses page, select the Status drop-down menu and select *Update license*.
-. Continue with instructions in <<Add a license>>.
+. Continue with instructions in <<Add or update a license>>.
 
 == Add or update a license
 
 Before adding a license, you need to obtain the license information.
 
-==== Retrieve license information
+=== Retrieve license information
 When you downloaded Astra Enterprise from the Astra Enterprise Download page on the NetApp Support Site, you also downloaded the NetApp license file (NLF).
 
 . Copy the license information to the clipboard.
 
-
-==== Add a license with the UI
+=== Add a license with the UI
 Use the license information that you obtained from the NetApp Support Site.
 
 . From the Dashboard when you first login, select *Manage Licenses*.
@@ -61,27 +59,15 @@ Alternatively, from the left navigation, select *Account* > *Licenses*.
 
 . Select *Add a license*.
 . Locate the NLS license file that you downloaded.
-. Select *Apply*.
+. Select *Add License*.
 
-The Account page displays the license information, expiration date (for Evaluation licenses), serial number, and CPU units used.
+The *Account* page displays the license information, expiration date (for evaluation licenses), license serial number, and CPU units used.
 
-Astra Enterprise functionality is now enabled.
+Full Astra Control Center functionality is now enabled.
 
+=== Add a license with the API
 
-
-==== Add a license with the API
-
-. To list licenses, enter the following:
-+
-----
-GET /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/licenses?include=name,id
-----
-
-. To add a license, enter the following:
-+
-----
-POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/licenses
-----
+You can add a license to Astra Control Center using the API. See the API documentation for more details.
 
 === Update a license
 
@@ -90,7 +76,6 @@ If you need to update your license information, you can easily do so.
 . From the left navigation, select *Account* > *Licenses*.
 . In the Account > Licenses page, select the Status drop-down menu and select *Update license*.
 . Continue with instructions in <<Add a license>>.
-
 
 == Add a bucket
 If you want to protect and back up your apps, you will need to add a storage bucket.
@@ -108,9 +93,6 @@ If you want to protect and back up your apps, you will need to add a storage buc
 * Credentials: Bucket provider credentials
 * IP address or DNS name: For ONTAP S3, the IP address/DNS name also enables you to select the name of an already defined ONTAP storage provider.
 
-
-
-
 === Add a bucket with the API
 
 . To list bucket providers, enter the following:
@@ -125,7 +107,7 @@ GET /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/topology/v1/bucketProviders?i
 POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/credentials
 POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/topology/v1/bucketProviders
 ----
-
+////
 == Set up email notifications
 To receive notifications, you'll need to set up SMTP email notifications.
 
@@ -144,8 +126,8 @@ To receive notifications, you'll need to set up SMTP email notifications.
 . Enter the SMTP configuration values.
 . Verify the SMTP server by sending a test email to your email address.
 . Select the *Send test email* option.
-
-== Configure SSO
+////
+== Configure Single-Sign-On (SSO)
 
 . Prepare PingFederate for use as an SSO provider for Astra Enterprise. See https://docs.pingidentity.com/bundle/pingfederate-102/page/ird1564002990806.html[Configure PingFederate authorization server settings].
 . Enable SSO for Astra Enterprise.
@@ -158,7 +140,6 @@ To receive notifications, you'll need to set up SMTP email notifications.
 * Client ID: Enter a unique ID that the client provides to the Resource Server to identify itself. This ID is included with every request that the client makes.
 * Name: Enter a descriptive name for the client instance. This name appears when you are prompted for authorization.
 * Certificate: Enter a TLS certificate for communication with the authentication service.
-
 
 == Connect to Cloud Insights
 
