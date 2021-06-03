@@ -5,18 +5,17 @@ keywords:
 summary:
 ---
 
-= Set up Astra Enterprise
+= Set up Astra Control Center
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/get-started/
 
-After you install Astra Enterprise, you'll want to set up things like accounts, licenses, storage buckets, and role-based access control.
+After you install Astra Control Center, you'll want to set up things like accounts, licenses, storage buckets, and role-based access control.
 
-== Log in to Astra Enterprise
+== Log in to Astra Control Center
 
 . For the first log in, log in to the Admin account.
 . If you didn't change the admin password, on your first log in, you'll be prompted to change it.
-
 
 == Create an Astra admin account
 (NOT SURE IF THIS DONE AFTER YOU log into the UI for first time or during the CLI tool.)
@@ -25,72 +24,70 @@ If you didn't create an admin account with the command-line installation utility
 . After changing the admin password, select *Account Settings*.
 . Enter the admin account email and password.
 
-== Try Astra Enterprise with an Evaluation license
-You can try Astra Enterprise with an Evaluation license, which lets you use Astra Enterprise for 90 days from the date you downloaded Astra Enterprise.
+== License Astra Control Center
+Without a license, your usage of Astra Control Center is limited to managing users and adding new clusters. You can add a license using the UI or API to gain full functionality.
 
-=== Convert an Evaluation license to a full license
+=== Try Astra Control Center with an Evaluation license
+You can try Astra Control Center with an Evaluation license, which lets you use Astra Control Center for 90 days from the date you downloaded Astra Control Center. You need to work with your NetApp sales contact to obtain an evaluation license, which is associated with your NetApp Support account.
 
-After working with your NetApp sales rep, you receive the license and serial number.
+. Log in to the Astra Control Center UI.
+. From the left navigation, select *Account* > *Licenses*.
+. Select the *Add License* dropdown menu, and choose *Connect to NetApp Support*.
+. Enter your NetApp Support site credentials, and click *Connect*.
+
+The *Account* > *Licenses* page displays the license information, expiration date, license serial number, cluster ID, and CPU units used.
+
+==== Convert an Evaluation license to a full license
+
+You can work with your NetApp sales contact to obtain a full license and serial number.
 
 . Log in to the NetApp Support Site.
-. Access the Astra Enterprise Download page, enter the serial number, and download the full NetApp license file (NLF).
-. Log in to the Astra Enterprise UI.
+. Access the Astra Control Center Download page, enter the serial number, and download the full NetApp license file (NLF).
+. Log in to the Astra Control Center UI.
 . From the left navigation, select *Account* > *Licenses*.
 +
-Alternatively, from the Astra Enterprise UI Dashboard, select *Upgrade license*.
+Alternatively, from the Astra Control Center UI Dashboard, select *Upgrade license*.
 
-. In the Account > Licenses page, select the Status drop-down menu and select *Update license*.
-. Continue with instructions in <<Add a license>>.
+. In the *Account* > *Licenses* page, select the status drop-down menu and select *Update license*.
+. Continue with instructions in <<Add or update a license>>.
 
-== Add or update a license
+=== Add or update a license
 
-Before adding a license, you need to obtain the license information.
+Astra Control Center licenses measure CPU resources using Kubernetes CPU units. The CPU cores that Astra Control Center is deployed on are not counted against the CPU units consumed in the license. Before adding a license, you need to obtain the license file.
+
+NOTE:  If your installation grows to exceed the licensed number of CPU units, Astra Control Center prevents you from managing new applications. An alert is displayed when capacity is exceeded.
 
 ==== Retrieve license information
-When you downloaded Astra Enterprise from the Astra Enterprise Download page on the NetApp Support Site, you also downloaded the NetApp license file (NLF).
+When you downloaded Astra Control Center from the Astra Control Center Download page on the NetApp Support Site, you also downloaded the NetApp license file (NLF).
 
 . Copy the license information to the clipboard.
-
 
 ==== Add a license with the UI
 Use the license information that you obtained from the NetApp Support Site.
 
-. From the Dashboard when you first login, select *Manage Licenses*.
+. From the Dashboard when you first log in, select *Manage Licenses*.
 +
 Alternatively, from the left navigation, select *Account* > *Licenses*.
 
 . Select *Add a license*.
-. Locate the NLS license file that you downloaded.
-. Select *Apply*.
+. Browse to the license file that you downloaded.
+. Select *Add License*.
 
-The Account page displays the license information, expiration date (for Evaluation licenses), serial number, and CPU units used.
+The *Account* > *Licenses* page displays the license information, expiration date (for evaluation licenses), license serial number, cluster ID, and CPU units used.
 
-Astra Enterprise functionality is now enabled.
-
-
+Full Astra Control Center functionality is now enabled.
 
 ==== Add a license with the API
 
-. To list licenses, enter the following:
-+
-----
-GET /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/licenses?include=name,id
-----
+You can add a license to Astra Control Center using the API. See the API documentation for more details.
 
-. To add a license, enter the following:
-+
-----
-POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/licenses
-----
-
-=== Update a license
+==== Update a license
 
 If you need to update your license information, you can easily do so.
 
 . From the left navigation, select *Account* > *Licenses*.
-. In the Account > Licenses page, select the Status drop-down menu and select *Update license*.
-. Continue with instructions in <<Add a license>>.
-
+. In the *Account* > *Licenses* page, select the status drop-down menu for the active license and select *Replace license*.
+. Continue with instructions in <<Add or update a license>>.
 
 == Add a bucket
 If you want to protect and back up your apps, you will need to add a storage bucket.
@@ -108,9 +105,6 @@ If you want to protect and back up your apps, you will need to add a storage buc
 * Credentials: Bucket provider credentials
 * IP address or DNS name: For ONTAP S3, the IP address/DNS name also enables you to select the name of an already defined ONTAP storage provider.
 
-
-
-
 === Add a bucket with the API
 
 . To list bucket providers, enter the following:
@@ -125,7 +119,7 @@ GET /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/topology/v1/bucketProviders?i
 POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/credentials
 POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/topology/v1/bucketProviders
 ----
-
+////
 == Set up email notifications
 To receive notifications, you'll need to set up SMTP email notifications.
 
@@ -144,11 +138,11 @@ To receive notifications, you'll need to set up SMTP email notifications.
 . Enter the SMTP configuration values.
 . Verify the SMTP server by sending a test email to your email address.
 . Select the *Send test email* option.
+////
+== Configure Single-Sign-On (SSO)
 
-== Configure SSO
-
-. Prepare PingFederate for use as an SSO provider for Astra Enterprise. See https://docs.pingidentity.com/bundle/pingfederate-102/page/ird1564002990806.html[Configure PingFederate authorization server settings].
-. Enable SSO for Astra Enterprise.
+. Prepare PingFederate for use as an SSO provider for Astra Control Center. See https://docs.pingidentity.com/bundle/pingfederate-102/page/ird1564002990806.html[Configure PingFederate authorization server settings].
+. Enable SSO for Astra Control Center.
 .. Select *Account Settings*.
 .. Select *Security*.
 .. Select *Configure an OIDC Authentication service* option.
@@ -159,19 +153,18 @@ To receive notifications, you'll need to set up SMTP email notifications.
 * Name: Enter a descriptive name for the client instance. This name appears when you are prompted for authorization.
 * Certificate: Enter a TLS certificate for communication with the authentication service.
 
-
 == Connect to Cloud Insights
 
 Using NetApp Cloud Insights, you gain insight into your complete infrastructure. You can monitor all your on-premise resources.
 Learn more about how Cloud Insights can help you monitor your Kubernetes clusters on-premise.
 
-From Cloud Insights, you first obtain an API token, which you will use later in Astra Enterprise.
+From Cloud Insights, you first obtain an API token, which you will use later in Astra Control Center.
 
 === Obtain a Cloud Insights API token key
 . Log into Cloud Insights.
 . Select (WHAT ???)
 
-=== Enter Cloud Insights connection information in Astra Enterprise
+=== Enter Cloud Insights connection information in Astra Control Center
 . From the Astra UI, select *Account Settings*.
 . Select *Support*.
 . In the Cloud Insights tile, select *Connect to Cloud Insights*.
@@ -203,8 +196,6 @@ For information about role-based access control, see LINK. ???
 +
 The new user receives an email notification and clicks on the Join link.
 
-
-
 ==== Add users with the Astra API
 
 
@@ -224,7 +215,7 @@ POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/roles
 
 == Add a private cloud
 
-You can add, monitor, and remove private clouds in an Astra Enterprise deployment. You might want to add a private cloud when a new geographic site used for data protection is added.
+You can add, monitor, and remove private clouds in an Astra Control Center deployment. You might want to add a private cloud when a new geographic site used for data protection is added.
 
 . From the Astra UI, select *Clouds*.
 . Select *Add Private Cloud*.
