@@ -1,32 +1,42 @@
 ---
 sidebar: sidebar
 permalink: get-started/setup_overview.html
-keywords:
+keywords: set up, get started, Astra Control Center setup, setup overview, create account, add license, update license,
 summary:
 ---
 
-= Set up Astra Enterprise
+= Set up Astra Control Center
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/get-started/
 
-After you install Astra Enterprise, you'll want to set up things like accounts, licenses, storage buckets, and role-based access control.
+After you install Astra Control Center, you'll want to add licenses, add additional users, and add compute resources before you use Astra to perform data management operations.
 
-== Log in to Astra Enterprise
+#
+1.	Initial login
+2.	Change Password - you are forced to change the password set at deployment time to a new password
+3.	Add License
+4.	Create Additional Users (optional)
+5.	Configure Optional Settings - this would include proxy, CI, and/or telemetry (note, no email/smtp support for Q2)
+6.	Add Compute - this includes the wizard steps of adding kubeconfig, storage backend discovery, picking storage class
+7.	Add Storage Backend (optional)
+8.	Add Storage Bucket (optional)
+9.	Manage an App - this would be picking one or more apps that we want to protect. At this point, you would have a deployed ACC that is ready for data management operations like snapshot, backup, clone.
 
-. For the first log in, log in to the Admin account.
-. If you didn't change the admin password, on your first log in, you'll be prompted to change it.
+Note: Adding (importing) storage backend is optional - when you add compute, the storage backend is discovered already as part of that process. Adding a storage bucket is required if you want to do backups, but not required if you are just doing snapshots.
+#
 
+== Log in to Astra Control Center
 
-== Create an Astra admin account
-(NOT SURE IF THIS DONE AFTER YOU log into the UI for first time or during the CLI tool.)
-If you didn't create an admin account with the command-line installation utility, you'll need to do so now.
-
+. If you didn't create an admin account with the command-line installation utility, you'll need to do so now.
+. Log in to the admin account.
+. On your first log in, you'll be prompted to change the password that you set during deployment.
 . After changing the admin password, select *Account Settings*.
 . Enter the admin account email and password.
 
-== Try Astra Enterprise with an Evaluation license
-You can try Astra Enterprise with an Evaluation license, which lets you use Astra Enterprise for 90 days from the date you downloaded Astra Enterprise.
+== Try Astra Control Center with an Evaluation license
+
+You can try Astra Control Center with an Evaluation license, which lets you use Astra Control Center for 90 days from the date you download it.
 
 === Convert an Evaluation license to a full license
 
