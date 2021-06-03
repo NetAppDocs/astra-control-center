@@ -24,12 +24,22 @@ If you didn't create an admin account with the command-line installation utility
 . After changing the admin password, select *Account Settings*.
 . Enter the admin account email and password.
 
-== Try Astra Enterprise with an Evaluation license
-You can try Astra Enterprise with an Evaluation license, which lets you use Astra Enterprise for 90 days from the date you downloaded Astra Enterprise.
+== License Astra Control Center
+Without a license, your usage of Astra Control Center is limited to managing users and adding new clusters. You can add a license using the UI or API to gain full functionality.
 
-=== Convert an Evaluation license to a full license
+=== Try Astra Enterprise with an Evaluation license
+You can try Astra Enterprise with an Evaluation license, which lets you use Astra Enterprise for 90 days from the date you downloaded Astra Enterprise. You need to work with your NetApp sales contact to obtain an evaluation license, which is associated with your NetApp Support account.
 
-After working with your NetApp sales contact, you receive the license and serial number.
+. Log in to the Astra Enterprise UI.
+. From the left navigation, select *Account* > *Licenses*.
+. Select the Add License dropdown, and choose *Connect to NetApp Support*.
+. Enter your NetApp Support site credentials, and click *Connect*.
+
+The *Account* > *Licenses* page displays the license information, expiration date, license serial number, cluster ID, and CPU units used.
+
+==== Convert an Evaluation license to a full license
+
+You can work with your NetApp sales contact to obtain a full license and serial number.
 
 . Log in to the NetApp Support Site.
 . Access the Astra Enterprise Download page, enter the serial number, and download the full NetApp license file (NLF).
@@ -38,21 +48,21 @@ After working with your NetApp sales contact, you receive the license and serial
 +
 Alternatively, from the Astra Enterprise UI Dashboard, select *Upgrade license*.
 
-. In the Account > Licenses page, select the Status drop-down menu and select *Update license*.
+. In the *Account* > *Licenses* page, select the status drop-down menu and select *Update license*.
 . Continue with instructions in <<Add or update a license>>.
 
-== Add or update a license
+=== Add or update a license
 
-Astra Control Center licenses measure CPU resources using Kubernetes CPU units. The CPU cores that Astra Control Center is deployed on are not counted against the CPU units consumed in the license. Without a license, your usage of Astra Control Center is limited to managing users and adding new clusters. You can add a license using the UI or API to gain full functionality. Before adding a license, you need to obtain the license information.
+Astra Control Center licenses measure CPU resources using Kubernetes CPU units. The CPU cores that Astra Control Center is deployed on are not counted against the CPU units consumed in the license. Before adding a license, you need to obtain the license file.
 
 NOTE:  If your installation grows to exceed the licensed number of CPU units, Astra Control Center prevents you from managing new applications. An alert is displayed when capacity is exceeded.
 
-=== Retrieve license information
-When you downloaded Astra Enterprise from the Astra Enterprise Download page on the NetApp Support Site, you also downloaded the NetApp license file (NLF).
+==== Retrieve license information
+When you downloaded Astra Control Center from the Astra Control Center Download page on the NetApp Support Site, you also downloaded the NetApp license file (NLF).
 
 . Copy the license information to the clipboard.
 
-=== Add a license with the UI
+==== Add a license with the UI
 Use the license information that you obtained from the NetApp Support Site.
 
 . From the Dashboard when you first login, select *Manage Licenses*.
@@ -63,20 +73,20 @@ Alternatively, from the left navigation, select *Account* > *Licenses*.
 . Locate the NLS license file that you downloaded.
 . Select *Add License*.
 
-The *Account* page displays the license information, expiration date (for evaluation licenses), license serial number, and CPU units used.
+The *Account* > *Licenses* page displays the license information, expiration date (for evaluation licenses), license serial number, cluster ID, and CPU units used.
 
 Full Astra Control Center functionality is now enabled.
 
-=== Add a license with the API
+==== Add a license with the API
 
 You can add a license to Astra Control Center using the API. See the API documentation for more details.
 
-=== Update a license
+==== Update a license
 
 If you need to update your license information, you can easily do so.
 
 . From the left navigation, select *Account* > *Licenses*.
-. In the *Account* > *Licenses* page, select the status drop-down menu for the active license and select *Update license*.
+. In the *Account* > *Licenses* page, select the status drop-down menu for the active license and select *Replace license*.
 . Continue with instructions in <<Add or update a license>>.
 
 == Add a bucket
