@@ -1,0 +1,263 @@
+---
+sidebar: sidebar
+permalink: get-started/install_acc.html
+keywords: Astra, Astra control center, install, deploy, download
+summary: To install Astra Control Center after addressing some environmental prerequisites, you'll download the bundle and install following the steps described.
+---
+
+= Install Astra Control Center
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/get-started/
+
+To install Astra Control Center, you'll do the following basic steps:
+
+* <<Install Astra Control Center>>
+* <<Log in to the Astra Control Center UI>>
+
+== Install Astra Control Center
+
+To install Astra Control Center, you'll download the installation bundle from the NetApp Support Site and perform a series a commands to install Astra Control Center Operator and Astra Control Center in your environment. You can use this procedure to install Astra Control Center in connected or dark site environments.
+
+.Before you begin
+Prepare your environment for Astra Control Center deployment: xxxxx.
+
+.About this task
+The Astra Control Center installation process does the following:
+
+* Installs the Astra components into the `pcloud` namespace.
+* Creates a default account.
+* Creates a default administrative user called `admin` with a default one-time password of `ACC-<UUID_of_installation>` for this instance of Astra Control Center.
+* Helps you determine that all Astra Control Center pods are running.
+* Installs the Astra UI.
+
+.Steps
+. Download the Astra Control Center bundle (`astra-control-center-21.06.9.tar.gz`) from the https://mysupport.netapp.com/site/products/all/details/astra/downloads-tab[NetApp Support Site].
+The bundle contains the following images:
++
+* Astra Container
+* Astra Control Center Operator
+
+. Extract the images:
++
+----
+tar -vxzf astra-control-center-21.06.9.tar.gz
+----
+
+. Change to the Astra directory.
++
+----
+cd astra-control-center-21.06.9
+----
+. Use the following script to push ACC images to your local registry. Replace `[Docker_registry_path]` with a valid Docker image registry path before proceeding:
++
+----
+export REGISTRY=[Docker_registry_path]
+
+for astraImageFile in $(ls images/*.tar) ; do
+   astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image: //')  # Load to local cache. And store the name of the loaded image trimming the 'Loaded image: '
+   docker tag ${astraImage} ${REGISTRY}/${astraImage}                              # Tag with local image repo.
+   docker push ${REGISTRY}/${astraImage}                                           # Push to the local repo.
+done
+----
+
+. Edit the Astra Enterprise custom resource definition file (`astra_enterprise_min.yaml`):
+.. Change `[Docker_registry_path]` to the registry path where you pushed the images in the previous step.
+.. Change `[Docker_registry_secret]` to the k8s secret with your registry credentials in it. Delete the `secret` line if credentials are not used with your registry.
+.. Change `astraAddress` to the FQDN you want to use in your browser to access Astra. Copy this FQDN for use in a <<Log in to the Astra Control Center UI,later step>>.
+.. Change `email` to the default initial administrator address.Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>.
+
++
+----
+astra-control-center-21.06.09 $vim astra_enterprise_min.yaml
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: pcloud
+---
+apiVersion: astra.netapp.io/v1
+kind: AstraEnterprise
+metadata:
+  name: astra
+spec:
+  astraVersion: "21.06.09"
+  astraAddress: "codev.astra.netapp.io"
+  autoSupport:
+    enrolled: true
+  email: "[nednetapp@netapp.com]"
+  imageRegistry:
+    name: "[Docker_registry_path]"
+    secret: "[Docker_registry_secret]"
+----
+
+. Edit the ACC Operator deployment yaml (`astra_enterprise_operator_deploy.yaml`) to refer to your local registry and secret.
+.. Change `[Docker_registry_path]` for the `kube-rbac-prox` image to the registry path where you pushed the images in the previous step.
+.. Change `[Docker_registry_path]` for the `ae-operator` image to the registry path where you pushed the images in the previous step.
++
+----
+astra-control-center-21.06.09 $vim astra_enterprise_operator_deploy.yaml
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    control-plane: controller-manager
+  name: ae-operator-controller-manager
+  namespace: ae-operator-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      control-plane: controller-manager
+  template:
+    metadata:
+      labels:
+        control-plane: controller-manager
+    spec:
+      containers:
+      - args:
+        - --secure-listen-address=0.0.0.0:8443
+        - --upstream=http://127.0.0.1:8080/
+        - --logtostderr=true
+        - --v=10
+        image: [Docker_registry_path]/kube-rbac-proxy:v0.5.0
+        name: kube-rbac-proxy
+        ports:
+        - containerPort: 8443
+          name: https
+      - args:
+        - --health-probe-bind-address=:8081
+        - --metrics-bind-address=127.0.0.1:8080
+        - --leader-elect
+        command:
+        - /manager
+        env:
+        - name: AEOP_LOG_LEVEL
+          value: "2"
+        image: [Docker_registry_path]//ae-operator:1.0.10
+        imagePullPolicy: IfNotPresent
+----
+
+. Install the ACC Operator:
++
+----
+astra-control-center-21.06.09 $kubectl apply -f astra_enterprise_operator_deploy.yaml
+----
++
+Sample response:
++
+----
+namespace/ae-operator-system created
+customresourcedefinition.apiextensions.k8s.io/astraenterprises.astra.netapp.io created
+role.rbac.authorization.k8s.io/ae-operator-leader-election-role created
+clusterrole.rbac.authorization.k8s.io/ae-operator-manager-role created
+clusterrole.rbac.authorization.k8s.io/ae-operator-metrics-reader created
+clusterrole.rbac.authorization.k8s.io/ae-operator-proxy-role created
+rolebinding.rbac.authorization.k8s.io/ae-operator-leader-election-rolebinding created
+clusterrolebinding.rbac.authorization.k8s.io/ae-operator-manager-rolebinding created
+clusterrolebinding.rbac.authorization.k8s.io/ae-operator-proxy-rolebinding created
+configmap/ae-operator-manager-config created
+service/ae-operator-controller-manager-metrics-service created
+deployment.apps/ae-operator-controller-manager created
+----
+
+. Install ACC in the `pcloud` namespace:
++
+----
+astra-control-center-21.06.09 $kubectl apply -f astra_enterprise_min.yaml -npcloud
+----
++
+Sample response:
++
+----
+namespace/pcloud created
+astraenterprise.astra.netapp.io/astra created
+----
+
+. Verify the installation.
++
+----
+kubctl get pods -n pcloud
+----
++
+Each pod should have a status of `Running`.
++
+----
+NAME                                        READY   STATUS    RESTARTS   AGE
+activity-57f547d6c6-fxxvg                   1/1     Running   1          16m
+ae-helm-repo-6b5b96b865-6dv52               1/1     Running   0          17m
+asup-5c4459875f-749jx                       1/1     Running   0          16m
+authentication-658d5bf874-52bx2             1/1     Running   0          15m
+billing-576696c7c5-8zhnd                    1/1     Running   1          15m
+bucketservice-6f7dc4878-528lt               1/1     Running   0          16m
+cloud-extension-64964df954-j4ddd            1/1     Running   1          16m
+composite-compute-685b7f577f-59xwm          1/1     Running   0          15m
+composite-volume-5d4f46fb4-glfrx            1/1     Running   0          15m
+credentials-74dbff87d4-bwtq2                1/1     Running   0          16m
+entitlement-58b974b9dc-np8cj                1/1     Running   1          16m
+features-684d4688fc-s2bj5                   1/1     Running   0          16m
+graphql-server-7f7d986-kjlvq                1/1     Running   0          14m
+identity-7bdc4fb8d-jncxt                    1/1     Running   0          16m
+krakend-5b5cb9c449-n5n6d                    1/1     Running   0          14m
+license-5559b4544-jm64s                     1/1     Running   0          15m
+login-ui-78d5ddc8f6-r87tx                   1/1     Running   0          14m
+loki-0                                      1/1     Running   0          17m
+metrics-ingestion-service-5567d8d46-sll5g   1/1     Running   0          16m
+nats-0                                      1/1     Running   0          17m
+nats-1                                      1/1     Running   0          17m
+nats-2                                      1/1     Running   0          17m
+nautilus-865cf68b5f-jz854                   1/1     Running   0          16m
+openapi-55dfcdbb5d-zl4hp                    1/1     Running   0          16m
+polaris-influxdb2-0                         1/1     Running   0          17m
+polaris-mongodb-arbiter-0                   1/1     Running   0          17m
+polaris-mongodb-primary-0                   2/2     Running   0          17m
+polaris-mongodb-secondary-0                 2/2     Running   0          17m
+polaris-ui-77bb5dd9d8-zcmq8                 1/1     Running   0          14m
+polaris-vault-0                             1/1     Running   0          17m
+storage-provider-65d867bb55-kd8nr           1/1     Running   0          16m
+support-54fd446c46-dwtt7                    1/1     Running   0          15m
+tenancy-5f9844696f-wcl7m                    1/1     Running   0          16m
+traefik-656d6576bf-hzz6q                    1/1     Running   0          14m
+traefik-656d6576bf-md6zj                    1/1     Running   0          14m
+trident-svc-cbdd76899-psmhh                 1/1     Running   0          15m
+vault-controller-98b8cbfc6-7ms5q            1/1     Running   0          17m
+----
+
+. Get the one-time password you will use when you log in to Astra Control Center:
++
+----
+astra-control-center-21.06.09 $kubectl get astraenterprises.astra.netapp.io -n pcloud
+----
++
+The password is `ACC-` followed by the UUID in the response (`ACC-[UUID]`):
++
+----
+NAME    UUID
+astra   c49008a5-4ef1-4c5d-a53e-830daf994116
+----
+
+== Log in to the Astra Control Center UI
+
+After installing ACC, you will change the password for the default administrator and log in to the ACC UI dashboard.
+
+.Steps
+. In a browser, enter the FQDN you used in the `astraAddress` in `astra_enterprise_min.yaml` CRD when <<Install Astra Control Center using the command-line utility,you installed ACC>>.
+. Accept the self-signed certificates when prompted.
+. At the Astra Control Center login page, enter the value you used in the `email` in `astra_enterprise_min.yaml` CRD when <<Install Astra Control Center using the command-line utility,you installed ACC>>.
+. Click *LOGIN*.
+. Change the password when prompted.
+
+== Troubleshoot the installation
+
+If any of the services are in `Error` status, you can inspect the logs. Look for API response codes in the 400 to 500 range. Those indicate the place where a failure happened.
+
+. To inspect the ACC Operator logs, enter the following:
++
+----
+$ kubectl logs --follow -n ae-operator-system $(kubectl get pods -n ae-operator-system -o name)  -c manager
+----
+
+== What's next
+
+Complete the deployment by performing link:setup_overview.html[setup tasks].

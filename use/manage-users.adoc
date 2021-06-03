@@ -1,30 +1,28 @@
 ---
 sidebar: sidebar
 permalink: use/manage-users.html
-keywords: invite users, add users, remove users, delete users
-summary: Invite users to join your Astra account and remove users that should no longer have access to your account.
+keywords: add users, edit users, remove users, delete users
+summary: Add users to your Astra Control Center system and remove users that should no longer have access to the system.
 ---
 
-= Invite and remove users
+= Manage users
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/use/
 
-Invite users to join your Astra account and remove users that should no longer have access to the account.
+You can add, remove, and edit users of your Astra Control Center installation.
 
-== Invite users
+== Add users
 
-Account Owners and Admins can invite other users to join the Astra account.
+Account Owners and Admins can add more users to the Astra Control Center installation.
 
 .Steps
 
 . Make sure that the user has a link:../get-started/register.html[Cloud Central login].
 
-. Click *Account*.
+. In the *Manage Your Account* navigation area, click *Account*.
 
-. In the *Users* tab, click *+ Invite users*.
-
-. Enter the user's name, email address, and their role.
+. Enter the user's name, email address, and password, and select a user role with the appropriate system permissions.
 +
 Note the following:
 +
@@ -32,24 +30,18 @@ Note the following:
 * Each role provides the following permissions:
 ** An *Owner* has Admin permissions and can delete accounts.
 ** An *Admin* has Member permissions and can invite other users.
-** A *Member* can fully manage apps and compute.
+** A *Member* can fully manage apps and compute resources.
 ** A *Viewer* can view resources.
 +
 image:screenshot-invite-users.gif[A screenshot of the Invite Users screen where you enter a name, email address, and select a role.]
 
-. Click *Send invite(s)*.
-
-.Result
-
-The user will receive an email that invites them to join your account.
-
 == Change a user's role
 
-An Account Owner can change the role of all users, while an Account Admin can change the role of users who have the Admin, Member, or Viewer role.
+An account Owner can change the role of all users, while an account Admin can change the role of users who have the Admin, Member, or Viewer role.
 
 .Steps
 
-. Click *Account*.
+. In the *Manage Your Account* navigation area, click *Account*.
 
 . In the *Users* tab, select the drop-down list in the *Role* column for the user.
 
@@ -61,11 +53,11 @@ Astra updates the user's permissions based on the new role that you selected.
 
 == Remove users
 
-An Account Owner can remove other users from the account at any time.
+An account Owner can remove other users from the account at any time.
 
 .Steps
 
-. Click *Account*.
+. In the *Manage Your Account* navigation area, click *Account*.
 
 . In the *Users* tab, select the users that you want to remove.
 
