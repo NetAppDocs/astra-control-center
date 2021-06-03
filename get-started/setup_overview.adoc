@@ -65,12 +65,12 @@ When you downloaded Astra Control Center from the Astra Control Center Download 
 ==== Add a license with the UI
 Use the license information that you obtained from the NetApp Support Site.
 
-. From the Dashboard when you first login, select *Manage Licenses*.
+. From the Dashboard when you first log in, select *Manage Licenses*.
 +
 Alternatively, from the left navigation, select *Account* > *Licenses*.
 
 . Select *Add a license*.
-. Locate the NLS license file that you downloaded.
+. Browse to the license file that you downloaded.
 . Select *Add License*.
 
 The *Account* > *Licenses* page displays the license information, expiration date (for evaluation licenses), license serial number, cluster ID, and CPU units used.
