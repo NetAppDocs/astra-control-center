@@ -29,5 +29,7 @@ entries:
         url: /use/manage-users.html
       - title: Manage notifications
         url: /use/manage-notifications.html
+      - title: Monitor and protect data
+        url: /use/monitor-protect.html  
   - title: Unmanage apps and compute
     url: /use/unmanage.html
