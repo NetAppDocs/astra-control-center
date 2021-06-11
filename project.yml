@@ -23,9 +23,9 @@ homepage:
           url: /release-notes/whats-new.html
         - title: Try it out
           url: /get-started/quick-start.html
-        - title: Install Astra Enterprise
+        - title: Install Astra Control Center
           url: /get-started/install_acc.html
-    - title: Use Astra Enterprise
+    - title: Use Astra Contol Center
       links:
         - title: Manage accounts
           url: /use/manage-accounts.html
@@ -41,12 +41,12 @@ homepage:
         - title: Manage apps using VMware
         - title: Protect apps using VMware
         - title: Migrate apps using VMware
-    - title: Use Astra Service
+    - title: Use Astra Control Service
       #image: ./media/outline_directions_run_black_18dp.png
       links:
-        - title: Get started with Astra Service
+        - title: Get started
           url: https://docs.netapp.com/us-en/astra/get-started/intro.html
-        - title: What's new in Astra Service
+        - title: What's new
           url: https://docs.netapp.com/us-en/astra/release-notes/whats-new.html
         - title: Try it out
         - title: Get started with Google Cloud
