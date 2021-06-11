@@ -18,9 +18,7 @@ When Astra clones an app, it creates a clone of your application configuration a
 .Steps
 
 . Click *Apps*.
-
-. Click the drop-down list in the *Action* column for the desired app.
-
+. Click the drop-down list in the *Actions* column for the desired app.
 . Click *Clone*.
 +
 image:screenshot-create-clone.gif["A screenshot of the app page where you can click the drop-down list in the actions column and select Clone."]
@@ -28,13 +26,15 @@ image:screenshot-create-clone.gif["A screenshot of the app page where you can cl
 . *Clone details*: Specify details for the clone:
 +
 * Enter a name.
-* Choose a destination compute for the clone.
+* Enter a namespace for the clone.
+* Choose a destination cluster for the clone.
 * Choose whether you want to create the clone from an existing snapshot or backup. If you don't select this option, Astra creates the clone from the app's current state.
 
 . *Source*: If you chose to clone from an existing snapshot or backup, choose the snapshot or backup that you'd like to use.
 +
 image:screenshot-clone-source.gif[]
 
+. Click *Review Information*.
 . *Clone Summary*: Review the details about the clone and click *Clone App*.
 +
 image:screenshot-clone-summary.gif[]
