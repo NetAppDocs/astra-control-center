@@ -10,7 +10,7 @@ summary: Adding object store bucket providers is essential if you want to back u
 :icons: font
 :imagesdir: ../media/use/
 
-Adding object store bucket providers is essential if you want to back up your applications and persistent storage of if you want to clone applications across clusters. Using Astra Control, add an object store provider as your backup destination.
+Adding object store bucket providers is essential if you want to back up your applications and persistent storage or if you want to clone applications across clusters. Using Astra Control, add an object store provider as your backup destination.
 
 You don’t need an object store bucket if you are:
 
@@ -45,9 +45,9 @@ NOTE: This option does not appear for the first bucket you create.
 
 . Continue by adding credential information.
 
-== Add and remove S3 access credentials
+== Add S3 access credentials
 
-Add or remove S3 access credentials at any time. Astra Control uses these credentials to discover Kubernetes compute and the apps on the compute and to provision resources.
+Add S3 access credentials at any time. Astra Control uses these credentials to discover Kubernetes compute and the apps on the compute and to provision resources.
 
 All users in Astra Control share the same set of credentials.
 
