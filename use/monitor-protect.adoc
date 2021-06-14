@@ -122,14 +122,13 @@ image:cloud-insight-disconnect.png[Shows the drop-down menu in the Cloud Insight
 
 == Connect to Fluent Bit
 
-You can enable a Fluent Bit endpoint to expose logs from your containers. The Fluent Bit connection is disabled by default.
+You can enable a Fluent Bit endpoint to expose logs from your containers. This enables you to forward the logs that Astra is collecting to any Fluent Bit endpoint.The Fluent Bit connection is disabled by default.
 
 .What you'll need
 
 * A valid Astra Control Center license.
 * An Astra Control Center account with *admin* privileges.
 * Astra Control Center is installed and running on a Kubernetes cluster.
-* A Cloud Insights connection. IS THIS NEEDED??
 
 .Steps
 
