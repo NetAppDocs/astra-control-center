@@ -12,24 +12,26 @@ summary: Astra is a Kubernetes application data lifecycle management service tha
 
 Astra Control is a Kubernetes application data lifecycle management service that simplifies operations for stateful applications. Easily back up Kubernetes apps, migrate data to a different cluster, and instantly create working application clones.
 
+== Features
+
+Astra Control offers critical capabilities for Kubernetes application data lifecycle management:
+
+* Manage, protect, and migrate your Kubernetes applications within and across multi-hybrid clouds
+* Manage persistent storage 
+* Migrate applications and data from one Kubernetes cluster to another
+* Easily clone an application from production to staging
+* Create application-aware, on-demand snapshots and backups
+* Visualize the real-time protection status of your apps
+* Create a protection policy for each of your apps
+* Use a UI or APIs to implement your backup and migration workflows
+
+link:/concepts/requirements.html[Learn about cluster requirements].
+
 == Implementations
 Astra Control offers the following implementations:
 
-* Astra Control Service: This NetApp service offering enables you to manage clusters and apps in public clouds and is run in the cloud.
-* Astra Control Center: This NetApp offering enables you to manage on-premise Kubernetes and VM clusters in your data center.
-
-== Features
-
-Both Astra Control Service and Astra Control Center offer critical capabilities for Kubernetes application data lifecycle management:
-
-* Create a protection policy for each of your apps
-* Migrate applications and data from one Kubernetes cluster to another
-* Easily clone an application from production to staging
-* Create on-demand snapshots and backups
-* Identify the health of your apps
-
-
-link:/concepts/requirements.html[Learn about cluster requirements].
+* Astra Control Service: You can manage Kubernetes clusters and apps in public clouds. This service is run in the cloud.
+* Astra Control Center: You can manage on-premise Kubernetes and VM clusters in your own IT environment using this downloaded implementation.
 
 == Supported apps
 
@@ -63,17 +65,15 @@ Note that Astra Control Service continually watches your compute for state chang
 
 == How Astra Control Center works
 
-Astra Control Center uses several components to enable application data lifecycle management.
-
-//The following image shows the relationship between each component:
+Astra Control Center is downloaded and run privately in your own IT environment.
 
 At a high level, Astra Control Center works like this:
 
 * You install Astra Control Center in your local environment. Astra Control Center does this:
-** Discover your Kubernetes clusters.
-** Discover your Trident configuration backed by the ONTAP storage backend.
+** Discovers your Kubernetes clusters.
+** Discovers your Trident configuration backed by the ONTAP storage backend.
 +
-For our first go, you'll install the images on OpenShift registry. We'll add more options later.
+For our first go, you'll install the images on an OpenShift registry.
 
 * You do some initial setup tasks such as these:
 ** Create an Astra Admin account
