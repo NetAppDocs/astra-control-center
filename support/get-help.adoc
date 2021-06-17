@@ -58,7 +58,7 @@ Before you begin, you might want to check to see whether your external connectio
 .Steps
 . Create a case on the NSS portal using the serial number listed on the *Support* page of the Astra UI.
 . Perform the following steps for generating the support bundle by using the Astra Control Center UI:
-.. On the *Support* page of the Astra UI, in the Support bundle tile, select *Generate*.
+.. On the *Support* page, in the Support bundle tile, select *Generate*.
 +
 image:support bundle.png[Shows the Support bundle tile from where you can select the button to generate the support bundle.]
 .. From the *Generate a Support Bundle* page, select the timeframe.
