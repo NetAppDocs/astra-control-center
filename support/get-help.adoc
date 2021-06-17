@@ -50,7 +50,7 @@ Log in to https://mysupport.netapp.com/site/[NetApp Support Site^] to create a s
 
 Astra Control Center enables the admin user to generate bundles, which include information useful to NetApp Support, including logs, events for all the components of the Astra deployment, metrics, and topology information about the clusters and apps under management. This feature is enabled by default. If you are connected to the Internet, you can upload support bundles to NetApp Support Site (NSS) directly from the Astra Control Center UI.
 
-Before you begin, you might want to check to see whether your external connections are configured to enable upload of bundles to NSS.
+Before you begin, check to see whether your external connections are configured to enable upload of bundles to NSS.
 
 . Select *Accounts* > *Connections*.
 . Check the external connections in *Connection settings*.
