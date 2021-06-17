@@ -32,6 +32,7 @@ The Astra Control Center installation process does the following:
 * Installs the Astra UI.
 
 .Steps
+
 . Download the Astra Control Center bundle (`astra-control-center-[version].tar.gz`) from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site].
 
 . Extract the images:
@@ -45,36 +46,36 @@ tar -vxzf astra-control-center-[version].tar.gz
 ----
 cd astra-control-center-[version]
 ----
-. Use the following script to push Astra Control Center images to your local registry. Replace `[Docker_registry_path]` with a valid Docker image registry path before proceeding:
+. Use the following script to push Astra Control Center images to your local registry. Change the following before proceeding:
+.. Replace `[Docker_registry_path]` with a valid Docker image registry path.
+.. Use the appropriate load-to-local-cache command for either Docker-based or Podman-based registries and comment out the option that is not used.
+.. Store the name of the loaded Astra Control Center image by replacing `[Loaded_image_name]` with the image name.
 +
 ----
 export REGISTRY=[Docker_registry_path]
 
 for astraImageFile in $(ls images/*.tar) ; do
-   astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image: //')       # For Docker-based registries: Load to local cache. And store the name of the loaded image trimming the 'Loaded image: '
-   # astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded images: //')    # For Podman-based registries: Load to local cache. And store the name of the loaded image trimming the 'Loaded images: '
-   docker tag ${astraImage} ${REGISTRY}/${astraImage}                                   # Tag with local image repo.
-   docker push ${REGISTRY}/${astraImage}                                                # Push to the local repo.
+   astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image: [Loaded_image_name]')       # For Docker-based registries
+   # astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded images: [Loaded_image_name]')    # For Podman-based registries
+   docker tag ${astraImage} ${REGISTRY}/${astraImage}
+   docker push ${REGISTRY}/${astraImage}
 done
 ----
 
-. Edit the Astra Control Center custom resource definition file (`astra_control_center_min.yaml`):
+. Edit the Astra Control Center custom resource definition (CRD) file (`astra_control_center_min.yaml`):
++
+----
+vim astra_control_center_min.yaml
+----
+
 .. Change `[Docker_registry_path]` to the registry path where you pushed the images in the previous step.
 .. Change `[Docker_registry_secret]` to the k8s secret with your registry credentials in it. Delete the `secret` line if credentials are not used with your registry.
 .. Change `astraAddress` to the FQDN you want to use in your browser to access Astra. Copy this FQDN for use in a <<Log in to the Astra Control Center UI,later step>>.
 .. Change `email` to the default initial administrator address. Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>.
-
 +
 ----
-$vim astra_control_center_min.yaml
----
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: pcloud
----
 apiVersion: astra.netapp.io/v1
-kind: AstraEnterprise
+kind: AstraControlCenter
 metadata:
   name: astra
 spec:
@@ -88,20 +89,23 @@ spec:
     secret: "[Docker_registry_secret]"
 ----
 
-. Edit the Astra Control Center operator deployment yaml (`astra_enterprise_operator_deploy.yaml`) to refer to your local registry and secret.
-.. Change `[Docker_registry_path]` for the `kube-rbac-prox` image to the registry path where you pushed the images in the previous step.
-.. Change `[Docker_registry_path]` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in the previous step.
+. Edit the Astra Control Center operator deployment yaml (`astra_control_center_operator_deploy.yaml`) to refer to your local registry and secret.
 +
 ----
-$vim astra_enterprise_operator_deploy.yaml
----
+vim astra_control_center_operator_deploy.yaml
+----
+.. Change `[Docker_registry_path]` for the `kube-rbac-prox` image to the registry path where you pushed the images in the previous step.
+.. Change `[Docker_registry_path]` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in the previous step.
+.. Change `[x.y.z]` to the bundle version number.
++
+----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
     control-plane: controller-manager
-  name: ae-operator-controller-manager
-  namespace: ae-operator-system
+  name: acc-operator-controller-manager
+  namespace: acc-operator-system
 spec:
   replicas: 1
   selector:
@@ -130,104 +134,136 @@ spec:
         command:
         - /manager
         env:
-        - name: AEOP_LOG_LEVEL
+        - name: ACCOP_LOG_LEVEL
           value: "2"
-        image: [Docker_registry_path]//acc-operator-controller-manager:[x.x.x]
+        image: [Docker_registry_path]/acc-operator:[x.y.z]
         imagePullPolicy: IfNotPresent
 ----
 
-. Install the ACC Operator:
+. Install the Astra Control Center operator:
 +
 ----
-astra-control-center-21.06.09 $kubectl apply -f astra_enterprise_operator_deploy.yaml
+kubectl apply -f astra_control_center_operator_deploy.yaml
 ----
 +
 Sample response:
 +
 ----
-namespace/ae-operator-system created
-customresourcedefinition.apiextensions.k8s.io/astraenterprises.astra.netapp.io created
-role.rbac.authorization.k8s.io/ae-operator-leader-election-role created
-clusterrole.rbac.authorization.k8s.io/ae-operator-manager-role created
-clusterrole.rbac.authorization.k8s.io/ae-operator-metrics-reader created
-clusterrole.rbac.authorization.k8s.io/ae-operator-proxy-role created
-rolebinding.rbac.authorization.k8s.io/ae-operator-leader-election-rolebinding created
-clusterrolebinding.rbac.authorization.k8s.io/ae-operator-manager-rolebinding created
-clusterrolebinding.rbac.authorization.k8s.io/ae-operator-proxy-rolebinding created
-configmap/ae-operator-manager-config created
-service/ae-operator-controller-manager-metrics-service created
-deployment.apps/ae-operator-controller-manager created
+namespace/acc-operator-system created
+customresourcedefinition.apiextensions.k8s.io/astracontrolcenters.astra.netapp.io created
+role.rbac.authorization.k8s.io/acc-operator-leader-election-role created
+clusterrole.rbac.authorization.k8s.io/acc-operator-manager-role created
+clusterrole.rbac.authorization.k8s.io/acc-operator-metrics-reader created
+clusterrole.rbac.authorization.k8s.io/acc-operator-proxy-role created
+rolebinding.rbac.authorization.k8s.io/acc-operator-leader-election-rolebinding created
+clusterrolebinding.rbac.authorization.k8s.io/acc-operator-manager-rolebinding created
+clusterrolebinding.rbac.authorization.k8s.io/acc-operator-proxy-rolebinding created
+configmap/acc-operator-manager-config created
+service/acc-operator-controller-manager-metrics-service created
+deployment.apps/acc-operator-controller-manager created
 ----
 
-. Install ACC in the `pcloud` namespace:
+. Create the `pcloud` namespace if it does not already exist:
 +
 ----
-astra-control-center-21.06.09 $kubectl apply -f astra_enterprise_min.yaml -npcloud
+kubectl create ns pcloud
 ----
 +
 Sample response:
 +
 ----
 namespace/pcloud created
-astraenterprise.astra.netapp.io/astra created
 ----
 
-. Verify the installation.
+. Install Astra Control Center in the `pcloud` namespace:
 +
 ----
-kubctl get pods -n pcloud
+kubectl apply -f astra_control_center_min.yaml -n pcloud
 ----
 +
-Each pod should have a status of `Running`.
+Sample response:
 +
 ----
-NAME                                        READY   STATUS    RESTARTS   AGE
-activity-57f547d6c6-fxxvg                   1/1     Running   1          16m
-ae-helm-repo-6b5b96b865-6dv52               1/1     Running   0          17m
-asup-5c4459875f-749jx                       1/1     Running   0          16m
-authentication-658d5bf874-52bx2             1/1     Running   0          15m
-billing-576696c7c5-8zhnd                    1/1     Running   1          15m
-bucketservice-6f7dc4878-528lt               1/1     Running   0          16m
-cloud-extension-64964df954-j4ddd            1/1     Running   1          16m
-composite-compute-685b7f577f-59xwm          1/1     Running   0          15m
-composite-volume-5d4f46fb4-glfrx            1/1     Running   0          15m
-credentials-74dbff87d4-bwtq2                1/1     Running   0          16m
-entitlement-58b974b9dc-np8cj                1/1     Running   1          16m
-features-684d4688fc-s2bj5                   1/1     Running   0          16m
-graphql-server-7f7d986-kjlvq                1/1     Running   0          14m
-identity-7bdc4fb8d-jncxt                    1/1     Running   0          16m
-krakend-5b5cb9c449-n5n6d                    1/1     Running   0          14m
-license-5559b4544-jm64s                     1/1     Running   0          15m
-login-ui-78d5ddc8f6-r87tx                   1/1     Running   0          14m
-loki-0                                      1/1     Running   0          17m
-metrics-ingestion-service-5567d8d46-sll5g   1/1     Running   0          16m
-nats-0                                      1/1     Running   0          17m
-nats-1                                      1/1     Running   0          17m
-nats-2                                      1/1     Running   0          17m
-nautilus-865cf68b5f-jz854                   1/1     Running   0          16m
-openapi-55dfcdbb5d-zl4hp                    1/1     Running   0          16m
-polaris-influxdb2-0                         1/1     Running   0          17m
-polaris-mongodb-arbiter-0                   1/1     Running   0          17m
-polaris-mongodb-primary-0                   2/2     Running   0          17m
-polaris-mongodb-secondary-0                 2/2     Running   0          17m
-polaris-ui-77bb5dd9d8-zcmq8                 1/1     Running   0          14m
-polaris-vault-0                             1/1     Running   0          17m
-storage-provider-65d867bb55-kd8nr           1/1     Running   0          16m
-support-54fd446c46-dwtt7                    1/1     Running   0          15m
-tenancy-5f9844696f-wcl7m                    1/1     Running   0          16m
-traefik-656d6576bf-hzz6q                    1/1     Running   0          14m
-traefik-656d6576bf-md6zj                    1/1     Running   0          14m
-trident-svc-cbdd76899-psmhh                 1/1     Running   0          15m
-vault-controller-98b8cbfc6-7ms5q            1/1     Running   0          17m
+astracontrolcenter.astra.netapp.io/astra created
+----
+
+. Verify that all system components installed successfully.
++
+----
+kubectl get po -n pcloud
+----
++
+Each pod should have a status of `Running`. It may take several minutes before the system pods are deployed.
++
+Sample response:
++
+----
+NAME                                         READY   STATUS    RESTARTS   AGE
+acc-helm-repo-5fdfff786f-gkv6z               1/1     Running   0          4m58s
+activity-649f869bf7-jn5gs                    1/1     Running   0          3m14s
+asup-79846b5fdc-s9s97                        1/1     Running   0          3m10s
+authentication-84c78f5cf4-qhx9t              1/1     Running   0          118s
+billing-9b8496787-v8rzv                      1/1     Running   0          2m54s
+bucketservice-5fb876d9d5-wkfvz               1/1     Running   0          3m26s
+cloud-extension-f9f4f59c6-dz6s6              1/1     Running   0          3m
+cloud-insights-service-5676b8c6d4-6q7lv      1/1     Running   0          2m52s
+composite-compute-7dcc9c6d6c-lxdr6           1/1     Running   0          2m50s
+composite-volume-74dbfd7577-cd42b            1/1     Running   0          3m2s
+credentials-75dbf46f9d-5qm2b                 1/1     Running   0          3m32s
+entitlement-6cf875cb48-gkvhp                 1/1     Running   0          3m12s
+features-74fd97bb46-vss2n                    1/1     Running   0          3m6s
+fluent-bit-ds-2g9jb                          1/1     Running   0          113s
+fluent-bit-ds-5tg5h                          1/1     Running   0          113s
+fluent-bit-ds-qfxb8                          1/1     Running   0          113s
+graphql-server-7769f98b86-p4qrv              1/1     Running   0          90s
+identity-566c566cd5-ntfj6                    1/1     Running   0          3m16s
+influxdb2-0                                  1/1     Running   0          4m43s
+krakend-5cb8d56978-44q66                     1/1     Running   0          93s
+license-66cbbc6f48-27kgf                     1/1     Running   0          3m4s
+login-ui-584f7fd84b-dmdrp                    1/1     Running   0          87s
+loki-0                                       1/1     Running   0          4m44s
+metrics-ingestion-service-6dcfddf45f-mhnvh   1/1     Running   0          3m8s
+monitoring-operator-78d67b4d4-nxs6v          2/2     Running   0          116s
+nats-0                                       1/1     Running   0          4m40s
+nats-1                                       1/1     Running   0          4m26s
+nats-2                                       1/1     Running   0          4m15s
+nautilus-9b664bc55-rn9t8                     1/1     Running   0          2m56s
+openapi-dc5ddfb7d-6q8vh                      1/1     Running   0          3m20s
+polaris-consul-consul-5tjs7                  1/1     Running   0          4m43s
+polaris-consul-consul-5wbnx                  1/1     Running   0          4m43s
+polaris-consul-consul-bfvl7                  1/1     Running   0          4m43s
+polaris-consul-consul-server-0               1/1     Running   0          4m43s
+polaris-consul-consul-server-1               1/1     Running   0          4m43s
+polaris-consul-consul-server-2               1/1     Running   0          4m43s
+polaris-mongodb-0                            2/2     Running   0          4m49s
+polaris-mongodb-1                            2/2     Running   0          4m22s
+polaris-mongodb-arbiter-0                    1/1     Running   0          4m49s
+polaris-ui-6648875998-75d98                  1/1     Running   0          92s
+polaris-vault-0                              1/1     Running   0          4m41s
+polaris-vault-1                              1/1     Running   0          4m41s
+polaris-vault-2                              1/1     Running   0          4m41s
+storage-backend-metrics-69546f4fc8-m7lfj     1/1     Running   0          3m22s
+storage-provider-5d46f755b-qfv89             1/1     Running   0          3m30s
+support-5dc579865c-z4pwq                     1/1     Running   0          3m18s
+telegraf-ds-4452f                            1/1     Running   0          113s
+telegraf-ds-gnqxl                            1/1     Running   0          113s
+telegraf-ds-jhw74                            1/1     Running   0          113s
+telegraf-rs-gg6m4                            1/1     Running   0          113s
+telemetry-service-6dcc875f98-zft26           1/1     Running   0          3m24s
+tenancy-7f7f77f699-q7l6w                     1/1     Running   0          3m28s
+traefik-769d846f9b-c9crt                     1/1     Running   0          83s
+traefik-769d846f9b-l9n4k                     1/1     Running   0          67s
+trident-svc-8649c8bfc5-pdj79                 1/1     Running   0          2m57s
+vault-controller-745879f98b-49c5v            1/1     Running   0          4m51s
 ----
 
 . Get the one-time password you will use when you log in to Astra Control Center:
 +
 ----
-astra-control-center-21.06.09 $kubectl get astraenterprises.astra.netapp.io -n pcloud
+kubectl get astracontrolcenters -npcloud
 ----
 +
-The password is `ACC-` followed by the UUID in the response (`ACC-[UUID]`):
+The password is `ACC-` followed by the UUID in the response (`ACC-[UUID]` or, in this example, `ACC-c49008a5-4ef1-4c5d-a53e-830daf994116`):
 +
 ----
 NAME    UUID
@@ -239,9 +275,9 @@ astra   c49008a5-4ef1-4c5d-a53e-830daf994116
 After installing ACC, you will change the password for the default administrator and log in to the ACC UI dashboard.
 
 .Steps
-. In a browser, enter the FQDN you used in the `astraAddress` in `astra_enterprise_min.yaml` CRD when <<Install Astra Control Center using the command-line utility,you installed ACC>>.
+. In a browser, enter the FQDN you used in the `astraAddress` in the  `astra_control_center_min.yaml` CRD when <<Install Astra Control Center using the command-line utility,you installed ACC>>.
 . Accept the self-signed certificates when prompted.
-. At the Astra Control Center login page, enter the value you used in the `email` in `astra_enterprise_min.yaml` CRD when <<Install Astra Control Center using the command-line utility,you installed ACC>>.
+. At the Astra Control Center login page, enter the value you used in the `email` in `astra_control_center_min.yaml` CRD when <<Install Astra Control Center using the command-line utility,you installed ACC>>.
 . Select *Login*.
 . Change the password when prompted.
 
@@ -249,10 +285,12 @@ After installing ACC, you will change the password for the default administrator
 
 If any of the services are in `Error` status, you can inspect the logs. Look for API response codes in the 400 to 500 range. Those indicate the place where a failure happened.
 
-. To inspect the ACC Operator logs, enter the following:
+.Steps
+
+. To inspect the Astra Control Center operator logs, enter the following:
 +
 ----
-$ kubectl logs --follow -n ae-operator-system $(kubectl get pods -n ae-operator-system -o name)  -c manager
+kubectl logs --follow -n acc-operator-system $(kubectl get pods -n acc-operator-system -o name)  -c manager
 ----
 
 == What's next
