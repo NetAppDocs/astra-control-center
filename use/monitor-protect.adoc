@@ -5,7 +5,7 @@ keywords: proxy, cloud insights, connections, fluent bit, accounts, protect, sec
 summary: You can configure several optional settings to enhance your Astra Control Centre experience. You can add a proxy server for an additional layer of security. You can use NetApp Cloud Insights to monitor and gain insight into your complete infrastructure. You can add a Fluent Bit connection to collect data and logs from your containers.
 ---
 
-= Monitor and protect data
+= Monitor and protect infrastructure
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/use/
@@ -29,7 +29,7 @@ To add an additional layer of security, you can add a proxy server. A proxy serv
 
 If the connection was successful, the *HTTP Proxy* section of the *Account* > *Connections* page indicates that it is connected, and displays the server name.
 
-image:proxy.png[Shows the proxy server successfully connected.]
+image:proxy-new.png[Shows the proxy server successfully connected.]
 
 === Edit proxy server settings
 
@@ -56,27 +56,26 @@ You can disable the proxy server connection. You will be warned before you disab
 
 == Connect to Cloud Insights
 
-To monitor and gain insight into your complete infrastructure, connect NetApp Cloud Insights with your Astra Control Center instance.
+To monitor and gain insight into your complete infrastructure, connect NetApp Cloud Insights with your Astra Control Center instance. Cloud Insights is included in your Astra Control Center license.
 
 NOTE: If you have an air-gapped installation, you cannot connect to Cloud Insights.
 
 .What you'll need
 
-* A valid login with Cloud Insights.
-* Cloud Insights tenant URL.
 * An Astra Control Center account with *admin* privileges.
-* The Astra Control Center subscription and the Cloud Insights subscription are registered under the same *admin* user.
+* A valid Astra Control Center license.
+* The Astra Control Center subscription and the Cloud Insights subscription should be registered under the same *admin* user.
 * A proxy server.
 
-NOTE: If your system is connected to the Internet and your Cloud Insights connection is not enabled, the *Dashboard* of the Astra UI shows a *Monitor with Cloud Insights* link in the *Getting started* section. You can click the link to get started with enabling the Cloud Insights connection. Alternatively, you can use the steps below.
+TIP: If you are new to Cloud Insights, familiarize yourself with the features and capabilities link:https://docs.netapp.com/us-en/cloudinsights/index.html[here^].
 
 .Steps
 
 . Log in to Astra Control Center using an account with *admin* privilege.
 . Select *Account* > *Connections*.
 . Select the drop-down list in the *Cloud Insights* section to add the connection.
-. Enter the Cloud Insights API token and the tenant URL.
-.. To get the API token, log in to your Cloud Insights tenant URL.
+. Enter the Cloud Insights API token and the tenant URL.If you do not have the tenant URL, see the link:https://docs.netapp.com/us-en/cloudinsights/task_cloud_insights_onboarding_1.html[Cloud Insights documentation^].
+.. To get the link:https://docs.netapp.com/us-en/cloudinsights/API_Overview.html#api-access-tokens[API token^], log in to your Cloud Insights tenant URL.
 .. In Cloud Insights, generate a user-specific API key.
 .. Copy the API key from Cloud Insights into Astra Control Center.
 . Select *Connect*.
