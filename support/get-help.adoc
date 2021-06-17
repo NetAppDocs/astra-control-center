@@ -47,7 +47,8 @@ Send an email to astra.feedback@netapp.com to let us know your thoughts, ideas, 
 Log in to https://mysupport.netapp.com/site/[NetApp Support Site^] to create a support case.
 
 == Generate support bundle to provide to NetApp Support
-Astra Control Center enables the admin user to generate bundles, which include information useful to NetApp Support, including logs, events for all the components of the Astra deployment, metrics, and topology information about the clusters and apps under management. This feature is enabled by default. You can upload support bundles to NetApp Support Site (NSS) directly from the Astra Control Center UI.
+
+Astra Control Center enables the admin user to generate bundles, which include information useful to NetApp Support, including logs, events for all the components of the Astra deployment, metrics, and topology information about the clusters and apps under management. This feature is enabled by default. If you are connected to the Internet, you can upload support bundles to NetApp Support Site (NSS) directly from the Astra Control Center UI.
 
 Before you begin, you might want to check to see whether your external connections are configured to enable upload of bundles to NSS.
 
@@ -63,12 +64,15 @@ image:support bundle.png[Shows the Support bundle tile from where you can select
 .. From the *Generate a Support Bundle* page, select the timeframe.
 +
 You can choose between quick or custom timeframes.
-.. Check the *Upload the bundle to the NetApp Support Site*.
+.. Check the *Upload the bundle to the NetApp Support Site when generated*.
 .. Select *Generate Bundle*.
 +
 When the support bundle is ready, a notification appears on the *Accounts* > *Notification* page in the Alerts area, on the *Activity* page, and also in the notifications list (accessible by selecting the bell icon in the top-right side of the UI).
 +
 If the generation failed or partially completed, an icon appears on the Generate bundle page. Select the icon to see the message.
+When the bundle is available for download, it appears next to *Generated* in the *Support Bundles* section of the *Support* page as shown:
++
+image:support-bundle.png[Shows the Support bundle generated and ready for download.]
 .. Select the *Download* icon.
 +
 NOTE: If you have an airgapped installation, you should download the support bundle locally and upload it manually to NSS.
