@@ -10,17 +10,17 @@ summary: To install Astra Control Center after addressing some environmental pre
 :icons: font
 :imagesdir: ../media/get-started/
 
-To install Astra Control Center, you'll do the following basic steps:
+To install Astra Control Center, do the following basic steps:
 
 * <<Install Astra Control Center>>
 * <<Log in to the Astra Control Center UI>>
 
 == Install Astra Control Center
 
-To install Astra Control Center, you'll download the installation bundle from the NetApp Support Site and perform a series a commands to install Astra Control Center Operator and Astra Control Center in your environment. You can use this procedure to install Astra Control Center in connected or dark site environments.
+To install Astra Control Center, download the installation bundle from the NetApp Support Site and perform a series a commands to install Astra Control Center Operator and Astra Control Center in your environment. You can use this procedure to install Astra Control Center in connected or dark site environments.
 
-.Before you begin
-Prepare your environment for Astra Control Center deployment: xxxxx.
+.What you'll need
+link:prepare_to_install.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
 
 .About this task
 The Astra Control Center installation process does the following:
@@ -32,44 +32,41 @@ The Astra Control Center installation process does the following:
 * Installs the Astra UI.
 
 .Steps
-. Download the Astra Control Center bundle (`astra-control-center-21.06.9.tar.gz`) from the https://mysupport.netapp.com/site/products/all/details/astra/downloads-tab[NetApp Support Site].
-The bundle contains the following images:
-+
-* Astra Container
-* Astra Control Center Operator
+. Download the Astra Control Center bundle (`astra-control-center-[version].tar.gz`) from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site].
 
 . Extract the images:
 +
 ----
-tar -vxzf astra-control-center-21.06.9.tar.gz
+tar -vxzf astra-control-center-[version].tar.gz
 ----
 
 . Change to the Astra directory.
 +
 ----
-cd astra-control-center-21.06.9
+cd astra-control-center-[version]
 ----
-. Use the following script to push ACC images to your local registry. Replace `[Docker_registry_path]` with a valid Docker image registry path before proceeding:
+. Use the following script to push Astra Control Center images to your local registry. Replace `[Docker_registry_path]` with a valid Docker image registry path before proceeding:
 +
 ----
 export REGISTRY=[Docker_registry_path]
 
 for astraImageFile in $(ls images/*.tar) ; do
-   astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image: //')  # Load to local cache. And store the name of the loaded image trimming the 'Loaded image: '
-   docker tag ${astraImage} ${REGISTRY}/${astraImage}                              # Tag with local image repo.
-   docker push ${REGISTRY}/${astraImage}                                           # Push to the local repo.
+   astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image: //')       # For Docker-based registries: Load to local cache. And store the name of the loaded image trimming the 'Loaded image: '
+   # astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded images: //')    # For Podman-based registries: Load to local cache. And store the name of the loaded image trimming the 'Loaded images: '
+   docker tag ${astraImage} ${REGISTRY}/${astraImage}                                   # Tag with local image repo.
+   docker push ${REGISTRY}/${astraImage}                                                # Push to the local repo.
 done
 ----
 
-. Edit the Astra Enterprise custom resource definition file (`astra_enterprise_min.yaml`):
+. Edit the Astra Control Center custom resource definition file (`astra_control_center_min.yaml`):
 .. Change `[Docker_registry_path]` to the registry path where you pushed the images in the previous step.
 .. Change `[Docker_registry_secret]` to the k8s secret with your registry credentials in it. Delete the `secret` line if credentials are not used with your registry.
 .. Change `astraAddress` to the FQDN you want to use in your browser to access Astra. Copy this FQDN for use in a <<Log in to the Astra Control Center UI,later step>>.
-.. Change `email` to the default initial administrator address.Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>.
+.. Change `email` to the default initial administrator address. Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>.
 
 +
 ----
-astra-control-center-21.06.09 $vim astra_enterprise_min.yaml
+$vim astra_control_center_min.yaml
 ---
 kind: Namespace
 apiVersion: v1
@@ -81,7 +78,7 @@ kind: AstraEnterprise
 metadata:
   name: astra
 spec:
-  astraVersion: "21.06.09"
+  astraVersion: "[version]"
   astraAddress: "codev.astra.netapp.io"
   autoSupport:
     enrolled: true
@@ -91,12 +88,12 @@ spec:
     secret: "[Docker_registry_secret]"
 ----
 
-. Edit the ACC Operator deployment yaml (`astra_enterprise_operator_deploy.yaml`) to refer to your local registry and secret.
+. Edit the Astra Control Center operator deployment yaml (`astra_enterprise_operator_deploy.yaml`) to refer to your local registry and secret.
 .. Change `[Docker_registry_path]` for the `kube-rbac-prox` image to the registry path where you pushed the images in the previous step.
-.. Change `[Docker_registry_path]` for the `ae-operator` image to the registry path where you pushed the images in the previous step.
+.. Change `[Docker_registry_path]` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in the previous step.
 +
 ----
-astra-control-center-21.06.09 $vim astra_enterprise_operator_deploy.yaml
+$vim astra_enterprise_operator_deploy.yaml
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -135,7 +132,7 @@ spec:
         env:
         - name: AEOP_LOG_LEVEL
           value: "2"
-        image: [Docker_registry_path]//ae-operator:1.0.10
+        image: [Docker_registry_path]//acc-operator-controller-manager:[x.x.x]
         imagePullPolicy: IfNotPresent
 ----
 
@@ -245,7 +242,7 @@ After installing ACC, you will change the password for the default administrator
 . In a browser, enter the FQDN you used in the `astraAddress` in `astra_enterprise_min.yaml` CRD when <<Install Astra Control Center using the command-line utility,you installed ACC>>.
 . Accept the self-signed certificates when prompted.
 . At the Astra Control Center login page, enter the value you used in the `email` in `astra_enterprise_min.yaml` CRD when <<Install Astra Control Center using the command-line utility,you installed ACC>>.
-. Click *LOGIN*.
+. Select *Login*.
 . Change the password when prompted.
 
 == Troubleshoot the installation
