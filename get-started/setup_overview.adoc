@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: get-started/setup_overview.html
-keywords:
+keywords: set up, get started, Astra Control Center setup, setup overview, create account, add license, update license,
 summary:
 ---
 
