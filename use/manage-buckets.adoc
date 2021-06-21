@@ -25,17 +25,19 @@ Use any of the following bucket types:
 
 You cannot remove a bucket.
 
+For instructions on how to manage buckets using the Astra API, see the Astra Automation and API information *INSERT LINK WHEN AVAILABLE*.
+
 == Add a bucket
 
 Admins can add object store buckets. When you use Astra Control to back up or clone your application data, Astra Control stores those backups or clones in the  object store buckets that you define here.
 
-When you add a bucket, Astra Control appends a default bucket indicator, such as “bucket-002” to the name. The first bucket that you create becomes the default bucket.
+When you add a bucket, Astra Control marks one bucket as the default bucket indicator. The first bucket that you create becomes the default bucket.
 
 
 .Steps
 
 . In the left navigation area, select *Buckets*.
-. Select *Add bucket*.
+. Select *Add*.
 . Select the bucket type.
 . Enter the existing bucket name and optional description.
 +
@@ -84,7 +86,7 @@ You can change the access credential information for a bucket and change whether
 .Steps
 .	From left navigation, select *Buckets*.
 . From the Actions menu, select *Edit*.
-. Change any information other than the bucket type. 
+. Change any information other than the bucket type.
 +
 TIP: You can't modify the bucket type.
 
