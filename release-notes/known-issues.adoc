@@ -1,11 +1,11 @@
 ---
 sidebar: sidebar
 permalink: release-notes/known-issues.html
-keywords: bugs, known issues, problems
+keywords: astra, control center, bugs, known issues, problems
 summary: Known issues identify problems that might prevent you from using this release of the product successfully.
 ---
 
-= Known issues
+= Known issues with this release
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/release-notes/
