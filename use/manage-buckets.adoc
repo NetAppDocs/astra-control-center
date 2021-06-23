@@ -25,7 +25,15 @@ Use any of the following bucket types:
 
 You cannot remove a bucket.
 
-For instructions on how to manage buckets using the Astra API, see the Astra Automation and API information *INSERT LINK WHEN AVAILABLE*.
+A bucket can be in one of these states:
+
+* pending: The bucket is scheduled for discovery.
+* available: The bucket is available for use.
+* failed: The bucket is in a permanent failure state.
+* removed: The bucket is not currently accessible.
+* unknown: The bucket's state cannot be determined.
+
+For instructions on how to manage buckets using the Astra API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information].
 
 == Add a bucket
 
