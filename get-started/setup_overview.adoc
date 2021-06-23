@@ -62,7 +62,7 @@ Full Astra Control Center functionality is now enabled.
 
 ==== Add a license with the API
 
-You can add a license to Astra Control Center using the API. See the API documentation for more details.
+You can add a license to Astra Control Center using the API. See the link:https://docs.netapp.com/us-en/astra-automation/index.html[API documentation] for more details.
 
 ////
 !!! MOVE TO MANAGEMENT !!! ==== Update a license
@@ -230,3 +230,7 @@ POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/roles
 * Name: Name or address of the ONTAP system
 * Username and password: Username and password of the ONTAP admin user
 . From a list of storage VMs from ONTAP, select the storage VM to manage with Astra
+
+[discrete]
+== Find more information
+* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API]
