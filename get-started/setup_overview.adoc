@@ -195,6 +195,7 @@ To receive notifications, you'll need to set up SMTP email notifications.
 * Name: Enter a descriptive name for the client instance. This name appears when you are prompted for authorization.
 * Certificate: Enter a TLS certificate for communication with the authentication service.
 ////
+////
 == (Optional) Set up role-based access
 You'll want to govern who has access to different options. Do this by configuring role-based access.
 
@@ -232,7 +233,7 @@ POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/users
 POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/credentials
 POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/roles
 ----
-
+////
 == Import an ONTAP storage backend
 
 . From the Astra UI, select *Storage backends*.
