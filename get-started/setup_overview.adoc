@@ -39,23 +39,9 @@ You can try Astra Control Center with an evaluation license, which lets you use 
 
 The *Account* > *Licenses* page displays the license information, expiration date, license serial number, cluster ID, and CPU units used.
 
-=== Convert an Evaluation license to a full license
+=== Add a full license
 
-You can work with your NetApp sales contact to obtain a full license and serial number.
-
-. Log in to the NetApp Support Site.
-. Access the Astra Control Center Download page, enter the serial number, and download the full NetApp license file (NLF).
-. Log in to the Astra Control Center UI.
-. From the left navigation, select *Account* > *Licenses*.
-+
-Alternatively, from the Astra Control Center UI Dashboard, select *Upgrade license*.
-
-. In the *Account* > *Licenses* page, select the status drop-down menu and select *Update license*.
-. Continue with instructions in <<Add or update a license>>.
-
-=== Add or update a full license
-
-Astra Control Center licenses measure CPU resources using Kubernetes CPU units. The CPU cores that Astra Control Center is deployed on are not counted against the CPU units consumed in the license. Before adding a license, you need to obtain the license file.
+Astra Control Center licenses measure CPU resources using Kubernetes CPU units. The CPU cores that Astra Control Center is deployed on are not counted against the CPU units consumed in the license. Before adding a license, you need to obtain the license file. To update an existing evaluation or full license, see link:../use/update-license.adoc[Update an existing license].
 
 NOTE:  If your installation grows to exceed the licensed number of CPU units, Astra Control Center prevents you from managing new applications. An alert is displayed when capacity is exceeded.
 

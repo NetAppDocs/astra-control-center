@@ -31,5 +31,7 @@ entries:
         url: /use/manage-notifications.html
       - title: Manage credentials
         url: /use/manage-credentials.html
+      - title: Update an existing license
+        url: /use/update-licenses.adoc
   - title: Unmanage apps and compute
     url: /use/unmanage.html
