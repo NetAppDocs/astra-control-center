@@ -11,7 +11,7 @@ summary: Astra can restore your application configuration and persistent storage
 :imagesdir: ../media/use/
 
 [.lead]
-Astra can restore your application configuration and persistent storage from a snapshot or backup. Persistent storage backups are transferred from your object store, so restoring from an existing backup will complete the fastest.
+Astra can restore your application configuration and persistent storage from a snapshot or backup. Persistent storage backups are transferred from your object store, so restoring from an existing backup will complete the fastest. You can also https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API] to restore apps.
 
 .Steps
 

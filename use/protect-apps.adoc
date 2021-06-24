@@ -10,7 +10,7 @@ summary: Protect your apps by taking snapshots and backups using an automated pr
 :icons: font
 :imagesdir: ../media/use/
 
-Protect your apps by taking snapshots and backups using an automated protection policy or on an ad-hoc basis.
+Protect your apps by taking snapshots and backups using an automated protection policy or on an ad-hoc basis. You can also https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API] to protect apps. 
 
 == Snapshots and backups
 
