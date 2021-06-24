@@ -93,3 +93,7 @@ You can change the access credential information for a bucket and change whether
 TIP: You can't modify the bucket type.
 
 . Select *Update*.
+
+== Find more information
+
+* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API]
