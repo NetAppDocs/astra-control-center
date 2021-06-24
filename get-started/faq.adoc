@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: get-started/faq.html
-keywords: faq, frequently asked questions
+keywords: faq, frequently asked questions, astra, astra control, kubernetes, persistent volumes
 summary: This FAQ can help if you're just looking for a quick answer to a question.
 ---
 
@@ -14,8 +14,6 @@ This FAQ can help if you're just looking for a quick answer to a question.
 
 == Overview
 
-Astra aims to simplify your application data lifecycle management operations for Kubernetes native applications. Astra supports Kubernetes clusters running in the cloud and on-premise.
-
 The following sections provide answers to some additional questions that you might come across as you use Astra Control Center. For additional clarifications, please reach out to astra.feedback@netapp.com
 
 == Access to Astra Control Center
@@ -23,31 +21,24 @@ The following sections provide answers to some additional questions that you mig
 
 *What's the Astra Control URL?*
 
-You can access Astra Control at https://astra.netapp.io.
+While you can access Astra Control Service at https://astra.netapp.io, Astra Control Center uses local authentication and a URL specific to each environment.
 
-*I set up email notifications and tested an email to a colleague, but it hasn't been received. What should I do?*
-
-Ask them to check their spam folder for an email from do-not-reply@netapp.com, or search their inbox for "astra." You can also remove the user and attempt to re-add them.
+For the URL, in a browser, enter the Fully Qualified Domain Name (FQDN) you set in the spec.astraAddress field in the astra_control_center_min.yaml CRD when you installed Astra Control Center.
 
 *I am using the Trial license. How to I change to the full license?*
 
+You can easily change to a full license by obtaining the NetApp license file (NLF).
 
+.Steps
+1. From the left navigation, select *Account* > *Licenses*.
+2. Select *Add license*.
+3. Browse to the license file you downloaded.
 
 *I am using the Trial license. Can I still use the Persistent Volume Claim functionality in Trident?*
 
 Yes, you can test out the Persistent Volumes functionality with the Trial license.
 
 == Registering Kubernetes clusters
-
-*Can I add a private cluster to Astra Control?*
-
-Yes, you can add private clusters to Astra Control. To create private cluster, https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Project_Astra/How_to_create_a_private_GKE_cluster_to_work_with_project_Astra[follow the instructions in this knowledgebase article^].
-
-Private clusters must have the https://cloud.google.com/kubernetes-engine/docs/concepts/private-cluster-concept[master authorized network^] set to allow the Astra IP addresses:
-
-* 54.164.233.140/32
-* 3.218.120.204/32
-* 34.193.99.138/32
 
 *Can my cluster reside on a shared VPC?*
 
@@ -60,7 +51,7 @@ No, this isn't a supported configuration. Only a single project is supported.
 
 *I need to add worker nodes to my Kubernetes cluster after adding to Astra Control. What should I do?*
 
-New worker nodes can be added to existing pools, or new pools can be created as long as they are the Ubuntu image type. These will be automatically discovered by Astra Control. If the new nodes are not visible in Astra Control, check if the new worker nodes are running the supported image type. You can also verify the health of the new worker nodes by using the `kubectl get nodes` command.
+New worker nodes can be added to existing pools. These will be automatically discovered by Astra Control. If the new nodes are not visible in Astra Control, check if the new worker nodes are running the supported image type. You can also verify the health of the new worker nodes by using the `kubectl get nodes` command.
 
 *How do I properly unregister, bring down a cluster, and delete the associated volumes?*
 
@@ -68,16 +59,15 @@ New worker nodes can be added to existing pools, or new pools can be created as 
 .	link:../use/unmanage.html#stop-managing-compute[Unregister the cluster from Astra Control].
 .	Delete the application namespace from the Kubernetes cluster.
 +
-Alternatively, delete the PVCs and PVs. This will remove the volume from Cloud Volumes Service.
+Alternatively, delete the PVCs and PVs.
 .	Delete the cluster.
 
-NOTE: If you forget step 3, or if you used a storage class with the reclaim policy set to _retain_, the volume will remain in Cloud Volumes Service indefinitely. If this happens and you want to delete the volume, then you'll need to delete the volume manually.
 
 *What happens to my applications and data after removing the Kubernetes cluster from Astra Control?*
 
-Removing a cluster from Astra Control will not make any changes to the cluster's configuration (applications and persistent storage). Any Astra Control snapshots or backups taken of applications on that cluster will be unavailable to restore. Persistent Storage backups created by Astra will remain within Astra Enterprise, but they are unavailable for restore.
+Removing a cluster from Astra Control will not make any changes to the cluster's configuration (applications and persistent storage). Any Astra Control snapshots or backups taken of applications on that cluster will be unavailable to restore. Persistent Storage backups created by Astra Control remain within Astra Control, but they are unavailable for restore.
 
-WARNING: Always remove a cluster from Astra before you delete it through any other methods. Deleting a cluster using another tool while it's still being managed by Astra Control can cause problems for your Astra account.
+WARNING: Always remove a cluster from Astra Control before you delete it through any other methods. Deleting a cluster using another tool while it's still being managed by Astra Control can cause problems for your Astra Control account.
 
 *Will NetApp Trident be uninstalled when I remove a Kubernetes cluster from Astra Control?*
 
@@ -91,7 +81,7 @@ When applications are not listed in *Discovered Apps*, check the status and heal
 
 *I don’t see any of my application’s PVCs bound to XYZ. What's wrong?*
 
-The NetApp Trident operator sets the default storage class to `netapp-cvs-premium` after it's successfully added to Astra Control. When an application's PVCs are not bound to XYZ, there are a few steps that you can take:
+The NetApp Trident operator sets a default storage class after it's successfully added to Astra Control. When an application's PVCs are not bound to XYZ, there are a few steps that you can take:
 
 * Run `kubectl get sc` and check the default storage class.
 * Check the yaml file or Helm chart that was used to deploy the application and see if a different storage class is defined.
@@ -111,15 +101,11 @@ No. While Astra Control can discover applications that are using non-NetApp stor
 
 == Data management operations
 
-*Where is my object bucket created?*
-
-The geography of the first managed cluster will determine the location of the object store. For example, if you add a cluster in a European zone, then remove that cluster and add one in the US, all future object stores will be created in EU. If you need to change this zone, please contact our support department.
-
 *There are snapshots in my account that I didn't create. Where did they come from?*
 
 In some situations, Astra Control will automatically create a snapshot as part of performing another process. If these snapshots are more than a few minutes old, you can safely delete them.
 
-*My application uses several PVs. Will Astra take snapshots and backups of all these PVCs?*
+*My application uses several PVs. Will Astra Control take snapshots and backups of all these PVCs?*
 
 Yes. A snapshot operation on an application by Astra Control includes snapshot of all the PVs that are bound to the application’s PVCs.
 
