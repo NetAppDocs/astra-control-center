@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: use/manage-backend.html
-keywords: astra control, storage, backend, ontap
+keywords: astra control, storage, backend, ontap, kubernetes,
 summary: Add storage for your on-premises Kubernetes applications. Astra Control discovers and uses the already-deployed resources, including Trident, ONTAP, and associated storage classes.
 ---
 
