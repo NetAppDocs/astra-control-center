@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: use/monitor-protect.html
 keywords: proxy, cloud insights, connections, fluent bit, accounts, protect, security
-summary: You can configure several optional settings to enhance your Astra Control Centre experience. You can add a proxy server for an additional layer of security. You can use NetApp Cloud Insights to monitor and gain insight into your complete infrastructure. You can add a Fluent Bit connection to collect data and logs from your containers.
+summary: You can configure several optional settings to enhance your Astra Control Centre experience. If the network where you're running Astra Control Center requires a proxy for connecting to the Internet, configure that proxy server in Astra Control Center. You can use NetApp Cloud Insights to monitor and gain insight into your complete infrastructure. You can add a Fluent Bit connection to collect data and logs from your containers.
 ---
 
 = Monitor and protect infrastructure
@@ -10,19 +10,21 @@ summary: You can configure several optional settings to enhance your Astra Contr
 :icons: font
 :imagesdir: ../media/use/
 
-You can configure several optional settings to enhance your Astra Control Center experience. To add an additional layer of security, add a proxy server. To monitor and gain insight into your complete infrastructure, create a connection to NetApp Cloud Insights. To collect data and logs from your containers, add a Fluent Bit connection.
+You can configure several optional settings to enhance your Astra Control Center experience. If the network where you're running Astra Control Center requires a proxy for connecting to the Internet, configure that proxy server in Astra Control Center. To monitor and gain insight into your complete infrastructure, create a connection to NetApp Cloud Insights. To collect data and logs from your containers, add a Fluent Bit connection.
 
 == Add a proxy server
 
-To add an additional layer of security, you can add a proxy server. A proxy server is needed if you want to use Cloud Insights and AutoSupport with your Astra Control Center.
+If the network where you're running Astra Control Center requires a proxy for connecting to the Internet, configure that proxy server in Astra Control Center.
 
 .Steps
 
 . Log in to Astra Control Center using an account with *admin* privilege.
 . Select *Account* > *Connections*.
-. Select the drop-down list in the *HTTP Proxy* section to add the connection to a proxy server.
+. Select *Connect* from the drop-down list to add a proxy server.
++
+image:proxy-connect.png[Shows the Connect option to enable proxy connection.]
 . Enter the proxy server name or IP address and the proxy port number.
-. If you want to use authentication, select the checkbox, and enter the username and password.
+. If your proxy server requires authentication, select the checkbox, and enter the username and password.
 . Select *Connect*.
 
 .Result
@@ -39,33 +41,33 @@ You can edit the proxy server settings.
 
 . Log in to Astra Control Center using an account with *admin* privilege.
 . Select *Account* > *Connections*.
-. Select the drop-down list in the *HTTP Proxy* section to edit the connection.
+. Select *Edit* from the drop-down list to edit the connection.
 . Edit the server details and authentication information.
 . Select *Save*.
 
 === Disable proxy server connection
 
-You can disable the proxy server connection. You will be warned before you disable it about potential disruption to other connections, such as Cloud Insights, that require a proxy server.
+You can disable the proxy server connection. You will be warned before you disable that potential disruption to other connections might occur.
 
 .Steps
 
 . Log in to Astra Control Center using an account with *admin* privilege.
 . Select *Account* > *Connections*.
-. Select the drop-down list in the *HTTP Proxy* section to disable the connection.
+. Select *Disconnect* from the drop-down list to disable the connection.
 . In the dialog box that opens, confirm the operation.
 
 == Connect to Cloud Insights
 
 To monitor and gain insight into your complete infrastructure, connect NetApp Cloud Insights with your Astra Control Center instance. Cloud Insights is included in your Astra Control Center license.
 
-NOTE: If you have an air-gapped installation, you cannot connect to Cloud Insights.
+NOTE: Cloud Insights should be accessible from the network that Astra Control Center uses, or indirectly via a proxy server.
 
 .What you'll need
 
 * An Astra Control Center account with *admin* privileges.
 * A valid Astra Control Center license.
 * The Astra Control Center subscription and the Cloud Insights subscription should be registered under the same *admin* user.
-* A proxy server.
+* A proxy server if the network where you're running Astra Control Center requires a proxy for connecting to the Internet.
 
 TIP: If you are new to Cloud Insights, familiarize yourself with the features and capabilities link:https://docs.netapp.com/us-en/cloudinsights/index.html[here^].
 
@@ -73,8 +75,10 @@ TIP: If you are new to Cloud Insights, familiarize yourself with the features an
 
 . Log in to Astra Control Center using an account with *admin* privilege.
 . Select *Account* > *Connections*.
-. Select the drop-down list in the *Cloud Insights* section to add the connection.
-. Enter the Cloud Insights API token and the tenant URL.If you do not have the tenant URL, see the link:https://docs.netapp.com/us-en/cloudinsights/task_cloud_insights_onboarding_1.html[Cloud Insights documentation^].
+. Select *Connect* where it shows *Disconnected* in the drop-down list to add the connection.
++
+image:ci-connect.png[Shows the Connect option from the drop-down list to enable Cloud Insights connection.]
+. Enter the Cloud Insights API token and the tenant URL. If you do not have the tenant URL, see the link:https://docs.netapp.com/us-en/cloudinsights/task_cloud_insights_onboarding_1.html[Cloud Insights documentation^].
 .. To get the link:https://docs.netapp.com/us-en/cloudinsights/API_Overview.html#api-access-tokens[API token^], log in to your Cloud Insights tenant URL.
 .. In Cloud Insights, generate a user-specific API key.
 .. Copy the API key from Cloud Insights into Astra Control Center.
@@ -84,7 +88,7 @@ NOTE: To enable linking between Astra Control Center and Cloud Insights without 
 
 .Result
 
-If the connection was successful, the *Cloud Insights* section of the *Account* > *Connections* page indicates that it is connected, and displays the tenant URL. You can visit Cloud Insights to see data being successfully received and displayed. You can also go to the Astra Control Dashboard and see the available data.
+If the connection was successful, the *Cloud Insights* section of the *Account* > *Connections* page indicates that it is connected, and displays the tenant URL. You can visit Cloud Insights to see data being successfully received and displayed.
 
 image:cloud-insights.png[Shows the Cloud Insights connection enabled in the Astra Control Center UI.]
 
@@ -96,13 +100,13 @@ You can also find the same information under *Account* > *Notifications*.
 
 === Edit Cloud Insights connection
 
-You can edit the Cloud Insights connection for a Kubernetes cluster managed by Astra Control Center.
+You can edit the Cloud Insights connection.
 
 .Steps
 
 . Log in to Astra Control Center using an account with *admin* privilege.
 . Select *Account* > *Connections*.
-. Select the drop-down list in the *Cloud Insights* section to edit the connection.
+. Select *Edit* from the drop-down list to edit the connection.
 . Edit the Cloud Insights connection settings.
 . Select *Save*.
 
@@ -114,18 +118,15 @@ You can disable the Cloud Insights connection for a Kubernetes cluster managed b
 
 . Log in to Astra Control Center using an account with *admin* privilege.
 . Select *Account* > *Connections*.
-. Select the drop-down list in the *Cloud Insights* section to disable the connection.
-+
-image:cloud-insight-disconnect.png[Shows the drop-down menu in the Cloud Insights section to disconnect or edit the connection.]
+. Select *Disconnect* from the drop-down list to disable the connection.
 . In the dialog box that opens, confirm the operation.
 
 == Connect to Fluent Bit
 
-You can enable a Fluent Bit endpoint to expose logs from your containers. This enables you to forward the logs that Astra is collecting to any Fluent Bit endpoint.The Fluent Bit connection is disabled by default.
+You can enable a Fluent Bit endpoint to expose logs from your containers. This enables you to forward the logs that Astra is collecting to any Fluent Bit endpoint. The Fluent Bit connection is disabled by default.
 
 .What you'll need
 
-* A valid Astra Control Center license.
 * An Astra Control Center account with *admin* privileges.
 * Astra Control Center is installed and running on a Kubernetes cluster.
 
@@ -133,8 +134,8 @@ You can enable a Fluent Bit endpoint to expose logs from your containers. This e
 
 . Log in to Astra Control Center using an account with *admin* privilege.
 . Select *Account* > *Connections*.
-. Select the drop-down list in the *Fluent Bit Endpoint* section to add the connection.
-. Enter the host IP address, the port number, and API token (optional) for your Fluent Bit server. NEED MORE INFO HERE. WHERE DO USERS GET THIS INFO FROM?
+. Select *Connect* from the drop-down list to add the connection.
+. Enter the host IP address, the port number, and API token (optional) for your Fluent Bit server.
 . Select *Connect*.
 
 .Result
@@ -153,7 +154,9 @@ You can edit the Fluent Bit connection to your Astra Control Center instance.
 
 . Log in to Astra Control Center using an account with *admin* privilege.
 . Select *Account* > *Connections*.
-. Select the drop-down list in the *Fluent Bit Endpoint* section to edit the connection.
+. Select *Edit* from the drop-down list to edit the connection.
++
+image:fb-connect.png[Shows the Edit option to edit the Fluent Bit connection.]
 . Change the Fluent Bit endpoint settings.
 . Select *Save*.
 
@@ -165,5 +168,7 @@ You can disable the Fluent Bit connection to your Astra Control Center instance.
 
 . Log in to Astra Control Center using an account with *admin* privilege.
 . Select *Account* > *Connections*.
-. Select the drop-down list in the *Fluent Bit Endpoint* section to disable the connection.
+. Select *Disconnect* from the drop-down list to disable the connection.
++
+image:fb-connect.png[Shows the Disconnect option to disable the Fluent Bit connection.]
 . In the dialog box that opens, confirm the operation.
