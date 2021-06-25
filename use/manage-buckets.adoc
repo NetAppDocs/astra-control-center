@@ -12,12 +12,11 @@ summary: Adding object store bucket providers is essential if you want to back u
 
 Adding object store bucket providers is essential if you want to back up your applications and persistent storage or if you want to clone applications across clusters. Using Astra Control, add an object store provider as your backup destination.
 
-You don’t need a bucket if you are:
+You don’t need a bucket if you are cloning your application configuration and persistent storage to the same cluster
 
-* Cloning your application configuration and persistent storage to the same cluster
-* Cloning to a different cluster using an existing backup or snapshot
+// Cloning to a different cluster using an existing backup or snapshot  - requires a bucket.
 
-Use any of the following bucket types:
+Use any of the following bucket providers:
 
 * NetApp ONTAP S3
 * NetApp StorageGRID S3
@@ -60,7 +59,7 @@ NOTE: This option does not appear for the first bucket you create.
 
 == Add S3 access credentials
 
-Add S3 access credentials at any time. These credentials must have the necessary access roles to facilitate access to the selected bucket.
+Add S3 access credentials at any time. These credentials must have the necessary access roles to facilitate access to the selected bucket and to storage management.
 
 .Steps
 
