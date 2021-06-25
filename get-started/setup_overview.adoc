@@ -64,6 +64,8 @@ Full Astra Control Center functionality is now enabled.
 
 == Add cluster
 
+???INCOMPLETE: ADDITIONS PENDING???
+
 . From the Astra UI, select *Clouds*.
 . Select the cloud to which you want to add the cluster.
 . Select *Add Cluster*.
