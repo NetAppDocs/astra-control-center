@@ -11,20 +11,17 @@ summary: Astra can restore your application configuration and persistent storage
 :imagesdir: ../media/use/
 
 [.lead]
-Astra can restore your application configuration and persistent storage from a snapshot or backup. Persistent storage backups are transferred from your object store, so restoring from an existing backup will complete the fastest.
+Astra can restore your application configuration and persistent storage from a snapshot or backup. Persistent storage backups are transferred from your object store, so restoring from an existing backup will complete the fastest. You can also https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API] to restore apps.
 
 .Steps
 
 . Click *Apps* and then click the name of an app.
-
 . Click *Data protection*.
-
-. If you want to restore from a snapshot, keep *Snapshots* selected. Otherwise, click *Backups* to restore from a backup.
+. If you want to restore from a snapshot, keep the *Snapshots* icon selected. Otherwise, click the *Backups* icon to restore from a backup.
 +
 image:screenshot-restore-snapshot-or-backup.gif[A screenshot of the Data protection tab where you can view Snapshots or Backups.]
 
 . Click the drop-down list in the *Actions* column for the snapshot or backup from which you want to restore.
-
 . Click *Restore application*.
 +
 image:screenshot-restore-app.gif["A screenshot of the app page where you can click the drop-down list in the actions column and select Restore application."]
@@ -32,7 +29,7 @@ image:screenshot-restore-app.gif["A screenshot of the app page where you can cli
 . *Restore details*: Specify details for the clone:
 +
 * Enter a name and namespace for the app.
-* Choose the destination compute for the app.
+* Choose the destination cluster for the app.
 * Click *Review information*.
 
 . *Restore Summary*: Review details about the restore action and click *Restore App*.

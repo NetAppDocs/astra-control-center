@@ -10,7 +10,7 @@ summary: Protect your apps by taking snapshots and backups using an automated pr
 :icons: font
 :imagesdir: ../media/use/
 
-Protect your apps by taking snapshots and backups using an automated protection policy or on an ad-hoc basis.
+Protect your apps by taking snapshots and backups using an automated protection policy or on an ad-hoc basis. You can also https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API] to protect apps. 
 
 == Snapshots and backups
 
@@ -27,9 +27,7 @@ A protection policy protects an app by creating snapshots, backups, or both at a
 .Steps
 
 . Click *Apps* and then click the name of an app.
-
 . Click *Data Protection*.
-
 . Click *Configure Protection Policy*.
 +
 image:screenshot-configure-protection-policy.gif[A screenshot of the Data protection tab for an app which enables you to configure a protection policy.]
@@ -43,7 +41,6 @@ The following example sets a schedule to take snapshots daily and weekly, while 
 image:screenshot-protection-policy.gif["A screenshot of a sample configuration policy where you can choose to take snapshots and backups on an hourly, daily, weekly, or monthly basis."]
 
 . Click *Review Information*.
-
 . Click *Set Protection Policy.*
 +
 Here's a video that shows each of these steps.
@@ -61,15 +58,12 @@ You can create an on-demand snapshot at any time.
 .Steps
 
 . Click *Apps*.
-
 . Click the drop-down list in the *Actions* column for the desired app.
-
 . Click *Snapshot*.
 +
 image:screenshot-create-snapshot.gif["A screenshot of the app page where you can click the drop-down list in the actions column and select Snapshot."]
 
 . Customize the name of the snapshot and then click *Review Information*.
-
 . Review the snapshot summary and click *Snapshot App*.
 
 .Result
@@ -83,15 +77,15 @@ You can also back up an app at any time.
 .Steps
 
 . Click *Apps*.
-
 . Click the drop-down list in the *Actions* column for the desired app.
-
 . Click *Backup*.
 +
 image:screenshot-create-backup.gif["A screenshot of the app page where you can click the drop-down list in the actions column and select Backup."]
 
-. Customize the name of the backup, choose whether to back up the app from an existing snapshot, and then click *Review Information*.
-
+. Customize the name of the backup.
+. Choose whether to back up the app from an existing snapshot. If you select this option, you can choose from a list of existing snapshots.
+. Choose a destination for the backup by selecting from the list of storage buckets.
+. Click *Review Information*.
 . Review the backup summary and click *Backup App*.
 
 .Result
@@ -105,7 +99,6 @@ You can view the snapshots and backups of an app from the Data Protection tab.
 .Steps
 
 . Click *Apps* and then click the name of an app.
-
 . Click *Data Protection*.
 +
 The snapshots display by default.
@@ -121,11 +114,8 @@ Delete the scheduled or on-demand snapshots that you no longer need.
 .Steps
 
 . Click *Apps* and then click the name of an app.
-
 . Click *Data Protection*.
-
 . Click the drop-down list in the *Actions* column for the desired snapshot.
-
 . Click *Delete snapshot*.
 +
 image:screenshot-delete-snapshot.gif[A screenshot of the Data protection tab for an app where you can delete a snapshot.]
@@ -141,15 +131,12 @@ Astra deletes the snapshot.
 Delete the scheduled or on-demand backups that you no longer need.
 
 . Click *Apps* and then click the name of an app.
-
 . Click *Data Protection*.
-
 . Click *Backups*.
 +
 image:screenshot-data-protection-backups.gif[A screenshot of the Backups option that's available in the far right of the data protection tab.]
 
 . Click the drop-down list in the *Actions* column for the desired backup.
-
 . Click *Delete backup*.
 +
 image:screenshot-delete-backup.gif[A screenshot of the Data protection tab for an app where you can delete a snapshot.]
