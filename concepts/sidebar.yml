@@ -1,6 +1,8 @@
 section: concepts
 title: Concepts
 entries:
+  - title: Intro to Astra Control
+    url: /get-started/intro.html
   - title: Architecture and components
     url: /concepts/architecture.html
   - title: Validated vs standard apps

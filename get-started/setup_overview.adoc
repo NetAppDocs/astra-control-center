@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar
 permalink: get-started/setup_overview.html
-keywords: set up, get started, Astra Control Center setup, setup overview, create account, add license, update license,
-summary:
+keywords: set up, setup, Astra Control Center, add license, add cluster, import storage, add bucket
+summary: After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up licenses, add clusters, important storage, and add buckets.
 ---
 
 = Set up Astra Control Center
@@ -10,24 +10,26 @@ summary:
 :icons: font
 :imagesdir: ../media/get-started/
 
-NOTE TO REVIEWERS: BATCH 2 CONTENT. DO NOT REVIEW UNTIL BATCH 2.
+After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up licenses, add clusters, important storage, and add buckets.
 
-After you install Astra Control Center, you'll want to set up things like accounts, licenses, storage buckets, and role-based access control.
-
-////
-== Create an Astra admin account
-(NOT SURE IF THIS DONE AFTER YOU log into the UI for first time or during the CLI tool.)
-If you didn't create an admin account with the command-line installation utility, you'll need to do so now.
-
-. After changing the admin password, select *Account Settings*.
-. Enter the admin account email and password.
-////
+.Options
+* <<Add a license for Astra Control Center>>
+* <<Add cluster>>
+* <<Import a storage backend>>
+* <<Add a bucket>>
 
 == Add a license for Astra Control Center
-Without a license, your usage of Astra Control Center is limited to managing users and adding new clusters. You can add a new license using the UI or API to gain full functionality. To update an existing evaluation or full license, see link:../use/update-license.html[Update an existing license].
+You can add a new license using the UI or API to gain full Astra Control Center functionality. Without a license, your usage of Astra Control Center is limited to managing users and adding new clusters.
 
 .Before you begin
-When you downloaded Astra Control Center from the Astra Control Center Download page on the NetApp Support Site, you also downloaded the NetApp license file (NLF). Ensure you have access to this license file.
+When you downloaded Astra Control Center from the  https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site], you also downloaded the NetApp license file (NLF). Ensure you have access to this license file.
+
+.Options
+* <<Add an evaluation license>>
++
+NOTE: To update an existing evaluation or full license, see link:../use/update-license.html[Update an existing license].
+
+* <<Add a full license>>
 
 === Add an evaluation license
 You can try Astra Control Center with an evaluation license, which lets you use Astra Control Center for 90 days from the date you downloaded Astra Control Center. You need to work with your NetApp sales contact to obtain an evaluation license, which is associated with your NetApp Support account.
@@ -42,36 +44,27 @@ The *Account* > *Licenses* page displays the license information, expiration dat
 
 === Add a full license
 
-Astra Control Center licenses measure CPU resources using Kubernetes CPU units. The CPU cores that Astra Control Center is deployed on are not counted against the CPU units consumed in the license. Before adding a license, you need to obtain the license file.
+Astra Control Center licenses measure CPU resources using Kubernetes CPU units. The CPU cores that Astra Control Center is deployed on are not counted against the CPU units consumed in the license. Before adding a license, you need to obtain the license file (NLF) that you downloaded with the Astra Control Center installation bundle from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site].
 
 NOTE:  If your installation grows to exceed the licensed number of CPU units, Astra Control Center prevents you from managing new applications. An alert is displayed when capacity is exceeded.
 
 .Steps
-. From the Dashboard when you first log in, select *Manage Licenses*.
+. Log in to the Astra Control Center UI.
+. From the Dashboard, select *Manage Licenses*.
 +
 Alternatively, from the left navigation, select *Account* > *Licenses*.
 
 . Select *Add a license*.
-. Browse to the license file that you downloaded.
+. Browse to the license file (NLF) that you downloaded.
 . Select *Add License*.
 
 The *Account* > *Licenses* page displays the license information, expiration date (for evaluation licenses), license serial number, cluster ID, and CPU units used.
 
 Full Astra Control Center functionality is now enabled.
 
-////
-!!! MOVE TO MANAGEMENT !!! ==== Update a license
+== Add cluster
 
-If you need to update your license information, you can easily do so.
-
-. From the left navigation, select *Account* > *Licenses*.
-. In the *Account* > *Licenses* page, select the status drop-down menu for the active license and select *Replace license*.
-. Continue with instructions in <<Add or update a license>>.
-////
-
-== Add a Kubernetes cluster
-
-=== Add a Kubernetes cluster with the Astra UI
+???INCOMPLETE: ADDITIONS PENDING???
 
 . From the Astra UI, select *Clouds*.
 . Select the cloud to which you want to add the cluster.
@@ -81,150 +74,92 @@ If you need to update your license information, you can easily do so.
 * Name of the cluster
 * Cluster credentials
 
-=== Add a Kubernetes cluster with the Astra API
+== Import a storage backend
 
-. To list clusters, enter the following:
+Add storage for your on-premises Kubernetes applications. Astra Control discovers and uses the already-deployed resources, including Trident, ONTAP, and associated storage classes. Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend.
+
+Admins can import an already discovered storage backend using these options:
+
+* <<Import storage backend using Dashboard>>
+* <<Import storage backend using Backends option>>
+
+=== Import storage backend using Dashboard
+. From the Dashboard do one of the following:
+** From the Dashboard Getting started section, select *Add storage backend*.
+** From the Dashboard *Resource Summary > Storage backends* section, select *Add*.
+. Enter the ONTAP admin credentials and select *Review information*.
+. Confirm the backend details and select *Import storage backend*.
 +
-----
-GET /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/topology/v1/clouds/2f9e63fa-8ba8-414a-a57c-0f3042b80682/clusters?include=name,id
-----
+The imported backend appears in the list with summary information.
 
-. To add a cluster, enter the following:
+=== Import storage backend using Backends option
+. In the left navigation area, select *Backends*.
+. Select *Import existing storage backend*.
+. Enter the ONTAP admin credentials and select *Review information*.
+. Confirm the backend details and select *Import storage backend*.
 +
-----
-POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/credentials
-POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/topology/v1/clouds/2f9e63fa-8ba8-414a-a57c-0f3042b80682/clusters
-----
+The imported backend appears in the list with summary information.
+. To see details of the backend storage, select it.
++
+TIP: Persistent volumes used by apps in the managed compute cluster are also displayed.
 
-== (Optional) Add a bucket
-If you want to protect and back up your apps, you will need to add a storage bucket.
+== Add a bucket
 
-=== Add a bucket with the UI
+Adding object store bucket providers is essential if you want to back up your applications and persistent storage or if you want to clone applications across clusters. Using Astra Control, add an object store provider as your backup destination.
+
+NOTE: You can also add a bucket to Astra Control Center using the API. See the API documentation for more details.
+
+You don’t need a bucket if you are:
+
+* Cloning your application configuration and persistent storage to the same cluster
+* Cloning to a different cluster using an existing backup or snapshot
+
+Use any of the following bucket types:
+
+* NetApp ONTAP S3
+* NetApp StorageGRID S3
+* Generic S3
 
 Admins can add object store buckets. When you use Astra Control to back up or clone your application data, Astra Control stores those backups or clones in the object store buckets that you define here.
 
-When you add an object store bucket, Astra Control appends a default bucket indicator, such as “bucket-002” to the name.
+When you add a bucket, Astra Control marks one bucket as the default bucket indicator. The first bucket that you create becomes the default bucket.
 
 .Steps
-In the left navigation area, select Buckets.
 
-Select Add bucket.
-
-Select the bucket type.
-
-Enter the bucket name and optional description.
-
-The bucket name appears as a backup location that you can choose later when you’re creating a backup. The name also appears during protection policy configuration.
-Enter the or IP address of the S3 server.
-
-If you want this bucket to be the default bucket for all backups, check the "Make this bucket the default bucket for this private cloud" option.
-
-This option does not appear for the first bucket you create.
-!!!Link to creds!!! Continue by adding credential information.
-
-=== Add a bucket with the API
-
-You can add a bucket to Astra Control Center using the API. See the API documentation for more details.
-
-////
-. To list bucket providers, enter the following:
+. In the left navigation area, select Buckets.
+.. Select Add.
+.. Select the bucket type.
+.. Enter the existing bucket name and optional description.
 +
-----
-GET /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/topology/v1/bucketProviders?include=name,state,id
-----
+TIP: The bucket name and description appear as a backup location that you can choose later when you’re creating a backup. The name also appears during protection policy configuration.
 
-. To add a bucket, enter the following:
+.. Enter the or IP address of the S3 server.
+.. If you want this bucket to be the default bucket for all backups, check the `Make this bucket the default bucket for this private cloud` option.
 +
-----
-POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/credentials
-POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/topology/v1/bucketProviders
-----
-////
+NOTE: This option does not appear for the first bucket you create.
 
-////
-== Set up email notifications
-To receive notifications, you'll need to set up SMTP email notifications.
+.. Continue by adding <<Add S3 access credentials,credential information>>.
 
-. From the Astra UI, select *Account Settings*.
-. Select *Notifications*.
-. Select *Set up email server*.
-. Enter or select the following information:
-+
-* Server URL
-* Port
-* Secure method: SSL or TLS
-* Keep alive: Yes or No
-* Authentication enabled: Yes or No
-* Username and password
+=== Add S3 access credentials
 
-. Enter the SMTP configuration values.
-. Verify the SMTP server by sending a test email to your email address.
-. Select the *Send test email* option.
-////
-////
-== Configure Single-Sign-On (SSO)
+Add S3 access credentials at any time.
 
-. Prepare PingFederate for use as an SSO provider for Astra Control Center. See https://docs.pingidentity.com/bundle/pingfederate-102/page/ird1564002990806.html[Configure PingFederate authorization server settings].
-. Enable SSO for Astra Control Center.
-.. Select *Account Settings*.
-.. Select *Security*.
-.. Select *Configure an OIDC Authentication service* option.
-. Enter the following:
-+
-* OIDC URL: The URL of the OIDC authentication service you configured.
-* Client ID: Enter a unique ID that the client provides to the Resource Server to identify itself. This ID is included with every request that the client makes.
-* Name: Enter a descriptive name for the client instance. This name appears when you are prompted for authorization.
-* Certificate: Enter a TLS certificate for communication with the authentication service.
-////
-////
-== (Optional) Set up role-based access
-You'll want to govern who has access to different options. Do this by configuring role-based access.
+.Steps
 
-=== Add a role
+. From the Buckets dialog, select either the *Add* or *Use existing* tab.
+.. Enter a name for the credential that distinguishes it from other credentials in Astra Control.
+.. Enter the access ID and secret key either by uploading the file or by pasting the contents from your clipboard.
 
-. From the Astra UI, select *Roles*.
-. Select *Add role*.
-. Enter the name of the role and the scope of the role.
+== What's next?
 
-=== Add users and specify roles
+Now that you’ve logged in and added compute to Astra Control Center, you're ready to start using Astra Control Center's application data management features.
 
-For information about role-based access control, see LINK. ???
-
-==== Add users with the Astra UI
-. From the Astra UI, select *Accounts* > *Users*.
-. Select *Manage Users and Roles*.
-. Select *Add a user*.
-. Enter the user account information and select a role.
-+
-The new user receives an email notification and selects on the Join link.
-
-==== Add users with the Astra API
-
-
-. To list user accounts, enter the following:
-+
-----
-GET /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/users?include=name,id
-----
-
-. To add a user account, enter the following:
-+
-----
-POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/users
-POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/credentials
-POST /accounts/0b311ae7-d89a-4a11-a52c-1349ca090415/core/v1/roles
-----
-////
-== Import an ONTAP storage backend
-
-. From the Astra UI, select *Storage backends*.
-. Select *Import*.
-. Select *ONTAP* as the type of storage to import.
-. Enter the following:
-+
-* Name: Name or address of the ONTAP system
-* Username and password: Username and password of the ONTAP admin user
-. From a list of storage VMs from ONTAP, select the storage VM to manage with Astra
+* link:../use/manage-users.html[Manage users]
+* link:../use/manage-apps.html[Start managing apps]
+* link:../use/protect-apps.html[Protect apps]
+* link:../use/clone-apps.html[Clone apps]
+* link:../use/manage-notifications.html[Manage notifications]
+* link:../use/manage-notifications.html[???Connecting to Cloud Insights???]
 
 [discrete]
 == Find more information

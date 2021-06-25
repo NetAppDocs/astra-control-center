@@ -3,8 +3,8 @@ sidebar:
     - title: Astra Control Center docs
       url: /index.html
     - section: release-notes
-    - section: get-started
     - section: concepts
+    - section: get-started
     - section: use
     - section: rest-api
     - section: solutions

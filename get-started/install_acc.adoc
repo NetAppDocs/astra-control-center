@@ -278,8 +278,12 @@ After installing ACC, you will change the password for the default administrator
 . In a browser, enter the FQDN you used in the `astraAddress` in the  `astra_control_center_min.yaml` CRD when <<Install Astra Control Center using the command-line utility,you installed ACC>>.
 . Accept the self-signed certificates when prompted.
 . At the Astra Control Center login page, enter the value you used in the `email` in `astra_control_center_min.yaml` CRD when <<Install Astra Control Center using the command-line utility,you installed ACC>>.
++
+NOTE: If you enter an incorrect password three times, the admin account will be locked for 15 minutes. If you need admin account password assistance, contact NetApp Support.
+
 . Select *Login*.
 . Change the password when prompted.
+
 
 == Troubleshoot the installation
 
