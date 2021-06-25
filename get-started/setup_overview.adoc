@@ -24,7 +24,7 @@ If you didn't create an admin account with the command-line installation utility
 ////
 
 == Add a license for Astra Control Center
-Without a license, your usage of Astra Control Center is limited to managing users and adding new clusters. You can add a new license using the UI or API to gain full functionality. To update an existing evaluation or full license, see link:../use/update-license.adoc[Update an existing license].
+Without a license, your usage of Astra Control Center is limited to managing users and adding new clusters. You can add a new license using the UI or API to gain full functionality. To update an existing evaluation or full license, see link:../use/update-license.html[Update an existing license].
 
 .Before you begin
 When you downloaded Astra Control Center from the Astra Control Center Download page on the NetApp Support Site, you also downloaded the NetApp license file (NLF). Ensure you have access to this license file.
