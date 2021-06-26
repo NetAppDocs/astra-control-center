@@ -76,14 +76,14 @@ When the support bundle is ready, a notification appears on the *Accounts* > *No
 +
 If the generation failed or partially completed, an icon appears on the Generate bundle page. Select the icon to see the message.
 
+TIP: The notifications bell icon at the top-right side of the UI provides information about events related to the support bundle, such as when the bundle is successfully created, when the bundle creation fails, when the bundle could not be uploaded, when the bundle could not be downloaded, and so on.
+
 === If you have an airgapped installation
 
 If you have an airgrapped installation, perform the following steps after the Support bundle is generated.
 When the bundle is available for download, it appears next to *Generated* in the *Support Bundles* section of the *Support* page as shown:
-+
+
 image:support-bundle.png[Shows the Support bundle generated and ready for download.]
 
 . Select the *Download* icon.
 . Manually upload the bundle on NSS.
-
-TIP: The notifications bell icon at the top-right side of the UI provides information about events related to the support bundle, such as when the bundle is successfully created, when the bundle creation fails, when the bundle could not be uploaded, when the bundle could not be downloaded, and so on.
