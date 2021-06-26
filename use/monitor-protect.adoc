@@ -78,9 +78,14 @@ TIP: If you are new to Cloud Insights, familiarize yourself with the features an
 . Select *Connect* where it shows *Disconnected* in the drop-down list to add the connection.
 +
 image:ci-connect.png[Shows the Connect option from the drop-down list to enable Cloud Insights connection.]
-. Enter the Cloud Insights API token and the tenant URL. If you do not have the tenant URL, see the link:https://docs.netapp.com/us-en/cloudinsights/task_cloud_insights_onboarding_1.html[Cloud Insights documentation^].
+. Enter the Cloud Insights API token and the tenant URL.
++
+You get the tenant URL when you get the Cloud Insights license. If you do not have the tenant URL, see the link:https://docs.netapp.com/us-en/cloudinsights/task_cloud_insights_onboarding_1.html[Cloud Insights documentation^].
+
 .. To get the link:https://docs.netapp.com/us-en/cloudinsights/API_Overview.html#api-access-tokens[API token^], log in to your Cloud Insights tenant URL.
 .. In Cloud Insights, generate a user-specific API key.
++
+image:cloud-insights-api.png[Shows the Cloud Insights API token generation page.]
 .. Copy the API key from Cloud Insights into Astra Control Center.
 . Select *Connect*.
 
