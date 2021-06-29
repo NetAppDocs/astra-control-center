@@ -109,7 +109,7 @@ Astra Control Center communicates using the following TCP ports. You should ensu
 
 |n/a
 |HTTPS
-|Ingress
+|Egress
 |Data to Cloud Insights
 
 |n/a
@@ -168,6 +168,7 @@ Astra Control Center communicates using the following TCP ports. You should ensu
 
 Astra Control Center supports recent versions of Firefox, Safari, and Chrome with a minimum resolution of 1280 x 720.
 
+////
 == Integration with your organization
 
 Before you deploy Astra Control Center, you should determine which internal integrations should occur, including the following:
@@ -179,7 +180,7 @@ If you want to integrate these options, you should obtain the following:
 
 * SSO integration confirmation details
 * SMTP server configuration details
-
+////
 == What's next
 
 View the link:quick-start.adoc[quick start^] overview.
