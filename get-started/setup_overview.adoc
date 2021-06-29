@@ -72,6 +72,9 @@ image:dashboard.png[Shows the Add a Cluster button.]
 NOTE: The `kubeconfig.yaml` file should include *only the cluster credential for one cluster*.
 +
 image:cluster-creds.png[Shows the screen to upload kubeconfig.yaml for cluster.]
++
+IMPORTANT: If you create your own `kubeconfig` file, you should define only *one* context element in it. See https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[Kubernetes documentation^] for information about creating `kubeconfig` files.
+
 . Provide a credential name.
 . Select *Configure storage*.
 . Select the storage class to be used for this Kubernetes cluster, and select *Review information*.
