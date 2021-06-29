@@ -166,7 +166,7 @@ Add S3 access credentials at any time.
 
 == What's next?
 
-Now that you’ve logged in and added compute to Astra Control Center, you're ready to start using Astra Control Center's application data management features.
+Now that you’ve logged in and added clusters to Astra Control Center, you're ready to start using Astra Control Center's application data management features.
 
 * link:../use/manage-users.html[Manage users]
 * link:../use/manage-apps.html[Start managing apps]

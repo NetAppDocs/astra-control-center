@@ -25,9 +25,10 @@ link:requirements.html[Before you begin installation, prepare your environment f
 .About this task
 The Astra Control Center installation process does the following:
 
-* Installs the Astra components into the `pcloud` namespace.
+* Installs the Astra components into the `netapp-acc` namespace.
 * Creates a default account.
-* Creates a default administrative user called `admin` with a default one-time password of `ACC-<UUID_of_installation>` for this instance of Astra Control Center.
+* Creates a default administrative user name of `admin` with a default one-time password of `ACC-<UUID_of_installation>` for this instance of Astra Control Center.
+* Creates a default administrative user email address.
 * Helps you determine that all Astra Control Center pods are running.
 * Installs the Astra UI.
 
@@ -96,7 +97,6 @@ vim astra_control_center_operator_deploy.yaml
 ----
 .. Change `[Docker_registry_path]` for the `kube-rbac-prox` image to the registry path where you pushed the images in the previous step.
 .. Change `[Docker_registry_path]` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in the previous step.
-.. Change `[x.y.z]` to the bundle version number.
 +
 ----
 apiVersion: apps/v1
@@ -136,7 +136,7 @@ spec:
         env:
         - name: ACCOP_LOG_LEVEL
           value: "2"
-        image: [Docker_registry_path]/acc-operator:[x.y.z]
+        image: [Docker_registry_path]/acc-operator:[version x.y.z]
         imagePullPolicy: IfNotPresent
 ----
 
@@ -163,22 +163,22 @@ service/acc-operator-controller-manager-metrics-service created
 deployment.apps/acc-operator-controller-manager created
 ----
 
-. Create the `pcloud` namespace if it does not already exist:
+. Create the `netapp-acc` namespace if it does not already exist:
 +
 ----
-kubectl create ns pcloud
+kubectl create ns netapp-acc
 ----
 +
 Sample response:
 +
 ----
-namespace/pcloud created
+namespace/netapp-acc created
 ----
 
-. Install Astra Control Center in the `pcloud` namespace:
+. Install Astra Control Center in the `netapp-acc` namespace:
 +
 ----
-kubectl apply -f astra_control_center_min.yaml -n pcloud
+kubectl apply -f astra_control_center_min.yaml -n netapp-acc
 ----
 +
 Sample response:
@@ -190,7 +190,7 @@ astracontrolcenter.astra.netapp.io/astra created
 . Verify that all system components installed successfully.
 +
 ----
-kubectl get po -n pcloud
+kubectl get pods -n netapp-acc
 ----
 +
 Each pod should have a status of `Running`. It may take several minutes before the system pods are deployed.
@@ -260,7 +260,7 @@ vault-controller-745879f98b-49c5v            1/1     Running   0          4m51s
 . Get the one-time password you will use when you log in to Astra Control Center:
 +
 ----
-kubectl get astracontrolcenters -npcloud
+kubectl get astracontrolcenters -nnetapp-acc
 ----
 +
 The password is `ACC-` followed by the UUID in the response (`ACC-[UUID]` or, in this example, `ACC-c49008a5-4ef1-4c5d-a53e-830daf994116`):
