@@ -12,7 +12,7 @@ summary: After you install Astra Control Center, log in to the UI, and change yo
 
 After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up licenses, add clusters, important storage, and add buckets.
 
-.Tasks 
+.Tasks
 * <<Add a license for Astra Control Center>>
 * <<Add cluster>>
 * <<Import a storage backend>>
@@ -36,11 +36,11 @@ You can try Astra Control Center with an evaluation license, which lets you use 
 
 .Steps
 . Log in to the Astra Control Center UI.
-. From the left navigation, select *Account* > *Licenses*.
+. From the left navigation, select *Account* > *License*.
 . Select the *Add License* dropdown menu, and choose *Connect to NetApp Support*.
 . Enter your NetApp Support site credentials, and select *Connect*.
 
-The *Account* > *Licenses* page displays the license information, expiration date, license serial number, cluster ID, and CPU units used.
+The *Account* > *License* page displays the license information, expiration date, license serial number, account ID, and CPU units used.
 
 === Add a full license
 
@@ -50,15 +50,12 @@ NOTE:  If your installation grows to exceed the licensed number of CPU units, As
 
 .Steps
 . Log in to the Astra Control Center UI.
-. From the Dashboard, select *Manage Licenses*.
-+
-Alternatively, from the left navigation, select *Account* > *Licenses*.
-
-. Select *Add a license*.
+. Select *Account* > *License*.
+. Select *Add license*.
 . Browse to the license file (NLF) that you downloaded.
 . Select *Add License*.
 
-The *Account* > *Licenses* page displays the license information, expiration date (for evaluation licenses), license serial number, cluster ID, and CPU units used.
+The *Account* > *License* page displays the license information, expiration date, license serial number, account ID, and CPU units used.
 
 Full Astra Control Center functionality is now enabled.
 
