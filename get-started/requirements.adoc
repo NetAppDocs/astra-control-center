@@ -27,13 +27,11 @@ Astra Control Center has the following cluster deployment requirements:
 ** A load balancer which exposes a reachable IP address
 ** This cluster must be the active kubeconfig on your local machine
 ** kubectl v1.19 or newer on the local machine
+** A method for pointing the FQDN of Astra Control Center to the load balanced IP address
 ** Docker engine v20.10 or newer on the local machine (for pushing images to the local registry)
-* OpenShift Clusters that are going to be managed must have the superuser and user ID set on the backing ONTAP system to backup and restore apps with ACC
-** export-policy rule modify -vserver svm0 -policyname default -ruleindex 1 -superuser sys
-** export-policy rule modify -policyname default -ruleindex 1 -anon 65534 (this is the default value)
-
-
-
+* For OpenShift clusters managed using StorageClasses with NFS backends, the superuser and user ID must be set on the backing ONTAP system using the following commands:
+** `export-policy rule modify -vserver svm0 -policyname default -ruleindex 1 -superuser sys`
+** `export-policy rule modify -policyname default -ruleindex 1 -anon 65534` (this is the default value)
 
 *Astra Control Center namespace*: You need to prepare two Kubernetes namespaces before deploying Astra Control Center:
 
