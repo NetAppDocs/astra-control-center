@@ -10,7 +10,7 @@ summary: Add users to your Astra Control Center system and remove users that sho
 :icons: font
 :imagesdir: ../media/use/
 
-You can add, remove, and edit users of your Astra Control Center installation using the Astra Control Center UI. You can also https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API] to manage users. 
+You can add, remove, and edit users of your Astra Control Center installation using the Astra Control Center UI. You can also https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API] to manage users.
 
 == Add users
 
@@ -54,7 +54,7 @@ Astra Control Center updates the user's permissions based on the new role that y
 
 == Remove users
 
-Users with the Owner role can remove other users from the account at any time.
+Users with the Owner or Admin role can remove other users from the account at any time.
 
 .Steps
 
