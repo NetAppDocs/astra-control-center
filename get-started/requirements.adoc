@@ -20,6 +20,7 @@ A Kubernetes cluster must meet the following requirements so you can discover an
 Astra Control Center has the following cluster deployment requirements:
 
 *OpenShift cluster*: If your Kubernetes cluster is managed as part of the Red Hat OpenShift Container Platform, Astra Control Center requires the following:
+NOTE: OpenShift 4.8 is not supported.
 
 * OpenShift 4.6.8 or 4.7 cluster that has Trident StorageClasses backed by ONTAP 9.8 or newer, with at least 300GB of available capacity
 ** 1 controller node with 2CPU, 6GB RAM, and 50GB storage
@@ -33,7 +34,6 @@ Astra Control Center has the following cluster deployment requirements:
 ** `export-policy rule modify -vserver svm0 -policyname default -ruleindex 1 -superuser sys`
 ** `export-policy rule modify -policyname default -ruleindex 1 -anon 65534` (this is the default value)
 
-NOTE: OpenShift 4.8 is not supported.
 
 * *Non-OpenShift Kubernetes cluster*: The Kubernetes cluster you use for Astra Control Center should already be deployed in your environment and you should have permissions to manage the cluster. This cluster should be preconfigured with the following:
 ** A load balancer with a static IP address or IP address range
