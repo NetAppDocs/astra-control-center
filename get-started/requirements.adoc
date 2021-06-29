@@ -19,9 +19,9 @@ A Kubernetes cluster must meet the following requirements so you can discover an
 === Cluster deployment
 Astra Control Center has the following cluster deployment requirements:
 
-*OpenShift*: If your Kubernetes cluster is managed as part of the Red Hat OpenShift Container Platform, Astra Control Center requires the following:
+*OpenShift cluster*: If your Kubernetes cluster is managed as part of the Red Hat OpenShift Container Platform, Astra Control Center requires the following:
 
-* OpenShift 4.6 or 4.7 cluster that has Trident StorageClasses backed by ONTAP 9.5 or newer, with at least 300GB of available capacity
+* OpenShift 4.6.8 or 4.7 cluster that has Trident StorageClasses backed by ONTAP 9.8 or newer, with at least 300GB of available capacity
 ** 1 controller node with 2CPU, 6GB RAM, and 50GB storage
 ** 3 worker nodes with 4CPU, 12GB RAM, 50GB storage
 ** A load balancer which exposes a reachable IP address
@@ -35,31 +35,26 @@ Astra Control Center has the following cluster deployment requirements:
 
 NOTE: OpenShift 4.8 is not supported.
 
-*Astra Control Center namespace*: You need to prepare two Kubernetes namespaces before deploying Astra Control Center:
-
-* acc-operator-system (Used by Astra Control Center operator)
-* pcloud (Used by Astra Control Center application)
-
-NOTE: Both the Astra Control Center operator and the Astra Control Center application are installed into the _ae-operator-system_ namespace.
-
-* *Kubernetes deployment*: The Kubernetes cluster you use for Astra Control Center should already be deployed in your environment and you should have permissions to manage the cluster. This cluster should be preconfigured with the following:
+* *Non-OpenShift Kubernetes cluster*: The Kubernetes cluster you use for Astra Control Center should already be deployed in your environment and you should have permissions to manage the cluster. This cluster should be preconfigured with the following:
 ** A load balancer with a static IP address or IP address range
 ** An internal domain name that is routed from an internal DNS server and points to the static IP address or IP address range of the cluster (the DNS name should point to the load-balanced IP address or addresses using the internal DNS server)
 ** A default storage provider in the Kubernetes cluster that is backed by a Trident storage class to work with ONTAP
 ** A single Trident StorageClass configured as the default
 
-* *Kubernetes version*: A cluster must be running Kubernetes version 1.19 or newer.
+* *Kubernetes version*: A Kubernetes cluster must be running Kubernetes version 1.19 or newer.
 
 * *Image registry*: You must have an existing private Docker image registry to which you can push Astra Control Center build images. You must have the URL of the image registry where you will upload the images, and you must have tagged the images for the private container registry.
 
 * *Cluster state*: Clusters must be running in a healthy state and are recommended to have at least three online worker nodes.
 
-* *Private clusters* If the cluster is private, it must have the https://cloud.google.com/kubernetes-engine/docs/concepts/private-cluster-concept[master authorized network^] set to allow the Astra IP addresses:
+////
+* *Private clusters* If the cluster is private, the master authorized network must be configured to allow the Astra IP addresses:
 ** 54.164.233.140/32
 ** 3.218.120.204/32
 ** 34.193.99.138/32
+////
 
-* *Trident / ONTAP storage configuration*: Astra Control Center requires that Trident version 21.01 or newer already be installed and configured to work with NetApp ONTAP version 9.5 or newer as the storage backend.
+* *Trident / ONTAP storage configuration*: Astra Control Center requires that Trident version 21.01 or newer already be installed and configured to work with NetApp ONTAP version 9.8 or newer as the storage backend.
 
 === Supported apps
 

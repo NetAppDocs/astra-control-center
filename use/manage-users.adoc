@@ -29,7 +29,6 @@ The user will need to change the password upon first login.
 +
 Note the following:
 +
-* The email address must match the email address that the user used to sign up to Cloud Central. (Is this true of Astra CC?)
 * Each role provides the following permissions:
 ** An *Owner* has Admin permissions and can delete accounts.
 ** An *Admin* has Member permissions and can invite other users.
