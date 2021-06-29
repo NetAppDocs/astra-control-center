@@ -22,4 +22,4 @@ You can convert an evaluation license to a full license, or you can update an ex
 . Browse to the license file that you downloaded.
 . Select *Add*.
 
-The *Account* > *Licenses* page displays the license information, expiration date (for evaluation licenses), license serial number, cluster ID, and CPU units used.
+The *Account* > *Licenses* page displays the license information, expiration date, license serial number, account ID, and CPU units used.
