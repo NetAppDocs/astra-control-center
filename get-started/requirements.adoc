@@ -96,7 +96,7 @@ Astra Control Center communicates using the following TCP ports. You should ensu
 |===
 |Product |Port |Protocol |Direction |Purpose
 
-.13+|Astra Control Center
+.11+|Astra Control Center
 |443
 |HTTPS
 |Ingress
