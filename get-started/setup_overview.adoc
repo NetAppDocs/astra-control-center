@@ -12,7 +12,7 @@ summary: After you install Astra Control Center, log in to the UI, and change yo
 
 After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up licenses, add clusters, important storage, and add buckets.
 
-.Tasks 
+.Tasks
 * <<Add a license for Astra Control Center>>
 * <<Add cluster>>
 * <<Import a storage backend>>
@@ -72,7 +72,7 @@ To begin managing your apps, add a Kubernetes cluster and manage it as a compute
 image:dashboard.png[Shows the Add a Cluster button.]
 . In the *Add Cluster* window that opens, upload a `kubeconfig.yaml` file or paste the contents of a `kubeconfig.yaml` file.
 +
-NOTE: The `kubeconfig.yaml` file should include one *one* cluster credentials in it.
+NOTE: The `kubeconfig.yaml` file should include *only the cluster credential for one cluster*.
 +
 image:cluster-creds.png[Shows the screen to upload kubeconfig.yaml for cluster.]
 . Provide a credential name.
