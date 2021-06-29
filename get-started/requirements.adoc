@@ -46,8 +46,6 @@ NOTE: Both the Astra Control Center operator and the Astra Control Center applic
 ** 3.218.120.204/32
 ** 34.193.99.138/32
 
-* *Compute and memory requirements*:
-
 * *Trident / ONTAP storage configuration*: Astra Control Center requires that Trident version 21.01 or newer already be installed and configured to work with NetApp ONTAP version 9.5 or newer as the storage backend.
 
 === Supported apps
