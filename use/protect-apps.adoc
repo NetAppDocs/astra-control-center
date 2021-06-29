@@ -10,7 +10,9 @@ summary: Protect your apps by taking snapshots and backups using an automated pr
 :icons: font
 :imagesdir: ../media/use/
 
-Protect your apps by taking snapshots and backups using an automated protection policy or on an ad-hoc basis. You can also https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API] to protect apps. 
+Protect your apps by taking snapshots and backups using an automated protection policy or on an ad-hoc basis. You can also https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API] to protect apps.
+
+NOTE: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
 
 == Snapshots and backups
 
