@@ -19,36 +19,42 @@ A Kubernetes cluster must meet the following requirements so you can discover an
 === Cluster deployment
 Astra Control Center has the following cluster deployment requirements:
 
-*Astra Control Center namespace*: You need to prepare two Kubernetes namespaces before deploying Astra Control Center:
+*OpenShift cluster*: If your Kubernetes cluster is managed as part of the Red Hat OpenShift Container Platform, Astra Control Center requires the following:
+NOTE: OpenShift 4.8 is not supported.
 
-* ae-operator-system (Used by Astra Control Center operator)
-* pcloud (Used by Astra Control Center application)
+* OpenShift 4.6.8 or 4.7 cluster that has Trident StorageClasses backed by ONTAP 9.8 or newer, with at least 300GB of available capacity
+** 1 controller node with 2 CPU cores, 6GB RAM, and 50GB storage
+** 3 worker nodes with 4 CPU cores, 12GB RAM, and 50GB storage
+** A load balancer which exposes a reachable IP address
+** This cluster must be the active kubeconfig credential
+** kubectl v1.19 or newer
+** A method for pointing the FQDN of Astra Control Center to the load balanced IP address
+** Docker engine v20.10 or newer (for pushing images to the local registry)
+* For OpenShift clusters managed using StorageClasses with NFS backends, the superuser and user ID must be set on the backing ONTAP system using the following commands:
+** `export-policy rule modify -vserver svm0 -policyname default -ruleindex 1 -superuser sys`
+** `export-policy rule modify -policyname default -ruleindex 1 -anon 65534` (this is the default value)
 
-NOTE: Both the Astra Control Center operator and the Astra Control Center application are installed into the _ae-operator-system_ namespace.
 
-*OpenShift*: If your Kubernetes cluster is managed as part of the Red Hat OpenShift Container Platform, Astra Control Center requires OpenShift 4.6 or newer.
-
-* *Kubernetes deployment*: The Kubernetes cluster you use for Astra Control Center should already be deployed in your environment and you should have permissions to manage the cluster. This cluster should be preconfigured with the following:
+* *Non-OpenShift Kubernetes cluster*: The Kubernetes cluster you use for Astra Control Center should already be deployed in your environment and you should have permissions to manage the cluster. This cluster should be preconfigured with the following:
 ** A load balancer with a static IP address or IP address range
 ** An internal domain name that is routed from an internal DNS server and points to the static IP address or IP address range of the cluster (the DNS name should point to the load-balanced IP address or addresses using the internal DNS server)
 ** A default storage provider in the Kubernetes cluster that is backed by a Trident storage class to work with ONTAP
+** A single Trident StorageClass configured as the default
 
-* *Kubernetes version*: A cluster must be running Kubernetes version 1.17 or later.
-
-* *Image type*: The image type for each worker node must be Ubuntu.
+* *Kubernetes version*: A Kubernetes cluster must be running Kubernetes version 1.19 or newer.
 
 * *Image registry*: You must have an existing private Docker image registry to which you can push Astra Control Center build images. You must have the URL of the image registry where you will upload the images, and you must have tagged the images for the private container registry.
 
-* *Cluster state*: Clusters must be running in a healthy state and have at least one online worker node.
+* *Cluster state*: Clusters must be running in a healthy state and are recommended to have at least three online worker nodes.
 
-* *Private clusters* If the cluster is private, it must have the https://cloud.google.com/kubernetes-engine/docs/concepts/private-cluster-concept[master authorized network^] set to allow the Astra IP addresses:
+////
+* *Private clusters* If the cluster is private, the master authorized network must be configured to allow the Astra IP addresses:
 ** 54.164.233.140/32
 ** 3.218.120.204/32
 ** 34.193.99.138/32
+////
 
-* *Compute and memory requirements*:
-
-* *Trident / ONTAP storage configuration*: Astra Control Center requires that Trident version 21.01 or newer already be installed and configured to work with NetApp ONTAP version 9.5 or newer as the storage backend.
+* *Trident / ONTAP storage configuration*: Astra Control Center requires that Trident version 21.01 or newer already be installed and configured to work with NetApp ONTAP version 9.8 or newer as the storage backend.
 
 === Supported apps
 
@@ -62,7 +68,7 @@ No matter which type of app that you use with Astra Control Center, you should a
 Astra Control Center has the following app management requirements:
 
 * *Licensing*: You need an Astra Control Center license to deploy and manage apps using Astra Control Center.
-* *Helm*: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported.
+* *Helm*: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
 
 == Access to the internet
 
@@ -96,7 +102,7 @@ Astra Control Center communicates using the following TCP ports. You should ensu
 |===
 |Product |Port |Protocol |Direction |Purpose
 
-.13+|Astra Control Center
+.11+|Astra Control Center
 |443
 |HTTPS
 |Ingress
@@ -109,7 +115,7 @@ Astra Control Center communicates using the following TCP ports. You should ensu
 
 |n/a
 |HTTPS
-|Ingress
+|Egress
 |Data to Cloud Insights
 
 |n/a
@@ -168,6 +174,7 @@ Astra Control Center communicates using the following TCP ports. You should ensu
 
 Astra Control Center supports recent versions of Firefox, Safari, and Chrome with a minimum resolution of 1280 x 720.
 
+////
 == Integration with your organization
 
 Before you deploy Astra Control Center, you should determine which internal integrations should occur, including the following:
@@ -179,7 +186,7 @@ If you want to integrate these options, you should obtain the following:
 
 * SSO integration confirmation details
 * SMTP server configuration details
-
+////
 == What's next
 
 View the link:quick-start.adoc[quick start^] overview.

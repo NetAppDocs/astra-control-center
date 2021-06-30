@@ -40,7 +40,7 @@ Stop managing the compute that you no longer want to manage from Astra. As a bes
 
 * This action stops your compute from being managed by Astra. It doesn't make any changes to the cluster's configuration and it doesn't delete the cluster.
 
-* Trident won't be uninstalled from the cluster. https://netapp-trident.readthedocs.io/en/stable-v20.04/kubernetes/operations/tasks/managing.html#uninstalling-trident[Learn how to uninstall Trident^].
+* Trident won't be uninstalled from the cluster. https://netapp-trident.readthedocs.io/en/stable-v21.01/kubernetes/operations/tasks/managing.html#uninstalling-trident[Learn how to uninstall Trident^].
 
 .Steps
 

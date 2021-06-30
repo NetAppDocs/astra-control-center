@@ -72,11 +72,11 @@ image:custom-timeframe.png[Shows the custom timeframe selection screen for gener
 image:upload-bundle.png[Shows the upload Support bundle to NSS checkbox.]
 .. Select *Generate Bundle*.
 +
-When the support bundle is ready, a notification appears on the *Accounts* > *Notification* page in the Alerts area, on the *Activity* page, and also in the notifications list (accessible by selecting the bell icon in the top-right side of the UI).
+When the support bundle is ready, a notification appears on the *Accounts* > *Notification* page in the Alerts area, on the *Activity* page, and also in the notifications list (accessible by selecting the icon in the top-right side of the UI).
 +
 If the generation failed or partially completed, an icon appears on the Generate bundle page. Select the icon to see the message.
 
-TIP: The notifications bell icon at the top-right side of the UI provides information about events related to the support bundle, such as when the bundle is successfully created, when the bundle creation fails, when the bundle could not be uploaded, when the bundle could not be downloaded, and so on.
+TIP: The notifications icon at the top-right side of the UI provides information about events related to the support bundle, such as when the bundle is successfully created, when the bundle creation fails, when the bundle could not be uploaded, when the bundle could not be downloaded, and so on.
 
 === If you have an airgapped installation
 
@@ -85,5 +85,17 @@ When the bundle is available for download, it appears next to *Generated* in the
 
 image:support-bundle.png[Shows the Support bundle generated and ready for download.]
 
-. Select the *Download* icon.
-. Manually upload the bundle on NSS.
+. Select the *Download* icon to download the bundle locally.
+. Manually upload the bundle to NSS.
++
+You can use one of the following methods to do this:
+
+* Use https://upload.netapp.com/sg[NetApp Authenticated File Upload (login required)^].
+* Attach the bundle to the case directly on NSS.
+* Use NetApp AIQ.
+
+
+[discrete]
+== Find more information
+* https://kb.netapp.com/Advice_and_Troubleshooting/Miscellaneous/How_to_upload_a_file_to_NetApp[How to upload a file to NetApp (login required)^]
+* https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/How_to_manually_upload_AutoSupport_messages_to_NetApp_in_ONTAP_9[How to manually upload a file to NetApp (login required)^]
