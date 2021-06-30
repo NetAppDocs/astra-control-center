@@ -87,8 +87,15 @@ image:support-bundle.png[Shows the Support bundle generated and ready for downlo
 
 . Select the *Download* icon to download the bundle locally.
 . Manually upload the bundle to NSS.
++
+You can use one of the following methods to do this:
+
+* Use https://upload.netapp.com/sg[NetApp Authenticated File Upload (login required)^]
+* Attach the bundle to the case directly on NSS.
+* Use NetApp AIQ.
+
 
 [discrete]
 == Find more information
-* https://upload.netapp.com/sg[NetApp Authenticated File Upload (login required)^]
 * https://kb.netapp.com/Advice_and_Troubleshooting/Miscellaneous/How_to_upload_a_file_to_NetApp[How to upload a file to NetApp (login required)^]
+* https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/How_to_manually_upload_AutoSupport_messages_to_NetApp_in_ONTAP_9[How to manually upload a file to NetApp (login required)^]
