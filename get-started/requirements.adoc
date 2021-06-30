@@ -23,13 +23,13 @@ Astra Control Center has the following cluster deployment requirements:
 NOTE: OpenShift 4.8 is not supported.
 
 * OpenShift 4.6.8 or 4.7 cluster that has Trident StorageClasses backed by ONTAP 9.8 or newer, with at least 300GB of available capacity
-** 1 controller node with 2CPU, 6GB RAM, and 50GB storage
-** 3 worker nodes with 4CPU, 12GB RAM, 50GB storage
+** 1 controller node with 2 CPU cores, 6GB RAM, and 50GB storage
+** 3 worker nodes with 4 CPU cores, 12GB RAM, and 50GB storage
 ** A load balancer which exposes a reachable IP address
-** This cluster must be the active kubeconfig on your local machine
-** kubectl v1.19 or newer on the local machine
+** This cluster must be the active kubeconfig credential
+** kubectl v1.19 or newer
 ** A method for pointing the FQDN of Astra Control Center to the load balanced IP address
-** Docker engine v20.10 or newer on the local machine (for pushing images to the local registry)
+** Docker engine v20.10 or newer (for pushing images to the local registry)
 * For OpenShift clusters managed using StorageClasses with NFS backends, the superuser and user ID must be set on the backing ONTAP system using the following commands:
 ** `export-policy rule modify -vserver svm0 -policyname default -ruleindex 1 -superuser sys`
 ** `export-policy rule modify -policyname default -ruleindex 1 -anon 65534` (this is the default value)
@@ -68,7 +68,7 @@ No matter which type of app that you use with Astra Control Center, you should a
 Astra Control Center has the following app management requirements:
 
 * *Licensing*: You need an Astra Control Center license to deploy and manage apps using Astra Control Center.
-* *Helm*: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported.
+* *Helm*: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
 
 == Access to the internet
 
