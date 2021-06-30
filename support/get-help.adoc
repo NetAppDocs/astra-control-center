@@ -85,5 +85,10 @@ When the bundle is available for download, it appears next to *Generated* in the
 
 image:support-bundle.png[Shows the Support bundle generated and ready for download.]
 
-. Select the *Download* icon.
-. Manually upload the bundle on NSS.
+. Select the *Download* icon to download the bundle locally.
+. Manually upload the bundle to NSS.
+
+[discrete]
+== Find more information
+* https://upload.netapp.com/sg[NetApp Authenticated File Upload (login required)^]
+* https://kb.netapp.com/Advice_and_Troubleshooting/Miscellaneous/How_to_upload_a_file_to_NetApp[How to upload a file to NetApp (login required)^]
