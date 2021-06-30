@@ -22,6 +22,8 @@ Use any of the following bucket providers:
 * NetApp StorageGRID S3
 * Generic S3
 
+NOTE: While Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon’s S3 support.
+
 You cannot remove a bucket.
 
 A bucket can be in one of these states:
