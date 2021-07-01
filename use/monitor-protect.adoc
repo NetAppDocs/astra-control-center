@@ -133,7 +133,8 @@ You can enable a Fluent Bit endpoint to expose logs from your containers. This e
 .What you'll need
 
 * An Astra Control Center account with *admin* privileges.
-* Astra Control Center is installed and running on a Kubernetes cluster.
+* Astra Control Center installed and running on a Kubernetes cluster.
+* `/var/log/` available to mount.
 
 .Steps
 
