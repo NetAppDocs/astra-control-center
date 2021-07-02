@@ -9,9 +9,5 @@ entries:
     url: /get-started/install_acc.html
   - title: Set up Astra Control Center
     url: /get-started/setup_overview.html
-  - title: Manage compute from Astra Control Center
-    url: /get-started/add-first-cluster.html
-#  - title: Videos
-#    url: /get-started/videos.html
   - title: FAQ
     url: /get-started/faq.html
