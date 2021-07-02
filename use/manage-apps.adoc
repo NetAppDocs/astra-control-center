@@ -132,12 +132,14 @@ If an app has been renamed outside of Astra Control, you can rename it to manage
 
 == Ignore apps
 
-If an app has been discovered, it appears in the Discovered list. Or, you might have apps that you are managing and later decide you no longer want to manage them. If you don't want to manage these apps, you can indicate that they should be ignored.
+If an app has been discovered, it appears in the Discovered list. In this case, you can clean up the Discovered list so that new apps that are newly installed are easier to find. Or, you might have apps that you are managing and later decide you no longer want to manage them. If you don't want to manage these apps, you can indicate that they should be ignored.
+
+Also, you might want to manage apps under one namespace together (Namespace-managed). You can ignore apps that you want to exclude from the namespace.
 
 .Steps
 
 . From the left navigation bar, select *Apps*.
-. Select *Managed* or *Discovered* as the filter.
+. Select *Discovered* as the filter.
 . Select the app.
 . From the Actions menu, select *Ignore*.
 . To unignore, from the Actions menu, select *Unignore*.
@@ -158,7 +160,7 @@ When you no longer want to back up, snapshot, or clone an app, you can unmanage 
 
 == What about system apps?
 
-Astra Control also discovers the system apps running on a Kubernetes cluster. You can view them by filtering the Apps list by All Compute.
+Astra Control also discovers the system apps running on a Kubernetes cluster. You can display system apps by selecting the *Show system apps* checkbox under the Cluster filter in the toolbar.
 
 image:screenshot-system-apps.gif[A screenshot that shows the Show System Apps option that is available when you click All Compute in the Apps screen.]
 
