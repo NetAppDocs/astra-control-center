@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar
 permalink: concepts/architecture.html
-keywords: astra, astra enterprise, architecture
-summary:
+keywords: astra, astra control, architecture, astra control center, kubernetes, netapp, clusters, trident
+summary: Here is an overview of the various components of the Astra Control environment.
 ---
 
 = Architecture and components
@@ -35,3 +35,11 @@ You can complete tasks using different interfaces:
 * *Astra API*: Both Astra Control Service and Astra Control Center use the same Astra API. Using the API, you can perform the same tasks that you would using the UI.
 
 To perform app management, you can also use VMware. Astra manages Kubernetes clusters running within VM guests and enables you to migrate VM apps into Kubernetes clusters that support VM execution.
+
+== For more information
+
+* [Astra Control Service documentation]
+* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API^]
+* https://netapp-trident.readthedocs.io/en/stable-v20.07/index.html[Trident documentation^]
+* https://docs.netapp.com/us-en/cloudinsights/[Cloud Insights documentation^]
+* https://docs.netapp.com/us-en/ontap/index.html[ONTAP documentation^]
