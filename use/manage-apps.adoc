@@ -10,7 +10,7 @@ summary: After you add Kubernetes compute to Astra Control, you can install apps
 :icons: font
 :imagesdir: ../media/use/
 
-After you link:../get-started/add-first-cluster.html[add Kubernetes compute to Astra Control], you can install apps on the cluster (outside of Astra), and then go to the Apps page in Astra Control to start managing the apps and their resources.
+After you link:../get-started/add-first-cluster.html[add Kubernetes compute to Astra Control], you can install apps on the cluster (outside of Astra Control), and then go to the Apps page in Astra Control to start managing the apps and their resources.
 
 == Install apps on your cluster
 
@@ -23,13 +23,6 @@ For help with deploying common applications from Helm charts, refer to the follo
 * link:../solutions/postgres-deploy-from-helm-chart.html[Deploy Postgres from a Helm chart]
 * link:../solutions/jenkins-deploy-from-helm-chart.html[Deploy Jenkins from a Helm chart]
 
-== What about system apps?
-
-Astra Control also discovers the system apps running on a Kubernetes cluster. You can view them by filtering the Apps list by All Compute.
-
-image:screenshot-system-apps.gif[A screenshot that shows the Show System Apps option that is available when you click All Compute in the Apps screen.]
-
-We don't show you these system apps by default because it's rare that you'd need to back them up.
 
 == Manage apps
 
@@ -39,7 +32,7 @@ Astra can clone Helm 3 apps defined either by namespace or by label.
 
 NOTE: Apps deployed with Helm 2 are not supported.
 
-You can perform the following activities with apps:
+You can perform the following activities to manage apps:
 
 *	Manage apps
 ** <<Manage apps by namespace>>
@@ -47,6 +40,8 @@ You can perform the following activities with apps:
 *	<<Rename apps>>
 * <<Ignore apps>>
 *	<<Unmanage apps>>
+
+For instructions on how to manage storage backends using the Astra API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information].
 
 
 === Manage apps by namespace
@@ -160,3 +155,15 @@ When you no longer want to back up, snapshot, or clone an app, you can unmanage 
 . Review the information.
 . Type the app name to confirm.
 . Select *Yes, Unmanage Application*.
+
+== What about system apps?
+
+Astra Control also discovers the system apps running on a Kubernetes cluster. You can view them by filtering the Apps list by All Compute.
+
+image:screenshot-system-apps.gif[A screenshot that shows the Show System Apps option that is available when you click All Compute in the Apps screen.]
+
+We don't show you these system apps by default because it's rare that you'd need to back them up.
+
+== Find more information
+
+* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API]
