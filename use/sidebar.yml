@@ -37,5 +37,7 @@ entries:
         url: /use/manage-credentials.html
       - title: Update an existing license
         url: /use/update-licenses.adoc
+  - title: Monitor and protect infrastructure
+    url: /use/monitor-protect.html       
   - title: Unmanage apps and compute
     url: /use/unmanage.html
