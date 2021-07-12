@@ -10,7 +10,7 @@ summary: Protect your apps by taking snapshots and backups using an automated pr
 :icons: font
 :imagesdir: ../media/use/
 
-Protect your apps by taking snapshots and backups using an automated protection policy or on an ad-hoc basis. You can also https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API] to protect apps.
+Protect your apps by taking snapshots and backups using an automated protection policy or on an ad-hoc basis. You can also https://docs.netapp.com/us-en/astra-automation/index.html[use the Astra API] to protect apps.
 
 NOTE: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
 
@@ -44,14 +44,14 @@ image:screenshot-protection-policy.gif["A screenshot of a sample configuration p
 
 . Click *Review Information*.
 . Click *Set Protection Policy.*
-+
-Here's a video that shows each of these steps.
-+
-video::video-set-protection-policy.mp4[width=848, height=480]
+//+
+//Here's a video that shows each of these steps.
+//+
+//video::video-set-protection-policy.mp4[width=848, height=480]
 
 .Result
 
-Astra implements the data protection policy by creating and retaining snapshots and backups using the schedule and retention policy that you defined.
+Astra Control Center implements the data protection policy by creating and retaining snapshots and backups using the schedule and retention policy that you defined.
 
 == Create a snapshot
 
@@ -70,7 +70,7 @@ image:screenshot-create-snapshot.gif["A screenshot of the app page where you can
 
 .Result
 
-Astra creates a snapshot of the apps.
+Astra Control Center creates a snapshot of the apps.
 
 == Create a backup
 
@@ -92,7 +92,7 @@ image:screenshot-create-backup.gif["A screenshot of the app page where you can c
 
 .Result
 
-Astra creates a backup of the app.
+Astra Control Center creates a backup of the app.
 
 == View snapshots and backups
 
@@ -126,7 +126,7 @@ image:screenshot-delete-snapshot.gif[A screenshot of the Data protection tab for
 
 .Result
 
-Astra deletes the snapshot.
+Astra Control Center deletes the snapshot.
 
 == Delete backups
 
@@ -147,4 +147,4 @@ image:screenshot-delete-backup.gif[A screenshot of the Data protection tab for a
 
 .Result
 
-Astra deletes the backup.
+Astra Control Center deletes the backup.

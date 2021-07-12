@@ -11,9 +11,9 @@ summary: Clone an existing app to create a duplicate app on the same Kubernetes 
 :imagesdir: ../media/use/
 
 [.lead]
-Clone an existing app to create a duplicate app on the same Kubernetes cluster or on another cluster. Cloning can help if you need to move applications and storage from one Kubernetes cluster to another. For example, you might want to move workloads through a CI/CD pipeline and across Kubernetes namespaces. You can also https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API] to clone and migrate apps.
+Clone an existing app to create a duplicate app on the same Kubernetes cluster or on another cluster. Cloning can help if you need to move applications and storage from one Kubernetes cluster to another. For example, you might want to move workloads through a CI/CD pipeline and across Kubernetes namespaces. You can also https://docs.netapp.com/us-en/astra-automation/index.html[use the Astra API] to clone and migrate apps.
 
-When Astra clones an app, it creates a clone of your application configuration and persistent storage.
+When Astra Control Center clones an app, it creates a clone of your application configuration and persistent storage.
 
 .Steps
 
@@ -28,7 +28,7 @@ image:screenshot-create-clone.gif["A screenshot of the app page where you can cl
 * Enter a name.
 * Enter a namespace for the clone.
 * Choose a destination cluster for the clone.
-* Choose whether you want to create the clone from an existing snapshot or backup. If you don't select this option, Astra creates the clone from the app's current state.
+* Choose whether you want to create the clone from an existing snapshot or backup. If you don't select this option, Astra Control Center creates the clone from the app's current state.
 
 . *Source*: If you chose to clone from an existing snapshot or backup, choose the snapshot or backup that you'd like to use.
 +
@@ -41,4 +41,4 @@ image:screenshot-clone-summary.gif[]
 
 .Result
 
-Astra clones that app based on the information that you provided.
+Astra Control Center clones that app based on the information that you provided.
