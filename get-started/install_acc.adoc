@@ -35,6 +35,12 @@ The Astra Control Center installation process does the following:
 .Steps
 
 . Download the Astra Control Center bundle (`astra-control-center-[version].tar.gz`) from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site].
+. Download the zip of Astra Control Center certificates and keys from https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site].
+. (Optional) Use the following command to verify the signature of the bundle:
++
+----
+openssl dgst -sha256 -verify astra-control-center[version].pub -signature <astra-control-center[version].sig astra-control-center[version].tar.gz
+----
 
 . Extract the images:
 +
