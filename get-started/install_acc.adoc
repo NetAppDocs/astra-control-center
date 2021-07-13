@@ -20,7 +20,18 @@ To install Astra Control Center, do the following basic steps:
 To install Astra Control Center, download the installation bundle from the NetApp Support Site and perform a series a commands to install Astra Control Center Operator and Astra Control Center in your environment. You can use this procedure to install Astra Control Center in connected or dark site environments.
 
 .What you'll need
-link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
+* link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
+* From your OpenShift cluster, ensure all cluster operators are in a healthy state (`available` is `true`):
++
+----
+oc get clusteroperators
+----
+
+* From your OpenShift cluster, ensure all API services are in a healthy state (`available` is `true`):
++
+----
+oc get apiservices
+----
 
 .About this task
 The Astra Control Center installation process does the following:
