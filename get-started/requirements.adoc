@@ -30,7 +30,7 @@ NOTE: OpenShift 4.8 is not supported.
 ** A load balancer which exposes a reachable IP address
 ** A method for pointing the FQDN of Astra Control Center to the load balanced IP address
 ** This cluster must be the active kubeconfig credential
-** kubectl version 1.19 or newer
+** `kubectl` utility version 1.19 or newer
 ** Docker Engine v20.10 or newer
 
 [NOTE]
