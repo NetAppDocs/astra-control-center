@@ -35,7 +35,7 @@ NOTE: OpenShift 4.8 is not supported.
 
 [NOTE]
 ======================
-During app cloning, Astra Control Center needs to allow OpenShift to mount volumes and change the ownership of files. Because of this, ONTAP needs to be configured to allow volume operations to complete successfully without permission issues using the following commands:
+During app cloning, Astra Control Center needs to allow OpenShift to mount volumes and change the ownership of files. Because of this, ONTAP needs to be configured to allow volume operations to complete successfully using the following commands:
 
 . `export-policy rule modify -vserver svm0 -policyname default -ruleindex 1 -superuser sys`
 . `export-policy rule modify -policyname default -ruleindex 1 -anon 65534`
