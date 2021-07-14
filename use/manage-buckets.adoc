@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: use/manage-buckets.html
-keywords: object store, bucket, s3
+keywords: object store, bucket, s3, astra, astra control, astra control center, kubernetes
 summary: Adding object store bucket providers is essential if you want to back up your applications and persistent storage of if you want to clone applications across clusters.
 ---
 
@@ -10,9 +10,9 @@ summary: Adding object store bucket providers is essential if you want to back u
 :icons: font
 :imagesdir: ../media/use/
 
-Adding object store bucket providers is essential if you want to back up your applications and persistent storage or if you want to clone applications across clusters. Using Astra Control, add an object store provider as your backup destination.
+Adding object store bucket providers is essential if you want to back up your applications and persistent storage or if you want to clone applications across clusters. Using Astra Control Center, add an object store provider as your backup destination.
 
-You don’t need a bucket if you are cloning your application configuration and persistent storage to the same cluster
+You don’t need a bucket if you are cloning your application configuration and persistent storage to the same cluster.
 
 // Cloning to a different cluster using an existing backup or snapshot  - requires a bucket.
 
@@ -32,13 +32,15 @@ A bucket can be in one of these states:
 * available: The bucket is available for use.
 * removed: The bucket is not currently accessible.
 
-For instructions on how to manage buckets using the Astra API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information].
+TIP: Ensure you use the correct bucket type; otherwise, mixing bucket types can cause errors.
+
+For instructions on how to manage buckets using the Astra API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
 
 == Add a bucket
 
-Admins can add object store buckets. When you use Astra Control to back up or clone your application data, Astra Control stores those backups or clones in the  object store buckets that you define here.
+You can add object store buckets. When you use Astra Control Center to back up or clone your application data, Astra Control stores those backups or clones in the  object store buckets that you define here.
 
-When you add a bucket, Astra Control marks one bucket as the default bucket indicator. The first bucket that you create becomes the default bucket.
+When you add a bucket, Astra Control Center marks one bucket as the default bucket indicator. The first bucket that you create becomes the default bucket.
 
 
 .Steps
@@ -65,7 +67,7 @@ Add S3 access credentials at any time. These credentials must have the necessary
 
 . From the Buckets dialog, select either the *Add* or *Use existing* tab.
 . Enter a name for the credential that distinguishes it from other credentials in Astra Control.
-. Enter the access ID and secret key either by uploading the file or by pasting the contents from your clipboard.
+. Enter the access ID and secret key either by pasting the contents from your clipboard.
 
 == Remove credentials
 
@@ -77,7 +79,7 @@ TIP: The first set of credentials that you add to Astra Control is always in use
 . Select *Account* > *Credentials*.
 .	From the State drop-down list, click the credentials you want to remove.
 . Select *Remove*.
-.	Type the name of the credentials to confirm deletion and then select *Yes, Remove Credentials*.
+.	Type the *remove* to confirm deletion and then select *Yes, remove credentials*.
 
 
 == Edit a bucket
@@ -95,4 +97,4 @@ TIP: You can't modify the bucket type.
 
 == Find more information
 
-* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API]
+* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API^]

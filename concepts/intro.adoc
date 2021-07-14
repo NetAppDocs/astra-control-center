@@ -1,14 +1,14 @@
 ---
 sidebar: sidebar
-permalink: get-started/intro.html
-keywords: introduction, how astra works, how Astra works, what Astra is, concept, understanding, overview
+permalink: concepts/intro.html
+keywords: introduction, how astra works, how Astra works, what Astra is, concept, understanding, overview, astra control
 summary: Astra is a Kubernetes application data lifecycle management service that simplifies operations for stateful applications. Easily back up Kubernetes apps, migrate data to a different cluster, and instantly create working application clones.
 ---
 
 = Intro to Astra Control
 :hardbreaks:
 :icons: font
-:imagesdir: ../media/get-started/
+:imagesdir: ../media/concepts/
 
 Astra Control is a Kubernetes application data lifecycle management service that simplifies operations for stateful applications. Easily back up Kubernetes apps, migrate data to a different cluster, and instantly create working application clones.
 
@@ -17,7 +17,7 @@ Astra Control is a Kubernetes application data lifecycle management service that
 Astra Control offers critical capabilities for Kubernetes application data lifecycle management:
 
 * Manage, protect, and migrate your Kubernetes applications within and across multi-hybrid clouds
-* Manage persistent storage 
+* Manage persistent storage
 * Migrate applications and data from one Kubernetes cluster to another
 * Easily clone an application from production to staging
 * Create application-aware, on-demand snapshots and backups
@@ -25,13 +25,13 @@ Astra Control offers critical capabilities for Kubernetes application data lifec
 * Create a protection policy for each of your apps
 * Use a UI or APIs to implement your backup and migration workflows
 
-link:/concepts/requirements.html[Learn about cluster requirements].
+link:/get-started/requirements.html[Learn about Astra Control requirements].
 
 == Implementations
 Astra Control offers the following implementations:
 
-* Astra Control Service: You can manage Kubernetes clusters and apps in public clouds. This service is run in the cloud.
-* Astra Control Center: You can manage on-premise Kubernetes and VM clusters in your own IT environment using this downloaded implementation.
+* *Astra Control Service*: You can manage Kubernetes clusters and apps in public clouds. This is a NetApp managed service running in the cloud.
+* *Astra Control Center*: You can manage on-premise Kubernetes clusters using this downloaded implementation.
 
 == Supported apps
 
@@ -40,6 +40,10 @@ Astra Control supports all applications running on your Kubernetes clusters.
 NetApp has validated some apps to ensure the safety and consistency of the snapshots and backups. Learn the difference between a link:/concepts/validated-vs-standard.html[validated app and a standard app].
 
 No matter which type of app that you use with Astra Control, you should always test the backup and restore workflow yourself to ensure that you can meet your disaster recovery requirements.
+
+
+TIP: Astra Control itself is not a standard app; it is a "system app."
+
 
 == How Astra Control Service works
 
@@ -56,8 +60,6 @@ At a high level, Astra Control Service works like this:
 ** Uses that new admin role to install NetApp’s Trident on the cluster and to create one or more storage classes.
 ** Uses Trident to provision persistent volumes for your apps.
 * At this point, you can add apps to your cluster. Persistent volumes will be provisioned on the new default storage class.
-** Learn about storage classes for GKE clusters.
-** Learn about storage classes for AKS clusters.
 * You then use Astra Control Service to manage these apps, and start creating snapshots, backups, and clones.
 
 Note that Astra Control Service continually watches your compute for state changes, so it’s aware of any new apps that you add along the way.
@@ -65,8 +67,12 @@ Note that Astra Control Service continually watches your compute for state chang
 
 == How Astra Control Center works
 
-Astra Control Center is downloaded and run privately in your own IT environment.
+Astra Control Center runs locally in your own private cloud.
 
+=== Requirements
+Learn about the link:../get-started/requirements.html[requirements].
+
+=== Installation tasks
 At a high level, Astra Control Center works like this:
 
 * You install Astra Control Center in your local environment. Astra Control Center does this:
@@ -74,25 +80,34 @@ At a high level, Astra Control Center works like this:
 ** Discovers your Trident configuration backed by the ONTAP storage backend.
 +
 For our first go, you'll install the images on an OpenShift registry.
+** Creates a new admin role.
 
-* You do some initial setup tasks such as these:
-** Create an Astra Admin account
-** Set up licensing
-** Add an object store bucket that will store your app backups
-** Add users and configure role-based access control (RBAC)
+Learn more about how to link:../get-started/install_acc.html[install Astra Control Center].
 
-* You add your first Kubernetes compute to Astra Control Center. Astra Control Center then does the following:
+=== Set up tasks
+You do some initial setup tasks such as these:
 
-** Creates a new admin role and Kubernetes service account on the cluster.
+* Set up licensing.
+* Add your first Kubernetes cluster.
+* Add backend storage.
+* Add an object store bucket that will store your app backups.
 
-** Uses that new admin role to install https://netapp-trident.readthedocs.io/[NetApp's Trident^].
+Learn more about how to link:../get-started/setup_overview.html[set up Astra Control Center].
 
-** Uses Trident to provision persistent volumes backed by NetApp ONTAP.
+=== Manage apps
 
-** Creates one or more storage classes.
+At this point, you can add apps to your cluster. Some apps are pre-installed in the cluster being managed and you can use Astra Control Center to manage those apps as well. 
 
-* At this point, you can add apps to your cluster. Persistent volumes will be provisioned on the new default storage class. link:../concepts/choose-class-and-size.html[Learn about storage classes and persistent volume sizes].
+Persistent volumes will be provisioned on the new default storage class. link:../concepts/choose-class-and-size.html[Learn about storage classes and persistent volume sizes].
 
-* You then use Astra Control Center to manage these apps, and start creating snapshots, backups, and clones.
+You then use Astra Control Center to manage these apps, and start creating snapshots, backups, and clones.
 
 Note that Astra Control Center continually watches your compute for state changes, so it's aware of any new apps that you add along the way.
+
+== For more information
+
+* https://docs.netapp.com/us-en/astra-control-service/index.html[Astra Control Service documentation^]
+* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API^]
+* https://netapp-trident.readthedocs.io/en/stable-v21.01/index.html[Trident documentation^]
+* https://docs.netapp.com/us-en/cloudinsights/[Cloud Insights documentation^]
+* https://docs.netapp.com/us-en/ontap/index.html[ONTAP documentation^]

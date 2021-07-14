@@ -1,19 +1,18 @@
 ---
 sidebar: sidebar
 permalink: rest-api/api-intro.html
-keywords: introduction, how astra works, api, rest api
-summary: Astra is a Kubernetes application data lifecycle management service that simplifies operations for stateful applications. Easily back up Kubernetes apps, migrate data to a different cluster, and instantly create working application clones.
+keywords: introduction, astra control, api, rest api
+summary: Astra Control has a REST API that enables you to directly access the Astra Control functionality using a programming language or utility such as Curl.
 ---
 
-= Intro to Astra API
+= Automation using the Astra Control REST API
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/rest-api/
 
-Astra is a Kubernetes application data lifecycle management service that simplifies operations for stateful applications. Easily back up Kubernetes apps, migrate data to a different cluster, and instantly create working application clones. To set up and manage your Kubernetes apps, you can use either the Astra UI or the Astra API. 
+Astra Control has a REST API that enables you to directly access the Astra Control functionality using a programming language or utility such as Curl. You can also manage Astra Control deployments using Ansible and other automation technologies.
 
-== Get started with Astra API
-Coming soon
+To set up and manage your Kubernetes apps, you can use either the Astra UI or the Astra Control API.
 
-== Astra API reference
-Coming soon
+
+To learn more, go to the https://docs.netapp.com/us-en/astra-automation/[Astra automation docs^]. 

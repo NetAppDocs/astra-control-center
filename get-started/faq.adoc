@@ -21,51 +21,38 @@ The following sections provide answers to some additional questions that you mig
 
 *What's the Astra Control URL?*
 
-While you can access Astra Control Service at https://astra.netapp.io, Astra Control Center uses local authentication and a URL specific to each environment.
+Astra Control Center uses local authentication and a URL specific to each environment.
 
-For the URL, in a browser, enter the Fully Qualified Domain Name (FQDN) you set in the spec.astraAddress field in the astra_control_center_min.yaml CRD when you installed Astra Control Center.
+For the URL, in a browser, enter the Fully Qualified Domain Name (FQDN) you set in the spec.astraAddress field in the astra_control_center_min.yaml custom resource definition (CRD) file when you installed Astra Control Center. The email is the value that you set in the spec.email field in the astra_control_center_min.yaml CRD.
 
 *I am using the Trial license. How to I change to the full license?*
 
 You can easily change to a full license by obtaining the NetApp license file (NLF).
 
-.Steps
-1. From the left navigation, select *Account* > *Licenses*.
-2. Select *Add license*.
-3. Browse to the license file you downloaded.
+*Steps*
+. From the left navigation, select *Account* > *License*.
+. Select *Add license*.
+. Browse to the license file you downloaded and select *Add*.
 
-*I am using the Trial license. Can I still use the Persistent Volume Claim functionality in Trident?*
+*I am using the Evaluation license. Can I still manage apps?*
 
-Yes, you can test out the Persistent Volumes functionality with the Trial license.
+Yes, you can test out the managing apps functionality with the Evaluation license.
 
 == Registering Kubernetes clusters
-
-*Can my cluster reside on a shared VPC?*
-
-No, Astra Control can’t manage clusters that reside in a shared VPC. This is a known limitation.
-
-
-*I would like to add different clusters from different projects. Is this supported in Astra Control?*
-
-No, this isn't a supported configuration. Only a single project is supported.
 
 *I need to add worker nodes to my Kubernetes cluster after adding to Astra Control. What should I do?*
 
 New worker nodes can be added to existing pools. These will be automatically discovered by Astra Control. If the new nodes are not visible in Astra Control, check if the new worker nodes are running the supported image type. You can also verify the health of the new worker nodes by using the `kubectl get nodes` command.
 
-*How do I properly unregister, bring down a cluster, and delete the associated volumes?*
+*How do I properly unmanage a cluster?*
 
 .	link:../use/unmanage.html[Unmanage the applications from Astra Control].
-.	link:../use/unmanage.html#stop-managing-compute[Unregister the cluster from Astra Control].
-.	Delete the application namespace from the Kubernetes cluster.
-+
-Alternatively, delete the PVCs and PVs.
-.	Delete the cluster.
+.	link:../use/unmanage.html#stop-managing-compute[Unmanage the cluster from Astra Control].
 
 
 *What happens to my applications and data after removing the Kubernetes cluster from Astra Control?*
 
-Removing a cluster from Astra Control will not make any changes to the cluster's configuration (applications and persistent storage). Any Astra Control snapshots or backups taken of applications on that cluster will be unavailable to restore. Persistent Storage backups created by Astra Control remain within Astra Control, but they are unavailable for restore.
+Removing a cluster from Astra Control will not make any changes to the cluster's configuration (applications and persistent storage). Any Astra Control snapshots or backups taken of applications on that cluster will be unavailable to restore. Persistent storage backups created by Astra Control remain within Astra Control, but they are unavailable for restore.
 
 WARNING: Always remove a cluster from Astra Control before you delete it through any other methods. Deleting a cluster using another tool while it's still being managed by Astra Control can cause problems for your Astra Control account.
 
@@ -75,17 +62,6 @@ Trident will not be uninstalled from a cluster when you remove it from Astra Con
 
 == Managing applications
 
-*My application is not showing up on the Discovered Apps list. What can I check to identify the problem?*
-
-When applications are not listed in *Discovered Apps*, check the status and health of the Kubernetes pod by running `kubectl get pod -A |grep [pod name]`. If the pods are healthy and running, check to see if the application is listed under *Ignored Apps*.
-
-*I don’t see any of my application’s PVCs bound to XYZ. What's wrong?*
-
-The NetApp Trident operator sets a default storage class after it's successfully added to Astra Control. When an application's PVCs are not bound to XYZ, there are a few steps that you can take:
-
-* Run `kubectl get sc` and check the default storage class.
-* Check the yaml file or Helm chart that was used to deploy the application and see if a different storage class is defined.
-* Check to make sure that the worker node image type is Ubuntu and the NFS mount succeeded.
 
 *Can Astra Control deploy an application?*
 
@@ -98,6 +74,9 @@ Any existing backups or snapshots will be deleted. Applications and data remain 
 *Can Astra Control manage an application that is on non-NetApp storage?*
 
 No. While Astra Control can discover applications that are using non-NetApp storage, it can't manage an application that's using non-NetApp storage.
+
+*Should I manage Astra Control itself?*
+No, you should not manage Astra Control itself because it is a "system app."
 
 == Data management operations
 

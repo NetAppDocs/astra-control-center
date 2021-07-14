@@ -1,11 +1,11 @@
 section: rest-api
 title: Automate with REST API
 entries:
-  - title: Overview
-    url: /rest-api/api-intro.html
+  - title: Introduction
+    url: https://docs.netapp.com/us-en/astra-automation/intro/introduction.html
   - title: Get started with the API
-    url: /rest-api/coming-soon.html
-  - title: Examples
-    url: /rest-api/coming-soon.html
+    url: https://docs.netapp.com/us-en/astra-automation/get-started/get-started.html
+  - title: Workflows
+    url: https://docs.netapp.com/us-en/astra-automation/workflows/workflows.html
   - title: API reference
-    url: /rest-api/coming-soon.html
+    url: https://docs.netapp.com/us-en/astra-automation/reference/api_reference.html
