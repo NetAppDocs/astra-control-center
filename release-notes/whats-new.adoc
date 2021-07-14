@@ -5,17 +5,27 @@ keywords: what's new, bugs, bug fixes, new features, enhancements
 summary: NetApp periodically updates Astra Control Center to bring you new features, enhancements, and bug fixes.
 ---
 
-= What's new with Astra Control Center
+= What's in this release of Astra Control Center
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/release-notes/
 
-NetApp periodically updates Astra Enterprise to bring you new features, enhancements, and bug fixes.
+We're pleased to announce the release of Astra Control Center.
 
-== 30 July 2021
+== 29 July 2021
 
-We're pleased to announce Astra Enterprise.
+Initial release of Astra Control Center.
 
-* (high level points)
-* (high level points)
-* (high level points)
+* link:../get-started/intro.html#features[What it is]
+* link:../concepts/architecture.html[Understand architecture and components]
+* link:../get-started/requirements.html[What it takes to get started]
+* link:../get-started/install_acc.html[Get up] and link:../get-started/setup_overview.html[running]
+* link:../use/manage-apps.html[Manage], link:../use/protect-apps.html[protect], and deploy apps
+* link:../use/manage-buckets.html[Manage buckets] and link:../use/manage-backend.html[storage backends]
+* link:../use/manage-users.html[Manage accounts]
+* link:../rest-api/api-intro.html[Automate with API]
+
+== Find more information
+
+* link:release-notes/known-issues.html[Known issues for this release]
+* link:release-notes/known-limitations.html[Known limitations for this release]
