@@ -44,7 +44,7 @@ During app cloning, Astra Control Center needs to allow OpenShift to mount volum
 NOTE: If you plan to add a second OpenShift 4.6 or 4.7 cluster as a managed compute resource, you need to ensure that the Trident Volume Snapshot feature is enabled. See the official Trident https://netapp-trident.readthedocs.io/en/stable-v21.04/kubernetes/operations/tasks/volumes/snapshots.html?highlight=volumesnapshot#on-demand-volume-snapshots[instructions] to enable and test Volume Snapshots with Trident.
 
 ==== Non-OpenShift Kubernetes cluster
- The Kubernetes cluster you use for Astra Control Center should already be deployed in your environment and you should have permissions to manage the cluster. This cluster should be preconfigured with the following:
+The Kubernetes cluster you use for Astra Control Center should already be deployed in your environment and you should have permissions to manage the cluster. This cluster should be preconfigured with the following:
 
 * A load balancer with a static IP address or IP address range
 * An internal domain name that is routed from an internal DNS server and points to the static IP address or IP address range of the cluster (the DNS name should point to the load-balanced IP address or addresses using the internal DNS server)
