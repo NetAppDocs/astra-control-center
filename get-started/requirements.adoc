@@ -55,7 +55,7 @@ NOTE: OpenShift 4.8 is not supported.
 ** 34.193.99.138/32
 ////
 
-* *Trident / ONTAP storage configuration*: Astra Control Center requires that Trident version 21.01 or newer already be installed and configured to work with NetApp ONTAP version 9.8 or newer as the storage backend.
+* *Trident / ONTAP storage configuration*: Astra Control Center requires that Trident version 21.01 already be installed and configured to work with NetApp ONTAP version 9.8 or newer as the storage backend.
 
 === Supported apps
 
