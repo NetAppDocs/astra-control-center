@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: use/update_licenses.html
+permalink: use/update-licenses.html
 keywords: manage, licenses, licensing, Astra Control Center, add license, update license
 summary: You can convert an evaluation license to a full license, or you can update an existing evaluation or full license with a new license.
 ---
