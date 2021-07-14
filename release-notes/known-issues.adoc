@@ -12,6 +12,11 @@ summary: Known issues identify problems that might prevent you from using this r
 
 Known issues identify problems that might prevent you from using this release of the product successfully.
 
+== Reusing buckets impacted by
+// ASTRACTL-9296 (Low probability)
+If you try to reuse a bucket after changing Astra Control Center installation configuration, backup and restore will fail. You must use a different bucket or completely clean out the previously used bucket.
+
+
 == Clone performance impacted by large persistent volumes
 
 Clones of very large and consumed persistent volumes might be intermittently slow, dependent on cluster access to the object store. If the clone is hung and no data has been copied for more than 30 minutes, Astra Enterprise terminates the clone action.
