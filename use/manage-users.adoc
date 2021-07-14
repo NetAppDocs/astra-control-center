@@ -10,7 +10,7 @@ summary: Add users to your Astra Control Center system and remove users that sho
 :icons: font
 :imagesdir: ../media/use/
 
-You can add, remove, and edit users of your Astra Control Center installation.
+You can add, remove, and edit users of your Astra Control Center installation using the Astra Control Center UI. You can also https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API] to manage users.
 
 == Add users
 
@@ -29,7 +29,6 @@ The user will need to change the password upon first login.
 +
 Note the following:
 +
-* The email address must match the email address that the user used to sign up to Cloud Central. (Is this true of Astra CC?)
 * Each role provides the following permissions:
 ** An *Owner* has Admin permissions and can delete accounts.
 ** An *Admin* has Member permissions and can invite other users.
@@ -54,7 +53,7 @@ Astra Control Center updates the user's permissions based on the new role that y
 
 == Remove users
 
-Users with the Owner role can remove other users from the account at any time.
+Users with the Owner or Admin role can remove other users from the account at any time.
 
 .Steps
 

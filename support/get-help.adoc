@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: support/get-help.html
-keywords: get help, get support, knowledgebase, slack, phone, web, ticket, contact support, support ticket
+keywords: get help, get support, knowledgebase, slack, phone, web, ticket, contact support, support ticket, support bundle
 summary: NetApp provides support for Astra in a variety of ways. Extensive free self-support options are available 24x7, such as knowledgebase (KB) articles and a Slack channel. Your Astra account includes remote technical support via web ticketing.
 ---
 
@@ -12,15 +12,16 @@ summary: NetApp provides support for Astra in a variety of ways. Extensive free 
 
 NetApp provides support for Astra in a variety of ways. Extensive free self-support options are available 24x7, such as knowledgebase (KB) articles and a Slack channel. Your Astra account includes remote technical support via web ticketing.
 
-TIP: If you have an Astra Enterprise Evaluation license, you can get technical support. 
+IMPORTANT: If you have an evaluation license, you can get technical support. However, case creation via NetApp Support Site (NSS) is not available. You can get in touch with Support via the feedback option or use the Slack channel for self service.
 
-You must first link:register-support.html[activate support for your NetApp serial number] in order to use these non self-service support options. A NetApp Support Site (NSS) SSO account is required for chat and web ticketing along with case management.
+
+You must first link:../get-started/setup_overview.html#add-or-update-a-license[activate support for your NetApp serial number] in order to use these non self-service support options. A NetApp Support Site (NSS) SSO account is required for chat and web ticketing along with case management.
 
 You can access support options from the Astra UI by selecting the *Support* tab from the main menu.
 
-image:screenshot-support.gif[]
+image:astracc-support.png[Shows the Astra Control Center Support page.]
 
-== Self support options
+== Self-support options
 
 These options are available for free 24x7:
 
@@ -36,64 +37,65 @@ This is the doc site that you're currently viewing.
 +
 Go to the containers channel in thePub workspace to connect with peers and experts.
 
-* Get support bundle information
-+ Generate a support bundle to provide to NetApp Technical Support for troubleshooting.
+* Generate support bundles to provide to NetApp Support for troubleshooting
 
 * Feedback email
 +
 Send an email to astra.feedback@netapp.com to let us know your thoughts, ideas, or concerns.
 
-== Get support bundle information from Astra Enterprise
-To troubleshoot issues, you might want to generate a support bundle and provide it to NetApp Technical Support.
+== Generate support bundle to provide to NetApp Support
 
-The Astra Enterprise support bundle includes the following information:
-* TBD
-* Trident information
+Astra Control Center enables the admin user to generate bundles, which include information useful to NetApp Support, including logs, events for all the components of the Astra deployment, metrics, and topology information about the clusters and apps under management. This feature is enabled by default. If you are connected to the Internet, you can upload support bundles to NetApp Support Site (NSS) directly from the Astra Control Center UI.
 
+Before you begin, check to see whether your external connections are configured to enable upload of bundles to NSS.
 
-Before you begin, you might want to check to see whether your external connections are configured to enable uploads of support bundles to NetApp Support.
 . Select *Accounts* > *Connections*.
 . Check the external connections in *Connection settings*.
 
-
 .Steps
-. From the Astra UI left navigation, select *Support*.
-. In the Support bundle tile, select *Generate*.
-. From the Generate a Support Bundle page, select the timeframe of 24 hours, 48 hours, or 7 days.
-. Check the *Upload the bundle to the NetApp Support Site*.
-. Select *Generate Bundle*.
+. Create a case on the NSS portal using the serial number listed on the *Support* page of the Astra UI.
+. Perform the following steps for generating the support bundle by using the Astra Control Center UI:
+.. On the *Support* page, in the Support bundle tile, select *Generate*.
 +
-When the support bundle is ready, a notification appears on the *Accounts* > *Notification* page in the Alerts area.
+image:support bundle.png[Shows the Support bundle tile from where you can select the button to generate the support bundle.]
+.. In the *Generate a Support Bundle* window, select the timeframe.
++
+You can choose between quick or custom timeframes.
++
+NOTE: You can choose a custom date range as well as specify a custom time period during the date range.
++
+image:custom-timeframe.png[Shows the custom timeframe selection screen for generating Support bundles.]
 
+.. Select *Confirm*.
+.. Check the *Upload the bundle to the NetApp Support Site when generated*.
++
+image:upload-bundle.png[Shows the upload Support bundle to NSS checkbox.]
+.. Select *Generate Bundle*.
++
+When the support bundle is ready, a notification appears on the *Accounts* > *Notification* page in the Alerts area, on the *Activity* page, and also in the notifications list (accessible by selecting the icon in the top-right side of the UI).
++
 If the generation failed or partially completed, an icon appears on the Generate bundle page. Select the icon to see the message.
-. Select the *Download* icon.
+
+TIP: The notifications icon at the top-right side of the UI provides information about events related to the support bundle, such as when the bundle is successfully created, when the bundle creation fails, when the bundle could not be uploaded, when the bundle could not be downloaded, and so on.
+
+=== If you have an airgapped installation
+
+If you have an airgrapped installation, perform the following steps after the Support bundle is generated.
+When the bundle is available for download, it appears next to *Generated* in the *Support Bundles* section of the *Support* page as shown:
+
+image:support-bundle.png[Shows the Support bundle generated and ready for download.]
+
+. Select the *Download* icon to download the bundle locally.
+. Manually upload the bundle to NSS.
++
+You can use one of the following methods to do this:
+
+* Use https://upload.netapp.com/sg[NetApp Authenticated File Upload (login required)^].
+* Attach the bundle to the case directly on NSS.
+* Use NetApp AIQ.
 
 
-
-== Subscription support for Astra Service
-
-In addition to the self-support options above, you can work with a NetApp Support Engineer to resolve any issues after you link:register-support.html[activate support for your NetApp serial number].
-
-Once your Astra serial number is activated, you can access NetApp technical support resources by creating a https://mysupport.netapp.com/site/cases/mine/create[Support ticket].
-
-Select *Cloud Data Services > Astra*.
-
-Use your "941" serial number to open the web ticket. link:register-support.html[Learn more about your serial number].
-
-image:screenshot-web-ticket.gif[]
-
-//* https://www.netapp.com/us/contact-us/support.aspx[Phone]
-//+
-//For reporting new issues or calling about existing tickets. This method is best for P1 or immediate assistance.
-
-//* https://www.netapp.com/us/forms/sales-contact.aspx[Contact sales]
-//+
-//You can also request sales support.
-
-//Your Astra serial number is visible within the service from the Support menu option. If you are experiencing issues accessing the service and have registered a serial number with NetApp previously, you can contact projectastra.support@netapp.com for assistance. You can also view your Astra serial number from the NetApp Support Site as follows:
-
-//. Login to https://mysupport.netapp.com/[mysupport.netapp.com].
-
-//.	From the Products > My Products menu tab, select the Product Family *SaaS Cloud Volume* to locate all your registered serial numbers:
-
-//image::diagram_support_list_registered_systems.png[View Installed Systems]
+[discrete]
+== Find more information
+* https://kb.netapp.com/Advice_and_Troubleshooting/Miscellaneous/How_to_upload_a_file_to_NetApp[How to upload a file to NetApp (login required)^]
+* https://kb.netapp.com/Advice_and_Troubleshooting/Data_Storage_Software/ONTAP_OS/How_to_manually_upload_AutoSupport_messages_to_NetApp_in_ONTAP_9[How to manually upload a file to NetApp (login required)^]

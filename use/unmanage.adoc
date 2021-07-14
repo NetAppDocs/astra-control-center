@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar
 permalink: use/unmanage.html
-keywords: unmanage app, remove app, stop managing app, stop managing clusters, unmanage cluster, remove cluster
-summary: Remove any apps or compute that you no longer want to manage from Astra.
+keywords: unmanage app, remove app, stop managing app, stop managing clusters, unmanage cluster, remove cluster, kubernetes, astra, astra control
+summary: Remove any apps or compute that you no longer want to manage from Astra Control.
 ---
 
 = Unmanage apps and compute
@@ -10,11 +10,11 @@ summary: Remove any apps or compute that you no longer want to manage from Astra
 :icons: font
 :imagesdir: ../media/use/
 
-Remove any apps or compute that you no longer want to manage from Astra.
+Remove any apps or compute that you no longer want to manage from Astra Control.
 
 == Stop managing an app
 
-Stop managing apps that you no longer want to back up, snapshot, or clone from Astra.
+Stop managing apps that you no longer want to back up, snapshot, or clone from Astra Control.
 
 * Any existing backups and snapshots will be deleted.
 
@@ -22,49 +22,35 @@ Stop managing apps that you no longer want to back up, snapshot, or clone from A
 
 .Steps
 
-. Click *Apps*.
+. From the left navigation bar, select *Apps*.
+. Select the checkbox for the apps that you no longer want to manage.
+. From the *Action* menu, select *Unmanage*.
+. Type the app name to confirm.
+. Confirm that you want to unmanage the apps and then select *Yes, Unmanage Application*.
 
-. Click the checkbox for the apps that you no longer want to manage.
-
-. Click the *Action* drop-down and select *Unmanage application/s*.
-
-. Confirm that you want to unmanage the apps and then click *Yes, Unmanage Applications*.
 
 .Result
 
-Astra stops managing the app.
+Astra Control stops managing the app.
 
 == Stop managing compute
 
-Stop managing the compute that you no longer want to manage from Astra. As a best practice, we recommend that you remove compute from Astra before you delete it through GCP.
+Stop managing the compute that you no longer want to manage from Astra Control.
 
-* This action stops your compute from being managed by Astra. It doesn't make any changes to the cluster's configuration and it doesn't delete the cluster.
+* This action stops your compute from being managed by Astra Control. It doesn't make any changes to the cluster's configuration and it doesn't delete the cluster.
 
-* Trident won't be uninstalled from the cluster. https://netapp-trident.readthedocs.io/en/stable-v20.04/kubernetes/operations/tasks/managing.html#uninstalling-trident[Learn how to uninstall Trident^].
+* Trident won't be uninstalled from the cluster. https://netapp-trident.readthedocs.io/en/stable-v21.01/kubernetes/operations/tasks/managing.html#uninstalling-trident[Learn how to uninstall Trident^].
 
 .Steps
 
-. Click *Compute*.
+. From the left navigation bar, select *Compute*.
 
-. Click the checkbox for the compute that you no longer want to manage.
+. Select the checkbox for the compute that you no longer want to manage.
 
-. Click the *Actions* drop-down and select *Unmanage compute/s*.
+. From the *Actions* menu, select *Unmanage compute/s*.
 
 . Confirm that you want to unmanage the compute and then click *Yes, Unmanage Compute*.
 
 .Result
 
-Astra stops managing the compute.
-
-== Deleting clusters from your cloud provider
-
-Before you delete a Kubernetes cluster that has persistent volumes (PV) residing on NetApp storage classes, you need to first delete the persistent volume claims (PVC) following one of the methods below. Deleting the PVC and PV before deleting the cluster ensures that you don’t receive unexpected bills from your cloud provider.
-
-* *Method #1*: Delete the application workload namespaces from the cluster. Do _not_ delete the Trident namespace.
-* *Method #2*: Delete the PVCs and the pods, or the deployment where the PVs are mounted.
-
-When you manage a Kubernetes cluster from Astra, applications on that cluster use Cloud Volumes Service as the backend storage for persistent volumes. If you delete the cluster from your cloud provider without first removing the PVs, the backend volumes are _not_ deleted along with the cluster.
-
-Using one of the above methods will delete the corresponding PVs from your cluster. Make sure that there are no PVs residing on NetApp storage classes on the cluster before you delete it.
-
-If you didn’t delete the persistent volumes before you deleted the cluster, then you’ll need to manually delete the backend volumes from Cloud Volumes Service for Google Cloud.
+Astra Control stops managing the compute.
