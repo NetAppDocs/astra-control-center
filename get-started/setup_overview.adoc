@@ -32,7 +32,7 @@ NOTE: To update an existing evaluation or full license, see link:../use/update-l
 * <<Add a full license>>
 
 === Add an evaluation license
-You can try Astra Control Center with an evaluation license, which lets you use Astra Control Center for 90 days from the date you downloaded Astra Control Center. You need to work with your NetApp sales contact to obtain an evaluation license, which is associated with your NetApp Support account.
+You can try Astra Control Center with an evaluation license, which lets you use Astra Control Center for 90 days from the date you activate the license. You need to work with your NetApp sales contact to obtain an evaluation license, which is associated with your NetApp Support account.
 
 .Steps
 . Log in to the Astra Control Center UI.
