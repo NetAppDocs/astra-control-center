@@ -19,19 +19,19 @@ A Kubernetes cluster must meet the following requirements so you can discover an
 === Cluster deployment
 Astra Control Center has the following cluster deployment requirements.
 
-*OpenShift cluster*: If your Kubernetes cluster is managed as part of the Red Hat OpenShift Container Platform, Astra Control Center requires the following:
+==== OpenShift cluster
+If your Kubernetes cluster is managed as part of the Red Hat OpenShift Container Platform, Astra Control Center requires an OpenShift 4.6.8 or 4.7 cluster that has Trident StorageClasses backed by ONTAP 9.8 or newer, with the following attributes:
+
+* At least 300GB of available storage capacity
+* 1 controller node with 2 CPU cores, 6GB RAM, and 50GB storage
+* At least 3 worker nodes with 4 CPU cores, 12GB RAM, and 50GB storage
+* A load balancer which exposes a reachable IP address
+* A method for pointing the FQDN of Astra Control Center to the load balanced IP address
+* This cluster must be the active kubeconfig credential
+* Kubernetes version 1.19 or newer
+* Docker Engine v20.10 or newer
 
 NOTE: OpenShift 4.8 is not supported.
-
-* OpenShift 4.6.8 or 4.7 cluster that has Trident StorageClasses backed by ONTAP 9.8 or newer, with the following attributes:
-** At least 300GB of available storage capacity
-** 1 controller node with 2 CPU cores, 6GB RAM, and 50GB storage
-** 3 worker nodes with 4 CPU cores, 12GB RAM, and 50GB storage
-** A load balancer which exposes a reachable IP address
-** A method for pointing the FQDN of Astra Control Center to the load balanced IP address
-** This cluster must be the active kubeconfig credential
-** `kubectl` utility version 1.19 or newer
-** Docker Engine v20.10 or newer
 
 [NOTE]
 ======================
@@ -41,17 +41,19 @@ During app cloning, Astra Control Center needs to allow OpenShift to mount volum
 . `export-policy rule modify -policyname default -ruleindex 1 -anon 65534`
 ======================
 
-* *Non-OpenShift Kubernetes cluster*: The Kubernetes cluster you use for Astra Control Center should already be deployed in your environment and you should have permissions to manage the cluster. This cluster should be preconfigured with the following:
-** A load balancer with a static IP address or IP address range
-** An internal domain name that is routed from an internal DNS server and points to the static IP address or IP address range of the cluster (the DNS name should point to the load-balanced IP address or addresses using the internal DNS server)
-** A default storage provider in the Kubernetes cluster that is backed by a Trident storage class to work with ONTAP
-** A single Trident StorageClass configured as the default
+NOTE: If you plan to add a second OpenShift 4.6 or 4.7 cluster as a managed compute resource, you need to ensure that the Trident Volume Snapshot feature is enabled. See the official Trident https://netapp-trident.readthedocs.io/en/stable-v21.04/kubernetes/operations/tasks/volumes/snapshots.html?highlight=volumesnapshot#on-demand-volume-snapshots[instructions] to enable and test Volume Snapshots with Trident.
 
-* *Kubernetes version*: A Kubernetes cluster must be running Kubernetes version 1.19 or newer.
+==== Non-OpenShift Kubernetes cluster
+ The Kubernetes cluster you use for Astra Control Center should already be deployed in your environment and you should have permissions to manage the cluster. This cluster should be preconfigured with the following:
+
+* A load balancer with a static IP address or IP address range
+* An internal domain name that is routed from an internal DNS server and points to the static IP address or IP address range of the cluster (the DNS name should point to the load-balanced IP address or addresses using the internal DNS server)
+* A default storage provider in the Kubernetes cluster that is backed by a Trident storage class to work with ONTAP
+* A single Trident StorageClass configured as the default
+* Kubernetes version 1.19 or newer
+* At least 3 worker nodes
 
 * *Image registry*: You must have an existing private Docker image registry to which you can push Astra Control Center build images. You must have the URL of the image registry where you will upload the images, and you must have tagged the images for the private container registry.
-
-* *Cluster state*: Clusters must be running in a healthy state and are recommended to have at least three online worker nodes.
 
 ////
 * *Private clusters* If the cluster is private, the master authorized network must be configured to allow the Astra IP addresses:
