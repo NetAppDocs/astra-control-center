@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: get-started/setup_overview.html
 keywords: set up, setup, Astra Control Center, add license, add cluster, import storage, add bucket
-summary: After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up licenses, add clusters, important storage, and add buckets.
+summary: After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up a license, add clusters, manage storage, and add buckets.
 ---
 
 = Set up Astra Control Center
@@ -10,7 +10,7 @@ summary: After you install Astra Control Center, log in to the UI, and change yo
 :icons: font
 :imagesdir: ../media/get-started/
 
-After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up licenses, add clusters, important storage, and add buckets.
+After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up a license, add clusters, manage storage, and add buckets.
 
 .Tasks
 * <<Add a license for Astra Control Center>>
@@ -68,9 +68,9 @@ image:cluster-creds.png[Shows the screen to upload kubeconfig.yaml for cluster.]
 +
 IMPORTANT: If you create your own `kubeconfig` file, you should define only *one* context element in it. See https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[Kubernetes documentation^] for information about creating `kubeconfig` files.
 
-. Provide a credential name.
+. Provide a credential name. By default, the credential name is auto-populated as the name of the cluster.
 . Select *Configure storage*.
-. Select the storage class to be used for this Kubernetes cluster, and select *Review information*.
+. Select the storage class to be used for this Kubernetes cluster, and select *Review*.
 +
 NOTE: You should select a Trident storage class backed by ONTAP storage.
 +
@@ -79,7 +79,7 @@ image:cluster-storage.png[Shows the storage class to be used for the cluster.]
 
 .Result
 
-The cluster enters the *Discovering* status and then changes to *Available*. You have successfully added a Kubernetes cluster and are now managing it in Astra Control Center.
+The cluster enters the *Discovering* status and then changes to *Running*. You have successfully added a Kubernetes cluster and are now managing it in Astra Control Center.
 
 == Import a storage backend
 
@@ -133,14 +133,14 @@ When you add a bucket, Astra Control marks one bucket as the default bucket indi
 
 .Steps
 
-. In the left navigation area, select Buckets.
-.. Select Add.
+. In the left navigation area, select *Buckets*.
+.. Select *Add*.
 .. Select the bucket type.
 .. Enter the existing bucket name and optional description.
 +
 TIP: The bucket name and description appear as a backup location that you can choose later when you’re creating a backup. The name also appears during protection policy configuration.
 
-.. Enter the or IP address of the S3 server.
+.. Enter the name or IP address of the S3 server.
 .. If you want this bucket to be the default bucket for all backups, check the `Make this bucket the default bucket for this private cloud` option.
 +
 NOTE: This option does not appear for the first bucket you create.
@@ -155,7 +155,7 @@ Add S3 access credentials at any time.
 
 . From the Buckets dialog, select either the *Add* or *Use existing* tab.
 .. Enter a name for the credential that distinguishes it from other credentials in Astra Control.
-.. Enter the access ID and secret key either by uploading the file or by pasting the contents from your clipboard.
+.. Enter the access ID and secret key by pasting the contents from your clipboard.
 
 == What's next?
 

@@ -100,7 +100,7 @@ metadata:
   name: astra
 spec:
   astraVersion: "[version]"
-  astraAddress: "codev.astra.netapp.io"
+  astraAddress: "astra-west.yourco.com"
   autoSupport:
     enrolled: true
   email: "[nednetapp@netapp.com]"
