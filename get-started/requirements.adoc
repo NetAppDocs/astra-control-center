@@ -34,8 +34,8 @@ NOTE: OpenShift 4.8 is not supported.
 ** Docker Engine v20.10 or newer
 
 NOTE: During app cloning, Astra Control Center needs to allow OpenShift to mount volumes and change the ownership of files. Because of this, ONTAP needs to be configured to allow volume operations to complete successfully without permission issues using the following commands:
-`export-policy rule modify -vserver svm0 -policyname default -ruleindex 1 -superuser sys`
-`export-policy rule modify -policyname default -ruleindex 1 -anon 65534`
+* `export-policy rule modify -vserver svm0 -policyname default -ruleindex 1 -superuser sys`
+* `export-policy rule modify -policyname default -ruleindex 1 -anon 65534`
 
 * *Non-OpenShift Kubernetes cluster*: The Kubernetes cluster you use for Astra Control Center should already be deployed in your environment and you should have permissions to manage the cluster. This cluster should be preconfigured with the following:
 ** A load balancer with a static IP address or IP address range
