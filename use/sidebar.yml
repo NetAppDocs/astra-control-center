@@ -39,3 +39,5 @@ entries:
     url: /use/manage-backend.html
   - title: Unmanage apps and compute
     url: /use/unmanage.html
+  - title: Update an existing license
+    url: /use/update-licenses.html
