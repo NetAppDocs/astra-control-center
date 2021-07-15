@@ -1,11 +1,5 @@
 section: rest-api
 title: Automate with REST API
 entries:
-  - title: Overview
+  - title: Introduction
     url: /rest-api/api-intro.html
-  - title: Get started with the API
-    url: /rest-api/coming-soon.html
-  - title: Examples
-    url: /rest-api/coming-soon.html
-  - title: API reference
-    url: /rest-api/coming-soon.html

@@ -12,16 +12,18 @@ summary: Get started with Astra in a few steps.
 
 This page provides a high-level overview of the steps that you need to complete to get started with Astra Control Center. The links within each step take you to a page that provides more details.
 
+Try it out! If you want to try Astra Control Center, you can use a 90-day evaluation license.
+
 ==== image:number1.png[Number 1] Review Kubernetes cluster requirements
 
 [role="quick-margin-list"]
-* Astra supports Kubernetes clusters with Trident support of an ONTAP storage backend.
-* Clusters must be running a healthy state, with at least one online worker node.
-* The cluster must be running Kubernetes version 1.17 or later.
+* Astra works with Kubernetes clusters with a Trident-configured ONTAP storage backend.
+* Clusters must be running a healthy state, with at least three online worker node.
+* The cluster must be running Kubernetes.
 
 
 [role="quick-margin-para"]
-link:../concepts/requirements.html[Learn more about the Kubernetes cluster requirements].
+link:../get-started/requirements.html[Learn more about the Astra Control Center requirements].
 
 ==== image:number2.png[Number 2] Download and install Astra Control Center
 [role="quick-margin-list"]
@@ -29,11 +31,11 @@ link:../concepts/requirements.html[Learn more about the Kubernetes cluster requi
 * Install Astra Control Center in your local environment and let Astra Control Center do this:
 ** Discover your Kubernetes clusters.
 ** Discover your Trident configuration backed by the ONTAP storage backend.
-
-For our first release, you'll install the images on an OpenShift registry. We'll add more options later.
++
+For our first release, you'll install the images on an OpenShift registry or use your local registry.
 
 [role="quick-margin-para"]
-link:../get-started/install_acc.html[Learn more about deploying Astra Control Center].
+link:../get-started/install_acc.html[Learn more about installing Astra Control Center].
 
 ==== image:number3.png[Number 3] Complete some initial setup tasks
 
@@ -44,16 +46,25 @@ link:../get-started/install_acc.html[Learn more about deploying Astra Control Ce
 * Import an ONTAP storage backend.
 * Optionally, add an object store bucket that will store your app backups.
 
-After you finish setting up Astra Control Center, here's what's next:
-
-* Manage an app
-* Optionally, connect to NetApp Cloud Insights to display metrics on the health of your system, capacity, and throughput inside the Astra Control Center UI.
-
 
 [role="quick-margin-para"]
 link:../get-started/setup_overview.html[Learn more about the initial setup process].
 
+==== image:number4.png[Number 4] Use Astra Control Center
+[role="quick-margin-list"]
+After you finish setting up Astra Control Center, here's what you might do next:
+
+[role="quick-margin-list"]
+* Manage an app. link:../use/manage-apps.html[Learn more about how to manage apps].
+
+* Optionally, connect to NetApp Cloud Insights to display metrics on the health of your system, capacity, and throughput inside the Astra Control Center UI. link:../use/monitor-protect.html[Learn more about connecting to Cloud Insights].
+
+==== image:number5.png[Number 5] Continue from this Quick Start
+
+[role="quick-margin-para"]
+link:../get-started/install_acc.html[Install Astra Control Center].
+
 
 == Find more information
 
-* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API]
+* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API^]

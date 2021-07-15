@@ -54,3 +54,5 @@ entries:
 >>>>>>> 675df2b4cc8ab2ee0ffcc40a2fc12280250e2824
   - title: Unmanage apps and compute
     url: /use/unmanage.html
+  - title: Update an existing license
+    url: /use/update-licenses.html
