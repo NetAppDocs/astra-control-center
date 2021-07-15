@@ -1,17 +1,7 @@
 section: use
 title: Use Astra
 entries:
-<<<<<<< HEAD
-  - title: Log in
-    url: /use/log-in.html
-  - title: Manage buckets
-    url: /use/manage-buckets.html
-  - title: Manage the storage backend
-    url: /use/manage-backend.html
-  - title: Manage and protect apps
-=======
   - title: Manage apps
->>>>>>> 675df2b4cc8ab2ee0ffcc40a2fc12280250e2824
     entries:
       - title: Start managing apps
         url: /use/manage-apps.html
@@ -43,16 +33,13 @@ entries:
         url: /use/manage-credentials.html
       - title: Update an existing license
         url: /use/update-licenses.adoc
-<<<<<<< HEAD
-  - title: Monitor and protect infrastructure
-    url: /use/monitor-protect.html       
-=======
   - title: Manage buckets
     url: /use/manage-buckets.html
   - title: Manage the storage backend
     url: /use/manage-backend.html
->>>>>>> 675df2b4cc8ab2ee0ffcc40a2fc12280250e2824
   - title: Unmanage apps and compute
     url: /use/unmanage.html
   - title: Update an existing license
     url: /use/update-licenses.html
+  - title: Monitor and protect your infrastructure
+    url: /use/monitor-protect.html  
