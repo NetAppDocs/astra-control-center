@@ -23,10 +23,10 @@ Astra Control Center has the following cluster deployment requirements.
 
 * *Trident / ONTAP storage configuration*: Astra Control Center requires that Trident version 21.01 already be installed and configured to work with NetApp ONTAP version 9.8 or newer as the storage backend. Astra Control Center supports the following ONTAP drivers provided by Trident:
 
-* ontap-nas
-* ontap-nas-flexgroup
-* ontap-san
-* ontap-san-economy
+** ontap-nas
+** ontap-nas-flexgroup
+** ontap-san
+** ontap-san-economy
 
 ==== OpenShift clusters
 If your Kubernetes cluster is managed as part of the Red Hat OpenShift Container Platform, Astra Control Center requires an OpenShift 4.6.8 or 4.7 cluster that has Trident StorageClasses backed by ONTAP 9.8 or newer, with the following attributes:
