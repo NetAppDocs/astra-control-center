@@ -15,7 +15,7 @@ After you install Astra Control Center, log in to the UI, and change your passwo
 .Tasks
 * <<Add a license for Astra Control Center>>
 * <<Add cluster>>
-* <<Import a storage backend>>
+* <<Add a storage backend>>
 * <<Add a bucket>>
 
 == Add a license for Astra Control Center
@@ -81,45 +81,44 @@ image:cluster-storage.png[Shows the storage class to be used for the cluster.]
 
 The cluster enters the *Discovering* status and then changes to *Running*. You have successfully added a Kubernetes cluster and are now managing it in Astra Control Center.
 
-== Import a storage backend
+== Add a storage backend
 
-Add storage for your on-premises Kubernetes applications. Astra Control discovers and uses the already-deployed resources, including Trident, ONTAP, and associated storage classes. Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend.
+Add a storage backend to Astra Control so that Astra Control can manage your on-premises Kubernetes applications. Astra Control discovers and uses the already-deployed resources, including Trident, ONTAP, and associated storage classes. Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend.
 
-Admins can import an already discovered storage backend using these options:
+You can add an already discovered storage backend using these options:
 
-* <<Import storage backend using Dashboard>>
-* <<Import storage backend using Backends option>>
+* <<Add storage backend using Dashboard>>
+* <<Add storage backend using Backends option>>
 
-=== Import storage backend using Dashboard
+=== Add storage backend using Dashboard
+
 . From the Dashboard do one of the following:
-** From the Dashboard Getting started section, select *Add storage backend*.
-** From the Dashboard *Resource Summary > Storage backends* section, select *Add*.
-. Enter the ONTAP admin credentials and select *Review information*.
-. Confirm the backend details and select *Import storage backend*.
+.. From the Dashboard Storage backend section, select *Manage*.
+.. From the Dashboard Resource Summary > Storage backends section, select *Add*.
+. Enter the ONTAP admin credentials and select *Review*.
+. Confirm the backend details and select *Manage*.
 +
-The imported backend appears in the list with summary information.
+The backend appears in the list with summary information.
 
-=== Import storage backend using Backends option
+=== Add storage backend using Backends option
+
 . In the left navigation area, select *Backends*.
-. Select *Import existing storage backend*.
-. Enter the ONTAP admin credentials and select *Review information*.
-. Confirm the backend details and select *Import storage backend*.
+. Select *Manage*.
+. Enter the ONTAP admin credentials and select *Review*.
+. Confirm the backend details and select *Manage*.
 +
-The imported backend appears in the list with summary information.
+The backend appears in the list with summary information.
 . To see details of the backend storage, select it.
 +
 TIP: Persistent volumes used by apps in the managed compute cluster are also displayed.
 
 == Add a bucket
 
-Adding object store bucket providers is essential if you want to back up your applications and persistent storage or if you want to clone applications across clusters. Using Astra Control, add an object store provider as your backup destination.
+Adding object store bucket providers is essential if you want to back up your applications and persistent storage or if you want to clone applications across clusters. Astra Control stores those backups or clones in the object store buckets that you define.
 
-NOTE: You can also add a bucket to Astra Control Center using the API. See the API documentation for more details.
+When you add a bucket, Astra Control marks one bucket as the default bucket indicator. The first bucket that you create becomes the default bucket.
 
-You don’t need a bucket if you are:
-
-* Cloning your application configuration and persistent storage to the same cluster
-* Cloning to a different cluster using an existing backup or snapshot
+You don’t need a bucket if you are cloning your application configuration and persistent storage to the same cluster.
 
 Use any of the following bucket types:
 
@@ -127,9 +126,11 @@ Use any of the following bucket types:
 * NetApp StorageGRID S3
 * Generic S3
 
-Admins can add object store buckets. When you use Astra Control to back up or clone your application data, Astra Control stores those backups or clones in the object store buckets that you define here.
+TIP: Ensure you use a single bucket type; otherwise, mixing bucket types can cause errors.
 
-When you add a bucket, Astra Control marks one bucket as the default bucket indicator. The first bucket that you create becomes the default bucket.
+NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon’s S3 support.
+
+For instructions on how to add buckets using the Astra API, see link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information].
 
 .Steps
 
