@@ -16,13 +16,12 @@ Astra Control is a Kubernetes application data lifecycle management service that
 
 Astra Control offers critical capabilities for Kubernetes application data lifecycle management:
 
-* Manage, protect, and migrate your Kubernetes applications within and across multi-hybrid clouds
+* Manage, protect, and migrate your Kubernetes applications
 * Manage persistent storage
 * Migrate applications and data from one Kubernetes cluster to another
 * Easily clone an application from production to staging
 * Create application-aware, on-demand snapshots and backups
 * Visualize the real-time protection status of your apps
-* Create a protection policy for each of your apps
 * Use a UI or APIs to implement your backup and migration workflows
 
 link:/get-started/requirements.html[Learn about Astra Control requirements].
@@ -96,7 +95,7 @@ Learn more about how to link:../get-started/setup_overview.html[set up Astra Con
 
 === Manage apps
 
-At this point, you can add apps to your cluster. Some apps are pre-installed in the cluster being managed and you can use Astra Control Center to manage those apps as well. 
+At this point, you can add apps to your cluster. Some apps are pre-installed in the cluster being managed and you can use Astra Control Center to manage those apps as well.
 
 Persistent volumes will be provisioned on the new default storage class. link:../concepts/choose-class-and-size.html[Learn about storage classes and persistent volume sizes].
 

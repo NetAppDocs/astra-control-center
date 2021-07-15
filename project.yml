@@ -30,7 +30,7 @@ homepage:
     - title: Use Astra Contol Center
       links:
         - title: Manage accounts
-          url: /use/manage-accounts.html
+          url: /use/manage-users.html
         - title: Manage apps
           url: /use/manage-apps.html
         - title: Protect apps
@@ -72,22 +72,27 @@ homepage:
 #          url: https://docs.netapp.com/us-en/astra/use/clone-apps.html
 #        - title: Set up billing
 #          url: https://docs.netapp.com/us-en/astra/use/set-up-billing.html
-    - title: Solutions
+    - title: Solutions briefs
       links:
-        - title: Deploy Jenkins from a Helm chart
-          url: https://docs.netapp.com/us-en/astra-control-center/solutions/jenkins-deploy-from-helm-chart.html
-        - title: Deploy MariaDB from a Helm chart
-          url: https://docs.netapp.com/us-en/astra-control-center/solutions/mariadb-deploy-from-helm-chart.html
-        - title: Deploy MySQL from a Helm chart
-          url: https://docs.netapp.com/us-en/astra-control-center/solutions/MySQL-deploy-from-helm-chart.html
-        - title: Deploy Postgres from a Helm chart
-          url: https://docs.netapp.com/us-en/astra-control-center/solutions/postgres-deploy-from-helm-chart.html
+        - title: PostgreSQL DBaaS with Astra Control
+          url: https://cloud.netapp.com/hubfs/SB-4122-0221-PostgresSQL-DBaaS-with-Astra%20(2).pdf
+        - title: MySQL DBaaS with Astra Control
+          url: https://cloud.netapp.com/hubfs/SB-4110-0221-MySQL-Astra%20(2).pdf
+        - title: Simplify Jenkins lifecycle management
+          url: https://cloud.netapp.com/hubfs/SB-4100-Jenkins%20(2).pdf
     - title: Demos & tutorials
       links:
-        - title: NetApp University training (login required)
+        - title: Deploy Jenkins
+          url: https://docs.netapp.com/us-en/astra-control-center/solutions/jenkins-deploy-from-helm-chart.html
+        - title: Deploy MariaDB
+          url: https://docs.netapp.com/us-en/astra-control-center/solutions/mariadb-deploy-from-helm-chart.html
+        - title: Deploy MySQL
+          url: https://docs.netapp.com/us-en/astra-control-center/solutions/mysql-deploy-from-helm-chart.html
+        - title: Deploy Postgres
+          url: https://docs.netapp.com/us-en/astra-control-center/solutions/postgres-deploy-from-helm-chart.html
     - title: Blogs & community
       links:
-        - title: Slack
+        - title: Slack channel
           url: https://netapppub.slack.com/#astra
         - title: NetApp Community
           url: https://community.netapp.com/

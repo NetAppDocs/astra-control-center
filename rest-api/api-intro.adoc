@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: rest-api/api-intro.html
-keywords: introduction, astra control, api, rest api
+keywords: introduction, astra control, api, rest api, astra, kubernetes
 summary: Astra Control has a REST API that enables you to directly access the Astra Control functionality using a programming language or utility such as Curl.
 ---
 
@@ -15,4 +15,4 @@ Astra Control has a REST API that enables you to directly access the Astra Contr
 To set up and manage your Kubernetes apps, you can use either the Astra UI or the Astra Control API.
 
 
-To learn more, go to the https://docs.netapp.com/us-en/astra-automation/[Astra automation docs^]. 
+To learn more, go to the https://docs.netapp.com/us-en/astra-automation/[Astra automation docs^].
