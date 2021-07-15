@@ -41,3 +41,5 @@ entries:
     url: /use/unmanage.html
   - title: Update an existing license
     url: /use/update-licenses.html
+  - title: Monitor and protect infrastructure
+    url: /use/monitor-protect.html
