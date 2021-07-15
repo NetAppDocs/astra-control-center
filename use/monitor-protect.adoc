@@ -5,7 +5,7 @@ keywords: proxy, cloud insights, connections, fluent bit, accounts, protect, sec
 summary: You can configure several optional settings to enhance your Astra Control Centre experience. If the network where you're running Astra Control Center requires a proxy for connecting to the Internet, configure that proxy server in Astra Control Center. You can use NetApp Cloud Insights to monitor and gain insight into your complete infrastructure. You can add a Fluent Bit connection to collect data and logs from your containers.
 ---
 
-= Monitor and protect your infrastructure
+= Monitor and protect infrastructure
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/use/
