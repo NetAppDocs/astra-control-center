@@ -10,11 +10,11 @@ summary: After you add Kubernetes compute to Astra Control, you can install apps
 :icons: font
 :imagesdir: ../media/use/
 
-After you link:../get-started/setup_overview.html[add a cluster to Astra Control management], you can install apps on the cluster (outside of Astra Control), and then go to the Apps page in Astra Control to start managing the apps and their resources.
+After you link:../get-started/setup_overview.html#add-cluster[add a cluster to Astra Control management], you can install apps on the cluster (outside of Astra Control), and then go to the Apps page in Astra Control to start managing the apps and their resources.
 
 == Install apps on your cluster
 
-Now that you've added your compute to Astra Control, you can install apps on the cluster. After the pods are online, you can manage the app with Astra Control.
+Now that you've added your cluster to Astra Control, you can install apps on the cluster. After the pods are online, you can manage the app with Astra Control.
 
 For help with deploying common applications from Helm charts, refer to the following:
 
@@ -41,7 +41,7 @@ You can perform the following activities to manage apps:
 * <<Ignore apps>>
 *	<<Unmanage apps>>
 
-For instructions on how to manage storage backends using the Astra API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information].
+For instructions on how to manage apps using the Astra API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information].
 
 
 === Manage apps by namespace
@@ -168,4 +168,4 @@ We don't show you these system apps by default because it's rare that you'd need
 
 == Find more information
 
-* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API]
+* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API^]
