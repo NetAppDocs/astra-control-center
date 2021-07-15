@@ -72,6 +72,7 @@ Astra Control Center has the following app management requirements:
 
 * *Licensing*: You need an Astra Control Center license to deploy and manage apps using Astra Control Center.
 * *Helm*: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
+* *Operator management*: Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators.
 
 == Access to the internet
 
