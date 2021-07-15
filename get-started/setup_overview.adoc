@@ -78,9 +78,7 @@ NOTE: If you plan to add a second OpenShift 4.6 or 4.7 cluster as a managed comp
 `[docker@worker-0 ~]$ sudo systemctl restart docker`
 
 .Steps
-. From the *Dashboard* in the Astra Control Center UI, select *Add a Cluster* in the Clusters section.
-+
-image:dashboard.png[Shows the Add a Cluster button.]
+. From the *Dashboard* in the Astra Control Center UI, select *Add* in the Clusters section.
 . In the *Add Cluster* window that opens, upload a `kubeconfig.yaml` file or paste the contents of a `kubeconfig.yaml` file.
 +
 NOTE: The `kubeconfig.yaml` file should include *only the cluster credential for one cluster*.
