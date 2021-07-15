@@ -18,7 +18,7 @@ A Kubernetes cluster must meet the following general requirements so you can dis
 
 * *Image registry*: You must have an existing private Docker image registry to which you can push Astra Control Center build images. You must have the URL of the image registry where you will upload the images, and you must have tagged the images for the private container registry.
 
-* *Trident / ONTAP storage configuration*: Astra Control Center requires that Trident version 21.01 already be installed and configured to work with NetApp ONTAP version 9.8 or newer as the storage backend. Astra Control Center supports the following ONTAP drivers provided by Trident:
+* *Trident / ONTAP storage configuration*: Astra Control Center requires that Trident version 21.01 already be installed and configured to work with NetApp ONTAP version 9.5 or newer as the storage backend. Astra Control Center supports the following ONTAP drivers provided by Trident:
 
 ** ontap-nas
 ** ontap-nas-flexgroup
@@ -26,7 +26,7 @@ A Kubernetes cluster must meet the following general requirements so you can dis
 ** ontap-san-economy
 
 === OpenShift clusters
-If your Kubernetes cluster is managed as part of the Red Hat OpenShift Container Platform, Astra Control Center requires an OpenShift 4.6.8 or 4.7 cluster that has Trident StorageClasses backed by ONTAP 9.8 or newer, with the following attributes:
+If your Kubernetes cluster is managed as part of the Red Hat OpenShift Container Platform, Astra Control Center requires an OpenShift 4.6.8 or 4.7 cluster that has Trident StorageClasses backed by ONTAP 9.5 or newer, with the following attributes:
 
 * At least 300GB of available storage capacity
 * 1 controller node with 2 CPU cores, 6GB RAM, and 50GB storage
