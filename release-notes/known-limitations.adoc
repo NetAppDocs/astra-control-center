@@ -12,6 +12,14 @@ summary: Known limitations identify platforms, devices, or functions that are no
 
 Known limitations identify platforms, devices, or functions that are not supported by this release of the product, or that do not interoperate correctly with it. Review these limitations carefully.
 
+== OLM-enabled operator deployed apps not supported
+// DOC-3553/ASTRACTL-9490
+Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators.
+
+== Cloning apps can only be done with same K8s distribution
+// ASTRACTL-7079
+If you clone an app between clusters, the source and destination clusters must be the same distribution of Kubernetes. For example, if you clone an app from an OpenShift 4.7 cluster, use a destination cluster that is also OpenShift 4.7.
+
 == Unhealthy pods affect app management
 
 If a managed app has pods in an unhealthy state, Astra Enterprise can't create new backups and clones.

@@ -16,6 +16,11 @@ Known issues identify problems that might prevent you from using this release of
 // ASTRACTL-9296 (Low probability)
 If you try to reuse a bucket after changing Astra Control Center installation configuration, backup and restore will fail. You must use a different bucket or completely clean out the previously used bucket.
 
+== App with user-defined label goes into "removed" state
+// ASTRACTL-9643
+If you define an app with a non-existent k8s label, Astra Control Center will create, manage, and then immediately remove the app. To avoid this, add the k8s label to pods and resources after the app is managed by Astra Control Center???
+
+
 
 == Clone performance impacted by large persistent volumes
 
