@@ -192,4 +192,4 @@ Now that you’ve logged in and added clusters to Astra Control Center, you're r
 
 [discrete]
 == Find more information
-* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API]
+* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API^]

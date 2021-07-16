@@ -18,7 +18,7 @@ If you define an app with a non-existent k8s label, Astra Control Center will cr
 
 == Unable to stop running app backup
 // DOC-3552/ASTRACTL-9586
-There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in link:../use/protect-apps.html#delete-backups[Delete backups]. To delete a failed backup, use the link:https://docs.netapp.com/us-en/astra-automation/index.html[Astra API].
+There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in link:../use/protect-apps.html#delete-backups[Delete backups]. To delete a failed backup, use the link:https://docs.netapp.com/us-en/astra-automation/index.html[Astra API^].
 
 == Astra Control Center UI slow to show persistent volume changes
 // DOC-3562/ASTRACTL-9560/ASTRACTL-9540

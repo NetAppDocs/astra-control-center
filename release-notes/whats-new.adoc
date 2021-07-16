@@ -27,5 +27,5 @@ Initial release of Astra Control Center.
 
 == Find more information
 
-* link:release-notes/known-issues.html[Known issues for this release]
-* link:release-notes/known-limitations.html[Known limitations for this release]
+* link:../release-notes/known-issues.html[Known issues for this release]
+* link:../release-notes/known-limitations.html[Known limitations for this release]
