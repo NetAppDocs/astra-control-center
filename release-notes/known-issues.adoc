@@ -12,16 +12,26 @@ summary: Known issues identify problems that might prevent you from using this r
 
 Known issues identify problems that might prevent you from using this release of the product successfully.
 
-== Reusing buckets impacted by
-// ASTRACTL-9296 (Low probability)
-If you try to reuse a bucket after changing Astra Control Center installation configuration, backup and restore will fail. You must use a different bucket or completely clean out the previously used bucket.
-
 == App with user-defined label goes into "removed" state
 // ASTRACTL-9643
 If you define an app with a non-existent k8s label, Astra Control Center will create, manage, and then immediately remove the app. To avoid this, add the k8s label to pods and resources after the app is managed by Astra Control Center???
 
+== Unable to stop running app backup
+// DOC-3552/ASTRACTL-9586
+There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in link:../use/protect-apps.html#delete-backups[Delete backups]. To delete a failed backup, use the link:https://docs.netapp.com/us-en/astra-automation/index.html[Astra API].
 
+== Astra Control Center UI slow to show persistent volume changes
+// DOC-3562/ASTRACTL-9560/ASTRACTL-9540
+After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
+
+== S3 buckets in Astra Control Center do not report available capacity
+// DOC-3561/ASTRACTL-9425
+Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
+
+== Reusing buckets between instances of Astra Control Center causes failures
+// ASTRACTL-9296 (Low probability)/ASTRACTL-9837/DOC-3575
+If you try to reuse a bucket used by another or previous installation of Astra Control Center, backup and restore will fail. You must use a different bucket or completely clean out the previously used bucket. You cannot share buckets between instances of Astra Control Center.
 
 == Clone performance impacted by large persistent volumes
-
-Clones of very large and consumed persistent volumes might be intermittently slow, dependent on cluster access to the object store. If the clone is hung and no data has been copied for more than 30 minutes, Astra Enterprise terminates the clone action.
+//from ACS repo
+Clones of very large and consumed persistent volumes might be intermittently slow, dependent on cluster access to the object store. If the clone is hung and no data has been copied for more than 30 minutes, Astra Control terminates the clone action.
