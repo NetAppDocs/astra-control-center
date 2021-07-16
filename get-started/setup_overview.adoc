@@ -56,6 +56,8 @@ The *Account* > *License* page displays the license information, expiration date
 
 To begin managing your apps, add a Kubernetes cluster and manage it as a compute resource. You have to add a cluster for Astra Control Center to discover your Kubernetes applications.
 
+TIP: We recommend that Astra Control Center also manages the cluster it is deployed on first before you add other clusters to Astra Control Center to manage. You can do this using the *Add Cluster* feature. 
+
 .What you'll need
 
 * A cluster running OpenShift 4.6 or later, which has Trident StorageClasses backed by ONTAP 9.5 or later.
