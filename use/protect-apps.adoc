@@ -94,6 +94,8 @@ image:screenshot-create-backup.gif["A screenshot of the app page where you can c
 
 Astra Control Center creates a backup of the app.
 
+NOTE: There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in <<Delete backups>>. To delete a failed backup, https://docs.netapp.com/us-en/astra-automation/index.html[use the Astra API].
+
 == View snapshots and backups
 
 You can view the snapshots and backups of an app from the Data Protection tab.
@@ -131,6 +133,8 @@ Astra Control Center deletes the snapshot.
 == Delete backups
 
 Delete the scheduled or on-demand backups that you no longer need.
+
+NOTE: There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use these instructions. To delete a failed backup, https://docs.netapp.com/us-en/astra-automation/index.html[use the Astra API].
 
 . Click *Apps* and then click the name of an app.
 . Click *Data Protection*.
