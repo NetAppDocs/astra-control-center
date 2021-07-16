@@ -18,28 +18,26 @@ image:astra_control_center_architectural_diagram.png[Astra Control architecture 
 
 * *Kubernetes clusters*: Kubernetes is a portable, extensible, open-source platform for managing containerized workloads and services, that facilitates both declarative configuration and automation. Astra provides management services for applications hosted in a Kubernetes cluster.
 
-* *Host disks*: This includes any media attached to the Kubernetes worker nodes and exposed as a block device, such as HDDs, SSDs, and NVMe.
-
 * *Trident*: As a fully supported open source storage provisioner and orchestrator maintained by NetApp, Trident enables you to create storage volumes for containerized applications managed by Docker and Kubernetes. When deployed with Astra Control Center, Trident includes a configured ONTAP storage backend.
 
-* *ONTAP storage backend*: Astra Control Center includes an ONTAP AFF and FAS storage backend. As a storage software and hardware platform, ONTAP provides core storage services, support for multiple storage access protocols, and storage management functionality, such as snapshots and mirroring.
+* *ONTAP storage backend*: Astra Control Center uses an ONTAP AFF and FAS storage backend. As a storage software and hardware platform, ONTAP provides core storage services, support for multiple storage access protocols, and storage management functionality, such as snapshots and mirroring.
 
 * *Cloud Insights*:  A NetApp cloud infrastructure monitoring tool, Cloud Insights enables you to monitor performance and utilization for your Kubernetes clusters. Cloud Insights correlates storage usage to workloads.
 
-== Astra interfaces
+== Astra Control interfaces
 
 You can complete tasks using different interfaces:
 
-* *Astra user interface (UI)*: Both Astra Control Service and Astra Control Center use the same web-based UI where you can manage, migrate and protect apps. Use the UI to manage user accounts and configuration settings.
+* *Web user interface (UI)*: Both Astra Control Service and Astra Control Center use the same web-based UI where you can manage, migrate and protect apps. Use the UI to manage user accounts and configuration settings.
 
-* *Astra API*: Both Astra Control Service and Astra Control Center use the same Astra API. Using the API, you can perform the same tasks that you would using the UI.
+* *API*: Both Astra Control Service and Astra Control Center use the same Astra API. Using the API, you can perform the same tasks that you would using the UI.
 
-To perform app management, you can also use VMware. Astra manages Kubernetes clusters running within VM guests and enables you to migrate VM apps into Kubernetes clusters that support VM execution.
+Astra Control also lets you manage, migrate, and protect Kubernetes clusters running within VM environments.
 
 == For more information
 
-* [Astra Control Service documentation]
+* https://docs.netapp.com/us-en/astra-control-service/index.html[Astra Control Service documentation^]
 * https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API^]
-* https://netapp-trident.readthedocs.io/en/stable-v20.07/index.html[Trident documentation^]
+* https://netapp-trident.readthedocs.io/en/stable-v21.01/index.html[Trident documentation^]
 * https://docs.netapp.com/us-en/cloudinsights/[Cloud Insights documentation^]
 * https://docs.netapp.com/us-en/ontap/index.html[ONTAP documentation^]

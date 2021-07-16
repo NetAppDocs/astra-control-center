@@ -26,4 +26,4 @@ See Trident information that provides cost comparisons and examples that can hel
 
 == Find more information
 
-* https://netapp-trident.readthedocs.io/en/stable-v20.07/index.html[Trident documentation^]
+* https://netapp-trident.readthedocs.io/en/stable-v21.01/index.html[Trident documentation^]

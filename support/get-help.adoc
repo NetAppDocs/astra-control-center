@@ -14,8 +14,7 @@ NetApp provides support for Astra in a variety of ways. Extensive free self-supp
 
 IMPORTANT: If you have an evaluation license, you can get technical support. However, case creation via NetApp Support Site (NSS) is not available. You can get in touch with Support via the feedback option or use the Slack channel for self service.
 
-
-You must first link:../get-started/setup_overview.html#add-or-update-a-license[activate support for your NetApp serial number] in order to use these non self-service support options. A NetApp Support Site (NSS) SSO account is required for chat and web ticketing along with case management.
+You must first link:../get-started/setup_overview.html[activate support for your NetApp serial number] in order to use these non self-service support options. A NetApp Support Site (NSS) SSO account is required for chat and web ticketing along with case management.
 
 You can access support options from the Astra UI by selecting the *Support* tab from the main menu.
 
@@ -93,7 +92,6 @@ You can use one of the following methods to do this:
 * Use https://upload.netapp.com/sg[NetApp Authenticated File Upload (login required)^].
 * Attach the bundle to the case directly on NSS.
 * Use NetApp AIQ.
-
 
 [discrete]
 == Find more information

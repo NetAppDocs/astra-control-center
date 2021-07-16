@@ -32,10 +32,14 @@ entries:
       - title: Manage credentials
         url: /use/manage-credentials.html
       - title: Update an existing license
-        url: /use/update-licenses.adoc
+        url: /use/update-licenses.html
   - title: Manage buckets
     url: /use/manage-buckets.html
   - title: Manage the storage backend
     url: /use/manage-backend.html
   - title: Unmanage apps and compute
     url: /use/unmanage.html
+  - title: Update an existing license
+    url: /use/update-licenses.html
+  - title: Monitor and protect infrastructure
+    url: /use/monitor-protect.html
