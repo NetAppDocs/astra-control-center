@@ -80,19 +80,19 @@ TIP: If you are new to Cloud Insights, familiarize yourself with the features an
 . Select *Connect* where it shows *Disconnected* in the drop-down list to add the connection.
 +
 image:ci-connect.png[Shows the Connect option from the drop-down list to enable Cloud Insights connection.]
-. Enter the Cloud Insights API token and the tenant URL.
+. Enter the Cloud Insights API tokens and the tenant URL.
 +
 You get the tenant URL when you get the Cloud Insights license. If you do not have the tenant URL, see the link:https://docs.netapp.com/us-en/cloudinsights/task_cloud_insights_onboarding_1.html[Cloud Insights documentation^].
 
 .. To get the link:https://docs.netapp.com/us-en/cloudinsights/API_Overview.html#api-access-tokens[API token^], log in to your Cloud Insights tenant URL.
-.. In Cloud Insights, generate a read key.
+.. In Cloud Insights, generate a *Read only* type API token.
 +
 image:cloud-insights-api.png[Shows the Cloud Insights API token generation page.]
-.. Copy the read key. You will need to paste it into the Astra Control Center window for enabling the Cloud Insights connection.
-.. In Cloud Insights, generate a write key.
-.. Copy the write key. You will need to paste it into the Astra Control Center window for enabling the Cloud Insights connection.
+.. Copy the *Read only* key. You will need to paste it into the Astra Control Center window for enabling the Cloud Insights connection.
+.. In Cloud Insights, generate a *Read/Write* type API token.
+.. Copy the *Read/Write* key. You will need to paste it into the Astra Control Center *Connect Cloud Insights* window.
 +
-NOTE: We recommend that you generate a read key and a write key, and not use the same key for both. By default, the token expiry period is set to one year. We recommend that you keep the default selection to give the token the maximum duration before it expires. If your token expires, the telemetry will stop.
+NOTE: We recommend that you generate a *Read only* key and a *Read/Write* key, and not use the same key for both purposes. By default, the token expiry period is set to one year. We recommend that you keep the default selection to give the token the maximum duration before it expires. If your token expires, the telemetry will stop.
 .. Paste the keys that you copied from Cloud Insights into Astra Control Center.
 . Select *Connect*.
 
@@ -149,13 +149,15 @@ You can send logs from Astra Control Center to your Fluentd endpoint. The Fluent
 
 image:fluentbit.png[Shows a conceptual diagram of event logs going from Astra to Fluentd.]
 
+NOTE: Only the event logs from managed clusters are forwarded to Fluentd. 
+
 .What you'll need
 
 * An Astra Control Center account with *admin* privileges.
 * Astra Control Center installed and running on a Kubernetes cluster.
 * Pods logs should be available in `/var/log/containers/`.
 
-IMPORTANT: Astra Control Center does not validate the details you enter for your Fluentd server. Ensure that you enter the correct values. 
+IMPORTANT: Astra Control Center does not validate the details you enter for your Fluentd server. Ensure that you enter the correct values.
 
 .Steps
 
