@@ -83,11 +83,18 @@ image:ci-connect.png[Shows the Connect option from the drop-down list to enable 
 You get the tenant URL when you get the Cloud Insights license. If you do not have the tenant URL, see the link:https://docs.netapp.com/us-en/cloudinsights/task_cloud_insights_onboarding_1.html[Cloud Insights documentation^].
 
 .. To get the link:https://docs.netapp.com/us-en/cloudinsights/API_Overview.html#api-access-tokens[API token^], log in to your Cloud Insights tenant URL.
-.. In Cloud Insights, generate a user-specific API key.
+.. In Cloud Insights, generate a read key.
 +
 image:cloud-insights-api.png[Shows the Cloud Insights API token generation page.]
-.. Copy the API key from Cloud Insights into Astra Control Center.
+.. Copy the read key. You will need to paste it into the Astra Control Center window for enabling the Cloud Insights connection.
+.. In Cloud Insights, generate a write key.
+.. Copy the write key. You will need to paste it into the Astra Control Center window for enabling the Cloud Insights connection.
++
+NOTE: We recommend that you generate a read key and a write key, and not use the same key for both. By default, the token expiry period is set to one year. We recommend that you keep the default selection to give the token the maximum duration before it expires. If your token expires, the telemetry will stop.
+.. Paste the keys that you copied from Cloud Insights into Astra Control Center.
 . Select *Connect*.
+
+IMPORTANT: After you select *Connect,* the status of the connection changes to *Pending* in the *Cloud Insights* section of the *Account* > *Connections* page. It can a few minutes for the connection to be enabled and the status to change to *Connected*.
 
 NOTE: To enable linking between Astra Control Center and Cloud Insights without requiring repeated logins, Astra Control Center needs an SSO configuration that matches Cloud Insights.
 
@@ -102,6 +109,13 @@ If the connection failed for some reason, the status shows *Failed*. You can fin
 image:cloud-insights-notifications.png[Shows the error message when Cloud Insights connection fails.]
 
 You can also find the same information under *Account* > *Notifications*.
+
+From Astra Control Center, you can view throughput information on the *Backends* page as well as connect to Cloud Insights from here after selecting a storage backend.
+image:throughput.png[Shows the throughput information on the Backends page in Astra Control Center.]
+
+You can also find the information on the *Dashboard*.
+
+image:dashboard-ci.png[Shows the Cloud Insighjts icon on the Dashboard.]
 
 === Edit Cloud Insights connection
 
@@ -125,10 +139,13 @@ You can disable the Cloud Insights connection for a Kubernetes cluster managed b
 . Select *Account* > *Connections*.
 . Select *Disconnect* from the drop-down list to disable the connection.
 . In the dialog box that opens, confirm the operation.
+After you confirm the operation, on the *Account* > *Connections* page, the Cloud Insights status changes to *Pending*. It take a few minutes for the status to change to *Disconnected*.
 
-== Connect to Fluent Bit
+== Connect to Fluentd
 
-You can enable a Fluent Bit endpoint to expose logs from your containers. This enables you to forward the logs that Astra is collecting to any Fluent Bit endpoint. The Fluent Bit connection is disabled by default.
+You can send logs from Astra Control Center to your Fluentd endpoint. The Fluentd connection is disabled by default.
+
+image:fluentbit.png[Shows a conceptual diagram of event logs going from Astra to Fluentd.]
 
 .What you'll need
 
@@ -140,41 +157,39 @@ You can enable a Fluent Bit endpoint to expose logs from your containers. This e
 
 . Log in to Astra Control Center using an account with *admin* privilege.
 . Select *Account* > *Connections*.
-. Select *Connect* from the drop-down list to add the connection.
-. Enter the host IP address, the port number, and API token (optional) for your Fluent Bit server.
+. Select *Connect* from the drop-down list where it shows *Disconnected* to add the connection.
++
+image:connect-fluentd.png[Shows the UI screen for enabling connection to Fluentd.]
+. Enter the host IP address, the port number, and API token (optional) for your Fluentd server.
 . Select *Connect*.
 
 .Result
 
-If the connection was successful, the *Fluent Bit Endpoint* section of the *Account* > *Connections* page indicates that it is connected.
+If the connection was successful, the *Fluentd*  ection of the *Account* > *Connections* page indicates that it is connected.
 
 If the connection failed for some reason, the status shows *Failed*. You can find the reason for failure under *Notifications* at the top-right side of the UI.
 
 You can also find the same information under *Account* > *Notifications*.
 
-=== Edit Fluent Bit connection
+=== Edit the Fluentd connection
 
-You can edit the Fluent Bit connection to your Astra Control Center instance.
+You can edit the Fluentd connection to your Astra Control Center instance.
 
 .Steps
 
 . Log in to Astra Control Center using an account with *admin* privilege.
 . Select *Account* > *Connections*.
 . Select *Edit* from the drop-down list to edit the connection.
-+
-image:fb-connect.png[Shows the Edit option to edit the Fluent Bit connection.]
-. Change the Fluent Bit endpoint settings.
+. Change the Fluentd endpoint settings.
 . Select *Save*.
 
-=== Disable Fluent Bit connection
+=== Disable the Fluentd connection
 
-You can disable the Fluent Bit connection to your Astra Control Center instance.
+You can disable the Fluentd connection to your Astra Control Center instance.
 
 .Steps
 
 . Log in to Astra Control Center using an account with *admin* privilege.
 . Select *Account* > *Connections*.
 . Select *Disconnect* from the drop-down list to disable the connection.
-+
-image:fb-connect.png[Shows the Disconnect option to disable the Fluent Bit connection.]
 . In the dialog box that opens, confirm the operation.
