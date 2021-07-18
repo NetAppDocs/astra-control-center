@@ -146,7 +146,7 @@ Also, you might want to manage apps under one namespace together (Namespace-mana
 
 == Unmanage apps
 
-When you no longer want to back up, snapshot, or clone an app, you can unmanage it.
+When you no longer want to back up, snapshot, or clone an app, you can stop managing it.
 
 .Steps
 

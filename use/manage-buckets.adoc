@@ -38,8 +38,11 @@ A bucket can be in one of these states:
 For instructions on how to manage buckets using the Astra API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
 
 * /get-started/setup_overview.html#add-a-bucket[Add buckets]
-* <<Edit a bucket>> 
+* <<Edit a bucket>>
 
+NOTE: S3 buckets in Astra Control Center do not report available capacity. Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
+
+// DOC-3561
 
 == Remove credentials
 

@@ -61,7 +61,7 @@ The Kubernetes cluster you use for Astra Control Center should already be deploy
 
 === Supported apps
 
-Astra Control Center supports all applications running on your Kubernetes clusters. See link:../release-notes/known-limitations.html[Known limitations].
+Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators.
 
 NetApp has validated some apps to ensure the safety and consistency of the snapshots and backups. link:../learn/validated-vs-standard.html[Learn the difference between a validated app and a standard app].
 
