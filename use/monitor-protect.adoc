@@ -16,6 +16,8 @@ You can configure several optional settings to enhance your Astra Control Center
 
 If the network where you're running Astra Control Center requires a proxy for connecting to the Internet, configure that proxy server in Astra Control Center.
 
+IMPORTANT: Astra Control Center does not validate the details you enter for your proxy server. Ensure that you enter the correct values.
+
 .Steps
 
 . Log in to Astra Control Center using an account with *admin* privilege.
@@ -152,6 +154,8 @@ image:fluentbit.png[Shows a conceptual diagram of event logs going from Astra to
 * An Astra Control Center account with *admin* privileges.
 * Astra Control Center installed and running on a Kubernetes cluster.
 * Pods logs should be available in `/var/log/containers/`.
+
+IMPORTANT: Astra Control Center does not validate the details you enter for your Fluentd server. Ensure that you enter the correct values. 
 
 .Steps
 
