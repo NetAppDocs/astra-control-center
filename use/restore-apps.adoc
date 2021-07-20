@@ -20,14 +20,12 @@ NOTE: If you use Helm to deploy apps, Astra Control Center requires Helm version
 . Click *Apps* and then click the name of an app.
 . Click *Data protection*.
 . If you want to restore from a snapshot, keep the *Snapshots* icon selected. Otherwise, click the *Backups* icon to restore from a backup.
-+
-image:screenshot-restore-snapshot-or-backup.gif[A screenshot of the Data protection tab where you can view Snapshots or Backups.]
-
+//+
+//image:screenshot-restore-snapshot-or-backup.gif[A screenshot of the Data protection tab where you can view Snapshots or Backups.]
 . Click the drop-down list in the *Actions* column for the snapshot or backup from which you want to restore.
 . Click *Restore application*.
-+
-image:screenshot-restore-app.gif["A screenshot of the app page where you can click the drop-down list in the actions column and select Restore application."]
-
+//+
+//image:screenshot-restore-app.gif["A screenshot of the app page where you can click the drop-down list in the actions column and select Restore application."]
 . *Restore details*: Specify details for the clone:
 +
 * Enter a name and namespace for the app.
@@ -39,9 +37,11 @@ NOTE: If you are restoring an app that has been deleted, choose a different name
 * Click *Review information*.
 
 . *Restore Summary*: Review details about the restore action and click *Restore App*.
-+
-image:screenshot-restore-summary.gif[]
+//+
+//image:screenshot-restore-summary.gif[]
 
 .Result
 
 Astra Control Center restores the app based on the information that you provided.
+
+NOTE: After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.

@@ -31,8 +31,8 @@ A protection policy protects an app by creating snapshots, backups, or both at a
 . Click *Apps* and then click the name of an app.
 . Click *Data Protection*.
 . Click *Configure Protection Policy*.
-+
-image:screenshot-configure-protection-policy.gif[A screenshot of the Data protection tab for an app which enables you to configure a protection policy.]
+//+
+//image:screenshot-configure-protection-policy.gif[A screenshot of the Data protection tab for an app which enables you to configure a protection policy.]
 
 . Define a protection schedule by choosing the number of snapshots and backups to keep hourly, daily, weekly, and monthly.
 +
@@ -62,9 +62,8 @@ You can create an on-demand snapshot at any time.
 . Click *Apps*.
 . Click the drop-down list in the *Actions* column for the desired app.
 . Click *Snapshot*.
-+
-image:screenshot-create-snapshot.gif["A screenshot of the app page where you can click the drop-down list in the actions column and select Snapshot."]
-
+//+
+//image:screenshot-create-snapshot.gif["A screenshot of the app page where you can click the drop-down list in the actions column and select Snapshot."]
 . Customize the name of the snapshot and then click *Review Information*.
 . Review the snapshot summary and click *Snapshot App*.
 
@@ -83,9 +82,8 @@ NOTE: S3 buckets in Astra Control Center do not report available capacity. Befor
 . Click *Apps*.
 . Click the drop-down list in the *Actions* column for the desired app.
 . Click *Backup*.
-+
-image:screenshot-create-backup.gif["A screenshot of the app page where you can click the drop-down list in the actions column and select Backup."]
-
+//+
+//image:screenshot-create-backup.gif["A screenshot of the app page where you can click the drop-down list in the actions column and select Backup."]
 . Customize the name of the backup.
 . Choose whether to back up the app from an existing snapshot. If you select this option, you can choose from a list of existing snapshots.
 . Choose a destination for the backup by selecting from the list of storage buckets.
@@ -98,6 +96,8 @@ Astra Control Center creates a backup of the app.
 
 NOTE: There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in <<Delete backups>>. To delete a failed backup, https://docs.netapp.com/us-en/astra-automation/index.html[use the Astra API].
 
+NOTE: After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
+
 == View snapshots and backups
 
 You can view the snapshots and backups of an app from the Data Protection tab.
@@ -108,8 +108,8 @@ You can view the snapshots and backups of an app from the Data Protection tab.
 . Click *Data Protection*.
 +
 The snapshots display by default.
-+
-image:screenshot-snapshots.gif[A screenshot of the data protection tab for an app where you can view the list of the current snapshots and backups.]
+//+
+//image:screenshot-snapshots.gif[A screenshot of the data protection tab for an app where you can view the list of the current snapshots and backups.]
 
 . Click *Backups* to see the list of backups.
 
@@ -123,8 +123,8 @@ Delete the scheduled or on-demand snapshots that you no longer need.
 . Click *Data Protection*.
 . Click the drop-down list in the *Actions* column for the desired snapshot.
 . Click *Delete snapshot*.
-+
-image:screenshot-delete-snapshot.gif[A screenshot of the Data protection tab for an app where you can delete a snapshot.]
+//+
+//image:screenshot-delete-snapshot.gif[A screenshot of the Data protection tab for an app where you can delete a snapshot.]
 
 . Type the name of the snapshot to confirm deletion and then click *Yes, Delete snapshot*.
 
@@ -141,13 +141,13 @@ NOTE: There is no way to stop a running backup. If you need to delete the backup
 . Click *Apps* and then click the name of an app.
 . Click *Data Protection*.
 . Click *Backups*.
-+
-image:screenshot-data-protection-backups.gif[A screenshot of the Backups option that's available in the far right of the data protection tab.]
+//+
+//image:screenshot-data-protection-backups.gif[A screenshot of the Backups option that's available in the far right of the data protection tab.]
 
 . Click the drop-down list in the *Actions* column for the desired backup.
 . Click *Delete backup*.
-+
-image:screenshot-delete-backup.gif[A screenshot of the Data protection tab for an app where you can delete a snapshot.]
+//+
+//image:screenshot-delete-backup.gif[A screenshot of the Data protection tab for an app where you can delete a snapshot.]
 
 . Type the name of the backup to confirm deletion and then click *Yes, Delete backup*.
 
