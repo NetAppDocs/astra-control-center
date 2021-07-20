@@ -72,7 +72,7 @@ image:upload-bundle.png[Shows the upload Support bundle to NSS checkbox.]
 +
 When the support bundle is ready, a notification appears on the *Accounts* > *Notification* page in the Alerts area, on the *Activity* page, and also in the notifications list (accessible by selecting the icon in the top-right side of the UI).
 +
-If the generation failed or partially completed, an icon appears on the Generate bundle page. Select the icon to see the message.
+If the generation failed, an icon appears on the Generate Bundle page. Select the icon to see the message.
 
 TIP: The notifications icon at the top-right side of the UI provides information about events related to the support bundle, such as when the bundle is successfully created, when the bundle creation fails, when the bundle could not be uploaded, when the bundle could not be downloaded, and so on.
 
