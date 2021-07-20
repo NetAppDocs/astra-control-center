@@ -12,6 +12,8 @@ summary: You can configure several optional settings to enhance your Astra Contr
 
 You can configure several optional settings to enhance your Astra Control Center experience. If the network where you're running Astra Control Center requires a proxy for connecting to the Internet, configure that proxy server in Astra Control Center. To monitor and gain insight into your complete infrastructure, create a connection to NetApp Cloud Insights. To collect data and logs from your containers, add a Fluent Bit connection.
 
+NOTE: After you enable the Cloud Insights connection, you can view throughput information on the *Backends* page as well as connect to Cloud Insights from here after selecting a storage backend. You can also find the information on the *Dashboard* in the Cluster section, and also connect to Cloud Insights from here.
+
 == Add a proxy server
 
 If the network where you're running Astra Control Center requires a proxy for connecting to the Internet, configure that proxy server in Astra Control Center.
@@ -100,7 +102,7 @@ IMPORTANT: After you select *Connect,* the status of the connection changes to *
 
 NOTE: To enable linking between Astra Control Center and Cloud Insights without requiring repeated logins, Astra Control Center needs an SSO configuration that matches Cloud Insights.
 
-.Result
+=== View data in Cloud Insights
 
 If the connection was successful, the *Cloud Insights* section of the *Account* > *Connections* page indicates that it is connected, and displays the tenant URL. You can visit Cloud Insights to see data being successfully received and displayed.
 
@@ -115,9 +117,11 @@ You can also find the same information under *Account* > *Notifications*.
 From Astra Control Center, you can view throughput information on the *Backends* page as well as connect to Cloud Insights from here after selecting a storage backend.
 image:throughput.png[Shows the throughput information on the Backends page in Astra Control Center.]
 
+To go directly to Cloud Insights, select the *Cloud Insights* icon next to the metrics image.
+
 You can also find the information on the *Dashboard*.
 
-image:dashboard-ci.png[Shows the Cloud Insighjts icon on the Dashboard.]
+image:dashboard-ci.png[Shows the Cloud Insights icon on the Dashboard.]
 
 === Edit Cloud Insights connection
 
@@ -149,7 +153,7 @@ You can send logs from Astra Control Center to your Fluentd endpoint. The Fluent
 
 image:fluentbit.png[Shows a conceptual diagram of event logs going from Astra to Fluentd.]
 
-NOTE: Only the event logs from managed clusters are forwarded to Fluentd. 
+NOTE: Only the event logs from managed clusters are forwarded to Fluentd.
 
 .What you'll need
 
