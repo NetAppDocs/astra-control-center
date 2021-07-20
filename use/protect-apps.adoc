@@ -40,7 +40,7 @@ You can define the hourly, daily, weekly, and monthly schedules concurrently. A 
 +
 The following example sets a schedule to take snapshots daily and weekly, while retaining the last 4 hourly snapshots and the last 26 weekly snapshots. It also takes monthly backups and retains the last 12 copies. Because 0 copies were selected for hourly, no hourly snapshots or backups are taken.
 +
-image:screenshot_config_protection_policy.png["A screenshot of a sample configuration policy where you can choose to take snapshots and backups on an hourly, daily, weekly, or monthly basis."]
+image:screenshot-config-protection-policy.png[A screenshot of a sample configuration policy where you can choose to take snapshots and backups on an hourly, daily, weekly, or monthly basis.]
 
 . Click *Review*.
 . Click *Set Protection Policy.*
