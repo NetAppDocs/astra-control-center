@@ -151,7 +151,7 @@ TIP: Ensure you use a single bucket type; otherwise, mixing bucket types can cau
 
 NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon’s S3 support.
 
-NOTE: When you add a bucket, select the correct bucket provider type with credentials that are correct for that provider. For example, the UI accepts NetApp ONTAP S3 as the type with StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail.
+NOTE: When you add a bucket, select the correct bucket provider type with credentials that are correct for that provider. For example, the UI accepts NetApp ONTAP S3 as the type with StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail. See the link:../release-notes/known-issues.html#selecting-a-bucket-provider-type-with-credentials-for-another-type-causes-data-protection-failures[Release Notes].
 
 For instructions on how to add buckets using the Astra API, see link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information].
 
@@ -160,9 +160,6 @@ For instructions on how to add buckets using the Astra API, see link:https://doc
 . In the left navigation area, select *Buckets*.
 .. Select *Add*.
 .. Select the bucket type.
-+
-IMPORTANT: When you add a bucket, select the correct bucket provider type with credentials that are correct for that provider. For example, the UI accepts NetApp ONTAP S3 as the type with StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail.
-
 .. Enter the existing bucket name and optional description.
 +
 TIP: The bucket name and description appear as a backup location that you can choose later when you’re creating a backup. The name also appears during protection policy configuration.
@@ -193,7 +190,7 @@ Now that you’ve logged in and added clusters to Astra Control Center, you're r
 * link:../use/protect-apps.html[Protect apps]
 * link:../use/clone-apps.html[Clone apps]
 * link:../use/manage-notifications.html[Manage notifications]
-* link:../use/monitor-protect.html[Connect to Cloud Insights]
+* link:../monitor-protect.html[Connect to Cloud Insights]
 
 [discrete]
 == Find more information
