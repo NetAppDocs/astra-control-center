@@ -42,9 +42,13 @@ Go to the containers channel in thePub workspace to connect with peers and exper
 +
 Send an email to astra.feedback@netapp.com to let us know your thoughts, ideas, or concerns.
 
+== Enable daily scheduled support bundle upload to NetApp Support
+
+During Astra installation, if you specify `enrolled: true` for `autoSupport` in the Astra Control Center custom resource definition (CRD) file (`astra_control_center_min.yaml`), daily support bundles are automatically uploaded to NetApp Support. 
+
 == Generate support bundle to provide to NetApp Support
 
-Astra Control Center enables the admin user to generate bundles, which include information useful to NetApp Support, including logs, events for all the components of the Astra deployment, metrics, and topology information about the clusters and apps under management. This feature is enabled by default. If you are connected to the Internet, you can upload support bundles to NetApp Support Site (NSS) directly from the Astra Control Center UI.
+Astra Control Center enables the admin user to generate bundles, which include information useful to NetApp Support, including logs, events for all the components of the Astra deployment, metrics, and topology information about the clusters and apps under management. If you are connected to the Internet, you can upload support bundles to NetApp Support Site (NSS) directly from the Astra Control Center UI.
 
 Before you begin, check to see whether your external connections are configured to enable upload of bundles to NSS.
 
@@ -55,17 +59,12 @@ Before you begin, check to see whether your external connections are configured 
 . Create a case on the NSS portal using the serial number listed on the *Support* page of the Astra UI.
 . Perform the following steps for generating the support bundle by using the Astra Control Center UI:
 .. On the *Support* page, in the Support bundle tile, select *Generate*.
-+
-image:support bundle.png[Shows the Support bundle tile from where you can select the button to generate the support bundle.]
 .. In the *Generate a Support Bundle* window, select the timeframe.
 +
 You can choose between quick or custom timeframes.
 +
 NOTE: You can choose a custom date range as well as specify a custom time period during the date range.
-+
-image:custom-timeframe.png[Shows the custom timeframe selection screen for generating Support bundles.]
-
-.. Select *Confirm*.
+.. After you make the selections, select *Confirm*.
 .. Check the *Upload the bundle to the NetApp Support Site when generated*.
 +
 image:upload-bundle.png[Shows the upload Support bundle to NSS checkbox.]
