@@ -40,7 +40,7 @@ You can define the hourly, daily, weekly, and monthly schedules concurrently. A 
 +
 The following example sets a schedule to take snapshots daily and weekly, while retaining the last 4 hourly snapshots and the last 26 weekly snapshots. It also takes monthly backups and retains the last 12 copies. Because 0 copies were selected for hourly, no hourly snapshots or backups are taken.
 +
-image:screenshot_config_protection_policy.png["A screenshot of a sample configuration policy where you can choose to take snapshots and backups on an hourly, daily, weekly, or monthly basis."]
+image:screenshot-config-protection-policy.png[A screenshot of a sample configuration policy where you can choose to take snapshots and backups on an hourly, daily, weekly, or monthly basis.]
 
 . Click *Review*.
 . Click *Set Protection Policy.*
@@ -64,8 +64,8 @@ You can create an on-demand snapshot at any time.
 . Click *Snapshot*.
 //+
 //image:screenshot-create-snapshot.gif["A screenshot of the app page where you can click the drop-down list in the actions column and select Snapshot."]
-. Customize the name of the snapshot and then click *Review Information*.
-. Review the snapshot summary and click *Snapshot App*.
+. Customize the name of the snapshot and then click *Review*.
+. Review the snapshot summary and click *Snapshot*.
 
 .Result
 
@@ -87,8 +87,8 @@ NOTE: S3 buckets in Astra Control Center do not report available capacity. Befor
 . Customize the name of the backup.
 . Choose whether to back up the app from an existing snapshot. If you select this option, you can choose from a list of existing snapshots.
 . Choose a destination for the backup by selecting from the list of storage buckets.
-. Click *Review Information*.
-. Review the backup summary and click *Backup App*.
+. Click *Review*.
+. Review the backup summary and click *Backup*.
 
 .Result
 
