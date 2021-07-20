@@ -24,6 +24,10 @@ There is no way to stop a running backup. If you need to delete the backup, wait
 // DOC-3562/ASTRACTL-9560/ASTRACTL-9540
 After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
 
+== Clone performance impacted by large persistent volumes
+//from ACS repo
+Clones of very large and consumed persistent volumes might be intermittently slow, dependent on cluster access to the object store. If the clone is hung and no data has been copied for more than 30 minutes, Astra Control terminates the clone action.
+
 == S3 buckets in Astra Control Center do not report available capacity
 // DOC-3561/ASTRACTL-9425
 Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
@@ -32,6 +36,6 @@ Before backing up or cloning apps managed by Astra Control Center, check bucket 
 // ASTRACTL-9296 (Low probability)/ASTRACTL-9837/DOC-3575
 If you try to reuse a bucket used by another or previous installation of Astra Control Center, backup and restore will fail. You must use a different bucket or completely clean out the previously used bucket. You cannot share buckets between instances of Astra Control Center.
 
-== Clone performance impacted by large persistent volumes
-//from ACS repo
-Clones of very large and consumed persistent volumes might be intermittently slow, dependent on cluster access to the object store. If the clone is hung and no data has been copied for more than 30 minutes, Astra Control terminates the clone action.
+== Uninstall of Astra Control Center fails to clean up the monitoring-operator pod on the managed cluster
+//DOC-3530/ASTRACTL-9496
+You can manually delete the namespace with an Openshift `oc` or `kubectl delete` command.
