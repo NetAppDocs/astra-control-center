@@ -13,7 +13,7 @@ summary: Clone an existing app to create a duplicate app on the same Kubernetes 
 [.lead]
 Clone an existing app to create a duplicate app on the same Kubernetes cluster or on another cluster. Cloning can help if you need to move applications and storage from one Kubernetes cluster to another. For example, you might want to move workloads through a CI/CD pipeline and across Kubernetes namespaces. You can use the Astra UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra API] to clone and migrate apps.
 
-NOTE: If you clone an app between clusters, the source and destination clusters must be the same distribution of Kubernetes. For example, if you clone an app from an OpenShift 4.7 cluster, use a destination cluster that is also OpenShift 4.7.
+NOTE: If you clone an app between clusters, the source and destination clusters must be the same distribution of OpenShift. For example, if you clone an app from an OpenShift 4.7 cluster, use a destination cluster that is also OpenShift 4.7.
 
 When Astra Control Center clones an app, it creates a clone of your application configuration and persistent storage.
 
@@ -38,13 +38,13 @@ NOTE: S3 buckets in Astra Control Center do not report available capacity. Befor
 //+
 //image:screenshot-clone-source.gif[]
 
-. Click *Review Information*.
-. *Clone Summary*: Review the details about the clone and click *Clone App*.
+. Click *Review*.
+. *Clone Summary*: Review the details about the clone and click *Clone*.
 //+
 //image:screenshot-clone-summary.gif[]
 
 .Result
 
-Astra Control Center clones that app based on the information that you provided.
+Astra Control Center clones that app based on the information that you provided. The clone operation is successful when the new app clone is in the `Available` state on the *Apps* page.
 
 NOTE: After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.

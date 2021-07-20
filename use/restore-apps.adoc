@@ -31,12 +31,12 @@ NOTE: If you use Helm to deploy apps, Astra Control Center requires Helm version
 * Enter a name and namespace for the app.
 +
 // Q2 note only; remove for Q3 and later - DOC-3548
-NOTE: If you are restoring an app that has been deleted, choose a different name for the app than the original name. If the name for the restored app is the same as the deleted app, the restore operation will fail.
+NOTE: If you are restoring an app that has been deleted, choose a different name and namespace for the app than the original name. If the name for the restored app is the same as the deleted app, the restore operation will fail.
 
 * Choose the destination cluster for the app.
-* Click *Review information*.
+* Click *Review*.
 
-. *Restore Summary*: Review details about the restore action and click *Restore App*.
+. *Restore Summary*: Review details about the restore action and click *Restore*.
 //+
 //image:screenshot-restore-summary.gif[]
 

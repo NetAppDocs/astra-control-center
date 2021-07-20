@@ -32,7 +32,7 @@ Note the following:
 * Each role provides the following permissions:
 ** An *Owner* has Admin permissions and can add and remove any user accounts.
 ** An *Admin* has Member permissions and can add and remove any other users except the Owner.
-** A *Member* can fully manage apps and compute resources.
+** A *Member* can fully manage apps and compute resources, but cannot unmanage apps or delete snapshots or backups. 
 ** A *Viewer* can view resources.
 +
 //image:screenshot-invite-users.gif[A screenshot of the Invite Users screen where you enter a name, email address, and select a role.]
