@@ -11,7 +11,7 @@ summary: Astra can restore your application configuration and persistent storage
 :imagesdir: ../media/use/
 
 [.lead]
-Astra Control Center can restore your application configuration and persistent storage from a snapshot or backup. Persistent storage backups are transferred from your object store, so restoring from an existing backup will complete the fastest. You can use the Astra UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra API] to restore apps.
+Astra Control Center can restore your application from a snapshot or backup. Persistent storage backups are transferred from your object store, so restoring from an existing backup will complete the fastest. You can use the Astra UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra API] to restore apps.
 
 NOTE: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
 
@@ -26,17 +26,17 @@ NOTE: If you use Helm to deploy apps, Astra Control Center requires Helm version
 . Click *Restore application*.
 //+
 //image:screenshot-restore-app.gif["A screenshot of the app page where you can click the drop-down list in the actions column and select Restore application."]
-. *Restore details*: Specify details for the clone:
+. *Restore details*: Specify details for the restore:
 +
 * Enter a name and namespace for the app.
 +
 // Q2 note only; remove for Q3 and later - DOC-3548
-NOTE: If you are restoring an app that has been deleted, choose a different name for the app than the original name. If the name for the restored app is the same as the deleted app, the restore operation will fail.
+NOTE: If you are restoring an app that has been deleted, choose a different name and namespace for the app than the original name. If the name for the restored app is the same as the deleted app, the restore operation will fail.
 
 * Choose the destination cluster for the app.
-* Click *Review information*.
+* Click *Review*.
 
-. *Restore Summary*: Review details about the restore action and click *Restore App*.
+. *Restore Summary*: Review details about the restore action and click *Restore*.
 //+
 //image:screenshot-restore-summary.gif[]
 

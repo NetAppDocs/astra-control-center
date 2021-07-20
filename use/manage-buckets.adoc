@@ -26,7 +26,6 @@ NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket pr
 
 TIP: Ensure you use a single bucket type; otherwise, mixing bucket types can cause errors.
 
-
 You cannot remove a bucket.
 
 A bucket can be in one of these states:
@@ -37,7 +36,7 @@ A bucket can be in one of these states:
 
 For instructions on how to manage buckets using the Astra API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
 
-* /get-started/setup_overview.html#add-a-bucket[Add buckets]
+* link:../get-started/setup_overview.html#add-a-bucket[Add a bucket]
 * <<Edit a bucket>>
 
 NOTE: S3 buckets in Astra Control Center do not report available capacity. Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
@@ -60,6 +59,8 @@ TIP: The first set of credentials that you add to Astra Control is always in use
 == Edit a bucket
 
 You can change the access credential information for a bucket and change whether a selected bucket is the default bucket.
+
+NOTE: When you add a bucket, select the correct bucket provider type with credentials that are correct for that provider. For example, the UI accepts NetApp ONTAP S3 as the type with StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail. See the link:../release-notes/known-issues.html#selecting-a-bucket-provider-type-with-credentials-for-another-type-causes-data-protection-failures[Release Notes].
 
 .Steps
 .	From left navigation, select *Buckets*.

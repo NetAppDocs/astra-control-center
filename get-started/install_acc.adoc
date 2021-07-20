@@ -93,6 +93,7 @@ vim astra_control_center_min.yaml
 .. Change the `accountName` string to the name you want to associate with the account.
 .. Change the `astraAddress` string to the FQDN you want to use in your browser to access Astra. Copy this FQDN for use in a <<Log in to the Astra Control Center UI,later step>>.
 .. Change the `email` string to the default initial administrator address. Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>.
+.. Change `enrolled` for autoSupport to `false` for sites without internet connectivity or retain `true` for connected sites.
 .. (Optional) Add a first name `firstName` and last name `lastName` of the user associated with the account. You can perform this step now or later within the UI.
 +
 ----

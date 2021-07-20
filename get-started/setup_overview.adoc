@@ -56,7 +56,7 @@ The *Account* > *License* page displays the license information, expiration date
 
 To begin managing your apps, add a Kubernetes cluster and manage it as a compute resource. You have to add a cluster for Astra Control Center to discover your Kubernetes applications.
 
-TIP: We recommend that Astra Control Center manage the cluster it is deployed on first before you add other clusters to Astra Control Center to manage. Having the initial cluster under management is necessary to send Kubemetrics data and cluster-associated data for metrics and troubleshooting. You can do this using the *Add Cluster* feature.
+TIP: We recommend that Astra Control Center manage the cluster it is deployed on first before you add other clusters to Astra Control Center to manage. Having the initial cluster under management is necessary to send Kubemetrics data and cluster-associated data for metrics and troubleshooting. You can use the *Add Cluster* feature to manage a cluster with Astra Control Center.
 
 .What you'll need
 
@@ -150,6 +150,8 @@ Use any of the following bucket types:
 TIP: Ensure you use a single bucket type; otherwise, mixing bucket types can cause errors.
 
 NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon’s S3 support.
+
+NOTE: When you add a bucket, select the correct bucket provider type with credentials that are correct for that provider. For example, the UI accepts NetApp ONTAP S3 as the type with StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail. See the link:../release-notes/known-issues.html#selecting-a-bucket-provider-type-with-credentials-for-another-type-causes-data-protection-failures[Release Notes].
 
 For instructions on how to add buckets using the Astra API, see link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information].
 
