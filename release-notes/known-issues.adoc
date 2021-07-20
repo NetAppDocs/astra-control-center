@@ -14,7 +14,7 @@ Known issues identify problems that might prevent you from using this release of
 
 == App with user-defined label goes into "removed" state
 // ASTRACTL-9643
-If you define an app with a non-existent k8s label, Astra Control Center will create, manage, and then immediately remove the app. To avoid this, add the k8s label to pods and resources after the app is managed by Astra Control Center???
+If you define an app with a non-existent k8s label, Astra Control Center will create, manage, and then immediately remove the app. To avoid this, add the k8s label to pods and resources after the app is managed by Astra Control Center.
 
 == Unable to stop running app backup
 // DOC-3552/ASTRACTL-9586
