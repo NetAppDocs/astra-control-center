@@ -28,7 +28,7 @@ OpenShift 4.8 is not supported for the July release of Astra Control Center. For
 //From requirements section
 If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. For more information, see link:../get-started/requirements.html[Astra Control Center requirements].
 
-= Data protection for Astra Control Center as app not yet available
+== Data protection for Astra Control Center as app not yet available
 //DOC-3583
 This release does not support the ability to manage Astra as an app using snapshot, backup, or restore options.
 
