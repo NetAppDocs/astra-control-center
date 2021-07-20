@@ -1,0 +1,23 @@
+---
+sidebar: sidebar
+permalink: get-started/add-cluster-reqs.html
+keywords: prerequisites, Astra Control Center, add cluster, eligibility checks, Trident version
+summary: You should run the elgibility checks to ensure that your cluster is ready to be added to Astra Control Center.
+---
+
+= Prerequisites for adding a cluster
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/get-started/
+
+You should run the elgibility checks to ensure that your cluster is ready to be added to Astra Control Center.
+
+.Tasks
+
+== What's next?
+
+Now that you’ve ... , you're ready to add a cluster.
+
+[discrete]
+== Find more information
+* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API^]
