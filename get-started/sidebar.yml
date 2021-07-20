@@ -9,5 +9,8 @@ entries:
     url: /get-started/install_acc.html
   - title: Set up Astra Control Center
     url: /get-started/setup_overview.html
+    entries:
+      - title: Prerequisites for adding a cluster
+        url: /get-started/add-cluster-reqs.html
   - title: FAQ
     url: /get-started/faq.html
