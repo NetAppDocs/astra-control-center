@@ -36,6 +36,10 @@ Before backing up or cloning apps managed by Astra Control Center, check bucket 
 // ASTRACTL-9296 (Low probability)/ASTRACTL-9837/DOC-3575
 If you try to reuse a bucket used by another or previous installation of Astra Control Center, backup and restore will fail. You must use a different bucket or completely clean out the previously used bucket. You cannot share buckets between instances of Astra Control Center.
 
+== Selecting a bucket provider type with credentials for another type causes data protection failures
+//DOC-3560/ASTRACTL-9574
+When you add a bucket, select the correct bucket provider type with credentials that are correct for that provider. For example, the UI accepts NetApp ONTAP S3 as the type with StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail.
+
 //== Fluentd???
 
 //When the user is trying to enable the connection from Astra CC to Fluentd, they need to enter the host IP address, the port number, and API token (optional) for their Fluentd server. Right now, there is no validation done at the back end to check if what they are entering is even valid. So for example, the user can enter basically anything in the fields, and the system will say “connected,” but in essence, it is a failed connection. I will mention this in the Fluentbit and proxy sections, but I think we need to call it out as a known limitation/issue.
