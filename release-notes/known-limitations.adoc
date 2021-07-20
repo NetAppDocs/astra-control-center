@@ -36,10 +36,10 @@ This release does not support the ability to manage Astra as an app using snapsh
 //From ACS RN
 If a managed app has pods in an unhealthy state, Astra Control can't create new backups and clones.
 
-== Trident isn't uninstalled from a cluster
-//From ACS RN
-When you unmanage a cluster from Astra Control Center, Trident isn't automatically uninstalled from the cluster. To uninstall Trident, you'll need to https://netapp-trident.readthedocs.io/en/latest/kubernetes/operations/tasks/managing.html#uninstalling-trident[follow these steps in the Trident documentation^].
-
 == Existing connections to a Postgres pod causes failures
 //From ACS RN
 When you perform operations on Postgres pods, you shouldn't connect directly within the pod to use the psql command. Astra Control requires psql access to freeze and thaw the databases. If there is a pre-existing connection, the snapshot, backup, or clone will fail.
+
+== Trident isn't uninstalled from a cluster
+//From ACS RN
+When you unmanage a cluster from Astra Control Center, Trident isn't automatically uninstalled from the cluster. To uninstall Trident, you'll need to https://netapp-trident.readthedocs.io/en/latest/kubernetes/operations/tasks/managing.html#uninstalling-trident[follow these steps in the Trident documentation^].
