@@ -147,8 +147,6 @@ Use any of the following bucket types:
 * NetApp StorageGRID S3
 * Generic S3
 
-TIP: Ensure you use a single bucket type; otherwise, mixing bucket types can cause errors.
-
 NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon’s S3 support.
 
 For instructions on how to add buckets using the Astra API, see link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information].
@@ -196,4 +194,4 @@ Now that you’ve logged in and added clusters to Astra Control Center, you're r
 [discrete]
 == Find more information
 * https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API^]
-* link:../release-notes/known-issues.html[Known issues].
+* link:../release-notes/known-issues.html[Known issues]

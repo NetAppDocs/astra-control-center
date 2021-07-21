@@ -46,4 +46,18 @@ When you add a bucket, select the correct bucket provider type with credentials 
 
 == Uninstall of Astra Control Center fails to clean up the monitoring-operator pod on the managed cluster
 //DOC-3530/ASTRACTL-9496
-You can manually delete the namespace with an Openshift `oc` or `kubectl delete` command.
+You can manually delete the namespace with the following commands:
+
+----
+oc delete agents acc-monitoring n  netapp-monitoring---
+----
+
+----
+oc delete ns netapp-monitoring
+----
+
+IMPORTANT: Execute the following command only from a remotely managed cluster. Don't execute this command on Astra Control Center host cluster. If you do, it will damage the monitoring operator that exists in the ACC namespace.
+
+----
+oc delete crds agents.monitoring.netapp.com
+----
