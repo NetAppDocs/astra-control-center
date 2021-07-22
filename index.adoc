@@ -2,8 +2,8 @@
 layout: astra
 sidebar: sidebar
 permalink: index.html
-lead: Astra is a Kubernetes application data lifecycle management service that simplifies operations for stateful applications. Easily back up Kubernetes apps, migrate data to a different cluster, and instantly create working application clones. Using Astra Control Service, you can manage apps in the cloud. Using Astra Control Center, you can manage apps on-premise. The docs on this site are for Astra Control Center.
-summary: Astra is a Kubernetes application data lifecycle management service that simplifies operations for stateful applications. Easily back up Kubernetes apps, migrate data to a different cluster, and instantly create working application clones. Using Astra Control Service, you can manage apps in the cloud. Using Astra Control Center, you can manage apps on-premise. The docs on this site are for Astra Control Center.
+lead: Astra Control Center software provides application-aware data management of Kubernetes clusters in your on-premise environment. Easily back up Kubernetes apps, migrate data to a different cluster, and instantly create working application clones. If you need to manage Kubernetes apps using a NetApp-managed service running in the cloud, go to the docs for Astra Control Service.
+summary: Astra Control Center software provides application-aware data management of Kubernetes clusters in your on-premise environment. Easily back up Kubernetes apps, migrate data to a different cluster, and instantly create working application clones. If you need to manage Kubernetes apps using a NetApp-managed service running in the cloud, go to the docs for Astra Control Service.
 ---
 
 = Astra Control Center Documentation
