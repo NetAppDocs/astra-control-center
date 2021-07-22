@@ -19,7 +19,7 @@ Initial release of Astra Control Center.
 * link:../get-started/intro.html#features[What it is]
 * link:../concepts/architecture.html[Understand architecture and components]
 * link:../get-started/requirements.html[What it takes to get started]
-* link:../get-started/install_acc.html[Get up] and link:../get-started/setup_overview.html[running]
+* link:../get-started/install_acc.html[Install] and link:../get-started/setup_overview.html[setup]
 * link:../use/manage-apps.html[Manage], link:../use/protect-apps.html[protect], and deploy apps
 * link:../use/manage-buckets.html[Manage buckets] and link:../use/manage-backend.html[storage backends]
 * link:../use/manage-users.html[Manage accounts]
