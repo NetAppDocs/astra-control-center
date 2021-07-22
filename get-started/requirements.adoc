@@ -34,7 +34,7 @@ If your Kubernetes cluster is managed as part of the Red Hat OpenShift Container
 * A load balancer which exposes a reachable IP address
 * A method for pointing the FQDN of Astra Control Center to the load balanced IP address
 * This cluster must be the active kubeconfig credential
-* Kubernetes version 1.19 or newer
+* Kubernetes version 1.18, 1.19, or 1.20
 * Docker Engine v20.10 or newer
 
 NOTE: OpenShift 4.8 is not supported.
@@ -56,7 +56,7 @@ The Kubernetes cluster you use for Astra Control Center should already be deploy
 * An internal domain name that is routed from an internal DNS server and points to the static IP address or IP address range of the cluster (the DNS name should point to the load-balanced IP address or addresses using the internal DNS server)
 * A default storage provider in the Kubernetes cluster that is backed by a Trident storage class to work with ONTAP
 * A single Trident StorageClass configured as the default
-* Kubernetes version 1.19 or newer
+* Kubernetes version 1.18, 1.19, or 1.20
 * At least 3 worker nodes
 
 === Supported apps
