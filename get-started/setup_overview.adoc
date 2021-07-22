@@ -56,7 +56,7 @@ The *Account* > *License* page displays the license information, expiration date
 
 To begin managing your apps, add a Kubernetes cluster and manage it as a compute resource. You have to add a cluster for Astra Control Center to discover your Kubernetes applications.
 
-TIP: We recommend that Astra Control Center also manages the cluster it is deployed on first before you add other clusters to Astra Control Center to manage. You can do this using the *Add Cluster* feature. 
+TIP: We recommend that Astra Control Center manage the cluster it is deployed on first before you add other clusters to Astra Control Center to manage. Having the initial cluster under management is necessary to send Kubemetrics data and cluster-associated data for metrics and troubleshooting. You can use the *Add Cluster* feature to manage a cluster with Astra Control Center.
 
 .What you'll need
 
@@ -147,8 +147,6 @@ Use any of the following bucket types:
 * NetApp StorageGRID S3
 * Generic S3
 
-TIP: Ensure you use a single bucket type; otherwise, mixing bucket types can cause errors.
-
 NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon’s S3 support.
 
 For instructions on how to add buckets using the Astra API, see link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information].
@@ -158,6 +156,9 @@ For instructions on how to add buckets using the Astra API, see link:https://doc
 . In the left navigation area, select *Buckets*.
 .. Select *Add*.
 .. Select the bucket type.
++
+NOTE: When you add a bucket, select the correct bucket provider type with credentials that are correct for that provider. For example, the UI accepts NetApp ONTAP S3 as the type with StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail.
+
 .. Enter the existing bucket name and optional description.
 +
 TIP: The bucket name and description appear as a backup location that you can choose later when you’re creating a backup. The name also appears during protection policy configuration.
@@ -192,4 +193,5 @@ Now that you’ve logged in and added clusters to Astra Control Center, you're r
 
 [discrete]
 == Find more information
-* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API]
+* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API^]
+* link:../release-notes/known-issues.html[Known issues]

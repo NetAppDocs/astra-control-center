@@ -1,31 +1,45 @@
 ---
 sidebar: sidebar
 permalink: release-notes/known-limitations.html
-keywords: limitations, known limitations, interoperability
+keywords: astra, control center, limitations, known limitations, interoperability
 summary: Known limitations identify platforms, devices, or functions that are not supported by this release of the product, or that do not interoperate correctly with it. Review these limitations carefully.
 ---
 
-= Known limitations
+= Known limitations with this release
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/release-notes/
 
 Known limitations identify platforms, devices, or functions that are not supported by this release of the product, or that do not interoperate correctly with it. Review these limitations carefully.
 
+== OLM-enabled operator deployed apps not supported
+// DOC-3553/ASTRACTL-9490
+Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators.
 
-== Astra API is not available yet
+== Cloning apps can only be done with same K8s distribution
+// ASTRACTL-7079
+If you clone an app between clusters, the source and destination clusters must be the same distribution of Kubernetes. For example, if you clone an app from an OpenShift 4.7 cluster, use a destination cluster that is also OpenShift 4.7.
 
-The Astra API is not available for customer use at this time. We'll add an announcement in the release notes when it's ready.
+== OpenShift 4.8 is not supported
+//From requirements section
+OpenShift 4.8 is not supported for the July release of Astra Control Center. For more information, see link:../get-started/requirements.html[Astra Control Center requirements].
 
+== Apps deployed with Helm 2 are not supported
+//From requirements section
+If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. For more information, see link:../get-started/requirements.html[Astra Control Center requirements].
+
+== Data protection for Astra Control Center as app not yet available
+//DOC-3583
+This release does not support the ability to manage Astra as an app using snapshot, backup, or restore options.
 
 == Unhealthy pods affect app management
-
-If a managed app has pods in an unhealthy state, Astra Enterprise can't create new backups and clones.
-
-== Trident isn't uninstalled from a cluster
-
-When you unmanage a cluster from Astra Enterprise, Trident isn't automatically uninstalled from the cluster. To uninstall Trident, you'll need to https://netapp-trident.readthedocs.io/en/latest/kubernetes/operations/tasks/managing.html#uninstalling-trident[follow these steps in the Trident documentation^].
+//From ACS RN
+If a managed app has pods in an unhealthy state, Astra Control can't create new backups and clones.
 
 == Existing connections to a Postgres pod causes failures
+//From ACS RN
+When you perform operations on Postgres pods, you shouldn't connect directly within the pod to use the psql command. Astra Control requires psql access to freeze and thaw the databases. If there is a pre-existing connection, the snapshot, backup, or clone will fail.
 
-When you perform operations on Postgres pods, you shouldn't connect directly within the pod to use the psql command. Astra Enterprise requires psql access to freeze and thaw the databases. If there is a pre-existing connection, the snapshot, backup, or clone will fail.
+== Trident isn't uninstalled from a cluster
+//From ACS RN
+When you unmanage a cluster from Astra Control Center, Trident isn't automatically uninstalled from the cluster. To uninstall Trident, you'll need to https://netapp-trident.readthedocs.io/en/latest/kubernetes/operations/tasks/managing.html#uninstalling-trident[follow these steps in the Trident documentation^].

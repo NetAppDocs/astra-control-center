@@ -90,8 +90,11 @@ vim astra_control_center_min.yaml
 
 .. Change `[Docker_registry_path]` to the registry path where you pushed the images in the previous step.
 .. Change `[Docker_registry_secret]` to the k8s secret with your registry credentials in it. Delete the `secret` line if credentials are not used with your registry.
-.. Change `astraAddress` to the FQDN you want to use in your browser to access Astra. Copy this FQDN for use in a <<Log in to the Astra Control Center UI,later step>>.
-.. Change `email` to the default initial administrator address. Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>.
+.. Change the `accountName` string to the name you want to associate with the account.
+.. Change the `astraAddress` string to the FQDN you want to use in your browser to access Astra. Copy this FQDN for use in a <<Log in to the Astra Control Center UI,later step>>.
+.. Change the `email` string to the default initial administrator address. Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>.
+.. Change `enrolled` for autoSupport to `false` for sites without internet connectivity or retain `true` for connected sites.
+.. (Optional) Add a first name `firstName` and last name `lastName` of the user associated with the account. You can perform this step now or later within the UI.
 +
 ----
 apiVersion: astra.netapp.io/v1
@@ -99,11 +102,14 @@ kind: AstraControlCenter
 metadata:
   name: astra
 spec:
-  astraVersion: "[version]"
-  astraAddress: "astra-west.yourco.com"
+  accountName: "Example"
+  astraVersion: "ASTRA_VERSION"
+  astraAddress: "astra.example.com"
   autoSupport:
     enrolled: true
   email: "[nednetapp@netapp.com]"
+  firstName: "SRE"
+  lastName: "Admin"
   imageRegistry:
     name: "[Docker_registry_path]"
     secret: "[Docker_registry_secret]"

@@ -1,0 +1,71 @@
+---
+sidebar: sidebar
+permalink: get-started/add-cluster-reqs.html
+keywords: prerequisites, Astra Control Center, add cluster, eligibility checks, Trident version
+summary: You should run the elgibility checks to ensure that your cluster is ready to be added to Astra Control Center.
+---
+
+= Prerequisites for adding a cluster
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/get-started/
+
+You should run the elgibility checks to ensure that your cluster is ready to be added to Astra Control Center.
+
+.Tasks
+
+* Check the Trident version.
++
+----
+kubectl get tridentversions -n trident
+----
++
+If Trident exists, you see output similar to the following:
++
+----
+NAME      VERSION
+trident   21.04.0
+----
++
+If Trident does not exist, you see output similar to the following:
++
+----
+error: the server doesn't have a resource type "tridentversions"
+----
+* Check if the snapshot controller and volumesnapshot CRDs are installed.
++
+----
+kubectl get sts -A | grep -i snapshot
+----
++
+If the snapshot controller is installed, you see output similar to the following:
++
+----
+default     snapshot-controller   1/1     5h18m
+----
+
+NOTE: The snapshot controller does not have to be installed in the `default` namespace.
+
+If the snapshot controller is not installed, you get the following message:
+
+----
+No resources found
+----
+
+* Check if the storage classes are using the supported Trident drivers. The provisioner name should be `csi.trident.netapp.io`. See the following example:
++
+----
+kubectl get storageClass -A
+NAME                   PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+ontap-gold (default)   csi.trident.netapp.io          Delete          Immediate           true                   5d23h
+thin                   kubernetes.io/vsphere-volume   Delete          Immediate           false                  6d
+----
+
+== What's next?
+
+Now that you’ve verified that the prerequisites are met, you're ready to add a cluster.
+
+[discrete]
+== Find more information
+* https://netapp-trident.readthedocs.io/en/latest/frequently_asked_questions.html[Trident documnentation^]
+* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API^]
