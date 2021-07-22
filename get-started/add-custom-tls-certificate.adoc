@@ -14,32 +14,33 @@ You can remove the existing self-signed TLS certificate and replace it with a TL
 
 .What you'll need
 
-* Kubernetes cluster with Astra Control Center installed and administrative access to a command shell on the cluster to run `kubectl` commands
+* Kubernetes cluster with Astra Control Center installed
+* Administrative access to a command shell on the cluster to run `kubectl` commands
 * Private key and certificate files from the CA
 
 .Remove the self-signed certificate
 
 . Using SSH, log in to the Kubernetes cluster that hosts Astra Control Center as an administrative user.
-. Find the TLS secret associated with the current certificate using the following command, replacing `<deployment-namespace>` with the Astra Control Center deployment namespace:
+. Find the TLS secret associated with the current certificate using the following command, replacing `<ACC-deployment-namespace>` with the Astra Control Center deployment namespace:
 +
 ----
-kubectl get certificate -n <deployment-namespace>
+kubectl get certificate -n <ACC-deployment-namespace>
 ----
 . Delete the currently installed secret and certificate using the following commands:
 +
 ----
-kubectl delete cert cert-manager-certificates -n <deployment-namespace>
-kubectl delete secret secure-testing-cert -n <deployment-namespace>
+kubectl delete cert cert-manager-certificates -n <ACC-deployment-namespace>
+kubectl delete secret secure-testing-cert -n <ACC-deployment-namespace>
 ----
-. Use the following command to create the new TLS secret with the private key and certificate files from the CA, replacing the arguments with the appropriate information:
+. Use the following command to create the new TLS secret with the private key and certificate files from the CA, replacing the arguments in brackets <> with the appropriate information:
 +
 ----
-kubectl create secret tls <secret-name> --key <private-key-filename> --cert <certificate-filename> -n <deployment-namespace>
+kubectl create secret tls <secret-name> --key <private-key-filename> --cert <certificate-filename> -n <ACC-deployment-namespace>
 ----
-. Use the following command and example to edit the cluster CRD (customer resource definition) file and change the `spec.selfSigned` value to `spec.ca.secretName` to refer to the TLS secret created above:
+. Use the following command and example to edit the cluster CRD (customer resource definition) file and change the `spec.selfSigned` value to `spec.ca.secretName` to refer to the TLS secret you created earlier:
 +
 ----
-kubectl edit clusterissuers.cert-manager.io/cert-manager-certificates -n <deployment-namespace>
+kubectl edit clusterissuers.cert-manager.io/cert-manager-certificates -n <ACC-deployment-namespace>
 ....
 
 #spec:
@@ -65,20 +66,20 @@ Status:
 Events:                    <none>
 
 ----
-. Create the `certificate.yaml` file using the following example:
+. Create the `certificate.yaml` file using the following example, replacing the placeholder values in brackets <> with appropriate information:
 +
 ----
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: <certificate-name>
-  namespace: <deployment-namespace>
+  namespace: <ACC-deployment-namespace>
 spec:
   secretName: <certificate-secret-name>
   duration: 2160h # 90d
   renewBefore: 360h # 15d
   dnsNames:
-  - astra.example.com #whatever you set your astraAddress to during deployment
+  - <astra.dnsname.example.com> #Replace with the correct Astra Control Center DNS address
   issuerRef:
     kind: ClusterIssuer
     name: cert-manager-certificates
@@ -91,7 +92,7 @@ kubectl apply -f certificate.yaml
 . Using the following command, validate that the certificate has been created correctly and with the arguments you specified during creation (such as name, duration, renewal deadline, and DNS names).
 +
 ----
-kubectl describe certificate -n <deployment-namespace>
+kubectl describe certificate -n <ACC-deployment-namespace>
 ....
 
 Spec:
@@ -119,7 +120,7 @@ Events:                    <none>
 . Edit the ingress CRD TLS option to point to your new certificate secret using the following command and example:
 +
 ----
-kubectl edit ingressroutes.traefik.containo.us -n <deployment-namespace>
+kubectl edit ingressroutes.traefik.containo.us -n <ACC-deployment-namespace>
 ....
 
 # tls:
