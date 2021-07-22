@@ -10,13 +10,16 @@ summary: Add storage for your on-premises Kubernetes applications. Astra Control
 :icons: font
 :imagesdir: ../media/use/
 
-Add storage backend to Astra Control to manage your on-premises Kubernetes applications. Astra Control discovers and uses the already-deployed resources, including Trident, ONTAP, and associated storage classes.
+Add storage backend to Astra Control  to manage your on-premises Kubernetes applications. Astra Control discovers and uses the already-deployed resources, including Trident, ONTAP, and associated storage classes.
 
-Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend. You can also see the storage capacity and health details, including performance if Astra Control is connected to Cloud Insights.
+Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend. 
+
+You can also see the storage capacity and health details, including performance if Astra Control Center is connected to Cloud Insights.
 
 For instructions on how to manage storage backends using the Astra API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
 
-* /get-started/setup_overview.html#add-a-storage-backend
+
+* link:../get-started/setup_overview.html#add-a-storage-backend[Add a storage backend]
 * <<View storage backend details>>
 * <<Unmanage a storage backend>>
 

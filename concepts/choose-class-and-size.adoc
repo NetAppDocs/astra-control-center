@@ -16,6 +16,8 @@ Astra Control Center uses ONTAP as the backend storage. You should understand ho
 == Overview
 Astra Control Center supports only Trident storage classes backed by ONTAP storage at this time. Astra Control Center discovers and uses the already-deployed resources, including ONTAP, Trident, and associated storage classes.
 
+NOTE: Trident storage classes should be preconfigured outside of Astra Control Center.
+
 == Storage classes
 
 When you add compute to Astra Control Center, you're prompted to choose one of the previously discovered storage classes for persistent volumes. Service levels in storage classes are designed for different capacity and bandwidth needs. These discovered storage classes are eligible for use within Astra Control Center.
@@ -26,4 +28,4 @@ See Trident information that provides cost comparisons and examples that can hel
 
 == Find more information
 
-* https://netapp-trident.readthedocs.io/en/stable-v21.01/index.html[Trident documentation^]
+* https://netapp-trident.readthedocs.io/en/stable-v21.01/dag/kubernetes/storage_configuration_trident.html[Trident documentation on storage configuration^]
