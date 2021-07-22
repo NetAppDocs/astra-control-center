@@ -50,7 +50,7 @@ spec:
   ca:
     secretName: <secret-name>
 ----
-. Use the following command and example output to validate that the edits are correct and the cluster is ready to validate certificates:
+. Use the following command and example output to validate that the edits are correct and the cluster is ready to validate certificates, replacing `<ACC-deployment-namespace>` with the Astra Control Center deployment namespace:
 +
 ----
 kubectl describe clusterissuers.cert-manager.io/cert-manager-certificates -n <ACC-deployment-namespace>
@@ -117,7 +117,7 @@ Status:
   Revision:                1
 Events:                    <none>
 ----
-. Edit the ingress CRD TLS option to point to your new certificate secret using the following command and example:
+. Edit the ingress CRD TLS option to point to your new certificate secret using the following command and example, replacing the placeholder values in brackets <> with appropriate information:
 +
 ----
 kubectl edit ingressroutes.traefik.containo.us -n <ACC-deployment-namespace>
