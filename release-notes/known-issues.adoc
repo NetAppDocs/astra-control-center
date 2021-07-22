@@ -46,18 +46,59 @@ When you add a bucket, select the correct bucket provider type with credentials 
 
 == Uninstall of Astra Control Center fails to clean up the monitoring-operator pod on the managed cluster
 //DOC-3530/ASTRACTL-9496
-You can manually delete the namespace with the following commands:
+You can manually delete the pods in the netapp-monitoring namespace and the namespace with the following commands:
 
+.Steps
+. Delete `acc-monitoring` agent:
++
 ----
-oc delete agents acc-monitoring n  netapp-monitoring---
+oc delete agents acc-monitoring n  netapp-monitoring
 ----
-
+Result:
++
+----
+agent.monitoring.netapp.com "acc-monitoring" deleted
+----
+. Delete the namespace:
++
 ----
 oc delete ns netapp-monitoring
 ----
+Result:
++
+----
+namespace "netapp-monitoring" deleted
+----
+. Confirm resources removed:
++
+----
+oc get pods -n netapp-monitoring
+----
+Result:
++
+----
+No resources found in netapp-monitoring namespace.
+----
+. Confirm monitoring agent removed:
++
+----
+oc get crd|grep agent
+----
++
+Sample result:
++
+----
+agents.monitoring.netapp.com                     2021-07-21T06:08:13Z
+----
 
-IMPORTANT: Execute the following command only from a remotely managed cluster. Don't execute this command on Astra Control Center host cluster. If you do, it will damage the monitoring operator that exists in the ACC namespace.
-
+. Delete custom resource definition (CRD) information:
++
 ----
 oc delete crds agents.monitoring.netapp.com
+----
++
+Result:
++
+----
+customresourcedefinition.apiextensions.k8s.io "agents.monitoring.netapp.com" deleted
 ----
