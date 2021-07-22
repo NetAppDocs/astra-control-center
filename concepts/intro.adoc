@@ -91,15 +91,31 @@ Astra Control Service is a NetApp-managed cloud service that is always on and up
 At a high level, Astra Control Service works like this:
 
 * You get started with Astra Control Service by setting up your cloud provider and by registering for an Astra account.
-** For GKE clusters, Astra Control Service uses NetApp Cloud Volumes Service for Google Cloud as the backend storage for your persistent volumes.
-** For AKS clusters, Astra Control Service uses Azure NetApp Files as the backend storage for your persistent volumes.
++
+** For GKE clusters, Astra Control Service uses https://cloud.netapp.com/cloud-volumes-service-for-gcp[NetApp Cloud Volumes Service for Google Cloud^] as the backend storage for your persistent volumes.
++
+** For AKS clusters, Astra Control Service uses https://cloud.netapp.com/azure-netapp-files[Azure NetApp Files^] as the backend storage for your persistent volumes.
+
 * You add your first Kubernetes compute to Astra Control Service. Astra Control Service then does the following:
+
 ** Creates an object store in your cloud provider account, which is where backup copies are stored.
++
+In Azure, Astra Control Service also creates a resource group, a storage account, and keys for the Blob container.
+
 ** Creates a new admin role and Kubernetes service account on the cluster.
-** Uses that new admin role to install NetApp’s Trident on the cluster and to create one or more storage classes.
+
+** Uses that new admin role to install https://netapp-trident.readthedocs.io/[NetApp's Trident^] on the cluster and to create one or more storage classes.
++
 ** Uses Trident to provision persistent volumes for your apps.
+
 * At this point, you can add apps to your cluster. Persistent volumes will be provisioned on the new default storage class.
+
 * You then use Astra Control Service to manage these apps, and start creating snapshots, backups, and clones.
++
+Astra Control Service continually watches your compute for state changes, so it's aware of any new apps that you add along the way.
+
+Astra Control's Free Plan enables you to manage up to 10 apps in your account. If you want to manage more than 10 apps, then you'll need to set up billing by upgrading from the Free Plan to the Premium Plan.
+
 
 == For more information
 
