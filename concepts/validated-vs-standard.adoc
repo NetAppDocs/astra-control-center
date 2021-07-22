@@ -34,4 +34,4 @@ No matter which type of app you use with Astra Control, always test the backup a
 
 Other apps, including custom programs, are considered standard apps. You can add and manage standard apps through Astra Control. You can also create basic crash-consistent snapshots and backups of a standard app. However, these have not been fully tested to restore the app to its original state.
 
-TIP: Astra Control itself is not a standard app; it is a "system app."
+TIP: Astra Control itself is not a standard app; it is a "system app." Astra Control itself isn't shown by default for management. You should not try to manage Astra Control itself. 

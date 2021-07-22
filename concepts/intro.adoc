@@ -31,7 +31,6 @@ link:/get-started/requirements.html[Learn about Astra Control requirements].
 
 == Deployment models
 Astra Control is available in two deployment models:
-delivered both as software you install on-premises (Astra Control Center) and as a fully managed service (Astra Control Service). Both deployment models offer the same app-data management capabilities to Kubernetes applications.
 
 * *Astra Control Service*: A NetApp-managed service that provides application-aware data management of Kubernetes clusters in Google Kubernetes Engine (GKE) and Azure Kubernetes Service (AKS).
 * *Astra Control Center*: Self-managed software that provides application-aware data management of Kubernetes clusters running in your on-premises environment.
@@ -44,8 +43,6 @@ Learn the difference between a link:/concepts/validated-vs-standard.html[validat
 
 No matter which type of app that you use with Astra Control, you should always test the backup and restore workflow yourself to ensure that you can meet your disaster recovery requirements.
 
-
-TIP: Astra Control itself is not a standard app; it is a "system app."
 
 
 == How Astra Control Center works
