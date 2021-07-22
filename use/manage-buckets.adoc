@@ -28,7 +28,7 @@ NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket pr
 
 
 You cannot delete a bucket.
-// Cannot delete a bucket using UI or API. 
+// Cannot delete a bucket using UI or API.
 
 A bucket can be in one of these states:
 
@@ -61,6 +61,8 @@ TIP: The first set of credentials that you add to Astra Control is always in use
 == Edit a bucket
 
 You can change the access credential information for a bucket and change whether a selected bucket is the default bucket.
+
+NOTE: When you add a bucket, select the correct bucket provider type with credentials that are correct for that provider. For example, the UI accepts NetApp ONTAP S3 as the type with StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail. See the link:../release-notes/known-issues.html#selecting-a-bucket-provider-type-with-credentials-for-another-type-causes-data-protection-failures[Release Notes].
 
 .Steps
 .	From left navigation, select *Buckets*.
