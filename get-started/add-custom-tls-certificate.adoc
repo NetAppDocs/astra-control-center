@@ -53,7 +53,7 @@ spec:
   ca:
     secretName: <secret-name>
 ----
-. Use the following command and example output to validate that the edits are correct and the cluster is ready to validate certificates, replacing `<ACC-deployment-namespace>` with the Astra Control Center deployment namespace:
+. Use the following command and example output to validate that the changes are correct and the cluster is ready to validate certificates, replacing `<ACC-deployment-namespace>` with the Astra Control Center deployment namespace:
 +
 ----
 kubectl describe clusterissuers.cert-manager.io/cert-manager-certificates -n <ACC-deployment-namespace>
@@ -92,7 +92,7 @@ spec:
 ----
 kubectl apply -f certificate.yaml
 ----
-. Using the following command, validate that the certificate has been created correctly and with the arguments you specified during creation (such as name, duration, renewal deadline, and DNS names).
+. Using the following command and example output, validate that the certificate has been created correctly and with the arguments you specified during creation (such as name, duration, renewal deadline, and DNS names).
 +
 ----
 kubectl describe certificate -n <ACC-deployment-namespace>
