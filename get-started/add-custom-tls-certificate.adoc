@@ -138,6 +138,7 @@ kubectl edit ingressroutes.traefik.containo.us -n <ACC-deployment-namespace>
       name: default
 ----
 . Using a web browser, browse to the deployment IP address of Astra Control Center.
+////
 . If you are using Firefox:
 .. Click the lock icon, then *Connection secure* > *More Information*.
 .. Click *View Certificate*.
@@ -145,4 +146,6 @@ kubectl edit ingressroutes.traefik.containo.us -n <ACC-deployment-namespace>
 . If you are using Chrome:
 .. Click the lock icon, then *Certificate (Valid)*.
 .. Verify that the *Valid from* section matches the validity of the certificate you installed.
+////
+. Verify that the certificate details match the details of the certificate you installed.
 . Export the certificate and import the result into the certificate manager in your web browser.
