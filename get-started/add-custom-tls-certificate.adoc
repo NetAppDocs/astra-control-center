@@ -32,6 +32,9 @@ kubectl get certificate -n <ACC-deployment-namespace>
 kubectl delete cert cert-manager-certificates -n <ACC-deployment-namespace>
 kubectl delete secret secure-testing-cert -n <ACC-deployment-namespace>
 ----
+
+.Add a new certificate
+
 . Use the following command to create the new TLS secret with the private key and certificate files from the CA, replacing the arguments in brackets <> with the appropriate information:
 +
 ----
