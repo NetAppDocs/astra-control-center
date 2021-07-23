@@ -52,7 +52,7 @@ You can manually delete the pods in the netapp-monitoring namespace and the name
 . Delete `acc-monitoring` agent:
 +
 ----
-oc delete agents acc-monitoring n  netapp-monitoring
+oc delete agents acc-monitoring -n  netapp-monitoring
 ----
 Result:
 +
