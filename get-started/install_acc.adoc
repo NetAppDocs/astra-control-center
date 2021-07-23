@@ -120,8 +120,15 @@ spec:
 ----
 vim astra_control_center_operator_deploy.yaml
 ----
+.. If you do not use a registry that requires authentication, delete these lines after `imagePullPolicy`:
++
+----
+imagePullSecrets:
+  name: astra-registry-cred
+----
 .. Change `[Docker_registry_path]` for the `kube-rbac-prox` image to the registry path where you pushed the images in the previous step.
 .. Change `[Docker_registry_path]` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in the previous step.
+
 +
 ----
 apiVersion: apps/v1
@@ -163,6 +170,8 @@ spec:
           value: "2"
         image: [Docker_registry_path]/acc-operator:[version x.y.z]
         imagePullPolicy: IfNotPresent
+        imagePullSecrets:
+          name: astra-registry-cred
 ----
 
 . Install the Astra Control Center operator:
@@ -188,16 +197,40 @@ service/acc-operator-controller-manager-metrics-service created
 deployment.apps/acc-operator-controller-manager created
 ----
 
+.  If you use a registry that requires authentication, you need to create a secret for the `netapp-acc-operator` namespace. Run the following command:
++
+----
+oc create secret docker-registry astra-registry-cred -n netapp-acc-operator --docker-server=<ASTRA_IMAGE_REGISTRY> --docker-username=<username> --docker-password=<token>
+----
++
+Sample response:
++
+----
+secret/astra-registry-cred created
+----
+
 . Create the `netapp-acc` namespace if it does not already exist:
 +
 ----
 kubectl create ns netapp-acc
 ----
 +
-Sample response:
+Response:
 +
 ----
 namespace/netapp-acc created
+----
+
+.  If you use a registry that requires authentication, you need to create a secret for the `netapp-acc` namespace. Run the following command:
++
+----
+oc create secret docker-registry astra-registry-cred -n netapp-acc --docker-server=<ASTRA_IMAGE_REGISTRY> --docker-username=<username> --docker-password=<token>
+----
++
+Response
++
+----
+secret/astra-registry-cred created
 ----
 
 . Install Astra Control Center in the `netapp-acc` namespace:
