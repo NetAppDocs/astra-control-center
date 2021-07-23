@@ -37,7 +37,7 @@ kubectl delete secret secure-testing-cert -n <ACC-deployment-namespace>
 ----
 kubectl create secret tls <secret-name> --key <private-key-filename> --cert <certificate-filename> -n <ACC-deployment-namespace>
 ----
-. Use the following command and example to edit the cluster CRD (customer resource definition) file and change the `spec.selfSigned` value to `spec.ca.secretName` to refer to the TLS secret you created earlier:
+. Use the following command and example to edit the cluster Custom Resource Definition (CRD) file and change the `spec.selfSigned` value to `spec.ca.secretName` to refer to the TLS secret you created earlier:
 +
 ----
 kubectl edit clusterissuers.cert-manager.io/cert-manager-certificates -n <ACC-deployment-namespace>
