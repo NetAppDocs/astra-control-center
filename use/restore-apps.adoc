@@ -15,6 +15,9 @@ Astra Control Center can restore your application from a snapshot or backup. Per
 
 NOTE: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
 
+//DOC-3556
+NOTE: If your backup was made on a source cluster using a persistent volume with the access mode RWX (ReadWriteMany), ensure that you restore to a cluster with the same persistent volume access mode. The restore operation will fail if the destination persistent volume access mode is different.
+
 .Steps
 
 . Click *Apps* and then click the name of an app.
