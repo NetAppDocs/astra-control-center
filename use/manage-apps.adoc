@@ -28,8 +28,6 @@ For help with deploying common applications from Helm charts, refer to the follo
 
 Astra Control enables you to manage your apps at the namespace level or by Kubernetes label.
 
-Astra can clone Helm 3 apps defined either by namespace or by label.
-
 NOTE: Apps deployed with Helm 2 are not supported.
 
 You can perform the following activities to manage apps:
@@ -37,12 +35,18 @@ You can perform the following activities to manage apps:
 *	Manage apps
 ** <<Manage apps by namespace>>
 ** <<Manage apps by Kubernetes label>>
-*	<<Rename apps>>
+//*	<<Rename apps>>
 * <<Ignore apps>>
 *	<<Unmanage apps>>
 
-For instructions on how to manage apps using the Astra API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information].
+TIP: Astra Control itself is not a standard app; it is a "system app." You should not try to manage Astra Control itself. Astra Control itself isn't shown by default for management. To see system apps, use the “Show system apps” filter.
 
+For instructions on how to manage apps using the Astra API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
+
+
+NOTE: After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
+
+//DOC-3563
 
 === Manage apps by namespace
 
@@ -57,7 +61,7 @@ While Astra Control enables you to separately manage both levels of the hierarch
 . From the left navigation bar, select *Apps*.
 . Select *Discovered*.
 +
-image:acc_apps_discovered.png[Screen shot of discovered apps]
+image:acc_apps_discovered2.png[Screen shot of discovered apps]
 .	View the list of discovered namespaces. Expand the namespace to view the apps and associated resources.
 +
 Astra Control shows you the Helm apps and custom-labeled apps in the namespace. If Helm labels are available, they’re designated with a tag icon.
@@ -66,11 +70,11 @@ Astra Control shows you the Helm apps and custom-labeled apps in the namespace. 
 .	Find the app you want at the desired level in the hierarchy, and from the Actions menu, select *Manage*.
 .	If you don’t want to manage an app, from the Actions menu next to the app, select *Ignore*.
 +
-For example, if you want to manage all apps under the “Jenkins” namespace together so that they have the same snapshot and backup policies, you would manage the namespace and ignore the apps in the namespace.
+For example, if you want to manage all apps under the "cattle-logging" namespace together so that they have the same snapshot and backup policies, you would manage the namespace and ignore the apps in the namespace.
 
 .	To see the list of managed apps, select *Managed* as the display filter.
 +
-image:acc_apps_managed.png[Screen shot of managed apps]
+image:acc_apps_managed2.png[Screen shot of managed apps]
 +
 Notice the app you just added has a warning icon under the Protected column, indicating that it is not backed up and not scheduled for backups yet.
 
@@ -88,15 +92,15 @@ Astra Control includes an action at the top of the Apps page named *Define custo
 .Steps
 
 . From the left navigation bar, select *Apps*.
-. Select *Define custom app*.
+. Select *Define*.
 +
-image:acc_apps_custom_details.png[Screen shot of define custom app]
+image:acc_apps_custom_details2.png[Screen shot of define custom app]
 
-. In the *Define Custom Application* dialog box, provide the required information to manage the app:
+. In the *Define custom application* dialog box, provide the required information to manage the app:
 
 .. *New App*: Enter the display name of the app.
 
-.. *Compute*: Select the compute where the app resides.
+.. *Cluster*: Select the cluster where the app resides.
 
 .. *Namespace:* Select the namespace for the app.
 
@@ -111,7 +115,7 @@ After you choose a label, it displays in the *Label* field. Astra Control also u
 
 .. *Unselected Resources*: Verify the app resources that you don't want to protect.
 
-. Click *Define Custom App*.
+. Click *Define custom application*.
 
 .Result
 
@@ -119,16 +123,16 @@ Astra Control enables management of the app. You can now find it in the *Managed
 
 
 
-== Rename apps
-If an app has been renamed outside of Astra Control, you can rename it to manage it effectively.
+//== Rename apps
+//If an app has been renamed outside of Astra Control, you can rename it to manage it effectively.
 
-.Steps
-. From the left navigation bar, select *Apps*.
-. Select *Managed* or *Discovered* as the filter.
-. Select the app.
-. From the Actions menu, select *Rename*.
-. Enter the new name.
-. Select *Rename*.
+//.Steps
+//. From the left navigation bar, select *Apps*.
+//. Select *Managed* or *Discovered* as the filter.
+//. Select the app.
+// From the Actions menu, select *Rename*.
+//. Enter the new name.
+//. Select *Rename*.
 
 == Ignore apps
 
@@ -148,6 +152,8 @@ Also, you might want to manage apps under one namespace together (Namespace-mana
 
 When you no longer want to back up, snapshot, or clone an app, you can stop managing it.
 
+NOTE: If you unmanage an app, any backups or snapshots that were created earlier will be lost.
+
 .Steps
 
 . From the left navigation bar, select *Apps*.
@@ -162,9 +168,11 @@ When you no longer want to back up, snapshot, or clone an app, you can stop mana
 
 Astra Control also discovers the system apps running on a Kubernetes cluster. You can display system apps by selecting the *Show system apps* checkbox under the Cluster filter in the toolbar.
 
-image:screenshot-system-apps.gif[A screenshot that shows the Show System Apps option that is available when you click All Compute in the Apps screen.]
+image:acc_apps_system-apps.png[A screenshot that shows the Show System Apps option that is available in the Apps page.]
 
 We don't show you these system apps by default because it's rare that you'd need to back them up.
+
+TIP: Astra Control itself is not a standard app; it is a "system app." You should not try to manage Astra Control itself. Astra Control itself isn't shown by default for management. To see system apps, use the “Show system apps” filter.
 
 == Find more information
 

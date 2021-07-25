@@ -24,9 +24,11 @@ Use any of the following bucket providers:
 
 NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon’s S3 support.
 
-TIP: Ensure you use a single bucket type; otherwise, mixing bucket types can cause errors.
+// TIP: Ensure you use a single bucket type; otherwise, mixing bucket types can cause errors.
 
-You cannot remove a bucket.
+
+You cannot delete a bucket.
+// Cannot delete a bucket using UI or API.
 
 A bucket can be in one of these states:
 

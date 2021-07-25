@@ -38,6 +38,6 @@ Astra Control also lets you manage, migrate, and protect Kubernetes clusters run
 
 * https://docs.netapp.com/us-en/astra-control-service/index.html[Astra Control Service documentation^]
 * https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API^]
-* https://netapp-trident.readthedocs.io/en/stable-v21.01/index.html[Trident documentation^]
+* https://netapp-trident.readthedocs.io/en/latest/index.html[Trident documentation^] 
 * https://docs.netapp.com/us-en/cloudinsights/[Cloud Insights documentation^]
 * https://docs.netapp.com/us-en/ontap/index.html[ONTAP documentation^]

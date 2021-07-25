@@ -10,7 +10,7 @@ summary: You should run the elgibility checks to ensure that your cluster is rea
 :icons: font
 :imagesdir: ../media/get-started/
 
-You should run the elgibility checks to ensure that your cluster is ready to be added to Astra Control Center.
+You should run the eligibility checks to ensure that your cluster is ready to be added to Astra Control Center.
 
 .Tasks
 
