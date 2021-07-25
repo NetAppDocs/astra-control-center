@@ -123,6 +123,8 @@ You can also find the information on the *Dashboard*.
 
 image:dashboard-ci.png[Shows the Cloud Insights icon on the Dashboard.]
 
+IMPORTANT: After enabling the Cloud Insights connection, if you unmange the cluster from Astra Control Center, the monitoring operator deployed on the remote cluster **is not** deleted. If you remove the  backends that you added from Astra Control Center, the **backends are also deleted** from Cloud Insights. 
+
 === Edit Cloud Insights connection
 
 You can edit the Cloud Insights connection.
