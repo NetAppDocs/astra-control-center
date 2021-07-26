@@ -169,7 +169,7 @@ Astra Control Center communicates using the following TCP ports. You should ensu
 |Node pod communication
 
 |9220
-|HTTPS
+|HTTP
 |Ingress
 |Metrics endpoint
 |===
