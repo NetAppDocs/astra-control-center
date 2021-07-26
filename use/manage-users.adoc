@@ -35,9 +35,6 @@ Note the following:
 ** An *Admin* has Member role permissions and can add and remove any other users except the Owner.
 ** An *Owner* has Admin role permissions and can add and remove any user accounts.
 
-
-
-+
 //image:screenshot-invite-users.gif[A screenshot of the Invite Users screen where you enter a name, email address, and select a role.]
 
 == Change a user's role
