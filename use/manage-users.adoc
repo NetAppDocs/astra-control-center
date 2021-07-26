@@ -38,7 +38,7 @@ Each role provides the following permissions:
 //image:screenshot-invite-users.gif[A screenshot of the Invite Users screen where you enter a name, email address, and select a role.]
 
 == Change a user's password
-You can change the password of your account, or other accounts if your account has Admin or Owner role permissions.
+You can change the password of your user account. If your account has Admin or Owner role permissions, you can change the passwords for other user accounts as well as your own.
 
 .Steps
 
