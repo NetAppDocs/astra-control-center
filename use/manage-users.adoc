@@ -27,13 +27,13 @@ Account Owners and Admins can add more users to the Astra Control Center install
 The user will need to change the password upon first login.
 . Select a user role with the appropriate system permissions.
 +
-Note the following:
+Each role provides the following permissions:
 +
-* Each role provides the following permissions:
-** A *Viewer* can view resources.
-** A *Member* has Viewer role permissions and can manage apps and clusters, but cannot unmanage apps or clusters, or delete snapshots or backups.
-** An *Admin* has Member role permissions and can add and remove any other users except the Owner.
-** An *Owner* has Admin role permissions and can add and remove any user accounts.
+
+* A *Viewer* can view resources.
+* A *Member* has Viewer role permissions and can manage apps and clusters, but cannot unmanage apps or clusters, or delete snapshots or backups.
+* An *Admin* has Member role permissions and can add and remove any other users except the Owner.
+* An *Owner* has Admin role permissions and can add and remove any user accounts.
 
 //image:screenshot-invite-users.gif[A screenshot of the Invite Users screen where you enter a name, email address, and select a role.]
 
