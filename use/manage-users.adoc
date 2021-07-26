@@ -34,6 +34,7 @@ Each role provides the following permissions:
 * A *Member* has Viewer role permissions and can manage apps and clusters, but cannot unmanage apps or clusters, or delete snapshots or backups.
 * An *Admin* has Member role permissions and can add and remove any other users except the Owner.
 * An *Owner* has Admin role permissions and can add and remove any user accounts.
+. Click *Add*.
 
 //image:screenshot-invite-users.gif[A screenshot of the Invite Users screen where you enter a name, email address, and select a role.]
 
