@@ -37,6 +37,21 @@ Note the following:
 
 //image:screenshot-invite-users.gif[A screenshot of the Invite Users screen where you enter a name, email address, and select a role.]
 
+== Change a user's password
+You can change the password of your account, or other accounts if your account has Admin or Owner role permissions.
+
+.Steps
+
+. In the *Manage Your Account* navigation area, click *Account*.
+. In the *Users* tab, select the drop-down list in the *State* column for the user.
+. Select *Reset Password*.
+. Enter a temporary password that conforms to the password requirements.
+. Enter the password again to confirm.
++
+NOTE: Next time the user logs in, they will be prompted to change their password.
+
+. Click *Reset password*.
+
 == Change a user's role
 
 Users with the Owner role can change the role of all users, while users with the Admin role can change the role of users who have the Admin, Member, or Viewer role.
