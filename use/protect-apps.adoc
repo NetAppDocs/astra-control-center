@@ -69,7 +69,7 @@ You can create an on-demand snapshot at any time.
 
 .Result
 
-Astra Control Center creates a snapshot of the apps.
+The snapshot process begins. A snapshot is successful when the status is *Available* in the *Actions* column on the *Data protection* > *Snapshots* page.
 
 == Create a backup
 
