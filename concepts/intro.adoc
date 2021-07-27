@@ -35,11 +35,23 @@ Astra Control is available in two deployment models:
 * *Astra Control Service*: A NetApp-managed service that provides application-aware data management of Kubernetes clusters in Google Kubernetes Engine (GKE) and Azure Kubernetes Service (AKS).
 * *Astra Control Center*: Self-managed software that provides application-aware data management of Kubernetes clusters running in your on-premises environment.
 
+[cols=3*,options="header",cols="25,25,25"]
+|===
+| Features
+| Astra Control Service
+| Astra Control Center
+| How is it offered? | As a fully managed cloud service from NetApp | As software that you download, install, and manage
+| Where is it hosted? | On a public cloud of NetApp's choice | On your provided Kubernetes cluster
+| How is it updated? | Managed by NetApp | You manage any updates
+| What are the app data management capabilities? | Same capabilities on both platforms with exceptions to backend storage or to external services | Same capabilities on both platforms with exceptions to backend storage or to external services
+| What is the backend storage support? | NetApp cloud service offerings | NetApp ONTAP AFF and FAS systems
+|===
+
 == Supported apps
 
 Astra Control supports all applications running on your Kubernetes clusters. NetApp has validated some apps to ensure the safety and consistency of the snapshots and backups.
 
-Learn the difference between a link:/concepts/validated-vs-standard.html[validated app and a standard app].
+Learn the difference between a link:../concepts/validated-vs-standard.html[validated app and a standard app].
 
 No matter which type of app that you use with Astra Control, you should always test the backup and restore workflow yourself to ensure that you can meet your disaster recovery requirements.
 
@@ -65,7 +77,7 @@ At a high level, Astra Control Center works like this:
 * Astra Control Center does this:
 ** Discovers your Kubernetes clusters.
 ** Discovers your Trident configuration backed by an ONTAP storage backend.
-** Creates a new admin role.
+** Creates a default user at deployment time with the "owner" role.
 
 Learn more about how to link:../get-started/install_acc.html[install Astra Control Center].
 
@@ -116,7 +128,7 @@ Astra Control's Free Plan enables you to manage up to 10 apps in your account. I
 
 == For more information
 
-* https://docs.netapp.com/us-en/astra-control-service/index.html[Astra Control Service documentation^]
+* https://docs.netapp.com/us-en/astra/index.html[Astra Control Service documentation^]
 * https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API^]
 * https://netapp-trident.readthedocs.io/en/latest/index.html[Trident documentation^]
 * https://docs.netapp.com/us-en/cloudinsights/[Cloud Insights documentation^]

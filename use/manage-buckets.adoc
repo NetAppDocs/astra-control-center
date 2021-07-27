@@ -10,7 +10,7 @@ summary: Adding object store bucket providers is essential if you want to back u
 :icons: font
 :imagesdir: ../media/use/
 
-An object store bucket provider is essential if you want to back up your applications and persistent storage or if you want to clone applications across clusters. Using Astra Control Center, add an object store provider as your backup destination.
+An object store bucket provider is essential if you want to back up your applications and persistent storage or if you want to clone applications across clusters. Using Astra Control Center, add an object store provider as your off-cluster, backup destination for your apps.
 
 You don’t need a bucket if you are cloning your application configuration and persistent storage to the same cluster.
 
