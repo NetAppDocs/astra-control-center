@@ -29,7 +29,7 @@ A Kubernetes cluster must meet the following general requirements so you can dis
 If your Kubernetes cluster is managed as part of the Red Hat OpenShift Container Platform, Astra Control Center requires an OpenShift 4.6.8 or 4.7 cluster that has Trident StorageClasses backed by ONTAP 9.5 or newer, with the following attributes:
 
 * At least 300GB of available storage capacity
-* 3 controller node with 2 CPU cores, 6GB RAM, and 50GB storage
+* 3 controller nodes with 2 CPU cores, 6GB RAM, and 50GB storage
 * At least 3 worker nodes with 8 CPU cores, 16GB RAM, and 50GB storage
 * A load balancer which exposes a reachable IP address
 * A method for pointing the FQDN of Astra Control Center to the load balanced IP address
