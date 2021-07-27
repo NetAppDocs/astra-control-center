@@ -69,12 +69,13 @@ cd astra-control-center-[version]
 .. Use the appropriate load-to-local-cache command for either Docker-based or Podman-based registries and comment out the option that is not used.
 .. Store the name of the loaded Astra Control Center image by replacing `[Loaded_image_name]` with the image name.
 +
+[subs=+quotes]
 ----
-export REGISTRY=[Docker_registry_path]
+*export REGISTRY=[Docker_registry_path]*
 
 for astraImageFile in $(ls images/*.tar) ; do
-   astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image: [Loaded_image_name]')       # For Docker-based registries
-   # astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded images: [Loaded_image_name]')    # For Podman-based registries
+   *astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image: [Loaded_image_name]')       # For Docker-based registries*
+   *# astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded images: [Loaded_image_name]')    # For Podman-based registries*
    docker tag ${astraImage} ${REGISTRY}/${astraImage}
    docker push ${REGISTRY}/${astraImage}
 done
@@ -89,30 +90,32 @@ vim astra_control_center_min.yaml
 ----
 
 .. Change `[Docker_registry_path]` to the registry path where you pushed the images in the previous step.
-.. Change `[Docker_registry_secret]` to the k8s secret with your registry credentials in it. Delete the `secret` line if credentials are not used with your registry.
+.. Change `[astra-registry-cred]` to the k8s secret with your registry credentials in it. Delete the `secret` line if credentials are not used with your registry.
 .. Change the `accountName` string to the name you want to associate with the account.
 .. Change the `astraAddress` string to the FQDN you want to use in your browser to access Astra. Copy this FQDN for use in a <<Log in to the Astra Control Center UI,later step>>.
 .. Change the `email` string to the default initial administrator address. Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>.
 .. Change `enrolled` for autoSupport to `false` for sites without internet connectivity or retain `true` for connected sites.
 .. (Optional) Add a first name `firstName` and last name `lastName` of the user associated with the account. You can perform this step now or later within the UI.
+
 +
+[subs=+quotes]
 ----
 apiVersion: astra.netapp.io/v1
 kind: AstraControlCenter
 metadata:
   name: astra
 spec:
-  accountName: "Example"
+  *accountName: "Example"*
   astraVersion: "ASTRA_VERSION"
-  astraAddress: "astra.example.com"
+  *astraAddress: "astra.example.com"*
   autoSupport:
-    enrolled: true
-  email: "[nednetapp@netapp.com]"
-  firstName: "SRE"
-  lastName: "Admin"
+    *enrolled: true*
+  *email: "[nednetapp@netapp.com]"*
+  *firstName: "SRE"*
+  *lastName: "Admin"*
   imageRegistry:
-    name: "[Docker_registry_path]"
-    secret: "[Docker_registry_secret]"
+    *name: "[Docker_registry_path]"*
+    *secret: "[astra-registry-cred]"*
 ----
 
 . Edit the Astra Control Center operator deployment yaml (`astra_control_center_operator_deploy.yaml`) to refer to your local registry and secret.
@@ -131,6 +134,7 @@ imagePullSecrets:
 .. Change `[Docker_registry_path]` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in the previous step.
 
 +
+[subs=+quotes]
 ----
 apiVersion: apps/v1
 kind: Deployment
@@ -155,7 +159,7 @@ spec:
         - --upstream=http://127.0.0.1:8080/
         - --logtostderr=true
         - --v=10
-        image: [Docker_registry_path]/kube-rbac-proxy:v0.5.0
+        *image: [Docker_registry_path]/kube-rbac-proxy:v0.5.0*
         name: kube-rbac-proxy
         ports:
         - containerPort: 8443
@@ -169,9 +173,9 @@ spec:
         env:
         - name: ACCOP_LOG_LEVEL
           value: "2"
-        image: [Docker_registry_path]/acc-operator:[version x.y.z]
+        *image: [Docker_registry_path]/acc-operator:[version x.y.z]*
         imagePullPolicy: IfNotPresent
-      imagePullSecrets: []
+      *imagePullSecrets: []*
 ----
 
 . Install the Astra Control Center operator:
@@ -200,7 +204,7 @@ deployment.apps/acc-operator-controller-manager created
 .  If you use a registry that requires authentication, you need to create a secret for the `netapp-acc-operator` namespace. Add Docker information and run the following command:
 +
 ----
-oc create secret docker-registry astra-registry-cred -n netapp-acc-operator --docker-server=[ASTRA_IMAGE_REGISTRY] --docker-username=[username] --docker-password=[token]
+kubectl create secret docker-registry astra-registry-cred -n netapp-acc-operator --docker-server=[Docker_registry_path] --docker-username=[username] --docker-password=[token]
 ----
 +
 Sample response:
@@ -224,7 +228,7 @@ namespace/netapp-acc created
 .  If you use a registry that requires authentication, you need to create a secret for the `netapp-acc` namespace. Add Docker information and run the following command:
 +
 ----
-oc create secret docker-registry astra-registry-cred -n netapp-acc --docker-server=[ASTRA_IMAGE_REGISTRY] --docker-username=[username] --docker-password=[token]
+kubectl create secret docker-registry astra-registry-cred -n netapp-acc --docker-server=[Docker_registry_path] --docker-username=[username] --docker-password=[token]
 ----
 +
 Response
@@ -313,6 +317,18 @@ traefik-769d846f9b-c9crt                     1/1     Running   0          83s
 traefik-769d846f9b-l9n4k                     1/1     Running   0          67s
 trident-svc-8649c8bfc5-pdj79                 1/1     Running   0          2m57s
 vault-controller-745879f98b-49c5v            1/1     Running   0          4m51s
+----
+
+. (Optional) To ensure the installation is completed, you can watch the `acc-operator` logs using the following command.
++
+----
+kubectl logs deploy/acc-operator-controller-manager -n acc-operator-system -c manager -f
+----
+
+. When all the pods are running, verify installation success by searching the `acc-operator-controller-manager` logs for the following message:
++
+----
+{"level":"info","ts":1624054318.029971,"logger":"controllers.AstraControlCenter","msg":"Successfully Reconciled AstraControlCenter in [seconds]s","AstraControlCenter":"netapp-acc/astra","ae.Version":"[x.y.z]"}
 ----
 
 . Get the one-time password you will use when you log in to Astra Control Center:
