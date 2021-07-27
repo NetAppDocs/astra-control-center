@@ -38,7 +38,10 @@ Each role provides the following permissions:
 
 //image:screenshot-invite-users.gif[A screenshot of the Invite Users screen where you enter a name, email address, and select a role.]
 
-== Change your password
+== Manage passwords
+You can manage passwords for user accounts in Astra Control Center.
+
+=== Change your password
 You can change the password of your user account at any time.
 
 .Steps
@@ -50,7 +53,7 @@ You can change the password of your user account at any time.
 . Enter the password again to confirm.
 . Click *Change password*.
 
-== Reset another user's password
+=== Reset another user's password
 If your account has Admin or Owner role permissions, you can reset passwords for other user accounts as well as your own. When you reset a password, you assign a temporary password that they will have to change upon logging in.
 
 .Steps
