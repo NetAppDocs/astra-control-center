@@ -25,7 +25,7 @@ Stop managing apps that you no longer want to back up, snapshot, or clone from A
 . From the left navigation bar, select *Apps*.
 . Select the checkbox for the apps that you no longer want to manage.
 . From the *Action* menu, select *Unmanage*.
-. Type the app name to confirm.
+. Type "unmanage" to confirm.
 . Confirm that you want to unmanage the apps and then select *Yes, Unmanage Application*.
 
 

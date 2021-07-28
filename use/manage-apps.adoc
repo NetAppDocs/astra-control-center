@@ -161,14 +161,14 @@ NOTE: If you unmanage an app, any backups or snapshots that were created earlier
 . Select the app.
 . From the Actions menu, select *Unmanage*.
 . Review the information.
-. Type the app name to confirm.
+. Type "unmanage" to confirm.
 . Select *Yes, Unmanage Application*.
 
 == What about system apps?
 
 Astra Control also discovers the system apps running on a Kubernetes cluster. You can display system apps by selecting the *Show system apps* checkbox under the Cluster filter in the toolbar.
 
-image:acc_apps_system-apps2.png[A screenshot that shows the Show System Apps option that is available in the Apps page.]
+image:acc_apps_system_apps2.png[A screenshot that shows the Show System Apps option that is available in the Apps page.]
 
 We don't show you these system apps by default because it's rare that you'd need to back them up.
 
