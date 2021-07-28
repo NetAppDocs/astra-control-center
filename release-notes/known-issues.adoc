@@ -44,6 +44,10 @@ When you add a bucket, select the correct bucket provider type with credentials 
 
 //When the user is trying to enable the connection from Astra CC to Fluentd, they need to enter the host IP address, the port number, and API token (optional) for their Fluentd server. Right now, there is no validation done at the back end to check if what they are entering is even valid. So for example, the user can enter basically anything in the fields, and the system will say “connected,” but in essence, it is a failed connection. I will mention this in the Fluentbit and proxy sections, but I think we need to call it out as a known limitation/issue.
 
+== Can't determine ASUP tar bundle status in scaled environment
+//DOC-3602/ASTRACTL-10186
+After Astra Control Center has been running for extended periods (up to 5 days in scaled environment), the ASUP tar bundle download status cannot be determined and the download can time out without any indication in the UI.
+
 == Uninstall of Astra Control Center fails to clean up the monitoring-operator pod on the managed cluster
 //DOC-3530/ASTRACTL-9496
 You can manually delete the pods in the netapp-monitoring namespace and the namespace with the following commands:
