@@ -28,14 +28,12 @@ A Kubernetes cluster must meet the following general requirements so you can dis
 === OpenShift clusters
 If your Kubernetes cluster is managed as part of the Red Hat OpenShift Container Platform, Astra Control Center requires an OpenShift 4.6.8 or 4.7 cluster that has Trident StorageClasses backed by ONTAP 9.5 or newer, with the following attributes:
 
-* At least 300GB of available storage capacity
-* 3 controller nodes with 2 CPU cores, 6GB RAM, and 50GB storage
-* At least 3 worker nodes with 8 CPU cores, 16GB RAM, and 50GB storage
+* At least 300GB of available ONTAP storage capacity
+* 3 controller nodes with 2 CPU cores, 6GB RAM, and 50GB of available storage
+* 3 worker nodes with at least 8 CPU cores, 16GB RAM, and 50GB of available storage
 * A load balancer which exposes a reachable IP address
 * A method for pointing the FQDN of Astra Control Center to the load balanced IP address
-* This cluster must be the active kubeconfig credential
 * Kubernetes version 1.18, 1.19, or 1.20
-* Docker Engine v20.10 or newer
 
 NOTE: OpenShift 4.8 is not supported.
 
@@ -49,6 +47,7 @@ During app cloning, Astra Control Center needs to allow OpenShift to mount volum
 
 NOTE: If you plan to add a second OpenShift 4.6 or 4.7 cluster as a managed compute resource, you need to ensure that the Trident Volume Snapshot feature is enabled. See the official Trident https://netapp-trident.readthedocs.io/en/stable-v21.04/kubernetes/operations/tasks/volumes/snapshots.html?highlight=volumesnapshot#on-demand-volume-snapshots[instructions] to enable and test Volume Snapshots with Trident.
 
+////
 === Non-OpenShift Kubernetes clusters
 The Kubernetes cluster you use for Astra Control Center should already be deployed in your environment and you should have permissions to manage the cluster. This cluster should be preconfigured with the following:
 
@@ -58,7 +57,7 @@ The Kubernetes cluster you use for Astra Control Center should already be deploy
 * A single Trident StorageClass configured as the default
 * Kubernetes version 1.18, 1.19, or 1.20
 * At least 3 worker nodes
-
+////
 === Supported apps
 
 Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators.
@@ -71,18 +70,18 @@ No matter which type of app that you use with Astra Control Center, you should a
 Astra Control Center has the following app management requirements:
 
 * *Licensing*: You need an Astra Control Center license to deploy and manage apps using Astra Control Center.
-* *Helm*: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
+* *Helm 3*: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
 * *Operator management*: Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators.
 
 == Access to the internet
 
-You should determine whether you have outside access to the internet. If you do not, some functionality might be limited, such as monitoring data from NetApp Cloud Insights, Support data, or Licensing information.
+You should determine whether you have outside access to the internet. If you do not, some functionality might be limited, such as monitoring data from NetApp Cloud Insights, or Support data.
 
 If you do have access to the internet, decide which of the following NetApp systems you will authorize Astra Control Center to integrate with:
 
 * Cloud Insights for monitoring and metrics
 * Active IQ and SmartSolve for supportability
-* IPA for license automation
+//* IPA for license automation
 
 == License
 
