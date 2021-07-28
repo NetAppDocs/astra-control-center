@@ -12,6 +12,16 @@ summary: Known limitations identify platforms, devices, or functions that are no
 
 Known limitations identify platforms, devices, or functions that are not supported by this release of the product, or that do not interoperate correctly with it. Review these limitations carefully.
 
+== The same cluster cannot be managed by two Astra Control Center instances
+//DOC-3600
+If you want to manage a cluster on another Astra Control Center instance, you should first link:../use/unmanage.html#stop-managing-compute[unmanage the cluster] from the instance on which it is managed before you manage it on another instance. After you remove the cluster from management, verify that the cluster is unmanaged by executing this command:
+
+----
+oc get pods n -netapp-monitoring
+----
+
+There should be no pods running in that namespace or the namespace should not exist. If either of those are true, the cluster is unmanaged.
+
 == OLM-enabled operator deployed apps not supported
 // DOC-3553/ASTRACTL-9490
 Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators.

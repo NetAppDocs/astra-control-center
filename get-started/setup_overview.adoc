@@ -19,9 +19,10 @@ After you install Astra Control Center, log in to the UI, and change your passwo
 * <<Add a bucket>>
 
 == Add a license for Astra Control Center
+//REFERENCED IN UI. DO NOT MODIFY WITHOUT NOTIFYING UX.
 You can add a new license using the UI or https://docs.netapp.com/us-en/astra-automation/index.html[API] to gain full Astra Control Center functionality. Without a license, your usage of Astra Control Center is limited to managing users and adding new clusters.
 
-.Before you begin
+.What you'll need
 When you downloaded Astra Control Center from the  https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site], you also downloaded the NetApp license file (NLF). Ensure you have access to this license file.
 
 NOTE: To update an existing evaluation or full license, see link:../use/update-licenses.html[Update an existing license].
@@ -53,10 +54,12 @@ NOTE:  If your installation grows to exceed the licensed number of CPU units, As
 The *Account* > *License* page displays the license information, expiration date, license serial number, account ID, and CPU units used.
 
 == Add cluster
-
+//REFERENCED IN UI. DO NOT MODIFY WITHOUT NOTIFYING UX.
 To begin managing your apps, add a Kubernetes cluster and manage it as a compute resource. You have to add a cluster for Astra Control Center to discover your Kubernetes applications.
 
 TIP: We recommend that Astra Control Center manage the cluster it is deployed on first before you add other clusters to Astra Control Center to manage. Having the initial cluster under management is necessary to send Kubemetrics data and cluster-associated data for metrics and troubleshooting. You can use the *Add Cluster* feature to manage a cluster with Astra Control Center.
+
+.What you'll need
 
 IMPORTANT: Before you add a cluster, review and perform the necessary link:add-cluster-reqs.html[prerequisite tasks^].
 
@@ -176,6 +179,7 @@ Now that you’ve logged in and added clusters to Astra Control Center, you're r
 * link:../use/clone-apps.html[Clone apps]
 * link:../use/manage-notifications.html[Manage notifications]
 * link:../use/monitor-protect.html[Connect to Cloud Insights]
+* link:../get-started/add-custom-tls-certificate.html[Add a custom TLS certificate]
 
 [discrete]
 == Find more information

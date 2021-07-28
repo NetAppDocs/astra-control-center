@@ -35,7 +35,7 @@ Astra Control is available in two deployment models:
 * *Astra Control Service*: A NetApp-managed service that provides application-aware data management of Kubernetes clusters in Google Kubernetes Engine (GKE) and Azure Kubernetes Service (AKS).
 * *Astra Control Center*: Self-managed software that provides application-aware data management of Kubernetes clusters running in your on-premises environment.
 
-[cols=3*,options="header",cols="25,25,25"]
+[cols=3*,options="header",cols="1h,2d,2d"]
 |===
 |
 | Astra Control Service
