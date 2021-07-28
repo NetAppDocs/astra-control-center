@@ -27,7 +27,7 @@ Astra Control offers critical capabilities for Kubernetes application data lifec
 Astra Control continually watches your compute for state changes, so it’s aware of any new apps that you add along the way.
 
 
-link:/get-started/requirements.html[Learn about Astra Control requirements].
+link:../get-started/requirements.html[Learn about Astra Control requirements].
 
 == Deployment models
 Astra Control is available in two deployment models:
@@ -37,7 +37,7 @@ Astra Control is available in two deployment models:
 
 [cols=3*,options="header",cols="25,25,25"]
 |===
-| Features
+|
 | Astra Control Service
 | Astra Control Center
 | How is it offered? | As a fully managed cloud service from NetApp | As software that you download, install, and manage
