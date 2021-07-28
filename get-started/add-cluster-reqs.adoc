@@ -10,9 +10,32 @@ summary: You should run the elgibility checks to ensure that your cluster is rea
 :icons: font
 :imagesdir: ../media/get-started/
 
-You should run the eligibility checks to ensure that your cluster is ready to be added to Astra Control Center.
+You should ensure that the prerequisite conditions are met before you add a cluster. You should also run the eligibility checks to ensure that your cluster is ready to be added to Astra Control Center.
 
-.Tasks
+== What you'll need before you add a cluster
+
+* A cluster running OpenShift 4.6 or later, which has Trident StorageClasses backed by ONTAP 9.5 or later.
+** One or more worker nodes with at least 1GB RAM available for running telemetry services.
++
+NOTE: If you plan to add a second OpenShift 4.6 or 4.7 cluster as a managed compute resource, you should ensure that the Trident Volume Snapshot feature is enabled. See the official Trident https://netapp-trident.readthedocs.io/en/stable-v21.04/kubernetes/operations/tasks/volumes/snapshots.html?highlight=volumesnapshot#on-demand-volume-snapshots[instructions] to enable and test Volume Snapshots with Trident.
+* The superuser and user ID set on the backing ONTAP system to back up and restore apps with Astra Control Center (ACC). Run the following commands in the ONTAP command line:
+`export policy rule modify -vserver svm0 -policyname default -ruleindex 1 -superuser sys`
+`export-policy rule modify -policyname default -ruleindex 1 -anon 65534` (this is the default value)
+
+* Clusters running the Docker daemon with logging that supports `json-file`. Enable this as follows:
+. SSH into each worker node and edit the Docker configuration by using sudo:
++
+`[docker@worker-0 ~]$ sudo vi /etc/sysconfig/docker`
+. Change the `log-driver` from `journald` to `json-file` so that the options line reads as follows:
++
+`OPTIONS='--selinux-enabled --log-driver=json-file --signature-verification=false'`
+. Restart the Docker daemon:
++
+`[docker@worker-0 ~]$ sudo systemctl restart docker`
+
+== Run eligibility checks
+
+Run the following eligibility checks to ensure that your cluster is ready to be added to Astra Control Center.
 
 * Check the Trident version.
 +
@@ -32,7 +55,7 @@ If Trident does not exist, you see output similar to the following:
 ----
 error: the server doesn't have a resource type "tridentversions"
 ----
-* Check if the snapshot controller and volumesnapshot CRDs are installed.
+* Check if the snapshot controller and volumesnapshot Custom Resource Definitions (CRDs) are installed.
 +
 ----
 kubectl get sts -A | grep -i snapshot
@@ -43,11 +66,11 @@ If the snapshot controller is installed, you see output similar to the following
 ----
 default     snapshot-controller   1/1     5h18m
 ----
-
++
 NOTE: The snapshot controller does not have to be installed in the `default` namespace.
-
++
 If the snapshot controller is not installed, you get the following message:
-
++
 ----
 No resources found
 ----
@@ -63,9 +86,9 @@ thin                   kubernetes.io/vsphere-volume   Delete          Immediate 
 
 == What's next?
 
-Now that you’ve verified that the prerequisites are met, you're ready to add a cluster.
+Now that you’ve verified that the prerequisites are met, you're ready to link:setup_overview.html[add a cluster^].
 
 [discrete]
 == Find more information
-* https://netapp-trident.readthedocs.io/en/latest/frequently_asked_questions.html[Trident documnentation^]
+* https://netapp-trident.readthedocs.io/en/latest/frequently_asked_questions.html[Trident documentation^]
 * https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API^]
