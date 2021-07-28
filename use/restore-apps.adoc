@@ -11,7 +11,7 @@ summary: Astra can restore your application configuration and persistent storage
 :imagesdir: ../media/use/
 
 [.lead]
-Astra Control Center can restore your application from a snapshot or backup. Persistent storage backups are transferred from your object store, so restoring from an existing backup will complete the fastest. You can use the Astra UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra API] to restore apps.
+Astra Control Center can restore your application from a snapshot or backup. Persistent storage backups and snapshots are transferred from your object store, so restoring from an existing snapshot to the same cluster will be faster than other methods. You can use the Astra UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra API] to restore apps.
 
 NOTE: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
 
