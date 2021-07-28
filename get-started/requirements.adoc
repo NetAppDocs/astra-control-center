@@ -109,12 +109,12 @@ Astra Control Center communicates using the following TCP ports. You should ensu
 |443
 |HTTPS
 |Ingress
-|UI / API access
+|UI / API access - Ensure this port is open both ways between the cluster hosting Astra Control Center and each managed cluster
 
 |9090
 |HTTPS
 |Ingress
-|Metrics data to Metrics consumer (Prometheus)
+|Metrics data to Metrics consumer (Prometheus) - one of these connections is needed for each worker node in the cluster
 
 |n/a
 |HTTPS
@@ -154,7 +154,7 @@ Astra Control Center communicates using the following TCP ports. You should ensu
 |n/a
 |HTTPS
 |Egress
-|Nautilus communication with managed cluster
+|Nautilus communication with managed cluster - ensure the corresponding Nautilus port is open for each managed cluster
 
 |n/a
 |HTTPS

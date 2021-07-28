@@ -14,7 +14,7 @@ You should ensure that the prerequisite conditions are met before you add a clus
 
 == What you'll need before you add a cluster
 
-* A cluster running OpenShift 4.6 or later, which has Trident StorageClasses backed by ONTAP 9.5 or later.
+* A cluster running OpenShift 4.6 or 4.7, which has Trident StorageClasses backed by ONTAP 9.5 or later.
 ** One or more worker nodes with at least 1GB RAM available for running telemetry services.
 +
 NOTE: If you plan to add a second OpenShift 4.6 or 4.7 cluster as a managed compute resource, you should ensure that the Trident Volume Snapshot feature is enabled. See the official Trident https://netapp-trident.readthedocs.io/en/stable-v21.04/kubernetes/operations/tasks/volumes/snapshots.html?highlight=volumesnapshot#on-demand-volume-snapshots[instructions] to enable and test Volume Snapshots with Trident.
@@ -22,6 +22,7 @@ NOTE: If you plan to add a second OpenShift 4.6 or 4.7 cluster as a managed comp
 `export policy rule modify -vserver svm0 -policyname default -ruleindex 1 -superuser sys`
 `export-policy rule modify -policyname default -ruleindex 1 -anon 65534` (this is the default value)
 
+////
 * Clusters running the Docker daemon with logging that supports `json-file`. Enable this as follows:
 . SSH into each worker node and edit the Docker configuration by using sudo:
 +
@@ -32,6 +33,7 @@ NOTE: If you plan to add a second OpenShift 4.6 or 4.7 cluster as a managed comp
 . Restart the Docker daemon:
 +
 `[docker@worker-0 ~]$ sudo systemctl restart docker`
+////
 
 == Run eligibility checks
 
