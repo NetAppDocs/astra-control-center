@@ -50,7 +50,7 @@ During Astra Control Center installation, if you specify `enrolled: true` for `a
 
 Astra Control Center enables the admin user to generate bundles, which include information useful to NetApp Support, including logs, events for all the components of the Astra deployment, metrics, and topology information about the clusters and apps under management. If you are connected to the Internet, you can upload support bundles to NetApp Support Site (NSS) directly from the Astra Control Center UI.
 
-NOTE: The time taken for ASUP bundle collection depends on the size of the installation and the ASUP bundle itself. The longer the duration of ASUP bundle collection, longer it might take to collect the bundle.
+NOTE: The time taken by Astra Control Center to generate the bundle depends on the size of your Astra Control Center installation as well as the bundle itself. The time duration that you set for Astra Control Center to generate a bundle dictates the time it takes for the bundle to be generated (for example: A shorter time period means faster bundle generation).
 
 Before you begin, check to see whether your external connections are configured to enable upload of bundles to NSS.
 
