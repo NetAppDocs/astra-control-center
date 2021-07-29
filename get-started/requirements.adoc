@@ -113,8 +113,12 @@ The cluster that hosts Astra Control Center communicates using the following TCP
 
 |9090
 |HTTPS
-|Ingress (to Astra Control Center cluster), Egress (from the node IP address of each worker node of each managed cluster)
-|Metrics data to Metrics consumer - ensure each managed cluster can access this port on the Astra Control Center cluster
+a|
+
+* Ingress (to cluster hosting Astra Control Center)
+* Egress (from the node IP address of each worker node of each managed cluster)
+
+|Metrics data to Metrics consumer - ensure each managed cluster can access this port on the cluster hosting Astra Control Center
 
 |n/a
 |HTTPS
@@ -159,7 +163,7 @@ The cluster that hosts Astra Control Center communicates using the following TCP
 |n/a
 |HTTPS
 |Egress
-|Trident service communication with managed cluster’s Trident
+|Trident service communication with each managed cluster’s Trident instance
 
 .2+|Trident
 |34571
