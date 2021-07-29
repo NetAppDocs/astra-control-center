@@ -60,7 +60,7 @@ The Kubernetes cluster you use for Astra Control Center should already be deploy
 ////
 === Supported apps
 
-Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators.
+Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators or cluster-scoped operators.
 
 NetApp has validated some apps to ensure the safety and consistency of the snapshots and backups. link:../learn/validated-vs-standard.html[Learn the difference between a validated app and a standard app].
 
@@ -69,9 +69,9 @@ No matter which type of app that you use with Astra Control Center, you should a
 === App management requirements
 Astra Control Center has the following app management requirements:
 
-* *Licensing*: You need an Astra Control Center license to deploy and manage apps using Astra Control Center.
+* *Licensing*: You need an Astra Control Center license to manage apps using Astra Control Center.
 * *Helm 3*: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
-* *Operator management*: Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators.
+* *Operator management*: Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators or cluster-scoped operators.
 
 == Access to the internet
 
@@ -92,7 +92,7 @@ Astra Control Center requires an Astra Control Center license for full functiona
 * Create snapshots or clones of existing apps
 * Configure data protection policies
 
-If you want to try Astra Control Center, you can use a 90-day evaluation license.
+If you want to try Astra Control Center, you can link:setup_overview.html#add-a-full-or-evaluation-license[use a 90-day evaluation license].
 
 == Load balancing
 
