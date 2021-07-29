@@ -33,7 +33,7 @@ Astra Control Center requires a Red Hat OpenShift Container Platform 4.6.8 or 4.
 * 3 worker nodes with at least 8 CPU cores, 16GB RAM, and 50GB of available storage
 * A load balancer which exposes a reachable IP address
 * A method for pointing the FQDN of Astra Control Center to the load balanced IP address
-* Kubernetes version 1.18, 1.19, or 1.20
+* Kubernetes version 1.19 or 1.20
 
 NOTE: OpenShift 4.8 is not supported.
 
@@ -80,7 +80,7 @@ You should determine whether you have outside access to the internet. If you do 
 If you do have access to the internet, decide which of the following NetApp systems you will authorize Astra Control Center to integrate with:
 
 * Cloud Insights for monitoring and metrics
-* Active IQ and SmartSolve for supportability
+* NetApp Support Site for Active IQ and SmartSolve processing
 //* IPA for license automation
 
 == License
