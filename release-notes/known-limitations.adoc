@@ -22,9 +22,9 @@ oc get pods n -netapp-monitoring
 
 There should be no pods running in that namespace or the namespace should not exist. If either of those are true, the cluster is unmanaged.
 
-== OLM-enabled operator deployed apps not supported
-// DOC-3553/ASTRACTL-9490
-Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators.
+== OLM-enabled and cluster-scoped operator deployed apps not supported
+// DOC-3553/ASTRACTL-9490/AD AH
+Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators or cluster-scoped operators.
 
 == Cloning apps can only be done with same K8s distribution
 // ASTRACTL-7079
@@ -38,9 +38,9 @@ OpenShift 4.8 is not supported for the July release of Astra Control Center. For
 //From requirements section
 If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. For more information, see link:../get-started/requirements.html[Astra Control Center requirements].
 
-== Astra Control Center does not validate the details you enter for your Fluentd server
-//From email request
-Ensure that you link:../use/monitor-protect.html#connect-to-fluentd[enter the correct values] when establishing a connection.
+== Astra Control Center does not validate the details you enter for your proxy server
+//From email request/AD AH
+Ensure that you link:../use/monitor-protect.html#add-a-proxy-server[enter the correct values] when establishing a connection.
 
 == Data protection for Astra Control Center as app not yet available
 //DOC-3583

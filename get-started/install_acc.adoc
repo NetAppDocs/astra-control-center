@@ -17,7 +17,7 @@ To install Astra Control Center, do the following basic steps:
 
 == Install Astra Control Center
 
-To install Astra Control Center, download the installation bundle from the NetApp Support Site and perform a series a commands to install Astra Control Center Operator and Astra Control Center in your environment. You can use this procedure to install Astra Control Center in connected or dark site environments.
+To install Astra Control Center, download the installation bundle from the NetApp Support Site and perform a series a commands to install Astra Control Center Operator and Astra Control Center in your environment. You can use this procedure to install Astra Control Center in internet-connected environments or in sites without external connectivity.
 
 .What you'll need
 * link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
@@ -36,10 +36,10 @@ oc get apiservices
 .About this task
 The Astra Control Center installation process does the following:
 
-* Installs the Astra components into the `netapp-acc` namespace.
+* Installs the Astra components into the `netapp-acc` (or custom) namespace.
 * Creates a default account.
-* Creates a default administrative user name of `admin` with a default one-time password of `ACC-<UUID_of_installation>` for this instance of Astra Control Center.
-* Creates a default administrative user email address.
+* Creates a default administrative user name of `admin` with a default one-time password of `ACC-<UUID_of_installation>` for this instance of Astra Control Center. This user is assigned the Owner role in the system.
+* Establishes a default administrative user email address needed for login to the UI.
 * Helps you determine that all Astra Control Center pods are running.
 * Installs the Astra UI.
 
@@ -64,58 +64,72 @@ tar -vxzf astra-control-center-[version].tar.gz
 ----
 cd astra-control-center-[version]
 ----
-. Use the following script to push Astra Control Center images to your local registry. Change the following before proceeding:
-.. Replace `[Docker_registry_path]` with a valid Docker image registry path.
-.. Use the appropriate load-to-local-cache command for either Docker-based or Podman-based registries and comment out the option that is not used.
-.. Store the name of the loaded Astra Control Center image by replacing `[Loaded_image_name]` with the image name.
+
+. Add the files in the Astra Control Center image directory to your local registry.
+.. Load the images into Docker.
+.. Tag the images.
+.. Push the images to your local registry.
++
+The following is a sample script for the automatic loading of images:
 +
 [subs=+quotes]
 ----
 *export REGISTRY=[Docker_registry_path]*
 
 for astraImageFile in $(ls images/*.tar) ; do
-   *astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image: [Loaded_image_name]')       # For Docker-based registries*
-   *# astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded images: [Loaded_image_name]')    # For Podman-based registries*
+   *astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image: [Loaded_image_name]')*
    docker tag ${astraImage} ${REGISTRY}/${astraImage}
    docker push ${REGISTRY}/${astraImage}
 done
 ----
 
-. Edit the Astra Control Center custom resource definition (CRD) file (`astra_control_center_min.yaml`):
-+
-NOTE: Properties configured by the CRD cannot be changed after initial Astra Control Center deployment.
+.  (For registries with auth requirements) If you use a registry that requires authentication, you need to do the following:
+.. Create a secret for the `netapp-acc-operator` namespace. Add Docker information and run the following command:
 +
 ----
-vim astra_control_center_min.yaml
+kubectl create secret docker-registry astra-registry-cred -n netapp-acc-operator --docker-server=[Docker_registry_path] --docker-username=[username] --docker-password=[token]
+----
++
+Sample response:
++
+----
+secret/astra-registry-cred created
 ----
 
-.. Change `[Docker_registry_path]` to the registry path where you pushed the images in the previous step.
-.. Change `[astra-registry-cred]` to the k8s secret with your registry credentials in it. Delete the `secret` line if credentials are not used with your registry.
-.. Change the `accountName` string to the name you want to associate with the account.
-.. Change the `astraAddress` string to the FQDN you want to use in your browser to access Astra. Copy this FQDN for use in a <<Log in to the Astra Control Center UI,later step>>.
-.. Change the `email` string to the default initial administrator address. Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>.
-.. Change `enrolled` for autoSupport to `false` for sites without internet connectivity or retain `true` for connected sites.
-.. (Optional) Add a first name `firstName` and last name `lastName` of the user associated with the account. You can perform this step now or later within the UI.
-
+.. Create the `netapp-acc` namespace:
 +
-[subs=+quotes]
 ----
-apiVersion: astra.netapp.io/v1
-kind: AstraControlCenter
-metadata:
-  name: astra
-spec:
-  *accountName: "Example"*
-  astraVersion: "ASTRA_VERSION"
-  *astraAddress: "astra.example.com"*
-  autoSupport:
-    *enrolled: true*
-  *email: "[nednetapp@netapp.com]"*
-  *firstName: "SRE"*
-  *lastName: "Admin"*
-  imageRegistry:
-    *name: "[Docker_registry_path]"*
-    *secret: "[astra-registry-cred]"*
+kubectl create ns netapp-acc
+----
++
+Response:
++
+----
+namespace/netapp-acc created
+----
+
+..  Create a secret for the `netapp-acc` namespace. Add Docker information and run the following command:
++
+----
+kubectl create secret docker-registry astra-registry-cred -n netapp-acc --docker-server=[Docker_registry_path] --docker-username=[username] --docker-password=[token]
+----
++
+Response
++
+----
+secret/astra-registry-cred created
+----
+
+.. Install Astra Control Center in the `netapp-acc` namespace:
++
+----
+kubectl apply -f astra_control_center_min.yaml -n netapp-acc
+----
++
+Sample response:
++
+----
+astracontrolcenter.astra.netapp.io/astra created
 ----
 
 . Edit the Astra Control Center operator deployment yaml (`astra_control_center_operator_deploy.yaml`) to refer to your local registry and secret.
@@ -178,6 +192,46 @@ spec:
       *imagePullSecrets: []*
 ----
 
+. Edit the Astra Control Center custom resource definition (CRD) file (`astra_control_center_min.yaml`):
++
+NOTE: If additional customizations are required for your environment, you can use `astra_control_center.yaml` as an alternative CRD. `astra_control_center_min.yaml` is the default CRD and is suitable for most installations.
+
+NOTE: Properties configured by the CRD cannot be changed after initial Astra Control Center deployment.
+
++
+----
+vim astra_control_center_min.yaml
+----
+
+.. Change `[Docker_registry_path]` to the registry path where you pushed the images in the previous step.
+.. Change `[astra-registry-cred]` to the k8s secret with your registry credentials in it. Delete the `secret` line if credentials are not used with your registry.
+.. Change the `accountName` string to the name you want to associate with the account.
+.. Change the `astraAddress` string to the FQDN you want to use in your browser to access Astra. Copy this FQDN for use in a <<Log in to the Astra Control Center UI,later step>>.
+.. Change the `email` string to the default initial administrator address. Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>.
+.. Change `enrolled` for autoSupport to `false` for sites without internet connectivity or retain `true` for connected sites.
+.. (Optional) Add a first name `firstName` and last name `lastName` of the user associated with the account. You can perform this step now or later within the UI.
+
++
+[subs=+quotes]
+----
+apiVersion: astra.netapp.io/v1
+kind: AstraControlCenter
+metadata:
+  name: astra
+spec:
+  *accountName: "Example"*
+  astraVersion: "ASTRA_VERSION"
+  *astraAddress: "astra.example.com"*
+  autoSupport:
+    *enrolled: true*
+  *email: "[nednetapp@netapp.com]"*
+  *firstName: "SRE"*
+  *lastName: "Admin"*
+  imageRegistry:
+    *name: "[Docker_registry_path]"*
+    *secret: "[astra-registry-cred]"*
+----
+
 . Install the Astra Control Center operator:
 +
 ----
@@ -199,54 +253,6 @@ clusterrolebinding.rbac.authorization.k8s.io/acc-operator-proxy-rolebinding crea
 configmap/acc-operator-manager-config created
 service/acc-operator-controller-manager-metrics-service created
 deployment.apps/acc-operator-controller-manager created
-----
-
-.  If you use a registry that requires authentication, you need to create a secret for the `netapp-acc-operator` namespace. Add Docker information and run the following command:
-+
-----
-kubectl create secret docker-registry astra-registry-cred -n netapp-acc-operator --docker-server=[Docker_registry_path] --docker-username=[username] --docker-password=[token]
-----
-+
-Sample response:
-+
-----
-secret/astra-registry-cred created
-----
-
-. Create the `netapp-acc` namespace if it does not already exist:
-+
-----
-kubectl create ns netapp-acc
-----
-+
-Response:
-+
-----
-namespace/netapp-acc created
-----
-
-.  If you use a registry that requires authentication, you need to create a secret for the `netapp-acc` namespace. Add Docker information and run the following command:
-+
-----
-kubectl create secret docker-registry astra-registry-cred -n netapp-acc --docker-server=[Docker_registry_path] --docker-username=[username] --docker-password=[token]
-----
-+
-Response
-+
-----
-secret/astra-registry-cred created
-----
-
-. Install Astra Control Center in the `netapp-acc` namespace:
-+
-----
-kubectl apply -f astra_control_center_min.yaml -n netapp-acc
-----
-+
-Sample response:
-+
-----
-astracontrolcenter.astra.netapp.io/astra created
 ----
 
 . Verify that all system components installed successfully.
@@ -358,6 +364,7 @@ NOTE: If you enter an incorrect password three times, the admin account will be 
 . Select *Login*.
 . Change the password when prompted.
 
+TIP: You can optionally remove the existing self-signed TLS certificate and replace it with a link:../get-started/add-custom-tls-certificate.html[custom TLS certificate signed by a Certificate Authority (CA)].
 
 == Troubleshoot the installation
 
