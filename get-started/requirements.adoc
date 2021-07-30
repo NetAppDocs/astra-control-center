@@ -75,13 +75,14 @@ Astra Control Center has the following app management requirements:
 
 == Access to the internet
 
-You should determine whether you have outside access to the internet. If you do not, some functionality might be limited, such as monitoring data from NetApp Cloud Insights, or Support data.
-
+You should determine whether you have outside access to the internet. If you do not, some functionality might be limited, such as receiving monitoring and metrics data from NetApp Cloud Insights, or sending support bundles to the NetApp Support Site.
+////
 If you do have access to the internet, decide which of the following NetApp systems you will authorize Astra Control Center to integrate with:
 
 * Cloud Insights for monitoring and metrics
 * NetApp Support Site for Active IQ and SmartSolve processing
 //* IPA for license automation
+////
 
 == License
 
