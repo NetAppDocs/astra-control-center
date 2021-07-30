@@ -75,13 +75,14 @@ Astra Control Center has the following app management requirements:
 
 == Access to the internet
 
-You should determine whether you have outside access to the internet. If you do not, some functionality might be limited, such as monitoring data from NetApp Cloud Insights, or Support data.
-
+You should determine whether you have outside access to the internet. If you do not, some functionality might be limited, such as receiving monitoring and metrics data from NetApp Cloud Insights, or sending support bundles to the NetApp Support Site.
+////
 If you do have access to the internet, decide which of the following NetApp systems you will authorize Astra Control Center to integrate with:
 
 * Cloud Insights for monitoring and metrics
 * NetApp Support Site for Active IQ and SmartSolve processing
 //* IPA for license automation
+////
 
 == License
 
@@ -105,21 +106,37 @@ The cluster that hosts Astra Control Center communicates using the following TCP
 |===
 |Product |Port |Protocol |Direction |Purpose
 
-.11+|Astra Control Center
+|Astra Control Center
 |443
 |HTTPS
 |Ingress
 |UI / API access - Ensure this port is open both ways between the cluster hosting Astra Control Center and each managed cluster
 
+|Astra Control Center
 |9090
 |HTTPS
 a|
 
 * Ingress (to cluster hosting Astra Control Center)
-* Egress (from the node IP address of each worker node of each managed cluster)
+* Egress (random port from the node IP address of each worker node of each managed cluster)
 
 |Metrics data to metrics consumer - ensure each managed cluster can access this port on the cluster hosting Astra Control Center
 
+|Trident
+|34571
+|HTTPS
+|Ingress
+|Node pod communication
+
+|Trident
+|9220
+|HTTP
+|Ingress
+|Metrics endpoint
+|===
+
+////
+// Removed at request of Pat Nanto
 |n/a
 |HTTPS
 |Egress
@@ -164,18 +181,7 @@ a|
 |HTTPS
 |Egress
 |Trident service communication with each managed cluster’s Trident instance
-
-.2+|Trident
-|34571
-|HTTPS
-|Ingress
-|Node pod communication
-
-|9220
-|HTTP
-|Ingress
-|Metrics endpoint
-|===
+////
 
 == Supported web browsers
 
