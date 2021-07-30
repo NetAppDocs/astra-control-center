@@ -22,7 +22,7 @@ Astra Control offers critical capabilities for Kubernetes application data lifec
 * Easily clone an application from production to staging
 * Create application-aware, on-demand snapshots and backups
 * Visualize the real-time protection status of your apps
-* Use a UI or APIs to implement your backup and migration workflows
+* Use a user interface or an API to implement your backup and migration workflows
 
 Astra Control continually watches your compute for state changes, so it’s aware of any new apps that you add along the way.
 
@@ -63,7 +63,7 @@ Astra Control Center runs locally in your own private cloud.
 
 For the first release, Astra Control Center will support OpenShift Kubernetes clusters and Trident storage backends with ONTAP 9.5 and above.
 
-In a cloud connected environment Astra Control Center uses Cloud Insights to provide advanced monitoring and telemetry. In the absence of a Cloud Insights connection, limited (7-days worth of metrics) monitoring and telemetry is available in Astra Control Center and also exported to Kubernetes native monitoring tools (such as Prometheus and Grafana) through open metrics end points.
+In a cloud connected environment Astra Control Center uses Cloud Insights to provide advanced monitoring and telemetry. In the absence of a Cloud Insights connection, limited (7-days of metrics) monitoring and telemetry is available in Astra Control Center and also exported to Kubernetes native monitoring tools (such as Prometheus and Grafana) through open metrics end points.
 
 Astra Control Center is fully integrated into the AutoSupport and Active IQ ecosystem to provide support and business users with troubleshooting and usage information.
 
@@ -75,9 +75,9 @@ At a high level, Astra Control Center works like this:
 
 * You install Astra Control Center in your local environment.
 * Astra Control Center does this:
-** Discovers your Kubernetes clusters.
-** Discovers your Trident configuration backed by an ONTAP storage backend.
-** Creates a default user at deployment time with the "owner" role.
+** Discovers details about your Kubernetes clusters.
+** Discovers your Trident configuration on the clusters that you choose to manage.
+** Discovers apps on those clusters and enables you to protect those apps.
 
 Learn more about how to link:../get-started/install_acc.html[install Astra Control Center].
 
@@ -85,12 +85,12 @@ You complete some setup tasks such as these:
 
 * Set up licensing.
 * Add your first cluster.
-* Add backend storage.
+* Add backend storage that is discovered when you added the cluster.
 * Add an object store bucket that will store your app backups.
 
 Learn more about how to link:../get-started/setup_overview.html[set up Astra Control Center].
 
-At this point, you can add apps to your cluster. Some apps are pre-installed in the cluster being managed. Then, use Astra Control Center to manage these apps, and create snapshots, backups, and clones.
+You can add apps to your cluster. Or, if you have some apps already in the cluster being managed, you can use Astra Control Center to discover and manage them. Then, use Astra Control Center to create snapshots, backups, and clones.
 
 
 == How Astra Control Service works

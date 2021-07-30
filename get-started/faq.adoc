@@ -25,14 +25,15 @@ Astra Control Center uses local authentication and a URL specific to each enviro
 
 For the URL, in a browser, enter the Fully Qualified Domain Name (FQDN) you set in the spec.astraAddress field in the astra_control_center_min.yaml custom resource definition (CRD) file when you installed Astra Control Center. The email is the value that you set in the spec.email field in the astra_control_center_min.yaml CRD.
 
-*I am using the Trial license. How to I change to the full license?*
+*I am using the Evaluation license. How to I change to the full license?*
 
 You can easily change to a full license by obtaining the NetApp license file (NLF).
 
 *Steps*
-. From the left navigation, select *Account* > *License*.
-. Select *Add license*.
-. Browse to the license file you downloaded and select *Add*.
+
+* From the left navigation, select *Account* > *License*.
+* Select *Add license*.
+* Browse to the license file you downloaded and select *Add*.
 
 *I am using the Evaluation license. Can I still manage apps?*
 
@@ -82,7 +83,7 @@ No, you should not manage Astra Control itself because it is a "system app."
 
 *There are snapshots in my account that I didn't create. Where did they come from?*
 
-In some situations, Astra Control will automatically create a snapshot as part of performing another process. If these snapshots are more than a few minutes old, you can safely delete them.
+In some situations, Astra Control will automatically create a snapshot as part of a backup, clone or restore process. 
 
 *My application uses several PVs. Will Astra Control take snapshots and backups of all these PVCs?*
 
