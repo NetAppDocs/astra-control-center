@@ -117,7 +117,7 @@ The cluster that hosts Astra Control Center communicates using the following TCP
 a|
 
 * Ingress (to cluster hosting Astra Control Center)
-* Egress (from the node IP address of each worker node of each managed cluster)
+* Egress (random port from the node IP address of each worker node of each managed cluster)
 
 |Metrics data to metrics consumer - ensure each managed cluster can access this port on the cluster hosting Astra Control Center
 
