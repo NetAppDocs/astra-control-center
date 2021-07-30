@@ -105,12 +105,13 @@ The cluster that hosts Astra Control Center communicates using the following TCP
 |===
 |Product |Port |Protocol |Direction |Purpose
 
-.11+|Astra Control Center
+|Astra Control Center
 |443
 |HTTPS
 |Ingress
 |UI / API access - Ensure this port is open both ways between the cluster hosting Astra Control Center and each managed cluster
 
+|Astra Control Center
 |9090
 |HTTPS
 a|
@@ -120,6 +121,8 @@ a|
 
 |Metrics data to metrics consumer - ensure each managed cluster can access this port on the cluster hosting Astra Control Center
 
+////
+// Removed at request of Pat Nanto
 |n/a
 |HTTPS
 |Egress
@@ -164,13 +167,15 @@ a|
 |HTTPS
 |Egress
 |Trident service communication with each managed cluster’s Trident instance
+////
 
-.2+|Trident
+|Trident
 |34571
 |HTTPS
 |Ingress
 |Node pod communication
 
+|Trident
 |9220
 |HTTP
 |Ingress
