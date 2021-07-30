@@ -121,6 +121,19 @@ a|
 
 |Metrics data to metrics consumer - ensure each managed cluster can access this port on the cluster hosting Astra Control Center
 
+|Trident
+|34571
+|HTTPS
+|Ingress
+|Node pod communication
+
+|Trident
+|9220
+|HTTP
+|Ingress
+|Metrics endpoint
+|===
+
 ////
 // Removed at request of Pat Nanto
 |n/a
@@ -168,19 +181,6 @@ a|
 |Egress
 |Trident service communication with each managed cluster’s Trident instance
 ////
-
-|Trident
-|34571
-|HTTPS
-|Ingress
-|Node pod communication
-
-|Trident
-|9220
-|HTTP
-|Ingress
-|Metrics endpoint
-|===
 
 == Supported web browsers
 
