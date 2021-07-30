@@ -20,9 +20,9 @@ If you define an app with a non-existent k8s label, Astra Control Center will cr
 // DOC-3552/ASTRACTL-9586
 There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in link:../use/protect-apps.html#delete-backups[Delete backups]. To delete a failed backup, use the link:https://docs.netapp.com/us-en/astra-automation/index.html[Astra API^].
 
-== Astra Control Center UI slow to show persistent volume changes
-// DOC-3562/ASTRACTL-9560/ASTRACTL-9540
-After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
+== Astra Control Center UI slow to show changes to app resources such as persistent volume changes
+// DOC-3562/ASTRACTL-9560/ASTRACTL-9540/AD AH
+After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. This delay in the UI can also occur when any app resources are added or modified. In this case, a data protection operation is successful within minutes and you can use the management software for the storage backend to confirm the change in volume size.
 
 == Clone performance impacted by large persistent volumes
 //from ACS repo
@@ -40,13 +40,17 @@ If you try to reuse a bucket used by another or previous installation of Astra C
 //DOC-3560/ASTRACTL-9574
 When you add a bucket, select the correct bucket provider type with credentials that are correct for that provider. For example, the UI accepts NetApp ONTAP S3 as the type with StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail.
 
+//Backups and snapshots might not be retained during removal of an Astra Control Center instance
+//AD AH review
+//If you remove your instance of Astra Control Center, you cannot access backups in a managed bucket without manually restoring a backup from restic in that bucket using the account ID as password. In general, backups last for the life of your Astra Control Center instance. If you have an evaluation license, be sure you store your account ID. If you have a full license, you can find the account ID in the license.
+
 == Can't determine ASUP tar bundle status in scaled environment
-//DOC-3602/ASTRACTL-10186
-After Astra Control Center has been running for extended periods (up to 5 days in scaled environment), the ASUP tar bundle download status cannot be determined and the download can time out without any indication in the UI.
+//DOC-3602/ASTRACTL-10186//AD AH
+During ASUP collection, the status of the bundle in the UI is reported as either `collecting` or `done`. Collection can take up to an hour for large environments. During ASUP download the network file transfer speed for the bundle might be insufficient, and the download might time out after 15 minutes without any indication in the UI. Download issues depend on the size of the ASUP, the scaled cluster size, and if collection time goes beyond the seven day limit.
 
 == Uninstall of Astra Control Center fails to clean up the monitoring-operator pod on the managed cluster
 //DOC-3530/ASTRACTL-9496
-You can manually delete the pods in the netapp-monitoring namespace and the namespace with the following commands:
+If you did not unmanage your clusters before you uninstalled Astra Control Center, you can manually delete the pods in the netapp-monitoring namespace and the namespace with the following commands:
 
 .Steps
 . Delete `acc-monitoring` agent:

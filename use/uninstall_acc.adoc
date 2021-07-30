@@ -14,7 +14,7 @@ You might need to remove Astra Control Center components if you are upgrading fr
 
 .Steps
 
-. Use the following command to delete Astra Control Center:
+. Delete Astra Control Center. The following sample command is based upon a default installation. Modify the command if you made custom configurations.
 +
 ----
 kubectl delete -f astra_control_center_min.yaml -n netapp-acc
