@@ -18,7 +18,7 @@ Try it out! If you want to try Astra Control Center, you can use a 90-day evalua
 
 [role="quick-margin-list"]
 * Astra works with Kubernetes clusters with a Trident-configured ONTAP storage backend.
-* Clusters must be running a healthy state, with at least three online worker node.
+* Clusters must be running a healthy state, with at least three online worker nodes.
 * The cluster must be running Kubernetes.
 
 
@@ -28,9 +28,8 @@ link:../get-started/requirements.html[Learn more about the Astra Control Center 
 ==== image:number2.png[Number 2] Download and install Astra Control Center
 [role="quick-margin-list"]
 * Download Astra Control Center from the NetApp Support Site.
-* Install Astra Control Center in your local environment and let Astra Control Center do this:
-** Discover your Kubernetes clusters.
-** Discover your Trident configuration backed by the ONTAP storage backend.
+* Install Astra Control Center in your local environment.
+* Discover your Trident configuration backed by the ONTAP storage backend.
 +
 For our first release, you'll install the images on an OpenShift registry or use your local registry.
 
@@ -42,8 +41,8 @@ link:../get-started/install_acc.html[Learn more about installing Astra Control C
 [role="quick-margin-list"]
 
 * Add a license.
-* Add a Kubernetes cluster.
-* Import an ONTAP storage backend.
+* Add a Kubernetes cluster and Astra Control Center discovers details.
+* Add an ONTAP storage backend.
 * Optionally, add an object store bucket that will store your app backups.
 
 

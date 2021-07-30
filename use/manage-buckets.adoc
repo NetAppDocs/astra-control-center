@@ -47,15 +47,18 @@ NOTE: S3 buckets in Astra Control Center do not report available capacity. Befor
 
 == Remove credentials
 
-Remove credentials from an account at any time.
+Remove S3 credentials from an account at any time using the Astra Control API.
+
+For details, see https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra Control API^].
+
 
 TIP: The first set of credentials that you add to Astra Control is always in use because Astra Control uses the credentials to authenticate the backup bucket. It’s best not to remove these credentials.
 
-.Steps
-. Select *Account* > *Credentials*.
-.	From the State drop-down list, click the credentials you want to remove.
-. Select *Remove*.
-.	Type the *remove* to confirm deletion and then select *Yes, remove credentials*.
+//.Steps
+//. Select *Account* > *Credentials*.
+//.	From the State drop-down list, click the credentials you want to remove.
+//. Select *Remove*.
+//.	Type the *remove* to confirm deletion and then select *Yes, remove credentials*.
 
 
 == Edit a bucket
