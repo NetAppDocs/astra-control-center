@@ -80,11 +80,14 @@ The following is a sample script for the automatic loading of images:
 [subs=+quotes]
 ----
 export REGISTRY=[Docker_registry_path]
-
-for astraImageFile in $(ls images/*.tar) ; do
-   astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image: //')
-   docker tag ${astraImage} ${REGISTRY}/${astraImage}
-   docker push ${REGISTRY}/${astraImage}
+for astraImageFile in $(ls images/*.tar)
+  # Load to local cache. And store the name of the loaded image trimming the 'Loaded images: '
+  do astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image(s): //')
+  astraDImage=$(echo ${astraImage} | sed 's!localhost/!!')
+  # Tag with local image repo.
+  docker tag ${astraImage} ${REGISTRY}/${astraDImage}
+  # Push to the local repo.
+  docker push ${REGISTRY}/${astraDImage}
 done
 ----
 
