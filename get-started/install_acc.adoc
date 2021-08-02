@@ -10,7 +10,7 @@ summary: To install Astra Control Center after addressing some environmental pre
 :icons: font
 :imagesdir: ../media/get-started/
 
-To install Astra Control Center, do the following basic steps:
+To install Astra Control Center, do the following steps:
 
 * <<Install Astra Control Center>>
 * <<Log in to the Astra Control Center UI>>
@@ -65,6 +65,12 @@ cd astra-control-center-[version]
 ----
 
 . Add the files in the Astra Control Center image directory to your local registry.
+.. Log in to your Docker registry:
++
+----
+docker login [Docker_registry_path]
+----
+
 .. Load the images into Docker.
 .. Tag the images.
 .. Push the images to your local registry.
@@ -82,7 +88,19 @@ for astraImageFile in $(ls images/*.tar) ; do
 done
 ----
 
-.  (For registries with auth requirements) If you use a registry that requires authentication, you need to do the following:
+.  (For registries with auth requirements only) If you use a registry that requires authentication, you need to do the following:
+.. Create the `netapp-acc-operator` namespace:
++
+----
+kubectl create ns netapp-acc-operator
+----
++
+Response:
++
+----
+namespace/netapp-acc-operator created
+----
+
 .. Create a secret for the `netapp-acc-operator` namespace. Add Docker information and run the following command:
 +
 ----
@@ -101,7 +119,7 @@ secret/astra-registry-cred created
 kubectl create ns [netapp-acc or custom]
 ----
 +
-Response:
+Sample response:
 +
 ----
 namespace/netapp-acc created
@@ -143,8 +161,8 @@ imagePullSecrets:
 - name: astra-registry-cred
 ----
 
-.. Change `[Docker_registry_path]` for the `kube-rbac-prox` image to the registry path where you pushed the images in the previous step.
-.. Change `[Docker_registry_path]` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in the previous step.
+.. Change `[Docker_registry_path]` for the `kube-rbac-prox` image to the registry path where you pushed the images in a previous step.
+.. Change `[Docker_registry_path]` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in a previous step.
 
 +
 [subs=+quotes]
@@ -251,6 +269,30 @@ clusterrolebinding.rbac.authorization.k8s.io/acc-operator-proxy-rolebinding crea
 configmap/acc-operator-manager-config created
 service/acc-operator-controller-manager-metrics-service created
 deployment.apps/acc-operator-controller-manager created
+----
+
+. If you didn't already do so in a previous step, create the `netapp-acc` (or custom) namespace:
++
+----
+kubectl create ns netapp-acc
+----
++
+Sample response:
++
+----
+namespace/netapp-acc created
+----
+
+. Install Astra Control Center in the `netapp-acc` (or your custom) namespace:
++
+----
+$ kubectl apply -f astra_control_center_min.yaml -n [netapp-acc or custom]
+----
++
+Sample response:
++
+----
+astracontrolcenter.astra.netapp.io/astra created
 ----
 
 . Verify that all system components installed successfully.
