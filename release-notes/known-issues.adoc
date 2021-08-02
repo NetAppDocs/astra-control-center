@@ -106,3 +106,33 @@ Result:
 ----
 customresourcedefinition.apiextensions.k8s.io "agents.monitoring.netapp.com" deleted
 ----
+
+== Uninstall of Astra Control Center fails to clean up Traefik CRDs
+//ASTRACTL-9180
+You can manually delete the Traefik CRDs:
+
+.Steps
+. Confirm which CRDs were not deleted by the uninstall process:
++
+----
+kubectl get crds |grep -E 'traefik'
+----
++
+Response
++
+----
+ingressroutes.traefik.containo.us                                 2021-06-23T23:29:11Z
+ingressroutetcps.traefik.containo.us                              2021-06-23T23:29:11Z
+ingressrouteudps.traefik.containo.us                              2021-06-23T23:29:12Z
+middlewares.traefik.containo.us                                   2021-06-23T23:29:12Z
+serverstransports.traefik.containo.us                             2021-06-23T23:29:13Z
+tlsoptions.traefik.containo.us                                    2021-06-23T23:29:13Z
+tlsstores.traefik.containo.us                                     2021-06-23T23:29:14Z
+traefikservices.traefik.containo.us                               2021-06-23T23:29:15Z
+----
+
+. Delete the CRDs:
++
+----
+oc delete crd agents.monitoring.netapp.com ingressroutes.traefik.containo.us ingressroutetcps.traefik.containo.us ingressrouteudps.traefik.containo.us middlewares.traefik.containo.us serverstransports.traefik.containo.us tlsoptions.traefik.containo.us tlsstores.traefik.containo.us traefikservices.traefik.containo.us
+----
