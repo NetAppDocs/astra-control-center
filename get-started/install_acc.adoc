@@ -65,6 +65,9 @@ cd astra-control-center-[version]
 ----
 
 . Add the files in the Astra Control Center image directory to your local registry.
++
+NOTE: See a sample script for the automatic loading of images below.
+
 .. Log in to your Docker registry:
 +
 ----
@@ -74,16 +77,14 @@ docker login [Docker_registry_path]
 .. Load the images into Docker.
 .. Tag the images.
 .. Push the images to your local registry.
+
 +
-The following is a sample script for the automatic loading of images:
-+
-[subs=+quotes]
 ----
 export REGISTRY=[Docker_registry_path]
 for astraImageFile in $(ls images/*.tar)
   # Load to local cache. And store the name of the loaded image trimming the 'Loaded images: '
   do astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image(s): //')
-  astraDImage=$(echo ${astraImage} | sed 's!localhost/!!')
+  astraImage=$(echo ${astraImage} | sed 's!localhost/!!')
   # Tag with local image repo.
   docker tag ${astraImage} ${REGISTRY}/${astraDImage}
   # Push to the local repo.
@@ -138,18 +139,6 @@ Response
 +
 ----
 secret/astra-registry-cred created
-----
-
-.. Install Astra Control Center in the `netapp-acc` (or custom named) namespace.
-+
-----
-kubectl apply -f astra_control_center_min.yaml -n [netapp-acc or custom]
-----
-+
-Sample response:
-+
-----
-astracontrolcenter.astra.netapp.io/astra created
 ----
 
 . Edit the Astra Control Center operator deployment yaml (`astra_control_center_operator_deploy.yaml`) to refer to your local registry and secret.
@@ -212,15 +201,15 @@ spec:
       *imagePullSecrets: []*
 ----
 
-. Edit the Astra Control Center custom resource definition (CRD) file (`astra_control_center_min.yaml`):
+. Edit the Astra Control Center custom resource (CR) file (`astra_control_center_min.yaml`):
 +
 ----
 vim astra_control_center_min.yaml
 ----
 +
-NOTE: If additional customizations are required for your environment, you can use `astra_control_center.yaml` as an alternative CRD. `astra_control_center_min.yaml` is the default CRD and is suitable for most installations.
+NOTE: If additional customizations are required for your environment, you can use `astra_control_center.yaml` as an alternative CR. `astra_control_center_min.yaml` is the default CR and is suitable for most installations.
 +
-NOTE: Properties configured by the CRD cannot be changed after initial Astra Control Center deployment.
+NOTE: Properties configured by the CR cannot be changed after initial Astra Control Center deployment.
 
 .. Change `[Docker_registry_path]` to the registry path where you pushed the images in the previous step.
 .. Change `[astra-registry-cred]` to the k8s secret with your registry credentials in it. Delete the `secret` line if credentials are not used with your registry.
@@ -277,7 +266,7 @@ deployment.apps/acc-operator-controller-manager created
 . If you didn't already do so in a previous step, create the `netapp-acc` (or custom) namespace:
 +
 ----
-kubectl create ns netapp-acc
+kubectl create ns [netapp-acc or custom]
 ----
 +
 Sample response:
@@ -289,7 +278,7 @@ namespace/netapp-acc created
 . Install Astra Control Center in the `netapp-acc` (or your custom) namespace:
 +
 ----
-$ kubectl apply -f astra_control_center_min.yaml -n [netapp-acc or custom]
+kubectl apply -f astra_control_center_min.yaml -n [netapp-acc or custom]
 ----
 +
 Sample response:
@@ -383,7 +372,7 @@ kubectl logs deploy/acc-operator-controller-manager -n netapp-acc-operator -c ma
 . Get the one-time password you will use when you log in to Astra Control Center:
 +
 ----
-kubectl get astracontrolcenters -n [netapp-acc or custom]
+kubectl get acc -n [netapp-acc or custom]
 ----
 +
 The password is `ACC-` followed by the UUID in the response (`ACC-[UUID]` or, in this example, `ACC-c49008a5-4ef1-4c5d-a53e-830daf994116`):
@@ -398,12 +387,12 @@ astra   c49008a5-4ef1-4c5d-a53e-830daf994116
 After installing ACC, you will change the password for the default administrator and log in to the ACC UI dashboard.
 
 .Steps
-. In a browser, enter the FQDN you used in the `astraAddress` in the  `astra_control_center_min.yaml` CRD when <<Install Astra Control Center using the command-line utility,you installed ACC>>.
+. In a browser, enter the FQDN you used in the `astraAddress` in the  `astra_control_center_min.yaml` CR when <<Install Astra Control Center using the command-line utility,you installed ACC>>.
 . Accept the self-signed certificates when prompted.
 +
 NOTE: You can create a custom certificate after login.
 
-. At the Astra Control Center login page, enter the value you used in the `email` in `astra_control_center_min.yaml` CRD when <<Install Astra Control Center using the command-line utility,you installed ACC>>.
+. At the Astra Control Center login page, enter the value you used in the `email` in `astra_control_center_min.yaml` CR when <<Install Astra Control Center using the command-line utility,you installed ACC>>.
 +
 NOTE: If you enter an incorrect password three times, the admin account will be locked for 15 minutes. If you need admin account password assistance, contact NetApp Support.
 
