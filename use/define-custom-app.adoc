@@ -43,12 +43,14 @@ The team's stable release includes a requirement for hourly snapshots and daily 
 
 In order to avoid possible data conflicts, the admin will create two custom apps: one for the canary release, and one for the stable release. This keeps the backups, snapshots, and clone operations separate for the two groups of Kubernetes objects.
 
-After the team adds the cluster to Astra Control, the next step is to define a custom app. To do this, the team clicks the **+ Define** button on the Apps page.
+.Steps
 
-In the pop-up window which appears, the team sets `devops-canary-deployment` as the app name. The team chooses the cluster in the **Cluster** drop-down, then the app's namespace from the **Namespace** drop-down.
+. After the team adds the cluster to Astra Control, the next step is to define a custom app. To do this, the team clicks the **+ Define** button on the Apps page.
 
-At this point, the team can either type `deployment=canary` in the **Labels** field, or select that label from the resources listed below.
+. In the pop-up window which appears, the team sets `devops-canary-deployment` as the app name. The team chooses the cluster in the **Cluster** drop-down, then the app's namespace from the **Namespace** drop-down.
 
-After defining the custom app for the canary deployment, the team repeats the process for the stable deployment.
+. The team can either type `deployment=canary` in the **Labels** field, or select that label from the resources listed below.
+
+. After defining the custom app for the canary deployment, the team repeats the process for the stable deployment.
 
 When the team has finished creating the two custom apps, they can treat these resources as any other Astra Control application. They can clone them, create backups and snapshots, and create a custom Protection Policy for each group of resources based on the Kubernetes labels.

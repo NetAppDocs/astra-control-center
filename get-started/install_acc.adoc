@@ -42,6 +42,8 @@ The Astra Control Center installation process does the following:
 * Helps you determine that all Astra Control Center pods are running.
 * Installs the Astra UI.
 
+NOTE: Podman commands can be used in place of Docker commands if you are using RedHat’s podman repository.
+
 .Steps
 
 . Download the Astra Control Center bundle (`astra-control-center-[version].tar.gz`) from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site].
@@ -86,9 +88,9 @@ for astraImageFile in $(ls images/*.tar)
   do astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image(s): //')
   astraImage=$(echo ${astraImage} | sed 's!localhost/!!')
   # Tag with local image repo.
-  docker tag ${astraImage} ${REGISTRY}/${astraDImage}
+  docker tag ${astraImage} ${REGISTRY}/${astraImage}
   # Push to the local repo.
-  docker push ${REGISTRY}/${astraDImage}
+  docker push ${REGISTRY}/${astraImage}
 done
 ----
 
@@ -392,9 +394,9 @@ After installing ACC, you will change the password for the default administrator
 +
 NOTE: You can create a custom certificate after login.
 
-. At the Astra Control Center login page, enter the value you used in the `email` in `astra_control_center_min.yaml` CR when <<Install Astra Control Center using the command-line utility,you installed ACC>>.
+. At the Astra Control Center login page, enter the value you used for `email` in `astra_control_center_min.yaml` CR when <<Install Astra Control Center using the command-line utility,you installed ACC>>, followed by the one-time password (`ACC-[UUID]`).
 +
-NOTE: If you enter an incorrect password three times, the admin account will be locked for 15 minutes. If you need admin account password assistance, contact NetApp Support.
+NOTE: If you enter an incorrect password three times, the admin account will be locked for 15 minutes. If you forget the password that was just updated and no other admin or owner user accounts have been created, contact NetApp Support for password recovery assistance.
 
 . Select *Login*.
 . Change the password when prompted.
