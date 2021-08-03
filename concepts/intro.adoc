@@ -73,16 +73,14 @@ To install and use Astra Control Center, you'll need to meet certain link:../get
 
 At a high level, Astra Control Center works like this:
 
-* You install Astra Control Center in your local environment.
+* You install Astra Control Center in your local environment. Learn more about how to link:../get-started/install_acc.html[install Astra Control Center].
 
-Learn more about how to link:../get-started/install_acc.html[install Astra Control Center].
+* You complete some setup tasks such as these:
 
-You complete some setup tasks such as these:
-
-* Set up licensing.
-* Add your first cluster.
-* Add backend storage that is discovered when you added the cluster.
-* Add an object store bucket that will store your app backups.
+** Set up licensing.
+** Add your first cluster.
+** Add backend storage that is discovered when you added the cluster.
+** Add an object store bucket that will store your app backups.
 
 Learn more about how to link:../get-started/setup_overview.html[set up Astra Control Center].
 

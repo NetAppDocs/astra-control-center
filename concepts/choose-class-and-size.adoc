@@ -20,7 +20,7 @@ NOTE: Trident storage classes should be preconfigured outside of Astra Control C
 
 == Storage classes
 
-When you add compute to Astra Control Center, you're prompted to choose one of the previously discovered storage classes for persistent volumes. Service levels in storage classes are designed for different capacity and bandwidth needs. These discovered storage classes are eligible for use within Astra Control Center.
+When you add clusters to Astra Control Center, you're prompted to choose one of the previously discovered storage classes for persistent volumes. Service levels in storage classes are designed for different capacity and bandwidth needs. These discovered storage classes are eligible for use within Astra Control Center.
 
 == Persistent volume size and performance
 
