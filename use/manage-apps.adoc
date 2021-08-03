@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: use/manage-apps.html
 keywords: manage app, discover app, ignore app, kubernetes, astra control, astra
-summary: After you add Kubernetes compute to Astra Control, you can install apps on that cluster (outside of Astra Control), and then go to the Apps page in Astra Control to start managing the apps.
+summary: After you add Kubernetes clusters to Astra Control, you can install apps on that cluster (outside of Astra Control), and then go to the Apps page in Astra Control to start managing the apps.
 ---
 
 = Start managing apps
@@ -61,7 +61,7 @@ While Astra Control enables you to separately manage both levels of the hierarch
 . From the left navigation bar, select *Apps*.
 . Select *Discovered*.
 +
-image:acc_apps_discovered3.png[Screen shot of discovered apps]
+image:acc_apps_discovered4.png[Screen shot of discovered apps]
 .	View the list of discovered namespaces. Expand the namespace to view the apps and associated resources.
 +
 Astra Control shows you the Helm apps and custom-labeled apps in the namespace. If Helm labels are available, they’re designated with a tag icon.
@@ -70,7 +70,7 @@ Astra Control shows you the Helm apps and custom-labeled apps in the namespace. 
 .	Find the app you want at the desired level in the hierarchy, and from the Actions menu, select *Manage*.
 .	If you don’t want to manage an app, from the Actions menu next to the app, select *Ignore*.
 +
-For example, if you want to manage all apps under the "cattle-logging" namespace together so that they have the same snapshot and backup policies, you would manage the namespace and ignore the apps in the namespace.
+For example, if you want to manage all apps under the "maria" namespace together so that they have the same snapshot and backup policies, you would manage the namespace and ignore the apps in the namespace.
 
 .	To see the list of managed apps, select *Managed* as the display filter.
 +
@@ -168,7 +168,7 @@ NOTE: If you unmanage an app, any backups or snapshots that were created earlier
 
 Astra Control also discovers the system apps running on a Kubernetes cluster. You can display system apps by selecting the *Show system apps* checkbox under the Cluster filter in the toolbar.
 
-image:acc_apps_system_apps2.png[A screenshot that shows the Show System Apps option that is available in the Apps page.]
+image:acc_apps_system_apps3.png[A screenshot that shows the Show System Apps option that is available in the Apps page.]
 
 We don't show you these system apps by default because it's rare that you'd need to back them up.
 
