@@ -214,12 +214,12 @@ NOTE: If additional customizations are required for your environment, you can us
 NOTE: Properties configured by the CR cannot be changed after initial Astra Control Center deployment.
 
 .. Change `[Docker_registry_path]` to the registry path where you pushed the images in the previous step.
-.. Change `[astra-registry-cred]` to the k8s secret with your registry credentials in it. Delete the `secret` line if credentials are not used with your registry.
 .. Change the `accountName` string to the name you want to associate with the account.
-.. Change the `astraAddress` string to the FQDN you want to use in your browser to access Astra. Copy this FQDN for use in a <<Log in to the Astra Control Center UI,later step>>.
+.. Change the `astraAddress` string to the FQDN you want to use in your browser to access Astra. Do not use `http://` or `https://` in the address. Copy this FQDN for use in a <<Log in to the Astra Control Center UI,later step>>.
 .. Change the `email` string to the default initial administrator address. Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>.
 .. Change `enrolled` for autoSupport to `false` for sites without internet connectivity or retain `true` for connected sites.
 .. (Optional) Add a first name `firstName` and last name `lastName` of the user associated with the account. You can perform this step now or later within the UI.
+.. If you are not using a registry that requires authorization, delete the `secret` line.
 
 +
 [subs=+quotes]
@@ -365,24 +365,59 @@ vault-controller-745879f98b-49c5v            1/1     Running   0          4m51s
 kubectl logs deploy/acc-operator-controller-manager -n netapp-acc-operator -c manager -f
 ----
 
-. When all the pods are running, verify installation success by searching the `acc-operator-controller-manager` logs for the following message:
+. When all the pods are running, verify installation success by retrieving the AstraControlCenter instance installed by the ACC Operator.
 +
 ----
-{"level":"info","ts":1624054318.029971,"logger":"controllers.AstraControlCenter","msg":"Successfully Reconciled AstraControlCenter in [seconds]s","AstraControlCenter":"[netapp-acc or custom]/astra","ae.Version":"[x.y.z]"}
+kubectl get acc -o yaml -n netapp-acc
 ----
 
-. Get the one-time password you will use when you log in to Astra Control Center:
+. Check the `status.deploymentState` field in the response for the `Deployed` value. If deployment was unsuccessful, an error message appears instead.
 +
-----
-kubectl get acc -n [netapp-acc or custom]
-----
+NOTE: You will use the `uuid` in the next step.
+
 +
-The password is `ACC-` followed by the UUID in the response (`ACC-[UUID]` or, in this example, `ACC-c49008a5-4ef1-4c5d-a53e-830daf994116`):
-+
+[subs=+quotes]
 ----
-NAME    UUID
-astra   c49008a5-4ef1-4c5d-a53e-830daf994116
+apiVersion: v1
+items:
+- apiVersion: astra.netapp.io/v1
+  kind: AstraControlCenter
+  metadata:
+    creationTimestamp: "2021-07-28T21:36:49Z"
+    finalizers:
+    - astracontrolcenter.netapp.io/finalizer
+   generation: 1
+    name: astra
+    namespace: netapp-acc
+    resourceVersion: "27797604"
+    selfLink: /apis/astra.netapp.io/v1/namespaces/netapp-acc/astracontrolcenters/astra
+    uid: 61cd8b65-047b-431a-ba35-510afcb845f1
+  spec:
+    accountName: Example
+    astraAddress: caas-se-openlab-astra-enterprise-02-lb-01.caas.openeng.netapp.com
+    astraResourcesScaler: "Off"
+    astraVersion: 21.08.52
+    autoSupport:
+      enrolled: false
+    email: admin@example.com
+    firstName: SRE
+    lastName: Admin
+    imageRegistry:
+      name: registry_name/astra
+  status:
+    certManager: deploy
+    *deploymentState: Deployed*
+    observedGeneration: 1
+    observedVersion: 21.08.52
+    postInstall: Complete
+    *uuid: c49008a5-4ef1-4c5d-a53e-830daf994116*
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""
 ----
+
+. To get the one-time password you will use when you log in to Astra Control Center, copy the `status.uuid` value from the response in the previous step. The password is `ACC-` followed by the UUID value (`ACC-[UUID]` or, in this example, `ACC-c49008a5-4ef1-4c5d-a53e-830daf994116`).
 
 == Log in to the Astra Control Center UI
 
