@@ -86,6 +86,144 @@ ontap-gold (default)   csi.trident.netapp.io          Delete          Immediate 
 thin                   kubernetes.io/vsphere-volume   Delete          Immediate           false                  6d
 ----
 
+== Create an admin-role kubeconfig
+
+Ensure that you have the following on your machine before you do the steps:
+
+* `kubectl` v1.19 or later installed
+* An active kubeconfig with cluster admin rights for the active context
+
+.Steps
+. Create a service account as follows:
+.. Create a service account file called ``astracontrol-service-account.yaml``.
++
+Adjust the name and namespace as needed. If changes are made here, you should apply the same changes in the following steps.
++
+[source]
+[subs="specialcharacters,quotes"]
+----
+*astracontrol-service-account.yaml*
+----
++
+----
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: astracontrol-service-account
+  namespace: default
+----
+.. Apply the service account:
++
+----
+kubectl apply -f astracontrol-service-account.yaml
+----
+. Grant cluster admin permissions as follows:
+.. Create a `ClusterRoleBinding` file called `astracontrol-clusterrolebinding.yaml`.
++
+Adjust any names and namespaces modified when creating the service account as needed.
++
+[source]
+[subs="specialcharacters,quotes"]
+----
+*astracontrol-clusterrolebinding.yaml*
+----
++
+----
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: astracontrol-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: astracontrol-service-account
+  namespace: default
+----
+.. Apply the cluster role binding:
++
+----
+kubectl apply -f astracontrol-clusterrolebinding.yaml
+----
+. Generate the kubeconfig as follows:
+.. Create a `create-kubeconfig.sh` file.
++
+[source]
+[subs="specialcharacters,quotes"]
+----
+*create-kubeconfig.sh*
+----
++
+----
+# Update these to match your environment. If you didn't change anything above, don't change anything here.
+SERVICE_ACCOUNT_NAME=astracontrol-service-account
+NAMESPACE=default
+NEW_CONTEXT=astracontrol
+KUBECONFIG_FILE='kubeconfig-sa'
+
+CONTEXT=$(kubectl config current-context)
+
+SECRET_NAME=$(kubectl get serviceaccount ${SERVICE_ACCOUNT_NAME} \
+  --context ${CONTEXT} \
+  --namespace ${NAMESPACE} \
+  -o jsonpath='{.secrets[0].name}')
+TOKEN_DATA=$(kubectl get secret ${SECRET_NAME} \
+  --context ${CONTEXT} \
+  --namespace ${NAMESPACE} \
+  -o jsonpath='{.data.token}')
+
+TOKEN=$(echo ${TOKEN_DATA} | base64 -d)
+
+# Create dedicated kubeconfig
+# Create a full copy
+kubectl config view --raw > ${KUBECONFIG_FILE}.full.tmp
+
+# Switch working context to correct context
+kubectl --kubeconfig ${KUBECONFIG_FILE}.full.tmp config use-context ${CONTEXT}
+
+# Minify
+kubectl --kubeconfig ${KUBECONFIG_FILE}.full.tmp \
+  config view --flatten --minify > ${KUBECONFIG_FILE}.tmp
+
+# Rename context
+kubectl config --kubeconfig ${KUBECONFIG_FILE}.tmp \
+  rename-context ${CONTEXT} ${NEW_CONTEXT}
+
+# Create token user
+kubectl config --kubeconfig ${KUBECONFIG_FILE}.tmp \
+  set-credentials ${CONTEXT}-${NAMESPACE}-token-user \
+  --token ${TOKEN}
+
+# Set context to use token user
+kubectl config --kubeconfig ${KUBECONFIG_FILE}.tmp \
+  set-context ${NEW_CONTEXT} --user ${CONTEXT}-${NAMESPACE}-token-user
+
+# Set context to correct namespace
+kubectl config --kubeconfig ${KUBECONFIG_FILE}.tmp \
+  set-context ${NEW_CONTEXT} --namespace ${NAMESPACE}
+
+# Flatten/minify kubeconfig
+kubectl config --kubeconfig ${KUBECONFIG_FILE}.tmp \
+  view --flatten --minify > ${KUBECONFIG_FILE}
+
+# Remove tmp
+rm ${KUBECONFIG_FILE}.full.tmp
+rm ${KUBECONFIG_FILE}.tmp
+----
+.. Source the commands to apply them to your Kubernetes cluster.
++
+----
+source create-kubeconfig.sh
+----
+. (*Optional*) Rename the kubeconfig to a meaningful name for your cluster. Protect your cluster credential.
++
+----
+chmod 700 create-kubeconfig.sh
+mv kubeconfig-sa.txt YOUR_CLUSTER_NAME_kubeconfig
+----
+
 == What's next?
 
 Now that you’ve verified that the prerequisites are met, you're ready to link:setup_overview.html[add a cluster^].
