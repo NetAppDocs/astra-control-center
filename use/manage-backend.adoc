@@ -76,7 +76,7 @@ With a connection to Cloud Insights, you can see the volumes that the Kubernetes
 TIP: If you connected to NetApp Cloud Insights, excerpts of data from Cloud Insights appear on the Backends page.
 
 +
-image:../use/acc_backends_ci_connection.png[A screenshot of the Backends page]
+image:../use/acc_backends_ci_connection2.png[A screenshot of the Backends page]
 
 . To go directly to Cloud Insights, click the *Cloud Insights* icon next to the metrics image.
 
