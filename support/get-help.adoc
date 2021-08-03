@@ -52,10 +52,10 @@ Astra Control Center enables the admin user to generate bundles, which include i
 
 NOTE: The time taken by Astra Control Center to generate the bundle depends on the size of your Astra Control Center installation as well as the parameters of the requested support bundle. The time duration that you specified when requesting a support bundle dictates the time it takes for the bundle to be generated (for example, a shorter time period results in faster bundle generation).
 
-Before you begin, check to see whether your external connections are configured to enable upload of bundles to NSS.
+Before you begin, determine whether a proxy connection will be required to upload bundles to NSS. If a proxy connection is needed, verify that Astra Control Center has been configured to use a proxy server.
 
 . Select *Accounts* > *Connections*.
-. Check the external connections in *Connection settings*.
+. Check the proxy settings in *Connection settings*.
 
 .Steps
 . Create a case on the NSS portal using the license serial number listed on the *Support* page of the Astra Control Center UI.
