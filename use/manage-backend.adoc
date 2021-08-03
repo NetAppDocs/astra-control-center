@@ -12,7 +12,7 @@ summary: Add storage for your on-premises Kubernetes applications. Astra Control
 
 Add a storage backend to Astra Control to manage your on-premises Kubernetes applications. Storage backends represent physical and virtual appliances providing storage. Astra Control discovers and uses the already-deployed resources, including Trident, ONTAP, and associated storage classes.
 
-Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend. 
+Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend.
 
 You can also see the storage capacity and health details, including performance if Astra Control Center is connected to Cloud Insights.
 
@@ -89,7 +89,7 @@ You can unmanage the backend.
 .	From left navigation, select *Backends*.
 . Select the backend storage.
 . From the Actions menu, select *Unmanage*.
-. Type "remove" to confirm the removal.
+. Type "unmanage" to confirm the removal.
 . Select *Yes, remove storage backend*.
 
 == Find more information
