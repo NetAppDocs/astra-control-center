@@ -19,6 +19,10 @@ When Astra Control Center clones an app, it creates a clone of your application 
 
 NOTE: S3 buckets in Astra Control Center do not report available capacity. Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
 
+.What you'll need
+
+To clone apps to a different cluster, you need a default bucket. You get a default bucket when you add a bucket to Astra Control Center.
+
 .Steps
 
 . Click *Apps*.
