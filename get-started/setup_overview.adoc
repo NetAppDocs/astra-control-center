@@ -53,6 +53,10 @@ NOTE:  If your installation grows to exceed the licensed number of CPU units, As
 
 The *Account* > *License* page displays the license information, expiration date, license serial number, account ID, and CPU units used.
 
+//AD AH review q2
+
+NOTE: If you have an evaluation license, be sure you store your account ID to avoid data loss in the event of Astra Control Center failure if you are not sending ASUPs.
+
 == Add cluster
 //REFERENCED IN UI. DO NOT MODIFY WITHOUT NOTIFYING UX.
 To begin managing your apps, add a Kubernetes cluster and manage it as a compute resource. You have to add a cluster for Astra Control Center to discover your Kubernetes applications.
