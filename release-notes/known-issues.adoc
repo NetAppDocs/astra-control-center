@@ -42,7 +42,7 @@ When you add a bucket, select the correct bucket provider type with credentials 
 
 == Backups and snapshots might not be retained during removal of an Astra Control Center instance
 //AD AH review
-If you remove your instance of Astra Control Center, you cannot access backups in a managed bucket without manually restoring a backup from restic in that bucket using the account ID as password. In general, backups last for the life of your Astra Control Center instance. If you have an evaluation license, be sure you store your account ID. If you have a full license, you can find the account ID in the license.
+If you have an evaluation license, be sure you store your account ID to avoid data loss in the event of Astra Control Center failure if you are not sending ASUPs.
 
 == Clone operation cannot use other buckets besides the default
 //DOC-3595/ASTRACTL-10071
