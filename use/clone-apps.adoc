@@ -21,7 +21,7 @@ NOTE: S3 buckets in Astra Control Center do not report available capacity. Befor
 
 .What you'll need
 
-To clone apps to a different cluster, you need a default bucket. You get a default bucket when you add a bucket to Astra Control Center.
+To clone apps to a different cluster, you need a default bucket. When you add your first bucket, it becomes the default bucket.
 
 .Steps
 
