@@ -10,13 +10,13 @@ summary: You can configure several optional settings to enhance your Astra Contr
 :icons: font
 :imagesdir: ../media/use/
 
-You can configure several optional settings to enhance your Astra Control Center experience. If the network where you're running Astra Control Center requires a proxy for connecting to the Internet, configure that proxy server in Astra Control Center. To monitor and gain insight into your complete infrastructure, create a connection to NetApp Cloud Insights. To collect data and logs from your containers, add a Fluent Bit connection.
+You can configure several optional settings to enhance your Astra Control Center experience. If the network where you’re running Astra Control Center requires a proxy for connecting to the Internet (to upload support bundles to NetApp Support Site or establish a connection to Cloud Insights), you should configure a proxy server in Astra Control Center. To monitor and gain insight into your complete infrastructure, create a connection to NetApp Cloud Insights. To collect Kubernetes events from systems monitored by Astra Control Center, add a Fluentd connection.
 
 NOTE: After you enable the Cloud Insights connection, you can view throughput information on the *Backends* page as well as connect to Cloud Insights from here after selecting a storage backend. You can also find the information on the *Dashboard* in the Cluster section, and also connect to Cloud Insights from here.
 
 == Add a proxy server
 
-If the network where you're running Astra Control Center requires a proxy for connecting to the Internet, configure that proxy server in Astra Control Center.
+If the network where you’re running Astra Control Center requires a proxy for connecting to the Internet (to upload support bundles to NetApp Support Site or establish a connection to Cloud Insights), you should configure a proxy server in Astra Control Center.
 
 IMPORTANT: Astra Control Center does not validate the details you enter for your proxy server. Ensure that you enter the correct values.
 
@@ -66,7 +66,7 @@ To monitor and gain insight into your complete infrastructure, connect NetApp Cl
 
 NOTE: Cloud Insights should be accessible from the network that Astra Control Center uses, or indirectly via a proxy server.
 
-NOTE: When Astra Control Center is connected to Cloud Insights, an Acquisition Unit pod gets created. This pod collects data from the storage backends that are managed by Astra Control Center and pushes it to Cloud Insights. This pod requires 8 GB RAM and 2 CPU cores. 
+NOTE: When Astra Control Center is connected to Cloud Insights, an Acquisition Unit pod gets created. This pod collects data from the storage backends that are managed by Astra Control Center and pushes it to Cloud Insights. This pod requires 8 GB RAM and 2 CPU cores.
 
 .What you'll need
 
@@ -154,7 +154,7 @@ After you confirm the operation, on the *Account* > *Connections* page, the Clou
 
 == Connect to Fluentd
 
-You can send logs from Astra Control Center to your Fluentd endpoint. The Fluentd connection is disabled by default.
+You can send logs (Kubernetes events) from Astra Control Center to your Fluentd endpoint. The Fluentd connection is disabled by default.
 
 image:fluentbit.png[Shows a conceptual diagram of event logs going from Astra to Fluentd.]
 
@@ -174,7 +174,7 @@ IMPORTANT: Astra Control Center does not validate the details you enter for your
 . Select *Connect* from the drop-down list where it shows *Disconnected* to add the connection.
 +
 image:connect-fluentd.png[Shows the UI screen for enabling connection to Fluentd.]
-. Enter the host IP address, the port number, and API token (optional) for your Fluentd server.
+. Enter the host IP address, the port number, and shared key for your Fluentd server.
 . Select *Connect*.
 
 .Result
