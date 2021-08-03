@@ -27,7 +27,7 @@ NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket pr
 // TIP: Ensure you use a single bucket type; otherwise, mixing bucket types can cause errors.
 
 
-You cannot delete a bucket.
+You cannot delete a bucket; however, you can edit it.
 // Cannot delete a bucket using UI or API.
 
 A bucket can be in one of these states:
