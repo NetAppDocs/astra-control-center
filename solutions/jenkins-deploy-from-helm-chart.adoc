@@ -26,7 +26,7 @@ NOTE: For Astra Control Center, you can add the cluster to Astra Control Center 
 
 * Updated versions of Helm (version 3.2+) and Kubectl installed on a local machine with the proper kubeconfig for the cluster
 
-Astra Control does not currently support the https://plugins.jenkins.io/kubernetes/[Kubernetes plugin for Jenkins]. You can run Jenkins in a Kubernetes cluster without the plugin. The plugin provides scalability to your Jenkins cluster.
+Astra Control does not currently support the https://plugins.jenkins.io/kubernetes/[Kubernetes plugin for Jenkins^]. You can run Jenkins in a Kubernetes cluster without the plugin. The plugin provides scalability to your Jenkins cluster.
 
 
 == Install Jenkins
