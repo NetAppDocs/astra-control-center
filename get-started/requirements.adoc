@@ -202,4 +202,4 @@ If you want to integrate these options, you should obtain the following:
 ////
 == What's next
 
-View the link:quick-start.html[quick start^] overview.
+View the link:quick-start.html[quick start] overview.
