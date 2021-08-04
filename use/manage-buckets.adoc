@@ -38,6 +38,8 @@ A bucket can be in one of these states:
 
 For instructions on how to manage buckets using the Astra API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
 
+You can do these tasks related to managing buckets:
+
 * link:../get-started/setup_overview.html#add-a-bucket[Add a bucket]
 * <<Edit a bucket>>
 
