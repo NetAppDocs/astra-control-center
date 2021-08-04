@@ -42,7 +42,7 @@ The Astra Control Center installation process does the following:
 * Helps you determine that all Astra Control Center pods are running.
 * Installs the Astra UI.
 
-NOTE: Podman commands can be used in place of Docker commands if you are using RedHat’s podman repository.
+NOTE: Podman commands can be used in place of Docker commands if you are using Red Hat’s Podman repository.
 
 .Steps
 

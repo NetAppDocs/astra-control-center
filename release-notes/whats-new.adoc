@@ -12,15 +12,15 @@ summary: NetApp periodically updates Astra Control Center to bring you new featu
 
 We're pleased to announce the release of Astra Control Center.
 
-== 5 August 2021
+== 5 August 2021 (21.08)
 
 Initial release of Astra Control Center.
 
-* link:../get-started/intro.html#features[What it is]
+* link:../get-started/intro.html[What it is]
 * link:../concepts/architecture.html[Understand architecture and components]
 * link:../get-started/requirements.html[What it takes to get started]
 * link:../get-started/install_acc.html[Install] and link:../get-started/setup_overview.html[setup]
-* link:../use/manage-apps.html[Manage], link:../use/protect-apps.html[protect], and deploy apps
+* link:../use/manage-apps.html[Manage] and link:../use/protect-apps.html[protect] apps
 * link:../use/manage-buckets.html[Manage buckets] and link:../use/manage-backend.html[storage backends]
 * link:../use/manage-users.html[Manage accounts]
 * link:../rest-api/api-intro.html[Automate with API]
