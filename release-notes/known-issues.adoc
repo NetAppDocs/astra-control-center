@@ -28,6 +28,10 @@ After a data protection operation (clone, backup, restore) and subsequent persis
 //from ACS repo
 Clones of very large and consumed persistent volumes might be intermittently slow, dependent on cluster access to the object store. If the clone is hung and no data has been copied for more than 30 minutes, Astra Control terminates the clone action.
 
+== App clones fail using a specific version of PostreSQL
+//DOC-3543/ASTRACTL-9408
+App clones within the same cluster consistently fail with the Bitnami PostgreSQL 11.5.0 chart. To clone successfully, use an earlier or later version of the chart.
+
 == S3 buckets in Astra Control Center do not report available capacity
 // DOC-3561/ASTRACTL-9425
 Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.

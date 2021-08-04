@@ -394,7 +394,7 @@ items:
     uid: 61cd8b65-047b-431a-ba35-510afcb845f1
   spec:
     accountName: Example
-    astraAddress: caas-se-openlab-astra-enterprise-02-lb-01.caas.openeng.netapp.com
+    astraAddress: astra.example.com
     astraResourcesScaler: "Off"
     astraVersion: 21.08.52
     autoSupport:
