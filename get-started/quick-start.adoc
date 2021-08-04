@@ -10,7 +10,7 @@ summary: Get started with Astra in a few steps.
 :icons: font
 :imagesdir: ../media/get-started/
 
-This page provides a high-level overview of the steps that you need to complete to get started with Astra Control Center. The links within each step take you to a page that provides more details.
+This page provides a high-level overview of the steps needed to get started with Astra Control Center. The links within each step take you to a page that provides more details.
 
 Try it out! If you want to try Astra Control Center, you can use a 90-day evaluation license. See link:../get-started/setup_overview.html#add-a-license-for-astra-control-center[licensing information] for details.
 
@@ -18,7 +18,7 @@ Try it out! If you want to try Astra Control Center, you can use a 90-day evalua
 
 [role="quick-margin-list"]
 * Astra works with Kubernetes clusters with a Trident-configured ONTAP storage backend.
-* Clusters must be running a healthy state, with at least three online worker nodes.
+* Clusters must be running in a healthy state, with at least three online worker nodes.
 * The cluster must be running Kubernetes.
 
 
