@@ -19,7 +19,7 @@ After you install Astra Control Center, log in to the UI, and change your passwo
 * <<Add a bucket>>
 
 == Add a license for Astra Control Center
-//REFERENCED IN UI. DO NOT MODIFY WITHOUT NOTIFYING UX.
+//REFERENCED IN UI and NSS downloads. DO NOT MODIFY WITHOUT NOTIFYING STAKEHOLDERS.
 You can add a new license using the UI or https://docs.netapp.com/us-en/astra-automation/index.html[API^] to gain full Astra Control Center functionality. Without a license, your usage of Astra Control Center is limited to managing users and adding new clusters.
 
 .What you'll need
@@ -94,9 +94,7 @@ IMPORTANT: After you add a cluster to be managed in Astra Control Center, it mig
 
 == Add a storage backend
 
-You can add a storage backend so that Astra Control can manage its resources. Storage backends represent physical and virtual appliances providing storage. Astra Control discovers and uses the already-deployed resources, including Trident, ONTAP, and associated storage classes.
-
-Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend.
+You can add a storage backend so that Astra Control can manage its resources. Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend as well as additional storage metrics.
 
 You can add a storage backend in the following ways:
 

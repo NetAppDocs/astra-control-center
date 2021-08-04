@@ -42,4 +42,4 @@ https://docs.netapp.com/us-en/astra-automation/media/astra-api-license.pdf[^]
 
 Notice files provide information about third-party copyright and licenses used in NetApp software.
 
-link:../media/NOTICE_AstraCloudControl_21.08.pdf[Notice for Astra Control Center 21.08 release^]
+link:NOTICE_AstraCloudControl_21.08.pdf[Notice for Astra Control Center 21.08 release^]
