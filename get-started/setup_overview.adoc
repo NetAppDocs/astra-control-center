@@ -90,6 +90,8 @@ image:cluster-storage.png[Shows the storage class to be used for the cluster.]
 
 The cluster enters the *Discovering* status and then changes to *Running*. You have successfully added a Kubernetes cluster and are now managing it in Astra Control Center.
 
+IMPORTANT: After you add a cluster to be managed in Astra Control Center, it might take a few minutes to deploy the monitoring operator. Until then, the Notification icon turns red and logs a *Monitoring Agent Status Check Failed* event. You can ignore this, because the issue resolves when Astra Control Center obtains the correct status. If the issue does not resolve in a few minutes, go to the cluster, and run `oc get pods -n netapp-monitoring` as the starting point. You will need to look into the monitoring operator logs to debug the problem.
+
 == Add a storage backend
 
 You can add a storage backend so that Astra Control can manage its resources. Storage backends represent physical and virtual appliances providing storage. Astra Control discovers and uses the already-deployed resources, including Trident, ONTAP, and associated storage classes.

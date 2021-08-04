@@ -14,12 +14,12 @@ If you no longer need your Astra account, you can close it at any time.
 
 .Steps
 
-. link:unmanage.html[Unmanage all apps and compute].
+. link:unmanage.html[Unmanage all apps and clusters].
 
 . link:manage-credentials.html[Remove credentials from Astra].
 
-. Click *Account > Billing > Payment method*.
+. Select *Account > Billing > Payment method*.
 
-. Click *Close Account*.
+. Select *Close Account*.
 
 . Enter your account name and confirm to close the account.
