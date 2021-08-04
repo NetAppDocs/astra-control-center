@@ -26,7 +26,7 @@ A Kubernetes cluster must meet the following general requirements so you can dis
 ** ontap-san-economy
 
 === OpenShift clusters
-Astra Control Center requires a Red Hat OpenShift Container Platform 4.6.8 or 4.7 cluster that has Trident StorageClasses backed by ONTAP 9.5 or newer, with the following attributes:
+Astra Control Center requires a Red Hat OpenShift Container Platform 4.6.8 or 4.7 cluster that has Trident storage classes backed by ONTAP 9.5 or newer, with the following attributes:
 
 * At least 300GB of available ONTAP storage capacity
 * 3 controller nodes with 4 CPU cores, 16GB RAM, and 120GB of available storage each

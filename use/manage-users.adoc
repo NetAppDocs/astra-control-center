@@ -64,7 +64,7 @@ If your account has Admin or Owner role permissions, you can reset passwords for
 . Enter a temporary password that conforms to the password requirements.
 . Enter the password again to confirm.
 +
-NOTE: Next time the user logs in, they will be prompted to change their password.
+NOTE: Next time the user logs in, the user will be prompted to change the password.
 
 . Click *Reset password*.
 

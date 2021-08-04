@@ -72,7 +72,7 @@ homepage:
 #          url: https://docs.netapp.com/us-en/astra/use/clone-apps.html
 #        - title: Set up billing
 #          url: https://docs.netapp.com/us-en/astra/use/set-up-billing.html
-    - title: Solutions briefs
+    - title: Solution briefs
       links:
         - title: PostgreSQL DBaaS with Astra Control
           url: https://cloud.netapp.com/hubfs/SB-4122-0221-PostgresSQL-DBaaS-with-Astra%20(2).pdf

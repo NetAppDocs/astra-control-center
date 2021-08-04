@@ -15,6 +15,8 @@ Managing storage clusters in Astra Control as a storage backend enables you to g
 For instructions on how to manage storage backends using the Astra API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
 
 
+You can complete the following tasks related to managing a storage backend:
+
 * link:../get-started/setup_overview.html#add-a-storage-backend[Add a storage backend]
 * <<View storage backend details>>
 * <<Unmanage a storage backend>>
