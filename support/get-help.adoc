@@ -44,7 +44,7 @@ Send an email to astra.feedback@netapp.com to let us know your thoughts, ideas, 
 
 == Enable daily scheduled support bundle upload to NetApp Support
 
-During Astra Control Center installation, if you specify `enrolled: true` for `autoSupport` in the Astra Control Center Custom Resource Definition (CRD) file (`astra_control_center_min.yaml`), daily support bundles are automatically uploaded to NetApp Support.
+During Astra Control Center installation, if you specify `enrolled: true` for `autoSupport` in the Astra Control Center Custom Resource Definition (CRD) file (`astra_control_center_min.yaml`), daily support bundles are automatically uploaded to the NetApp Support Site.
 
 == Generate support bundle to provide to NetApp Support
 
