@@ -1,0 +1,11 @@
+section: concepts
+title: Concepts
+entries:
+  - title: Intro to Astra Control
+    url: /concepts/intro.html
+  - title: Architecture and components
+    url: /concepts/architecture.html
+  - title: Validated vs standard apps
+    url: /concepts/validated-vs-standard.html
+  - title: Storage classes and PV size
+    url: /concepts/choose-class-and-size.html
