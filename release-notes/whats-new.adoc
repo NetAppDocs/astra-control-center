@@ -16,7 +16,7 @@ We're pleased to announce the release of Astra Control Center.
 
 Initial release of Astra Control Center.
 
-* link:../get-started/intro.html[What it is]
+* link:../concepts/intro.html[What it is]
 * link:../concepts/architecture.html[Understand architecture and components]
 * link:../get-started/requirements.html[What it takes to get started]
 * link:../get-started/install_acc.html[Install] and link:../get-started/setup_overview.html[setup]
