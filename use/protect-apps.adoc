@@ -1,0 +1,158 @@
+---
+sidebar: sidebar
+permalink: use/protect-apps.html
+keywords: backup, back up, backup apps, back up apps, snapshots, snapshot an app, take a snapshot, take a backup, view backups, view snapshots, set policy, set schedule, schedule backups, schedule snapshots
+summary: Protect your apps by taking snapshots and backups using an automated protection policy or on an ad-hoc basis.
+---
+
+= Protect apps with snapshots and backups
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/use/
+
+Protect your apps by taking snapshots and backups using an automated protection policy or on an ad-hoc basis. You can use the Astra UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra API^] to protect apps.
+
+NOTE: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
+
+== Snapshots and backups
+
+A _snapshot_ is a point-in-time copy of an app that's stored on the same provisioned volume as the app. They are usually fast. Local snapshots are used to restore the application to an earlier point in time. Snapshots are useful for fast clones; snapshots include all of the Kubernetes objects for the app, including configuration files.
+
+A _backup_ is stored in the external object store. A backup can be slower to take compared to local snapshots. You can migrate an app by restoring its backup to a different cluster. You can also choose a longer retention period for backups.
+
+CAUTION: _You can't be fully protected until you have a recent backup_. This is important because backups are stored in an object store away from the persistent volumes. If a failure or accident wipes out the cluster and it's persistent storage, then you need a backup to recover. A snapshot wouldn't enable you to recover.
+
+== Configure a protection policy
+
+A protection policy protects an app by creating snapshots, backups, or both at a defined schedule. You can choose to create snapshots and backups hourly, daily, weekly, and monthly, and you can specify the number of copies to retain.
+
+.Steps
+
+. Click *Apps* and then click the name of an app.
+. Click *Data Protection*.
+. Click *Configure Protection Policy*.
+//+
+//image:screenshot-configure-protection-policy.gif[A screenshot of the Data protection tab for an app which enables you to configure a protection policy.]
+
+. Define a protection schedule by choosing the number of snapshots and backups to keep hourly, daily, weekly, and monthly.
++
+You can define the hourly, daily, weekly, and monthly schedules concurrently. A schedule won't turn active until you set a retention level.
++
+The following example sets four protection schedules: hourly, daily, weekly, and monthly for snapshots and backups.
++
+image:screenshot-config-protection-policy.png[A screenshot of a sample configuration policy where you can choose to take snapshots and backups on an hourly, daily, weekly, or monthly basis.]
+
+. Click *Review*.
+. Click *Set Protection Policy.*
+//+
+//Here's a video that shows each of these steps.
+//+
+//video::video-set-protection-policy.mp4[width=848, height=480]
+
+.Result
+
+Astra Control Center implements the data protection policy by creating and retaining snapshots and backups using the schedule and retention policy that you defined.
+
+== Create a snapshot
+
+You can create an on-demand snapshot at any time.
+
+.Steps
+
+. Click *Apps*.
+. Click the drop-down list in the *Actions* column for the desired app.
+. Click *Snapshot*.
+//+
+//image:screenshot-create-snapshot.gif["A screenshot of the app page where you can click the drop-down list in the actions column and select Snapshot."]
+. Customize the name of the snapshot and then click *Review*.
+. Review the snapshot summary and click *Snapshot*.
+
+.Result
+
+The snapshot process begins. A snapshot is successful when the status is *Available* in the *Actions* column on the *Data protection* > *Snapshots* page.
+
+== Create a backup
+
+You can also back up an app at any time.
+
+NOTE: S3 buckets in Astra Control Center do not report available capacity. Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
+
+.Steps
+
+. Click *Apps*.
+. Click the drop-down list in the *Actions* column for the desired app.
+. Click *Backup*.
+//+
+//image:screenshot-create-backup.gif["A screenshot of the app page where you can click the drop-down list in the actions column and select Backup."]
+. Customize the name of the backup.
+. Choose whether to back up the app from an existing snapshot. If you select this option, you can choose from a list of existing snapshots.
+. Choose a destination for the backup by selecting from the list of storage buckets.
+. Click *Review*.
+. Review the backup summary and click *Backup*.
+
+.Result
+
+Astra Control Center creates a backup of the app.
+
+NOTE: If your network has an outage or is abnormally slow, a backup operation might time out. This causes the backup to fail.
+
+NOTE: There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in <<Delete backups>>. To delete a failed backup, https://docs.netapp.com/us-en/astra-automation/index.html[use the Astra API^].
+
+NOTE: After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
+
+== View snapshots and backups
+
+You can view the snapshots and backups of an app from the Data Protection tab.
+
+.Steps
+
+. Click *Apps* and then click the name of an app.
+. Click *Data Protection*.
++
+The snapshots display by default.
+//+
+//image:screenshot-snapshots.gif[A screenshot of the data protection tab for an app where you can view the list of the current snapshots and backups.]
+
+. Click *Backups* to see the list of backups.
+
+== Delete snapshots
+
+Delete the scheduled or on-demand snapshots that you no longer need.
+
+.Steps
+
+. Click *Apps* and then click the name of an app.
+. Click *Data Protection*.
+. Click the drop-down list in the *Actions* column for the desired snapshot.
+. Click *Delete snapshot*.
+//+
+//image:screenshot-delete-snapshot.gif[A screenshot of the Data protection tab for an app where you can delete a snapshot.]
+
+. Type the word "delete" to confirm deletion and then click *Yes, Delete snapshot*.
+
+.Result
+
+Astra Control Center deletes the snapshot.
+
+== Delete backups
+
+Delete the scheduled or on-demand backups that you no longer need.
+
+NOTE: There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use these instructions. To delete a failed backup, https://docs.netapp.com/us-en/astra-automation/index.html[use the Astra API^].
+
+. Click *Apps* and then click the name of an app.
+. Click *Data Protection*.
+. Click *Backups*.
+//+
+//image:screenshot-data-protection-backups.gif[A screenshot of the Backups option that's available in the far right of the data protection tab.]
+
+. Click the drop-down list in the *Actions* column for the desired backup.
+. Click *Delete backup*.
+//+
+//image:screenshot-delete-backup.gif[A screenshot of the Data protection tab for an app where you can delete a snapshot.]
+
+. Type the word "delete" to confirm deletion and then click *Yes, Delete backup*.
+
+.Result
+
+Astra Control Center deletes the backup.

@@ -1,0 +1,60 @@
+---
+sidebar: sidebar
+permalink: use/unmanage.html
+keywords: unmanage app, remove app, stop managing app, stop managing clusters, unmanage cluster, remove cluster, kubernetes, astra, astra control
+summary: Remove any apps or compute that you no longer want to manage from Astra Control.
+---
+
+= Unmanage apps and clusters
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/use/
+
+Remove any apps or clusters that you no longer want to manage from Astra Control Center.
+
+== Unmanage an app
+
+Stop managing apps that you no longer want to back up, snapshot, or clone from Astra Control Center.
+
+* Any existing backups and snapshots will be deleted.
+
+* Applications and data remain available.
+
+.Steps
+
+. From the left navigation bar, select *Apps*.
+. Select the checkbox for the apps that you no longer want to manage.
+. From the *Action* menu, select *Unmanage*.
+. Type "unmanage" to confirm.
+. Confirm that you want to unmanage the apps and then select *Yes, unmanage Application*.
+
+
+.Result
+
+Astra Control Center stops managing the app.
+
+== Unmanage a cluster
+
+Unmanage the cluster that you no longer want to manage from Astra Control Center.
+
+* This action stops your cluster from being managed by Astra Control Center. It doesn't make any changes to the cluster's configuration and it doesn't delete the cluster.
+
+* Trident won't be uninstalled from the cluster. https://netapp-trident.readthedocs.io/en/stable-v21.01/kubernetes/operations/tasks/managing.html#uninstalling-trident[Learn how to uninstall Trident^].
+
+NOTE: Before you unmanage the cluster, you should unmanage the apps associated with the cluster.
+
+.Steps
+
+. From the left navigation bar, select *Clusters*.
+
+. Select the checkbox for the cluster that you no longer want to manage in Astra Control Center.
+
+. From the *Actions* menu, select *Unmanage*.
+
+. Confirm that you want to unmanage the cluster and then select *Yes, unmanage cluster*.
+
+.Result
+
+The status of the cluster changes to *Removing* and after that the cluster will be removed from the *Clusters* page, and it is no longer managed by Astra Control Center.
+
+IMPORTANT: *If Astra Control Center and Cloud Insights are not connected*, unmanaging the cluster removes all the resources that were installed for sending telemetry data. *If Astra Control Center and Cloud Insights are connected*, unmanaging the cluster deletes only the `fluentbit` and `event-exporter` pods. 

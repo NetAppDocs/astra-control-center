@@ -1,0 +1,98 @@
+---
+sidebar: sidebar
+permalink: use/manage-users.html
+keywords: add users, edit users, remove users, delete users
+summary: Add users to your Astra Control Center system and remove users that should no longer have access to the system.
+---
+
+= Manage users
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/use/
+
+You can add, remove, and edit users of your Astra Control Center installation using the Astra Control Center UI. You can use the Astra UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra API^] to manage users.
+
+== Add users
+
+Account Owners and Admins can add more users to the Astra Control Center installation.
+
+.Steps
+
+//. Make sure that the user has an invitation link:../get-started/register.html[Cloud Central login].
+. In the *Manage Your Account* navigation area, click *Account*.
+. Select the *Users* tab.
+. Select *Add User*.
+. Enter the user's name, email address, and a temporary password.
++
+The user will need to change the password upon first login.
+. Select a user role with the appropriate system permissions.
++
+Each role provides the following permissions:
++
+
+* A *Viewer* can view resources.
+* A *Member* has Viewer role permissions and can manage apps and clusters, but cannot unmanage apps or clusters, or delete snapshots or backups.
+* An *Admin* has Member role permissions and can add and remove any other users except the Owner.
+* An *Owner* has Admin role permissions and can add and remove any user accounts.
+. Click *Add*.
+
+//image:screenshot-invite-users.gif[A screenshot of the Invite Users screen where you enter a name, email address, and select a role.]
+
+== Manage passwords
+You can manage passwords for user accounts in Astra Control Center.
+
+=== Change your password
+You can change the password of your user account at any time.
+
+.Steps
+
+. Click the User icon at the top right of the screen.
+. Select *Profile*.
+. Click the *Actions* drop-down list, and select *Change Password*.
+. Enter a password that conforms to the password requirements.
+. Enter the password again to confirm.
+. Click *Change password*.
+
+=== Reset another user's password
+If your account has Admin or Owner role permissions, you can reset passwords for other user accounts as well as your own. When you reset a password, you assign a temporary password that the user will have to change upon logging in.
+
+.Steps
+
+. In the *Manage Your Account* navigation area, click *Account*.
+. In the *Users* tab, select the drop-down list in the *State* column for the user.
+. Select *Reset Password*.
+. Enter a temporary password that conforms to the password requirements.
+. Enter the password again to confirm.
++
+NOTE: Next time the user logs in, the user will be prompted to change the password.
+
+. Click *Reset password*.
+
+== Change a user's role
+
+Users with the Owner role can change the role of all users, while users with the Admin role can change the role of users who have the Admin, Member, or Viewer role.
+
+.Steps
+
+. In the *Manage Your Account* navigation area, click *Account*.
+. In the *Users* tab, select the drop-down list in the *Role* column for the user.
+. Select a new role and then click *Change Role* when prompted.
+
+.Result
+
+Astra Control Center updates the user's permissions based on the new role that you selected.
+
+== Remove users
+
+Users with the Owner or Admin role can remove other users from the account at any time.
+
+.Steps
+
+. In the *Manage Your Account* navigation area, click *Account*.
+. In the *Users* tab, select the checkbox in the row of each user that you want to remove.
+. Click *Actions* and select *Remove user/s*.
+. When you're prompted, confirm deletion by typing the word "remove" and then click *Yes, Remove User*.
+
+.Result
+
+Astra Control Center removes the user from the account.

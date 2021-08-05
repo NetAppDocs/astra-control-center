@@ -1,0 +1,18 @@
+section: get-started
+title: Get started
+entries:
+  - title: Astra Control Center requirements
+    url: /get-started/requirements.html
+  - title: Quick start for Astra Control Center
+    url: /get-started/quick-start.html
+  - title: Install Astra Control Center
+    url: /get-started/install_acc.html
+  - title: Set up Astra Control Center
+    url: /get-started/setup_overview.html
+    entries:
+      - title: Prerequisites for adding a cluster
+        url: /get-started/add-cluster-reqs.html
+      - title: Add a custom TLS certificate
+        url: /get-started/add-custom-tls-certificate.html
+  - title: FAQ
+    url: /get-started/faq.html

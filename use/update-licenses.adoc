@@ -1,0 +1,25 @@
+---
+sidebar: sidebar
+permalink: use/update-licenses.html
+keywords: manage, licenses, licensing, Astra Control Center, add license, update license
+summary: You can convert an evaluation license to a full license, or you can update an existing evaluation or full license with a new license.
+---
+
+= Update an existing license
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/get-started/
+
+You can convert an evaluation license to a full license, or you can update an existing evaluation or full license with a new license. If you don't have a full license, work with your NetApp sales contact to obtain a full license and serial number. You can use the Astra UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra API^] to update an existing license.
+
+.Steps
+
+. Log in to the NetApp Support Site.
+. Access the Astra Control Center Download page, enter the serial number, and download the full NetApp license file (NLF).
+. Log in to the Astra Control Center UI.
+. From the left navigation, select *Account* > *License*.
+. In the *Account* > *License* page, click the status drop-down menu for the existing license and select *Replace*.
+. Browse to the license file that you downloaded.
+. Select *Add*.
+
+The *Account* > *Licenses* page displays the license information, expiration date, license serial number, account ID, and CPU units used.

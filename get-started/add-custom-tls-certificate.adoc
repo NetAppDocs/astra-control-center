@@ -1,0 +1,155 @@
+---
+sidebar: sidebar
+permalink: get-started/add-custom-tls-certificate.html
+keywords: login, Astra Control Center, web ui, tls, certificate
+summary: You can upload and verify a TLS certificate signed by a 3rd party certificate authority (CA) to replace the self-signed Astra Control Center certificate.
+---
+
+= Add a custom TLS certificate
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/get-started/
+
+You can remove the existing self-signed TLS certificate and replace it with a TLS certificate signed by a Certificate Authority (CA).
+
+.What you'll need
+
+* Kubernetes cluster with Astra Control Center installed
+* Administrative access to a command shell on the cluster to run `kubectl` commands
+* Private key and certificate files from the CA
+
+.Remove the self-signed certificate
+
+. Using SSH, log in to the Kubernetes cluster that hosts Astra Control Center as an administrative user.
+. Find the TLS secret associated with the current certificate using the following command, replacing `<ACC-deployment-namespace>` with the Astra Control Center deployment namespace:
++
+----
+kubectl get certificate -n <ACC-deployment-namespace>
+----
+. Delete the currently installed secret and certificate using the following commands:
++
+----
+kubectl delete cert cert-manager-certificates -n <ACC-deployment-namespace>
+kubectl delete secret secure-testing-cert -n <ACC-deployment-namespace>
+----
+
+.Add a new certificate
+
+. Use the following command to create the new TLS secret with the private key and certificate files from the CA, replacing the arguments in brackets <> with the appropriate information:
++
+----
+kubectl create secret tls <secret-name> --key <private-key-filename> --cert <certificate-filename> -n <ACC-deployment-namespace>
+----
+. Use the following command and example to edit the cluster Custom Resource Definition (CRD) file and change the `spec.selfSigned` value to `spec.ca.secretName` to refer to the TLS secret you created earlier:
++
+----
+kubectl edit clusterissuers.cert-manager.io/cert-manager-certificates -n <ACC-deployment-namespace>
+....
+
+#spec:
+#  selfSigned: {}
+
+spec:
+  ca:
+    secretName: <secret-name>
+----
+. Use the following command and example output to validate that the changes are correct and the cluster is ready to validate certificates, replacing `<ACC-deployment-namespace>` with the Astra Control Center deployment namespace:
++
+----
+kubectl describe clusterissuers.cert-manager.io/cert-manager-certificates -n <ACC-deployment-namespace>
+....
+
+Status:
+  Conditions:
+    Last Transition Time:  2021-07-01T23:50:27Z
+    Message:               Signing CA verified
+    Reason:                KeyPairVerified
+    Status:                True
+    Type:                  Ready
+Events:                    <none>
+
+----
+. Create the `certificate.yaml` file using the following example, replacing the placeholder values in brackets <> with appropriate information:
++
+----
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: <certificate-name>
+  namespace: <ACC-deployment-namespace>
+spec:
+  secretName: <certificate-secret-name>
+  duration: 2160h # 90d
+  renewBefore: 360h # 15d
+  dnsNames:
+  - <astra.dnsname.example.com> #Replace with the correct Astra Control Center DNS address
+  issuerRef:
+    kind: ClusterIssuer
+    name: cert-manager-certificates
+----
+. Create the certificate using the following command:
++
+----
+kubectl apply -f certificate.yaml
+----
+. Using the following command and example output, validate that the certificate has been created correctly and with the arguments you specified during creation (such as name, duration, renewal deadline, and DNS names).
++
+----
+kubectl describe certificate -n <ACC-deployment-namespace>
+....
+
+Spec:
+  Dns Names:
+    astra.example.com
+  Duration:  125h0m0s
+  Issuer Ref:
+    Kind:        ClusterIssuer
+    Name:        cert-manager-certificates
+  Renew Before:  61h0m0s
+  Secret Name:   <certificate-secret-name>
+Status:
+  Conditions:
+    Last Transition Time:  2021-07-02T00:45:41Z
+    Message:               Certificate is up to date and has not expired
+    Reason:                Ready
+    Status:                True
+    Type:                  Ready
+  Not After:               2021-07-07T05:45:41Z
+  Not Before:              2021-07-02T00:45:41Z
+  Renewal Time:            2021-07-04T16:45:41Z
+  Revision:                1
+Events:                    <none>
+----
+. Edit the ingress CRD TLS option to point to your new certificate secret using the following command and example, replacing the placeholder values in brackets <> with appropriate information:
++
+----
+kubectl edit ingressroutes.traefik.containo.us -n <ACC-deployment-namespace>
+....
+
+# tls:
+#    options:
+#      name: default
+#    secretName: secure-testing-cert
+#    store:
+#      name: default
+
+ tls:
+    options:
+      name: default
+    secretName: <certificate-secret-name>
+    store:
+      name: default
+----
+. Using a web browser, browse to the deployment IP address of Astra Control Center.
+. Verify that the certificate details match the details of the certificate you installed.
+. Export the certificate and import the result into the certificate manager in your web browser.
+
+////
+. If you are using Firefox:
+.. Click the lock icon, then *Connection secure* > *More Information*.
+.. Click *View Certificate*.
+.. Verify that the *Validity* section matches the validity of the certificate you installed.
+. If you are using Chrome:
+.. Click the lock icon, then *Certificate (Valid)*.
+.. Verify that the *Valid from* section matches the validity of the certificate you installed.
+////

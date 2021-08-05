@@ -1,0 +1,205 @@
+---
+sidebar: sidebar
+permalink: get-started/requirements.html
+keywords: kubernetes cluster, cluster requirements, version requirements, supported versions, apps, supported apps, mariadb, mysql, postgres, kubernetes version, ubuntu, image type, networking
+summary: Get started by verifying support for your Kubernetes clusters, apps, and web browser.
+---
+
+= Astra Control Center requirements
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/get-started/
+
+Get started by verifying support for your Kubernetes clusters, apps, licenses, and web browser.
+
+== Kubernetes cluster general requirements
+
+A Kubernetes cluster must meet the following general requirements so you can discover and manage it from Astra Control Center.
+
+* *Image registry*: You must have an existing private Docker image registry to which you can push Astra Control Center build images. You must have the URL of the image registry where you will upload the images, and you must have tagged the images for the private container registry.
+
+* *Trident / ONTAP storage configuration*: Astra Control Center requires that Trident version 21.01 or 21.04 already be installed and configured to work with NetApp ONTAP version 9.5 or newer as the storage backend. Astra Control Center supports the following ONTAP drivers provided by Trident:
+
+** ontap-nas
+** ontap-nas-flexgroup
+** ontap-san
+** ontap-san-economy
+
+=== OpenShift clusters
+Astra Control Center requires a Red Hat OpenShift Container Platform 4.6.8 or 4.7 cluster that has Trident storage classes backed by ONTAP 9.5 or newer, with the following attributes:
+
+* At least 300GB of available ONTAP storage capacity
+* 3 controller nodes with 4 CPU cores, 16GB RAM, and 120GB of available storage each
+* 3 worker nodes with at least 8 CPU cores, 16GB RAM, and 50GB of available storage each
+* A load balancer which exposes a reachable IP address
+* A method for pointing the FQDN of Astra Control Center to the load balanced IP address
+* Kubernetes version 1.19 or 1.20
+
+NOTE: OpenShift 4.8 is not supported.
+
+[NOTE]
+======================
+During app cloning, Astra Control Center needs to allow OpenShift to mount volumes and change the ownership of files. Because of this, ONTAP needs to be configured to allow volume operations to complete successfully using the following commands:
+
+. `export-policy rule modify -vserver svm0 -policyname default -ruleindex 1 -superuser sys`
+. `export-policy rule modify -policyname default -ruleindex 1 -anon 65534`
+======================
+
+NOTE: If you plan to add a second OpenShift 4.6 or 4.7 cluster as a managed compute resource, you need to ensure that the Trident Volume Snapshot feature is enabled. See the official Trident https://netapp-trident.readthedocs.io/en/stable-v21.04/kubernetes/operations/tasks/volumes/snapshots.html?highlight=volumesnapshot#on-demand-volume-snapshots[instructions^] to enable and test Volume Snapshots with Trident.
+
+////
+=== Non-OpenShift Kubernetes clusters
+The Kubernetes cluster you use for Astra Control Center should already be deployed in your environment and you should have permissions to manage the cluster. This cluster should be preconfigured with the following:
+
+* A load balancer with a static IP address or IP address range
+* An internal domain name that is routed from an internal DNS server and points to the static IP address or IP address range of the cluster (the DNS name should point to the load-balanced IP address or addresses using the internal DNS server)
+* A default storage provider in the Kubernetes cluster that is backed by a Trident storage class to work with ONTAP
+* A single Trident StorageClass configured as the default
+* Kubernetes version 1.18, 1.19, or 1.20
+* At least 3 worker nodes
+////
+=== Supported apps
+
+Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators or cluster-scoped operators.
+
+NetApp has validated some apps to ensure the safety and consistency of the snapshots and backups. link:../concepts/validated-vs-standard.html[Learn the difference between a validated app and a standard app].
+
+No matter which type of app that you use with Astra Control Center, you should always test the backup and restore workflow yourself to ensure that you can meet your disaster recovery requirements.
+
+=== App management requirements
+Astra Control Center has the following app management requirements:
+
+* *Licensing*: You need an Astra Control Center license to manage apps using Astra Control Center.
+* *Helm 3*: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
+* *Operator management*: Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators or cluster-scoped operators.
+
+== Access to the internet
+
+You should determine whether you have outside access to the internet. If you do not, some functionality might be limited, such as receiving monitoring and metrics data from NetApp Cloud Insights, or sending support bundles to the NetApp Support Site.
+////
+If you do have access to the internet, decide which of the following NetApp systems you will authorize Astra Control Center to integrate with:
+
+* Cloud Insights for monitoring and metrics
+* NetApp Support Site for Active IQ and SmartSolve processing
+//* IPA for license automation
+////
+
+== License
+
+Astra Control Center requires an Astra Control Center license for full functionality. Obtain an evaluation license or full license from NetApp. Without a license, you will be unable to:
+
+// * Add clusters (de-scoped for Q2 release)
+* Define custom apps
+* Create snapshots or clones of existing apps
+* Configure data protection policies
+
+If you want to try Astra Control Center, you can link:setup_overview.html#add-a-full-or-evaluation-license[use a 90-day evaluation license].
+
+== Load balancing
+
+Astra Control Center requires the Kubernetes cluster to have a load balancer installed and configured with an accessible external IP address. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
+
+== Networking requirements
+
+The cluster that hosts Astra Control Center communicates using the following TCP ports. You should ensure that these ports are allowed through any firewalls, and configure firewalls to allow any HTTPS egress traffic originating from the Astra network. Some ports require connectivity both ways between the cluster hosting Astra Control Center and each managed cluster (noted where applicable).
+
+|===
+|Product |Port |Protocol |Direction |Purpose
+
+|Astra Control Center
+|443
+|HTTPS
+|Ingress
+|UI / API access - Ensure this port is open both ways between the cluster hosting Astra Control Center and each managed cluster
+
+|Astra Control Center
+|9090
+|HTTPS
+a|
+
+* Ingress (to cluster hosting Astra Control Center)
+* Egress (random port from the node IP address of each worker node of each managed cluster)
+
+|Metrics data to metrics consumer - ensure each managed cluster can access this port on the cluster hosting Astra Control Center
+
+|Trident
+|34571
+|HTTPS
+|Ingress
+|Node pod communication
+
+|Trident
+|9220
+|HTTP
+|Ingress
+|Metrics endpoint
+|===
+
+////
+// Removed at request of Pat Nanto
+|n/a
+|HTTPS
+|Egress
+|Data to Cloud Insights
+
+|n/a
+|HTTPS
+|Egress
+|Log processing data to logs consumer
+
+|n/a
+|HTTPS
+|Egress
+|NetApp AutoSupport messages to NetApp Active IQ
+
+|n/a
+|HTTPS
+|Egress
+|Bucket service communication with bucket provider
+
+|n/a
+|HTTPS
+|Egress
+|Metrics flow from ONTAP
+
+|n/a
+|HTTPS
+|Egress
+|Storage Backend service communication with ONTAP
+
+|n/a
+|HTTPS
+|Egress
+|Cloud extension communication with managed cluster
+
+|n/a
+|HTTPS
+|Egress
+|Nautilus communication with managed cluster - ensure the corresponding Nautilus port is open for each managed cluster
+
+|n/a
+|HTTPS
+|Egress
+|Trident service communication with each managed cluster’s Trident instance
+////
+
+== Supported web browsers
+
+Astra Control Center supports recent versions of Firefox, Safari, and Chrome with a minimum resolution of 1280 x 720.
+
+////
+== Integration with your organization
+
+Before you deploy Astra Control Center, you should determine which internal integrations should occur, including the following:
+
+* Single sign on
+* SMTP server for email notifications
+
+If you want to integrate these options, you should obtain the following:
+
+* SSO integration confirmation details
+* SMTP server configuration details
+////
+== What's next
+
+View the link:quick-start.html[quick start] overview.

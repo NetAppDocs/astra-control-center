@@ -1,0 +1,193 @@
+---
+sidebar: sidebar
+permalink: get-started/setup_overview.html
+keywords: set up, setup, Astra Control Center, add license, add cluster, import storage, add bucket
+summary: After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up a license, add clusters, manage storage, and add buckets.
+---
+
+= Set up Astra Control Center
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/get-started/
+
+After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up a license, add clusters, manage storage, and add buckets.
+
+.Tasks
+* <<Add a license for Astra Control Center>>
+* <<Add cluster>>
+* <<Add a storage backend>>
+* <<Add a bucket>>
+
+== Add a license for Astra Control Center
+//REFERENCED IN UI and NSS downloads. DO NOT MODIFY WITHOUT NOTIFYING STAKEHOLDERS.
+You can add a new license using the UI or https://docs.netapp.com/us-en/astra-automation/index.html[API^] to gain full Astra Control Center functionality. Without a license, your usage of Astra Control Center is limited to managing users and adding new clusters.
+
+.What you'll need
+When you downloaded Astra Control Center from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^], you also downloaded the NetApp license file (NLF). Ensure you have access to this license file.
+
+NOTE: To update an existing evaluation or full license, see link:../use/update-licenses.html[Update an existing license].
+
+////
+.Options
+* <<Add an evaluation license>>
++
+NOTE: To update an existing evaluation or full license, see link:../use/update-licenses.html[Update an existing license].
+
+* <<Add a full license>>
+////
+=== Add a full or evaluation license
+
+Astra Control Center licenses measure CPU resources using Kubernetes CPU units. The license needs to account for the CPU resources assigned to the worker nodes of all the managed Kubernetes clusters. Before you add a license, you need to obtain the license file (NLF) from the link:https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
+//The CPU cores that Astra Control Center is deployed on are not counted against the CPU units consumed in the license.
+
+You can also try Astra Control Center with an evaluation license, which lets you use Astra Control Center for 90 days from the date you download the license. You can sign up for a free trial by registering link:https://cloud.netapp.com/astra-register[here^].
+
+NOTE:  If your installation grows to exceed the licensed number of CPU units, Astra Control Center prevents you from managing new applications. An alert is displayed when capacity is exceeded.
+
+.Steps
+. Log in to the Astra Control Center UI.
+. Select *Account* > *License*.
+. Select *Add License*.
+. Browse to the license file (NLF) that you downloaded.
+. Select *Add License*.
+
+The *Account* > *License* page displays the license information, expiration date, license serial number, account ID, and CPU units used.
+
+//AD AH review q2
+
+NOTE: If you have an evaluation license, be sure you store your account ID to avoid data loss in the event of Astra Control Center failure if you are not sending ASUPs.
+
+== Add cluster
+//REFERENCED IN UI. DO NOT MODIFY WITHOUT NOTIFYING UX.
+To begin managing your apps, add a Kubernetes cluster and manage it as a compute resource. You have to add a cluster for Astra Control Center to discover your Kubernetes applications.
+
+TIP: We recommend that Astra Control Center manage the cluster it is deployed on first before you add other clusters to Astra Control Center to manage. Having the initial cluster under management is necessary to send Kubemetrics data and cluster-associated data for metrics and troubleshooting. You can use the *Add Cluster* feature to manage a cluster with Astra Control Center.
+
+.What you'll need
+
+IMPORTANT: Before you add a cluster, review and perform the necessary link:add-cluster-reqs.html[prerequisite tasks^].
+
+.Steps
+. From the *Dashboard* in the Astra Control Center UI, select *Add* in the Clusters section.
+. In the *Add Cluster* window that opens, upload a `kubeconfig.yaml` file or paste the contents of a `kubeconfig.yaml` file.
++
+NOTE: The `kubeconfig.yaml` file should include *only the cluster credential for one cluster*.
++
+image:cluster-creds.png[Shows the screen to upload kubeconfig.yaml for cluster.]
++
+IMPORTANT: If you create your own `kubeconfig` file, you should define only *one* context element in it. See https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[Kubernetes documentation^] for information about creating `kubeconfig` files.
+
+. Provide a credential name. By default, the credential name is auto-populated as the name of the cluster.
+. Select *Configure storage*.
+. Select the storage class to be used for this Kubernetes cluster, and select *Review*.
++
+NOTE: You should select a Trident storage class backed by ONTAP storage.
++
+image:cluster-storage.png[Shows the storage class to be used for the cluster.]
+. Review the information, and if everything looks good, select *Add cluster*.
+
+.Result
+
+The cluster enters the *Discovering* status and then changes to *Running*. You have successfully added a Kubernetes cluster and are now managing it in Astra Control Center.
+
+IMPORTANT: After you add a cluster to be managed in Astra Control Center, it might take a few minutes to deploy the monitoring operator. Until then, the Notification icon turns red and logs a *Monitoring Agent Status Check Failed* event. You can ignore this, because the issue resolves when Astra Control Center obtains the correct status. If the issue does not resolve in a few minutes, go to the cluster, and run `oc get pods -n netapp-monitoring` as the starting point. You will need to look into the monitoring operator logs to debug the problem.
+
+== Add a storage backend
+
+You can add a storage backend so that Astra Control can manage its resources. Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend as well as additional storage metrics.
+
+You can add a storage backend in the following ways:
+
+*	Configure storage when you are adding a cluster. See link:../get-started/setup_overview.html#add-cluster[Add cluster].
+*	Add a discovered storage backend using either the Dashboard or the Backends option.
+
+You can add an already discovered storage backend using these options:
+
+* <<Add storage backend using Dashboard>>
+* <<Add storage backend using Backends option>>
+
+=== Add storage backend using Dashboard
+
+. From the Dashboard do one of the following:
+.. From the Dashboard Storage backend section, select *Manage*.
+.. From the Dashboard Resource Summary > Storage backends section, select *Add*.
+. Enter the ONTAP admin credentials and select *Review*.
+. Confirm the backend details and select *Manage*.
++
+The backend appears in the list with summary information.
+
+=== Add storage backend using Backends option
+
+. In the left navigation area, select *Backends*.
+. Select *Manage*.
+. Enter the ONTAP admin credentials and select *Review*.
+. Confirm the backend details and select *Manage*.
++
+The backend appears in the list with summary information.
+. To see details of the backend storage, select it.
++
+TIP: Persistent volumes used by apps in the managed compute cluster are also displayed.
+
+== Add a bucket
+
+Adding object store bucket providers is essential if you want to back up your applications and persistent storage or if you want to clone applications across clusters. Astra Control stores those backups or clones in the object store buckets that you define.
+
+When you add a bucket, Astra Control marks one bucket as the default bucket indicator. The first bucket that you create becomes the default bucket.
+
+You don’t need a bucket if you are cloning your application configuration and persistent storage to the same cluster.
+
+Use any of the following bucket types:
+
+* NetApp ONTAP S3
+* NetApp StorageGRID S3
+* Generic S3
+
+NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon’s S3 support.
+
+For instructions on how to add buckets using the Astra API, see link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
+
+.Steps
+
+. In the left navigation area, select *Buckets*.
+.. Select *Add*.
+.. Select the bucket type.
++
+NOTE: When you add a bucket, select the correct bucket provider type with credentials that are correct for that provider. For example, the UI accepts NetApp ONTAP S3 as the type with StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail.
+
+.. Create a new bucket name or enter an existing bucket name and optional description.
++
+TIP: The bucket name and description appear as a backup location that you can choose later when you’re creating a backup. The name also appears during protection policy configuration.
+
+.. Enter the name or IP address of the S3 server.
+.. If you want this bucket to be the default bucket for all backups, check the `Make this bucket the default bucket for this private cloud` option.
++
+NOTE: This option does not appear for the first bucket you create.
+
+.. Continue by adding <<Add S3 access credentials,credential information>>.
+
+=== Add S3 access credentials
+
+Add S3 access credentials at any time.
+
+.Steps
+
+. From the Buckets dialog, select either the *Add* or *Use existing* tab.
+.. Enter a name for the credential that distinguishes it from other credentials in Astra Control.
+.. Enter the access ID and secret key by pasting the contents from your clipboard.
+
+== What's next?
+
+Now that you’ve logged in and added clusters to Astra Control Center, you're ready to start using Astra Control Center's application data management features.
+
+* link:../use/manage-users.html[Manage users]
+* link:../use/manage-apps.html[Start managing apps]
+* link:../use/protect-apps.html[Protect apps]
+* link:../use/clone-apps.html[Clone apps]
+* link:../use/manage-notifications.html[Manage notifications]
+* link:../use/monitor-protect.html#connect-to-cloud-insights[Connect to Cloud Insights]
+* link:../get-started/add-custom-tls-certificate.html[Add a custom TLS certificate]
+
+[discrete]
+== Find more information
+* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API^]
+* link:../release-notes/known-issues.html[Known issues]

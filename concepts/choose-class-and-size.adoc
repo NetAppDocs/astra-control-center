@@ -1,0 +1,31 @@
+---
+sidebar: sidebar
+permalink: concepts/choose-class-and-size.html
+keywords: service level, storage class, storage classes, pv size, persistent volume size, volume size, bandwidth, performance, persistent, volume, kubernetes, containers
+summary: Astra Control Center supports only Trident storage classes backed by ONTAP storage.  You should understand how storage class and persistent volume size can help you meet your performance objectives.
+---
+
+= Storage classes and persistent volume size
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/concepts/
+
+[.lead]
+Astra Control Center supports ONTAP as the backend storage. You should understand how storage class and persistent volume (PV) size can help you meet your performance objectives.
+
+== Overview
+Astra Control Center supports only Trident storage classes backed by ONTAP storage at this time. Astra Control Center discovers and uses the already-deployed resources, including ONTAP, Trident, and associated storage classes.
+
+NOTE: Trident storage classes should be preconfigured outside of Astra Control Center.
+
+== Storage classes
+
+When you add clusters to Astra Control Center, you're prompted to choose one of the previously discovered storage classes for persistent volumes. Service levels in storage classes are designed for different capacity and bandwidth needs. These discovered storage classes are eligible for use within Astra Control Center.
+
+== Persistent volume size and performance
+
+See Trident information that provides cost comparisons and examples that can help you better understand how to couple a service level with volume size to meet your performance objectives.
+
+== Find more information
+
+* https://netapp-trident.readthedocs.io/en/stable-v21.01/dag/kubernetes/storage_configuration_trident.html[Trident documentation on storage configuration^]

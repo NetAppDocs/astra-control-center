@@ -1,0 +1,211 @@
+---
+sidebar: sidebar
+permalink: use/monitor-protect.html
+keywords: proxy, cloud insights, connections, fluent bit, accounts, protect, security
+summary: You can configure several optional settings to enhance your Astra Control Centre experience. If the network where you're running Astra Control Center requires a proxy for connecting to the Internet, configure that proxy server in Astra Control Center. You can use NetApp Cloud Insights to monitor and gain insight into your complete infrastructure. You can add a Fluent Bit connection to collect data and logs from your containers.
+---
+
+= Monitor and protect infrastructure
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/use/
+
+You can configure several optional settings to enhance your Astra Control Center experience. If the network where you’re running Astra Control Center requires a proxy for connecting to the Internet (to upload support bundles to NetApp Support Site or establish a connection to Cloud Insights), you should configure a proxy server in Astra Control Center. To monitor and gain insight into your complete infrastructure, create a connection to NetApp Cloud Insights. To collect Kubernetes events from systems monitored by Astra Control Center, add a Fluentd connection.
+
+NOTE: After you enable the Cloud Insights connection, you can view throughput information on the *Backends* page as well as connect to Cloud Insights from here after selecting a storage backend. You can also find the information on the *Dashboard* in the Cluster section, and also connect to Cloud Insights from here.
+
+== Add a proxy server
+
+If the network where you’re running Astra Control Center requires a proxy for connecting to the Internet (to upload support bundles to NetApp Support Site or establish a connection to Cloud Insights), you should configure a proxy server in Astra Control Center.
+
+IMPORTANT: Astra Control Center does not validate the details you enter for your proxy server. Ensure that you enter the correct values.
+
+.Steps
+
+. Log in to Astra Control Center using an account with *admin*/*owner* privilege.
+. Select *Account* > *Connections*.
+. Select *Connect* from the drop-down list to add a proxy server.
++
+image:proxy-connect.png[Shows the Connect option to enable proxy connection.]
+. Enter the proxy server name or IP address and the proxy port number.
+. If your proxy server requires authentication, select the checkbox, and enter the username and password.
+. Select *Connect*.
+
+.Result
+
+If the proxy information you entered was saved, the *HTTP Proxy* section of the *Account* > *Connections* page indicates that it is connected, and displays the server name.
+
+image:proxy-new.png[Shows the proxy server successfully connected.]
+
+=== Edit proxy server settings
+
+You can edit the proxy server settings.
+
+.Steps
+
+. Log in to Astra Control Center using an account with *admin*/*owner* privilege.
+. Select *Account* > *Connections*.
+. Select *Edit* from the drop-down list to edit the connection.
+. Edit the server details and authentication information.
+. Select *Save*.
+
+=== Disable proxy server connection
+
+You can disable the proxy server connection. You will be warned before you disable that potential disruption to other connections might occur.
+
+.Steps
+
+. Log in to Astra Control Center using an account with *admin*/*owner* privilege.
+. Select *Account* > *Connections*.
+. Select *Disconnect* from the drop-down list to disable the connection.
+. In the dialog box that opens, confirm the operation.
+
+== Connect to Cloud Insights
+
+To monitor and gain insight into your complete infrastructure, connect NetApp Cloud Insights with your Astra Control Center instance. Cloud Insights is included in your Astra Control Center license.
+
+NOTE: Cloud Insights should be accessible from the network that Astra Control Center uses, or indirectly via a proxy server.
+
+NOTE: When Astra Control Center is connected to Cloud Insights, an Acquisition Unit pod gets created. This pod collects data from the storage backends that are managed by Astra Control Center and pushes it to Cloud Insights. This pod requires 8 GB RAM and 2 CPU cores.
+
+.What you'll need
+
+* An Astra Control Center account with *admin*/*owner* privileges.
+* A valid Astra Control Center license.
+* A proxy server if the network where you're running Astra Control Center requires a proxy for connecting to the Internet.
+
+TIP: If you are new to Cloud Insights, familiarize yourself with the features and capabilities link:https://docs.netapp.com/us-en/cloudinsights/index.html[here^].
+
+.Steps
+
+. Log in to Astra Control Center using an account with *admin*/*owner* privilege.
+. Select *Account* > *Connections*.
+. Select *Connect* where it shows *Disconnected* in the drop-down list to add the connection.
++
+image:ci-connect.png[Shows the Connect option from the drop-down list to enable Cloud Insights connection.]
+. Enter the Cloud Insights API tokens and the tenant URL.
++
+You get the tenant URL when you get the Cloud Insights license. If you do not have the tenant URL, see the link:https://docs.netapp.com/us-en/cloudinsights/task_cloud_insights_onboarding_1.html[Cloud Insights documentation^].
+
+.. To get the link:https://docs.netapp.com/us-en/cloudinsights/API_Overview.html#api-access-tokens[API token^], log in to your Cloud Insights tenant URL.
+.. In Cloud Insights, generate a *Read only* type API token.
++
+image:cloud-insights-api.png[Shows the Cloud Insights API token generation page.]
+.. Copy the *Read only* key. You will need to paste it into the Astra Control Center window for enabling the Cloud Insights connection.
+.. In Cloud Insights, generate a *Read/Write* type API token.
+.. Copy the *Read/Write* key. You will need to paste it into the Astra Control Center *Connect Cloud Insights* window.
++
+NOTE: We recommend that you generate a *Read only* key and a *Read/Write* key, and not use the same key for both purposes. By default, the token expiry period is set to one year. We recommend that you keep the default selection to give the token the maximum duration before it expires. If your token expires, the telemetry will stop.
+.. Paste the keys that you copied from Cloud Insights into Astra Control Center.
+. Select *Connect*.
+
+IMPORTANT: After you select *Connect,* the status of the connection changes to *Pending* in the *Cloud Insights* section of the *Account* > *Connections* page. It can a few minutes for the connection to be enabled and the status to change to *Connected*.
+
+NOTE: To go back and forth easily between the Astra Control Center and Cloud Insights UIs, ensure that you are logged into both.
+
+=== View data in Cloud Insights
+
+If the connection was successful, the *Cloud Insights* section of the *Account* > *Connections* page indicates that it is connected, and displays the tenant URL. You can visit Cloud Insights to see data being successfully received and displayed.
+
+image:cloud-insights.png[Shows the Cloud Insights connection enabled in the Astra Control Center UI.]
+
+If the connection failed for some reason, the status shows *Failed*. You can find the reason for failure under *Notifications* at the top-right side of the UI.
+
+image:cloud-insights-notifications.png[Shows the error message when Cloud Insights connection fails.]
+
+You can also find the same information under *Account* > *Notifications*.
+
+From Astra Control Center, you can view throughput information on the *Backends* page as well as connect to Cloud Insights from here after selecting a storage backend.
+image:throughput.png[Shows the throughput information on the Backends page in Astra Control Center.]
+
+To go directly to Cloud Insights, select the *Cloud Insights* icon next to the metrics image.
+
+You can also find the information on the *Dashboard*.
+
+image:dashboard-ci.png[Shows the Cloud Insights icon on the Dashboard.]
+
+IMPORTANT: After enabling the Cloud Insights connection, if you remove the backends that you added in Astra Control Center, the backends stop reporting to Cloud Insights.
+
+=== Edit Cloud Insights connection
+
+You can edit the Cloud Insights connection.
+
+NOTE: You can only edit the API keys. To change the Cloud Insights tenant URL, we recommended that you disconnect the Cloud Insights connection, and connect with the new URL.
+
+.Steps
+
+. Log in to Astra Control Center using an account with *admin*/*owner* privilege.
+. Select *Account* > *Connections*.
+. Select *Edit* from the drop-down list to edit the connection.
+. Edit the Cloud Insights connection settings.
+. Select *Save*.
+
+=== Disable Cloud Insights connection
+
+You can disable the Cloud Insights connection for a Kubernetes cluster managed by Astra Control Center. Disabling the Cloud Insights connection does not delete the telemetry data already uploaded to Cloud Insights.
+
+.Steps
+
+. Log in to Astra Control Center using an account with *admin*/*owner* privilege.
+. Select *Account* > *Connections*.
+. Select *Disconnect* from the drop-down list to disable the connection.
+. In the dialog box that opens, confirm the operation.
+After you confirm the operation, on the *Account* > *Connections* page, the Cloud Insights status changes to *Pending*. It take a few minutes for the status to change to *Disconnected*.
+
+== Connect to Fluentd
+
+You can send logs (Kubernetes events) from Astra Control Center to your Fluentd endpoint. The Fluentd connection is disabled by default.
+
+image:fluentbit.png[Shows a conceptual diagram of event logs going from Astra to Fluentd.]
+
+NOTE: Only the event logs from managed clusters are forwarded to Fluentd.
+
+.What you'll need
+
+* An Astra Control Center account with *admin*/*owner* privileges.
+* Astra Control Center installed and running on a Kubernetes cluster.
+
+IMPORTANT: Astra Control Center does not validate the details you enter for your Fluentd server. Ensure that you enter the correct values.
+
+.Steps
+
+. Log in to Astra Control Center using an account with *admin*/*owner* privilege.
+. Select *Account* > *Connections*.
+. Select *Connect* from the drop-down list where it shows *Disconnected* to add the connection.
++
+image:connect-fluentd.png[Shows the UI screen for enabling connection to Fluentd.]
+. Enter the host IP address, the port number, and shared key for your Fluentd server.
+. Select *Connect*.
+
+.Result
+
+If the details you entered for your Fluentd server were saved, the *Fluentd* section of the *Account* > *Connections* page indicates that it is connected. Now you can visit the Fluentd server that you connected and view the event logs.
+
+If the connection failed for some reason, the status shows *Failed*. You can find the reason for failure under *Notifications* at the top-right side of the UI.
+
+You can also find the same information under *Account* > *Notifications*.
+
+IMPORTANT: If you are having trouble with log collection, you should log in to your worker node and ensure that your logs are available in `/var/log/containers/`.
+
+=== Edit the Fluentd connection
+
+You can edit the Fluentd connection to your Astra Control Center instance.
+
+.Steps
+
+. Log in to Astra Control Center using an account with *admin*/*owner* privilege.
+. Select *Account* > *Connections*.
+. Select *Edit* from the drop-down list to edit the connection.
+. Change the Fluentd endpoint settings.
+. Select *Save*.
+
+=== Disable the Fluentd connection
+
+You can disable the Fluentd connection to your Astra Control Center instance.
+
+.Steps
+
+. Log in to Astra Control Center using an account with *admin*/*owner* privilege.
+. Select *Account* > *Connections*.
+. Select *Disconnect* from the drop-down list to disable the connection.
+. In the dialog box that opens, confirm the operation.
