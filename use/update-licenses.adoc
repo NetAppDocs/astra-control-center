@@ -10,7 +10,7 @@ summary: You can convert an evaluation license to a full license, or you can upd
 :icons: font
 :imagesdir: ../media/get-started/
 
-You can convert an evaluation license to a full license, or you can update an existing evaluation or full license with a new license. If you don't have a full license, work with your NetApp sales contact to obtain a full license and serial number. You can use the Astra UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra API] to update an existing license.
+You can convert an evaluation license to a full license, or you can update an existing evaluation or full license with a new license. If you don't have a full license, work with your NetApp sales contact to obtain a full license and serial number. You can use the Astra UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra API^] to update an existing license.
 
 .Steps
 

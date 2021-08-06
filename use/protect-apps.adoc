@@ -10,7 +10,7 @@ summary: Protect your apps by taking snapshots and backups using an automated pr
 :icons: font
 :imagesdir: ../media/use/
 
-Protect your apps by taking snapshots and backups using an automated protection policy or on an ad-hoc basis. You can use the Astra UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra API] to protect apps.
+Protect your apps by taking snapshots and backups using an automated protection policy or on an ad-hoc basis. You can use the Astra UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra API^] to protect apps.
 
 NOTE: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
 
@@ -94,7 +94,9 @@ NOTE: S3 buckets in Astra Control Center do not report available capacity. Befor
 
 Astra Control Center creates a backup of the app.
 
-NOTE: There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in <<Delete backups>>. To delete a failed backup, https://docs.netapp.com/us-en/astra-automation/index.html[use the Astra API].
+NOTE: If your network has an outage or is abnormally slow, a backup operation might time out. This causes the backup to fail.
+
+NOTE: There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in <<Delete backups>>. To delete a failed backup, https://docs.netapp.com/us-en/astra-automation/index.html[use the Astra API^].
 
 NOTE: After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
 
@@ -136,7 +138,7 @@ Astra Control Center deletes the snapshot.
 
 Delete the scheduled or on-demand backups that you no longer need.
 
-NOTE: There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use these instructions. To delete a failed backup, https://docs.netapp.com/us-en/astra-automation/index.html[use the Astra API].
+NOTE: There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use these instructions. To delete a failed backup, https://docs.netapp.com/us-en/astra-automation/index.html[use the Astra API^].
 
 . Click *Apps* and then click the name of an app.
 . Click *Data Protection*.

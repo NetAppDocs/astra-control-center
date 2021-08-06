@@ -28,13 +28,17 @@ After a data protection operation (clone, backup, restore) and subsequent persis
 //from ACS repo
 Clones of very large and consumed persistent volumes might be intermittently slow, dependent on cluster access to the object store. If the clone is hung and no data has been copied for more than 30 minutes, Astra Control terminates the clone action.
 
+== App clones fail using a specific version of PostgreSQL
+//DOC-3543/ASTRACTL-9408
+App clones within the same cluster consistently fail with the Bitnami PostgreSQL 11.5.0 chart. To clone successfully, use an earlier or later version of the chart.
+
 == S3 buckets in Astra Control Center do not report available capacity
 // DOC-3561/ASTRACTL-9425
 Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
 
 == Reusing buckets between instances of Astra Control Center causes failures
 // ASTRACTL-9296 (Low probability)/ASTRACTL-9837/DOC-3575
-If you try to reuse a bucket used by another or previous installation of Astra Control Center, backup and restore will fail. You must use a different bucket or completely clean out the previously used bucket. You cannot share buckets between instances of Astra Control Center.
+If you try to reuse a bucket used by another or previous installation of Astra Control Center, backup and restore will fail. You must use a different bucket or completely clean out the previously used bucket. You can't share buckets between instances of Astra Control Center.
 
 == Selecting a bucket provider type with credentials for another type causes data protection failures
 //DOC-3560/ASTRACTL-9574
@@ -44,7 +48,7 @@ When you add a bucket, select the correct bucket provider type with credentials 
 //AD AH review
 If you have an evaluation license, be sure you store your account ID to avoid data loss in the event of Astra Control Center failure if you are not sending ASUPs.
 
-== Clone operation cannot use other buckets besides the default
+== Clone operation can't use other buckets besides the default
 //DOC-3595/ASTRACTL-10071
 During an app backup or app restore, you can optionally specify a bucket ID. An app clone operation, however, always uses the default bucket that has been defined. There is no option to change buckets for a clone. If you want control over which bucket is used, you can either link:../use/manage-buckets.html#edit-a-bucket[change the bucket default] or do a link:../use/protect-apps.html#create-a-backup[backup] followed by a link:../use/restore-apps.html[restore] separately.
 
@@ -125,14 +129,14 @@ kubectl get crds |grep -E 'traefik'
 Response
 +
 ----
-ingressroutes.traefik.containo.us                                 2021-06-23T23:29:11Z
-ingressroutetcps.traefik.containo.us                              2021-06-23T23:29:11Z
-ingressrouteudps.traefik.containo.us                              2021-06-23T23:29:12Z
-middlewares.traefik.containo.us                                   2021-06-23T23:29:12Z
-serverstransports.traefik.containo.us                             2021-06-23T23:29:13Z
-tlsoptions.traefik.containo.us                                    2021-06-23T23:29:13Z
-tlsstores.traefik.containo.us                                     2021-06-23T23:29:14Z
-traefikservices.traefik.containo.us                               2021-06-23T23:29:15Z
+ingressroutes.traefik.containo.us             2021-06-23T23:29:11Z
+ingressroutetcps.traefik.containo.us          2021-06-23T23:29:11Z
+ingressrouteudps.traefik.containo.us          2021-06-23T23:29:12Z
+middlewares.traefik.containo.us               2021-06-23T23:29:12Z
+serverstransports.traefik.containo.us         2021-06-23T23:29:13Z
+tlsoptions.traefik.containo.us                2021-06-23T23:29:13Z
+tlsstores.traefik.containo.us                 2021-06-23T23:29:14Z
+traefikservices.traefik.containo.us           2021-06-23T23:29:15Z
 ----
 
 . Delete the CRDs:
@@ -140,3 +144,7 @@ traefikservices.traefik.containo.us                               2021-06-23T23:
 ----
 kubectl delete crd agents.monitoring.netapp.com ingressroutes.traefik.containo.us ingressroutetcps.traefik.containo.us ingressrouteudps.traefik.containo.us middlewares.traefik.containo.us serverstransports.traefik.containo.us tlsoptions.traefik.containo.us tlsstores.traefik.containo.us traefikservices.traefik.containo.us
 ----
+
+== Find more information
+
+* link:../release-notes/known-limitations.html[Known limitations for this release]

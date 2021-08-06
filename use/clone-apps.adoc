@@ -11,13 +11,17 @@ summary: Clone an existing app to create a duplicate app on the same Kubernetes 
 :imagesdir: ../media/use/
 
 [.lead]
-Clone an existing app to create a duplicate app on the same Kubernetes cluster or on another cluster. Cloning can help if you need to move applications and storage from one Kubernetes cluster to another. For example, you might want to move workloads through a CI/CD pipeline and across Kubernetes namespaces. You can use the Astra UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra API] to clone and migrate apps.
+Clone an existing app to create a duplicate app on the same Kubernetes cluster or on another cluster. Cloning can help if you need to move applications and storage from one Kubernetes cluster to another. For example, you might want to move workloads through a CI/CD pipeline and across Kubernetes namespaces. You can use the Astra UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra API^] to clone and migrate apps.
 
 NOTE: If you clone an app between clusters, the source and destination clusters must be the same distribution of OpenShift. For example, if you clone an app from an OpenShift 4.7 cluster, use a destination cluster that is also OpenShift 4.7.
 
 When Astra Control Center clones an app, it creates a clone of your application configuration and persistent storage.
 
 NOTE: S3 buckets in Astra Control Center do not report available capacity. Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
+
+.What you'll need
+
+To clone apps to a different cluster, you need a default bucket. When you add your first bucket, it becomes the default bucket.
 
 .Steps
 

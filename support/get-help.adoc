@@ -44,7 +44,7 @@ Send an email to astra.feedback@netapp.com to let us know your thoughts, ideas, 
 
 == Enable daily scheduled support bundle upload to NetApp Support
 
-During Astra Control Center installation, if you specify `enrolled: true` for `autoSupport` in the Astra Control Center Custom Resource Definition (CRD) file (`astra_control_center_min.yaml`), daily support bundles are automatically uploaded to NetApp Support.
+During Astra Control Center installation, if you specify `enrolled: true` for `autoSupport` in the Astra Control Center Custom Resource Definition (CRD) file (`astra_control_center_min.yaml`), daily support bundles are automatically uploaded to the NetApp Support Site.
 
 == Generate support bundle to provide to NetApp Support
 
@@ -52,10 +52,10 @@ Astra Control Center enables the admin user to generate bundles, which include i
 
 NOTE: The time taken by Astra Control Center to generate the bundle depends on the size of your Astra Control Center installation as well as the parameters of the requested support bundle. The time duration that you specified when requesting a support bundle dictates the time it takes for the bundle to be generated (for example, a shorter time period results in faster bundle generation).
 
-Before you begin, check to see whether your external connections are configured to enable upload of bundles to NSS.
+Before you begin, determine whether a proxy connection will be required to upload bundles to NSS. If a proxy connection is needed, verify that Astra Control Center has been configured to use a proxy server.
 
 . Select *Accounts* > *Connections*.
-. Check the external connections in *Connection settings*.
+. Check the proxy settings in *Connection settings*.
 
 .Steps
 . Create a case on the NSS portal using the license serial number listed on the *Support* page of the Astra Control Center UI.
@@ -78,9 +78,9 @@ If the generation failed, an icon appears on the Generate Bundle page. Select th
 
 TIP: The notifications icon at the top-right side of the UI provides information about events related to the support bundle, such as when the bundle is successfully created, when the bundle creation fails, when the bundle could not be uploaded, when the bundle could not be downloaded, and so on.
 
-=== If you have an airgapped installation
+=== If you have an air-gapped installation
 
-If you have an airgrapped installation, perform the following steps after the Support bundle is generated.
+If you have an air-gapped installation, perform the following steps after the Support bundle is generated.
 When the bundle is available for download, it appears next to *Generated* in the *Support Bundles* section of the *Support* page as shown:
 
 image:support-bundle.png[Shows the Support bundle generated and ready for download.]

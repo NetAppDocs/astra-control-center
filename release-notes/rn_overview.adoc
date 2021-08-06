@@ -14,6 +14,6 @@ We're pleased to announce the initial release of Astra Control Center.
 
 * link:../release-notes/whats-new.html[What's in this release of Astra Control Center]
 * link:../release-notes/known-issues.html[Known issues]
-* link:../release-notes/known-limitations[Known limitations]
+* link:../release-notes/known-limitations.html[Known limitations]
 
-Follow us on Twitter @NetAppDoc. Send feedback about documentation by becoming a link:https://docs.netapp.com/us-en/contribute/[GitHub contributor] or sending an email to doccomments@netapp.com.
+Follow us on Twitter @NetAppDoc. Send feedback about documentation by becoming a link:https://docs.netapp.com/us-en/contribute/[GitHub contributor^] or sending an email to doccomments@netapp.com.

@@ -19,11 +19,11 @@ After you install Astra Control Center, log in to the UI, and change your passwo
 * <<Add a bucket>>
 
 == Add a license for Astra Control Center
-//REFERENCED IN UI. DO NOT MODIFY WITHOUT NOTIFYING UX.
-You can add a new license using the UI or https://docs.netapp.com/us-en/astra-automation/index.html[API] to gain full Astra Control Center functionality. Without a license, your usage of Astra Control Center is limited to managing users and adding new clusters.
+//REFERENCED IN UI and NSS downloads. DO NOT MODIFY WITHOUT NOTIFYING STAKEHOLDERS.
+You can add a new license using the UI or https://docs.netapp.com/us-en/astra-automation/index.html[API^] to gain full Astra Control Center functionality. Without a license, your usage of Astra Control Center is limited to managing users and adding new clusters.
 
 .What you'll need
-When you downloaded Astra Control Center from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site], you also downloaded the NetApp license file (NLF). Ensure you have access to this license file.
+When you downloaded Astra Control Center from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^], you also downloaded the NetApp license file (NLF). Ensure you have access to this license file.
 
 NOTE: To update an existing evaluation or full license, see link:../use/update-licenses.html[Update an existing license].
 
@@ -37,10 +37,10 @@ NOTE: To update an existing evaluation or full license, see link:../use/update-l
 ////
 === Add a full or evaluation license
 
-Astra Control Center licenses measure CPU resources using Kubernetes CPU units. The license needs to account for the CPU resources assigned to the worker nodes of all the managed Kubernetes clusters. Before you add a license, you need to obtain the license file (NLF) from the link:https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site].
+Astra Control Center licenses measure CPU resources using Kubernetes CPU units. The license needs to account for the CPU resources assigned to the worker nodes of all the managed Kubernetes clusters. Before you add a license, you need to obtain the license file (NLF) from the link:https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
 //The CPU cores that Astra Control Center is deployed on are not counted against the CPU units consumed in the license.
 
-You can also try Astra Control Center with an evaluation license, which lets you use Astra Control Center for 90 days from the date you download the license. You can sign up for a free trial by registering link:https://cloud.netapp.com/astra-register[here].
+You can also try Astra Control Center with an evaluation license, which lets you use Astra Control Center for 90 days from the date you download the license. You can sign up for a free trial by registering link:https://cloud.netapp.com/astra-register[here^].
 
 NOTE:  If your installation grows to exceed the licensed number of CPU units, Astra Control Center prevents you from managing new applications. An alert is displayed when capacity is exceeded.
 
@@ -52,6 +52,10 @@ NOTE:  If your installation grows to exceed the licensed number of CPU units, As
 . Select *Add License*.
 
 The *Account* > *License* page displays the license information, expiration date, license serial number, account ID, and CPU units used.
+
+//AD AH review q2
+
+NOTE: If you have an evaluation license, be sure you store your account ID to avoid data loss in the event of Astra Control Center failure if you are not sending ASUPs.
 
 == Add cluster
 //REFERENCED IN UI. DO NOT MODIFY WITHOUT NOTIFYING UX.
@@ -86,9 +90,11 @@ image:cluster-storage.png[Shows the storage class to be used for the cluster.]
 
 The cluster enters the *Discovering* status and then changes to *Running*. You have successfully added a Kubernetes cluster and are now managing it in Astra Control Center.
 
+IMPORTANT: After you add a cluster to be managed in Astra Control Center, it might take a few minutes to deploy the monitoring operator. Until then, the Notification icon turns red and logs a *Monitoring Agent Status Check Failed* event. You can ignore this, because the issue resolves when Astra Control Center obtains the correct status. If the issue does not resolve in a few minutes, go to the cluster, and run `oc get pods -n netapp-monitoring` as the starting point. You will need to look into the monitoring operator logs to debug the problem.
+
 == Add a storage backend
 
-Add a storage backend to Astra Control so that Astra Control can manage your on-premises Kubernetes applications. Astra Control discovers and uses the already-deployed resources, including Trident, ONTAP, and associated storage classes. Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend.
+You can add a storage backend so that Astra Control can manage its resources. Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend as well as additional storage metrics.
 
 You can add a storage backend in the following ways:
 
@@ -138,7 +144,7 @@ Use any of the following bucket types:
 
 NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon’s S3 support.
 
-For instructions on how to add buckets using the Astra API, see link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information].
+For instructions on how to add buckets using the Astra API, see link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
 
 .Steps
 
@@ -178,7 +184,7 @@ Now that you’ve logged in and added clusters to Astra Control Center, you're r
 * link:../use/protect-apps.html[Protect apps]
 * link:../use/clone-apps.html[Clone apps]
 * link:../use/manage-notifications.html[Manage notifications]
-* link:../use/monitor-protect.html[Connect to Cloud Insights]
+* link:../use/monitor-protect.html#connect-to-cloud-insights[Connect to Cloud Insights]
 * link:../get-started/add-custom-tls-certificate.html[Add a custom TLS certificate]
 
 [discrete]

@@ -26,7 +26,7 @@ A Kubernetes cluster must meet the following general requirements so you can dis
 ** ontap-san-economy
 
 === OpenShift clusters
-Astra Control Center requires a Red Hat OpenShift Container Platform 4.6.8 or 4.7 cluster that has Trident StorageClasses backed by ONTAP 9.5 or newer, with the following attributes:
+Astra Control Center requires a Red Hat OpenShift Container Platform 4.6.8 or 4.7 cluster that has Trident storage classes backed by ONTAP 9.5 or newer, with the following attributes:
 
 * At least 300GB of available ONTAP storage capacity
 * 3 controller nodes with 4 CPU cores, 16GB RAM, and 120GB of available storage each
@@ -34,6 +34,8 @@ Astra Control Center requires a Red Hat OpenShift Container Platform 4.6.8 or 4.
 * A load balancer which exposes a reachable IP address
 * A method for pointing the FQDN of Astra Control Center to the load balanced IP address
 * Kubernetes version 1.19 or 1.20
+
+Make sure that your cluster meets the minimum requirements and that you follow Kubernetes best practices so that Astra Control Center is highly available in your Kubernetes cluster.
 
 NOTE: OpenShift 4.8 is not supported.
 
@@ -45,7 +47,7 @@ During app cloning, Astra Control Center needs to allow OpenShift to mount volum
 . `export-policy rule modify -policyname default -ruleindex 1 -anon 65534`
 ======================
 
-NOTE: If you plan to add a second OpenShift 4.6 or 4.7 cluster as a managed compute resource, you need to ensure that the Trident Volume Snapshot feature is enabled. See the official Trident https://netapp-trident.readthedocs.io/en/stable-v21.04/kubernetes/operations/tasks/volumes/snapshots.html?highlight=volumesnapshot#on-demand-volume-snapshots[instructions] to enable and test Volume Snapshots with Trident.
+NOTE: If you plan to add a second OpenShift 4.6 or 4.7 cluster as a managed compute resource, you need to ensure that the Trident Volume Snapshot feature is enabled. See the official Trident https://netapp-trident.readthedocs.io/en/stable-v21.04/kubernetes/operations/tasks/volumes/snapshots.html?highlight=volumesnapshot#on-demand-volume-snapshots[instructions^] to enable and test Volume Snapshots with Trident.
 
 ////
 === Non-OpenShift Kubernetes clusters
@@ -62,7 +64,7 @@ The Kubernetes cluster you use for Astra Control Center should already be deploy
 
 Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators or cluster-scoped operators.
 
-NetApp has validated some apps to ensure the safety and consistency of the snapshots and backups. link:../learn/validated-vs-standard.html[Learn the difference between a validated app and a standard app].
+NetApp has validated some apps to ensure the safety and consistency of the snapshots and backups. link:../concepts/validated-vs-standard.html[Learn the difference between a validated app and a standard app].
 
 No matter which type of app that you use with Astra Control Center, you should always test the backup and restore workflow yourself to ensure that you can meet your disaster recovery requirements.
 
@@ -202,4 +204,4 @@ If you want to integrate these options, you should obtain the following:
 ////
 == What's next
 
-View the link:quick-start.html[quick start^] overview.
+View the link:quick-start.html[quick start] overview.
