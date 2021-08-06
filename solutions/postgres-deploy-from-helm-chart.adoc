@@ -12,7 +12,7 @@ summary: Learn how to deploy Postgres from a Helm chart. After you deploy Postgr
 
 Learn how to deploy Postgres from the Bitnami Helm chart. After you deploy Postgres on your cluster, you can register the application with Astra Control.
 
-Postgres is a validated app for Astra. link:../learn/validated-vs-standard.html[Learn the difference between Validated and Standard apps].
+Postgres is a validated app for Astra. link:../concepts/validated-vs-standard.html[Learn the difference between Validated and Standard apps].
 
 These instructions apply to both Astra Control Service and Astra Control Center.
 

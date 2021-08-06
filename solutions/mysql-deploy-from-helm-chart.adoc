@@ -12,7 +12,7 @@ summary: Learn how to deploy MySQL from the standard stable chart. After you dep
 
 Learn how to deploy MySQL from the https://github.com/helm/charts/tree/master/stable/mysql[standard stable chart^]. After you deploy MySQL on your Kubernetes cluster, you can manage the application with Astra Control.
 
-MySQL is a validated app for Astra Control. link:../learn/validated-vs-standard.html[Learn the difference between Validated and Standard apps].
+MySQL is a validated app for Astra Control. link:../concepts/validated-vs-standard.html[Learn the difference between Validated and Standard apps].
 
 These instructions apply to both Astra Control Service and Astra Control Center.
 
