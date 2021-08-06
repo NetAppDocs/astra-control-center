@@ -44,7 +44,7 @@ homepage:
         - title: API reference
           url: https://docs.netapp.com/us-en/astra-automation/reference/api_reference.html
         - title: API workflows
-          url: https://docs.netapp.com/us-en/astra-automation/workflows/workflows.html
+          url: https://docs.netapp.com/us-en/astra-automation/workflows/workflows_before.html
 #    - title: Use Astra Control Center in VMware
 #      links:
 #        - title: Get started in VMware

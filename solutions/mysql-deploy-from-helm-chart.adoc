@@ -12,7 +12,7 @@ summary: Learn how to deploy MySQL from the standard stable chart. After you dep
 
 Learn how to deploy MySQL from the https://github.com/helm/charts/tree/master/stable/mysql[standard stable chart^]. After you deploy MySQL on your Kubernetes cluster, you can manage the application with Astra Control.
 
-MySQL is a validated app for Astra Control. link:../learn/validated-vs-standard.html[Learn the difference between Validated and Standard apps].
+MySQL is a validated app for Astra Control. link:../concepts/validated-vs-standard.html[Learn the difference between Validated and Standard apps].
 
 These instructions apply to both Astra Control Service and Astra Control Center.
 
@@ -57,7 +57,7 @@ You need to define the storage class only in these situations:
 *	You are using Astra Control Service and you don’t want to use the default storage class.
 *	You are using Astra Control Center and haven’t yet imported the cluster into Astra Control Center. Or, you have imported the cluster, but don't want to use the default storage class.
 
-.Result 
+.Result
 This does the following:
 
 * Creates a namespace.

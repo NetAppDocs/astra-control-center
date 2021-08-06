@@ -12,7 +12,7 @@ summary: Learn how to deploy Jenkins from the Bitnami Helm chart. After you depl
 
 Learn how to deploy Jenkins from the Bitnami Helm chart. After you deploy Jenkins on your cluster, you can register the application with Astra Control.
 
-Jenkins is a validated app for Astra Control. link:../learn/validated-vs-standard.html[Learn the difference between Validated and Standard apps].
+Jenkins is a validated app for Astra Control. link:../concepts/validated-vs-standard.html[Learn the difference between Validated and Standard apps].
 
 These instructions apply to both Astra Control Service and Astra Control Center.
 
