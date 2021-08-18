@@ -52,6 +52,18 @@ If you have an evaluation license, be sure you store your account ID to avoid da
 //DOC-3595/ASTRACTL-10071
 During an app backup or app restore, you can optionally specify a bucket ID. An app clone operation, however, always uses the default bucket that has been defined. There is no option to change buckets for a clone. If you want control over which bucket is used, you can either link:../use/manage-buckets.html#edit-a-bucket[change the bucket default] or do a link:../use/protect-apps.html#create-a-backup[backup] followed by a link:../use/restore-apps.html[restore] separately.
 
+== Astra Control Center clones fail when using Service Account level OCP Security Context Constraints (SCC)
+//DOC-3594/ASTRACTL-10060
+An application clone might fail if the original security context constraints are configured at the service account level within the namespace on the OCP cluster. The application clone will appear in the Managed Applications area with status `Removed`. See the https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Astra/Application_clone_is_failing_for_an_application_in_Astra_Control_Center[knowledgebase article] for more information.
+
+== Backup or clone fails for apps using PVCs with decimal units in Astra Control Center
+//ASTRACTL-9948/DOC-3612
+Volumes created with decimal units fail using the Astra Control Center backup or clone process. See the link:https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Astra/Backup_or_clone_may_fail_for_applications_using_PVCs_with_decimal_units_in_Astra_Control_Center[knowledgebase article] for more information.
+
+== Managing a cluster with Astra Control Center fails when default kubeconfig file contains more than one context
+//ASTRACTL-8872/DOC-3612
+You cannot use a kubeconfig with more than one cluster and context in it. See the link:https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Astra/Managing_cluster_with_Astra_Control_Center_may_fail_when_using_default_kubeconfig_file_contains_more_than_one_context[knowledgebase article] for more information.
+
 == Can't determine ASUP tar bundle status in scaled environment
 //DOC-3602/ASTRACTL-10186//AD AH
 During ASUP collection, the status of the bundle in the UI is reported as either `collecting` or `done`. Collection can take up to an hour for large environments. During ASUP download the network file transfer speed for the bundle might be insufficient, and the download might time out after 15 minutes without any indication in the UI. Download issues depend on the size of the ASUP, the scaled cluster size, and if collection time goes beyond the seven day limit.
@@ -116,7 +128,7 @@ customresourcedefinition.apiextensions.k8s.io "agents.monitoring.netapp.com" del
 ----
 
 == Uninstall of Astra Control Center fails to clean up Traefik CRDs
-//ASTRACTL-9180
+//ASTRACTL-9180/DOC-3630
 You can manually delete the Traefik CRDs:
 
 .Steps
