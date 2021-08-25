@@ -46,6 +46,10 @@ Ensure that you link:../use/monitor-protect.html#add-a-proxy-server[enter the co
 //DOC-3583
 This release does not support the ability to manage Astra as an app using snapshot, backup, or restore options.
 
+== Cluster is in `removed` state although cluster and network are otherwise working as expected
+//DOC-3613
+Astra Control Service has the ability to regenerate the kubeconfig files for managed clusters through service accounts should they become invalid. This ability to regenerate kubeconfig files is not possible in Astra Control Center because clusters are managed by submitting a kubeconfig. If a cluster is in a `removed` state when the cluster and network seem healthy, rotate the kubeconfig used to manage the cluster in Astra Control Center. 
+
 == Unhealthy pods affect app management
 //From ACS RN
 If a managed app has pods in an unhealthy state, Astra Control can't create new backups and clones.
