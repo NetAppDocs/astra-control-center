@@ -83,9 +83,9 @@ docker login [Docker_registry_path]
 +
 ----
 export REGISTRY=[Docker_registry_path]
-for astraImageFile in $(ls images/*.tar)
+for astraImageFile in $(ls images/*.tar) ; do
   # Load to local cache. And store the name of the loaded image trimming the 'Loaded images: '
-  do astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image(s): //')
+  astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image: //')
   astraImage=$(echo ${astraImage} | sed 's!localhost/!!')
   # Tag with local image repo.
   docker tag ${astraImage} ${REGISTRY}/${astraImage}
