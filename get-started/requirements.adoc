@@ -27,8 +27,8 @@ A Kubernetes cluster must meet the following general requirements so you can dis
 
 If you are planning to manage the Kubernetes cluster from Astra Control Center as well as use the cluster to host the Astra Control Center installation, the cluster has the following additional requirements:
 
-* The most recent version of the Kubernetes https://kubernetes-csi.github.io/docs/snapshot-controller.html[snapshot-controller component^] must be installed
-* The Kubernetes https://kubernetes.io/docs/concepts/storage/volume-snapshot-classes/[volumesnapshotclass component^] must be configured
+* The most recent version of the Kubernetes https://kubernetes-csi.github.io/docs/snapshot-controller.html[snapshot-controller component^] is installed
+* The Kubernetes https://kubernetes.io/docs/concepts/storage/volume-snapshot-classes/[volumesnapshotclass component^] is configured
 * A default Kubernetes storage class exists on the cluster
 * At least one storage class is configured to use Trident
 
