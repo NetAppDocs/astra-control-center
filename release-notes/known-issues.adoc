@@ -29,8 +29,12 @@ There is no way to stop a running backup. If you need to delete the backup, wait
 Volumes created with decimal units fail using the Astra Control Center backup or clone process. See the link:https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Astra/Backup_or_clone_may_fail_for_applications_using_PVCs_with_decimal_units_in_Astra_Control_Center[knowledgebase article] for more information.
 
 == Astra Control Center UI slow to show changes to app resources such as persistent volume changes
-// DOC-3562/ASTRACTL-9560/ASTRACTL-9540/AD AH
+// DOC-3563/ASTRACTL-9560/ASTRACTL-9540/AD AH
 After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. This delay in the UI can also occur when any app resources are added or modified. In this case, a data protection operation is successful within minutes and you can use the management software for the storage backend to confirm the change in volume size.
+
+== During app restore from backup Trident creates a larger PV than the original PV
+// DOC-3562/ASTRACTL-9560
+If you resize a persistent volume after creating a backup and then restore from that backup, the persistent volume size matches the new size of the PV instead of using the size of the backup.
 
 == Clone performance impacted by large persistent volumes
 //from ACS repo
