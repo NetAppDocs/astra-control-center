@@ -12,6 +12,7 @@ summary: You should run the elgibility checks to ensure that your cluster is rea
 
 You should ensure that the prerequisite conditions are met before you add a cluster. You should also run the eligibility checks to ensure that your cluster is ready to be added to Astra Control Center.
 //REFERENCED IN UI. DO NOT MODIFY WITHOUT NOTIFYING UX.
+
 == What you'll need before you add a cluster
 
 * A cluster running OpenShift 4.6 or 4.7, which has Trident StorageClasses backed by ONTAP 9.5 or later.
@@ -57,7 +58,7 @@ If Trident does not exist, you see output similar to the following:
 ----
 error: the server doesn't have a resource type "tridentversions"
 ----
-* If Trident is not the latest version or is not installed, you need to install the latest version of Trident before proceeding.
+* If Trident is not installed or the installed version is not the latest, you need to install the latest version of Trident before proceeding.
 ////
 * Check if the snapshot controller and volumesnapshot Custom Resource Definitions (CRDs) are installed.
 +
