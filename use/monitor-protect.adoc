@@ -83,7 +83,10 @@ TIP: If you are new to Cloud Insights, familiarize yourself with the features an
 . Select *Connect* where it shows *Disconnected* in the drop-down list to add the connection.
 +
 image:ci-connect.png[Shows the Connect option from the drop-down list to enable Cloud Insights connection.]
-. Enter the Cloud Insights API tokens and the tenant URL.
+. Enter the Cloud Insights API tokens and the tenant URL. The tenant URL has the following format, as an example:
+----
+https://<environment-name>.c01.cloudinsights.netapp.com/
+----
 +
 You get the tenant URL when you get the Cloud Insights license. If you do not have the tenant URL, see the link:https://docs.netapp.com/us-en/cloudinsights/task_cloud_insights_onboarding_1.html[Cloud Insights documentation^].
 
