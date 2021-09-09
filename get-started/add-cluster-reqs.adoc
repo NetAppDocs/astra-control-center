@@ -61,7 +61,7 @@ If Trident does not exist, you see output similar to the following:
 error: the server doesn't have a resource type "tridentversions"
 ----
 +
-NOTE: If Trident is not installed or the installed version is not the latest, you need to install the latest version of Trident before proceeding.
+NOTE: If Trident is not installed or the installed version is not the latest, you need to install the latest version of Trident before proceeding. See the https://netapp-trident.readthedocs.io/en/latest/kubernetes/deploying/deploying.html#deploying-in-kubernetes[Trident documentation^] for instructions.
 
 +
 ////
