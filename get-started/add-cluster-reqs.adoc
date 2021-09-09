@@ -63,6 +63,7 @@ error: the server doesn't have a resource type "tridentversions"
 +
 NOTE: If Trident is not installed or the installed version is not the latest, you need to install the latest version of Trident before proceeding.
 
++
 ////
 * Check if the snapshot controller and volumesnapshot Custom Resource Definitions (CRDs) are installed.
 +
@@ -84,6 +85,7 @@ If the snapshot controller is not installed, you get the following message:
 No resources found
 ----
 ////
+
 . Check if the storage classes are using the supported Trident drivers. The provisioner name should be `csi.trident.netapp.io`. See the following example:
 +
 ----
