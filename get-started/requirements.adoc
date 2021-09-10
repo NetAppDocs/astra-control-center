@@ -25,6 +25,13 @@ A Kubernetes cluster must meet the following general requirements so you can dis
 ** ontap-san
 ** ontap-san-economy
 
+If you are planning to manage the Kubernetes cluster from Astra Control Center as well as use the cluster to host the Astra Control Center installation, the cluster has the following additional requirements:
+
+* The most recent version of the Kubernetes https://kubernetes-csi.github.io/docs/snapshot-controller.html[snapshot-controller component^] is installed
+* A Trident https://netapp-trident.readthedocs.io/en/latest/kubernetes/concepts/objects.html?highlight=VolumeSnapshotClass#kubernetes-volumesnapshotclass-objects[volumesnapshotclass object^] has been defined by an administrator
+* A default Kubernetes storage class exists on the cluster
+* At least one storage class is configured to use Trident
+
 === OpenShift clusters
 Astra Control Center requires a Red Hat OpenShift Container Platform 4.6.8 or 4.7 cluster that has Trident storage classes backed by ONTAP 9.5 or newer, with the following attributes:
 
@@ -60,13 +67,6 @@ The Kubernetes cluster you use for Astra Control Center should already be deploy
 * Kubernetes version 1.18, 1.19, or 1.20
 * At least 3 worker nodes
 ////
-=== Supported apps
-
-Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators or cluster-scoped operators.
-
-NetApp has validated some apps to ensure the safety and consistency of the snapshots and backups. link:../concepts/validated-vs-standard.html[Learn the difference between a validated app and a standard app].
-
-No matter which type of app that you use with Astra Control Center, you should always test the backup and restore workflow yourself to ensure that you can meet your disaster recovery requirements.
 
 === App management requirements
 Astra Control Center has the following app management requirements:
