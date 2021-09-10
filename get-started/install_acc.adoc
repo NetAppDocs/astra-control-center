@@ -219,6 +219,7 @@ NOTE: Properties configured by the CR cannot be changed after initial Astra Cont
 .. Change the `email` string to the default initial administrator address. Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>.
 .. Change `enrolled` for autoSupport to `false` for sites without internet connectivity or retain `true` for connected sites.
 .. (Optional) Add a first name `firstName` and last name `lastName` of the user associated with the account. You can perform this step now or later within the UI.
+.. (Optional) Change the `storageClass` value to another Trident storageClass resource if required by your installation.
 .. If you are not using a registry that requires authorization, delete the `secret` line.
 
 +
@@ -240,6 +241,7 @@ spec:
   imageRegistry:
     *name: "[Docker_registry_path]"*
     *secret: "astra-registry-cred"*
+    *storageClass: "ontap-gold"*
 ----
 
 . Install the Astra Control Center operator:

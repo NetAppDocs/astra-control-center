@@ -16,10 +16,6 @@ Known issues identify problems that might prevent you from using this release of
 // ASTRACTL-9643
 If you define an app with a non-existent k8s label, Astra Control Center will create, manage, and then immediately remove the app. To avoid this, add the k8s label to pods and resources after the app is managed by Astra Control Center.
 
-== Astra Control Center clones fail when using Service Account level OCP Security Context Constraints (SCC)
-//DOC-3594/ASTRACTL-10060
-An application clone might fail if the original security context constraints are configured at the service account level within the namespace on the OCP cluster. The application clone will appear in the Managed Applications area with status `Removed`. See the https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Astra/Application_clone_is_failing_for_an_application_in_Astra_Control_Center[knowledgebase article] for more information.
-
 == Unable to stop running app backup
 // DOC-3552/ASTRACTL-9586
 There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in link:../use/protect-apps.html#delete-backups[Delete backups]. To delete a failed backup, use the link:https://docs.netapp.com/us-en/astra-automation/index.html[Astra API^].
