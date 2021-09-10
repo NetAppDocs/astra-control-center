@@ -83,7 +83,11 @@ TIP: If you are new to Cloud Insights, familiarize yourself with the features an
 . Select *Connect* where it shows *Disconnected* in the drop-down list to add the connection.
 +
 image:ci-connect.png[Shows the Connect option from the drop-down list to enable Cloud Insights connection.]
-. Enter the Cloud Insights API tokens and the tenant URL.
+. Enter the Cloud Insights API tokens and the tenant URL. The tenant URL has the following format, as an example:
++
+----
+https://<environment-name>.c01.cloudinsights.netapp.com/
+----
 +
 You get the tenant URL when you get the Cloud Insights license. If you do not have the tenant URL, see the link:https://docs.netapp.com/us-en/cloudinsights/task_cloud_insights_onboarding_1.html[Cloud Insights documentation^].
 
@@ -96,6 +100,7 @@ image:cloud-insights-api.png[Shows the Cloud Insights API token generation page.
 .. Copy the *Read/Write* key. You will need to paste it into the Astra Control Center *Connect Cloud Insights* window.
 +
 NOTE: We recommend that you generate a *Read only* key and a *Read/Write* key, and not use the same key for both purposes. By default, the token expiry period is set to one year. We recommend that you keep the default selection to give the token the maximum duration before it expires. If your token expires, the telemetry will stop.
+
 .. Paste the keys that you copied from Cloud Insights into Astra Control Center.
 . Select *Connect*.
 
