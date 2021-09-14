@@ -22,6 +22,15 @@ oc get pods n -netapp-monitoring
 
 There should be no pods running in that namespace or the namespace should not exist. If either of those are true, the cluster is unmanaged.
 
+== Cluster is in `removed` state although cluster and network are otherwise working as expected
+//DOC-3613
+If a cluster is in `removed` state yet cluster and network connectivity appears healthy (external attempts to access the cluster using Kubernetes APIs are successful), the kubeconfig you provided to Astra Control might no longer be valid. This can be due to certificate rotation or expiration on the cluster. To correct this issue, update the credentials associated with the cluster in Astra Control using the link:https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API]:
+
+. Run a POST call to add an updated kubeconfig file to the `/credentials` endpoint and retrieve the assigned `id` from the response body.
+. Run a PUT call from the `/clusters` endpoint using the appropriate cluster ID and set the `credentialID` to the `id` value from the previous step.
+
+After you complete these steps, the credential associated with the cluster is updated and the cluster should reconnect and update its state to `available`.
+
 == OLM-enabled and cluster-scoped operator deployed apps not supported
 // DOC-3553/ASTRACTL-9490/AD AH
 Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators or cluster-scoped operators.
