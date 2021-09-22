@@ -1,4 +1,4 @@
-= Deploy Jenkins from a Helm chart
+= Deploy Jenkins from a Helm chart - this heading doesn't show
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/

@@ -1,4 +1,4 @@
-= Validated vs standard apps
+= Validated vs standard apps include - this heading doesn't show
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/concepts/
