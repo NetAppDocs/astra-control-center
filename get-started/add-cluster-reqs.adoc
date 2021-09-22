@@ -5,7 +5,7 @@ keywords: prerequisites, Astra Control Center, add cluster, eligibility checks, 
 summary: You should run the elgibility checks to ensure that your cluster is ready to be added to Astra Control Center.
 ---
 
-= Prerequisites for adding a cluster
+= Prerequisites for adding a cluster 
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/get-started/
