@@ -12,6 +12,7 @@ summary: You should run the elgibility checks to ensure that your cluster is rea
 
 You should ensure that the prerequisite conditions are met before you add a cluster. You should also run the eligibility checks to ensure that your cluster is ready to be added to Astra Control Center.
 //REFERENCED IN UI. DO NOT MODIFY WITHOUT NOTIFYING UX.
+
 == What you'll need before you add a cluster
 
 * A cluster running OpenShift 4.6 or 4.7, which has Trident StorageClasses backed by ONTAP 9.5 or later.
@@ -39,7 +40,9 @@ NOTE: If you plan to add a second OpenShift 4.6 or 4.7 cluster as a managed comp
 
 Run the following eligibility checks to ensure that your cluster is ready to be added to Astra Control Center.
 
-* Check the Trident version.
+.Steps
+
+. Check the Trident version.
 +
 ----
 kubectl get tridentversions -n trident
@@ -57,6 +60,11 @@ If Trident does not exist, you see output similar to the following:
 ----
 error: the server doesn't have a resource type "tridentversions"
 ----
++
+NOTE: If Trident is not installed or the installed version is not the latest, you need to install the latest version of Trident before proceeding. See the https://netapp-trident.readthedocs.io/en/latest/kubernetes/deploying/deploying.html#deploying-in-kubernetes[Trident documentation^] for instructions.
+
++
+////
 * Check if the snapshot controller and volumesnapshot Custom Resource Definitions (CRDs) are installed.
 +
 ----
@@ -76,8 +84,9 @@ If the snapshot controller is not installed, you get the following message:
 ----
 No resources found
 ----
+////
 
-* Check if the storage classes are using the supported Trident drivers. The provisioner name should be `csi.trident.netapp.io`. See the following example:
+. Check if the storage classes are using the supported Trident drivers. The provisioner name should be `csi.trident.netapp.io`. See the following example:
 +
 ----
 kubectl get storageClass -A
