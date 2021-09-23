@@ -1,8 +1,4 @@
-= Validated vs standard apps include - this heading doesn't show
-:hardbreaks:
-:icons: font
-:imagesdir: ../media/concepts/
-
+//Validated vs standard apps include - include source file
 There are two types of applications you can bring to Astra Control: validated and standard. Learn the difference between these two categories and the potential impacts on your projects and strategy.
 
 NOTE: It's tempting to think of these two categories as "supported" and "unsupported." But as you will see, there is no such thing as an "unsupported" app in Astra Control. You can add any app to Astra Control, although validated apps have more infrastructure built around their Astra Control workflows compared to standard apps.
