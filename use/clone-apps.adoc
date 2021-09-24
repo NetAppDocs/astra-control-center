@@ -19,10 +19,9 @@ When Astra Control Center clones an app, it creates a clone of your application 
 
 NOTE: S3 buckets in Astra Control Center do not report available capacity. Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
 
-.OpenShift security contexts for apps
-[IMPORTANT]
+[NOTE]
 ===============================
-When you create a project for hosting an app on an OpenShift cluster, the project (or Kubernetes namespace) is assigned a SecurityContext UID. To enable Astra Control Center to protect your app and move the app to another cluster or project in OpenShift, you need to add a policy that enables the app to run as any UID. As an example, the following OpenShift CLI commands grant the appropriate policies to a WordPress app.
+When you create a project for hosting an app on an OpenShift cluster, the project (or Kubernetes namespace) is assigned a SecurityContext UID. To enable Astra Control Center to protect your app and move the app to another cluster or project in OpenShift, you need to add policies that enable the app to run as any UID. As an example, the following OpenShift CLI commands grant the appropriate policies to a WordPress app.
 
 `oc new-project wordpress`
 `oc adm policy add-scc-to-group anyuid system:serviceaccounts:wordpress`
