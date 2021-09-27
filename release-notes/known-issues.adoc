@@ -17,8 +17,9 @@ Known issues identify problems that might prevent you from using this release of
 Apply the following patch to all Kubernetes clusters where the acc-operator version 21.08.65 has been deployed. It should also be applied if the acc-operator is re-deployed.
 
 To resolve this issue:
-. Replace `ACC_NAMESPACE` in the script below with the namespace you used to link:../get-started/install_acc.html#install-astra-control-center[deploy Astra Control Center].
 
+. Replace `ACC_NAMESPACE` in the script below with the namespace you used to link:../get-started/install_acc.html#install-astra-control-center[deploy Astra Control Center].
++
 [source,cli]
 ----
 cat <<EOF | kubectl apply -f –
