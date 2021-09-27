@@ -14,7 +14,10 @@ Known issues identify problems that might prevent you from using this release of
 
 == Incorrect ClusterRoleBinding created by Astra Control Center CRD during installation
 //ASTRACTL-11352/DOC-3726
-The following patch should be applied to all Kubernetes clusters where the acc-operator version 21.08.65 has been deployed. It should also be applied if the acc-operator is re-deployed. You can resolve this issue by running the following command:
+Apply the following patch to all Kubernetes clusters where the acc-operator version 21.08.65 has been deployed. It should also be applied if the acc-operator is re-deployed.
+
+To resolve this issue:
+. Replace `ACC_NAMESPACE` in the script below with the namespace you used to link:../get-started/install_acc.html#install-astra-control-center[deploy Astra Control Center].
 
 [source,cli]
 ----
@@ -31,8 +34,13 @@ subjects:
 - kind: ServiceAccount
   name: default
   namespace: netapp-acc-operator
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: system:serviceaccounts:ACC_NAMESPACE
 EOF
 ----
+
+. Run the script.
 
 The patch removes the following two subjects from `ClusterRoleBinding: "acc-operator-manager-rolebinding"`
 
