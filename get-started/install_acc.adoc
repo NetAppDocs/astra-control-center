@@ -244,6 +244,8 @@ spec:
     *storageClass: "ontap-gold"*
 ----
 
+. Run the following patch to correct link:https://docs.netapp.com/us-en/astra-control-center/release-notes/known-issues.html#Incorrect-ClusterRoleBinding-created-by-Astra-Control-Center-CRD-during-installation[cluster role binding].
+
 . Install the Astra Control Center operator:
 +
 ----
