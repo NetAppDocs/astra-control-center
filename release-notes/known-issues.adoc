@@ -12,6 +12,48 @@ summary: Known issues identify problems that might prevent you from using this r
 
 Known issues identify problems that might prevent you from using this release of the product successfully.
 
+== Incorrect ClusterRoleBinding created by Astra Control Center CRD during installation
+//ASTRACTL-11352/DOC-3726
+Apply the following patch to all Kubernetes clusters where the acc-operator version 21.08.65 has been deployed. It should also be applied if the acc-operator is re-deployed.
+
+To resolve this issue:
+
+. Replace `ACC_NAMESPACE` in the script below with the namespace you used to link:../get-started/install_acc.html#install-astra-control-center[deploy Astra Control Center].
++
+[source,cli]
+----
+cat <<EOF | kubectl apply -f –
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: acc-operator-manager-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: acc-operator-manager-role
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: netapp-acc-operator
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: system:serviceaccounts:ACC_NAMESPACE
+EOF
+----
+
+. Run the script.
+
+The patch removes the following two subjects from `ClusterRoleBinding: "acc-operator-manager-rolebinding"`
+
+----
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: system:serviceaccounts
+- apiGroup: ""
+  kind: Group
+  name: system:serviceaccounts
+----
+
 == App with user-defined label goes into "removed" state
 // ASTRACTL-9643
 If you define an app with a non-existent k8s label, Astra Control Center will create, manage, and then immediately remove the app. To avoid this, add the k8s label to pods and resources after the app is managed by Astra Control Center.
@@ -40,6 +82,10 @@ Clones of very large and consumed persistent volumes might be intermittently slo
 //DOC-3543/ASTRACTL-9408
 App clones within the same cluster consistently fail with the Bitnami PostgreSQL 11.5.0 chart. To clone successfully, use an earlier or later version of the chart.
 
+== App clones fail when using Service Account level OCP Security Context Constraints (SCC)
+//ASTRACTL-10060/DOC-3594
+An application clone might fail if the original security context constraints are configured at the service account level within the namespace on the OCP cluster. When the application clone fails, it appears in the Managed Applications area in Astra Control Center with status `Removed`. See the https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Astra/Application_clone_is_failing_for_an_application_in_Astra_Control_Center[knowledgebase article] for more information.
+
 == S3 buckets in Astra Control Center do not report available capacity
 // DOC-3561/ASTRACTL-9425
 Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
@@ -55,6 +101,10 @@ When you add a bucket, select the correct bucket provider type with credentials 
 == Backups and snapshots might not be retained during removal of an Astra Control Center instance
 //AD AH review
 If you have an evaluation license, be sure you store your account ID to avoid data loss in the event of Astra Control Center failure if you are not sending ASUPs.
+
+== Extra backups are retained as part of scheduled backup
+//ASTRACTL-10069/DOC-3609
+Sometimes one or more backups in Astra Control Center are retained beyond the number specified to be retained in the backup schedule. These extra backups should be deleted as part of a scheduled backup but are not deleted and are stuck in a `pending` state. To resolve the issue, https://docs.netapp.com/us-en/astra-automation/workflows/wf_delete_backup.html[force delete] the extra backups.
 
 == Clone operation can't use other buckets besides the default
 //DOC-3595/ASTRACTL-10071
