@@ -5,7 +5,7 @@ keywords: prerequisites, Astra Control Center, add cluster, eligibility checks, 
 summary: You should run the elgibility checks to ensure that your cluster is ready to be added to Astra Control Center.
 ---
 
-= Prerequisites for adding a cluster
+= Prerequisites for adding a cluster 
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/get-started/
@@ -156,8 +156,24 @@ subjects:
 ----
 kubectl apply -f astracontrol-clusterrolebinding.yaml
 ----
+. List the service account secrets, replacing `<context>` with the correct context for your installation:
++
+----
+kubectl get serviceaccount astracontrol-service-account --context <context> --namespace default -o json
+----
++
+The end of the output should look similar to the following:
++
+----
+"secrets": [
+{ "name": "astracontrol-service-account-dockercfg-vhz87"},
+{ "name": "astracontrol-service-account-token-r59kr"}
+]
+----
++
+The indices for each element in the `secrets` array begin with 0. In the above example, the index for `astracontrol-service-account-dockercfg-vhz87` would be 0 and the index for `astracontrol-service-account-token-r59kr` would be 1. In your output, make note of the index for the service account name that has the word "token" in it.
 . Generate the kubeconfig as follows:
-.. Create a `create-kubeconfig.sh` file.
+.. Create a `create-kubeconfig.sh` file. If the token index you noted in the previous step was not 0, replace the value for `TOKEN_INDEX` in the beginning of the following script with the correct value.
 +
 [source]
 [subs="specialcharacters,quotes"]
@@ -166,18 +182,22 @@ kubectl apply -f astracontrol-clusterrolebinding.yaml
 ----
 +
 ----
-# Update these to match your environment. If you didn't change anything above, don't change anything here.
+# Update these to match your environment. Replace the value for TOKEN_INDEX from
+# the output in the previous step if it was not 0. If you didn't change anything
+# else above, don't change anything else here.
+
 SERVICE_ACCOUNT_NAME=astracontrol-service-account
 NAMESPACE=default
 NEW_CONTEXT=astracontrol
 KUBECONFIG_FILE='kubeconfig-sa'
+TOKEN_INDEX=0
 
 CONTEXT=$(kubectl config current-context)
 
 SECRET_NAME=$(kubectl get serviceaccount ${SERVICE_ACCOUNT_NAME} \
   --context ${CONTEXT} \
   --namespace ${NAMESPACE} \
-  -o jsonpath='{.secrets[0].name}')
+  -o jsonpath='{.secrets[TOKEN_INDEX].name}')
 TOKEN_DATA=$(kubectl get secret ${SECRET_NAME} \
   --context ${CONTEXT} \
   --namespace ${NAMESPACE} \
