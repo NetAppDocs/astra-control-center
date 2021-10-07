@@ -1,3 +1,4 @@
+
 Here is an overview of the various components of the Astra Control environment.
 
 image:astra-cc-arch2.png[Astra Control architecture diagram and components]
