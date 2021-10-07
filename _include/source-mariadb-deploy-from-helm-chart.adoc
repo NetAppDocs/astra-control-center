@@ -1,14 +1,13 @@
-//Deploy Jenkins from a Helm chart - include file
-Learn how to deploy Jenkins from the Bitnami Helm chart. After you deploy Jenkins on your cluster, you can register the application with Astra Control.
+Learn how to deploy MariaDB from the https://bitnami.com/stack/mariadb/helm[Bitnami Helm chart^]. After you deploy MariaDB on your cluster, you can manage the application with Astra Control.
 
-Jenkins is a validated app for Astra Control.
+MariaDB is a validated app for Astra.
 
 * https://docs.netapp.com/us-en/astra/learn/validated-vs-standard.html[Learn the difference between a validated app and a standard app in Astra Control Service^].
-
 * https://docs.netapp.com/us-en/astra-control-center/concepts/validated-vs-standard.html[Learn the difference between a validated app and a standard app in Astra Control Center^].
 
 
 These instructions apply to both Astra Control Service and Astra Control Center.
+
 
 NOTE: Applications deployed from Google Marketplace have not been validated. Some users report issues with discovery and/or backup with Google Marketplace deployments of Postgres, MariaDB, and MySQL.
 
@@ -20,10 +19,8 @@ NOTE: For Astra Control Center, you can add the cluster to Astra Control Center 
 
 * Updated versions of Helm (version 3.2+) and Kubectl installed on a local machine with the proper kubeconfig for the cluster
 
-Astra Control does not currently support the https://plugins.jenkins.io/kubernetes/[Kubernetes plugin for Jenkins^]. You can run Jenkins in a Kubernetes cluster without the plugin. The plugin provides scalability to your Jenkins cluster.
 
-
-== Install Jenkins
+== Install MariaDB
 
 Two important notes on this process:
 
@@ -31,31 +28,36 @@ Two important notes on this process:
 * You must deploy the Helm chart in a namespace other than the default.
 
 .Steps
-
 . Add the Bitnami chart repo:
 +
 ----
 helm repo add bitnami https://charts.bitnami.com/bitnami
 ----
 
-. Create the `jenkins` namespace and deploy Jenkins into it with the command:
+. Deploy MariaDB with the command:
 +
 ----
 Helm install <name> --namespace <namespace> --create-namespace -–set persistence.storageClass=<storage_class>
 ----
+// helm install mariadb bitnami/mariadb --namespace testdb --create-namespace --set db.database=test_db,db.user=test_db_user,db.password=NKhjs2wQPt8 > /dev/null 2>&1
 +
 NOTE: If the volume size is changed, use Kibibyte (Ki), Mebibyte (Mi) or Gibibyte (Gi) units.
 
 +
 You need to define the storage class only in these situations:
 
-*	You are using Astra Control Service and you don’t want to use the default storage class.
-*	You are using Astra Control Center and haven’t yet imported the cluster into Astra Control Center. Or, you have imported the cluster, but don't want to use the default storage class.
+•	You are using Astra Control Service and you don’t want to use the default storage class.
+•	You are using Astra Control Center and haven’t yet imported the cluster into Astra Control Center. Or, you have imported the cluster, but don't want to use the default storage class.
 
 .Result
+
 This does the following:
 
 * Creates a namespace.
-* Sets the correct storage class.
+* Deploys MariaDB on the namespace.
+* Creates a database.
+
+
+WARNING: This method of setting the password at deployment is insecure. We do not recommend this for a production environment.
 
 After the pods are online, you can manage the app with Astra Control. Astra Control enables you to manage an app at the namespace level or by using a helm label.
