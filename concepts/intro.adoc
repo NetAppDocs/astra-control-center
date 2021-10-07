@@ -10,4 +10,4 @@ summary: Astra is a Kubernetes application data lifecycle management service tha
 :icons: font
 :imagesdir: ../media/concepts/
 
-include::_include/source-intro.adoc[]
+include::../_include/source-intro.adoc[]

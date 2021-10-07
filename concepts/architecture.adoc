@@ -5,9 +5,9 @@ keywords: astra, astra control, architecture, astra control center, kubernetes, 
 summary: Here is an overview of the various components of the Astra Control environment.
 ---
 
-= Architecture & components
+= Architecture and components
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/concepts/
 
-include::_include/source-architecture.adoc[]
+include::../_include/source-architecture.adoc[]

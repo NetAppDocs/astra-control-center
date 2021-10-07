@@ -10,4 +10,4 @@ summary: There are two types of applications you can bring to Astra Control, Val
 :icons: font
 :imagesdir: ../media/
 
-include::_include/source-validated-vs-standard.adoc[]
+include::../_include/source-validated-vs-standard.adoc[]
