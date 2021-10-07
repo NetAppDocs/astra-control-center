@@ -10,4 +10,4 @@ summary: Learn how to deploy Jenkins from the Bitnami Helm chart. After you depl
 :icons: font
 :imagesdir: ../media/
 
-include::_include/source-jenkins-deploy-from-helm-chart.adoc[]
+include::../_include/source-jenkins-deploy-from-helm-chart.adoc[]
