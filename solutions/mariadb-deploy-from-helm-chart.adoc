@@ -9,4 +9,5 @@ summary: Learn how to deploy MariaDB from the Bitnami Helm chart. After you depl
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/
+
 include::_include/source-mariadb-deploy-from-helm-chart.adoc[]

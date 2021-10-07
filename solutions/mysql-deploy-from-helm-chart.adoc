@@ -9,4 +9,5 @@ summary: Learn how to deploy MySQL from the standard stable chart. After you dep
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/
+
 include::_include/source-mysql-deploy-from-helm-chart.adoc[]

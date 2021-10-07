@@ -9,4 +9,5 @@ summary: Learn how to deploy Postgres from a Helm chart. After you deploy Postgr
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/
+
 include::_include/source-postgres-deploy-from-helm-chart.adoc[]

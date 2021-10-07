@@ -4,6 +4,7 @@ permalink: concepts/intro.html
 keywords: introduction, how astra works, how Astra works, what Astra is, concept, understanding, overview, astra control, kubernetes, astra control service, astra control center
 summary: Astra is a Kubernetes application data lifecycle management service that simplifies operations for stateful applications. Easily protect, back up, and migrate Kubernetes workloads, and instantly create working application clones.
 ---
+
 = Intro to Astra Control
 :hardbreaks:
 :icons: font
