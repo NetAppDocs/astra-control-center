@@ -1,11 +1,11 @@
 ---
 sidebar: sidebar
 permalink: get-started/add-cluster-reqs.html
-keywords: prerequisites, Astra Control Center, add cluster, eligibility checks, Trident version
+keywords: what are astra prerequisites, what is Astra Control, add kubernetes cluster, astra trident version
 summary: You should run the elgibility checks to ensure that your cluster is ready to be added to Astra Control Center.
 ---
 
-= Prerequisites for adding a cluster 
+= Prerequisites for adding a cluster
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/get-started/
