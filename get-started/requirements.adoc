@@ -31,6 +31,7 @@ If you are planning to manage the Kubernetes cluster from Astra Control Center a
 * A Trident https://netapp-trident.readthedocs.io/en/latest/kubernetes/concepts/objects.html?highlight=VolumeSnapshotClass#kubernetes-volumesnapshotclass-objects[volumesnapshotclass object^] has been defined by an administrator
 * A default Kubernetes storage class exists on the cluster
 * At least one storage class is configured to use Trident
+* A method for pointing the FQDN of Astra Control Center to the External IP address of the Astra Control Center service
 
 === OpenShift clusters
 Astra Control Center requires a Red Hat OpenShift Container Platform 4.6.8 or 4.7 cluster that has Trident storage classes backed by ONTAP 9.5 or newer, with the following attributes:
@@ -41,6 +42,9 @@ Astra Control Center requires a Red Hat OpenShift Container Platform 4.6.8 or 4.
 * A load balancer which exposes a reachable IP address
 * A method for pointing the FQDN of Astra Control Center to the load balanced IP address
 * Kubernetes version 1.19 or 1.20
+* Service type "LoadBalancer" available for ingress traffic to be sent to services in the OpenShift cluster
+
+Astra Control Center uses a service of the type "LoadBalancer" and requires the Kubernetes cluster to expose that service on an external IP address. For on-premises OpenShift clusters, NetApp has internally validated https://docs.netapp.com/us-en/netapp-solutions/containers/rh-os-n_LB_MetalLB.html#installing-the-metallb-load-balancer[MetalLB^] for use with Astra Control Center. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the external IP address assigned to the service for Astra Control Center.
 
 Make sure that your cluster meets the minimum requirements and that you follow Kubernetes best practices so that Astra Control Center is highly available in your Kubernetes cluster.
 
