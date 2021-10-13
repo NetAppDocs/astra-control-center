@@ -9,6 +9,8 @@ entries:
         url: /use/define-custom-app.html
   - title: Protect apps
     entries:
+      - title: Protection overview
+        url: /use/protection-overview.html
       - title: Protect apps
         url: /use/protect-apps.html
       - title: Restore apps
