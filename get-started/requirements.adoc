@@ -31,7 +31,7 @@ If you are planning to manage the Kubernetes cluster from Astra Control Center a
 * A Trident https://netapp-trident.readthedocs.io/en/latest/kubernetes/concepts/objects.html?highlight=VolumeSnapshotClass#kubernetes-volumesnapshotclass-objects[volumesnapshotclass object^] has been defined by an administrator
 * A default Kubernetes storage class exists on the cluster
 * At least one storage class is configured to use Trident
-* A method for pointing the FQDN of Astra Control Center to the External IP address of the Astra Control Center service
+* A method for pointing the FQDN of Astra Control Center to the external IP address of the Astra Control Center service
 
 === OpenShift clusters
 Astra Control Center requires a Red Hat OpenShift Container Platform 4.6.8 or 4.7 cluster that has Trident storage classes backed by ONTAP 9.5 or newer, with the following attributes:
