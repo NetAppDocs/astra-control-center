@@ -39,12 +39,9 @@ Astra Control Center requires a Red Hat OpenShift Container Platform 4.6.8 or 4.
 * At least 300GB of available ONTAP storage capacity
 * 3 controller nodes with 4 CPU cores, 16GB RAM, and 120GB of available storage each
 * 3 worker nodes with at least 8 CPU cores, 16GB RAM, and 50GB of available storage each
-* A load balancer which exposes a reachable IP address
-* A method for pointing the FQDN of Astra Control Center to the load balanced IP address
 * Kubernetes version 1.19 or 1.20
-* Service type "LoadBalancer" available for ingress traffic to be sent to services in the OpenShift cluster (such as https://docs.netapp.com/us-en/netapp-solutions/containers/rh-os-n_LB_MetalLB.html#installing-the-metallb-load-balancer[MetalLB^])
-
-Astra Control Center uses a service of the type "LoadBalancer" and requires the Kubernetes cluster to expose that service on an external IP address. For on-premises OpenShift clusters, NetApp has internally validated https://docs.netapp.com/us-en/netapp-solutions/containers/rh-os-n_LB_MetalLB.html#installing-the-metallb-load-balancer[MetalLB^] for use with Astra Control Center. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the external IP address assigned to the service for Astra Control Center.
+* Service type "LoadBalancer" available for ingress traffic to be sent to services in the OpenShift cluster
+* A method for pointing the FQDN of Astra Control Center to the load balanced IP address
 
 Make sure that your cluster meets the minimum requirements and that you follow Kubernetes best practices so that Astra Control Center is highly available in your Kubernetes cluster.
 
@@ -101,9 +98,12 @@ Astra Control Center requires an Astra Control Center license for full functiona
 
 If you want to try Astra Control Center, you can link:setup_overview.html#add-a-full-or-evaluation-license[use a 90-day evaluation license].
 
-== Load balancing
+== Service type "LoadBalancer" in on-premises Kubernetes clusters
 
-Astra Control Center requires the Kubernetes cluster to have a load balancer installed and configured with an accessible external IP address. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
+Astra Control Center uses the Traefik application proxy as a service of the type "LoadBalancer", and requires that it be assigned an accessible external IP address. For on-premises OpenShift clusters, you can use https://docs.netapp.com/us-en/netapp-solutions/containers/rh-os-n_LB_MetalLB.html#installing-the-metallb-load-balancer[MetalLB^] to automatically assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
+////
+Astra Control Center uses a service of the type "LoadBalancer" and requires the Kubernetes cluster to expose that service on an external IP address. For on-premises OpenShift clusters, NetApp has internally validated https://docs.netapp.com/us-en/netapp-solutions/containers/rh-os-n_LB_MetalLB.html#installing-the-metallb-load-balancer[MetalLB^] for use with Astra Control Center. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the external IP address assigned to the service for Astra Control Center.
+////
 
 == Networking requirements
 
