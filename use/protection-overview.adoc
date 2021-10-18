@@ -14,7 +14,7 @@ Learn about the available types of data protection in Astra Control Center, and 
 
 == Snapshots, backups, and protection policies
 
-A _snapshot_ is a point-in-time copy of an app that's stored on the same provisioned volume as the app. They are usually fast. Local snapshots are used to restore the application to an earlier point in time. Snapshots are useful for fast clones; snapshots include all of the Kubernetes objects for the app, including configuration files.
+A _snapshot_ is a point-in-time copy of an app that's stored on the same provisioned volume as the app. They are usually fast. You can use local snapshots to restore the application to an earlier point in time. Snapshots are useful for fast clones; snapshots include all of the Kubernetes objects for the app, including configuration files.
 
 A _backup_ is stored in the external object store, and can be slower to take compared to local snapshots. You can restore an app backup to the same cluster, or you can migrate an app by restoring its backup to a different cluster. You can also choose a longer retention period for backups. Backups generally offer you better protection than snapshots in cases of server failure or data loss.
 
@@ -25,3 +25,27 @@ CAUTION: _You can't be fully protected until you have a recent backup_. This is 
 == Clones
 
 A _clone_ is an exact duplicate of an app, its configuration, and its persistent storage. You can manually create a clone on either the same Kubernetes cluster or on another cluster. Cloning an app can be useful if you need to move applications and storage from one Kubernetes cluster to another.
+
+== Example app protection workflow
+
+You can use the following example workflow to get started protecting your apps.
+
+==== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png[One] Take a manual backup of all apps
+
+[role="quick-margin-para"]
+Establish a backup baseline for all apps, so you are immediately protected.
+
+==== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png[Two] Optional: Configure a protection policy
+
+[role="quick-margin-para"]
+Configure a protection policy to automate future backups and snapshots. As an example, you can start with weekly backups of each app, and daily snapshots, with one month retention for both. Configuring a protection policy is strongly recommended over manual backups and snapshots.
+
+==== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png[Three] Optional: Adjust the protection policy as needed
+
+[role="quick-margin-para"]
+As apps and their usage patterns change, adjust the protection policy as needed to provide the best protection.
+
+==== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png[Four] In case of a disaster, restore your apps
+
+[role="quick-margin-para"]
+If data loss occurs, restore the latest backup first for each app, followed by the latest snapshot (if available).
