@@ -98,9 +98,9 @@ Astra Control Center requires an Astra Control Center license for full functiona
 
 If you want to try Astra Control Center, you can link:setup_overview.html#add-a-full-or-evaluation-license[use a 90-day evaluation license].
 
-== Service type "LoadBalancer" in on-premises Kubernetes clusters
+== Service type "LoadBalancer" for on-premises Kubernetes clusters
 
-Astra Control Center uses the Traefik application proxy as a service of the type "LoadBalancer", and requires that it be assigned an accessible external IP address. For on-premises OpenShift clusters, you can use https://docs.netapp.com/us-en/netapp-solutions/containers/rh-os-n_LB_MetalLB.html#installing-the-metallb-load-balancer[MetalLB^] to automatically assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
+Astra Control Center uses a service of the type "LoadBalancer" (svc/traefik in the Astra Control Center namespace), and requires that it be assigned an accessible external IP address. For on-premises OpenShift clusters, you can use https://docs.netapp.com/us-en/netapp-solutions/containers/rh-os-n_LB_MetalLB.html#installing-the-metallb-load-balancer[MetalLB^] to automatically assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
 ////
 Astra Control Center uses a service of the type "LoadBalancer" and requires the Kubernetes cluster to expose that service on an external IP address. For on-premises OpenShift clusters, NetApp has internally validated https://docs.netapp.com/us-en/netapp-solutions/containers/rh-os-n_LB_MetalLB.html#installing-the-metallb-load-balancer[MetalLB^] for use with Astra Control Center. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the external IP address assigned to the service for Astra Control Center.
 ////
