@@ -30,22 +30,25 @@ A _clone_ is an exact duplicate of an app, its configuration, and its persistent
 
 You can use the following example workflow to get started protecting your apps.
 
+////
 ==== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png[One] Back up all apps
 
 [role="quick-margin-para"]
 Create a manual https://docs.netapp.com/us-en/astra-control-center/use/protect-apps.html#create-a-backup[backup^] of all apps, so your apps are immediately protected.
 
-==== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png[Two] Recommended: Configure a protection policy
+////
+
+==== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png[One] Configure a protection policy
 
 [role="quick-margin-para"]
 https://docs.netapp.com/us-en/astra-control-center/use/protect-apps.html#configure-a-protection-policy[Configure a protection policy^] to automate future backups and snapshots. As an example, you can start with weekly backups of each app, and daily snapshots, with one month retention for both. Configuring a protection policy is strongly recommended over manual backups and snapshots.
 
-==== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png[Three] Optional: Adjust the protection policy as needed
+==== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png[Two] Optional: Adjust the protection policy as needed
 
 [role="quick-margin-para"]
 As apps and their usage patterns change, adjust the protection policy as needed to provide the best protection.
 
-==== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png[Four] In case of a disaster, restore your apps
+==== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png[Three] In case of a disaster, restore your apps
 
 [role="quick-margin-para"]
 If data loss occurs, link:restore-apps.html[restore^] the latest backup first for each app, followed by the latest snapshot (if available).
