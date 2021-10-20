@@ -18,7 +18,7 @@ A _snapshot_ is a point-in-time copy of an app that's stored on the same provisi
 
 A _backup_ is stored in the external object store, and can be slower to take compared to local snapshots. You can restore an app backup to the same cluster, or you can migrate an app by restoring its backup to a different cluster. You can also choose a longer retention period for backups. Because they are stored in the external object store, backups generally offer you better protection than snapshots in cases of server failure or data loss.
 
-A _protection policy_ is a way to protect your apps by automatically creating snapshots, backups, or both according to a schedule that you define. A protection policy also enables you to choose how many snapshots and backups to retain in the schedule. Automating your backups and snapshots with a protection policy is the best way to ensure your apps are protected according to the needs of your organization.
+A _protection policy_ is a way to protect an app by automatically creating snapshots, backups, or both according to a schedule that you define for that app. A protection policy also enables you to choose how many snapshots and backups to retain in the schedule. Automating your backups and snapshots with a protection policy is the best way to ensure each app is protected according to the needs of your organization.
 
 CAUTION: _You can't be fully protected until you have a recent backup_. This is important because backups are stored in an object store away from the persistent volumes. If a failure or accident wipes out the cluster and its associated persistent storage, then you need a backup to recover. A snapshot would not enable you to recover.
 
@@ -30,25 +30,22 @@ A _clone_ is an exact duplicate of an app, its configuration, and its persistent
 
 You can use the following example workflow to get started protecting your apps.
 
-////
 ==== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png[One] Back up all apps
 
 [role="quick-margin-para"]
 Create a manual https://docs.netapp.com/us-en/astra-control-center/use/protect-apps.html#create-a-backup[backup^] of all apps, so your apps are immediately protected.
 
-////
-
-==== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png[One] Configure a protection policy
+==== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png[Two] Configure a protection policy for each app
 
 [role="quick-margin-para"]
-https://docs.netapp.com/us-en/astra-control-center/use/protect-apps.html#configure-a-protection-policy[Configure a protection policy^] to automate future backups and snapshots. As an example, you can start with weekly backups of each app, and daily snapshots, with one month retention for both. Configuring a protection policy is strongly recommended over manual backups and snapshots.
+https://docs.netapp.com/us-en/astra-control-center/use/protect-apps.html#configure-a-protection-policy[Configure a protection policy^] for each app to automate future backups and snapshots. As an example, you can start with weekly backups and daily snapshots, with one month retention for both. Automating backups and snapshots with a protection policy is strongly recommended over manual backups and snapshots.
 
-==== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png[Two] Optional: Adjust the protection policy as needed
+==== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png[Three] Optional: Adjust the protection policies as needed
 
 [role="quick-margin-para"]
-As apps and their usage patterns change, adjust the protection policy as needed to provide the best protection.
+As apps and their usage patterns change, adjust the protection policies as needed to provide the best protection.
 
-==== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png[Three] In case of a disaster, restore your apps
+==== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png[Four] In case of a disaster, restore your apps
 
 [role="quick-margin-para"]
 If data loss occurs, link:restore-apps.html[restore^] the latest backup first for each app, followed by the latest snapshot (if available).
