@@ -10,7 +10,7 @@ summary: Learn about the available types of data protection in Astra Control Cen
 :icons: font
 :imagesdir: ../media/use/
 
-See the data protection link:../concepts/data-protection.html[concepts^] to learn about the available types of data protection in Astra Control Center. Keep reading to learn about an example workflow for protecting your apps.
+Learn about an example workflow for making sure your apps are protected against data loss. See the data protection link:../concepts/data-protection.html[concepts^] to learn about the available types of data protection in Astra Control Center.
 
 == Example app protection workflow
 
