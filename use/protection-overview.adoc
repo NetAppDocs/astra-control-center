@@ -10,7 +10,7 @@ summary: Learn about the available types of data protection in Astra Control Cen
 :icons: font
 :imagesdir: ../media/use/
 
-Learn about the available types of data protection in Astra Control Center, and how best to use them to protect your apps. 
+Learn about the available types of data protection in Astra Control Center, and how best to use them to protect your apps.
 
 == Snapshots, backups, and protection policies
 
@@ -33,7 +33,7 @@ You can use the following example workflow to get started protecting your apps.
 ==== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png[One] Back up all apps
 
 [role="quick-margin-para"]
-Create a manual https://docs.netapp.com/us-en/astra-control-center/use/protect-apps.html#create-a-backup[backup^] of all apps, so your apps are immediately protected.
+Create a manual https://docs.netapp.com/us-en/astra-control-center/use/protect-apps.html#create-a-backup[backup^] of all apps, so that your apps are immediately protected.
 
 ==== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png[Two] Configure a protection policy for each app
 
