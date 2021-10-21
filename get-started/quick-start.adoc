@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar
 permalink: get-started/quick-start.html
-keywords: get started, quick start, astra, astra control, deploy, deployment, kubernetes
-summary: Get started with Astra in a few steps.
+keywords: how to get started with astra, astra quick start, astra installation, how to install astra control, deploy, deployment, kubernetes
+summary: Get started with Astra Control in a few steps.
 ---
 
 = Quick start for Astra Control Center
