@@ -94,6 +94,8 @@ homepage:
       links:
         - title: Slack channel
           url: https://netapppub.slack.com/#astra
+        - title: Astra control blog
+          url: https://cloud.netapp.com/blog/topic/astra
         - title: NetApp Community
           url: https://community.netapp.com/
         - title: Kubernetes Hub

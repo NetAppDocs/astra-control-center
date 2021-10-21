@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: get-started/setup_overview.html
-keywords: set up, setup, Astra Control Center, add license, add cluster, import storage, add bucket
+keywords: set up astra control, setup astra control, setting up Astra Control Center, astra control license, add cluster, import storage, add bucket
 summary: After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up a license, add clusters, manage storage, and add buckets.
 ---
 

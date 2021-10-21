@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: get-started/install_acc.html
-keywords: Astra, Astra control center, install, deploy, download
+keywords: astra installation, install astra control center, how to install astra control, deploy, download from netapp support
 summary: To install Astra Control Center after addressing some environmental prerequisites, you'll download the bundle and install following the steps described.
 ---
 
