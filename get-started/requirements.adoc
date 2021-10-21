@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar
 permalink: get-started/requirements.html
-keywords: kubernetes cluster, cluster requirements, version requirements, supported versions, apps, supported apps, mariadb, mysql, postgres, kubernetes version, ubuntu, image type, networking
-summary: Get started by verifying support for your Kubernetes clusters, apps, and web browser.
+keywords: what are astra kubernetes requirements, astra control requirements, astra supported versions, apps, supported apps, mariadb, mysql, postgres, kubernetes version, ubuntu, image type, networking
+summary: Get started with Astra Control Center by verifying support for your Kubernetes clusters, apps, and web browser.
 ---
 
 = Astra Control Center requirements
