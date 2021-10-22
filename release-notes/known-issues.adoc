@@ -207,6 +207,18 @@ traefikservices.traefik.containo.us           2021-06-23T23:29:15Z
 kubectl delete crd ingressroutes.traefik.containo.us ingressroutetcps.traefik.containo.us ingressrouteudps.traefik.containo.us middlewares.traefik.containo.us serverstransports.traefik.containo.us tlsoptions.traefik.containo.us tlsstores.traefik.containo.us traefikservices.traefik.containo.us
 ----
 
+== ASUP collection stuck in a generating or uploading state
+//DOC-3813/ASTRACTL-12325
+If an ASUP pod is killed or restarted, an ASUP collection might become stuck in a generating or uploading state. Perform the following link:https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control REST API] call to initiate manual collection again:
+
+[cols="25,75"*,options="header"]
+|===
+|HTTP method
+|Path
+|GET
+|/accounts/{accountID}/core/v1/asups
+|===
+
 == Find more information
 
 * link:../release-notes/known-limitations.html[Known limitations for this release]
