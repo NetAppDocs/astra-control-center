@@ -110,7 +110,7 @@ Astra Control Center uses a service of the type "LoadBalancer" and requires the 
 The cluster that hosts Astra Control Center communicates using the following TCP ports. You should ensure that these ports are allowed through any firewalls, and configure firewalls to allow any HTTPS egress traffic originating from the Astra network. Some ports require connectivity both ways between the cluster hosting Astra Control Center and each managed cluster (noted where applicable).
 
 |===
-|Product |Port |Protocol |Direction |Purpose
+|Product |Destination port |Protocol |Direction |Purpose
 
 |Astra Control Center
 |443
@@ -128,17 +128,12 @@ a|
 
 |Metrics data to metrics consumer - ensure each managed cluster can access this port on the cluster hosting Astra Control Center
 
-|Trident
-|34571
+|Astra Control Center
+|443
 |HTTPS
-|Ingress
-|Node pod communication
+|Egress
+|Data to Cloud Insights (cloudinsights.netapp.com)
 
-|Trident
-|9220
-|HTTP
-|Ingress
-|Metrics endpoint
 |===
 
 ////
