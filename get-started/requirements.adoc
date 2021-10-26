@@ -132,7 +132,19 @@ a|
 |443
 |HTTPS
 |Egress
-|Data to Cloud Insights (cloudinsights.netapp.com)
+|Cloud Insights communication (cloudinsights.netapp.com)
+
+|Astra Control Center
+|443
+|HTTPS
+|Egress
+|Amazon S3 storage bucket provider (https://my-bucket.s3.us-west-2.amazonaws.com/)
+
+|Astra Control Center
+|443
+|HTTPS
+|Egress
+|NetApp ActiveIQ (activeiq.solidfire.com)
 
 |===
 
