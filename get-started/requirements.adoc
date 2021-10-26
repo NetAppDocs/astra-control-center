@@ -110,41 +110,43 @@ Astra Control Center uses a service of the type "LoadBalancer" and requires the 
 The cluster that hosts Astra Control Center communicates using the following TCP ports. You should ensure that these ports are allowed through any firewalls, and configure firewalls to allow any HTTPS egress traffic originating from the Astra network. Some ports require connectivity both ways between the cluster hosting Astra Control Center and each managed cluster (noted where applicable).
 
 |===
-|Product |Destination port |Protocol |Direction |Purpose
+|Source |Destination |Port |Protocol |Purpose
 
+|Client PC
 |Astra Control Center
 |443
 |HTTPS
-|Ingress
 |UI / API access - Ensure this port is open both ways between the cluster hosting Astra Control Center and each managed cluster
 
-|Astra Control Center
+|Metrics consumer
+|Astra Control Center worker node
 |9090
 |HTTPS
-a|
+|Metrics data communication - ensure each managed cluster can access this port on the cluster hosting Astra Control Center
 
-* Ingress (to cluster hosting Astra Control Center)
-* Egress (random port from the node IP address of each worker node of each managed cluster)
-
-|Metrics data to metrics consumer - ensure each managed cluster can access this port on the cluster hosting Astra Control Center
+|Astra Control Center worker node
+|Metrics consumer
+|9090
+|HTTPS
+|Metrics data communication
 
 |Astra Control Center
+|Hosted Cloud Insights service (https://cloudinsights.netapp.com)
 |443
 |HTTPS
-|Egress
-|Cloud Insights communication (cloudinsights.netapp.com)
+|Cloud Insights communication
 
 |Astra Control Center
-|443
-|HTTPS
-|Egress
 |Amazon S3 storage bucket provider (https://my-bucket.s3.us-west-2.amazonaws.com/)
-
-|Astra Control Center
 |443
 |HTTPS
-|Egress
-|NetApp ActiveIQ (activeiq.solidfire.com)
+|Amazon S3 storage communication
+
+|Astra Control Center
+|NetApp ActiveIQ (https://activeiq.solidfire.com)
+|443
+|HTTPS
+|NetApp ActiveIQ communication
 
 |===
 
