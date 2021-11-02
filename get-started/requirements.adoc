@@ -14,7 +14,20 @@ Get started by verifying support for your Kubernetes clusters, apps, licenses, a
 
 == Kubernetes cluster general requirements
 
-A Kubernetes cluster must meet the following general requirements so you can discover and manage it from Astra Control Center.
+Astra Control Center requires one of the following types of host clusters:
+
+* Red Hat OpenShift Container Platform 4.6.8 or 4.7 (4.8 is not supported)
+* NetApp Rancher 2.5
+* Kubernetes 1.21
+
+The cluster must meet the following general requirements so you can discover and manage it from Astra Control Center.
+
+* At least 300GB of available ONTAP storage capacity
+* 3 controller nodes with 4 CPU cores, 16GB RAM, and 120GB of available storage each
+* 3 worker nodes with at least 8 CPU cores, 16GB RAM, and 50GB of available storage each
+//* Kubernetes version 1.19 or 1.20
+* Service type "LoadBalancer" available for ingress traffic to be sent to services in the OpenShift cluster
+* A method for pointing the FQDN of Astra Control Center to the load balanced IP address
 
 * *Image registry*: You must have an existing private Docker image registry to which you can push Astra Control Center build images. You must have the URL of the image registry where you will upload the images, and you must have tagged the images for the private container registry.
 
@@ -28,24 +41,12 @@ A Kubernetes cluster must meet the following general requirements so you can dis
 If you are planning to manage the Kubernetes cluster from Astra Control Center as well as use the cluster to host the Astra Control Center installation, the cluster has the following additional requirements:
 
 * The most recent version of the Kubernetes https://kubernetes-csi.github.io/docs/snapshot-controller.html[snapshot-controller component^] is installed
-* A Trident https://netapp-trident.readthedocs.io/en/latest/kubernetes/concepts/objects.html?highlight=VolumeSnapshotClass#kubernetes-volumesnapshotclass-objects[volumesnapshotclass object^] has been defined by an administrator
+* A Trident https://docs.netapp.com/us-en/trident/trident-concepts/snapshots.html[volumesnapshotclass object^] has been defined by an administrator
 * A default Kubernetes storage class exists on the cluster
 * At least one storage class is configured to use Trident
 * A method for pointing the FQDN of Astra Control Center to the external IP address of the Astra Control Center service
 
-=== OpenShift clusters
-Astra Control Center requires a Red Hat OpenShift Container Platform 4.6.8 or 4.7 cluster that has Trident storage classes backed by ONTAP 9.5 or newer, with the following attributes:
-
-* At least 300GB of available ONTAP storage capacity
-* 3 controller nodes with 4 CPU cores, 16GB RAM, and 120GB of available storage each
-* 3 worker nodes with at least 8 CPU cores, 16GB RAM, and 50GB of available storage each
-* Kubernetes version 1.19 or 1.20
-* Service type "LoadBalancer" available for ingress traffic to be sent to services in the OpenShift cluster
-* A method for pointing the FQDN of Astra Control Center to the load balanced IP address
-
 Make sure that your cluster meets the minimum requirements and that you follow Kubernetes best practices so that Astra Control Center is highly available in your Kubernetes cluster.
-
-NOTE: OpenShift 4.8 is not supported.
 
 [NOTE]
 ======================
@@ -55,7 +56,7 @@ During app cloning, Astra Control Center needs to allow OpenShift to mount volum
 . `export-policy rule modify -policyname default -ruleindex 1 -anon 65534`
 ======================
 
-NOTE: If you plan to add a second OpenShift 4.6 or 4.7 cluster as a managed compute resource, you need to ensure that the Trident Volume Snapshot feature is enabled. See the official Trident https://netapp-trident.readthedocs.io/en/stable-v21.04/kubernetes/operations/tasks/volumes/snapshots.html?highlight=volumesnapshot#on-demand-volume-snapshots[instructions^] to enable and test Volume Snapshots with Trident.
+NOTE: If you plan to add a second OpenShift 4.6 or 4.7 cluster as a managed compute resource, you need to ensure that the Trident Volume Snapshot feature is enabled. See the official Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Trident.
 
 ////
 === Non-OpenShift Kubernetes clusters
