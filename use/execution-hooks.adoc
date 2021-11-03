@@ -11,7 +11,6 @@ summary: Creating a custom app lets you group elements of your Kubernetes cluste
 :imagesdir: ../media/use/
 
 [.lead]
-Stub topic for execution hooks feature in ACC.
 
 An execution hook is a custom script that you can run before or after a snapshot of a managed app. For example, if you have a database app, you can use execution hooks to pause all database transactions before a snapshot, and resume transactions after the snapshot is complete. This ensures application-consistent snapshots.
 
