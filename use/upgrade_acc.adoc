@@ -32,6 +32,7 @@ oc get clusteroperators
 ----
 oc get apiservices
 ----
+* Log out of your Astra Control Center.
 
 .About this task
 The Astra Control Center upgrade process guides you through the following high-level steps:
@@ -40,6 +41,8 @@ The Astra Control Center upgrade process guides you through the following high-l
 * <<Unpack the bundle and change directory>>
 * <<Copy the binary and push images to your local registry>>
 * <<Install the updated monitoring operator>>
+* <<Upgrade Astra Control Center>>
+* <<Verify system status>>
 
 
 NOTE: Podman commands can be used in place of Docker commands if you are using Red Hat’s Podman repository.
@@ -188,77 +191,103 @@ service/acc-operator-controller-manager-metrics-service created
 deployment.apps/acc-operator-controller-manager created
 ----
 
+== Upgrade Astra Control Center
+
+. Edit the Astra Control Center custom resource (CR) file (`astra_control_center_min.yaml`) and change the Astra version (`astraVersion`) number to the latest:
++
+----
+kubectl edit acc -n [netapp-acc or custom namespace] astra
+----
+
+. Verify that the pods terminate and become available again:
++
+----
+watch kubectl get po -n [netapp-acc or custom namespace]
+----
+
+. Verify that the Astra status conditions indicate that the upgrade is complete and ready:
++
+----
+kubectl get -o yaml -n [netapp-acc or custom namespace] astracontrolcenters.astra.netapp.io astra
+----
+
+Response:
++
+----
+conditions:
+  - lastTransitionTime: "2021-10-25T18:49:26Z"
+    message: Astra is deployed
+    reason: Complete
+    status: "True"
+    type: Ready
+  - lastTransitionTime: "2021-10-25T18:49:26Z"
+    message: Upgrading succeeded.
+    reason: Complete
+    status: "False"
+    type: Upgrading
+----
+
+== Verify system status
+
+. Log in to Astra Control Center.
+. Verify that all your managed clusters and apps are still present and protected.
+
+== Upgrade third-party services
+Third-party services, such as Traefik and Cert-manager, are not upgraded during earlier upgrade steps and must be upgraded separately. The following is the recommended sequence.
+
+. Setup a `acc-helm-repo` `to use to upgrade Traefik and Cert-manager:
+.. Find the `enterprise-helm-repo` that is loaded to your local Docker cache:
++
+----
+docker images enterprise-helm-repo
+----
++
+Response:
++
+----
+REPOSITORY             TAG         IMAGE ID       CREATED        SIZE
+enterprise-helm-repo   21.10.218   7a182d6b30f3   20 hours ago   464MB
+----
+
+.. Start a container using the tag from the previous step:
++
+----
+docker run -dp 8082:8080 enterprise-helm-repo:21.10.218
+----
++
+Response:
++
+----
+940436e67fa86d2c4559ac4987b96bb35588313c2c9ddc9cec195651963f08d8
+----
+
+.. Add the Helm repo to your local host repositories:
++
+----
+helm repo add acc-helm-repo http://localhost:8082/
+----
++
+Response:
++
+----
+"acc-helm-repo" has been added to your repositories
+----
+
 ???
-== Update Astra Control Center
+. Update Traefik service using `acc-helm-repo`:
+..
 
-. Edit the Astra Control Center custom resource (CR) file (`astra_control_center_min.yaml`):
-+
-----
-vim astra_control_center_min.yaml
-----
-+
-NOTE: If additional customizations are required for your environment, you can use `astra_control_center.yaml` as an alternative CR. `astra_control_center_min.yaml` is the default CR and is suitable for most installations.
-+
-NOTE: Properties configured by the CR cannot be changed after initial Astra Control Center deployment.
 
-.. Change `[your_registry_path]` to the registry path where you pushed the images in the previous step.
-.. Change the `accountName` string to the name you want to associate with the account.
-.. Change the `astraAddress` string to the FQDN you want to use in your browser to access Astra. Do not use `http://` or `https://` in the address. Copy this FQDN for use in a <<Log in to the Astra Control Center UI,later step>>.
-.. Change the `email` string to the default initial administrator address. Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>.
-.. Change `enrolled` for autoSupport to `false` for sites without internet connectivity or retain `true` for connected sites.
-.. (Optional) Add a first name `firstName` and last name `lastName` of the user associated with the account. You can perform this step now or later within the UI.
-.. (Optional) Change the `storageClass` value to another Trident storageClass resource if required by your installation.
-.. If you are not using a registry that requires authorization, delete the `secret` line.
 
-+
-[subs=+quotes]
-----
-apiVersion: astra.netapp.io/v1
-kind: AstraControlCenter
-metadata:
-  name: astra
-spec:
-  *accountName: "Example"*
-  astraVersion: "ASTRA_VERSION"
-  *astraAddress: "astra.example.com"*
-  autoSupport:
-    *enrolled: true*
-  *email: "[admin@example.com]"*
-  *firstName: "SRE"*
-  *lastName: "Admin"*
-  imageRegistry:
-    *name: "[your_registry_path]"*
-    *secret: "astra-registry-cred"*
-    *storageClass: "ontap-gold"*
-----
 
-. If you didn't already do so in a previous step, create the `netapp-acc` (or custom) namespace:
-+
-----
-kubectl create ns [netapp-acc or custom]
-----
-+
-Sample response:
-+
-----
-namespace/netapp-acc created
-----
 
-. Run the following patch to correct link:https://docs.netapp.com/us-en/astra-control-center/release-notes/known-issues.html#Incorrect-ClusterRoleBinding-created-by-Astra-Control-Center-CRD-during-installation[cluster role binding].
 
-. Install Astra Control Center in the `netapp-acc` (or your custom) namespace:
-+
-----
-kubectl apply -f astra_control_center_min.yaml -n [netapp-acc or custom]
-----
-+
-Sample response:
-+
-----
-astracontrolcenter.astra.netapp.io/astra created
-----
 
-. Verify that all system components installed successfully.
+
+
+
+
+. Verify that all system components upgraded successfully.
 +
 ----
 kubectl get pods -n [netapp-acc or custom]
@@ -327,66 +356,6 @@ traefik-769d846f9b-l9n4k                     1/1     Running   0          67s
 trident-svc-8649c8bfc5-pdj79                 1/1     Running   0          2m57s
 vault-controller-745879f98b-49c5v            1/1     Running   0          4m51s
 ----
-
-. (Optional) To ensure the installation is completed, you can watch the `acc-operator` logs using the following command.
-+
-----
-kubectl logs deploy/acc-operator-controller-manager -n netapp-acc-operator -c manager -f
-----
-
-. When all the pods are running, verify installation success by retrieving the AstraControlCenter instance installed by the ACC Operator.
-+
-----
-kubectl get acc -o yaml -n netapp-acc
-----
-
-. Check the `status.deploymentState` field in the response for the `Deployed` value. If deployment was unsuccessful, an error message appears instead.
-+
-NOTE: You will use the `uuid` in the next step.
-
-+
-[subs=+quotes]
-----
-apiVersion: v1
-items:
-- apiVersion: astra.netapp.io/v1
-  kind: AstraControlCenter
-  metadata:
-    creationTimestamp: "2021-07-28T21:36:49Z"
-    finalizers:
-    - astracontrolcenter.netapp.io/finalizer
-   generation: 1
-    name: astra
-    namespace: netapp-acc
-    resourceVersion: "27797604"
-    selfLink: /apis/astra.netapp.io/v1/namespaces/netapp-acc/astracontrolcenters/astra
-    uid: 61cd8b65-047b-431a-ba35-510afcb845f1
-  spec:
-    accountName: Example
-    astraAddress: astra.example.com
-    astraResourcesScaler: "Off"
-    astraVersion: 21.08.52
-    autoSupport:
-      enrolled: false
-    email: admin@example.com
-    firstName: SRE
-    lastName: Admin
-    imageRegistry:
-      name: registry_name/astra
-  status:
-    certManager: deploy
-    *deploymentState: Deployed*
-    observedGeneration: 1
-    observedVersion: 21.08.52
-    postInstall: Complete
-    *uuid: c49008a5-4ef1-4c5d-a53e-830daf994116*
-kind: List
-metadata:
-  resourceVersion: ""
-  selfLink: ""
-----
-
-. To get the one-time password you will use when you log in to Astra Control Center, copy the `status.uuid` value from the response in the previous step. The password is `ACC-` followed by the UUID value (`ACC-[UUID]` or, in this example, `ACC-c49008a5-4ef1-4c5d-a53e-830daf994116`).
 
 == Log in to the Astra Control Center UI
 
