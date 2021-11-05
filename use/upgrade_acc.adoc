@@ -10,13 +10,6 @@ summary: To upgrade Astra Control Center, you'll download the bundle and upgrade
 :icons: font
 :imagesdir: ../media/get-started/
 
-To upgrade Astra Control Center, do the following steps:
-
-* <<Upgrade Astra Control Center>>
-* <<Log in to the Astra Control Center UI>>
-
-== Upgrade Astra Control Center
-
 To upgrade Astra Control Center, download the installation bundle from the NetApp Support Site and perform a series a commands to upgrade the Astra Control Center Operator and Astra Control Center in your environment. You can use this procedure to upgrade Astra Control Center in internet-connected or air-gapped environments.
 
 .What you'll need
@@ -39,11 +32,12 @@ The Astra Control Center upgrade process guides you through the following high-l
 
 * <<Download the Astra Control Center bundle>>
 * <<Unpack the bundle and change directory>>
-* <<Copy the binary and push images to your local registry>>
+* <<Add the images to your local registry>>
 * <<Install the updated monitoring operator>>
 * <<Upgrade Astra Control Center>>
 * <<Verify system status>>
-
+* <<Upgrade third-party services>>
+* <<Edit and apply updates to Astra Control Center YAML>>
 
 NOTE: Podman commands can be used in place of Docker commands if you are using Red Hat’s Podman repository.
 
@@ -85,7 +79,6 @@ docker login [your_registry_path]
 .. Load the images into Docker.
 .. Tag the images.
 [[substep_image_local_registry_push]].. Push the images to your local registry.
-
 +
 ----
 export REGISTRY=[your_registry_path]
@@ -105,7 +98,7 @@ done
 . Delete the existing `netapp-acc-operator` namespace. This ensures that the previously installed monitoring operator does not run.
 +
 ----
-~ kubectl delete namespace netapp-acc-operator
+kubectl delete namespace netapp-acc-operator
 ----
 
 . Edit the Astra Control Center operator deployment yaml (`astra_control_center_operator_deploy.yaml`) to refer to your local registry and secret.
@@ -120,7 +113,7 @@ imagePullSecrets:
 - name: astra-registry-cred
 ----
 
-.. Change `[your_registry_path]` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<substep_image_local_registry_push,previous step>>v.
+.. Change `[your_registry_path]` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<substep_image_local_registry_push,previous step>>.
 .. Change `[your_registry_path]` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in a <<substep_image_local_registry_push,previous step>>.
 
 +
@@ -210,7 +203,7 @@ watch kubectl get po -n [netapp-acc or custom namespace]
 ----
 kubectl get -o yaml -n [netapp-acc or custom namespace] astracontrolcenters.astra.netapp.io astra
 ----
-
++
 Response:
 +
 ----
@@ -233,10 +226,15 @@ conditions:
 . Verify that all your managed clusters and apps are still present and protected.
 
 == Upgrade third-party services
-Third-party services, such as Traefik and Cert-manager, are not upgraded during earlier upgrade steps and must be upgraded separately. The following is the recommended sequence.
+Third-party services, such as Traefik and Cert-manager, are not upgraded during earlier upgrade steps and must be upgraded separately. The following is the recommended sequence:
 
-. Setup a `acc-helm-repo` `to use to upgrade Traefik and Cert-manager:
-.. Find the `enterprise-helm-repo` that is loaded to your local Docker cache:
+. <<Set up acc-helm-repo to upgrade Traefik and Cert-manager>>
+. <<Update Traefik service using acc-helm-repo>>
+. <<Update the Cert-manager service>>
+
+== Set up acc-helm-repo to upgrade Traefik and Cert-manager
+
+. Find the `enterprise-helm-repo` that is loaded to your local Docker cache:
 +
 ----
 docker images enterprise-helm-repo
@@ -249,7 +247,7 @@ REPOSITORY             TAG         IMAGE ID       CREATED        SIZE
 enterprise-helm-repo   21.10.218   7a182d6b30f3   20 hours ago   464MB
 ----
 
-.. Start a container using the tag from the previous step:
+. Start a container using the tag from the previous step:
 +
 ----
 docker run -dp 8082:8080 enterprise-helm-repo:21.10.218
@@ -261,7 +259,7 @@ Response:
 940436e67fa86d2c4559ac4987b96bb35588313c2c9ddc9cec195651963f08d8
 ----
 
-.. Add the Helm repo to your local host repositories:
+. Add the Helm repo to your local host repositories:
 +
 ----
 helm repo add acc-helm-repo http://localhost:8082/
@@ -273,19 +271,105 @@ Response:
 "acc-helm-repo" has been added to your repositories
 ----
 
-???
-. Update Traefik service using `acc-helm-repo`:
-..
+== Update Traefik service using acc-helm-repo
 
+NOTE: You must already have set up acc-helm-repo using the steps above for the following procedure to work.
 
+. If you are installing from an internet-connected environment, download the Traefik bundle using a secure, file-transfer tool, such as GNU wget:
++
+----
+ wget http://localhost:8082/traefik-X.X.X.tgz
+----
 
+. Extract the images:
++
+----
+tar -vxzf traefik-X.X.X.tgz
+----
 
+. Apply the Traefik CRDs:
++
+----
+kubectl apply -f ./traefik/charts/traefik/crds/
+----
 
+. Find the Helm chart version to use with your upgraded Traefik:
++
+----
+helm search repo acc-helm-repo/traefik
+----
++
+Response:
++
+----
+NAME                                    CHART VERSION   APP VERSION DESCRIPTION
+local-temp-repo/traefik                 X.X.X           X.X.X       Helm chart for Traefik Ingress controller
+local-temp-repo/traefik-ingressroutes   X.X.X
+----
 
+. Upgrade your Traefik configuration:
++
+----
+helm upgrade --version X.X.X  --namespace pcloud traefik acc-helm-repo/traefik
+----
++
+Response:
++
+----
+Release "traefik" has been upgraded. Happy Helming!
+NAME: traefik
+LAST DEPLOYED: Mon Oct 25 22:53:19 2021
+NAMESPACE: pcloud
+STATUS: deployed
+REVISION: 2
+TEST SUITE: None
+----
 
+== Update the Cert-manager service
 
+NOTE: You must already have completed the Traefik upgrade and added acc-helm-repo in Helm for the following procedure to work.
 
+. Apply the Certs-manager CRDs:
++
+----
+kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/vX.X.X/cert-manager.crds.yaml
+----
++
+Response:
++
+----
+Warning: resource customresourcedefinitions/certificaterequests.cert-manager.io is missing the kubectl.kubernetes.io/last-applied-configuration annotation which is required by kubectl apply. kubectl apply should only be used on resources created declaratively by either kubectl create --save-config or kubectl apply. The missing annotation will be patched automatically.
+customresourcedefinition.apiextensions.k8s.io/certificaterequests.cert-manager.io configured
+Warning: resource customresourcedefinitions/certificates.cert-manager.io is missing the kubectl.kubernetes.io/last-applied-configuration annotation which is required by kubectl apply. kubectl apply should only be used on resources created declaratively by either kubectl create --save-config or kubectl apply. The missing annotation will be patched automatically.
+customresourcedefinition.apiextensions.k8s.io/certificates.cert-manager.io configured
+Warning: resource customresourcedefinitions/challenges.acme.cert-manager.io is missing the kubectl.kubernetes.io/last-applied-configuration annotation which is required by kubectl apply. kubectl apply should only be used on resources created declaratively by either kubectl create --save-config or kubectl apply. The missing annotation will be patched automatically.
+customresourcedefinition.apiextensions.k8s.io/challenges.acme.cert-manager.io configured
+Warning: resource customresourcedefinitions/clusterissuers.cert-manager.io is missing the kubectl.kubernetes.io/last-applied-configuration annotation which is required by kubectl apply. kubectl apply should only be used on resources created declaratively by either kubectl create --save-config or kubectl apply. The missing annotation will be patched automatically.
+customresourcedefinition.apiextensions.k8s.io/clusterissuers.cert-manager.io configured
+Warning: resource customresourcedefinitions/issuers.cert-manager.io is missing the kubectl.kubernetes.io/last-applied-configuration annotation which is required by kubectl apply. kubectl apply should only be used on resources created declaratively by either kubectl create --save-config or kubectl apply. The missing annotation will be patched automatically.
+customresourcedefinition.apiextensions.k8s.io/issuers.cert-manager.io configured
+Warning: resource customresourcedefinitions/orders.acme.cert-manager.io is missing the kubectl.kubernetes.io/last-applied-configuration annotation which is required by kubectl apply. kubectl apply should only be used on resources created declaratively by either kubectl create --save-config or kubectl apply. The missing annotation will be patched automatically.
+customresourcedefinition.apiextensions.k8s.io/orders.acme.cert-manager.io configured
+----
 
+. Upgrade your Cert-manager configuration:
++
+----
+helm upgrade  --version X.X.X --namespace pcloud cert-manager acc-helm-repo/cert-manager
+----
++
+Response:
++
+----
+Release "cert-manager" has been upgraded. Happy Helming!
+Release "cert-manager" has been upgraded. Happy Helming!
+NAME: cert-manager
+LAST DEPLOYED: Thu Oct 28 15:26:39 2021
+NAMESPACE: pcloud
+STATUS: deployed
+REVISION: 2
+TEST SUITE: Non
+----
 
 . Verify that all system components upgraded successfully.
 +
@@ -293,7 +377,7 @@ Response:
 kubectl get pods -n [netapp-acc or custom]
 ----
 +
-Each pod should have a status of `Running`. It may take several minutes before the system pods are deployed.
+Each pod should have a status of `Running` and `Age` that is recent. It may take several minutes before the system pods are deployed.
 +
 Sample response:
 +
@@ -357,39 +441,57 @@ trident-svc-8649c8bfc5-pdj79                 1/1     Running   0          2m57s
 vault-controller-745879f98b-49c5v            1/1     Running   0          4m51s
 ----
 
-== Log in to the Astra Control Center UI
+== Edit and apply updates to Astra Control Center YAML
 
-After installing ACC, you will change the password for the default administrator and log in to the ACC UI dashboard.
-
-.Steps
-. In a browser, enter the FQDN you used in the `astraAddress` in the  `astra_control_center_min.yaml` CR when <<Install Astra Control Center,you installed ACC>>.
-. Accept the self-signed certificates when prompted.
-+
-NOTE: You can create a custom certificate after login.
-
-. At the Astra Control Center login page, enter the value you used for `email` in `astra_control_center_min.yaml` CR when <<Install Astra Control Center,you installed ACC>>, followed by the one-time password (`ACC-[UUID]`).
-+
-NOTE: If you enter an incorrect password three times, the admin account will be locked for 15 minutes.
-
-. Select *Login*.
-. Change the password when prompted.
-+
-NOTE: If this is your first login and you forget the password and no other administrative user accounts have yet been created, contact NetApp Support for password recovery assistance.
-
-. (Optional) Remove the existing self-signed TLS certificate and replace it with a link:../get-started/add-custom-tls-certificate.html[custom TLS certificate signed by a Certificate Authority (CA)].
-
-== Troubleshoot the installation
-
-If any of the services are in `Error` status, you can inspect the logs. Look for API response codes in the 400 to 500 range. Those indicate the place where a failure happened.
-
-.Steps
-
-. To inspect the Astra Control Center operator logs, enter the following:
+. When all the pods are running, edit the `astra_control_center.yaml` or `astra_control_center_min.yaml` (depending on the YAML you used during installation):
 +
 ----
-kubectl logs --follow -n netapp-acc-operator $(kubectl get pods -n netapp-acc-operator -o name)  -c manager
+vim astra_control_center_operator_deploy.yaml
 ----
 
-== What's next
+. In the response, check the `deploymentState` field in `status` for the `Deployed` value. If deployment was unsuccessful, an error message appears instead.
+. Change the Astra version (`astraVersion`) to the version number of the upgrade.
+. (Optional) Change the Astra address (`astraAddress`) if you need to change the IP/FQDN.
+. (Optional) Change the auto support boolean (`autoSupport`) if you need to send or restart sending data to auto support.
+. (Optional) Update the image registry name (`imageRegistry`) where images are found.
 
-Complete the deployment by performing link:setup_overview.html[setup tasks].
+[subs=+quotes]
+----
+apiVersion: v1
+items:
+- apiVersion: astra.netapp.io/v1
+  kind: AstraControlCenter
+  metadata:
+    creationTimestamp: "2021-12-19T21:36:49Z"
+    finalizers:
+    - astracontrolcenter.netapp.io/finalizer
+   generation: 1
+    name: astra
+    namespace: netapp-acc
+    resourceVersion: "27797604"
+    selfLink: /apis/astra.netapp.io/v1/namespaces/netapp-acc/astracontrolcenters/astra
+    uid: 61cd8b65-047b-431a-ba35-510afcb845f1
+  spec:
+    accountName: Example
+    *astraAddress: astra.example.com*
+    astraResourcesScaler: "Off"
+    *astraVersion: 21.12.XX*
+    *autoSupport:*
+      *enrolled: false*
+    email: admin@example.com
+    firstName: SRE
+    lastName: Admin
+    imageRegistry:
+      name: registry_name/astra
+  status:
+    certManager: deploy
+    *deploymentState: Deployed*
+    observedGeneration: 1
+    observedVersion: 21.08.52
+    postInstall: Complete
+    uuid: c49008a5-4ef1-4c5d-a53e-830daf994116
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""
+----

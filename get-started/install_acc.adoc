@@ -369,7 +369,7 @@ vault-controller-745879f98b-49c5v            1/1     Running   0          4m51s
 kubectl logs deploy/acc-operator-controller-manager -n netapp-acc-operator -c manager -f
 ----
 
-. When all the pods are running, verify installation success by retrieving the AstraControlCenter instance installed by the ACC Operator.
+. When all the pods are running, verify installation success by retrieving the AstraControlCenter instance installed by the Astra Control Center Operator.
 +
 ----
 kubectl get acc -o yaml -n [netapp-acc or custom namespace]
