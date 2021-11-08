@@ -215,7 +215,7 @@ If an ASUP pod is killed or restarted, an ASUP collection might become stuck in 
 |===
 |HTTP method
 |Path
-|GET
+|POST
 |/accounts/{accountID}/core/v1/asups
 |===
 
