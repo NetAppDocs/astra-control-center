@@ -24,10 +24,12 @@ The cluster must meet the following general requirements so you can discover and
 
 * At least 300GB of available ONTAP storage capacity
 * 3 controller nodes with 4 CPU cores, 16GB RAM, and 120GB of available storage each
-* 3 worker nodes with at least 8 CPU cores, 16GB RAM, and 50GB of available storage each
+* 3 worker nodes with at least 12 CPU cores, 32GB RAM, and 50GB of available storage each
 //* Kubernetes version 1.19 or 1.20
 * Service type "LoadBalancer" available for ingress traffic to be sent to services in the OpenShift cluster
 * A method for pointing the FQDN of Astra Control Center to the load balanced IP address
+
+NOTE: These requirements assume that Astra Control Center is the only application running on the OpenShift cluster. If the cluster is running additional applications, adjust these minimum requirements accordingly. 
 
 * *Image registry*: You must have an existing private Docker image registry to which you can push Astra Control Center build images. You must have the URL of the image registry where you will upload the images, and you must have tagged the images for the private container registry.
 
