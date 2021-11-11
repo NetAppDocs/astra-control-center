@@ -155,7 +155,7 @@ imagePullSecrets:
 - name: astra-registry-cred
 ----
 
-.. Change `[Docker_registry_path]` for the `kube-rbac-prox` image to the registry path where you pushed the images in a previous step.
+.. Change `[Docker_registry_path]` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a previous step.
 .. Change `[Docker_registry_path]` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in a previous step.
 
 +
