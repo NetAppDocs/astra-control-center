@@ -37,7 +37,6 @@ The Astra Control Center upgrade process guides you through the following high-l
 * <<Upgrade Astra Control Center>>
 * <<Verify system status>>
 * <<Upgrade third-party services>>
-* <<Edit and apply updates to Astra Control Center YAML>>
 
 NOTE: Podman commands can be used in place of Docker commands if you are using Red Hat’s Podman repository.
 
@@ -95,17 +94,12 @@ done
 
 == Install the updated monitoring operator
 
-. Delete the existing `netapp-acc-operator` namespace. This ensures that the previously installed monitoring operator does not run.
-+
-----
-kubectl delete namespace netapp-acc-operator
-----
-
 . Edit the Astra Control Center operator deployment yaml (`astra_control_center_operator_deploy.yaml`) to refer to your local registry and secret.
 +
 ----
 vim astra_control_center_operator_deploy.yaml
 ----
+
 .. If you use a registry that requires authentication, replace the default line of `imagePullSecrets: []` with the following:
 +
 ----
@@ -186,11 +180,13 @@ deployment.apps/acc-operator-controller-manager created
 
 == Upgrade Astra Control Center
 
-. Edit the Astra Control Center custom resource (CR) file (`astra_control_center_min.yaml`) and change the Astra version (`astraVersion`) number to the latest:
+. Edit the Astra Control Center custom resource (CR) and change the Astra version (`astraVersion`) number to the latest:
 +
 ----
 kubectl edit acc -n [netapp-acc or custom namespace] astra
 ----
++
+NOTE: Changing the Astra version is the only requirement for an Astra Control Center upgrade. Your registry path must match the registry path where you pushed the images in a <<substep_image_local_registry_push,previous step>>.
 
 . Verify that the pods terminate and become available again:
 +
@@ -226,7 +222,7 @@ conditions:
 . Verify that all your managed clusters and apps are still present and protected.
 
 == Upgrade third-party services
-The third-party services Traefik and Cert-manager are not upgraded during earlier upgrade steps and must be upgraded separately. The following is the recommended sequence:
+The third-party services Traefik and Cert-manager are not upgraded during earlier upgrade steps. You can optionally upgrade them using the procedure described here or retain existing service versions if your system requires it. The following is the recommended Traefik and Certs-manager upgrade sequence:
 
 . <<Set up acc-helm-repo to upgrade Traefik and Cert-manager>>
 . <<Update Traefik service using acc-helm-repo>>
@@ -439,59 +435,4 @@ traefik-769d846f9b-c9crt                     1/1     Running   0          83s
 traefik-769d846f9b-l9n4k                     1/1     Running   0          67s
 trident-svc-8649c8bfc5-pdj79                 1/1     Running   0          2m57s
 vault-controller-745879f98b-49c5v            1/1     Running   0          4m51s
-----
-
-== Edit and apply updates to Astra Control Center YAML
-
-. When all the pods are running, edit the `astra_control_center.yaml` or `astra_control_center_min.yaml` (depending on the YAML you used during installation):
-+
-----
-vim astra_control_center_operator_deploy.yaml
-----
-
-.. Check the `deploymentState` field in `status` for the `Deployed` value. If deployment was unsuccessful, an error message appears instead.
-.. Change the Astra version (`astraVersion`) to the version number of the upgrade.
-.. (Optional) Change the Astra address (`astraAddress`) if you need to change the IP/FQDN.
-.. (Optional) Change the auto support boolean (`autoSupport`) if you need to send or restart sending data to auto support.
-.. (Optional) Update the image registry name (`imageRegistry`) where images are found.
-
-[subs=+quotes]
-----
-apiVersion: v1
-items:
-- apiVersion: astra.netapp.io/v1
-  kind: AstraControlCenter
-  metadata:
-    creationTimestamp: "2021-12-19T21:36:49Z"
-    finalizers:
-    - astracontrolcenter.netapp.io/finalizer
-   generation: 1
-    name: astra
-    namespace: netapp-acc
-    resourceVersion: "27797604"
-    selfLink: /apis/astra.netapp.io/v1/namespaces/netapp-acc/astracontrolcenters/astra
-    uid: 61cd8b65-047b-431a-ba35-510afcb845f1
-  spec:
-    accountName: Example
-    *astraAddress: astra.example.com*
-    astraResourcesScaler: "Off"
-    *astraVersion: 21.12.XX*
-    *autoSupport:*
-      *enrolled: false*
-    email: admin@example.com
-    firstName: SRE
-    lastName: Admin
-    *imageRegistry:*
-      *name: registry_name/astra*
-  status:
-    certManager: deploy
-    *deploymentState: Deployed*
-    observedGeneration: 1
-    observedVersion: 21.08.52
-    postInstall: Complete
-    uuid: c49008a5-4ef1-4c5d-a53e-830daf994116
-kind: List
-metadata:
-  resourceVersion: ""
-  selfLink: ""
 ----
