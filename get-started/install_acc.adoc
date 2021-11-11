@@ -70,19 +70,24 @@ cd astra-control-center-[version]
 +
 NOTE: See a sample script for the automatic loading of images below.
 
-.. Log in to your Docker registry:
+.. Log in to your container registry
 +
-----
-docker login [Docker_registry_path]
-----
+Using Docker
+[source,bash]
+docker login [Registry_path]
++
+Using Podman
+[source,bash]
+podman login [Registry_path]
 
-.. Load the images into Docker.
-.. Tag the images.
-.. Push the images to your local registry.
+.. Load the all images from `images/` directory into container storage
+.. Tag the loaded images with the new name, registry name followed by original image name
+.. Push the images to your registry
 
 +
-----
-export REGISTRY=[Docker_registry_path]
+Sample script using Docker
+[source,bash]
+export REGISTRY=[Registry_path]
 for astraImageFile in $(ls images/*.tar) ; do
   # Load to local cache. And store the name of the loaded image trimming the 'Loaded images: '
   astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image: //')
@@ -92,7 +97,19 @@ for astraImageFile in $(ls images/*.tar) ; do
   # Push to the local repo.
   docker push ${REGISTRY}/${astraImage}
 done
-----
++
+Sample script using Podman
+[source,bash]
+export REGISTRY=[Registry_path]
+for astraImageFile in $(ls images/*.tar) ; do
+  # Load to local cache. And store the name of the loaded image trimming the 'Loaded images: '
+  astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image(s): //')
+  astraImage=$(echo ${astraImage} | sed 's!localhost/!!')
+  # Tag with local image repo.
+  podman tag ${astraImage} ${REGISTRY}/${astraImage}
+  # Push to the local repo.
+  podman push ${REGISTRY}/${astraImage}
+done
 
 .  (For registries with auth requirements only) If you use a registry that requires authentication, you need to do the following:
 .. Create the `netapp-acc-operator` namespace:
