@@ -37,7 +37,7 @@ Astra Control is available in two deployment models:
 
 == Supported apps
 
-Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators or cluster-scoped operators.
+//Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators or cluster-scoped operators.
 
 NetApp has validated some apps to ensure the safety and consistency of the snapshots and backups.
 
