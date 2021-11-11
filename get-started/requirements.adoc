@@ -78,7 +78,7 @@ Astra Control Center has the following app management requirements:
 * *Licensing*: You need an Astra Control Center license to manage apps using Astra Control Center.
 * *Helm 3*: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Managing apps deployed with Helm 2 is not supported.
 //* *Operator management*: Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators or cluster-scoped operators.
-* *Operator-deployed apps*: Astra Control Center supports Astra Control Center supports the following apps deployed with namespace-scoped operators:
+* *Operator-deployed apps*: Astra Control Center supports the following apps deployed with namespace-scoped operators:
 ** https://github.com/k8ssandra/cass-operator/tree/v1.7.1[Apache Cassandra^]
 ** https://github.com/jenkinsci/kubernetes-operator[Jenkins CI^]
 ** https://github.com/percona/percona-xtradb-cluster-operator[Percona XtraDB Cluster^]
