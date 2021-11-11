@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar
 permalink: use/execution-hooks.html
-keywords: manage app, custom app, kubernetes, astra control, astra
-summary: Creating a custom app lets you group elements of your Kubernetes cluster into a single app.
+keywords: execution hook, snapshot, hook, kubernetes, astra control, astra
+summary: An execution hook is a custom script that you can run before or after a snapshot of a managed app.
 ---
 
 = Manage app execution hooks
@@ -11,10 +11,15 @@ summary: Creating a custom app lets you group elements of your Kubernetes cluste
 :imagesdir: ../media/use/
 
 [.lead]
-
 An execution hook is a custom script that you can run before or after a snapshot of a managed app. For example, if you have a database app, you can use execution hooks to pause all database transactions before a snapshot, and resume transactions after the snapshot is complete. This ensures application-consistent snapshots.
 
-For validated apps, Astra Control comes with default execution hooks that handle freeze and thaw operations before and after snapshots. You can use these NetApp-provided hooks, or disable them and use your own. You cannot delete or modify NetApp-provided execution hooks.
+For the following validated apps, Astra Control comes with default execution hooks that handle freeze and thaw operations before and after snapshots.
+
+* MariaDB 10.5.9
+* MySQL 8.0.25
+* PostgreSQL 11.12
+
+You can use the NetApp-provided hooks for these apps, or disable them and use your own. You cannot delete or modify NetApp-provided execution hooks.
 
 == Important notes about execution hooks
 Keep the following points in mind when planning execution hooks for your apps.
@@ -23,8 +28,8 @@ Keep the following points in mind when planning execution hooks for your apps.
 * All execution hook failures are soft failures; other hooks and the snapshot are still attempted even if a hook fails. However, when a hook fails, a warning event is recorded in the *Activity* page event log.
 * Any executable script is supported and execution is dependent on support for that script in the container (including interpreted languages such as Python, Ruby, or Go).
 * Script size is limited to 128KB.
-* All create / edit / delete operations use Owner/Admin permissions.
-* Scripts that run with Member and Viewer privileges can view only.
+* All create, edit, and delete operations use Owner/Admin permissions.
+//* Scripts that run with Member and Viewer privileges can view only.
 
 When a snapshot is run, execution hook events take place in the following order:
 
@@ -47,7 +52,7 @@ You can view existing custom or NetApp-provided execution hooks for an app.
 You can view all enabled or disabled execution hooks in the resulting list. You can see a hook's status, source, and when it runs (pre- or post-snapshot). To view event logs surrounding execution hooks, go to the *Activity* page in the left-side navigation area.
 
 == Create a custom execution hook
-You can create a custom execution hook for an app.
+You can create a custom execution hook for an app. See link:execution-hook-examples.html[Execution hook examples^] for hook examples. You need to have Owner/Admin permissions to create execution hooks.
 
 .Steps
 
@@ -66,7 +71,7 @@ An execution hook can run against all container images contained within the appl
 .. Browse to a file and upload it.
 .. Give the script a unique name.
 .. (Optional) Enter any notes other administrators should know about the script.
-* Paste in a custom script from the clipboard
+* Paste in a custom script from the clipboard.
 .. Select the *Paste from clipboard* option.
 .. Click the text field and paste the script text into the field.
 .. Give the script a unique name.
@@ -74,7 +79,7 @@ An execution hook can run against all container images contained within the appl
 . Click *Add hook*.
 
 == Disable an execution hook
-You can disable an execution hook if you want to temporarily prevent it from running before or after a snapshot of an app.
+You can disable an execution hook if you want to temporarily prevent it from running before or after a snapshot of an app. You need to have Owner/Admin permissions to disable execution hooks.
 
 .Steps
 
@@ -84,7 +89,7 @@ You can disable an execution hook if you want to temporarily prevent it from run
 . Select *Disable*.
 
 == Delete an execution hook
-You can remove an execution hook entirely if you no longer need it.
+You can remove an execution hook entirely if you no longer need it. You need to have Owner/Admin permissions to delete execution hooks.
 
 .Steps
 
@@ -92,8 +97,3 @@ You can remove an execution hook entirely if you no longer need it.
 . Click the *Execution hooks* tab.
 . Select the *Actions* dropdown for a hook that you wish to delete.
 . Select *Delete*.
-
-=== Execution hook examples
-Use the following examples to get an idea of how to structure your execution hooks.
-
-(Examples are WIP)

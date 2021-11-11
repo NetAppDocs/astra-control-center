@@ -24,14 +24,16 @@ The cluster must meet the following general requirements so you can discover and
 
 * At least 300GB of available ONTAP storage capacity
 * 3 controller nodes with 4 CPU cores, 16GB RAM, and 120GB of available storage each
-* 3 worker nodes with at least 8 CPU cores, 16GB RAM, and 50GB of available storage each
+* 3 worker nodes with at least 12 CPU cores, 32GB RAM, and 50GB of available storage each
 //* Kubernetes version 1.19 or 1.20
 * Service type "LoadBalancer" available for ingress traffic to be sent to services in the OpenShift cluster
 * A method for pointing the FQDN of Astra Control Center to the load balanced IP address
 
+NOTE: These requirements assume that Astra Control Center is the only application running on the OpenShift cluster. If the cluster is running additional applications, adjust these minimum requirements accordingly.
+
 * *Image registry*: You must have an existing private Docker image registry to which you can push Astra Control Center build images. You must have the URL of the image registry where you will upload the images, and you must have tagged the images for the private container registry.
 
-* *Trident / ONTAP storage configuration*: Astra Control Center requires that Trident version 21.01 or 21.04 already be installed and configured to work with NetApp ONTAP version 9.5 or newer as the storage backend. Astra Control Center requires that a storage class be created and set as the default storage class. Astra Control Center supports the following ONTAP drivers provided by Trident:
+* *Astra Trident / ONTAP storage configuration*: Astra Control Center requires that Astra Trident version 21.07 or newer already be installed and configured to work with NetApp ONTAP version 9.5 or newer as the storage backend. Astra Control Center requires that a storage class be created and set as the default storage class. Astra Control Center supports the following ONTAP drivers provided by Astra Trident:
 
 ** ontap-nas
 ** ontap-nas-flexgroup
@@ -41,9 +43,9 @@ The cluster must meet the following general requirements so you can discover and
 If you are planning to manage the Kubernetes cluster from Astra Control Center as well as use the cluster to host the Astra Control Center installation, the cluster has the following additional requirements:
 
 * The most recent version of the Kubernetes https://kubernetes-csi.github.io/docs/snapshot-controller.html[snapshot-controller component^] is installed
-* A Trident https://docs.netapp.com/us-en/trident/trident-concepts/snapshots.html[volumesnapshotclass object^] has been defined by an administrator
+* A Astra Trident https://docs.netapp.com/us-en/trident/trident-concepts/snapshots.html[volumesnapshotclass object^] has been defined by an administrator
 * A default Kubernetes storage class exists on the cluster
-* At least one storage class is configured to use Trident
+* At least one storage class is configured to use Astra Trident
 * A method for pointing the FQDN of Astra Control Center to the external IP address of the Astra Control Center service
 
 Make sure that your cluster meets the minimum requirements and that you follow Kubernetes best practices so that Astra Control Center is highly available in your Kubernetes cluster.
@@ -56,7 +58,7 @@ During app cloning, Astra Control Center needs to allow OpenShift to mount volum
 . `export-policy rule modify -policyname default -ruleindex 1 -anon 65534`
 ======================
 
-NOTE: If you plan to add a second OpenShift 4.6 or 4.7 cluster as a managed compute resource, you need to ensure that the Trident Volume Snapshot feature is enabled. See the official Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Trident.
+NOTE: If you plan to add a second OpenShift 4.6 or 4.7 cluster as a managed compute resource, you need to ensure that the Astra Trident Volume Snapshot feature is enabled. See the official Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
 
 ////
 === Non-OpenShift Kubernetes clusters
@@ -74,8 +76,15 @@ The Kubernetes cluster you use for Astra Control Center should already be deploy
 Astra Control Center has the following app management requirements:
 
 * *Licensing*: You need an Astra Control Center license to manage apps using Astra Control Center.
-* *Helm 3*: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
-* *Operator management*: Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators or cluster-scoped operators.
+* *Helm 3*: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Managing apps deployed with Helm 2 is not supported.
+//* *Operator management*: Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators or cluster-scoped operators.
+* *Operator-deployed apps*: Astra Control Center supports the following apps deployed with namespace-scoped operators:
+** https://github.com/k8ssandra/cass-operator/tree/v1.7.1[Apache Cassandra^]
+** https://github.com/jenkinsci/kubernetes-operator[Jenkins CI^]
+** https://github.com/percona/percona-xtradb-cluster-operator[Percona XtraDB Cluster^]
+NOTE: If you clone an operator-deployed instance of Jenkins CI, you need to manually restore the persistent data. This is a limitation of the app's deployment model.
+
+Each of these operators must be deployed in the same namespace as the app. You might need to modify the deployment .yaml file for the operator to ensure this is the case.
 
 == Access to the internet
 
@@ -102,6 +111,9 @@ If you want to try Astra Control Center, you can link:setup_overview.html#add-a-
 == Service type "LoadBalancer" for on-premises Kubernetes clusters
 
 Astra Control Center uses a service of the type "LoadBalancer" (svc/traefik in the Astra Control Center namespace), and requires that it be assigned an accessible external IP address. For on-premises OpenShift clusters, you can use https://docs.netapp.com/us-en/netapp-solutions/containers/rh-os-n_LB_MetalLB.html#installing-the-metallb-load-balancer[MetalLB^] to automatically assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
+
+NOTE: MetalLB version 0.11.0 is not supported.
+
 ////
 Astra Control Center uses a service of the type "LoadBalancer" and requires the Kubernetes cluster to expose that service on an external IP address. For on-premises OpenShift clusters, NetApp has internally validated https://docs.netapp.com/us-en/netapp-solutions/containers/rh-os-n_LB_MetalLB.html#installing-the-metallb-load-balancer[MetalLB^] for use with Astra Control Center. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the external IP address assigned to the service for Astra Control Center.
 ////
@@ -129,13 +141,13 @@ a|
 
 |Metrics data to metrics consumer - ensure each managed cluster can access this port on the cluster hosting Astra Control Center
 
-|Trident
+|Astra Trident
 |34571
 |HTTPS
 |Ingress
 |Node pod communication
 
-|Trident
+|Astra Trident
 |9220
 |HTTP
 |Ingress
