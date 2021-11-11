@@ -76,13 +76,15 @@ The Kubernetes cluster you use for Astra Control Center should already be deploy
 Astra Control Center has the following app management requirements:
 
 * *Licensing*: You need an Astra Control Center license to manage apps using Astra Control Center.
-* *Helm 3*: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
+* *Helm 3*: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Managing apps deployed with Helm 2 is not supported.
 //* *Operator management*: Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators or cluster-scoped operators.
-* *Operator-deployed apps*: Astra Control Center supports the following apps deployed with cluster-scoped or namespace-scoped operators:
-** Apache Cassandra
-** Jenkins CI
-** Percona XtraDB Cluster
+* *Operator-deployed apps*: Astra Control Center supports Astra Control Center supports the following apps deployed with namespace-scoped operators:
+** https://github.com/k8ssandra/cass-operator/tree/v1.7.1[Apache Cassandra^]
+** https://github.com/jenkinsci/kubernetes-operator[Jenkins CI^]
+** https://github.com/percona/percona-xtradb-cluster-operator[Percona XtraDB Cluster^]
 NOTE: If you clone an operator-deployed instance of Jenkins CI, you need to manually restore the persistent data. This is a limitation of the app's deployment model.
+
+Each of these operators must be deployed in the same namespace as the app. You might need to modify the deployment .yaml file for the operator to ensure this is the case.
 
 == Access to the internet
 
