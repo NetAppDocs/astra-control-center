@@ -33,7 +33,7 @@ NOTE: These requirements assume that Astra Control Center is the only applicatio
 
 * *Image registry*: You must have an existing private Docker image registry to which you can push Astra Control Center build images. You must have the URL of the image registry where you will upload the images, and you must have tagged the images for the private container registry.
 
-* *Trident / ONTAP storage configuration*: Astra Control Center requires that Trident version 21.01 or 21.04 already be installed and configured to work with NetApp ONTAP version 9.5 or newer as the storage backend. Astra Control Center requires that a storage class be created and set as the default storage class. Astra Control Center supports the following ONTAP drivers provided by Trident:
+* *Astra Trident / ONTAP storage configuration*: Astra Control Center requires that Astra Trident version 21.07 or newer already be installed and configured to work with NetApp ONTAP version 9.5 or newer as the storage backend. Astra Control Center requires that a storage class be created and set as the default storage class. Astra Control Center supports the following ONTAP drivers provided by Astra Trident:
 
 ** ontap-nas
 ** ontap-nas-flexgroup
@@ -43,9 +43,9 @@ NOTE: These requirements assume that Astra Control Center is the only applicatio
 If you are planning to manage the Kubernetes cluster from Astra Control Center as well as use the cluster to host the Astra Control Center installation, the cluster has the following additional requirements:
 
 * The most recent version of the Kubernetes https://kubernetes-csi.github.io/docs/snapshot-controller.html[snapshot-controller component^] is installed
-* A Trident https://docs.netapp.com/us-en/trident/trident-concepts/snapshots.html[volumesnapshotclass object^] has been defined by an administrator
+* A Astra Trident https://docs.netapp.com/us-en/trident/trident-concepts/snapshots.html[volumesnapshotclass object^] has been defined by an administrator
 * A default Kubernetes storage class exists on the cluster
-* At least one storage class is configured to use Trident
+* At least one storage class is configured to use Astra Trident
 * A method for pointing the FQDN of Astra Control Center to the external IP address of the Astra Control Center service
 
 Make sure that your cluster meets the minimum requirements and that you follow Kubernetes best practices so that Astra Control Center is highly available in your Kubernetes cluster.
@@ -58,7 +58,7 @@ During app cloning, Astra Control Center needs to allow OpenShift to mount volum
 . `export-policy rule modify -policyname default -ruleindex 1 -anon 65534`
 ======================
 
-NOTE: If you plan to add a second OpenShift 4.6 or 4.7 cluster as a managed compute resource, you need to ensure that the Trident Volume Snapshot feature is enabled. See the official Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Trident.
+NOTE: If you plan to add a second OpenShift 4.6 or 4.7 cluster as a managed compute resource, you need to ensure that the Astra Trident Volume Snapshot feature is enabled. See the official Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
 
 ////
 === Non-OpenShift Kubernetes clusters
@@ -139,13 +139,13 @@ a|
 
 |Metrics data to metrics consumer - ensure each managed cluster can access this port on the cluster hosting Astra Control Center
 
-|Trident
+|Astra Trident
 |34571
 |HTTPS
 |Ingress
 |Node pod communication
 
-|Trident
+|Astra Trident
 |9220
 |HTTP
 |Ingress
