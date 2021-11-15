@@ -16,7 +16,7 @@ entries:
       - title: Clone and migrate apps
         url: /use/clone-apps.html
       - title: Manage app execution hooks
-        url: /use/manage-app-execution-hooks.html
+        url: /use/execution-hooks.html
         entries:
           - title: Execution hook examples
             url: /use/execution-hook-examples.html
