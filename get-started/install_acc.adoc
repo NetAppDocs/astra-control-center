@@ -73,16 +73,16 @@ NOTE: See a sample script for the automatic loading of images below.
 .. Log in to your Docker registry:
 +
 ----
-docker login [Docker_registry_path]
+docker login [your_registry_path]
 ----
 
 .. Load the images into Docker.
 .. Tag the images.
-.. Push the images to your local registry.
+[[substep_image_local_registry_push]].. Push the images to your local registry.
 
 +
 ----
-export REGISTRY=[Docker_registry_path]
+export REGISTRY=[your_registry_path]
 for astraImageFile in $(ls images/*.tar)
   # Load to local cache. And store the name of the loaded image trimming the 'Loaded images: '
   do astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image(s): //')
@@ -110,7 +110,7 @@ namespace/netapp-acc-operator created
 .. Create a secret for the `netapp-acc-operator` namespace. Add Docker information and run the following command:
 +
 ----
-kubectl create secret docker-registry astra-registry-cred -n netapp-acc-operator --docker-server=[Docker_registry_path] --docker-username=[username] --docker-password=[token]
+kubectl create secret docker-registry astra-registry-cred -n netapp-acc-operator --docker-server=[your_registry_path] --docker-username=[username] --docker-password=[token]
 ----
 +
 Sample response:
@@ -122,7 +122,7 @@ secret/astra-registry-cred created
 .. Create the `netapp-acc` (or custom named) namespace.
 +
 ----
-kubectl create ns [netapp-acc or custom]
+kubectl create ns [netapp-acc or custom namespace]
 ----
 +
 Sample response:
@@ -134,7 +134,7 @@ namespace/netapp-acc created
 ..  Create a secret for the `netapp-acc` (or custom named) namespace. Add Docker information and run the following command:
 +
 ----
-kubectl create secret docker-registry astra-registry-cred -n [netapp-acc or custom] --docker-server=[Docker_registry_path] --docker-username=[username] --docker-password=[token]
+kubectl create secret docker-registry astra-registry-cred -n [netapp-acc or custom namespace] --docker-server=[your_registry_path] --docker-username=[username] --docker-password=[token]
 ----
 +
 Response
@@ -155,8 +155,8 @@ imagePullSecrets:
 - name: astra-registry-cred
 ----
 
-.. Change `[Docker_registry_path]` for the `kube-rbac-prox` image to the registry path where you pushed the images in a previous step.
-.. Change `[Docker_registry_path]` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in a previous step.
+.. Change `[your_registry_path]` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<substep_image_local_registry_push,previous step>>.
+.. Change `[your_registry_path]` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in a <<substep_image_local_registry_push,previous step>>.
 
 +
 [subs=+quotes]
@@ -184,7 +184,7 @@ spec:
         - --upstream=http://127.0.0.1:8080/
         - --logtostderr=true
         - --v=10
-        *image: [Docker_registry_path]/kube-rbac-proxy:v0.5.0*
+        *image: [your_registry_path]/kube-rbac-proxy:v0.5.0*
         name: kube-rbac-proxy
         ports:
         - containerPort: 8443
@@ -198,7 +198,7 @@ spec:
         env:
         - name: ACCOP_LOG_LEVEL
           value: "2"
-        *image: [Docker_registry_path]/acc-operator:[version x.y.z]*
+        *image: [your_registry_path]/acc-operator:[version x.y.z]*
         imagePullPolicy: IfNotPresent
       *imagePullSecrets: []*
 ----
@@ -213,7 +213,7 @@ NOTE: If additional customizations are required for your environment, you can us
 +
 NOTE: Properties configured by the CR cannot be changed after initial Astra Control Center deployment.
 
-.. Change `[Docker_registry_path]` to the registry path where you pushed the images in the previous step.
+.. Change `[your_registry_path]` to the registry path where you pushed the images in the previous step.
 .. Change the `accountName` string to the name you want to associate with the account.
 .. Change the `astraAddress` string to the FQDN you want to use in your browser to access Astra. Do not use `http://` or `https://` in the address. Copy this FQDN for use in a <<Log in to the Astra Control Center UI,later step>>.
 .. Change the `email` string to the default initial administrator address. Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>.
@@ -239,7 +239,7 @@ spec:
   *firstName: "SRE"*
   *lastName: "Admin"*
   imageRegistry:
-    *name: "[Docker_registry_path]"*
+    *name: "[your_registry_path]"*
     *secret: "astra-registry-cred"*
     *storageClass: "ontap-gold"*
 ----
@@ -270,7 +270,7 @@ deployment.apps/acc-operator-controller-manager created
 . If you didn't already do so in a previous step, create the `netapp-acc` (or custom) namespace:
 +
 ----
-kubectl create ns [netapp-acc or custom]
+kubectl create ns [netapp-acc or custom namespace]
 ----
 +
 Sample response:
@@ -284,7 +284,7 @@ namespace/netapp-acc created
 . Install Astra Control Center in the `netapp-acc` (or your custom) namespace:
 +
 ----
-kubectl apply -f astra_control_center_min.yaml -n [netapp-acc or custom]
+kubectl apply -f astra_control_center_min.yaml -n [netapp-acc or custom namespace]
 ----
 +
 Sample response:
@@ -296,7 +296,7 @@ astracontrolcenter.astra.netapp.io/astra created
 . Verify that all system components installed successfully.
 +
 ----
-kubectl get pods -n [netapp-acc or custom]
+kubectl get pods -n [netapp-acc or custom namespace]
 ----
 +
 Each pod should have a status of `Running`. It may take several minutes before the system pods are deployed.
@@ -369,10 +369,10 @@ vault-controller-745879f98b-49c5v            1/1     Running   0          4m51s
 kubectl logs deploy/acc-operator-controller-manager -n netapp-acc-operator -c manager -f
 ----
 
-. When all the pods are running, verify installation success by retrieving the AstraControlCenter instance installed by the ACC Operator.
+. When all the pods are running, verify installation success by retrieving the AstraControlCenter instance installed by the Astra Control Center Operator.
 +
 ----
-kubectl get acc -o yaml -n netapp-acc
+kubectl get acc -o yaml -n [netapp-acc or custom namespace]
 ----
 
 . Check the `status.deploymentState` field in the response for the `Deployed` value. If deployment was unsuccessful, an error message appears instead.
