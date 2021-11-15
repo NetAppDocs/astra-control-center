@@ -49,6 +49,6 @@ entries:
   - title: Unmanage apps and clusters
     url: /use/unmanage.html
   - title: Upgrade Astra Control Center
-    url: /use/upgrade_acc.html
+    url: /use/upgrade-acc.html
   - title: Uninstall Astra Control Center
     url: /use/uninstall_acc.html

@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: use/upgrade_acc.html
+permalink: use/upgrade-acc.html
 keywords: astra upgrade, upgrade astra control center, how to upgrade astra control, update
 summary: To upgrade Astra Control Center, you'll download the bundle and upgrade following the steps described.
 ---
