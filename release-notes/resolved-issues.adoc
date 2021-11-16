@@ -1,16 +1,30 @@
 ---
 sidebar: sidebar
-permalink: release-notes/known-issues.html
-keywords: astra, control center, bugs, known issues, problems
+permalink: release-notes/resolved-issues.html
+keywords: astra, control center, fixed bugs, fixes, resolved issues
 summary: Known issues identify problems that might prevent you from using this release of the product successfully.
 ---
 
-= Known issues with this release
+= Issues resolved with this release
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/release-notes/
 
-Known issues identify problems that might prevent you from using this release of the product successfully.
+These issues have been corrected in this release of the product.
+
+== Extra backups are retained as part of scheduled backup
+//ASTRACTL-10069/DOC-3609
+Sometimes one or more backups in Astra Control Center are retained beyond the number specified to be retained in the backup schedule. These extra backups should be deleted as part of a scheduled backup but are not deleted and are stuck in a `pending` state.
+
+== Backup or clone fails for apps using PVCs with decimal units in Astra Control Center
+//ASTRACTL-9948/DOC-3612
+Volumes created with decimal units fail using the Astra Control Center backup or clone process.
+
+
+
+
+
+
 
 == Incorrect ClusterRoleBinding created by Astra Control Center CRD during installation
 //ASTRACTL-11352/DOC-3726
@@ -97,6 +111,7 @@ When you add a bucket, select the correct bucket provider type with credentials 
 == Backups and snapshots might not be retained during removal of an Astra Control Center instance
 //AD AH review
 If you have an evaluation license, be sure you store your account ID to avoid data loss in the event of Astra Control Center failure if you are not sending ASUPs.
+
 
 == Clone operation can't use other buckets besides the default
 //DOC-3595/ASTRACTL-10071

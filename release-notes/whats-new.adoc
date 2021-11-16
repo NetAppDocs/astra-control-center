@@ -10,7 +10,7 @@ summary: NetApp periodically updates Astra Control Center to bring you new featu
 :icons: font
 :imagesdir: ../media/release-notes/
 
-We're pleased to announce the latest release of Astra Control Center.
+We're pleased to announce the latest 21.12 release of Astra Control Center.
 
 == 14 December 2021 (21.12)
 
@@ -21,7 +21,10 @@ Updated release of Astra Control Center.
 * link:../use/upgrade-acc.html[Upgrades]
 * link:../use/execution-hooks.html[Execution hooks]
 
-.Issues and limitations
+.Resolved issues
+* link:../release-notes/known-issues.html[Known issues for this release]
+
+.Known issues and limitations
 * link:../release-notes/known-issues.html[Known issues for this release]
 * link:../release-notes/known-limitations.html[Known limitations for this release]
 
