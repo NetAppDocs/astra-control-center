@@ -41,7 +41,11 @@ If you clone an app between clusters, the source and destination clusters must b
 
 == OpenShift 4.8 is not supported
 //From requirements section
-OpenShift 4.8 is not supported for the July release of Astra Control Center. For more information, see link:../get-started/requirements.html[Astra Control Center requirements].
+OpenShift 4.8 is not supported for this release of Astra Control Center. For more information, see link:../get-started/requirements.html[Astra Control Center requirements].
+
+== metalLB 0.11.0 is not supported
+//DOC-3872/ASTRACTL-12718
+metalLB 0.11.0 is not a supported loadbalancer for Astra Control Center. For more information regarding supported load balancers, see link:../get-started/requirements.html[Astra Control Center requirements].
 
 == Apps deployed with Helm 2 are not supported
 //From requirements section
