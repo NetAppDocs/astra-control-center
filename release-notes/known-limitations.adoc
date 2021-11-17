@@ -45,7 +45,7 @@ OpenShift 4.8 is not supported for this release of Astra Control Center. For mor
 
 == metalLB 0.11.0 is not supported
 //DOC-3872/ASTRACTL-12718
-metalLB 0.11.0 is not a supported loadbalancer for Astra Control Center. For more information regarding supported load balancers, see link:../get-started/requirements.html[Astra Control Center requirements].
+metalLB 0.11.0 is not a supported loadbalancer for Astra Control Center. For more information regarding supported load balancers, see link:../get-started/requirements.html#service-type-loadbalancer-for-on-premises-kubernetes-clusters[Astra Control Center requirements].
 
 == Apps deployed with Helm 2 are not supported
 //From requirements section
