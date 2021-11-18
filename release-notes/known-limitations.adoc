@@ -39,10 +39,6 @@ Astra Control Center does not support apps that are deployed with Operator Lifec
 // ASTRACTL-7079
 If you clone an app between clusters, the source and destination clusters must be the same distribution of Kubernetes. For example, if you clone an app from an OpenShift 4.7 cluster, use a destination cluster that is also OpenShift 4.7.
 
-== OpenShift 4.8 is not supported
-//From requirements section
-OpenShift 4.8 is not supported for this release of Astra Control Center. For more information, see link:../get-started/requirements.html[Astra Control Center requirements].
-
 == metalLB 0.11.0 is not supported
 //DOC-3872/ASTRACTL-12718
 metalLB 0.11.0 is not a supported loadbalancer for Astra Control Center. For more information regarding supported load balancers, see link:../get-started/requirements.html#service-type-loadbalancer-for-on-premises-kubernetes-clusters[Astra Control Center requirements].
