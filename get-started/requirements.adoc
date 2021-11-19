@@ -87,6 +87,8 @@ NOTE: If you clone an operator-deployed instance of Jenkins CI, you need to manu
 
 Each of these operators must be deployed in the same namespace as the app. You might need to modify the deployment .yaml file for the operator to ensure this is the case.
 
+NOTE: Only one operator-deployed app is supported per namespace.
+
 == Access to the internet
 
 You should determine whether you have outside access to the internet. If you do not, some functionality might be limited, such as receiving monitoring and metrics data from NetApp Cloud Insights, or sending support bundles to the NetApp Support Site.
