@@ -32,8 +32,12 @@ If a cluster is in `removed` state yet cluster and network connectivity appears 
 After you complete these steps, the credential associated with the cluster is updated and the cluster should reconnect and update its state to `available`.
 
 == OLM-enabled and cluster-scoped operator deployed apps not supported
-// DOC-3553/ASTRACTL-9490/AD AH
+//DOC-3553/ASTRACTL-9490/AD AH
 Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators or cluster-scoped operators.
+
+== Operator-deployed apps and namespaces
+//DOC-3899/ASTRACTL-13098
+An operator and the app it deploys must use the same namespace. Astra Control supports only one operator-deployed app per namespace.
 
 == Cloning apps can only be done with same K8s distribution
 // ASTRACTL-7079
