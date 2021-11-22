@@ -17,7 +17,7 @@ To install Astra Control Center, do the following steps:
 
 == Install Astra Control Center
 
-To install Astra Control Center, download the installation bundle from the NetApp Support Site and perform a series a commands to install Astra Control Center Operator and Astra Control Center in your environment. You can use this procedure to install Astra Control Center in internet-connected or air-gapped environments.
+To install Astra Control Center, download the installation bundle from the NetApp Support Site and perform a series of commands to install Astra Control Center Operator and Astra Control Center in your environment. You can use this procedure to install Astra Control Center in internet-connected or air-gapped environments.
 
 .What you'll need
 * link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
@@ -82,10 +82,10 @@ docker login [your_registry_path]
 
 +
 ----
-export REGISTRY=[your_registry_path]
-for astraImageFile in $(ls images/*.tar)
+export REGISTRY=[Docker_registry_path]
+for astraImageFile in $(ls images/*.tar) ; do
   # Load to local cache. And store the name of the loaded image trimming the 'Loaded images: '
-  do astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image(s): //')
+  astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image: //')
   astraImage=$(echo ${astraImage} | sed 's!localhost/!!')
   # Tag with local image repo.
   docker tag ${astraImage} ${REGISTRY}/${astraImage}
