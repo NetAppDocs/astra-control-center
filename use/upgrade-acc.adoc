@@ -269,7 +269,7 @@ Response:
 
 . Save the following Python script as a file, for example, `set_previous_values.py`:
 +
-NOTE: This Python script creates writes two files that are used in later upgrade steps to retain helm values.
+NOTE: This Python script creates two files that are used in later upgrade steps to retain helm values.
 
 +
 ----
@@ -371,7 +371,7 @@ NOTE: You must already have completed the <<Update Traefik service using acc-hel
 . If you are installing from an internet-connected environment, download the Cert-manager bundle using a secure, file-transfer tool, such as GNU wget:
 +
 ----
-wget https://github.com/jetstack/cert-manager/releases/download/v1.5.4/cert-manager.crds.yaml
+wget https://github.com/jetstack/cert-manager/releases/download/vX.X.X/cert-manager.crds.yaml
 ----
 
 . Apply the Certs-manager CRDs:
@@ -400,17 +400,16 @@ customresourcedefinition.apiextensions.k8s.io/orders.acme.cert-manager.io config
 . Upgrade your Cert-manager configuration:
 +
 ----
-helm upgrade  --version X.X.X --namespace netapp-acc -f cert_manager_values.json cert-manager acc-helm-repo/cert-manager  
+helm upgrade  --version X.X.X --namespace netapp-acc -f cert_manager_values.json cert-manager acc-helm-repo/cert-manager
 ----
 +
 Response:
 +
 ----
 Release "cert-manager" has been upgraded. Happy Helming!
-Release "cert-manager" has been upgraded. Happy Helming!
 NAME: cert-manager
 LAST DEPLOYED: Thu Oct 28 15:26:39 2021
-NAMESPACE: pcloud
+NAMESPACE: netapp-acc
 STATUS: deployed
 REVISION: 2
 TEST SUITE: Non
