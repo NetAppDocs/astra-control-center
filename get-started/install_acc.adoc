@@ -43,7 +43,7 @@ To install Astra Control Center, do the following steps:
 * <<Unpack the bundle and change directory>>
 * <<Add the images to your local registry>>
 * <<Set up namespace and secret for registries with auth requirements>>
-* <<Configure the Astra Control Center operator>>
+* <<Install the Astra Control Center operator>>
 * <<Configure Astra Control Center>>
 * <<Complete Astra Control Center and operator installation>>
 * <<Verify system status>>
@@ -156,9 +156,17 @@ Response
 secret/astra-registry-cred created
 ----
 
-== Configure the Astra Control Center operator
+== Install the Astra Control Center operator
 
-. Edit the Astra Control Center operator deployment yaml (`astra_control_center_operator_deploy.yaml`) to refer to your local registry and secret.
+You can configure and install the operator YAML using either the commands described here or by completing the installation from Operatorhub.io.
+
+.Options
+* link:../get-started/acc_operatorhub_install.html[Install from Operatorhub.io]
+* Install using command line
+
+=== Install the operator using the command line
+
+. Edit the Astra Control Center operator deployment YAML (`astra_control_center_operator_deploy.yaml`) to refer to your local registry and secret.
 +
 ----
 vim astra_control_center_operator_deploy.yaml
@@ -219,6 +227,29 @@ spec:
       *imagePullSecrets: []*
 ----
 
+. Install the Astra Control Center operator:
++
+----
+kubectl apply -f astra_control_center_operator_deploy.yaml
+----
++
+Sample response:
++
+----
+namespace/netapp-acc-operator created
+customresourcedefinition.apiextensions.k8s.io/astracontrolcenters.astra.netapp.io created
+role.rbac.authorization.k8s.io/acc-operator-leader-election-role created
+clusterrole.rbac.authorization.k8s.io/acc-operator-manager-role created
+clusterrole.rbac.authorization.k8s.io/acc-operator-metrics-reader created
+clusterrole.rbac.authorization.k8s.io/acc-operator-proxy-role created
+rolebinding.rbac.authorization.k8s.io/acc-operator-leader-election-rolebinding created
+clusterrolebinding.rbac.authorization.k8s.io/acc-operator-manager-rolebinding created
+clusterrolebinding.rbac.authorization.k8s.io/acc-operator-proxy-rolebinding created
+configmap/acc-operator-manager-config created
+service/acc-operator-controller-manager-metrics-service created
+deployment.apps/acc-operator-controller-manager created
+----
+
 == Configure Astra Control Center
 
 . Edit the Astra Control Center custom resource (CR) file (`astra_control_center_min.yaml`):
@@ -263,29 +294,6 @@ spec:
 ----
 
 == Complete Astra Control Center and operator installation
-
-. Install the Astra Control Center operator:
-+
-----
-kubectl apply -f astra_control_center_operator_deploy.yaml
-----
-+
-Sample response:
-+
-----
-namespace/netapp-acc-operator created
-customresourcedefinition.apiextensions.k8s.io/astracontrolcenters.astra.netapp.io created
-role.rbac.authorization.k8s.io/acc-operator-leader-election-role created
-clusterrole.rbac.authorization.k8s.io/acc-operator-manager-role created
-clusterrole.rbac.authorization.k8s.io/acc-operator-metrics-reader created
-clusterrole.rbac.authorization.k8s.io/acc-operator-proxy-role created
-rolebinding.rbac.authorization.k8s.io/acc-operator-leader-election-rolebinding created
-clusterrolebinding.rbac.authorization.k8s.io/acc-operator-manager-rolebinding created
-clusterrolebinding.rbac.authorization.k8s.io/acc-operator-proxy-rolebinding created
-configmap/acc-operator-manager-config created
-service/acc-operator-controller-manager-metrics-service created
-deployment.apps/acc-operator-controller-manager created
-----
 
 . If you didn't already do so in a previous step, create the `netapp-acc` (or custom) namespace:
 +

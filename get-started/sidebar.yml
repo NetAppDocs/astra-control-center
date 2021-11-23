@@ -7,6 +7,9 @@ entries:
     url: /get-started/quick-start.html
   - title: Install Astra Control Center
     url: /get-started/install_acc.html
+    entries:
+    - title: Install Astra Control Center operator from Operatorhub.io
+      url: /get-started/acc_operatorhub_install.html
   - title: Set up Astra Control Center
     url: /get-started/setup_overview.html
     entries:
