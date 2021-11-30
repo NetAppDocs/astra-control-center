@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: concepts/choose-class-and-size.html
 keywords: service level, storage class, storage classes, pv size, persistent volume size, volume size, bandwidth, performance, persistent, volume, kubernetes, containers
-summary: Astra Control Center supports only Trident storage classes backed by ONTAP storage.  You should understand how storage class and persistent volume size can help you meet your performance objectives.
+summary: Astra Control Center supports  Trident storage classes backed by ONTAP storage or Astra Data Store storage classes.  You should understand how storage class and persistent volume size can help you meet your performance objectives.
 ---
 
 = Storage classes and persistent volume size
@@ -11,10 +11,17 @@ summary: Astra Control Center supports only Trident storage classes backed by ON
 :imagesdir: ../media/concepts/
 
 [.lead]
-Astra Control Center supports ONTAP as the backend storage. You should understand how storage class and persistent volume (PV) size can help you meet your performance objectives.
+Astra Control Center supports ONTAP or Astra Data Store as the backend storage. You should understand how storage class and persistent volume (PV) size can help you meet your performance objectives.
 
 == Overview
-Astra Control Center supports only Trident storage classes backed by ONTAP storage at this time. Astra Control Center discovers and uses the already-deployed resources, including ONTAP, Trident, and associated storage classes.
+Astra Control Center supports the following:
+
+* *Astra Data Store storage*: If you installed one or more Astra Data Store clusters manually, Astra Control Center offers the ability to import these and retrieve their topology (nodes, disks) as well as various statuses.
+
++
+Astra Control Center displays the underlying Kubernetes cluster from the Astra Data Store configuration, the cloud that the Kubernetes cluster belongs to, any persistent volumes provisioned by Astra Data Store, the name of the corresponding internal volume, the application using the persistent volume, and the cluster containing the app.
+* *Trident storage classes backed by ONTAP storage*:  Astra Control Center discovers and uses the already-deployed resources, including ONTAP, Trident, and associated storage classes.
+
 
 NOTE: Trident storage classes should be preconfigured outside of Astra Control Center.
 
@@ -28,4 +35,5 @@ See Trident information that provides cost comparisons and examples that can hel
 
 == Find more information
 
-* https://netapp-trident.readthedocs.io/en/stable-v21.01/dag/kubernetes/storage_configuration_trident.html[Trident documentation on storage configuration^]
+* https://docs.netapp.com/us-en/trident/index.html[Astra Trident documentation^]
+* https://docs.netapp.com/us-en/astra-data-store/index.html[Astra Data Store documentation^]
