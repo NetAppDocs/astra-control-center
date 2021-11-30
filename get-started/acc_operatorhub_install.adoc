@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: get-started/acc_operatorhub_install.html
-keywords: astra installation, operator, operatorhub, install astra control center operator, how to install astra control
+keywords: astra installation, operator, operatorhub, install astra control center operator, how to install astra control center
 summary: You can install the Astra Control Center operator from Operatorhub.io after addressing systems prerequisites and other installation steps.
 ---
 
@@ -10,10 +10,12 @@ summary: You can install the Astra Control Center operator from Operatorhub.io a
 :icons: font
 :imagesdir: ../media/get-started/
 
-You can install the Astra Control Center operator from https://operatorhub.io/[Operatorhub.io]. After you complete this procedure, you must return to the installation procedure to complete the link:../get-started/install_acc.html#verify-system-status[remaining steps] to verify installation success and log on.
+You can install the Astra Control Center operator from https://operatorhub.io/[Operatorhub.io^]. You can also install the Astra Control Center from Red Hat Container Platform using this procedure.
+
+After you complete this procedure, you must return to the installation procedure to complete the link:../get-started/install_acc.html#verify-system-status[remaining steps] to verify installation success and log on.
 
 .What you'll need
-* You have completed all steps including prerequisite steps from the link:../get-started/install_acc.html[installation procedure] prior to the step link:../get-started/install_acc.html#configure-the-astra-control-center-operator[Configure the Astra Control Center operator].
+* You have completed all steps including prerequisite steps from the link:../get-started/install_acc.html[installation procedure] prior to the step link:../get-started/install_acc.html#install-the-astra-control-center-operator[Install the Astra Control Center operator].
 * You have created an FQDN address for Astra Control Center in your data center.
 * You have the necessary permissions and access to the Red Hat OpenShift Container Platform to perform the steps described.
 
@@ -25,7 +27,7 @@ You can install the Astra Control Center operator from https://operatorhub.io/[O
 
 == Find the operator install page
 
-. From the Red Hat OpenShift console, go to the Operatorhub menu and https://operatorhub.io/?keyword=netapp[select] the NetApp Astra Control Center operator.
+. From the Red Hat OpenShift console, go to the Operatorhub menu and https://operatorhub.io/?keyword=netapp[select^] the NetApp Astra Control Center operator.
 . Select *Install*.
 
 == Install the operator
