@@ -162,7 +162,7 @@ You can configure and install the operator YAML using either the commands descri
 
 .Options
 * link:../get-started/acc_operatorhub_install.html[Install from Operatorhub.io]
-* Install using command line
+* <<Install the operator using the command line,Install using command line>>
 
 === Install the operator using the command line
 

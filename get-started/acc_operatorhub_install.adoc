@@ -10,90 +10,59 @@ summary: You can install the Astra Control Center operator from Operatorhub.io a
 :icons: font
 :imagesdir: ../media/get-started/
 
-You can install the Astra Control Center operator from https://operatorhub.io/[Operatorhub.io]. After you complete this procedure, you must return to the installation procedure to complete the link:../get-started/install_acc.html#configure-astra-control-center[remaining steps].
+You can install the Astra Control Center operator from https://operatorhub.io/[Operatorhub.io]. After you complete this procedure, you must return to the installation procedure to complete the link:../get-started/install_acc.html#verify-system-status[remaining steps] to verify installation success and log on.
 
 .What you'll need
 * You have completed all steps including prerequisite steps from the link:../get-started/install_acc.html[installation procedure] prior to the step link:../get-started/install_acc.html#configure-the-astra-control-center-operator[Configure the Astra Control Center operator].
+* You have created an FQDN address for Astra Control Center in your data center.
+* You have the necessary permissions and access to the Red Hat OpenShift Container Platform to perform the steps described.
 
 .Steps
 
-. https://operatorhub.io/?keyword=netapp[Select] the NetApp Astra Control Center operator.
-. Confirm that you have completed any system prerequisites described in the summary documentation.
-. Configure the Astra Control Center operator deployment YAML (`astra_control_center_operator_deploy.yaml`) using the form field to refer to your local registry and secret:
-.. If you use a registry that requires authentication, replace the default line of `imagePullSecrets: []` with the following:
-+
-----
-imagePullSecrets:
-- name: astra-registry-cred
-----
+* <<Find the operator install page>>
+* <<Install the operator>>
+* <<Install Astra Control Center>>
 
-.. Change `[your_registry_path]` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<substep_image_local_registry_push,previous step>>.
-.. Change `[your_registry_path]` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in a <<substep_image_local_registry_push,previous step>>.
+== Find the operator install page
 
-+
-[subs=+quotes]
-----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  labels:
-    control-plane: controller-manager
-  name: acc-operator-controller-manager
-  namespace: netapp-acc-operator
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      control-plane: controller-manager
-  template:
-    metadata:
-      labels:
-        control-plane: controller-manager
-    spec:
-      containers:
-      - args:
-        - --secure-listen-address=0.0.0.0:8443
-        - --upstream=http://127.0.0.1:8080/
-        - --logtostderr=true
-        - --v=10
-        *image: [your_registry_path]/kube-rbac-proxy:v4.8.0*
-        name: kube-rbac-proxy
-        ports:
-        - containerPort: 8443
-          name: https
-      - args:
-        - --health-probe-bind-address=:8081
-        - --metrics-bind-address=127.0.0.1:8080
-        - --leader-elect
-        command:
-        - /manager
-        env:
-        - name: ACCOP_LOG_LEVEL
-          value: "2"
-        *image: [your_registry_path]/acc-operator:[version x.y.z]*
-        imagePullPolicy: IfNotPresent
-      *imagePullSecrets: []*
-----
+. From the Red Hat OpenShift console, go to the Operatorhub menu and https://operatorhub.io/?keyword=netapp[select] the NetApp Astra Control Center operator.
+. Select *Install*.
 
-. Click *Install* to apply the operator YAML.
+== Install the operator
+
+. Complete the *Install Operator* page and install the operator:
 +
-Sample response:
+NOTE: The operator will be available in all cluster namespaces.
+
+.. Select the operator namespace or `netapp-acc-operator` namespace will be created automatically as part of the operator installation.
+.. Select a manual or automatic approval strategy.
+.. Select *Install*.
+.. If you select a manual approval strategy, you will prompted to approve the manual install plan for this operator.
+. From the console, go to the Operatorhub menu and confirm that the operator installed successfully.
+
+== Install Astra Control Center
+
+. From the console within the details view of the Astra Control Center operator, select `Create instance` in the Provided APIs section.
+. Complete the `Create AstraControlCenter` form field:
+.. Keep or adjust the Astra Control Center name.
+.. Retain the Auto Support value.
 +
-----
-namespace/netapp-acc-operator created
-customresourcedefinition.apiextensions.k8s.io/astracontrolcenters.astra.netapp.io created
-role.rbac.authorization.k8s.io/acc-operator-leader-election-role created
-clusterrole.rbac.authorization.k8s.io/acc-operator-manager-role created
-clusterrole.rbac.authorization.k8s.io/acc-operator-metrics-reader created
-clusterrole.rbac.authorization.k8s.io/acc-operator-proxy-role created
-rolebinding.rbac.authorization.k8s.io/acc-operator-leader-election-rolebinding created
-clusterrolebinding.rbac.authorization.k8s.io/acc-operator-manager-rolebinding created
-clusterrolebinding.rbac.authorization.k8s.io/acc-operator-proxy-rolebinding created
-configmap/acc-operator-manager-config created
-service/acc-operator-controller-manager-metrics-service created
-deployment.apps/acc-operator-controller-manager created
-----
+NOTE: Auto support is required for Astra Data Store preview.
+
+.. Enter the Astra Control Center address. Do not use `http://` or `https://` in the address.
+.. Enter the Astra Control Center version you are deploying.
+.. Enter an account name, email address, and admin last name.
+.. Retain the default volume reclaim policy.
+.. In *Image Registry*, enter your local container image registry path. Do not use `http://` or `https://` in the address.
+.. If you use a registry that requires authentication, enter the secret.
+.. Enter the admin first name.
+.. Configure resources scaling.
+.. Retain the default storage class.
+.. Define CRD handling preferences.
+.. Select `Create`.
 
 == What's next
 
-Complete Astra Control Center installation by completing the link:../get-started/install_acc.html#configure-astra-control-center[remaining steps].
+Complete installation by verifying the successful of Astra Control Center and completing the link:../get-started/install_acc.html#verify-system-status[remaining steps] to log on.
+
+NOTE: You can alternatively verify successful installation of the Astra Control Center from the `AstraControlCenter details` tab within your installed operator in the Red Hat console.
