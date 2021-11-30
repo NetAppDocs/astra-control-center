@@ -241,7 +241,7 @@ spec:
   imageRegistry:
     *name: "[Docker_registry_path]"*
     *secret: "astra-registry-cred"*
-    *storageClass: "ontap-gold"*
+  *storageClass: "ontap-gold"*
 ----
 
 . Install the Astra Control Center operator:
