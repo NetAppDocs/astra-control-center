@@ -13,6 +13,7 @@ summary: Known issues identify problems that might prevent you from using this r
 Known issues identify problems that might prevent you from using this release of the product successfully.
 
 The following known issues affect the current release:
+//NOTE: For known issues specific to Astra Data Store when managed by Astra Control Center, see xxxx.
 
 * <<Incorrect ClusterRoleBinding created by Astra Control Center CRD during installation>>
 * <<App with user-defined label goes into "removed" state>>

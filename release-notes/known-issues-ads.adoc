@@ -1,0 +1,25 @@
+---
+sidebar: sidebar
+permalink: release-notes/known-issues-ads.html
+keywords: astra, control center, ads, data store, bugs, known issues, problems
+summary: Known issues identify problems that might prevent you from using this release of the product successfully.
+---
+
+= Known issues with Astra Data Store and this release
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/release-notes/
+
+Known issues identify problems that might prevent you from using this release of the product successfully.
+
+The following known issues affect the management of Astra Data Store with this current release of the Astra Control Center:
+
+* <<Astra Control Center shows Astra Data Store backend in `Unknown` state>>
+
+== Astra Control Center shows Astra Data Store backend in `Unknown` state
+//DOC-3916/ASTRACTL-13196/ASTRACTL-13134
+Astra Control Center shows the Astra Data Store storage backend in an `Unknown` state from the Backends page in the UI. In this condition, the backend is actually available and can be communicated with. A component within the backend is likely in an unhealthy state and needs to be returned to a healthy state for the backend to show as `available`.
+
+== Find more information
+//Add ADS links
+* link:../release-notes/known-limitations.html[Known limitations for this release]
