@@ -16,6 +16,8 @@ sidebar:
     - section: rest-api
     - section: solutions
     - section: support
+    - title: Earlier versions
+      url: /acc-earlier-versions.html
     - title: Legal notices
       url: /legal-notices.html
 
@@ -26,7 +28,7 @@ homepage:
       links:
         - title: Learn about Astra Control Center
           url: /concepts/intro.html
-        - title: What's in Astra Control Center
+        - title: What's new in Astra Control Center
           url: /release-notes/whats-new.html
         - title: Release notes
           url: /release-notes/rn_overview.html

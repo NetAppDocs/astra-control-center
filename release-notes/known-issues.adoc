@@ -42,7 +42,7 @@ Apply the following patch to all Kubernetes clusters where the acc-operator vers
 
 To resolve this issue:
 
-. Replace `ACC_NAMESPACE` in the script below with the namespace you used to link:../get-started/install_acc.html#install-astra-control-center[deploy Astra Control Center].
+. Replace `ACC_NAMESPACE` in the script below with the namespace you used to link:../get-started/install_acc.html#configure-the-astra-control-center-operator[deploy Astra Control Center].
 +
 [source,cli]
 ----

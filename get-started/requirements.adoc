@@ -16,7 +16,7 @@ Get started by verifying support for your Kubernetes clusters, apps, licenses, a
 
 Astra Control Center requires one of the following types of host clusters:
 
-* Red Hat OpenShift Container Platform 4.6.8 or 4.7 (4.8 is not supported)
+* Red Hat OpenShift Container Platform 4.6.8 to 4.8
 * NetApp Rancher 2.5
 * Kubernetes 1.21
 
@@ -70,7 +70,7 @@ During app cloning, Astra Control Center needs to allow OpenShift to mount volum
 . `export-policy rule modify -policyname default -ruleindex 1 -anon 65534`
 ======================
 
-NOTE: If you plan to add a second OpenShift 4.6 or 4.7 cluster as a managed compute resource, you need to ensure that the Astra Trident Volume Snapshot feature is enabled. See the official Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
+NOTE: If you plan to add a second OpenShift cluster as a managed compute resource, you need to ensure that the Astra Trident Volume Snapshot feature is enabled. See the official Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
 
 ////
 === Non-OpenShift Kubernetes clusters
@@ -94,6 +94,7 @@ Astra Control Center has the following app management requirements:
 ** https://github.com/k8ssandra/cass-operator/tree/v1.7.1[Apache Cassandra^]
 ** https://github.com/jenkinsci/kubernetes-operator[Jenkins CI^]
 ** https://github.com/percona/percona-xtradb-cluster-operator[Percona XtraDB Cluster^]
++
 NOTE: If you clone an operator-deployed instance of Jenkins CI, you need to manually restore the persistent data. This is a limitation of the app's deployment model.
 
 Each of these operators must be deployed in the same namespace as the app. You might need to modify the deployment .yaml file for the operator to ensure this is the case.
