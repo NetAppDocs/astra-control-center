@@ -16,9 +16,9 @@ Get started by verifying support for your Kubernetes clusters, apps, licenses, a
 
 Astra Control Center requires one of the following types of host clusters:
 
-* Red Hat OpenShift Container Platform 4.6.8 to 4.8
+* Red Hat OpenShift Container Platform 4.6.8, 4.7, or 4.8
 * NetApp Rancher 2.5
-* Kubernetes 1.21 (including 1.21.x)
+* Kubernetes 1.19 to 1.21 (including 1.21.x)
 
 The cluster must meet the following general requirements so you can discover and manage it from Astra Control Center.
 
@@ -33,7 +33,7 @@ NOTE: These requirements assume that Astra Control Center is the only applicatio
 
 * *Image registry*: You must have an existing private Docker image registry to which you can push Astra Control Center build images. You must have the URL of the image registry where you will upload the images, and you must have tagged the images for the private container registry.
 
-* *Astra Trident / ONTAP storage configuration*: Astra Control Center requires that Astra Trident version 21.07 or newer already be installed and configured to work with NetApp ONTAP version 9.5 or newer as the storage backend. Astra Control Center requires that a storage class be created and set as the default storage class. Astra Control Center supports the following ONTAP drivers provided by Astra Trident:
+* *Astra Trident / ONTAP storage configuration*: Astra Control Center requires that Astra Trident version 21.04 or newer already be installed and configured to work with NetApp ONTAP version 9.5 or newer as the storage backend. Astra Control Center requires that a storage class be created and set as the default storage class. Astra Control Center supports the following ONTAP drivers provided by Astra Trident:
 
 ** ontap-nas
 ** ontap-nas-flexgroup
@@ -43,7 +43,7 @@ NOTE: These requirements assume that Astra Control Center is the only applicatio
 If you are planning to manage the Kubernetes cluster from Astra Control Center as well as use the cluster to host the Astra Control Center installation, the cluster has the following additional requirements:
 
 * The most recent version of the Kubernetes https://kubernetes-csi.github.io/docs/snapshot-controller.html[snapshot-controller component^] is installed
-* A Astra Trident https://docs.netapp.com/us-en/trident/trident-concepts/snapshots.html[volumesnapshotclass object^] has been defined by an administrator
+* An Astra Trident https://docs.netapp.com/us-en/trident/trident-concepts/snapshots.html[volumesnapshotclass object^] has been defined by an administrator
 * A default Kubernetes storage class exists on the cluster
 * At least one storage class is configured to use Astra Trident
 * A method for pointing the FQDN of Astra Control Center to the external IP address of the Astra Control Center service
