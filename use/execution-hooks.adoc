@@ -24,10 +24,10 @@ You can use the NetApp-provided hooks for these apps, or disable them and use yo
 == Important notes about execution hooks
 Keep the following points in mind when planning execution hooks for your apps.
 
+* Astra Control requires execution hooks to be written in the format of executable shell scripts.
+* Script size is limited to 128KB.
 * Astra Control uses execution hook settings and any matching criteria to determine which hooks are applicable to a snapshot.
 * All execution hook failures are soft failures; other hooks and the snapshot are still attempted even if a hook fails. However, when a hook fails, a warning event is recorded in the *Activity* page event log.
-* Any executable script is supported and execution is dependent on support for that script in the container (including interpreted languages such as Python, Ruby, or Go).
-* Script size is limited to 128KB.
 * All create, edit, and delete operations use Owner/Admin permissions.
 //* Scripts that run with Member and Viewer privileges can view only.
 
