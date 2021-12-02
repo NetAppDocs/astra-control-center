@@ -20,53 +20,22 @@ Sometimes one or more backups in Astra Control Center are retained beyond the nu
 //ASTRACTL-9948/DOC-3612
 Volumes created with decimal units fail using the Astra Control Center backup or clone process.
 
-
-
-
-
-
+== Astra Control Center UI slow to show changes to app resources such as persistent volume changes
+// DOC-3563/ASTRACTL-9540/AD AH
+After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. This delay in the UI can also occur when any app resources are added or modified. In this case, a data protection operation is successful within minutes and you can use the management software for the storage backend to confirm the change in volume size.
 
 == Incorrect ClusterRoleBinding created by Astra Control Center CRD during installation
 //ASTRACTL-11352/DOC-3726
-Apply the following patch to all Kubernetes clusters where the acc-operator version 21.08.65 has been deployed. It should also be applied if the acc-operator is re-deployed.
+The patch to correct cluster role binding during installation is no longer required in this release.
 
-To resolve this issue:
 
-. Replace `ACC_NAMESPACE` in the script below with the namespace you used to link:../get-started/install_acc.html#install-astra-control-center[deploy Astra Control Center].
-+
-[source,cli]
-----
-cat <<EOF | kubectl apply -f –
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: acc-operator-manager-rolebinding
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: acc-operator-manager-role
-subjects:
-- kind: ServiceAccount
-  name: default
-  namespace: netapp-acc-operator
-- apiGroup: rbac.authorization.k8s.io
-  kind: Group
-  name: system:serviceaccounts:ACC_NAMESPACE
-EOF
-----
 
-. Run the script.
 
-The patch removes the following two subjects from `ClusterRoleBinding: "acc-operator-manager-rolebinding"`
 
-----
-- apiGroup: rbac.authorization.k8s.io
-  kind: Group
-  name: system:serviceaccounts
-- apiGroup: ""
-  kind: Group
-  name: system:serviceaccounts
-----
+
+
+
+
 
 == App with user-defined label goes into "removed" state
 // ASTRACTL-9643

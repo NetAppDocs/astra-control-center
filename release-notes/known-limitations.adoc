@@ -43,6 +43,10 @@ An operator and the app it deploys must use the same namespace. Astra Control su
 // ASTRACTL-7079
 If you clone an app between clusters, the source and destination clusters must be the same distribution of Kubernetes. For example, if you clone an app from an OpenShift 4.7 cluster, use a destination cluster that is also OpenShift 4.7.
 
+== S3 buckets in Astra Control Center do not report available capacity
+// DOC-3561/ASTRACTL-9425/Q2 and PI4
+Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
+
 == metalLB 0.11.0 is not supported
 //DOC-3872/ASTRACTL-12718
 metalLB 0.11.0 is not a supported loadbalancer for Astra Control Center. For more information regarding supported load balancers, see link:../get-started/requirements.html#service-type-loadbalancer-for-on-premises-kubernetes-clusters[Astra Control Center requirements].

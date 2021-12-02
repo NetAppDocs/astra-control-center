@@ -15,7 +15,6 @@ Known issues identify problems that might prevent you from using this release of
 The following known issues affect the current release:
 //NOTE: For known issues specific to Astra Data Store when managed by Astra Control Center, see link:../release-notes/known-issues-ads.html.
 
-* <<Incorrect ClusterRoleBinding created by Astra Control Center CRD during installation>>
 * <<App with user-defined label goes into "removed" state>>
 * <<Unable to stop running app backup>>
 * <<Backup or clone fails for apps using PVCs with decimal units in Astra Control Center>>
@@ -36,62 +35,16 @@ The following known issues affect the current release:
 * <<Uninstall of Astra Control Center fails to clean up Traefik CRDs>>
 * <<ASUP collection stuck in a generating or uploading state>>
 
-== Incorrect ClusterRoleBinding created by Astra Control Center CRD during installation
-//ASTRACTL-11352/DOC-3726/Q2
-Apply the following patch to all Kubernetes clusters where the acc-operator version 21.08.65 has been deployed. It should also be applied if the acc-operator is re-deployed.
-
-To resolve this issue:
-
-. Replace `ACC_NAMESPACE` in the script below with the namespace you used to link:../get-started/install_acc.html#configure-the-astra-control-center-operator[deploy Astra Control Center].
-+
-[source,cli]
-----
-cat <<EOF | kubectl apply -f –
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: acc-operator-manager-rolebinding
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: acc-operator-manager-role
-subjects:
-- kind: ServiceAccount
-  name: default
-  namespace: netapp-acc-operator
-- apiGroup: rbac.authorization.k8s.io
-  kind: Group
-  name: system:serviceaccounts:ACC_NAMESPACE
-EOF
-----
-
-. Run the script.
-
-The patch removes the following two subjects from `ClusterRoleBinding: "acc-operator-manager-rolebinding"`
-
-----
-- apiGroup: rbac.authorization.k8s.io
-  kind: Group
-  name: system:serviceaccounts
-- apiGroup: ""
-  kind: Group
-  name: system:serviceaccounts
-----
-
 == App with user-defined label goes into "removed" state
 //ASTRACTL-9643/DOC-3415/Q2
 If you define an app with a non-existent k8s label, Astra Control Center will create, manage, and then immediately remove the app. To avoid this, add the k8s label to pods and resources after the app is managed by Astra Control Center.
 
 == Unable to stop running app backup
-// DOC-3552/ASTRACTL-9586/DOC-3894/ASTRACTL-13029
+// DOC-3552/ASTRACTL-9586/DOC-3894/ASTRACTL-13029/Q2 and PI4
 There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in link:../use/protect-apps.html#delete-backups[Delete backups]. To delete a failed backup, use the link:https://docs.netapp.com/us-en/astra-automation/index.html[Astra API^].
 
-== Astra Control Center UI slow to show changes to app resources such as persistent volume changes
-// DOC-3563/ASTRACTL-9560/ASTRACTL-9540/AD AH
-After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. This delay in the UI can also occur when any app resources are added or modified. In this case, a data protection operation is successful within minutes and you can use the management software for the storage backend to confirm the change in volume size.
-
 == During app restore from backup Trident creates a larger PV than the original PV
-// DOC-3562/ASTRACTL-9560
+// DOC-3562/ASTRACTL-9560/Q2 and PI4
 If you resize a persistent volume after creating a backup and then restore from that backup, the persistent volume size matches the new size of the PV instead of using the size of the backup.
 
 == Clone performance impacted by large persistent volumes
@@ -99,21 +52,17 @@ If you resize a persistent volume after creating a backup and then restore from 
 Clones of very large and consumed persistent volumes might be intermittently slow, dependent on cluster access to the object store. If the clone is hung and no data has been copied for more than 30 minutes, Astra Control terminates the clone action.
 
 == App clones fail using a specific version of PostgreSQL
-//DOC-3543/ASTRACTL-9408
+//DOC-3543/ASTRACTL-9408/Q2 and PI4
 App clones within the same cluster consistently fail with the Bitnami PostgreSQL 11.5.0 chart. To clone successfully, use an earlier or later version of the chart.
 
 == App clones fail when using Service Account level OCP Security Context Constraints (SCC)
-//ASTRACTL-10060/DOC-3594
+//ASTRACTL-10060/DOC-3594/Q2 and PI4
 An application clone might fail if the original security context constraints are configured at the service account level within the namespace on the OCP cluster. When the application clone fails, it appears in the Managed Applications area in Astra Control Center with status `Removed`. See the https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Astra/Application_clone_is_failing_for_an_application_in_Astra_Control_Center[knowledgebase article] for more information.
 
 == App clones fail after an application is deployed with a set storage class
 //DOC-3892/ASTRACTL-13183/PI4
 After an application is deployed with a storage class explicitly set (for example, `helm install ...-set global.storageClass=netapp-cvs-perf-extreme`), subsequent attempts to clone the application require that the target cluster have the originally specified storage class.
 Cloning an application with an explicitly set storage class to a cluster that does not have the same storage class will fail. There are no recovery steps in this scenario.
-
-== S3 buckets in Astra Control Center do not report available capacity
-// DOC-3561/ASTRACTL-9425
-Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
 
 == Reusing buckets between instances of Astra Control Center causes failures
 // ASTRACTL-9296 (Low probability)/ASTRACTL-9837/DOC-3575

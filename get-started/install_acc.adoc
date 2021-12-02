@@ -299,8 +299,6 @@ Sample response:
 namespace/netapp-acc created
 ----
 
-. Run the following patch to correct link:https://docs.netapp.com/us-en/astra-control-center/release-notes/known-issues.html#Incorrect-ClusterRoleBinding-created-by-Astra-Control-Center-CRD-during-installation[cluster role binding].
-
 . Install Astra Control Center in the `netapp-acc` (or your custom) namespace:
 +
 ----
