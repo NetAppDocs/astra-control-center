@@ -13,7 +13,7 @@ summary: Known issues identify problems that might prevent you from using this r
 Known issues identify problems that might prevent you from using this release of the product successfully.
 
 The following known issues affect the current release:
-//NOTE: For known issues specific to Astra Data Store when managed by Astra Control Center, see xxxx.
+//NOTE: For known issues specific to Astra Data Store when managed by Astra Control Center, see link:../release-notes/known-issues-ads.html.
 
 * <<Incorrect ClusterRoleBinding created by Astra Control Center CRD during installation>>
 * <<App with user-defined label goes into "removed" state>>
@@ -28,7 +28,6 @@ The following known issues affect the current release:
 * <<Reusing buckets between instances of Astra Control Center causes failures>>
 * <<Selecting a bucket provider type with credentials for another type causes data protection failures>>
 * <<Backups and snapshots might not be retained during removal of an Astra Control Center instance>>
-* <<Backup and restore operations fail using restic image from private repo that requires authentication>>
 * link:known-issues.html#clone-operation-cant-use-other-buckets-besides-the-default[Clone operation can't use other buckets besides the default]
 * <<Managing a cluster with Astra Control Center fails when default kubeconfig file contains more than one context>>
 * <<500 internal service error when attempting Trident app data management>>
@@ -38,7 +37,7 @@ The following known issues affect the current release:
 * <<ASUP collection stuck in a generating or uploading state>>
 
 == Incorrect ClusterRoleBinding created by Astra Control Center CRD during installation
-//ASTRACTL-11352/DOC-3726
+//ASTRACTL-11352/DOC-3726/Q2
 Apply the following patch to all Kubernetes clusters where the acc-operator version 21.08.65 has been deployed. It should also be applied if the acc-operator is re-deployed.
 
 To resolve this issue:
@@ -80,7 +79,7 @@ The patch removes the following two subjects from `ClusterRoleBinding: "acc-oper
 ----
 
 == App with user-defined label goes into "removed" state
-// ASTRACTL-9643
+//ASTRACTL-9643/DOC-3415/Q2
 If you define an app with a non-existent k8s label, Astra Control Center will create, manage, and then immediately remove the app. To avoid this, add the k8s label to pods and resources after the app is managed by Astra Control Center.
 
 == Unable to stop running app backup
@@ -107,6 +106,11 @@ App clones within the same cluster consistently fail with the Bitnami PostgreSQL
 //ASTRACTL-10060/DOC-3594
 An application clone might fail if the original security context constraints are configured at the service account level within the namespace on the OCP cluster. When the application clone fails, it appears in the Managed Applications area in Astra Control Center with status `Removed`. See the https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Astra/Application_clone_is_failing_for_an_application_in_Astra_Control_Center[knowledgebase article] for more information.
 
+== App clones fail after an application is deployed with a set storage class
+//DOC-3892/ASTRACTL-13183/PI4
+After an application is deployed with a storage class explicitly set (for example, `helm install ...-set global.storageClass=netapp-cvs-perf-extreme`), subsequent attempts to clone the application require that the target cluster have the originally specified storage class.
+Cloning an application with an explicitly set storage class to a cluster that does not have the same storage class will fail. There are no recovery steps in this scenario.
+
 == S3 buckets in Astra Control Center do not report available capacity
 // DOC-3561/ASTRACTL-9425
 Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
@@ -122,13 +126,6 @@ When you add a bucket, select the correct bucket provider type with credentials 
 == Backups and snapshots might not be retained during removal of an Astra Control Center instance
 //AD AH review
 If you have an evaluation license, be sure you store your account ID to avoid data loss in the event of Astra Control Center failure if you are not sending ASUPs.
-
-== Backup and restore operations fail using restic image from private repo that requires authentication
-//DOC-3913/ASTRACTL-12528/PI4
-Astra Control Center does not support the ability to pull images from a private repository that requires authentication. To avoid failed backups and restores, you need to perform one of the following workarounds:
-
-* Manually pull the restic image into your k8s app cluster. After the restic image is on the cluster, backup and restore operations will use that image instead of pulling the image from repository again.
-* You can push the restic image into a repository that does not need authentication to pull images and update your deployment.
 
 == Clone operation can't use other buckets besides the default
 //DOC-3595/ASTRACTL-10071
