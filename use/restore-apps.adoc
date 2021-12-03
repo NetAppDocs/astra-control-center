@@ -38,7 +38,7 @@ When you create a project for hosting an app on an OpenShift cluster, the projec
 . Click *Restore application*.
 //+
 //image:screenshot-restore-app.gif["A screenshot of the app page where you can click the drop-down list in the actions column and select Restore application."]
-. *Restore details*: Specify details for the restored app. By default, the current cluster and namespace appear. Use these values to restore an app in-place. This reverts the app to an earlier version of itself. Change these values if you want to restore to a different cluster or namespace.
+. *Restore details*: Specify details for the restored app. By default, the current cluster and namespace appear. Leave these values intact to restore an app in-place, which reverts the app to an earlier version of itself. Change these values if you want to restore to a different cluster or namespace.
 +
 * Enter a name and namespace for the app.
 * Choose the destination cluster for the app.
