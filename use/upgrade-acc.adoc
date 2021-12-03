@@ -206,62 +206,76 @@ Sample response:
 +
 ----
 NAME                                         READY   STATUS    RESTARTS   AGE
-acc-helm-repo-5fdfff786f-gkv6z               1/1     Running   0          4m58s
-activity-649f869bf7-jn5gs                    1/1     Running   0          3m14s
-asup-79846b5fdc-s9s97                        1/1     Running   0          3m10s
-authentication-84c78f5cf4-qhx9t              1/1     Running   0          118s
-billing-9b8496787-v8rzv                      1/1     Running   0          2m54s
-bucketservice-5fb876d9d5-wkfvz               1/1     Running   0          3m26s
-cloud-extension-f9f4f59c6-dz6s6              1/1     Running   0          3m
-cloud-insights-service-5676b8c6d4-6q7lv      1/1     Running   0          2m52s
-composite-compute-7dcc9c6d6c-lxdr6           1/1     Running   0          2m50s
-composite-volume-74dbfd7577-cd42b            1/1     Running   0          3m2s
-credentials-75dbf46f9d-5qm2b                 1/1     Running   0          3m32s
-entitlement-6cf875cb48-gkvhp                 1/1     Running   0          3m12s
-features-74fd97bb46-vss2n                    1/1     Running   0          3m6s
-fluent-bit-ds-2g9jb                          1/1     Running   0          113s
-fluent-bit-ds-5tg5h                          1/1     Running   0          113s
-fluent-bit-ds-qfxb8                          1/1     Running   0          113s
-graphql-server-7769f98b86-p4qrv              1/1     Running   0          90s
-identity-566c566cd5-ntfj6                    1/1     Running   0          3m16s
-influxdb2-0                                  1/1     Running   0          4m43s
-krakend-5cb8d56978-44q66                     1/1     Running   0          93s
-license-66cbbc6f48-27kgf                     1/1     Running   0          3m4s
-login-ui-584f7fd84b-dmdrp                    1/1     Running   0          87s
-loki-0                                       1/1     Running   0          4m44s
-metrics-ingestion-service-6dcfddf45f-mhnvh   1/1     Running   0          3m8s
-monitoring-operator-78d67b4d4-nxs6v          2/2     Running   0          116s
-nats-0                                       1/1     Running   0          4m40s
-nats-1                                       1/1     Running   0          4m26s
-nats-2                                       1/1     Running   0          4m15s
-nautilus-9b664bc55-rn9t8                     1/1     Running   0          2m56s
-openapi-dc5ddfb7d-6q8vh                      1/1     Running   0          3m20s
-polaris-consul-consul-5tjs7                  1/1     Running   0          4m43s
-polaris-consul-consul-5wbnx                  1/1     Running   0          4m43s
-polaris-consul-consul-bfvl7                  1/1     Running   0          4m43s
-polaris-consul-consul-server-0               1/1     Running   0          4m43s
-polaris-consul-consul-server-1               1/1     Running   0          4m43s
-polaris-consul-consul-server-2               1/1     Running   0          4m43s
-polaris-mongodb-0                            2/2     Running   0          4m49s
-polaris-mongodb-1                            2/2     Running   0          4m22s
-polaris-mongodb-2                            1/1     Running   0          4m49s
-polaris-ui-6648875998-75d98                  1/1     Running   0          92s
-polaris-vault-0                              1/1     Running   0          4m41s
-polaris-vault-1                              1/1     Running   0          4m41s
-polaris-vault-2                              1/1     Running   0          4m41s
-storage-backend-metrics-69546f4fc8-m7lfj     1/1     Running   0          3m22s
-storage-provider-5d46f755b-qfv89             1/1     Running   0          3m30s
-support-5dc579865c-z4pwq                     1/1     Running   0          3m18s
-telegraf-ds-4452f                            1/1     Running   0          113s
-telegraf-ds-gnqxl                            1/1     Running   0          113s
-telegraf-ds-jhw74                            1/1     Running   0          113s
-telegraf-rs-gg6m4                            1/1     Running   0          113s
-telemetry-service-6dcc875f98-zft26           1/1     Running   0          3m24s
-tenancy-7f7f77f699-q7l6w                     1/1     Running   0          3m28s
-traefik-769d846f9b-c9crt                     1/1     Running   0          83s
-traefik-769d846f9b-l9n4k                     1/1     Running   0          67s
-trident-svc-8649c8bfc5-pdj79                 1/1     Running   0          2m57s
-vault-controller-745879f98b-49c5v            1/1     Running   0          4m51s
+acc-helm-repo-5f75c5f564-bzqmt             1/1     Running   0          11m
+activity-6b8f7cccb9-mlrn4                  1/1     Running   0          9m2s
+api-token-authentication-6hznt             1/1     Running   0          8m50s
+api-token-authentication-qpfgb             1/1     Running   0          8m50s
+api-token-authentication-sqnb7             1/1     Running   0          8m50s
+asup-5578bbdd57-dxkbp                      1/1     Running   0          9m3s
+authentication-56bff4f95d-mspmq            1/1     Running   0          7m31s
+bucketservice-6f7968b95d-9rrrl             1/1     Running   0          8m36s
+cert-manager-5f6cf4bc4b-82khn              1/1     Running   0          6m19s
+cert-manager-cainjector-76cf976458-sdrbc   1/1     Running   0          6m19s
+cert-manager-webhook-5b7896bfd8-2n45j      1/1     Running   0          6m19s
+cloud-extension-749d9f684c-8bdhq           1/1     Running   0          9m6s
+cloud-insights-service-7d58687d9-h5tzw     1/1     Running   2          8m56s
+composite-compute-968c79cb5-nv7l4          1/1     Running   0          9m11s
+composite-volume-7687569985-jg9gg          1/1     Running   0          8m33s
+credentials-5c9b75f4d6-nx9cz               1/1     Running   0          8m42s
+entitlement-6c96fd8b78-zt7f8               1/1     Running   0          8m28s
+features-5f7bfc9f68-gsjnl                  1/1     Running   0          8m57s
+fluent-bit-ds-h88p7                        1/1     Running   0          7m22s
+fluent-bit-ds-krhnj                        1/1     Running   0          7m23s
+fluent-bit-ds-l5bjj                        1/1     Running   0          7m22s
+fluent-bit-ds-lrclb                        1/1     Running   0          7m23s
+fluent-bit-ds-s5t4n                        1/1     Running   0          7m23s
+fluent-bit-ds-zpr6v                        1/1     Running   0          7m22s
+graphql-server-5f5976f4bd-vbb4z            1/1     Running   0          7m13s
+identity-56f78b8f9f-8h9p9                  1/1     Running   0          8m29s
+influxdb2-0                                1/1     Running   0          11m
+krakend-6f8d995b4d-5khkl                   1/1     Running   0          7m7s
+license-5b5db87c97-jmxzc                   1/1     Running   0          9m
+login-ui-57b57c74b8-6xtv7                  1/1     Running   0          7m10s
+loki-0                                     1/1     Running   0          11m
+monitoring-operator-9dbc9c76d-8znck        2/2     Running   0          7m33s
+nats-0                                     1/1     Running   0          11m
+nats-1                                     1/1     Running   0          10m
+nats-2                                     1/1     Running   0          10m
+nautilus-6b9d88bc86-h8kfb                  1/1     Running   0          8m6s
+nautilus-6b9d88bc86-vn68r                  1/1     Running   0          8m35s
+openapi-b87d77dd8-5dz9h                    1/1     Running   0          9m7s
+polaris-consul-consul-5ljfb                1/1     Running   0          11m
+polaris-consul-consul-s5d5z                1/1     Running   0          11m
+polaris-consul-consul-server-0             1/1     Running   0          11m
+polaris-consul-consul-server-1             1/1     Running   0          11m
+polaris-consul-consul-server-2             1/1     Running   0          11m
+polaris-consul-consul-twmpq                1/1     Running   0          11m
+polaris-mongodb-0                          2/2     Running   0          11m
+polaris-mongodb-1                          2/2     Running   0          10m
+polaris-mongodb-2                          2/2     Running   0          10m
+polaris-ui-84dc87847f-zrg8w                1/1     Running   0          7m12s
+polaris-vault-0                            1/1     Running   0          11m
+polaris-vault-1                            1/1     Running   0          11m
+polaris-vault-2                            1/1     Running   0          11m
+public-metrics-657698b66f-67pgt            1/1     Running   0          8m47s
+storage-backend-metrics-6848b9fd87-w7x8r   1/1     Running   0          8m39s
+storage-provider-5ff5868cd5-r9hj7          1/1     Running   0          8m45s
+telegraf-ds-dw4hg                          1/1     Running   0          7m23s
+telegraf-ds-k92gn                          1/1     Running   0          7m23s
+telegraf-ds-mmxjl                          1/1     Running   0          7m23s
+telegraf-ds-nhs8s                          1/1     Running   0          7m23s
+telegraf-ds-rj7lw                          1/1     Running   0          7m23s
+telegraf-ds-tqrkb                          1/1     Running   0          7m23s
+telegraf-rs-9mwgj                          1/1     Running   0          7m23s
+telemetry-service-56c49d689b-ffrzx         1/1     Running   0          8m42s
+tenancy-767c77fb9d-g9ctv                   1/1     Running   0          8m52s
+traefik-5857d87f85-7pmx8                   1/1     Running   0          6m49s
+traefik-5857d87f85-cpxgv                   1/1     Running   0          5m34s
+traefik-5857d87f85-lvmlb                   1/1     Running   0          4m33s
+traefik-5857d87f85-t2xlk                   1/1     Running   0          4m33s
+traefik-5857d87f85-v9wpf                   1/1     Running   0          7m3s
+trident-svc-595f84dd78-zb8l6               1/1     Running   0          8m54s
+vault-controller-86c94fbf4f-krttq          1/1     Running   0          9m24s
 ----
 
 . Verify that the Astra status conditions indicate that the upgrade is complete and ready:
@@ -412,6 +426,20 @@ acc-helm-repo/traefik                 0.2.0           2.5.3       Helm chart for
 acc-helm-repo/traefik-ingressroutes   0.2.0           2.5.3       A Helm chart for Kubernetes
 ----
 
+. Validate the traefik_values.json file for upgrade:
+.. Open the traefik_values.json file.
+.. Check if there is a value for the `imagePullSecret` field. If it is empty, remove the following text from the file:
++
+----
+"imagePullSecrets": [{"name": ""}],
+----
+
+.. Ensure that the traefik image is directed to the correct location and has the correct name:
++
+----
+image: [your_registry_path]/traefik
+----
+
 . Upgrade your Traefik configuration:
 +
 ----
@@ -447,6 +475,16 @@ NAME CHART VERSION APP VERSION DESCRIPTION
 acc-helm-repo/cert-manager 0.3.0 v1.5.4 A Helm chart for cert-manager
 acc-helm-repo/cert-manager-certificates 0.1.0 1.16.0 A Helm chart for Kubernetes
 ----
+
+. Validate the cert_manager_values.json file for upgrade:
+.. Open the cert_manager_values.json file.
+.. Check if there is a value for the `imagePullSecret` field. If it is empty, remove the following text from the file:
++
+----
+"imagePullSecrets": [{"name": ""}],
+----
+
+.. Ensure that the three cert-manager images are directed to the correct location and have the correct names.
 
 . Upgrade your Cert-manager configuration:
 +
