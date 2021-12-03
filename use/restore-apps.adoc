@@ -11,7 +11,7 @@ summary: Astra can restore your application configuration and persistent storage
 :imagesdir: ../media/use/
 
 [.lead]
-Astra Control Center can restore your application from a snapshot or backup. Persistent storage backups and snapshots are transferred from your object store, so restoring from an existing snapshot to the same cluster will be faster than other methods. You can use the Astra Control UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to restore apps.
+Astra Control Center can restore your application from a snapshot or backup. Persistent storage backups are transferred from your object store, which might take some time. Because of this, restoring from an existing snapshot to the same cluster will be faster than other methods. You can use the Astra Control UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to restore apps.
 
 NOTE: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
 
@@ -38,7 +38,7 @@ When you create a project for hosting an app on an OpenShift cluster, the projec
 . Click *Restore application*.
 //+
 //image:screenshot-restore-app.gif["A screenshot of the app page where you can click the drop-down list in the actions column and select Restore application."]
-. *Restore details*: Specify details for the restored app. To restore an app in-place (revert an app to an earlier version of itself), choose the same namespace and destination cluster that it is currently running in:
+. *Restore details*: Specify details for the restored app. By default, the current cluster and namespace appear. Use these values to restore an app in-place. This reverts the app to an earlier version of itself. Change these values if you want to restore to a different cluster or namespace.
 +
 * Enter a name and namespace for the app.
 * Choose the destination cluster for the app.
@@ -56,6 +56,6 @@ When you create a project for hosting an app on an OpenShift cluster, the projec
 
 .Result
 
-Astra Control Center restores the app based on the information that you provided. If you restored the app in-place, the associated persistent volumes are deleted and recreated.
+Astra Control Center restores the app based on the information that you provided. If you restored the app in-place, the contents of any existing persistent volumes are replaced with the contents of persistent volumes from the restored app.
 
 NOTE: After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
