@@ -48,18 +48,6 @@ If you are planning to manage the Kubernetes cluster from Astra Control Center a
 * At least one storage class is configured to use Astra Trident
 * A method for pointing the FQDN of Astra Control Center to the external IP address of the Astra Control Center service
 
-=== OpenShift clusters
-Astra Control Center requires a Red Hat OpenShift Container Platform 4.6.8 or 4.7 cluster that has Trident storage classes backed by ONTAP 9.5 or newer, with the following attributes:
-
-* At least 300GB of available ONTAP storage capacity
-* 3 controller nodes with 4 CPU cores, 16GB RAM, and 120GB of available storage each
-* 3 worker nodes with at least 12 CPU cores, 32GB RAM, and 50GB of available storage each
-* Kubernetes version 1.19 or 1.20
-* Service type "LoadBalancer" available for ingress traffic to be sent to services in the OpenShift cluster
-* A method for pointing the FQDN of Astra Control Center to the load balanced IP address
-
-NOTE: These minimum requirements assume that Astra Control Center is the only application running on the OpenShift cluster. If the cluster is running additional applications, you need to adjust these minimum requirements accordingly.
-
 Make sure that your cluster meets the minimum requirements and that you follow Kubernetes best practices so that Astra Control Center is highly available in your Kubernetes cluster.
 
 [NOTE]
