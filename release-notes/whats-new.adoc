@@ -16,10 +16,14 @@ We're pleased to announce the latest 21.12 release of Astra Control Center.
 
 Updated release of Astra Control Center.
 
-.New features
+.New features and support
 
-* link:../use/upgrade-acc.html[Upgrades]
+* link:../get-started/setup_overview.html#add-a-storage-backend/[Astra Data Store backend management and monitoring]
+* link:../get-started/requirements.html[Added support for Kubernetes 1.19 to 1.21, Rancher 2.5, Openshift 4.8, and Trident 21.04]
+* link:../use/upgrade-acc.html[Astra Control Center upgrades]
 * link:../use/execution-hooks.html[Execution hooks]
+* link:../use/restore-apps.html[App restore]
+* link:../get-started/install_acc.html[OperatorHub option for installation]
 
 .Resolved issues
 * link:../release-notes/known-issues.html[Known issues for this release]
@@ -45,3 +49,4 @@ Initial release of Astra Control Center.
 
 * link:../release-notes/known-issues.html[Known issues for this release]
 * link:../release-notes/known-limitations.html[Known limitations for this release]
+* link:../acc-earlier-versions.html[Earlier versions of Astra Control Center documentation]

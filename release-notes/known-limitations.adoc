@@ -13,7 +13,7 @@ summary: Known limitations identify platforms, devices, or functions that are no
 Known limitations identify platforms, devices, or functions that are not supported by this release of the product, or that do not interoperate correctly with it. Review these limitations carefully.
 
 == The same cluster cannot be managed by two Astra Control Center instances
-//DOC-3600
+//DOC-3600/Q2 and PI4
 If you want to manage a cluster on another Astra Control Center instance, you should first link:../use/unmanage.html#stop-managing-compute[unmanage the cluster] from the instance on which it is managed before you manage it on another instance. After you remove the cluster from management, verify that the cluster is unmanaged by executing this command:
 
 ----
@@ -23,7 +23,7 @@ oc get pods n -netapp-monitoring
 There should be no pods running in that namespace or the namespace should not exist. If either of those are true, the cluster is unmanaged.
 
 == Cluster is in `removed` state although cluster and network are otherwise working as expected
-//DOC-3613
+//DOC-3613/Q2 and PI4
 If a cluster is in `removed` state yet cluster and network connectivity appears healthy (external attempts to access the cluster using Kubernetes APIs are successful), the kubeconfig you provided to Astra Control might no longer be valid. This can be due to certificate rotation or expiration on the cluster. To correct this issue, update the credentials associated with the cluster in Astra Control using the link:https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API]:
 
 . Run a POST call to add an updated kubeconfig file to the `/credentials` endpoint and retrieve the assigned `id` from the response body.
@@ -32,23 +32,19 @@ If a cluster is in `removed` state yet cluster and network connectivity appears 
 After you complete these steps, the credential associated with the cluster is updated and the cluster should reconnect and update its state to `available`.
 
 == OLM-enabled and cluster-scoped operator deployed apps not supported
-//DOC-3553/ASTRACTL-9490/AD AH
+//DOC-3553/ASTRACTL-9490/AD AH/Q2 and PI4
 Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators or cluster-scoped operators.
 
-== Operator-deployed apps and namespaces
-//DOC-3899/ASTRACTL-13098
-An operator and the app it deploys must use the same namespace. Astra Control supports only one operator-deployed app per namespace.
-
 == Cloning apps can only be done with same K8s distribution
-// ASTRACTL-7079
+//ASTRACTL-7079
 If you clone an app between clusters, the source and destination clusters must be the same distribution of Kubernetes. For example, if you clone an app from an OpenShift 4.7 cluster, use a destination cluster that is also OpenShift 4.7.
 
 == S3 buckets in Astra Control Center do not report available capacity
-// DOC-3561/ASTRACTL-9425/Q2 and PI4
+//DOC-3561/ASTRACTL-9425/Q2 and PI4
 Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
 
 == metalLB 0.11.0 is not supported
-//DOC-3872/ASTRACTL-12718
+//DOC-3872/ASTRACTL-12718/Q2 and PI4
 metalLB 0.11.0 is not a supported loadbalancer for Astra Control Center. For more information regarding supported load balancers, see link:../get-started/requirements.html#service-type-loadbalancer-for-on-premises-kubernetes-clusters[Astra Control Center requirements].
 
 == Apps deployed with Helm 2 are not supported
@@ -56,11 +52,11 @@ metalLB 0.11.0 is not a supported loadbalancer for Astra Control Center. For mor
 If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. For more information, see link:../get-started/requirements.html[Astra Control Center requirements].
 
 == Astra Control Center does not validate the details you enter for your proxy server
-//From email request/AD AH
+//From email request/AD AH/Q2 and PI4
 Ensure that you link:../use/monitor-protect.html#add-a-proxy-server[enter the correct values] when establishing a connection.
 
 == Data protection for Astra Control Center as app not yet available
-//DOC-3583
+//DOC-3583/Q2 and PI4
 This release does not support the ability to manage Astra as an app using snapshot, backup, or restore options.
 
 == Unhealthy pods affect app management

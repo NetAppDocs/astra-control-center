@@ -5,7 +5,7 @@ keywords: astra, control center, ads, data store, bugs, known issues, problems
 summary: Known issues identify problems that might prevent you from using this release of the product successfully.
 ---
 
-= Known issues with Astra Data Store and this release
+= Known issues with Astra Data Store and this Astra Control Center release
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/release-notes/
