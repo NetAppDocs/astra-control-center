@@ -180,10 +180,10 @@ deployment.apps/acc-operator-controller-manager configured
 
 == Upgrade Astra Control Center
 
-. Edit the Astra Control Center custom resource (CR) and change the Astra version (`astraVersion`) number to the latest:
+. Edit the Astra Control Center custom resource (CR) and change the Astra version (`astraVersion` inside of `Spec`) number to the latest:
 +
 ----
-kubectl edit acc -n [netapp-acc or custom namespace] astra
+kubectl edit acc -n [netapp-acc or custom namespace]
 ----
 +
 NOTE: Changing the Astra version is the only requirement for an Astra Control Center upgrade. Your registry path must match the registry path where you pushed the images in a <<substep_image_local_registry_push,previous step>>.
@@ -191,13 +191,13 @@ NOTE: Changing the Astra version is the only requirement for an Astra Control Ce
 . Verify that the pods terminate and become available again:
 +
 ----
-watch kubectl get po -n [netapp-acc or custom namespace]
+watch kubectl get pods -n [netapp-acc or custom namespace]
 ----
 
 . Verify that all system components upgraded successfully.
 +
 ----
-kubectl get pods -n [netapp-acc or custom]
+kubectl get pods -n [netapp-acc or custom namespace]
 ----
 +
 Each pod should have a status of `Running` and `Age` that is recent. It may take several minutes before the system pods are deployed.
@@ -408,8 +408,8 @@ Response:
 +
 ----
 NAME                                    CHART VERSION   APP VERSION DESCRIPTION
-local-temp-repo/traefik                 0.2.0           2.5.3       Helm chart for Traefik Ingress controller
-local-temp-repo/traefik-ingressroutes   0.2.0           2.5.3       A Helm chart for Kubernetes
+acc-helm-repo/traefik                 0.2.0           2.5.3       Helm chart for Traefik Ingress controller
+acc-helm-repo/traefik-ingressroutes   0.2.0           2.5.3       A Helm chart for Kubernetes
 ----
 
 . Upgrade your Traefik configuration:
@@ -451,7 +451,7 @@ acc-helm-repo/cert-manager-certificates 0.1.0 1.16.0 A Helm chart for Kubernetes
 . Upgrade your Cert-manager configuration:
 +
 ----
-helm upgrade --version 0.3.0 --namespace netapp-acc -f ../cert_manager_values.json cert-manager acc-helm-repo/cert-manager
+helm upgrade --version 0.3.0 --namespace netapp-acc -f cert_manager_values.json cert-manager acc-helm-repo/cert-manager
 ----
 +
 Response:
