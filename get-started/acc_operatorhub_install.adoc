@@ -10,7 +10,7 @@ summary: You can install the Astra Control Center operator from Operatorhub.io a
 :icons: font
 :imagesdir: ../media/get-started/
 
-You can install the Astra Control Center operator from https://operatorhub.io/[Operatorhub.io^]. You can also install the Astra Control Center from Red Hat Container Platform using this procedure.
+You can install the Astra Control Center operator from https://operatorhub.io/[Operatorhub.io^] using the Red Hat Container Platform. You can also install the Astra Control Center through the same platform using this procedure.
 
 After you complete this procedure, you must return to the installation procedure to complete the link:../get-started/install_acc.html#verify-system-status[remaining steps] to verify installation success and log on.
 
