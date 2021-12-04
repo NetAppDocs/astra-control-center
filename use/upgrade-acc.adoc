@@ -40,6 +40,8 @@ The Astra Control Center upgrade process guides you through the following high-l
 
 NOTE: Podman commands can be used in place of Docker commands if you are using Red Hat’s Podman repository.
 
+IMPORTANT: Do not execute the following command during the entirety of the upgrade process to avoid deleting all Astra Control Center pods: `kubectl delete -f astra_control_center_operator_deploy.yaml`
+
 == Download the Astra Control Center bundle
 
 . Download the Astra Control Center upgrade bundle (`astra-control-center-[version].tar.gz`) from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].

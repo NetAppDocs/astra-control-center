@@ -37,6 +37,8 @@ The Astra Control Center installation process does the following:
 
 NOTE: Podman commands can be used in place of Docker commands if you are using Red Hat’s Podman repository.
 
+IMPORTANT: Do not execute the following command during the entirety of the installation process to avoid deleting all Astra Control Center pods: `kubectl delete -f astra_control_center_operator_deploy.yaml`
+
 To install Astra Control Center, do the following steps:
 
 * <<Download the Astra Control Center bundle>>
