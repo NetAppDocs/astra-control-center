@@ -16,9 +16,9 @@ Get started by verifying support for your Kubernetes clusters, apps, licenses, a
 
 Astra Control Center requires one of the following types of host clusters:
 
-* Red Hat OpenShift Container Platform 4.6.8 to 4.8
+* Red Hat OpenShift Container Platform 4.6.8, 4.7, or 4.8
 * NetApp Rancher 2.5
-* Kubernetes 1.21
+* Kubernetes 1.19 to 1.21 (including 1.21.x)
 
 The cluster must meet the following general requirements so you can discover and manage it from Astra Control Center.
 
@@ -33,7 +33,7 @@ NOTE: These requirements assume that Astra Control Center is the only applicatio
 
 * *Image registry*: You must have an existing private Docker image registry to which you can push Astra Control Center build images. You must have the URL of the image registry where you will upload the images, and you must have tagged the images for the private container registry.
 
-* *Astra Trident / ONTAP storage configuration*: Astra Control Center requires that Astra Trident version 21.07 or newer already be installed and configured to work with NetApp ONTAP version 9.5 or newer as the storage backend. Astra Control Center requires that a storage class be created and set as the default storage class. Astra Control Center supports the following ONTAP drivers provided by Astra Trident:
+* *Astra Trident / ONTAP storage configuration*: Astra Control Center requires that Astra Trident version 21.04 or newer already be installed and configured to work with NetApp ONTAP version 9.5 or newer as the storage backend. Astra Control Center requires that a storage class be created and set as the default storage class. Astra Control Center supports the following ONTAP drivers provided by Astra Trident:
 
 ** ontap-nas
 ** ontap-nas-flexgroup
@@ -43,22 +43,10 @@ NOTE: These requirements assume that Astra Control Center is the only applicatio
 If you are planning to manage the Kubernetes cluster from Astra Control Center as well as use the cluster to host the Astra Control Center installation, the cluster has the following additional requirements:
 
 * The most recent version of the Kubernetes https://kubernetes-csi.github.io/docs/snapshot-controller.html[snapshot-controller component^] is installed
-* A Astra Trident https://docs.netapp.com/us-en/trident/trident-concepts/snapshots.html[volumesnapshotclass object^] has been defined by an administrator
+* An Astra Trident https://docs.netapp.com/us-en/trident/trident-concepts/snapshots.html[volumesnapshotclass object^] has been defined by an administrator
 * A default Kubernetes storage class exists on the cluster
 * At least one storage class is configured to use Astra Trident
 * A method for pointing the FQDN of Astra Control Center to the external IP address of the Astra Control Center service
-
-=== OpenShift clusters
-Astra Control Center requires a Red Hat OpenShift Container Platform 4.6.8 or 4.7 cluster that has Trident storage classes backed by ONTAP 9.5 or newer, with the following attributes:
-
-* At least 300GB of available ONTAP storage capacity
-* 3 controller nodes with 4 CPU cores, 16GB RAM, and 120GB of available storage each
-* 3 worker nodes with at least 12 CPU cores, 32GB RAM, and 50GB of available storage each
-* Kubernetes version 1.19 or 1.20
-* Service type "LoadBalancer" available for ingress traffic to be sent to services in the OpenShift cluster
-* A method for pointing the FQDN of Astra Control Center to the load balanced IP address
-
-NOTE: These minimum requirements assume that Astra Control Center is the only application running on the OpenShift cluster. If the cluster is running additional applications, you need to adjust these minimum requirements accordingly.
 
 Make sure that your cluster meets the minimum requirements and that you follow Kubernetes best practices so that Astra Control Center is highly available in your Kubernetes cluster.
 
@@ -97,7 +85,7 @@ Astra Control Center has the following app management requirements:
 +
 NOTE: If you clone an operator-deployed instance of Jenkins CI, you need to manually restore the persistent data. This is a limitation of the app's deployment model.
 
-Each of these operators must be deployed in the same namespace as the app. You might need to modify the deployment .yaml file for the operator to ensure this is the case.
+NOTE: Only one operator-deployed app is supported per namespace. An operator and the app it deploys must use the same namespace; you might need to modify the deployment .yaml file for the operator to ensure this is the case.
 
 == Access to the internet
 
