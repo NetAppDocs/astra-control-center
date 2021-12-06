@@ -29,6 +29,10 @@ NOTE: Trident storage classes should be preconfigured outside of Astra Control C
 
 When you add clusters to Astra Control Center, you're prompted to choose one of the previously discovered storage classes for persistent volumes. Service levels in storage classes are designed for different capacity and bandwidth needs. These discovered storage classes are eligible for use within Astra Control Center.
 
+When you use Astra Control Center integrated with an Astra Data Store backend storage, after the installation, no storage classes are defined. You will need to create the Trident default storage class and apply it to the storage backend. See information in Astra Data Store getting started about how to create a generic Astra Data Store storage class. 
+
+
+
 == Persistent volume size and performance
 
 See Trident information that provides cost comparisons and examples that can help you better understand how to couple a service level with volume size to meet your performance objectives.
