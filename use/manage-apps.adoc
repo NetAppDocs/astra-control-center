@@ -17,7 +17,7 @@ Astra Control has the following app management requirements:
 
 * *Licensing*: To manage apps using Astra Control Center, you need an Astra Control Center license.
 * *Namespaces*: Astra Control requires that an app not span more than a single namespace, but a namespace can contain more than one app.
-* *StorageClass*: If you deploy an app with a StorageClass explicitly set and you need to clone the app, the target cluster must have the originally specified StorageClass. Cloning an application with an explicitly set StorageClass to a cluster that does not have the same StorageClass will fail.
+* *StorageClass*: If you deploy an app with a StorageClass explicitly set and you need to clone the app, the target cluster for the clone operation must have the originally specified StorageClass. Cloning an application with an explicitly set StorageClass to a cluster that does not have the same StorageClass will fail.
 * *Kubernetes resources*: Apps that use Kubernetes Resources not currently collected by Astra Control might not have full app data management capabilities. Astra Control collects the following Kubernetes resources:
 ** ClusterRole
 ** ClusterRoleBinding
