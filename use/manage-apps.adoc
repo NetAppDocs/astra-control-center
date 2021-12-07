@@ -21,7 +21,7 @@ Astra Control Center has the following app management requirements:
 === Supported app deployment methods
 Astra Control Center supports the following application deployment methods:
 
-* *Manifest file*: You can deploy an app's manifest file using kubectl. For example:
+* *Manifest file*: Astra Control Center supports apps deployed from a manifest file using kubectl. For example:
 +
 ----
 kubectl apply -f myapp.yaml
