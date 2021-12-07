@@ -72,7 +72,7 @@ The Kubernetes cluster you use for Astra Control Center should already be deploy
 * At least 3 worker nodes
 ////
 
-=== App management requirements
+== App management requirements
 Astra Control has the following app management requirements:
 
 * *Licensing*: To manage apps using Astra Control Center, you need an Astra Control Center license.
@@ -101,7 +101,7 @@ Astra Control has the following app management requirements:
 ** StatefulSet
 ** ValidatingWebhook
 
-==== Supported app installation methods
+=== Supported app installation methods
 Astra Control supports the following application installation methods:
 
 * *Manifest file*: Astra Control supports apps installed from a manifest file using kubectl. For example:
