@@ -19,7 +19,10 @@ Updated release of Astra Control Center.
 .New features and support
 
 * link:../get-started/setup_overview.html#add-a-storage-backend/[Astra Data Store backend management and monitoring]
-* link:../get-started/requirements.html[Added support for Kubernetes 1.19 to 1.21, NetApp Rancher 2.5, Red Hat Openshift Container Platform 4.8, and Astra Trident 21.04]
+* link:../get-started/requirements.html[Added support for Kubernetes 1.19 to 1.21, NetApp Rancher 2.5, Red Hat OpenShift Container Platform 4.8, and Astra Trident 21.04]
+* Operator Support for Cassandra, Jenkins, and Percona
+//link:../use/operator_support.html
+* link:../get-started/setup_overview.html#ipv6-support[Support for managing IPv6 applications]
 * link:../use/upgrade-acc.html[Astra Control Center upgrades]
 * link:../use/execution-hooks.html[Execution hooks]
 * link:../use/restore-apps.html[App restore]
