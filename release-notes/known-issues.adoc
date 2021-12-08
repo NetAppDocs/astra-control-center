@@ -97,6 +97,7 @@ Because execution hooks often reduce or completely disable the functionality of 
 During ASUP collection, the status of the bundle in the UI is reported as either `collecting` or `done`. Collection can take up to an hour for large environments. During ASUP download the network file transfer speed for the bundle might be insufficient, and the download might time out after 15 minutes without any indication in the UI. Download issues depend on the size of the ASUP, the scaled cluster size, and if collection time goes beyond the seven day limit.
 
 == Snapshots eventually begin to fail when using external-snapshotter version 4.2.0
+// DOC-3891 and ASTRACTL-12523
 When you use Kubernetes snapshot-controller (also known as external-snapshotter) version 4.2.0 with Kubernetes 1.20 or 1.21, snapshots can eventually begin to fail. To prevent this, use a different https://kubernetes-csi.github.io/docs/snapshot-controller.html[supported version^] of external-snapshotter, such as version 4.2.1, with Kubernetes versions 1.20 or 1.21.
 
 == Uninstall of Astra Control Center fails to clean up the monitoring-operator pod on the managed cluster
