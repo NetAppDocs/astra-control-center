@@ -106,7 +106,7 @@ When you use Kubernetes snapshot-controller (also known as external-snapshotter)
 //DOC-3910 and ASTRACTL-13362
 If you try to restore one or more individually managed apps within a namespace simultaneously, the restore operations can fail after a long period of time. As a workaround, restore each app one at a time.
 
-== Upgrade fails if source version uses a container image registry that doesn't require authentication and target version uses a container image registry that requires authentication
+== Upgrade fails if source version uses a container image registry that does not require authentication and target version uses a container image registry that requires authentication
 //DOC-3919 and ASTRACTL-13466
 If you upgrade an Astra Control Center system that uses a registry that doesn't require authentication to a newer version that uses a registry that requires authentication, the upgrade fails. As a workaround, perform the following steps:
 
@@ -118,6 +118,7 @@ If you upgrade an Astra Control Center system that uses a registry that doesn't 
 
 . Execute the following script:
 +
+[source,shell]
 ----
 namespace="<netapp-acc>"
 statefulsets=("polaris-vault" "polaris-mongodb" "influxdb2" "nats" "loki")
