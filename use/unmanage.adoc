@@ -39,7 +39,7 @@ Unmanage the cluster that you no longer want to manage from Astra Control Center
 
 * This action stops your cluster from being managed by Astra Control Center. It doesn't make any changes to the cluster's configuration and it doesn't delete the cluster.
 
-* Trident won't be uninstalled from the cluster. https://netapp-trident.readthedocs.io/en/stable-v21.01/kubernetes/operations/tasks/managing.html#uninstalling-trident[Learn how to uninstall Trident^].
+* Trident won't be uninstalled from the cluster. https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html[Learn how to uninstall Trident^].
 
 NOTE: Before you unmanage the cluster, you should unmanage the apps associated with the cluster.
 
@@ -57,4 +57,4 @@ NOTE: Before you unmanage the cluster, you should unmanage the apps associated w
 
 The status of the cluster changes to *Removing* and after that the cluster will be removed from the *Clusters* page, and it is no longer managed by Astra Control Center.
 
-IMPORTANT: *If Astra Control Center and Cloud Insights are not connected*, unmanaging the cluster removes all the resources that were installed for sending telemetry data. *If Astra Control Center and Cloud Insights are connected*, unmanaging the cluster deletes only the `fluentbit` and `event-exporter` pods. 
+IMPORTANT: *If Astra Control Center and Cloud Insights are not connected*, unmanaging the cluster removes all the resources that were installed for sending telemetry data. *If Astra Control Center and Cloud Insights are connected*, unmanaging the cluster deletes only the `fluentbit` and `event-exporter` pods.

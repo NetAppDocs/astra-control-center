@@ -69,7 +69,7 @@ When you perform operations on Postgres pods, you shouldn't connect directly wit
 
 == Trident isn't uninstalled from a cluster
 //From ACS RN
-When you unmanage a cluster from Astra Control Center, Trident isn't automatically uninstalled from the cluster. To uninstall Trident, you'll need to https://netapp-trident.readthedocs.io/en/latest/kubernetes/operations/tasks/managing.html#uninstalling-trident[follow these steps in the Trident documentation^].
+When you unmanage a cluster from Astra Control Center, Trident isn't automatically uninstalled from the cluster. To uninstall Trident, you'll need to https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html[follow these steps in the Trident documentation^].
 
 == Find more information
 
