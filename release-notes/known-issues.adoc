@@ -142,7 +142,7 @@ statefulset.apps/influxdb2 patched
 statefulset.apps/nats patched
 statefulset.apps/loki patched
 ----
-. Proceed with the upgrade using the instructions link:../use/upgrade-acc.html#add-the-images-to-your-local-registry[here^].
+. Proceed with the upgrade using the link:../use/upgrade-acc.html#add-the-images-to-your-local-registry[Astra Control Center upgrade instructions].
 
 == Uninstall of Astra Control Center fails to clean up the monitoring-operator pod on the managed cluster
 //DOC-3530/ASTRACTL-9496/Q2 and PI4
