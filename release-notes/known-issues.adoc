@@ -121,6 +121,7 @@ If you upgrade an Astra Control Center system that uses a registry that doesn't 
 +
 [source,shell]
 ----
+
 namespace="<netapp-acc>"
 statefulsets=("polaris-vault" "polaris-mongodb" "influxdb2" "nats" "loki")
 for ss in ${statefulsets[@]}; do
