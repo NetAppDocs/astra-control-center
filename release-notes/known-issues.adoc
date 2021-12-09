@@ -32,7 +32,7 @@ The following known issues affect the current release:
 * link:known-issues.html#cant-determine-asup-tar-bundle-status-in-scaled-environment[Can't determine ASUP tar bundle status in scaled environment]
 * <<Snapshots eventually begin to fail when using external-snapshotter version 4.2.0>>
 * <<Simultaneous app restore operations in the same namespace can fail>>
-* <<Upgrade fails if source version uses a container image registry that doesn't require authentication and target version uses a container image registry that requires authentication>>
+* <<Upgrade fails if source version uses a container image registry that does not require authentication and target version uses a container image registry that requires authentication>>
 * <<Uninstall of Astra Control Center fails to clean up the monitoring-operator pod on the managed cluster>>
 * <<Uninstall of Astra Control Center fails to clean up Traefik CRDs>>
 
