@@ -43,7 +43,7 @@ NOTE: These requirements assume that Astra Control Center is the only applicatio
 If you are planning to manage the Kubernetes cluster from Astra Control Center as well as use the cluster to host the Astra Control Center installation, the cluster has the following additional requirements:
 
 * The most recent version of the Kubernetes https://kubernetes-csi.github.io/docs/snapshot-controller.html[snapshot-controller component^] is installed
-* An Astra Trident https://docs.netapp.com/us-en/trident/trident-concepts/snapshots.html[volumesnapshotclass object^] has been defined by an administrator
+* An Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[volumesnapshotclass object^] has been defined by an administrator
 * A default Kubernetes storage class exists on the cluster
 * At least one storage class is configured to use Astra Trident
 * A method for pointing the FQDN of Astra Control Center to the external IP address of the Astra Control Center service
