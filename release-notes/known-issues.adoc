@@ -114,7 +114,7 @@ If you upgrade an Astra Control Center system that uses a registry that doesn't 
 . Log in to a host that has network access to the Astra Control Center cluster.
 . Ensure that the host has the following configuration:
 +
-* kubectl version 1.19 or later is installed
+* `kubectl` version 1.19 or later is installed
 * The KUBECONFIG environment variable is set to the kubeconfig file for the Astra Control Center cluster
 
 . Execute the following script:
