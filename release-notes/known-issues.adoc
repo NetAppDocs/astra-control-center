@@ -6,6 +6,7 @@ summary: Known issues identify problems that might prevent you from using this r
 ---
 
 = Known issues with this release
+:source-highlighter: highlight.js
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/release-notes/
