@@ -5,7 +5,7 @@ keywords: astra installation, operator, operatorhub, install astra control cente
 summary: You can install the Astra Control Center operator from Operatorhub.io after addressing systems prerequisites and other installation steps.
 ---
 
-= Install Astra Control Center operator from Operatorhub.io
+= Install Astra Control Center from Operatorhub.io
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/get-started/
@@ -15,20 +15,95 @@ You can install the Astra Control Center operator from https://catalog.redhat.co
 After you complete this procedure, you must return to the installation procedure to complete the link:../get-started/install_acc.html#verify-system-status[remaining steps] to verify installation success and log on.
 
 .What you'll need
-* You have completed all steps including prerequisite steps from the link:../get-started/install_acc.html[installation procedure] prior to the step link:../get-started/install_acc.html#install-the-astra-control-center-operator[Install the Astra Control Center operator].
+* link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
+* From your OpenShift cluster, ensure all cluster operators are in a healthy state (`available` is `true`):
++
+----
+oc get clusteroperators
+----
+
+* From your OpenShift cluster, ensure all API services are in a healthy state (`available` is `true`):
++
+----
+oc get apiservices
+----
+
 * You have created an FQDN address for Astra Control Center in your data center.
 * You have the necessary permissions and access to the Red Hat OpenShift Container Platform to perform the steps described.
 
 .Steps
 
+* <<Download the Astra Control Center bundle>>
+* <<Unpack the bundle and change directory>>
+* <<Add the images to your local registry>>
 * <<Find the operator install page>>
 * <<Install the operator>>
 * <<Install Astra Control Center>>
 
+== Download the Astra Control Center bundle
+
+. Download the Astra Control Center bundle (`astra-control-center-[version].tar.gz`) from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
+. Download the zip of Astra Control Center certificates and keys from https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
+. (Optional) Use the following command to verify the signature of the bundle:
++
+----
+openssl dgst -sha256 -verify astra-control-center[version].pub -signature <astra-control-center[version].sig astra-control-center[version].tar.gz
+----
+
+== Unpack the bundle and change directory
+
+. Extract the images:
++
+----
+tar -vxzf astra-control-center-[version].tar.gz
+----
+
+. Change to the Astra directory.
++
+----
+cd astra-control-center-[version]
+----
+
+== Add the images to your local registry
+
+. Add the files in the Astra Control Center image directory to your local registry.
++
+NOTE: See a sample script for the automatic loading of images below.
+
+.. Log in to your Docker registry:
++
+----
+docker login [your_registry_path]
+----
+
+.. Load the images into Docker.
+.. Tag the images.
+.. [[substep_image_local_registry_push]]Push the images to your local registry.
+
++
+----
+export REGISTRY=[Docker_registry_path]
+for astraImageFile in $(ls images/*.tar) ; do
+  # Load to local cache. And store the name of the loaded image trimming the 'Loaded images: '
+  astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image: //')
+  astraImage=$(echo ${astraImage} | sed 's!localhost/!!')
+  # Tag with local image repo.
+  docker tag ${astraImage} ${REGISTRY}/${astraImage}
+  # Push to the local repo.
+  docker push ${REGISTRY}/${astraImage}
+done
+----
+
 == Find the operator install page
 
-. From the Red Hat OpenShift console, go to the Operatorhub menu and https://catalog.redhat.com/software/operators/detail/611fd22aaf489b8bb1d0f274[select^] the NetApp Astra Control Center operator.
-. Select *Install*.
+. Do one of the following:
+* Red Hat Openshift console:
+.. From the Red Hat OpenShift console, go to the Operatorhub menu and https://catalog.redhat.com/software/operators/detail/611fd22aaf489b8bb1d0f274[select^] the NetApp Astra Control Center operator.
+.. Select *Install*.
+
+* Red Hat catalog:
+.. From the Red Hat catalog, select the NetApp Astra Control Center https://catalog.redhat.com/software/operators/detail/611fd22aaf489b8bb1d0f274[operator].
+.. Select *Deploy and Use*.
 
 == Install the operator
 
@@ -47,21 +122,20 @@ NOTE: The operator will be available in all cluster namespaces.
 . From the console within the details view of the Astra Control Center operator, select `Create instance` in the Provided APIs section.
 . Complete the `Create AstraControlCenter` form field:
 .. Keep or adjust the Astra Control Center name.
-.. Retain the Auto Support value.
+.. (Optional) Enable or disable Auto Support. Retaining Auto Support functionality is highly recommended.
 .. Enter the Astra Control Center address. Do not use `http://` or `https://` in the address.
-.. Enter the Astra Control Center version you are deploying.
 .. Enter an account name, email address, and admin last name.
 .. Retain the default volume reclaim policy.
 .. In *Image Registry*, enter your local container image registry path. Do not use `http://` or `https://` in the address.
 .. If you use a registry that requires authentication, enter the secret.
 .. Enter the admin first name.
-.. Configure resources scaling.
-.. Retain the default storage class.
-.. Define CRD handling preferences.
-.. Select `Create`.
+//.. Configure resources scaling.
+//.. Retain the default storage class.
+//.. Define CRD handling preferences.
+. Select `Create`.
 
 == What's next
 
-Complete installation by verifying the successful of Astra Control Center and completing the link:../get-started/install_acc.html#verify-system-status[remaining steps] to log on.
+Complete installation by verifying the successful of Astra Control Center and completing the link:../get-started/install_acc.html#verify-system-status[remaining steps] to log on. Complete the deployment by also performing link:setup_overview.html[setup tasks].
 
 NOTE: You can alternatively verify successful installation of the Astra Control Center from the `AstraControlCenter details` tab within your installed operator in the Red Hat console.

@@ -5,7 +5,7 @@ keywords: astra installation, install astra control center, how to install astra
 summary: To install Astra Control Center after addressing some environmental prerequisites, you'll download the bundle and install following the steps described.
 ---
 
-= Install Astra Control Center
+= Install Astra Control Center using the standard process
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/get-started/
