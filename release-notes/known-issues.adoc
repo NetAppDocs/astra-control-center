@@ -32,6 +32,7 @@ The following known issues affect the current release:
 * link:known-issues.html#cant-determine-asup-tar-bundle-status-in-scaled-environment[Can't determine ASUP tar bundle status in scaled environment]
 * <<Snapshots eventually begin to fail when using external-snapshotter version 4.2.0>>
 * <<Simultaneous app restore operations in the same namespace can fail>>
+* <<Clones of apps installed using pass by reference operators can fail>>
 * <<Upgrade fails if source version uses a container image registry that does not require authentication and target version uses a container image registry that requires authentication>>
 * <<Uninstall of Astra Control Center fails to clean up the monitoring-operator pod on the managed cluster>>
 * <<Uninstall of Astra Control Center fails to clean up Traefik CRDs>>
@@ -106,6 +107,14 @@ When you use Kubernetes snapshot-controller (also known as external-snapshotter)
 == Simultaneous app restore operations in the same namespace can fail
 //DOC-3910 and ASTRACTL-13362
 If you try to restore one or more individually managed apps within a namespace simultaneously, the restore operations can fail after a long period of time. As a workaround, restore each app one at a time.
+
+=== Clones of apps installed using pass by reference operators can fail
+* *Operator-deployed apps*: Astra Control supports apps installed with namespace-scoped operators. These operators are generally designed with a "pass-by-value" rather than "pass-by-reference" architecture. The following are some operator apps that follow these patterns:
+** https://github.com/k8ssandra/cass-operator/tree/v1.7.1[Apache K8ssandra^]
+** https://github.com/jenkinsci/kubernetes-operator[Jenkins CI^]
+** https://github.com/percona/percona-xtradb-cluster-operator[Percona XtraDB Cluster^]
+
+Note that Astra Control might not be able to clone an operator that is designed with a “pass-by-reference” architecture (for example, the CockroachDB operator). During these types of cloning operations, the cloned operator attempts to reference Kubernetes secrets from the source operator despite having its own new secret as part of the cloning process. The clone operation might fail because Astra Control is unaware of the Kubernetes secrets in the source operator.
 
 == Upgrade fails if source version uses a container image registry that does not require authentication and target version uses a container image registry that requires authentication
 //DOC-3919 and ASTRACTL-13466
