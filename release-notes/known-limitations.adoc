@@ -22,6 +22,15 @@ oc get pods n -netapp-monitoring
 
 There should be no pods running in that namespace or the namespace should not exist. If either of those are true, the cluster is unmanaged.
 
+=== Clones of apps installed using pass by reference operators can fail
+Astra Control supports apps installed with namespace-scoped operators. These operators are generally designed with a "pass-by-value" rather than "pass-by-reference" architecture. The following are some operator apps that follow these patterns:
+
+* https://github.com/k8ssandra/cass-operator/tree/v1.7.1[Apache K8ssandra^]
+* https://github.com/jenkinsci/kubernetes-operator[Jenkins CI^]
+* https://github.com/percona/percona-xtradb-cluster-operator[Percona XtraDB Cluster^]
+
+Note that Astra Control might not be able to clone an operator that is designed with a “pass-by-reference” architecture (for example, the CockroachDB operator). During these types of cloning operations, the cloned operator attempts to reference Kubernetes secrets from the source operator despite having its own new secret as part of the cloning process. The clone operation might fail because Astra Control is unaware of the Kubernetes secrets in the source operator.
+
 == Cluster is in `removed` state although cluster and network are otherwise working as expected
 //DOC-3613/Q2 and PI4
 If a cluster is in `removed` state yet cluster and network connectivity appears healthy (external attempts to access the cluster using Kubernetes APIs are successful), the kubeconfig you provided to Astra Control might no longer be valid. This can be due to certificate rotation or expiration on the cluster. To correct this issue, update the credentials associated with the cluster in Astra Control using the link:https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API]:
