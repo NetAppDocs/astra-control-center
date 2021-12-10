@@ -109,10 +109,11 @@ When you use Kubernetes snapshot-controller (also known as external-snapshotter)
 If you try to restore one or more individually managed apps within a namespace simultaneously, the restore operations can fail after a long period of time. As a workaround, restore each app one at a time.
 
 === Clones of apps installed using pass by reference operators can fail
-* *Operator-deployed apps*: Astra Control supports apps installed with namespace-scoped operators. These operators are generally designed with a "pass-by-value" rather than "pass-by-reference" architecture. The following are some operator apps that follow these patterns:
-** https://github.com/k8ssandra/cass-operator/tree/v1.7.1[Apache K8ssandra^]
-** https://github.com/jenkinsci/kubernetes-operator[Jenkins CI^]
-** https://github.com/percona/percona-xtradb-cluster-operator[Percona XtraDB Cluster^]
+Astra Control supports apps installed with namespace-scoped operators. These operators are generally designed with a "pass-by-value" rather than "pass-by-reference" architecture. The following are some operator apps that follow these patterns:
+
+* https://github.com/k8ssandra/cass-operator/tree/v1.7.1[Apache K8ssandra^]
+* https://github.com/jenkinsci/kubernetes-operator[Jenkins CI^]
+* https://github.com/percona/percona-xtradb-cluster-operator[Percona XtraDB Cluster^]
 
 Note that Astra Control might not be able to clone an operator that is designed with a “pass-by-reference” architecture (for example, the CockroachDB operator). During these types of cloning operations, the cloned operator attempts to reference Kubernetes secrets from the source operator despite having its own new secret as part of the cloning process. The clone operation might fail because Astra Control is unaware of the Kubernetes secrets in the source operator.
 
