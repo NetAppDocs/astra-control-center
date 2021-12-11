@@ -14,13 +14,17 @@ To install Astra Control Center, download the installation bundle from the NetAp
 
 .What you'll need
 * link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
-* From your OpenShift cluster, ensure all cluster operators are in a healthy state (`available` is `true`):
+* Ensure all cluster operators are in a healthy state and available.
++
+OpenShift example:
 +
 ----
 oc get clusteroperators
 ----
 
-* From your OpenShift cluster, ensure all API services are in a healthy state (`available` is `true`):
+* Ensure all API services are in a healthy state and available:
++
+OpenShift example:
 +
 ----
 oc get apiservices
@@ -35,7 +39,7 @@ The Astra Control Center installation process does the following:
 * Helps you determine that all Astra Control Center pods are running.
 * Installs the Astra UI.
 
-NOTE: Podman commands can be used in place of Docker commands if you are using Red Hat’s Podman repository.
+NOTE: Podman commands can be used in place of Docker commands if you are using Red Hat’s Podman instead of Docker Engine.
 
 IMPORTANT: Do not execute the following command during the entirety of the installation process to avoid deleting all Astra Control Center pods: `kubectl delete -f astra_control_center_operator_deploy.yaml`
 
@@ -170,7 +174,7 @@ vim astra_control_center_operator_deploy.yaml
 +
 ----
 imagePullSecrets:
-- name: astra-registry-cred
+- name: <name_of_secret_with_creds_to_local_registry>
 ----
 
 .. Change `[your_registry_path]` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<substep_image_local_registry_push,previous step>>.
@@ -428,7 +432,7 @@ name: astra
  spec:
    accountName: Example
    astraAddress: astra.example.com
-   astraVersion: 21.12.32
+   astraVersion: 21.12.59
    autoSupport:
      enrolled: true
      url: https://support.netapp.com/asupprod/post/1.0/postAsup
@@ -442,7 +446,7 @@ name: astra
  status:
    accConditionHistory:
      items:
-     - astraVersion: 21.12.32
+     - astraVersion: 21.12.59
        condition:
          lastTransitionTime: "2021-11-23T02:23:59Z"
          message: Deploying is currently in progress.
@@ -453,7 +457,7 @@ name: astra
        observedSpec:
          accountName: Example
          astraAddress: astra.example.com
-         astraVersion: 21.12.32
+         astraVersion: 21.12.59
          autoSupport:
            enrolled: true
            url: https://support.netapp.com/asupprod/post/1.0/postAsup
@@ -465,7 +469,7 @@ name: astra
            secret: astra-registry-cred
          lastName: Admin
        timestamp: "2021-11-23T02:23:59Z"
-     - astraVersion: 21.12.32
+     - astraVersion: 21.12.59
        condition:
          lastTransitionTime: "2021-11-23T02:23:59Z"
          message: Deploying is currently in progress.
@@ -476,7 +480,7 @@ name: astra
        observedSpec:
          accountName: Example
          astraAddress: astra.example.com
-         astraVersion: 21.12.32
+         astraVersion: 21.12.59
          autoSupport:
            enrolled: true
            url: https://support.netapp.com/asupprod/post/1.0/postAsup
@@ -488,7 +492,7 @@ name: astra
            secret: astra-registry-cred
          lastName: Admin
        timestamp: "2021-11-23T02:23:59Z"
-     - astraVersion: 21.12.32
+     - astraVersion: 21.12.59
        condition:
          lastTransitionTime: "2021-11-23T02:29:41Z"
          message: Post Install was successful
@@ -500,7 +504,7 @@ name: astra
        observedSpec:
          accountName: Example
          astraAddress: astra.example.com
-         astraVersion: 21.12.32
+         astraVersion: 21.12.59
          autoSupport:
            enrolled: true
            url: https://support.netapp.com/asupprod/post/1.0/postAsup
@@ -512,7 +516,7 @@ name: astra
            secret: astra-registry-cred
          lastName: Admin
        timestamp: "2021-11-23T02:29:41Z"
-     - astraVersion: 21.12.32
+     - astraVersion: 21.12.59
        condition:
          lastTransitionTime: "2021-11-23T02:29:41Z"
          message: Deploying succeeded.
@@ -524,7 +528,7 @@ name: astra
        observedSpec:
          accountName: Example
          astraAddress: astra.example.com
-         astraVersion: 21.12.32
+         astraVersion: 21.12.59
          autoSupport:
            enrolled: true
            url: https://support.netapp.com/asupprod/post/1.0/postAsup
@@ -535,9 +539,9 @@ name: astra
            name: registry_name/astra
            secret: astra-registry-cred
          lastName: Admin
-       observedVersion: 21.12.32
+       observedVersion: 21.12.59
        timestamp: "2021-11-23T02:29:41Z"
-     - astraVersion: 21.12.32
+     - astraVersion: 21.12.59
        condition:
          lastTransitionTime: "2021-11-23T02:29:41Z"
          message: Astra is deployed
@@ -549,7 +553,7 @@ name: astra
        observedSpec:
          accountName: Example
          astraAddress: astra.example.com
-         astraVersion: 21.12.32
+         astraVersion: 21.12.59
          autoSupport:
            enrolled: true
            url: https://support.netapp.com/asupprod/post/1.0/postAsup
@@ -560,9 +564,9 @@ name: astra
            name: registry_name/astra
            secret: astra-registry-cred
          lastName: Admin
-       observedVersion: 21.12.32
+       observedVersion: 21.12.59
        timestamp: "2021-11-23T02:29:41Z"
-     - astraVersion: 21.12.32
+     - astraVersion: 21.12.59
        condition:
          lastTransitionTime: "2021-11-23T02:29:41Z"
          message: Astra is deployed
@@ -574,7 +578,7 @@ name: astra
        observedSpec:
          accountName: Example
          astraAddress: astra.example.com
-         astraVersion: 21.12.32
+         astraVersion: 21.12.59
          autoSupport:
            enrolled: true
            url: https://support.netapp.com/asupprod/post/1.0/postAsup
@@ -585,7 +589,7 @@ name: astra
            name: registry_name/astra
            secret: astra-registry-cred
          lastName: Admin
-       observedVersion: 21.12.32
+       observedVersion: 21.12.59
        timestamp: "2021-11-23T02:29:41Z"
    certManager: deploy
    cluster:
@@ -593,33 +597,33 @@ name: astra
      vendorVersion: 4.7.5
      version: v1.20.0+bafe72f
    conditions:
-   - lastTransitionTime: "2021-11-23T02:29:41Z"
+   - lastTransitionTime: "2021-12-08T16:19:55Z"
      message: Astra is deployed
      reason: Complete
      status: "True"
      type: Ready
-   - lastTransitionTime: "2021-11-23T02:29:41Z"
+   - lastTransitionTime: "2021-12-08T16:19:55Z"
      message: Deploying succeeded.
      reason: Complete
      status: "False"
      type: Deploying
-   - lastTransitionTime: "2021-11-23T02:29:41Z"
+   - lastTransitionTime: "2021-12-08T16:19:53Z"
      message: Post Install was successful
      observedGeneration: 2
      reason: Complete
      status: "True"
      type: PostInstallComplete
-   - lastTransitionTime: "2021-11-23T02:29:41Z"
-     message: Astra is deployed
-     reason: Complete
-     status: "True"
-     type: Deployed
+   *- lastTransitionTime: "2021-12-08T16:19:55Z"*
+     *message: Astra is deployed*
+     *reason: Complete*
+     *status: "True"*
+     *type: Deployed*
    *deploymentState: Deployed*
    observedGeneration: 2
    observedSpec:
      accountName: Example
      astraAddress: astra.example.com
-     astraVersion: 21.12.32
+     astraVersion: 21.12.59
      autoSupport:
        enrolled: true
        url: https://support.netapp.com/asupprod/post/1.0/postAsup
@@ -630,7 +634,7 @@ name: astra
        name: registry_name/astra
        secret: astra-registry-cred
      lastName: Admin
-   observedVersion: 21.12.32
+   observedVersion: 21.12.59
    postInstall: Complete
    *uuid: 9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f*
 kind: List

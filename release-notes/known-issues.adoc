@@ -222,6 +222,7 @@ ingressroutes.traefik.containo.us             2021-06-23T23:29:11Z
 ingressroutetcps.traefik.containo.us          2021-06-23T23:29:11Z
 ingressrouteudps.traefik.containo.us          2021-06-23T23:29:12Z
 middlewares.traefik.containo.us               2021-06-23T23:29:12Z
+middlewaretcps.traefik.containo.us 				    2021-06-23T23:29:12Z
 serverstransports.traefik.containo.us         2021-06-23T23:29:13Z
 tlsoptions.traefik.containo.us                2021-06-23T23:29:13Z
 tlsstores.traefik.containo.us                 2021-06-23T23:29:14Z
@@ -231,7 +232,7 @@ traefikservices.traefik.containo.us           2021-06-23T23:29:15Z
 . Delete the CRDs:
 +
 ----
-kubectl delete crd ingressroutes.traefik.containo.us ingressroutetcps.traefik.containo.us ingressrouteudps.traefik.containo.us middlewares.traefik.containo.us serverstransports.traefik.containo.us tlsoptions.traefik.containo.us tlsstores.traefik.containo.us traefikservices.traefik.containo.us
+kubectl delete crd ingressroutes.traefik.containo.us ingressroutetcps.traefik.containo.us ingressrouteudps.traefik.containo.us middlewares.traefik.containo.us serverstransports.traefik.containo.us tlsoptions.traefik.containo.us tlsstores.traefik.containo.us traefikservices.traefik.containo.us middlewaretcps.traefik.containo.us
 ----
 
 == Find more information
