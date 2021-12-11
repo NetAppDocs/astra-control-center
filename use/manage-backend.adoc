@@ -12,7 +12,7 @@ summary: Add storage for your on-premises Kubernetes applications. Astra Control
 
 Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend as well as additional storage metrics. You can monitor storage capacity and health details, including performance if Astra Control Center is connected to Cloud Insights.
 
-For instructions on how to manage storage backends using the Astra API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
+For instructions on how to manage storage backends using the Astra Control API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
 
 
 You can complete the following tasks related to managing a storage backend:
@@ -92,4 +92,4 @@ You can unmanage the backend.
 
 == Find more information
 
-* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API^]
+* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra Control API^]

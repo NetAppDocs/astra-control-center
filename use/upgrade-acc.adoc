@@ -13,18 +13,23 @@ summary: To upgrade Astra Control Center, you'll download the bundle and upgrade
 To upgrade Astra Control Center, download the installation bundle from the NetApp Support Site and perform a series a commands to upgrade the Astra Control Center components in your environment. You can use this procedure to upgrade Astra Control Center in internet-connected or air-gapped environments.
 
 .What you'll need
-* link:requirements.html[Before you begin upgrade, ensure your environment still meets the minimum requirements for Astra Control Center deployment].
-* From your OpenShift cluster, ensure all cluster operators are in a healthy state (`available` is `true`):
+* link:../get-started/requirements.html[Before you begin upgrade, ensure your environment still meets the minimum requirements for Astra Control Center deployment].
+* Ensure all cluster operators are in a healthy state and available.
++
+OpenShift example:
 +
 ----
 oc get clusteroperators
 ----
 
-* From your OpenShift cluster, ensure all API services are in a healthy state (`available` is `true`):
+* Ensure all API services are in a healthy state and available.
++
+OpenShift example:
 +
 ----
 oc get apiservices
 ----
+
 * Log out of your Astra Control Center.
 
 .About this task
@@ -38,9 +43,12 @@ The Astra Control Center upgrade process guides you through the following high-l
 * <<Upgrade third-party services>>
 * <<Verify system status>>
 
-NOTE: Podman commands can be used in place of Docker commands if you are using Red Hat’s Podman repository.
 
 IMPORTANT: Do not execute the following command during the entirety of the upgrade process to avoid deleting all Astra Control Center pods: `kubectl delete -f astra_control_center_operator_deploy.yaml`
+
+TIP: Perform upgrades in a maintenance window when schedules, backups, and snapshots are not running.
+
+NOTE: Podman commands can be used in place of Docker commands if you are using Red Hat’s Podman instead of Docker Engine.
 
 == Download the Astra Control Center bundle
 
@@ -85,7 +93,7 @@ docker login [your_registry_path]
 export REGISTRY=[your_registry_path]
 for astraImageFile in $(ls images/*.tar)
   # Load to local cache. And store the name of the loaded image trimming the 'Loaded images: '
-  do astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image(s): //')
+  do astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image: //')
   astraImage=$(echo ${astraImage} | sed 's!localhost/!!')
   # Tag with local image repo.
   docker tag ${astraImage} ${REGISTRY}/${astraImage}
@@ -106,7 +114,7 @@ vim astra_control_center_operator_deploy.yaml
 +
 ----
 imagePullSecrets:
-- name: astra-registry-cred
+- name: <name_of_secret_with_creds_to_local_registry>
 ----
 
 .. Change `[your_registry_path]` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<substep_image_local_registry_push,previous step>>.
@@ -396,7 +404,7 @@ python3.7 ./set_previous_values.py
 
 NOTE: You must already have <<Set up acc-helm-repo to upgrade Traefik and Cert-manager,set up acc-helm-repo>> before completing the following procedure.
 
-. If you are installing from an internet-connected environment, download the Traefik bundle using a secure, file-transfer tool, such as GNU wget:
+. Download the Traefik bundle using a secure, file-transfer tool, such as GNU wget:
 +
 ----
 wget http://localhost:8082/traefik-0.2.0.tgz

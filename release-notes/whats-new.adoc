@@ -18,15 +18,16 @@ Updated release of Astra Control Center.
 
 .New features and support
 
-* link:../get-started/setup_overview.html#add-a-storage-backend/[Astra Data Store backend management and monitoring]
-* link:../get-started/requirements.html[Added support for Kubernetes 1.19 to 1.21, NetApp Rancher 2.5, Red Hat Openshift Container Platform 4.8, and Astra Trident 21.04]
-* link:../use/upgrade-acc.html[Astra Control Center upgrades]
-* link:../use/execution-hooks.html[Execution hooks]
 * link:../use/restore-apps.html[App restore]
-* link:../get-started/install_acc.html[OperatorHub option for installation]
+* link:../use/execution-hooks.html[Execution hooks]
+* link:../get-started/requirements.html#supported-app-installation-methods[Support for applications deployed with namespace-scoped operators]
+* link:../get-started/requirements.html[Additional support for upstream Kubernetes and Rancher]
+* link:../get-started/setup_overview.html#add-a-storage-backend[Astra Data Store backend management and monitoring]
+* link:../use/upgrade-acc.html[Astra Control Center upgrades]
+//* link:../get-started/install_acc.html[OperatorHub option for installation]
 
 .Resolved issues
-* link:../release-notes/known-issues.html[Known issues for this release]
+* link:../release-notes/resolved-issues.html[Resolved issues for this release]
 
 .Known issues and limitations
 * link:../release-notes/known-issues.html[Known issues for this release]

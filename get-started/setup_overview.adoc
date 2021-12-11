@@ -10,7 +10,7 @@ summary: After you install Astra Control Center, log in to the UI, and change yo
 :icons: font
 :imagesdir: ../media/get-started/
 
-After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up a license, add clusters, manage storage, and add buckets.
+Astra Control Center supports and monitors ONTAP and Astra Data Store as the backend storage. After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up a license, add clusters, manage storage, and add buckets.
 
 .Tasks
 * <<Add a license for Astra Control Center>>
@@ -148,7 +148,7 @@ Use any of the following bucket types:
 
 NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon’s S3 support.
 
-For instructions on how to add buckets using the Astra API, see link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
+For instructions on how to add buckets using the Astra Control API, see link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
 
 .Steps
 
@@ -156,13 +156,13 @@ For instructions on how to add buckets using the Astra API, see link:https://doc
 .. Select *Add*.
 .. Select the bucket type.
 +
-NOTE: When you add a bucket, select the correct bucket provider type with credentials that are correct for that provider. For example, the UI accepts NetApp ONTAP S3 as the type with StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail.
+NOTE: When you add a bucket, select the correct bucket provider and provide the right credentials for that provider. For example, the UI accepts NetApp ONTAP S3 as the type and accepts StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail.
 
 .. Create a new bucket name or enter an existing bucket name and optional description.
 +
 TIP: The bucket name and description appear as a backup location that you can choose later when you’re creating a backup. The name also appears during protection policy configuration.
 
-.. Enter the name or IP address of the S3 server.
+.. Enter the name or IP address of the S3 endpoint.
 .. If you want this bucket to be the default bucket for all backups, check the `Make this bucket the default bucket for this private cloud` option.
 +
 NOTE: This option does not appear for the first bucket you create.
@@ -193,5 +193,5 @@ Now that you’ve logged in and added clusters to Astra Control Center, you're r
 
 [discrete]
 == Find more information
-* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API^]
+* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra Control API^]
 * link:../release-notes/known-issues.html[Known issues]

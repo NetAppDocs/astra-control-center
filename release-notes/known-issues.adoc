@@ -6,6 +6,7 @@ summary: Known issues identify problems that might prevent you from using this r
 ---
 
 = Known issues with this release
+:source-highlighter: highlight.js
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/release-notes/
@@ -29,6 +30,9 @@ The following known issues affect the current release:
 * <<500 internal service error when attempting Trident app data management>>
 * <<Custom app execution hook scripts time out and cause post-snapshot scripts not to execute>>
 * link:known-issues.html#cant-determine-asup-tar-bundle-status-in-scaled-environment[Can't determine ASUP tar bundle status in scaled environment]
+* <<Snapshots eventually begin to fail when using external-snapshotter version 4.2.0>>
+* <<Simultaneous app restore operations in the same namespace can fail>>
+* <<Upgrade fails if source version uses a container image registry that does not require authentication and target version uses a container image registry that requires authentication>>
 * <<Uninstall of Astra Control Center fails to clean up the monitoring-operator pod on the managed cluster>>
 * <<Uninstall of Astra Control Center fails to clean up Traefik CRDs>>
 
@@ -38,7 +42,7 @@ If you define an app with a non-existent k8s label, Astra Control Center will cr
 
 == Unable to stop running app backup
 // DOC-3552/ASTRACTL-9586/DOC-3894/ASTRACTL-13029/Q2 and PI4
-There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in link:../use/protect-apps.html#delete-backups[Delete backups]. To delete a failed backup, use the link:https://docs.netapp.com/us-en/astra-automation/index.html[Astra API^].
+There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in link:../use/protect-apps.html#delete-backups[Delete backups]. To delete a failed backup, use the link:https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^].
 
 == During app restore from backup Trident creates a larger PV than the original PV
 // DOC-3562/ASTRACTL-9560/Q2 and PI4
@@ -67,7 +71,7 @@ If you try to reuse a bucket used by another or previous installation of Astra C
 
 == Selecting a bucket provider type with credentials for another type causes data protection failures
 //DOC-3560/ASTRACTL-9574/ASTRACTL-9504/Q2 and PI4
-When you add a bucket, select the correct bucket provider type with credentials that are correct for that provider. For example, the UI accepts NetApp ONTAP S3 as the type with StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail.
+When you add a bucket, select the correct bucket provider and provide the right credentials for that provider. For example, the UI accepts NetApp ONTAP S3 as the type and accepts StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail.
 
 == Backups and snapshots might not be retained during removal of an Astra Control Center instance
 //AD AH review
@@ -94,6 +98,52 @@ Because execution hooks often reduce or completely disable the functionality of 
 == Can't determine ASUP tar bundle status in scaled environment
 //DOC-3602/ASTRACTL-10186/AD AH/Q2 and PI4
 During ASUP collection, the status of the bundle in the UI is reported as either `collecting` or `done`. Collection can take up to an hour for large environments. During ASUP download the network file transfer speed for the bundle might be insufficient, and the download might time out after 15 minutes without any indication in the UI. Download issues depend on the size of the ASUP, the scaled cluster size, and if collection time goes beyond the seven day limit.
+
+== Snapshots eventually begin to fail when using external-snapshotter version 4.2.0
+// DOC-3891 and ASTRACTL-12523
+When you use Kubernetes snapshot-controller (also known as external-snapshotter) version 4.2.0 with Kubernetes 1.20 or 1.21, snapshots can eventually begin to fail. To prevent this, use a different https://kubernetes-csi.github.io/docs/snapshot-controller.html[supported version^] of external-snapshotter, such as version 4.2.1, with Kubernetes versions 1.20 or 1.21.
+
+== Simultaneous app restore operations in the same namespace can fail
+//DOC-3910 and ASTRACTL-13362
+If you try to restore one or more individually managed apps within a namespace simultaneously, the restore operations can fail after a long period of time. As a workaround, restore each app one at a time.
+
+== Upgrade fails if source version uses a container image registry that does not require authentication and target version uses a container image registry that requires authentication
+//DOC-3919 and ASTRACTL-13466
+If you upgrade an Astra Control Center system that uses a registry that doesn't require authentication to a newer version that uses a registry that requires authentication, the upgrade fails. As a workaround, perform the following steps:
+
+. Log in to a host that has network access to the Astra Control Center cluster.
+. Ensure that the host has the following configuration:
++
+* `kubectl` version 1.19 or later is installed
+* The KUBECONFIG environment variable is set to the kubeconfig file for the Astra Control Center cluster
+
+. Execute the following script:
++
+[source,shell]
+----
+
+namespace="<netapp-acc>"
+statefulsets=("polaris-vault" "polaris-mongodb" "influxdb2" "nats" "loki")
+for ss in ${statefulsets[@]}; do
+	existing=$(kubectl get -n ${namespace} statefulsets.apps ${ss} -o jsonpath='{.spec.template.spec.imagePullSecrets}')
+	if [ "${existing}" = "[{}]" ] || [ "${existing}" = "[{},{},{}]" ]; then
+		kubectl patch -n ${namespace} statefulsets.apps ${ss} --type merge --patch '{"spec": {"template": {"spec": {"imagePullSecrets": []}}}}'
+	else
+		echo "${ss} not patched"
+	fi
+done
+----
++
+You should see output similar to the following:
++
+----
+statefulset.apps/polaris-vault patched
+statefulset.apps/polaris-mongodb patched
+statefulset.apps/influxdb2 patched
+statefulset.apps/nats patched
+statefulset.apps/loki patched
+----
+. Proceed with the upgrade using the link:../use/upgrade-acc.html#add-the-images-to-your-local-registry[Astra Control Center upgrade instructions].
 
 == Uninstall of Astra Control Center fails to clean up the monitoring-operator pod on the managed cluster
 //DOC-3530/ASTRACTL-9496/Q2 and PI4
@@ -172,6 +222,7 @@ ingressroutes.traefik.containo.us             2021-06-23T23:29:11Z
 ingressroutetcps.traefik.containo.us          2021-06-23T23:29:11Z
 ingressrouteudps.traefik.containo.us          2021-06-23T23:29:12Z
 middlewares.traefik.containo.us               2021-06-23T23:29:12Z
+middlewaretcps.traefik.containo.us 				    2021-06-23T23:29:12Z
 serverstransports.traefik.containo.us         2021-06-23T23:29:13Z
 tlsoptions.traefik.containo.us                2021-06-23T23:29:13Z
 tlsstores.traefik.containo.us                 2021-06-23T23:29:14Z
@@ -181,7 +232,7 @@ traefikservices.traefik.containo.us           2021-06-23T23:29:15Z
 . Delete the CRDs:
 +
 ----
-kubectl delete crd ingressroutes.traefik.containo.us ingressroutetcps.traefik.containo.us ingressrouteudps.traefik.containo.us middlewares.traefik.containo.us serverstransports.traefik.containo.us tlsoptions.traefik.containo.us tlsstores.traefik.containo.us traefikservices.traefik.containo.us
+kubectl delete crd ingressroutes.traefik.containo.us ingressroutetcps.traefik.containo.us ingressrouteudps.traefik.containo.us middlewares.traefik.containo.us serverstransports.traefik.containo.us tlsoptions.traefik.containo.us tlsstores.traefik.containo.us traefikservices.traefik.containo.us middlewaretcps.traefik.containo.us
 ----
 
 == Find more information
