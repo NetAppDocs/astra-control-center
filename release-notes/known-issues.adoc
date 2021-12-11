@@ -42,7 +42,7 @@ If you define an app with a non-existent k8s label, Astra Control Center will cr
 
 == Unable to stop running app backup
 // DOC-3552/ASTRACTL-9586/DOC-3894/ASTRACTL-13029/Q2 and PI4
-There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in link:../use/protect-apps.html#delete-backups[Delete backups]. To delete a failed backup, use the link:https://docs.netapp.com/us-en/astra-automation/index.html[Astra API^].
+There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in link:../use/protect-apps.html#delete-backups[Delete backups]. To delete a failed backup, use the link:https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^].
 
 == During app restore from backup Trident creates a larger PV than the original PV
 // DOC-3562/ASTRACTL-9560/Q2 and PI4
@@ -71,7 +71,7 @@ If you try to reuse a bucket used by another or previous installation of Astra C
 
 == Selecting a bucket provider type with credentials for another type causes data protection failures
 //DOC-3560/ASTRACTL-9574/ASTRACTL-9504/Q2 and PI4
-When you add a bucket, select the correct bucket provider type with credentials that are correct for that provider. For example, the UI accepts NetApp ONTAP S3 as the type with StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail.
+When you add a bucket, select the correct bucket provider and provide the right credentials for that provider. For example, the UI accepts NetApp ONTAP S3 as the type and accepts StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail.
 
 == Backups and snapshots might not be retained during removal of an Astra Control Center instance
 //AD AH review

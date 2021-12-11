@@ -46,9 +46,9 @@ homepage:
           url: /use/protect-apps.html
         - title: Clone and migrate apps
           url: /use/clone-apps.html
-    - title: Use Astra API
+    - title: Use Astra Control API
       links:
-        - title: Get started with the Astra API
+        - title: Get started with the Astra Control API
           url: https://docs.netapp.com/us-en/astra-automation/get-started/before_get_started.html
         - title: API reference
           url: https://docs.netapp.com/us-en/astra-automation/reference/api_reference.html
