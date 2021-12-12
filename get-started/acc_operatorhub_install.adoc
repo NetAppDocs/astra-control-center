@@ -96,7 +96,7 @@ done
 
 == Find the operator install page
 
-. Complete one of the following procedures to access OperatorHub:
+. Complete one of the following procedures to access the operator install page:
 * From Red Hat Openshift web console:
 image:openshift_operatorhub.png[Astra Control Center install page]
 .. Log in to the OpenShift Container Platform UI.
