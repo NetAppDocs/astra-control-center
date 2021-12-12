@@ -54,7 +54,7 @@ If you are planning to manage the Kubernetes cluster from Astra Control Center a
 ======================
 During app cloning, Astra Control Center needs to allow OpenShift to mount volumes and change the ownership of files if necessary. Because of this, you need to configure an ONTAP volume export policy to allow volume operations to complete successfully. You can do so with the following commands:
 
-. `export-policy rule modify -vserver <storage virtual machine name> -policyname <policy name>  -ruleindex 1 -superuser sysm --anon 65534`
+`export-policy rule modify -vserver <storage virtual machine name> -policyname <policy name>  -ruleindex 1 -superuser sysm --anon 65534`
 
 ======================
 
