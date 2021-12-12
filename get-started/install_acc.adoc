@@ -10,7 +10,9 @@ summary: To install Astra Control Center after addressing some environmental pre
 :icons: font
 :imagesdir: ../media/get-started/
 
-To install Astra Control Center, download the installation bundle from the NetApp Support Site and perform a series of commands to install Astra Control Center Operator and Astra Control Center in your environment. You can use this procedure to install Astra Control Center in internet-connected or air-gapped environments.
+To install Astra Control Center, download the installation bundle from the NetApp Support Site and perform a series of additional steps to install Astra Control Center Operator and Astra Control Center in your environment. You can use this procedure to install Astra Control Center in internet-connected or air-gapped environments.
+
+For Red Hat OpenShift environments, you can use a different procedure and link:../get-started/acc_operatorhub_install.html[install using the Astra Control Center operator].
 
 .What you'll need
 * link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
@@ -42,6 +44,8 @@ The Astra Control Center installation process does the following:
 NOTE: Podman commands can be used in place of Docker commands if you are using Red Hat’s Podman instead of Docker Engine.
 
 IMPORTANT: Do not execute the following command during the entirety of the installation process to avoid deleting all Astra Control Center pods: `kubectl delete -f astra_control_center_operator_deploy.yaml`
+
+.Steps
 
 To install Astra Control Center, do the following steps:
 
@@ -163,14 +167,6 @@ secret/astra-registry-cred created
 ----
 
 == Install the Astra Control Center operator
-
-You can configure and install the operator YAML using either the commands described here or by completing the installation from Operatorhub.io.
-
-.Options
-* link:../get-started/acc_operatorhub_install.html[Install from Operatorhub.io]
-* <<Install the operator using the command line,Install using command line>>
-
-=== Install the operator using the command line
 
 . Edit the Astra Control Center operator deployment YAML (`astra_control_center_operator_deploy.yaml`) to refer to your local registry and secret.
 +
@@ -328,6 +324,8 @@ astracontrolcenter.astra.netapp.io/astra created
 ----
 
 == Verify system status
+
+NOTE: If you prefer to use OpenShift, you can use comparable oc commands for verification steps.
 
 . Verify that all system components installed successfully.
 +

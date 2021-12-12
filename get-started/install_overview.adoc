@@ -10,7 +10,7 @@ summary: You have two choices for Astra Control Center installation.
 :icons: font
 :imagesdir: ../media/release-notes/
 
-Choose one of the following Astra Control Center installation options:
+Choose and complete one of the following Astra Control Center installation procedures:
 
 * link:..get-started/install_acc.html[Install Astra Control Center using the standard process]
-* link:../get-started/acc_operatorhub_install.html[Install Astra Control Center from Operatorhub.io]
+* link:../get-started/acc_operatorhub_install.html[(If you use Red Hat OpenShift) Install the Astra Control Center using the Astra Control Center operator]
