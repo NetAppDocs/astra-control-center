@@ -17,12 +17,12 @@ Get started by verifying support for your Kubernetes clusters, apps, licenses, a
 Astra Control Center requires one of the following types of host clusters:
 
 * Red Hat OpenShift Container Platform 4.6.8, 4.7, or 4.8
-* NetApp Rancher 2.5
+* Rancher 2.5
 * Kubernetes 1.19 to 1.21 (including 1.21.x)
 
 The cluster must meet the following general requirements so you can discover and manage it from Astra Control Center.
 
-* At least 300GB of available ONTAP storage capacity
+* At least 300GB available in backend ONTAP storage capacity
 * 3 controller nodes with 4 CPU cores, 16GB RAM, and 120GB of available storage each
 * 3 worker nodes with at least 12 CPU cores, 32GB RAM, and 50GB of available storage each
 //* Kubernetes version 1.19 or 1.20
@@ -31,7 +31,7 @@ The cluster must meet the following general requirements so you can discover and
 
 NOTE: These requirements assume that Astra Control Center is the only application running on the OpenShift cluster. If the cluster is running additional applications, adjust these minimum requirements accordingly.
 
-* *Image registry*: You must have an existing private Docker image registry to which you can push Astra Control Center build images. You must have the URL of the image registry where you will upload the images, and you must have tagged the images for the private container registry.
+* *Image registry*: You must have an existing private Docker image registry to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
 
 * *Astra Trident / ONTAP storage configuration*: Astra Control Center requires that Astra Trident version 21.04 or newer already be installed and configured to work with NetApp ONTAP version 9.5 or newer as the storage backend. Astra Control Center requires that a storage class be created and set as the default storage class. Astra Control Center supports the following ONTAP drivers provided by Astra Trident:
 
@@ -48,14 +48,14 @@ If you are planning to manage the Kubernetes cluster from Astra Control Center a
 * At least one storage class is configured to use Astra Trident
 * A method for pointing the FQDN of Astra Control Center to the external IP address of the Astra Control Center service
 
-Make sure that your cluster meets the minimum requirements and that you follow Kubernetes best practices so that Astra Control Center is highly available in your Kubernetes cluster.
+//Make sure that your cluster meets the minimum requirements and that you follow Kubernetes best practices so that Astra Control Center is highly available in your Kubernetes cluster.
 
 [NOTE]
 ======================
-During app cloning, Astra Control Center needs to allow OpenShift to mount volumes and change the ownership of files. Because of this, ONTAP needs to be configured to allow volume operations to complete successfully using the following commands:
+During app cloning, Astra Control Center needs to allow OpenShift to mount volumes and change the ownership of files if necessary. Because of this, you need to configure an ONTAP volume export policy to allow volume operations to complete successfully. You can do so with the following commands:
 
-. `export-policy rule modify -vserver svm0 -policyname default -ruleindex 1 -superuser sys`
-. `export-policy rule modify -policyname default -ruleindex 1 -anon 65534`
+. `export-policy rule modify -vserver <storage virtual machine name> -policyname <policy name>  -ruleindex 1 -superuser sysm --anon 65534`
+
 ======================
 
 NOTE: If you plan to add a second OpenShift cluster as a managed compute resource, you need to ensure that the Astra Trident Volume Snapshot feature is enabled. See the official Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
@@ -142,7 +142,7 @@ If you want to try Astra Control Center, you can link:setup_overview.html#add-a-
 
 == Service type "LoadBalancer" for on-premises Kubernetes clusters
 
-Astra Control Center uses a service of the type "LoadBalancer" (svc/traefik in the Astra Control Center namespace), and requires that it be assigned an accessible external IP address. For on-premises OpenShift clusters, you can use https://docs.netapp.com/us-en/netapp-solutions/containers/rh-os-n_LB_MetalLB.html#installing-the-metallb-load-balancer[MetalLB^] to automatically assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
+Astra Control Center uses a service of the type "LoadBalancer" (svc/traefik in the Astra Control Center namespace), and requires that it be assigned an accessible external IP address. If load balancers are permitted in your environment and you don't already have one configured, you can use https://docs.netapp.com/us-en/netapp-solutions/containers/rh-os-n_LB_MetalLB.html#installing-the-metallb-load-balancer[MetalLB^] to automatically assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
 
 NOTE: MetalLB version 0.11.0 is not supported.
 

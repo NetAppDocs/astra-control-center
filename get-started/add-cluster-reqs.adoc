@@ -91,7 +91,7 @@ No resources found
 . Check if the storage classes are using the supported Trident drivers. The provisioner name should be `csi.trident.netapp.io`. See the following example:
 +
 ----
-kubectl get storageClass -A
+kubectl get sc
 NAME                   PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
 ontap-gold (default)   csi.trident.netapp.io          Delete          Immediate           true                   5d23h
 thin                   kubernetes.io/vsphere-volume   Delete          Immediate           false                  6d
