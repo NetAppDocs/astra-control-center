@@ -14,7 +14,7 @@ You can convert an evaluation license to a full license, or you can update an ex
 
 .Steps
 
-. Log in to the NetApp Support Site.
+. Log in to the https://mysupport.netapp.com/site/[NetApp Support Site^].
 . Access the Astra Control Center Download page, enter the serial number, and download the full NetApp license file (NLF).
 . Log in to the Astra Control Center UI.
 . From the left navigation, select *Account* > *License*.
