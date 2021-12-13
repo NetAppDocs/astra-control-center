@@ -38,7 +38,7 @@ To clone apps to a different cluster, you need a default bucket. When you add yo
 
 .Steps
 
-. Click *Apps*.
+. Click *Applications*.
 . Do one of the following:
 +
 * Click the drop-down list in the *Actions* column for the desired app.
@@ -65,6 +65,6 @@ To clone apps to a different cluster, you need a default bucket. When you add yo
 
 .Result
 
-Astra Control Center clones that app based on the information that you provided. The clone operation is successful when the new app clone is in the `Available` state on the *Apps* page.
+Astra Control Center clones that app based on the information that you provided. The clone operation is successful when the new app clone is in the `Available` state on the *Applications* page.
 
 NOTE: After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.

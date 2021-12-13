@@ -106,7 +106,7 @@ While Astra Control enables you to separately manage both levels of the hierarch
 
 .Steps
 
-. From the left navigation bar, select *Apps*.
+. From the left navigation bar, select *Applications*.
 . Select *Discovered*.
 +
 image:acc_apps_discovered4.png[Screen shot of discovered apps]
@@ -139,7 +139,7 @@ Astra Control includes an action at the top of the Apps page named *Define custo
 
 .Steps
 
-. From the left navigation bar, select *Apps*.
+. From the left navigation bar, select *Applications*.
 . Select *Define*.
 +
 image:acc_apps_custom_details3.png[Screen shot of define custom app]
@@ -175,7 +175,7 @@ Astra Control enables management of the app. You can now find it in the *Managed
 //If an app has been renamed outside of Astra Control, you can rename it to manage it effectively.
 
 //.Steps
-//. From the left navigation bar, select *Apps*.
+//. From the left navigation bar, select *Applications*.
 //. Select *Managed* or *Discovered* as the filter.
 //. Select the app.
 // From the Actions menu, select *Rename*.
@@ -190,7 +190,7 @@ Also, you might want to manage apps under one namespace together (Namespace-mana
 
 .Steps
 
-. From the left navigation bar, select *Apps*.
+. From the left navigation bar, select *Applications*.
 . Select *Discovered* as the filter.
 . Select the app.
 . From the Actions menu, select *Ignore*.
@@ -204,7 +204,7 @@ NOTE: If you unmanage an app, any backups or snapshots that were created earlier
 
 .Steps
 
-. From the left navigation bar, select *Apps*.
+. From the left navigation bar, select *Applications*.
 . Select *Managed* as the filter.
 . Select the app.
 . From the Actions menu, select *Unmanage*.

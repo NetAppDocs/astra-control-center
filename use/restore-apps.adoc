@@ -31,7 +31,7 @@ When you create a project for hosting an app on an OpenShift cluster, the projec
 
 .Steps
 
-. Click *Apps* and then click the name of an app.
+. Click *Applications* and then click the name of an app.
 . Click *Data protection*.
 . If you want to restore from a snapshot, keep the *Snapshots* icon selected. Otherwise, click the *Backups* icon to restore from a backup.
 //+

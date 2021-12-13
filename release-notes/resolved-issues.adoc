@@ -5,7 +5,7 @@ keywords: astra, control center, fixed bugs, fixes, resolved issues
 summary: Known issues identify problems that might prevent you from using this release of the product successfully.
 ---
 
-= Issues resolved with this release
+= Resolved issues
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/release-notes/
@@ -24,13 +24,13 @@ Volumes created with decimal units fail using the Astra Control Center backup or
 // DOC-3563/ASTRACTL-9540/AD AH
 After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. This delay in the UI can also occur when any app resources are added or modified. In this case, a data protection operation is successful within minutes and you can use the management software for the storage backend to confirm the change in volume size.
 
-== Incorrect ClusterRoleBinding created by Astra Control Center CRD during installation
+== Incorrect cluster role binding created by Astra Control Center custom resource definition during installation
 //ASTRACTL-11352/DOC-3726
 The patch to correct cluster role binding during installation is no longer required in this release.
 
 == ASUP collection stuck in a generating or uploading state
 //DOC-3813/ASTRACTL-12325
-If an ASUP pod is killed or restarted, an ASUP collection might become stuck in a generating or uploading state.
+If an ASUP pod is stopped or restarted, an ASUP collection might become stuck in a generating or uploading state.
 
 == Operator-deployed apps and namespaces
 //DOC-3899/ASTRACTL-13098
@@ -38,4 +38,5 @@ An operator and the app it deploys must use the same namespace. Astra Control su
 
 == Find more information
 
-* link:../release-notes/known-limitations.html[Known limitations for this release]
+* link:../release-notes/known-issues.html[Known issues]
+* link:../release-notes/known-limitations.html[Known limitations]
