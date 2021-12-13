@@ -16,28 +16,22 @@ Astra Control Center supports ONTAP or Astra Data Store as the backend storage. 
 == Overview
 Astra Control Center supports the following:
 
-* *Astra Data Store storage*: If you installed one or more Astra Data Store clusters manually, Astra Control Center offers the ability to import these and retrieve their topology (nodes, disks) as well as various statuses.
+* *Trident storage classes backed by Astra Data Store storage*: If you installed one or more Astra Data Store clusters manually, Astra Control Center offers the ability to import these and retrieve their topology (nodes, disks) as well as various statuses.
 
 +
 Astra Control Center displays the underlying Kubernetes cluster from the Astra Data Store configuration, the cloud that the Kubernetes cluster belongs to, any persistent volumes provisioned by Astra Data Store, the name of the corresponding internal volume, the application using the persistent volume, and the cluster containing the app.
-* *Trident storage classes backed by ONTAP storage*:  Astra Control Center discovers and uses the already-deployed resources, including ONTAP, Trident, and associated storage classes.
+* *Trident storage classes backed by ONTAP storage*:  If you are using an ONTAP backend, Astra Control Center offers the ability to import the ONTAP backend to report various monitoring information.
 
 
 NOTE: Trident storage classes should be preconfigured outside of Astra Control Center.
 
 == Storage classes
 
-When you add clusters to Astra Control Center, you're prompted to choose one of the previously discovered storage classes for persistent volumes. Service levels in storage classes are designed for different capacity and bandwidth needs. These discovered storage classes are eligible for use within Astra Control Center.
+When you add a cluster to Astra Control Center, you’re prompted to select one previously configured storage class on that cluster as the default storage class. This storage class will be used when no storage class is specified in a persistent volume claim (PVC). The default storage class can be changed at any time within Astra Control Center and any storage class can be used at any time by specifying the name of the storage class within the PVC or Helm chart.
 
-When you use Astra Control Center integrated with an Astra Data Store backend storage, after the installation, no storage classes are defined. You will need to create the Trident default storage class and apply it to the storage backend. See information in Astra Data Store getting started about how to create a generic Astra Data Store storage class. 
+When you use Astra Control Center integrated with an Astra Data Store backend storage, after the installation, no storage classes are defined. You will need to create the Trident default storage class and apply it to the storage backend. See information in Astra Data Store getting started about how to create a default Astra Data Store storage class.
 
 
-
-== Persistent volume size and performance
-
-See Trident information that provides cost comparisons and examples that can help you better understand how to couple a service level with volume size to meet your performance objectives.
-
-== Find more information
+== For more information
 
 * https://docs.netapp.com/us-en/trident/index.html[Astra Trident documentation^]
-* https://docs.netapp.com/us-en/astra-data-store/index.html[Astra Data Store documentation^]
