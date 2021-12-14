@@ -20,7 +20,7 @@ When you attempt to use Astra Data Store as the storage class provisioner during
 
 To correct this issue, make the following changes in addition to the standard YAML changes when completing the link:../get-started/install_acc.html#configure-astra-control-center[Astra Control Center installation process]:
 
-. Edit the link:../get-started/install_acc.html#configure-the-astra-control-center-operator[Astra Control Center operator deployment YAML (astra_control_center_operator_deploy.yaml)] to change the Helm install timeout:
+. Edit the link:../get-started/install_acc.html#configure-astra-control-center[Astra Control Center operator deployment YAML (astra_control_center_operator_deploy.yaml)] to change the Helm install timeout:
 +
 ----
 - name: ACCOP_HELM_INSTALLTIMEOUT
