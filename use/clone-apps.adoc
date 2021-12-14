@@ -11,7 +11,11 @@ summary: Clone an existing app to create a duplicate app on the same Kubernetes 
 :imagesdir: ../media/use/
 
 [.lead]
-Clone an existing app to create a duplicate app on the same Kubernetes cluster or on another cluster. Cloning can help if you need to move applications and storage from one Kubernetes cluster to another. For example, you might want to move workloads through a CI/CD pipeline and across Kubernetes namespaces. You can use the Astra UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra API^] to clone and migrate apps.
+Clone an existing app to create a duplicate app on the same Kubernetes cluster or on another cluster. Cloning can help if you need to move applications and storage from one Kubernetes cluster to another. For example, you might want to move workloads through a CI/CD pipeline and across Kubernetes namespaces. You can use the Astra UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to clone and migrate apps.
+
+NOTE: If you deploy an app with a StorageClass explicitly set and you need to clone the app, the target cluster must have the originally specified StorageClass. Cloning an application with an explicitly set StorageClass to a cluster that does not have the same StorageClass will fail.
+
+NOTE: If you clone an operator-deployed instance of Jenkins CI, you need to manually restore the persistent data. This is a limitation of the app's deployment model.
 
 NOTE: If you clone an app between clusters, the source and destination clusters must be the same distribution of OpenShift. For example, if you clone an app from an OpenShift 4.7 cluster, use a destination cluster that is also OpenShift 4.7.
 
@@ -34,7 +38,7 @@ To clone apps to a different cluster, you need a default bucket. When you add yo
 
 .Steps
 
-. Click *Apps*.
+. Click *Applications*.
 . Do one of the following:
 +
 * Click the drop-down list in the *Actions* column for the desired app.
@@ -61,6 +65,6 @@ To clone apps to a different cluster, you need a default bucket. When you add yo
 
 .Result
 
-Astra Control Center clones that app based on the information that you provided. The clone operation is successful when the new app clone is in the `Available` state on the *Apps* page.
+Astra Control Center clones that app based on the information that you provided. The clone operation is successful when the new app clone is in the `Available` state on the *Applications* page.
 
 NOTE: After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.

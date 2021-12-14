@@ -12,6 +12,54 @@ summary: After you add Kubernetes clusters to Astra Control, you can install app
 
 After you link:../get-started/setup_overview.html#add-cluster[add a cluster to Astra Control management], you can install apps on the cluster (outside of Astra Control), and then go to the Apps page in Astra Control to start managing the apps and their resources.
 
+== App management requirements
+Astra Control has the following app management requirements:
+
+* *Licensing*: To manage apps using Astra Control Center, you need an Astra Control Center license.
+* *Namespaces*: Astra Control requires that an app not span more than a single namespace, but a namespace can contain more than one app.
+* *StorageClass*: If you install an app with a StorageClass explicitly set and you need to clone the app, the target cluster for the clone operation must have the originally specified StorageClass. Cloning an application with an explicitly set StorageClass to a cluster that does not have the same StorageClass will fail.
+* *Kubernetes resources*: Apps that use Kubernetes Resources not collected by Astra Control might not have full app data management capabilities. Astra Control collects the following Kubernetes resources:
+** ClusterRole
+** ClusterRoleBinding
+** ConfigMap
+** CustomResourceDefinition
+** CustomResource
+** DaemonSet
+** Deployment
+** DeploymentConfig
+** Ingress
+** MutatingWebhook
+** PersistentVolumeClaim
+** Pod
+** ReplicaSet
+** RoleBinding
+** Role
+** Route
+** Secret
+** Service
+** ServiceAccount
+** StatefulSet
+** ValidatingWebhook
+
+=== Supported app installation methods
+Astra Control supports the following application installation methods:
+
+* *Manifest file*: Astra Control supports apps installed from a manifest file using kubectl. For example:
++
+----
+kubectl apply -f myapp.yaml
+----
+* *Helm 3*: If you use Helm to install apps, Astra Control requires Helm version 3. Managing and cloning apps installed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Managing apps installed with Helm 2 is not supported.
+//* *Operator management*: Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators or cluster-scoped operators.
+* *Operator-deployed apps*: Astra Control supports apps installed with namespace-scoped operators. These operators are generally designed with a "pass-by-value" rather than "pass-by-reference" architecture. The following are some operator apps that follow these patterns:
+** https://github.com/k8ssandra/cass-operator/tree/v1.7.1[Apache K8ssandra^]
+** https://github.com/jenkinsci/kubernetes-operator[Jenkins CI^]
+** https://github.com/percona/percona-xtradb-cluster-operator[Percona XtraDB Cluster^]
+
+Note that Astra Control might not be able to clone an operator that is designed with a “pass-by-reference” architecture (for example, the CockroachDB operator). During these types of cloning operations, the cloned operator attempts to reference Kubernetes secrets from the source operator despite having its own new secret as part of the cloning process. The clone operation might fail because Astra Control is unaware of the Kubernetes secrets in the source operator.
+
+NOTE: An operator and the app it installs must use the same namespace; you might need to modify the deployment .yaml file for the operator to ensure this is the case.
+
 == Install apps on your cluster
 
 Now that you've added your cluster to Astra Control, you can install apps or manage existing apps on the cluster. Any app that is scoped to a namespace can be managed. After the pods are online, you can manage the app with Astra Control.
@@ -28,7 +76,7 @@ For help with deploying validated apps from Helm charts, refer to the following:
 
 Astra Control enables you to manage your apps at the namespace level or by Kubernetes label.
 
-NOTE: Apps deployed with Helm 2 are not supported.
+NOTE: Apps installed with Helm 2 are not supported.
 
 You can perform the following activities to manage apps:
 
@@ -41,7 +89,7 @@ You can perform the following activities to manage apps:
 
 TIP: Astra Control itself is not a standard app; it is a "system app." You should not try to manage Astra Control itself. Astra Control itself isn't shown by default for management. To see system apps, use the “Show system apps” filter.
 
-For instructions on how to manage apps using the Astra API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
+For instructions on how to manage apps using the Astra Control API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
 
 
 NOTE: After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
@@ -58,7 +106,7 @@ While Astra Control enables you to separately manage both levels of the hierarch
 
 .Steps
 
-. From the left navigation bar, select *Apps*.
+. From the left navigation bar, select *Applications*.
 . Select *Discovered*.
 +
 image:acc_apps_discovered4.png[Screen shot of discovered apps]
@@ -91,7 +139,7 @@ Astra Control includes an action at the top of the Apps page named *Define custo
 
 .Steps
 
-. From the left navigation bar, select *Apps*.
+. From the left navigation bar, select *Applications*.
 . Select *Define*.
 +
 image:acc_apps_custom_details3.png[Screen shot of define custom app]
@@ -127,7 +175,7 @@ Astra Control enables management of the app. You can now find it in the *Managed
 //If an app has been renamed outside of Astra Control, you can rename it to manage it effectively.
 
 //.Steps
-//. From the left navigation bar, select *Apps*.
+//. From the left navigation bar, select *Applications*.
 //. Select *Managed* or *Discovered* as the filter.
 //. Select the app.
 // From the Actions menu, select *Rename*.
@@ -142,7 +190,7 @@ Also, you might want to manage apps under one namespace together (Namespace-mana
 
 .Steps
 
-. From the left navigation bar, select *Apps*.
+. From the left navigation bar, select *Applications*.
 . Select *Discovered* as the filter.
 . Select the app.
 . From the Actions menu, select *Ignore*.
@@ -156,7 +204,7 @@ NOTE: If you unmanage an app, any backups or snapshots that were created earlier
 
 .Steps
 
-. From the left navigation bar, select *Apps*.
+. From the left navigation bar, select *Applications*.
 . Select *Managed* as the filter.
 . Select the app.
 . From the Actions menu, select *Unmanage*.
@@ -176,4 +224,4 @@ TIP: Astra Control itself is not a standard app; it is a "system app." You shoul
 
 == Find more information
 
-* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API^]
+* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra Control API^]

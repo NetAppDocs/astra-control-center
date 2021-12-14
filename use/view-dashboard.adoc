@@ -17,8 +17,8 @@ image:dashboard.png[Shows the Astra Control Center Dashboard.]
 
 These aren't just static numbers or statuses--you can drill down from each of these. For example, if apps aren't fully protected, you can hover over the icon to identify which apps aren't fully protected, which includes a reason why.
 
-== Apps tile
-The *Apps* tile helps you identify the following:
+== Applications tile
+The *Applications* tile helps you identify the following:
 
 * How many apps you're currently managing with Astra.
 * Whether those managed apps are healthy.
