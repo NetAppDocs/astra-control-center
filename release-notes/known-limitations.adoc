@@ -84,3 +84,4 @@ When you unmanage a cluster from Astra Control Center, Trident isn't automatical
 
 * link:../release-notes/resolved-issues.html[Resolved issues]
 * link:../release-notes/known-issues.html[Known issues]
+* link:../release-notes/known-issues-ads.html[Known issues with Astra Data Store and this Astra Control Center release]
