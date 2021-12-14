@@ -10,7 +10,7 @@ summary: After you install Astra Control Center, log in to the UI, and change yo
 :icons: font
 :imagesdir: ../media/get-started/
 
-Astra Control Center supports and monitors ONTAP and Astra Data Store as the backend storage. After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up a license, add clusters, manage storage, and add buckets.
+Astra Control Center supports and monitors ONTAP and Astra Data Store as the storage backend. After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up a license, add clusters, manage storage, and add buckets.
 
 .Tasks
 * <<Add a license for Astra Control Center>>
@@ -120,7 +120,7 @@ NOTE: After you add your Kubernetes app cluster for Astra Data Store, the cluste
 . Do one of the following depending on your backend type:
 * *Astra Data Store*:
 ... Select the *Astra Data Store* tab.
-... Select the managed compute cluster and click *Next*.
+... Select the managed compute cluster and select *Next*.
 ... Confirm the backend details and select *Manage storage backend*.
 
 * *ONTAP*:

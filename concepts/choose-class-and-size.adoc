@@ -11,7 +11,7 @@ summary: Astra Control Center supports  Trident storage classes backed by ONTAP 
 :imagesdir: ../media/concepts/
 
 [.lead]
-Astra Control Center supports ONTAP or Astra Data Store as the backend storage. You should understand how storage class and persistent volume (PV) size can help you meet your performance objectives.
+Astra Control Center supports ONTAP or Astra Data Store as the storage backend. You should understand how storage class and persistent volume (PV) size can help you meet your performance objectives.
 
 == Overview
 Astra Control Center supports the following:
@@ -29,7 +29,7 @@ NOTE: Trident storage classes should be preconfigured outside of Astra Control C
 
 When you add a cluster to Astra Control Center, you’re prompted to select one previously configured storage class on that cluster as the default storage class. This storage class will be used when no storage class is specified in a persistent volume claim (PVC). The default storage class can be changed at any time within Astra Control Center and any storage class can be used at any time by specifying the name of the storage class within the PVC or Helm chart.
 
-When you use Astra Control Center integrated with an Astra Data Store backend storage, after the installation, no storage classes are defined. You will need to create the Trident default storage class and apply it to the storage backend. See information in Astra Data Store getting started about how to create a default Astra Data Store storage class.
+When you use Astra Control Center integrated with an Astra Data Store storage backend, after the installation, no storage classes are defined. You will need to create the Trident default storage class and apply it to the storage backend. See information in Astra Data Store getting started about how to create a default Astra Data Store storage class.
 
 
 == For more information
