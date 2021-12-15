@@ -5,12 +5,33 @@ keywords: what's new, bugs, bug fixes, new features, enhancements
 summary: NetApp periodically updates Astra Control Center to bring you new features, enhancements, and bug fixes.
 ---
 
-= What's in this release of Astra Control Center
+= What's new in this release of Astra Control Center
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/release-notes/
 
-We're pleased to announce the release of Astra Control Center.
+We're pleased to announce the latest 21.12 release of Astra Control Center.
+
+== 14 December 2021 (21.12)
+
+Updated release of Astra Control Center.
+
+.New features and support
+
+* link:../use/restore-apps.html[Application restore]
+* link:../use/execution-hooks.html[Execution hooks]
+* link:../get-started/requirements.html#supported-app-installation-methods[Support for applications deployed with namespace-scoped operators]
+* link:../get-started/requirements.html[Additional support for upstream Kubernetes and Rancher]
+* link:../get-started/setup_overview.html#add-a-storage-backend[Astra Data Store backend management and monitoring]
+* link:../use/upgrade-acc.html[Astra Control Center upgrades]
+//* link:../get-started/install_acc.html[OperatorHub option for installation]
+
+.Resolved issues
+* link:../release-notes/resolved-issues.html[Resolved issues for this release]
+
+.Known issues and limitations
+* link:../release-notes/known-issues.html[Known issues for this release]
+* link:../release-notes/known-limitations.html[Known limitations for this release]
 
 == 5 August 2021 (21.08)
 
@@ -29,3 +50,4 @@ Initial release of Astra Control Center.
 
 * link:../release-notes/known-issues.html[Known issues for this release]
 * link:../release-notes/known-limitations.html[Known limitations for this release]
+* link:../acc-earlier-versions.html[Earlier versions of Astra Control Center documentation]

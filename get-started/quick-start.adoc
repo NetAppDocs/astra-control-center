@@ -17,7 +17,7 @@ Try it out! If you want to try Astra Control Center, you can use a 90-day evalua
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png[One] Review Kubernetes cluster requirements
 
 [role="quick-margin-list"]
-* Astra works with Kubernetes clusters with a Trident-configured ONTAP storage backend.
+* Astra works with Kubernetes clusters with a Trident-configured ONTAP storage backend or an Astra Data Store storage backend.
 * Clusters must be running in a healthy state, with at least three online worker nodes.
 * The cluster must be running Kubernetes.
 
@@ -28,11 +28,14 @@ link:../get-started/requirements.html[Learn more about the Astra Control Center 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png[Two] Download and install Astra Control Center
 
 [role="quick-margin-list"]
-* Download Astra Control Center from the NetApp Support Site.
+* Download Astra Control Center from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site Astra Control Center Downloads page^].
 * Install Astra Control Center in your local environment.
-* Discover your Trident configuration backed by the ONTAP storage backend.
 +
-For our first release, you'll install the images on an OpenShift registry or use your local registry.
+Optionally, install Astra Control Center from the Red Hat OperatorHub.
+
+* Discover your Trident configuration backed by the ONTAP storage backend. Or, discover your Astra Data Store clusters as your storage backend.
++
+You install the images on an OpenShift registry or use your local registry.
 
 [role="quick-margin-para"]
 link:../get-started/install_acc.html[Learn more about installing Astra Control Center].
@@ -43,7 +46,7 @@ link:../get-started/install_acc.html[Learn more about installing Astra Control C
 
 * Add a license.
 * Add a Kubernetes cluster and Astra Control Center discovers details.
-* Add an ONTAP storage backend.
+* Add an ONTAP or Astra Data Store storage backend.
 * Optionally, add an object store bucket that will store your app backups.
 
 
@@ -68,4 +71,4 @@ link:../get-started/install_acc.html[Install Astra Control Center].
 
 == Find more information
 
-* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API^]
+* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra Control API^]
