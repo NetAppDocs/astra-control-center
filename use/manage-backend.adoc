@@ -76,7 +76,7 @@ TIP: If you connected to NetApp Cloud Insights, excerpts of data from Cloud Insi
 +
 image:../use/acc_backends_ci_connection2.png[A screenshot of the Backends page]
 
-. To go directly to Cloud Insights, click the *Cloud Insights* icon next to the metrics image.
+. To go directly to Cloud Insights, select the *Cloud Insights* icon next to the metrics image.
 
 
 == Unmanage a storage backend

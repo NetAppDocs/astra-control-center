@@ -120,7 +120,7 @@ NOTE: After you add your Kubernetes app cluster for Astra Data Store, the cluste
 . Do one of the following depending on your backend type:
 * *Astra Data Store*:
 ... Select the *Astra Data Store* tab.
-... Select the managed compute cluster and click *Next*.
+... Select the managed compute cluster and select *Next*.
 ... Confirm the backend details and select *Manage storage backend*.
 
 * *ONTAP*:
