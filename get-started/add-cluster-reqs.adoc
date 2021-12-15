@@ -15,15 +15,18 @@ You should ensure that the prerequisite conditions are met before you add a clus
 
 == What you'll need before you add a cluster
 
-* A cluster running OpenShift 4.6, 4.7, or 4.8, which has Astra Trident StorageClasses backed by ONTAP 9.5 or later.
-** One or more worker nodes with at least 1GB RAM available for running telemetry services.
+* One of the following types of clusters:
+** Clusters running OpenShift 4.6, 4.7, or 4.8, which has Astra Trident StorageClasses backed by ONTAP 9.5 or later.
+** Clusters running Rancher 2.5
+** Clusters running Kubernetes 1.19 to 1.21 (including 1.21.x)
 +
-NOTE: If you plan to add a second OpenShift 4.6, 4.7, or 4.8 cluster as a managed compute resource, you should ensure that the Trident Volume Snapshot feature is enabled. See the official Trident instructions to enable and test Volume Snapshots with Trident.
+Make sure your clusters have one or more worker nodes with at least 1GB RAM available for running telemetry services.
++
+NOTE: If you plan to add a second OpenShift 4.6, 4.7, or 4.8 cluster as a managed compute resource, you should ensure that the Astra Trident Volume Snapshot feature is enabled. See the official Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
 
-* The superuser and user ID set on the backing ONTAP system to back up and restore apps with Astra Control Center (ACC). Run the following commands in the ONTAP command line:
-`export policy rule modify -vserver svm0 -policyname default -ruleindex 1 -superuser sys`
-`export-policy rule modify -policyname default -ruleindex 1 -anon 65534` (this is the default value)
-* An Astra Trident volumesnapshotclass object that has been defined by an administrator. See the Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
+* The superuser and user ID set on the backing ONTAP system to back up and restore apps with Astra Control Center (ACC). Run the following command in the ONTAP command line:
+`export-policy rule modify -vserver <storage virtual machine name> -policyname <policy name>  -ruleindex 1 -superuser sysm --anon 65534`
+* An Astra Trident `volumesnapshotclass` object that has been defined by an administrator. See the Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
 
 ////
 * Clusters running the Docker daemon with logging that supports `json-file`. Enable this as follows:
@@ -91,7 +94,7 @@ No resources found
 . Check if the storage classes are using the supported Trident drivers. The provisioner name should be `csi.trident.netapp.io`. See the following example:
 +
 ----
-kubectl get storageClass -A
+kubectl get sc
 NAME                   PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
 ontap-gold (default)   csi.trident.netapp.io          Delete          Immediate           true                   5d23h
 thin                   kubernetes.io/vsphere-volume   Delete          Immediate           false                  6d

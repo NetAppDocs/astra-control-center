@@ -5,7 +5,7 @@ keywords: astra, control center, bugs, known issues, problems
 summary: Known issues identify problems that might prevent you from using this release of the product successfully.
 ---
 
-= Known issues with this release
+= Known issues
 :source-highlighter: highlight.js
 :hardbreaks:
 :icons: font
@@ -46,7 +46,7 @@ There is no way to stop a running backup. If you need to delete the backup, wait
 
 == During app restore from backup Trident creates a larger PV than the original PV
 // DOC-3562/ASTRACTL-9560/Q2 and PI4
-If you resize a persistent volume after creating a backup and then restore from that backup, the persistent volume size matches the new size of the PV instead of using the size of the backup.
+If you resize a persistent volume after creating a backup and then restore from that backup, the persistent volume size will match the new size of the PV instead of using the size of the backup.
 
 == Clone performance impacted by large persistent volumes
 //from ACS repo
@@ -67,11 +67,11 @@ Cloning an application with an explicitly set storage class to a cluster that do
 
 == Reusing buckets between instances of Astra Control Center causes failures
 //ASTRACTL-9296 (Low probability)/ASTRACTL-9837/DOC-3575/Q2 and PI4
-If you try to reuse a bucket used by another or previous installation of Astra Control Center, backup and restore will fail. You must use a different bucket or completely clean out the previously used bucket. You can't share buckets between instances of Astra Control Center.
+If you try to reuse a bucket used by another or previous installation of Astra Control Center, backup and restore operations will fail. You must use a different bucket or completely clean out the previously used bucket. You can't share buckets between instances of Astra Control Center.
 
 == Selecting a bucket provider type with credentials for another type causes data protection failures
 //DOC-3560/ASTRACTL-9574/ASTRACTL-9504/Q2 and PI4
-When you add a bucket, select the correct bucket provider and provide the right credentials for that provider. For example, the UI accepts NetApp ONTAP S3 as the type and accepts StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail.
+When you add a bucket, select the correct bucket provider and enter the right credentials for that provider. For example, the UI accepts NetApp ONTAP S3 as the type and accepts StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail.
 
 == Backups and snapshots might not be retained during removal of an Astra Control Center instance
 //AD AH review
@@ -87,7 +87,7 @@ You cannot use a kubeconfig with more than one cluster and context in it. See th
 
 == 500 internal service error when attempting Trident app data management
 //DOC-3903/ASTRA-13162/PI4
-If Trident on an app cluster goes offline (and is brought back online) and 500 internal service errors are encountered when attempting app data management, restart all of the k8s nodes in the app cluster to restore functionality.
+If Trident on an app cluster goes offline (and is brought back online) and 500 internal service errors are encountered when attempting app data management, restart all of the Kubernetes nodes in the app cluster to restore functionality.
 
 == Custom app execution hook scripts time out and cause post-snapshot scripts not to execute
 //ASTRACTL-12927/DOC-3909
@@ -97,7 +97,7 @@ Because execution hooks often reduce or completely disable the functionality of 
 
 == Can't determine ASUP tar bundle status in scaled environment
 //DOC-3602/ASTRACTL-10186/AD AH/Q2 and PI4
-During ASUP collection, the status of the bundle in the UI is reported as either `collecting` or `done`. Collection can take up to an hour for large environments. During ASUP download the network file transfer speed for the bundle might be insufficient, and the download might time out after 15 minutes without any indication in the UI. Download issues depend on the size of the ASUP, the scaled cluster size, and if collection time goes beyond the seven day limit.
+During ASUP collection, the status of the bundle in the UI is reported as either `collecting` or `done`. Collection can take up to an hour for large environments. During ASUP download, the network file transfer speed for the bundle might be insufficient, and the download might time out after 15 minutes without any indication in the UI. Download issues depend on the size of the ASUP, the scaled cluster size, and if collection time goes beyond the seven-day limit.
 
 == Snapshots eventually begin to fail when using external-snapshotter version 4.2.0
 // DOC-3891 and ASTRACTL-12523
@@ -237,5 +237,6 @@ kubectl delete crd ingressroutes.traefik.containo.us ingressroutetcps.traefik.co
 
 == Find more information
 
-* link:../release-notes/known-limitations.html[Known limitations for this release]
-* link:../release-notes/known-issues-ads.html[Known issues with Astra Data Store and this Astra Control Center release]
+* link:../release-notes/resolved-issues.html[Resolved issues]
+* link:../release-notes/known-limitations.html[Known limitations]
+//* link:../release-notes/known-issues-ads.html[Known issues with Astra Data Store and this Astra Control Center release]

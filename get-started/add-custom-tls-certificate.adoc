@@ -146,10 +146,10 @@ kubectl edit ingressroutes.traefik.containo.us -n <ACC-deployment-namespace>
 
 ////
 . If you are using Firefox:
-.. Click the lock icon, then *Connection secure* > *More Information*.
-.. Click *View Certificate*.
+.. Select the lock icon, then *Connection secure* > *More Information*.
+.. Select *View Certificate*.
 .. Verify that the *Validity* section matches the validity of the certificate you installed.
 . If you are using Chrome:
-.. Click the lock icon, then *Certificate (Valid)*.
+.. Select the lock icon, then *Certificate (Valid)*.
 .. Verify that the *Valid from* section matches the validity of the certificate you installed.
 ////

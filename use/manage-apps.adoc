@@ -106,7 +106,7 @@ While Astra Control enables you to separately manage both levels of the hierarch
 
 .Steps
 
-. From the left navigation bar, select *Apps*.
+. From the left navigation bar, select *Applications*.
 . Select *Discovered*.
 +
 image:acc_apps_discovered4.png[Screen shot of discovered apps]
@@ -139,7 +139,7 @@ Astra Control includes an action at the top of the Apps page named *Define custo
 
 .Steps
 
-. From the left navigation bar, select *Apps*.
+. From the left navigation bar, select *Applications*.
 . Select *Define*.
 +
 image:acc_apps_custom_details3.png[Screen shot of define custom app]
@@ -156,14 +156,14 @@ image:acc_apps_custom_details3.png[Screen shot of define custom app]
 
 .. *Selected Resources*: View and manage the selected Kubernetes resources that you'd like to protect (pods, secrets, persistent volumes, and more).
 +
-** View the available labels by expanding a resource and clicking the number of labels.
+** View the available labels by expanding a resource and selecting the number of labels.
 ** Select one of the labels.
 +
 After you choose a label, it displays in the *Label* field. Astra Control also updates the *Unselected Resources* section to show the resources that don't match the selected label.
 
 .. *Unselected Resources*: Verify the app resources that you don't want to protect.
 
-. Click *Define custom application*.
+. Select *Define custom application*.
 
 .Result
 
@@ -175,7 +175,7 @@ Astra Control enables management of the app. You can now find it in the *Managed
 //If an app has been renamed outside of Astra Control, you can rename it to manage it effectively.
 
 //.Steps
-//. From the left navigation bar, select *Apps*.
+//. From the left navigation bar, select *Applications*.
 //. Select *Managed* or *Discovered* as the filter.
 //. Select the app.
 // From the Actions menu, select *Rename*.
@@ -190,7 +190,7 @@ Also, you might want to manage apps under one namespace together (Namespace-mana
 
 .Steps
 
-. From the left navigation bar, select *Apps*.
+. From the left navigation bar, select *Applications*.
 . Select *Discovered* as the filter.
 . Select the app.
 . From the Actions menu, select *Ignore*.
@@ -204,7 +204,7 @@ NOTE: If you unmanage an app, any backups or snapshots that were created earlier
 
 .Steps
 
-. From the left navigation bar, select *Apps*.
+. From the left navigation bar, select *Applications*.
 . Select *Managed* as the filter.
 . Select the app.
 . From the Actions menu, select *Unmanage*.

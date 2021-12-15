@@ -14,23 +14,16 @@ Known issues identify problems that might prevent you from using this release of
 
 The following known issues affect the management of Astra Data Store with this current release of the Astra Control Center:
 
-== Astra Data Store backend cannot be added to Astra Control Center management due to MongoDB pod failure
+== Astra Data Store cannot be used as a storage class for Astra Control Center due to MongoDB pod liveness probe failure
 //ASTRACTL-13036/DOC-3904/BURT1439334
-When you attempt to add Astra Data Store as a default backend for an Astra Control Center deployment, the Astra Data Store persistent volumes are not mounted on the Astra Control Center cluster, the MongoDB pod liveness probe fails, and the backend fails to be added to management.
+When you attempt to use Astra Data Store as the storage class provisioner during an Astra Control Center deployment, the MongoDB pod liveness probe fails, resulting in a deployment that will not complete.
 
-To correct this issue, do the following:
+To correct this issue, make the following changes when completing the link:../get-started/install_acc.html#configure-astra-control-center[Astra Control Center installation process]:
 
-. Edit the Astra Control Center custom resource (CR) file (astra_control_center_min.yaml) and include the following under `spec:`:
+. Configure the Astra Control Center operator deployment YAML (astra_control_center_operator_deploy.yaml) to change the Helm install timeout:
 +
 ----
-additionalValues:
-    polaris-mongodb:
-      mongodb:
-        livenessProbe:
-          initialDelaySeconds: 400
-      metrics:
-        livenessProbe:
-          initialDelaySeconds: 400
+kubectl set env -n netapp-acc-operator deployment/acc-operator-controller-manager ACCOP_HELM_INSTALLTIMEOUT=20m
 ----
 
 . Apply updates to astra_control_center_operator_deploy.yaml:
@@ -39,10 +32,35 @@ additionalValues:
 kubectl apply -f astra_control_center_operator_deploy.yaml
 ----
 
-. Change the Helm install timeout:
+. Edit the Astra Control Center custom resource (CR) file (astra_control_center_min.yaml) and include the following under `spec:`:
 +
+[subs=+quotes]
 ----
-kubectl set env -n netapp-acc-operator deployment/acc-operator-controller-manager ACCOP_HELM_INSTALLTIMEOUT=15m
+apiVersion: astra.netapp.io/v1
+kind: AstraControlCenter
+metadata:
+  name: astra
+*spec:*
+  accountName: "Example"
+  astraVersion: "ASTRA_VERSION"
+  astraAddress: "astra.example.com"
+  autoSupport:
+    enrolled: true
+  email: "[admin@example.com]"
+  firstName: "SRE"
+  lastName: "Admin"
+  imageRegistry:
+    name: "[your_registry_path]"
+    secret: "astra-registry-cred"
+  storageClass: "ontap-gold"
+  *additionalValues:*
+    *polaris-mongodb:*
+      *mongodb:*
+        *livenessProbe:*
+          *initialDelaySeconds: 400*
+      *metrics:*
+        *livenessProbe:*
+          *initialDelaySeconds: 400*
 ----
 
 . Apply the updates to astra_control_center_min.yaml:
@@ -51,10 +69,13 @@ kubectl set env -n netapp-acc-operator deployment/acc-operator-controller-manage
 kubectl apply -f astra_control_center_min.yaml -n [netapp-acc or custom namespace]
 ----
 
-== Astra Control Center shows Astra Data Store backend in `Unknown` state
+
+== Astra Control Center shows Astra Data Store storage backend in `Unknown` state
 //DOC-3916/ASTRACTL-13196/ASTRACTL-13134
-Astra Control Center shows the Astra Data Store storage backend in an `Unknown` state from the Backends page in the UI. In this condition, the backend is actually available and can be communicated with. A component within the backend is likely in an unhealthy state and needs to be returned to a healthy state for the backend to show as `available`.
+Astra Control Center shows the Astra Data Store storage backend in an `Unknown` state from the Backends page in the UI. In this condition, the storage backend is actually available and can be communicated with. A component within the storage backend is likely in an unhealthy state and needs to be returned to a healthy state for the storage backend to show as `available`.
 
 == Find more information
 //Add ADS links
-* link:../release-notes/known-limitations.html[Known limitations for this release]
+* link:../release-notes/resolved-issues.html[Resolved issues]
+* link:../release-notes/known-issues.html[Known issues]
+* link:../release-notes/known-limitations.html[Known limitations]

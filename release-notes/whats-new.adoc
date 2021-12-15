@@ -18,7 +18,7 @@ Updated release of Astra Control Center.
 
 .New features and support
 
-* link:../use/restore-apps.html[App restore]
+* link:../use/restore-apps.html[Application restore]
 * link:../use/execution-hooks.html[Execution hooks]
 * link:../get-started/requirements.html#supported-app-installation-methods[Support for applications deployed with namespace-scoped operators]
 * link:../get-started/requirements.html[Additional support for upstream Kubernetes and Rancher]
