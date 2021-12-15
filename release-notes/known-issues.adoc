@@ -222,7 +222,7 @@ ingressroutes.traefik.containo.us             2021-06-23T23:29:11Z
 ingressroutetcps.traefik.containo.us          2021-06-23T23:29:11Z
 ingressrouteudps.traefik.containo.us          2021-06-23T23:29:12Z
 middlewares.traefik.containo.us               2021-06-23T23:29:12Z
-middlewaretcps.traefik.containo.us 				    2021-06-23T23:29:12Z
+middlewaretcps.traefik.containo.us            2021-06-23T23:29:12Z
 serverstransports.traefik.containo.us         2021-06-23T23:29:13Z
 tlsoptions.traefik.containo.us                2021-06-23T23:29:13Z
 tlsstores.traefik.containo.us                 2021-06-23T23:29:14Z
