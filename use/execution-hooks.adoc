@@ -1,4 +1,4 @@
-Select---
+---
 sidebar: sidebar
 permalink: use/execution-hooks.html
 keywords: execution hook, snapshot, hook, kubernetes, astra control, astra

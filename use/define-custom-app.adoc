@@ -22,7 +22,7 @@ A custom app gives you more granular control over what to include in an Astra Co
 
 In most cases you will want to use Astra Control's features on your entire app. However, you can also create a custom app to use these features by the labels you assign to Kubernetes objects in a namespace.
 
-To create a custom app, go to the Apps page and click **+ Define**.
+To create a custom app, go to the Apps page and select **+ Define**.
 
 As you make your selections, the Custom App window shows you which resources will be included or excluded from your custom app. This helps you make sure you are choosing the correct criteria for defining your custom app.
 
@@ -45,7 +45,7 @@ In order to avoid possible data conflicts, the admin will create two custom apps
 
 .Steps
 
-. After the team adds the cluster to Astra Control, the next step is to define a custom app. To do this, the team clicks the **+ Define** button on the Apps page.
+. After the team adds the cluster to Astra Control, the next step is to define a custom app. To do this, the team selects the **+ Define** button on the Apps page.
 
 . In the pop-up window which appears, the team sets `devops-canary-deployment` as the app name. The team chooses the cluster in the **Cluster** drop-down, then the app's namespace from the **Namespace** drop-down.
 

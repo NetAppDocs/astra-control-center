@@ -156,14 +156,14 @@ image:acc_apps_custom_details3.png[Screen shot of define custom app]
 
 .. *Selected Resources*: View and manage the selected Kubernetes resources that you'd like to protect (pods, secrets, persistent volumes, and more).
 +
-** View the available labels by expanding a resource and clicking the number of labels.
+** View the available labels by expanding a resource and selecting the number of labels.
 ** Select one of the labels.
 +
 After you choose a label, it displays in the *Label* field. Astra Control also updates the *Unselected Resources* section to show the resources that don't match the selected label.
 
 .. *Unselected Resources*: Verify the app resources that you don't want to protect.
 
-. Click *Define custom application*.
+. Select *Define custom application*.
 
 .Result
 

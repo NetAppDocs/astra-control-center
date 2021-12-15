@@ -58,7 +58,7 @@ TIP: The first set of credentials that you add to Astra Control is always in use
 
 //.Steps
 //. Select *Account* > *Credentials*.
-//.	From the State drop-down list, click the credentials you want to remove.
+//.	From the State drop-down list, select the credentials you want to remove.
 //. Select *Remove*.
 //.	Type the *remove* to confirm deletion and then select *Yes, remove credentials*.
 
