@@ -5,8 +5,13 @@ entries:
     url: /get-started/requirements.html
   - title: Quick start for Astra Control Center
     url: /get-started/quick-start.html
-  - title: Install Astra Control Center
-    url: /get-started/install_acc.html
+  - title: Installation overview
+    url: /get-started/install_overview.html
+    entries:
+    - title: Install Astra Control Center
+      url: /get-started/install_acc.html
+    - title: Install Astra Control Center using OpenShift OperatorHub
+      url: /get-started/acc_operatorhub_install.html
   - title: Set up Astra Control Center
     url: /get-started/setup_overview.html
     entries:
