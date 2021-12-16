@@ -5,7 +5,7 @@ keywords: how to install astra control center, operator, operatorhub, openshift,
 summary: If you use Red Hat OpenShift, you can install the Astra Control Center using an operator.
 ---
 
-= Install Astra Control Center using OpenShift Operatorhub
+= Install Astra Control Center using OpenShift OperatorHub
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/get-started/
@@ -124,7 +124,7 @@ NOTE: Manual approval is recommended. You should only have a single operator ins
 +
 NOTE: If you selected a manual approval strategy, you will be prompted to approve the manual install plan for this operator.
 
-. From the console, go to the Operatorhub menu and confirm that the operator installed successfully.
+. From the console, go to the OperatorHub menu and confirm that the operator installed successfully.
 
 == Install Astra Control Center
 
