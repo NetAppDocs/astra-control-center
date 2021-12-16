@@ -31,7 +31,7 @@ link:../get-started/requirements.html[Learn more about the Astra Control Center 
 * Download Astra Control Center from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site Astra Control Center Downloads page^].
 * Install Astra Control Center in your local environment.
 +
-Optionally, install Astra Control Center from the Red Hat OperatorHub.
+Optionally, install Astra Control Center using Red Hat OperatorHub.
 
 * Discover your Trident configuration backed by the ONTAP storage backend. Or, discover your Astra Data Store clusters as your storage backend.
 +
