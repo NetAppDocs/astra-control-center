@@ -1,0 +1,16 @@
+---
+sidebar: sidebar
+permalink: get-started/install_overview.html
+keywords: astra installation, install astra control center, how to install astra control, deploy, download from netapp support
+summary: You have two choices for Astra Control Center installation.
+---
+
+= Installation overview
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/release-notes/
+
+Choose and complete one of the following Astra Control Center installation procedures:
+
+* link:../get-started/install_acc.html[Install Astra Control Center using the standard process]
+* link:../get-started/acc_operatorhub_install.html[(If you use Red Hat OpenShift) Install Astra Control Center using OpenShift OperatorHub]
