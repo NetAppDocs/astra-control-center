@@ -10,9 +10,9 @@ summary: To install Astra Control Center after addressing some environmental pre
 :icons: font
 :imagesdir: ../media/get-started/
 
-To install Astra Control Center, download the installation bundle from the NetApp Support Site and perform a series of additional steps to install Astra Control Center Operator and Astra Control Center in your environment. You can use this procedure to install Astra Control Center in internet-connected or air-gapped environments.
+To install Astra Control Center, download the installation bundle from the NetApp Support Site and perform the following steps to install Astra Control Center Operator and Astra Control Center in your environment. You can use this procedure to install Astra Control Center in internet-connected or air-gapped environments.
 
-For Red Hat OpenShift environments, you can use a different procedure and link:../get-started/acc_operatorhub_install.html[install using the Astra Control Center operator].
+For Red Hat OpenShift environments, use an link:../get-started/acc_operatorhub_install.html[alternative procedure] to install Astra Control Center using OpenShift OperatorHub.
 
 .What you'll need
 * link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
@@ -31,6 +31,8 @@ OpenShift example:
 ----
 oc get apiservices
 ----
+
+* You have created an FQDN address for Astra Control Center in your data center.
 
 .About this task
 The Astra Control Center installation process does the following:
