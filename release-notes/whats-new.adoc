@@ -22,7 +22,7 @@ Updated release of Astra Control Center.
 * link:../use/execution-hooks.html[Execution hooks]
 * link:../get-started/requirements.html#supported-app-installation-methods[Support for applications deployed with namespace-scoped operators]
 * link:../get-started/requirements.html[Additional support for upstream Kubernetes and Rancher]
-* link:../get-started/setup_overview.html#add-a-storage-backend[Astra Data Store backend management and monitoring]
+* link:../get-started/setup_overview.html#add-a-storage-backend[Astra Data Store preview backend management and monitoring]
 * link:../use/upgrade-acc.html[Astra Control Center upgrades]
 //* link:../get-started/install_acc.html[OperatorHub option for installation]
 
@@ -31,7 +31,7 @@ Updated release of Astra Control Center.
 
 .Known issues and limitations
 * link:../release-notes/known-issues.html[Known issues for this release]
-* link:../release-notes/known-issues-ads.html[Known issues with Astra Data Store and this Astra Control Center release]
+* link:../release-notes/known-issues-ads.html[Known issues with Astra Data Store preview and this Astra Control Center release]
 * link:../release-notes/known-limitations.html[Known limitations for this release]
 
 == 5 August 2021 (21.08)

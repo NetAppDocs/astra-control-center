@@ -179,7 +179,7 @@ imagePullSecrets:
 
 .. Change `[your_registry_path]` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<substep_image_local_registry_push,previous step>>.
 .. Change `[your_registry_path]` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in a <<substep_image_local_registry_push,previous step>>.
-.. (For installations using Astra Data Store Preview) See this known issue for link:../release-notes/known-issues-ads.html#astra-data-store-cannot-be-used-as-a-storage-class-for-astra-control-center-due-to-mongodb-pod-liveness-probe-failure[additional required changes] to the YAML.
+.. (For installations using Astra Data Store preview) See this known issue for link:../release-notes/known-issues-ads.html#astra-data-store-cannot-be-used-as-a-storage-class-for-astra-control-center-due-to-mongodb-pod-liveness-probe-failure[additional required changes] to the YAML.
 +
 [subs=+quotes]
 ----
@@ -247,7 +247,7 @@ IMPORTANT: If you are using a registry that does not require authorization, you 
 .. Change `enrolled` for autoSupport to `false` for sites without internet connectivity or retain `true` for connected sites.
 .. (Optional) Add a first name `firstName` and last name `lastName` of the user associated with the account. You can perform this step now or later within the UI.
 .. (Optional) Change the `storageClass` value to another Trident storageClass resource if required by your installation.
-.. (For installations using Astra Data Store Preview) See this known issue for link:../release-notes/known-issues-ads.html#astra-data-store-cannot-be-used-as-a-storage-class-for-astra-control-center-due-to-mongodb-pod-liveness-probe-failure[additional required changes] to the YAML.
+.. (For installations using Astra Data Store preview) See this known issue for link:../release-notes/known-issues-ads.html#astra-data-store-cannot-be-used-as-a-storage-class-for-astra-control-center-due-to-mongodb-pod-liveness-probe-failure[additional required changes] to the YAML.
 
 +
 [subs=+quotes]
