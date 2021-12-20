@@ -75,7 +75,7 @@ homepage:
         - title: Intro to Astra Data Store
           url: https://docs.netapp.com/us-en/astra-data-store/concepts/intro.html
         - title: What's in this release of Astra Data Store
-          url: https://review.docs.netapp.com/us-en/astra-data-store_ads-PI4-review/release-notes/whats-new.html
+          url: https://docs.netapp.com/us-en/astra-data-store/release-notes/whats-new.html
         - title: Quick start for Astra Data Store preview
           url: https://docs.netapp.com/us-en/astra-data-store/get-started/quick-start.html
 #    - title: Use Astra Service
