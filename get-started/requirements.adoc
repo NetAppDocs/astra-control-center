@@ -28,13 +28,14 @@ The cluster must meet the following general requirements so you can discover and
 //* Kubernetes version 1.19 or 1.20
 * Service type "LoadBalancer" available for ingress traffic to be sent to services in the OpenShift cluster
 * A method for pointing the FQDN of Astra Control Center to the load balanced IP address
+* Astra Trident 21.04 or newer installed and configured if NetApp ONTAP version 9.5 or newer will be used as a storage backend
+* Astra Trident 21.10.1 or newer installed and configured if Astra Trident will be used as a storage backend
 
 NOTE: These requirements assume that Astra Control Center is the only application running on the OpenShift cluster. If the cluster is running additional applications, adjust these minimum requirements accordingly.
 
 * *Image registry*: You must have an existing private Docker image registry to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
 
-* *Astra Trident / ONTAP storage configuration*: Astra Control Center requires that Astra Trident version 21.04 or newer already be installed and configured to work with NetApp ONTAP version 9.5 or newer as the storage backend. Astra Control Center requires that a storage class be created and set as the default storage class. Astra Control Center supports the following ONTAP drivers provided by Astra Trident:
-
+* *Astra Trident / ONTAP configuration*: Astra Control Center requires that a storage class be created and set as the default storage class. Astra Control Center supports the following ONTAP drivers provided by Astra Trident:
 ** ontap-nas
 ** ontap-nas-flexgroup
 ** ontap-san

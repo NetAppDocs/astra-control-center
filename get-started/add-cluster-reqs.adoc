@@ -16,7 +16,7 @@ You should ensure that the prerequisite conditions are met before you add a clus
 == What you'll need before you add a cluster
 
 * One of the following types of clusters:
-** Clusters running OpenShift 4.6, 4.7, or 4.8, which has Astra Trident StorageClasses backed by ONTAP 9.5 or later.
+** Clusters running OpenShift 4.6, 4.7, or 4.8, which has Astra Trident StorageClasses backed by Astra Data Store or ONTAP 9.5 or later
 ** Clusters running Rancher 2.5
 ** Clusters running Kubernetes 1.19 to 1.21 (including 1.21.x)
 +
