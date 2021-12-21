@@ -24,7 +24,7 @@ Updated release of Astra Control Center.
 * link:../get-started/requirements.html[Additional support for upstream Kubernetes and Rancher]
 * link:../get-started/setup_overview.html#add-a-storage-backend[Astra Data Store preview backend management and monitoring]
 * link:../use/upgrade-acc.html[Astra Control Center upgrades]
-//* link:../get-started/install_acc.html[OperatorHub option for installation]
+* link:../get-started/acc_operatorhub_install.html[Red Hat OperatorHub option for installation]
 
 .Resolved issues
 * link:../release-notes/resolved-issues.html[Resolved issues for this release]

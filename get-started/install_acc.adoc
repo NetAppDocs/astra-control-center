@@ -5,12 +5,14 @@ keywords: astra installation, install astra control center, how to install astra
 summary: To install Astra Control Center after addressing some environmental prerequisites, you'll download the bundle and install following the steps described.
 ---
 
-= Install Astra Control Center
+= Install Astra Control Center using the standard process
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/get-started/
 
-To install Astra Control Center, download the installation bundle from the https://mysupport.netapp.com/site/[NetApp Support Site^] and perform a series of commands to install Astra Control Center Operator and Astra Control Center in your environment. You can use this procedure to install Astra Control Center in internet-connected or air-gapped environments.
+To install Astra Control Center, download the installation bundle from the NetApp Support Site and perform the following steps to install Astra Control Center Operator and Astra Control Center in your environment. You can use this procedure to install Astra Control Center in internet-connected or air-gapped environments.
+
+For Red Hat OpenShift environments, you can also use an link:../get-started/acc_operatorhub_install.html[alternative procedure] to install Astra Control Center using OpenShift OperatorHub.
 
 .What you'll need
 * link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
@@ -30,6 +32,8 @@ OpenShift example:
 oc get apiservices
 ----
 
+* You have created an FQDN address for Astra Control Center in your data center.
+
 .About this task
 The Astra Control Center installation process does the following:
 
@@ -43,13 +47,15 @@ NOTE: Podman commands can be used in place of Docker commands if you are using R
 
 IMPORTANT: Do not execute the following command during the entirety of the installation process to avoid deleting all Astra Control Center pods: `kubectl delete -f astra_control_center_operator_deploy.yaml`
 
+.Steps
+
 To install Astra Control Center, do the following steps:
 
 * <<Download the Astra Control Center bundle>>
 * <<Unpack the bundle and change directory>>
 * <<Add the images to your local registry>>
 * <<Set up namespace and secret for registries with auth requirements>>
-* <<Configure the Astra Control Center operator>>
+* <<Install the Astra Control Center operator>>
 * <<Configure Astra Control Center>>
 * <<Complete Astra Control Center and operator installation>>
 * <<Verify system status>>
@@ -162,7 +168,7 @@ Response
 secret/astra-registry-cred created
 ----
 
-== Configure the Astra Control Center operator
+== Install the Astra Control Center operator
 
 . Edit the Astra Control Center operator deployment YAML (`astra_control_center_operator_deploy.yaml`) to refer to your local registry and secret.
 +
@@ -225,6 +231,29 @@ spec:
       *imagePullSecrets: []*
 ----
 
+. Install the Astra Control Center operator:
++
+----
+kubectl apply -f astra_control_center_operator_deploy.yaml
+----
++
+Sample response:
++
+----
+namespace/netapp-acc-operator created
+customresourcedefinition.apiextensions.k8s.io/astracontrolcenters.astra.netapp.io created
+role.rbac.authorization.k8s.io/acc-operator-leader-election-role created
+clusterrole.rbac.authorization.k8s.io/acc-operator-manager-role created
+clusterrole.rbac.authorization.k8s.io/acc-operator-metrics-reader created
+clusterrole.rbac.authorization.k8s.io/acc-operator-proxy-role created
+rolebinding.rbac.authorization.k8s.io/acc-operator-leader-election-rolebinding created
+clusterrolebinding.rbac.authorization.k8s.io/acc-operator-manager-rolebinding created
+clusterrolebinding.rbac.authorization.k8s.io/acc-operator-proxy-rolebinding created
+configmap/acc-operator-manager-config created
+service/acc-operator-controller-manager-metrics-service created
+deployment.apps/acc-operator-controller-manager created
+----
+
 == Configure Astra Control Center
 
 . Edit the Astra Control Center custom resource (CR) file (`astra_control_center_min.yaml`):
@@ -273,29 +302,6 @@ spec:
 
 == Complete Astra Control Center and operator installation
 
-. Install the Astra Control Center operator:
-+
-----
-kubectl apply -f astra_control_center_operator_deploy.yaml
-----
-+
-Sample response:
-+
-----
-namespace/netapp-acc-operator created
-customresourcedefinition.apiextensions.k8s.io/astracontrolcenters.astra.netapp.io created
-role.rbac.authorization.k8s.io/acc-operator-leader-election-role created
-clusterrole.rbac.authorization.k8s.io/acc-operator-manager-role created
-clusterrole.rbac.authorization.k8s.io/acc-operator-metrics-reader created
-clusterrole.rbac.authorization.k8s.io/acc-operator-proxy-role created
-rolebinding.rbac.authorization.k8s.io/acc-operator-leader-election-rolebinding created
-clusterrolebinding.rbac.authorization.k8s.io/acc-operator-manager-rolebinding created
-clusterrolebinding.rbac.authorization.k8s.io/acc-operator-proxy-rolebinding created
-configmap/acc-operator-manager-config created
-service/acc-operator-controller-manager-metrics-service created
-deployment.apps/acc-operator-controller-manager created
-----
-
 . If you didn't already do so in a previous step, create the `netapp-acc` (or custom) namespace:
 +
 ----
@@ -321,6 +327,8 @@ astracontrolcenter.astra.netapp.io/astra created
 ----
 
 == Verify system status
+
+NOTE: If you prefer to use OpenShift, you can use comparable oc commands for verification steps.
 
 . Verify that all system components installed successfully.
 +
@@ -433,7 +441,7 @@ name: astra
  spec:
    accountName: Example
    astraAddress: astra.example.com
-   astraVersion: 21.12.59
+   astraVersion: 21.12.60
    autoSupport:
      enrolled: true
      url: https://support.netapp.com/asupprod/post/1.0/postAsup
@@ -447,7 +455,7 @@ name: astra
  status:
    accConditionHistory:
      items:
-     - astraVersion: 21.12.59
+     - astraVersion: 21.12.60
        condition:
          lastTransitionTime: "2021-11-23T02:23:59Z"
          message: Deploying is currently in progress.
@@ -458,7 +466,7 @@ name: astra
        observedSpec:
          accountName: Example
          astraAddress: astra.example.com
-         astraVersion: 21.12.59
+         astraVersion: 21.12.60
          autoSupport:
            enrolled: true
            url: https://support.netapp.com/asupprod/post/1.0/postAsup
@@ -470,7 +478,7 @@ name: astra
            secret: astra-registry-cred
          lastName: Admin
        timestamp: "2021-11-23T02:23:59Z"
-     - astraVersion: 21.12.59
+     - astraVersion: 21.12.60
        condition:
          lastTransitionTime: "2021-11-23T02:23:59Z"
          message: Deploying is currently in progress.
@@ -481,7 +489,7 @@ name: astra
        observedSpec:
          accountName: Example
          astraAddress: astra.example.com
-         astraVersion: 21.12.59
+         astraVersion: 21.12.60
          autoSupport:
            enrolled: true
            url: https://support.netapp.com/asupprod/post/1.0/postAsup
@@ -493,7 +501,7 @@ name: astra
            secret: astra-registry-cred
          lastName: Admin
        timestamp: "2021-11-23T02:23:59Z"
-     - astraVersion: 21.12.59
+     - astraVersion: 21.12.60
        condition:
          lastTransitionTime: "2021-11-23T02:29:41Z"
          message: Post Install was successful
@@ -505,7 +513,7 @@ name: astra
        observedSpec:
          accountName: Example
          astraAddress: astra.example.com
-         astraVersion: 21.12.59
+         astraVersion: 21.12.60
          autoSupport:
            enrolled: true
            url: https://support.netapp.com/asupprod/post/1.0/postAsup
@@ -517,7 +525,7 @@ name: astra
            secret: astra-registry-cred
          lastName: Admin
        timestamp: "2021-11-23T02:29:41Z"
-     - astraVersion: 21.12.59
+     - astraVersion: 21.12.60
        condition:
          lastTransitionTime: "2021-11-23T02:29:41Z"
          message: Deploying succeeded.
@@ -529,7 +537,7 @@ name: astra
        observedSpec:
          accountName: Example
          astraAddress: astra.example.com
-         astraVersion: 21.12.59
+         astraVersion: 21.12.60
          autoSupport:
            enrolled: true
            url: https://support.netapp.com/asupprod/post/1.0/postAsup
@@ -540,9 +548,9 @@ name: astra
            name: registry_name/astra
            secret: astra-registry-cred
          lastName: Admin
-       observedVersion: 21.12.59
+       observedVersion: 21.12.60
        timestamp: "2021-11-23T02:29:41Z"
-     - astraVersion: 21.12.59
+     - astraVersion: 21.12.60
        condition:
          lastTransitionTime: "2021-11-23T02:29:41Z"
          message: Astra is deployed
@@ -554,7 +562,7 @@ name: astra
        observedSpec:
          accountName: Example
          astraAddress: astra.example.com
-         astraVersion: 21.12.59
+         astraVersion: 21.12.60
          autoSupport:
            enrolled: true
            url: https://support.netapp.com/asupprod/post/1.0/postAsup
@@ -565,9 +573,9 @@ name: astra
            name: registry_name/astra
            secret: astra-registry-cred
          lastName: Admin
-       observedVersion: 21.12.59
+       observedVersion: 21.12.60
        timestamp: "2021-11-23T02:29:41Z"
-     - astraVersion: 21.12.59
+     - astraVersion: 21.12.60
        condition:
          lastTransitionTime: "2021-11-23T02:29:41Z"
          message: Astra is deployed
@@ -579,7 +587,7 @@ name: astra
        observedSpec:
          accountName: Example
          astraAddress: astra.example.com
-         astraVersion: 21.12.59
+         astraVersion: 21.12.60
          autoSupport:
            enrolled: true
            url: https://support.netapp.com/asupprod/post/1.0/postAsup
@@ -590,7 +598,7 @@ name: astra
            name: registry_name/astra
            secret: astra-registry-cred
          lastName: Admin
-       observedVersion: 21.12.59
+       observedVersion: 21.12.60
        timestamp: "2021-11-23T02:29:41Z"
    certManager: deploy
    cluster:
@@ -624,7 +632,7 @@ name: astra
    observedSpec:
      accountName: Example
      astraAddress: astra.example.com
-     astraVersion: 21.12.59
+     astraVersion: 21.12.60
      autoSupport:
        enrolled: true
        url: https://support.netapp.com/asupprod/post/1.0/postAsup
@@ -635,7 +643,7 @@ name: astra
        name: registry_name/astra
        secret: astra-registry-cred
      lastName: Admin
-   observedVersion: 21.12.59
+   observedVersion: 21.12.60
    postInstall: Complete
    *uuid: 9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f*
 kind: List
