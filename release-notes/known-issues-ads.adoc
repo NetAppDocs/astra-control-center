@@ -67,3 +67,4 @@ Astra Control Center shows the Astra Data Store preview storage backend in an `U
 * link:../release-notes/resolved-issues.html[Resolved issues]
 * link:../release-notes/known-issues.html[Known issues]
 * link:../release-notes/known-limitations.html[Known limitations]
+* https://docs.netapp.com/us-en/astra-data-store/index.html[Astra Data Store documentation]
