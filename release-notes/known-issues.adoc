@@ -14,7 +14,6 @@ summary: Known issues identify problems that might prevent you from using this r
 Known issues identify problems that might prevent you from using this release of the product successfully.
 
 The following known issues affect the current release:
-//NOTE: For known issues specific to Astra Data Store when managed by Astra Control Center, see link:../release-notes/known-issues-ads.html.
 
 * <<App with user-defined label goes into "removed" state>>
 * <<Unable to stop running app backup>>
@@ -222,7 +221,7 @@ ingressroutes.traefik.containo.us             2021-06-23T23:29:11Z
 ingressroutetcps.traefik.containo.us          2021-06-23T23:29:11Z
 ingressrouteudps.traefik.containo.us          2021-06-23T23:29:12Z
 middlewares.traefik.containo.us               2021-06-23T23:29:12Z
-middlewaretcps.traefik.containo.us 				    2021-06-23T23:29:12Z
+middlewaretcps.traefik.containo.us            2021-06-23T23:29:12Z
 serverstransports.traefik.containo.us         2021-06-23T23:29:13Z
 tlsoptions.traefik.containo.us                2021-06-23T23:29:13Z
 tlsstores.traefik.containo.us                 2021-06-23T23:29:14Z
@@ -238,5 +237,5 @@ kubectl delete crd ingressroutes.traefik.containo.us ingressroutetcps.traefik.co
 == Find more information
 
 * link:../release-notes/resolved-issues.html[Resolved issues]
+* link:../release-notes/known-issues-ads.html[Known issues with Astra Data Store prreview and this Astra Control Center release]
 * link:../release-notes/known-limitations.html[Known limitations]
-//* link:../release-notes/known-issues-ads.html[Known issues with Astra Data Store and this Astra Control Center release]

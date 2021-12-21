@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: use/manage-backend.html
-keywords: how to use astra control, what is astra storage, how to set up astra backend storage, ontap storage in astra, kubernetes,
+keywords: how to use astra control, what is astra storage, how to set up astra storage backend, ontap storage in astra, kubernetes,
 summary: Add storage for your on-premises Kubernetes applications. Astra Control discovers and uses the already-deployed resources, including Trident, ONTAP, and associated storage classes.
 ---
 
@@ -43,7 +43,7 @@ You can complete the following tasks related to managing a storage backend:
 //. Confirm the backend details and select *Manage*.
 //+
 //The backend appears in the list with summary information.
-//. To see details of the backend storage, select it.
+//. To see details of the storage backend, select it.
 //+
 //TIP: Persistent volumes used by apps in the managed compute cluster are also displayed.
 
@@ -85,7 +85,7 @@ You can unmanage the backend.
 
 .Steps
 .	From left navigation, select *Backends*.
-. Select the backend storage.
+. Select the storage backend.
 . From the Actions menu, select *Unmanage*.
 . Type "unmanage" to confirm the removal.
 . Select *Yes, remove storage backend*.
