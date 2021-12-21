@@ -120,6 +120,7 @@ NOTE: The operator will be available in all cluster namespaces.
 +
 NOTE: Manual approval is recommended. You should only have a single operator instance running per cluster.
 
+.. Enter the Astra Control Center version; for example, 21.12.60.
 .. Select *Install*.
 +
 NOTE: If you selected a manual approval strategy, you will be prompted to approve the manual install plan for this operator.
