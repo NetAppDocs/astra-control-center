@@ -1,4 +1,4 @@
-# astra_enterprise
+# Astra Control Center
 
 Welcome to the open-source documentation for NetApp Astra Control Center.
 

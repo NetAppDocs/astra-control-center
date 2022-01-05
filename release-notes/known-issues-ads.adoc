@@ -1,0 +1,70 @@
+---
+sidebar: sidebar
+permalink: release-notes/known-issues-ads.html
+keywords: astra, control center, ads, data store, bugs, known issues, problems
+summary: Known issues identify problems that might prevent you from using this release of the product successfully.
+---
+
+= Known issues with Astra Data Store preview and this Astra Control Center release
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/release-notes/
+
+Known issues identify problems that might prevent you from using this release of the product successfully.
+
+The following known issues affect the management of Astra Data Store with this current release of the Astra Control Center:
+
+== Astra Data Store preview cannot be used as a storage class for Astra Control Center due to MongoDB pod liveness probe failure
+//ASTRACTL-13036/DOC-3904/BURT1439334
+When you attempt to use Astra Data Store preview as the storage class provisioner during an Astra Control Center deployment, the MongoDB pod liveness probe fails, resulting in a deployment that will not complete.
+
+To correct this issue, make the following changes in addition to the standard YAML changes when completing the link:../get-started/install_acc.html#configure-astra-control-center[Astra Control Center installation process]:
+
+. Edit the link:../get-started/install_acc.html#configure-the-astra-control-center-operator[Astra Control Center operator deployment YAML (astra_control_center_operator_deploy.yaml)] to change the Helm install timeout:
++
+----
+- name: ACCOP_HELM_INSTALLTIMEOUT
+  value: 20m
+----
+
+. Edit the link:../get-started/install_acc.html#configure-astra-control-center[Astra Control Center custom resource (CR) file (astra_control_center_min.yaml)] and include the highlighted additional values under `spec`:
++
+[subs=+quotes]
+----
+apiVersion: astra.netapp.io/v1
+kind: AstraControlCenter
+metadata:
+  name: astra
+*spec:*
+  accountName: "Example"
+  astraVersion: "ASTRA_VERSION"
+  astraAddress: "astra.example.com"
+  autoSupport:
+    enrolled: true
+  email: "[admin@example.com]"
+  firstName: "SRE"
+  lastName: "Admin"
+  imageRegistry:
+    name: "[your_registry_path]"
+    secret: "astra-registry-cred"
+  storageClass: "ontap-gold"
+  *additionalValues:*
+    *polaris-mongodb:*
+      *mongodb:*
+        *livenessProbe:*
+          *initialDelaySeconds: 400*
+      *metrics:*
+        *livenessProbe:*
+          *initialDelaySeconds: 400*
+----
+
+== Astra Control Center shows Astra Data Store preview storage backend in `Unknown` state
+//DOC-3916/ASTRACTL-13196/ASTRACTL-13134
+Astra Control Center shows the Astra Data Store preview storage backend in an `Unknown` state from the Backends page in the UI. In this condition, the storage backend is actually available and can be communicated with. A component within the storage backend is likely in an unhealthy state and needs to be returned to a healthy state for the storage backend to show as `available`.
+
+== Find more information
+//Add ADS links
+* link:../release-notes/resolved-issues.html[Resolved issues]
+* link:../release-notes/known-issues.html[Known issues]
+* link:../release-notes/known-limitations.html[Known limitations]
+* https://docs.netapp.com/us-en/astra-data-store/index.html[Astra Data Store documentation]

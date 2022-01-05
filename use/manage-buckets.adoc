@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: use/manage-buckets.html
-keywords: object store, bucket, s3, astra, astra control, astra control center, kubernetes
+keywords: how to set up object storage in astra, how to set up astra buckets, s3, astra, setting up astra control, how to set up astra control center, kubernetes
 summary: Adding object store bucket providers is essential if you want to back up your applications and persistent storage of if you want to clone applications across clusters.
 ---
 
@@ -36,7 +36,7 @@ A bucket can be in one of these states:
 * available: The bucket is available for use.
 * removed: The bucket is not currently accessible.
 
-For instructions on how to manage buckets using the Astra API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
+For instructions on how to manage buckets using the Astra Control API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
 
 You can do these tasks related to managing buckets:
 
@@ -58,7 +58,7 @@ TIP: The first set of credentials that you add to Astra Control is always in use
 
 //.Steps
 //. Select *Account* > *Credentials*.
-//.	From the State drop-down list, click the credentials you want to remove.
+//.	From the State drop-down list, select the credentials you want to remove.
 //. Select *Remove*.
 //.	Type the *remove* to confirm deletion and then select *Yes, remove credentials*.
 
@@ -67,7 +67,7 @@ TIP: The first set of credentials that you add to Astra Control is always in use
 
 You can change the access credential information for a bucket and change whether a selected bucket is the default bucket.
 
-NOTE: When you add a bucket, select the correct bucket provider type with credentials that are correct for that provider. For example, the UI accepts NetApp ONTAP S3 as the type with StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail. See the link:../release-notes/known-issues.html#selecting-a-bucket-provider-type-with-credentials-for-another-type-causes-data-protection-failures[Release Notes].
+NOTE: When you add a bucket, select the correct bucket provider and provide the right credentials for that provider. For example, the UI accepts NetApp ONTAP S3 as the type and accepts StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail. See the link:../release-notes/known-issues.html#selecting-a-bucket-provider-type-with-credentials-for-another-type-causes-data-protection-failures[Release Notes].
 
 .Steps
 .	From left navigation, select *Buckets*.
@@ -80,4 +80,4 @@ TIP: You can't modify the bucket type.
 
 == Find more information
 
-* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API^]
+* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra Control API^]

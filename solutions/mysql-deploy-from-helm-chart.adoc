@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: solutions/mysql-deploy-from-helm-chart.html
-keywords: helm, mysql, helm chart, deploy mysql, astra, astra control, kubernetes
+keywords: how to set up mysql, how to deploy mysql from helm chart, helm chart, deploy mysql, astra, astra control, kubernetes
 summary: Learn how to deploy MySQL from the Bitnami Helm chart. After you deploy MySQL on your Kubernetes cluster, you can manage the application with Astra Control.
 ---
 
@@ -11,4 +11,3 @@ summary: Learn how to deploy MySQL from the Bitnami Helm chart. After you deploy
 :imagesdir: ../media/
 
 include::../_include/source-mysql-deploy-from-helm-chart.adoc[]
-

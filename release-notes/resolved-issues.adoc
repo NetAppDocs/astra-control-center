@@ -1,0 +1,43 @@
+---
+sidebar: sidebar
+permalink: release-notes/resolved-issues.html
+keywords: astra, control center, fixed bugs, fixes, resolved issues
+summary: Known issues identify problems that might prevent you from using this release of the product successfully.
+---
+
+= Resolved issues
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/release-notes/
+
+These issues have been corrected in this release of the product.
+
+== Extra backups are retained as part of scheduled backup
+//ASTRACTL-10069/DOC-3609
+Sometimes one or more backups in Astra Control Center are retained beyond the number specified to be retained in the backup schedule. These extra backups should be deleted as part of a scheduled backup but are not deleted and are stuck in a `pending` state.
+
+== Backup or clone fails for apps using PVCs with decimal units in Astra Control Center
+//ASTRACTL-9948/DOC-3612
+Volumes created with decimal units fail using the Astra Control Center backup or clone process.
+
+== Astra Control Center UI slow to show changes to app resources such as persistent volume changes
+// DOC-3563/ASTRACTL-9540/AD AH
+After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. This delay in the UI can also occur when any app resources are added or modified. In this case, a data protection operation is successful within minutes and you can use the management software for the storage backend to confirm the change in volume size.
+
+== Incorrect cluster role binding created by Astra Control Center custom resource definition during installation
+//ASTRACTL-11352/DOC-3726
+The patch to correct cluster role binding during installation is no longer required in this release.
+
+== ASUP collection stuck in a generating or uploading state
+//DOC-3813/ASTRACTL-12325
+If an ASUP pod is stopped or restarted, an ASUP collection might become stuck in a generating or uploading state.
+
+== Operator-deployed apps and namespaces
+//DOC-3899/ASTRACTL-13098
+An operator and the app it deploys must use the same namespace. Astra Control supports only one operator-deployed app per namespace.
+
+== Find more information
+
+* link:../release-notes/known-issues.html[Known issues]
+* link:../release-notes/known-limitations.html[Known limitations]
+* link:../release-notes/known-issues-ads.html[Known issues with Astra Data Store preview and this Astra Control Center release]

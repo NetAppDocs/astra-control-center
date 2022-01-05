@@ -23,7 +23,7 @@ Astra Control is available in two deployment models:
 * *Astra Control Service*: A NetApp-managed service that provides application-aware data management of Kubernetes clusters in Google Kubernetes Engine (GKE) and Azure Kubernetes Service (AKS).
 * *Astra Control Center*: Self-managed software that provides application-aware data management of Kubernetes clusters running in your on-premises environment.
 
-[cols=3*,options="header",cols="1h,2d,2d"]
+[cols=3*,options="header",cols="1h,2d,2a"]
 |===
 |
 | Astra Control Service
@@ -31,13 +31,16 @@ Astra Control is available in two deployment models:
 | How is it offered? | As a fully managed cloud service from NetApp | As software that you download, install, and manage
 | Where is it hosted? | On a public cloud of NetApp's choice | On your provided Kubernetes cluster
 | How is it updated? | Managed by NetApp | You manage any updates
-| What are the app data management capabilities? | Same capabilities on both platforms with exceptions to backend storage or to external services | Same capabilities on both platforms with exceptions to backend storage or to external services
-| What is the backend storage support? | NetApp cloud service offerings | NetApp ONTAP AFF and FAS systems
+| What are the app data management capabilities? | Same capabilities on both platforms with exceptions to storage backend or to external services | Same capabilities on both platforms with exceptions to storage backend or to external services
+| What is the storage backend support? | NetApp cloud service offerings |
+
+* NetApp ONTAP AFF and FAS systems
+* Astra Data Store as storage backend
 |===
 
 == Supported apps
 
-Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators or cluster-scoped operators.
+//Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators or cluster-scoped operators.
 
 NetApp has validated some apps to ensure the safety and consistency of the snapshots and backups.
 
@@ -55,9 +58,9 @@ At a high level, Astra Control Service works like this:
 
 * You get started with Astra Control Service by setting up your cloud provider and by registering for an Astra account.
 +
-** For GKE clusters, Astra Control Service uses https://cloud.netapp.com/cloud-volumes-service-for-gcp[NetApp Cloud Volumes Service for Google Cloud^] as the backend storage for your persistent volumes.
+** For GKE clusters, Astra Control Service uses https://cloud.netapp.com/cloud-volumes-service-for-gcp[NetApp Cloud Volumes Service for Google Cloud^] as the storage backend for your persistent volumes.
 +
-** For AKS clusters, Astra Control Service uses https://cloud.netapp.com/azure-netapp-files[Azure NetApp Files^] as the backend storage for your persistent volumes.
+** For AKS clusters, Astra Control Service uses https://cloud.netapp.com/azure-netapp-files[Azure NetApp Files^] as the storage backend for your persistent volumes.
 
 * You add your first Kubernetes compute to Astra Control Service. Astra Control Service then does the following:
 
@@ -85,7 +88,10 @@ Astra Control's Free Plan enables you to manage up to 10 apps in your account. I
 
 Astra Control Center runs locally in your own private cloud.
 
-For the first release, Astra Control Center will support OpenShift Kubernetes clusters and Trident storage backends with ONTAP 9.5 and above.
+Astra Control Center supports OpenShift Kubernetes clusters with:
+
+* Trident storage backends with ONTAP 9.5 and above
+* Astra Data Store storage backends
 
 In a cloud connected environment Astra Control Center uses Cloud Insights to provide advanced monitoring and telemetry. In the absence of a Cloud Insights connection, limited (7-days of metrics) monitoring and telemetry is available in Astra Control Center and also exported to Kubernetes native monitoring tools (such as Prometheus and Grafana) through open metrics end points.
 
@@ -103,7 +109,7 @@ At a high level, Astra Control Center works like this:
 
 ** Set up licensing.
 ** Add your first cluster.
-** Add backend storage that is discovered when you added the cluster.
+** Add storage backend that is discovered when you added the cluster.
 ** Add an object store bucket that will store your app backups.
 
 Learn more about how to https://docs.netapp.com/us-en/astra-control-center/get-started/setup_overview.html[set up Astra Control Center].
@@ -111,7 +117,7 @@ Learn more about how to https://docs.netapp.com/us-en/astra-control-center/get-s
 Astra Control Center does this:
 
 * Discovers details about the managed Kubernetes clusters.
-* Discovers your Astra Trident configuration on the clusters that you choose to manage and lets you monitor the storage backends.
+* Discovers your Astra Trident or Astra Data Store configuration on the clusters that you choose to manage and lets you monitor the storage backends.
 * Discovers apps on those clusters and enables you to manage and protect the apps.
 
 You can add apps to your cluster. Or, if you have some apps already in the cluster being managed, you can use Astra Control Center to discover and manage them. Then, use Astra Control Center to create snapshots, backups, and clones.
@@ -120,8 +126,9 @@ You can add apps to your cluster. Or, if you have some apps already in the clust
 == For more information
 
 * https://docs.netapp.com/us-en/astra/index.html[Astra Control Service documentation^]
-* https://docs.netapp.com/us-en/astra-control-center/index.html[Astra Control Control documentation^]
+* https://docs.netapp.com/us-en/astra-control-center/index.html[Astra Control Center documentation^]
+* https://docs.netapp.com/us-en/astra-data-store/index.html[Astra Data Store documentation]
 * https://docs.netapp.com/us-en/trident/index.html[Astra Trident documentation^]
-* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API^]
+* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra Control API^]
 * https://docs.netapp.com/us-en/cloudinsights/[Cloud Insights documentation^]
 * https://docs.netapp.com/us-en/ontap/index.html[ONTAP documentation^]

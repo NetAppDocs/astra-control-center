@@ -1,3 +1,10 @@
+---
+settings:
+  name: Astra Control Center
+  internal:
+    pdf_enabled: true
+  prod:
+    pdf_enabled: true
 sidebar:
   entries:
     - title: Astra Control Center docs
@@ -9,6 +16,8 @@ sidebar:
     - section: rest-api
     - section: solutions
     - section: support
+    - title: Earlier versions
+      url: /acc-earlier-versions.html
     - title: Legal notices
       url: /legal-notices.html
 
@@ -19,7 +28,7 @@ homepage:
       links:
         - title: Learn about Astra Control Center
           url: /concepts/intro.html
-        - title: What's in Astra Control Center
+        - title: What's new in Astra Control Center
           url: /release-notes/whats-new.html
         - title: Release notes
           url: /release-notes/rn_overview.html
@@ -37,9 +46,9 @@ homepage:
           url: /use/protect-apps.html
         - title: Clone and migrate apps
           url: /use/clone-apps.html
-    - title: Use Astra API
+    - title: Use Astra Control API
       links:
-        - title: Get started with the Astra API
+        - title: Get started with the Astra Control API
           url: https://docs.netapp.com/us-en/astra-automation/get-started/before_get_started.html
         - title: API reference
           url: https://docs.netapp.com/us-en/astra-automation/reference/api_reference.html
@@ -60,6 +69,15 @@ homepage:
           url: https://docs.netapp.com/us-en/astra/release-notes/whats-new.html
         - title: Quick start for Astra Control Service
           url: https://docs.netapp.com/us-en/astra/get-started/quick-start.html
+    - title: Use Astra Data Store preview
+      #image: ./media/outline_directions_run_black_18dp.png
+      links:
+        - title: Intro to Astra Data Store
+          url: https://docs.netapp.com/us-en/astra-data-store/concepts/intro.html
+        - title: What's in this release of Astra Data Store
+          url: https://docs.netapp.com/us-en/astra-data-store/release-notes/whats-new.html
+        - title: Quick start for Astra Data Store preview
+          url: https://docs.netapp.com/us-en/astra-data-store/get-started/quick-start.html
 #    - title: Use Astra Service
 #      links:
 #        - title: Manage accounts
@@ -94,6 +112,8 @@ homepage:
       links:
         - title: Slack channel
           url: https://netapppub.slack.com/#astra
+        - title: Astra Control blog
+          url: https://cloud.netapp.com/blog/topic/astra
         - title: NetApp Community
           url: https://community.netapp.com/
         - title: Kubernetes Hub
