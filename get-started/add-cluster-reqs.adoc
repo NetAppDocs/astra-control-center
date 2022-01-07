@@ -187,9 +187,11 @@ The indices for each element in the `secrets` array begin with 0. In the above e
 ----
 +
 ----
-# Update these to match your environment. Replace TOKEN_INDEX from the output
-# in the previous step. If you didn't change anything else above, don't
-# change anything else here.
+# Update these to match your environment.
+# Replace TOKEN_INDEX with the correct value
+# from the output in the previous step. If you
+# didn't change anything else above, don't change
+# anything else here.
 
 SERVICE_ACCOUNT_NAME=astracontrol-service-account
 NAMESPACE=default
