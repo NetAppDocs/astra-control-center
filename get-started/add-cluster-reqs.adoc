@@ -178,7 +178,7 @@ The end of the output should look similar to the following:
 +
 The indices for each element in the `secrets` array begin with 0. In the above example, the index for `astracontrol-service-account-dockercfg-vhz87` would be 0 and the index for `astracontrol-service-account-token-r59kr` would be 1. In your output, make note of the index for the service account name that has the word "token" in it.
 . Generate the kubeconfig as follows:
-.. Create a `create-kubeconfig.sh` file. If the token index you noted in the previous step was not 0, replace the value for `TOKEN_INDEX` in the beginning of the following script with the correct value.
+.. Create a `create-kubeconfig.sh` file. Replace `TOKEN_INDEX` in the beginning of the following script with the correct value.
 +
 [source]
 [subs="specialcharacters,quotes"]
@@ -187,15 +187,14 @@ The indices for each element in the `secrets` array begin with 0. In the above e
 ----
 +
 ----
-# Update these to match your environment. Replace the value for TOKEN_INDEX from
-# the output in the previous step if it was not 0. If you didn't change anything
-# else above, don't change anything else here.
+# Update these to match your environment. Replace TOKEN_INDEX from the output
+# in the previous step. If you didn't change anything else above, don't
+# change anything else here.
 
 SERVICE_ACCOUNT_NAME=astracontrol-service-account
 NAMESPACE=default
 NEW_CONTEXT=astracontrol
 KUBECONFIG_FILE='kubeconfig-sa'
-TOKEN_INDEX=0
 
 CONTEXT=$(kubectl config current-context)
 
