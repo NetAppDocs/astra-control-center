@@ -112,6 +112,7 @@ podman login [your_registry_path]
 Docker:
 +
 ----
+[source,go]
 export REGISTRY=[Docker_registry_path]
 for astraImageFile in $(ls images/*.tar) ; do
   # Load to local cache. And store the name of the loaded image trimming the 'Loaded images: '
@@ -127,6 +128,7 @@ done
 Podman:
 +
 ----
+[source,go]
 export REGISTRY=[Registry_path]
 for astraImageFile in $(ls images/*.tar) ; do
   # Load to local cache. And store the name of the loaded image trimming the 'Loaded images: '
