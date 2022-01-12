@@ -155,6 +155,7 @@ NOTE: If you selected a manual approval strategy, you will be prompted to approv
 .. Keep or adjust the Astra Control Center name.
 .. (Optional) Enable or disable Auto Support. Retaining Auto Support functionality is recommended.
 .. Enter the Astra Control Center address. Do not enter `http://` or `https://` in the address.
+.. Enter the Astra Control Center version; for example, 21.12.60.
 .. Enter an account name, email address, and admin last name.
 .. Retain the default volume reclaim policy.
 .. In *Image Registry*, enter your local container image registry path. Do not enter `http://` or `https://` in the address.
