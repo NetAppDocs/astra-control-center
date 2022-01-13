@@ -23,17 +23,9 @@ When you create a project for hosting an app on an OpenShift cluster, the projec
 `oc adm policy add-scc-to-user privileged -z default -n wordpress`
 ===============================
 
-== Snapshots and backups
-
-A _snapshot_ is a point-in-time copy of an app that's stored on the same provisioned volume as the app. They are usually fast. Local snapshots are used to restore the application to an earlier point in time. Snapshots are useful for fast clones; snapshots include all of the Kubernetes objects for the app, including configuration files.
-
-A _backup_ is stored in the external object store. A backup can be slower to take compared to local snapshots. You can migrate an app by restoring its backup to a different cluster. You can also choose a longer retention period for backups.
-
-CAUTION: _You can't be fully protected until you have a recent backup_. This is important because backups are stored in an object store away from the persistent volumes. If a failure or accident wipes out the cluster and it's persistent storage, then you need a backup to recover. A snapshot wouldn't enable you to recover.
-
 == Configure a protection policy
 
-A protection policy protects an app by creating snapshots, backups, or both at a defined schedule. You can choose to create snapshots and backups hourly, daily, weekly, and monthly, and you can specify the number of copies to retain.
+A protection policy protects an app by creating snapshots, backups, or both at a defined schedule. You can choose to create snapshots and backups hourly, daily, weekly, and monthly, and you can specify the number of copies to retain. As an example, a protection policy might create weekly backups and daily snapshots, and retain the backups and snapshots for one month. How often you create snapshots and backups and how long you retain them depends on the needs of your organization.
 
 .Steps
 
