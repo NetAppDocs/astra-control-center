@@ -68,18 +68,25 @@ cd astra-control-center-[version]
 
 . Add the files in the Astra Control Center image directory to your local registry.
 +
-NOTE: See a sample script for the automatic loading of images below.
+NOTE: See sample scripts for the automatic loading of images below.
 
-.. Log in to your Docker registry:
+.. Log in to your registry:
++
+Docker:
 +
 ----
 docker login [your_registry_path]
 ----
++
+Podman:
++
+----
+podman login [your_registry_path]
+----
 
-.. Load the images into Docker.
-.. Tag the images.
-.. [[substep_image_local_registry_push]]Push the images to your local registry.
-
+.. Use the appropriate script to load the images, tag the images, and [[substep_image_local_registry_push]]push the images to your local registry:
++
+Docker:
 +
 ----
 export REGISTRY=[Docker_registry_path]
@@ -91,6 +98,21 @@ for astraImageFile in $(ls images/*.tar) ; do
   docker tag ${astraImage} ${REGISTRY}/${astraImage}
   # Push to the local repo.
   docker push ${REGISTRY}/${astraImage}
+done
+----
++
+Podman:
++
+----
+export REGISTRY=[Registry_path]
+for astraImageFile in $(ls images/*.tar) ; do
+  # Load to local cache. And store the name of the loaded image trimming the 'Loaded images: '
+  astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image(s): //')
+  astraImage=$(echo ${astraImage} | sed 's!localhost/!!')
+  # Tag with local image repo.
+  podman tag ${astraImage} ${REGISTRY}/${astraImage}
+  # Push to the local repo.
+  podman push ${REGISTRY}/${astraImage}
 done
 ----
 
@@ -133,6 +155,7 @@ NOTE: If you selected a manual approval strategy, you will be prompted to approv
 .. Keep or adjust the Astra Control Center name.
 .. (Optional) Enable or disable Auto Support. Retaining Auto Support functionality is recommended.
 .. Enter the Astra Control Center address. Do not enter `http://` or `https://` in the address.
+.. Enter the Astra Control Center version; for example, 21.12.60.
 .. Enter an account name, email address, and admin last name.
 .. Retain the default volume reclaim policy.
 .. In *Image Registry*, enter your local container image registry path. Do not enter `http://` or `https://` in the address.
