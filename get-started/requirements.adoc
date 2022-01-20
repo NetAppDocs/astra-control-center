@@ -22,7 +22,7 @@ Astra Control Center requires one of the following types of host clusters:
 
 The cluster must meet the following general requirements so you can discover and manage it from Astra Control Center.
 
-* A `kubeconfig.yaml` file that defines only one _context_ element; visit the Kubernetes documentation for https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[information about creating kubeconfig files^]
+* A `kubeconfig.yaml` file that defines only one _context_ element (visit the Kubernetes documentation for https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[information about creating kubeconfig files^])
 * At least 300GB available in backend ONTAP storage capacity
 * 3 controller nodes with 4 CPU cores, 16GB RAM, and 120GB of available storage each
 * 3 worker nodes with at least 12 CPU cores, 32GB RAM, and 50GB of available storage each
