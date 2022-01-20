@@ -22,6 +22,7 @@ Astra Control Center requires one of the following types of host clusters:
 
 The cluster must meet the following general requirements so you can discover and manage it from Astra Control Center.
 
+* A `kubeconfig.yaml` file that defines only one _context_ element; visit the Kubernetes documentation for https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[information about creating kubeconfig files^]
 * At least 300GB available in backend ONTAP storage capacity
 * 3 controller nodes with 4 CPU cores, 16GB RAM, and 120GB of available storage each
 * 3 worker nodes with at least 12 CPU cores, 32GB RAM, and 50GB of available storage each
@@ -50,6 +51,8 @@ If you are planning to manage the Kubernetes cluster from Astra Control Center a
 * A method for pointing the FQDN of Astra Control Center to the external IP address of the Astra Control Center service
 
 //Make sure that your cluster meets the minimum requirements and that you follow Kubernetes best practices so that Astra Control Center is highly available in your Kubernetes cluster.
+
+NOTE: When managing application clusters in a Rancher environment, modify the application cluster's default context in the kubeconfig file provided by Rancher to use a control plane context instead of the Rancher API server context. This reduces load on the Rancher API server and improves performance.
 
 [NOTE]
 ======================
