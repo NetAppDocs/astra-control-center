@@ -71,8 +71,6 @@ During app cloning in OpenShift environments, Astra Control Center needs to allo
 
 NOTE: If you plan to add a second OpenShift operational environment as a managed compute resource, you need to ensure that the Astra Trident Volume Snapshot feature is enabled. To enable and test volume snapshots with Astra Trident, https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[see the official Astra Trident instructions^].
 
-
-
 //* A method for pointing the FQDN of Astra Control Center to the external IP address of the Astra Control Center service
 
 //Make sure that your cluster meets the minimum requirements and that you follow Kubernetes best practices so that Astra Control Center is highly available in your Kubernetes cluster.
