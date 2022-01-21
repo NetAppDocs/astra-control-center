@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: get-started/requirements.html
-keywords: what are astra kubernetes requirements, astra control requirements, astra supported versions, apps, supported apps, mariadb, mysql, postgres, kubernetes version, ubuntu, image type, networking
+keywords: what are astra kubernetes requirements, astra control requirements, astra supported versions, apps, supported apps, mariadb, mysql, postgres, kubernetes version, ubuntu, image type, networking, environment, operational, operational environment, hosting, host, cluster, clusters
 summary: Get started with Astra Control Center by verifying support for your Kubernetes clusters, apps, and web browser.
 ---
 
@@ -27,7 +27,7 @@ The operational environment must meet the following requirements to host Astra C
 * 3 controller nodes with 4 CPU cores, 16GB RAM, and 120GB of available storage each
 * 3 worker nodes with at least 12 CPU cores, 32GB RAM, and 50GB of available storage each
 //* Kubernetes version 1.19 or 1.20
-* Service type "LoadBalancer" available for ingress traffic to be sent to services in the OpenShift cluster
+* Service type "LoadBalancer" available for ingress traffic to be sent to services in the operational environment cluster
 * A method for pointing the FQDN of Astra Control Center to the load balanced IP address
 * Astra Trident 21.04 or newer installed and configured if NetApp ONTAP version 9.5 or newer will be used as a storage backend
 * Astra Trident 21.10.1 or newer installed and configured if Astra Data Store will be used as a storage backend
@@ -51,7 +51,7 @@ If you plan to manage the operational environment cluster from Astra Control Cen
 
 [NOTE]
 ======================
-During app cloning, Astra Control Center needs to allow OpenShift to mount volumes and change the ownership of files if necessary. Because of this, you need to configure an ONTAP volume export policy to allow volume operations to complete successfully. You can do so with the following commands:
+During app cloning in OpenShift environments, Astra Control Center needs to allow OpenShift to mount volumes and change the ownership of files. Because of this, you need to configure an ONTAP volume export policy to allow these operations. You can do so with the following commands:
 
 `export-policy rule modify -vserver <storage virtual machine name> -policyname <policy name>  -ruleindex 1 -superuser sysm --anon 65534`
 ======================
@@ -168,7 +168,7 @@ Astra Control Center uses a service of the type "LoadBalancer" and requires the 
 
 == Networking requirements
 
-The cluster that hosts Astra Control Center communicates using the following TCP ports. You should ensure that these ports are allowed through any firewalls, and configure firewalls to allow any HTTPS egress traffic originating from the Astra network. Some ports require connectivity both ways between the cluster hosting Astra Control Center and each managed cluster (noted where applicable).
+The operational environment that hosts Astra Control Center communicates using the following TCP ports. You should ensure that these ports are allowed through any firewalls, and configure firewalls to allow any HTTPS egress traffic originating from the Astra network. Some ports require connectivity both ways between the environment hosting Astra Control Center and each managed cluster (noted where applicable).
 
 |===
 |Product |Port |Protocol |Direction |Purpose
@@ -177,17 +177,17 @@ The cluster that hosts Astra Control Center communicates using the following TCP
 |443
 |HTTPS
 |Ingress
-|UI / API access: Ensure this port is open both ways between the cluster hosting Astra Control Center and each managed cluster
+|UI / API access: Ensure this port is open both ways between the environment hosting Astra Control Center and each managed cluster
 
 |Astra Control Center
 |9090
 |HTTPS
 a|
 
-* Ingress (to cluster hosting Astra Control Center)
+* Ingress (to environment hosting Astra Control Center)
 * Egress (random port from the node IP address of each worker node of each managed cluster)
 
-|Metrics data to metrics consumer: Ensure each managed cluster can access this port on the cluster hosting Astra Control Center
+|Metrics data to metrics consumer: Ensure each managed cluster can access this port on the environment hosting Astra Control Center
 
 |Astra Trident
 |34571
