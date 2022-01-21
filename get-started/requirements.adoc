@@ -71,7 +71,7 @@ During app cloning in OpenShift environments, Astra Control Center needs to allo
 
 NOTE: If you plan to add a second OpenShift operational environment as a managed compute resource, you need to ensure that the Astra Trident Volume Snapshot feature is enabled. To enable and test volume snapshots with Astra Trident, https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[see the official Astra Trident instructions^].
 
-NOTE: When managing application clusters in a Rancher environment, modify the application cluster's default context in the kubeconfig file provided by Rancher to use a control plane context instead of the Rancher API server context. This reduces load on the Rancher API server and improves performance.
+
 
 //* A method for pointing the FQDN of Astra Control Center to the external IP address of the Astra Control Center service
 
@@ -99,6 +99,8 @@ Astra Control Center has the following requirements for clusters that you plan t
 * An Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[volumesnapshotclass object^] has been defined by an administrator
 * A default Kubernetes storage class exists on the cluster
 * At least one storage class is configured to use Astra Trident
+
+NOTE: When managing application clusters in a Rancher environment, modify the application cluster's default context in the kubeconfig file provided by Rancher to use a control plane context instead of the Rancher API server context. This reduces load on the Rancher API server and improves performance.
 
 == App management requirements
 Astra Control has the following app management requirements:
