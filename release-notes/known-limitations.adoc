@@ -22,6 +22,10 @@ oc get pods n -netapp-monitoring
 
 There should be no pods running in that namespace or the namespace should not exist. If either of those are true, the cluster is unmanaged.
 
+= Astra Control Center cannot manage two identically named clusters in the same cloud
+//DOC-3744/ASTRACTL-11632
+If you try to add a cluster with the same name of a cluster that already exists in your cloud, the operation will fail. You must remove the existing cluster and corresponding credentials and retry the request.
+
 == Clones of apps installed using pass by reference operators can fail
 Astra Control supports apps installed with namespace-scoped operators. These operators are generally designed with a "pass-by-value" rather than "pass-by-reference" architecture. The following are some operator apps that follow these patterns:
 
