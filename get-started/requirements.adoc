@@ -42,13 +42,6 @@ NOTE: These requirements assume that Astra Control Center is the only applicatio
 ** ontap-san
 ** ontap-san-economy
 
-If you plan to manage the operational environment cluster from Astra Control Center, the cluster has the following additional requirements:
-
-* The most recent version of the Kubernetes https://kubernetes-csi.github.io/docs/snapshot-controller.html[snapshot-controller component^] is installed
-* An Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[volumesnapshotclass object^] has been defined by an administrator
-* A default Kubernetes storage class exists on the cluster
-* At least one storage class is configured to use Astra Trident
-
 [NOTE]
 ======================
 During app cloning in OpenShift environments, Astra Control Center needs to allow OpenShift to mount volumes and change the ownership of files. Because of this, you need to configure an ONTAP volume export policy to allow these operations. You can do so with the following commands:
@@ -80,13 +73,12 @@ The Kubernetes cluster you use for Astra Control Center should already be deploy
 
 == Kubernetes cluster requirements
 
-Astra Control Center has the following requirements for clusters that you plan to add to and manage from Astra Control Center.
+Astra Control Center has the following requirements for clusters that you plan to add to and manage from Astra Control Center. These requirements also apply if the cluster you plan to manage is the operational environment cluster that hosts Astra Control Center.
 
-
-
-
-
-
+* The most recent version of the Kubernetes https://kubernetes-csi.github.io/docs/snapshot-controller.html[snapshot-controller component^] is installed
+* An Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[volumesnapshotclass object^] has been defined by an administrator
+* A default Kubernetes storage class exists on the cluster
+* At least one storage class is configured to use Astra Trident
 
 == App management requirements
 Astra Control has the following app management requirements:
