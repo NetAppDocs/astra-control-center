@@ -98,7 +98,7 @@ Astra Control Center has the following requirements for clusters that you plan t
 * A default Kubernetes storage class exists on the cluster
 * At least one storage class is configured to use Astra Trident
 
-NOTE: When managing application clusters in a Rancher environment, modify the application cluster's default context in the kubeconfig file provided by Rancher to use a control plane context instead of the Rancher API server context. This reduces load on the Rancher API server and improves performance.
+NOTE: When managing application clusters in a Rancher environment, modify the application cluster's default context in the `kubeconfig` file provided by Rancher to use a control plane context instead of the Rancher API server context. This reduces load on the Rancher API server and improves performance.
 
 == App management requirements
 Astra Control has the following app management requirements:
