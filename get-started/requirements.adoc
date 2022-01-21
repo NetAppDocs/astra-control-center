@@ -22,15 +22,35 @@ Astra Control Center requires one of the following types of operational environm
 
 The operational environment must meet the following requirements to host Astra Control Center:
 
-* A `kubeconfig.yaml` file that defines only one _context_ element (visit the Kubernetes documentation for https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[information about creating kubeconfig files^])
-* At least 300GB available in backend ONTAP storage capacity
-* 3 controller nodes with 4 CPU cores, 16GB RAM, and 120GB of available storage each
-* 3 worker nodes with at least 12 CPU cores, 32GB RAM, and 50GB of available storage each
-//* Kubernetes version 1.19 or 1.20
-* Service type "LoadBalancer" available for ingress traffic to be sent to services in the operational environment cluster
-* A method for pointing the FQDN of Astra Control Center to the load balanced IP address
+|===
+|Component |Requirement
+
+|Kubeconfig context
+|A `kubeconfig.yaml` file that defines only one _context_ element (visit the Kubernetes documentation for https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[information about creating kubeconfig files^])
+
+|Backend ONTAP storage capacity
+|At least 300GB available
+
+|Controller nodes
+|3 controller nodes with 4 CPU cores, 16GB RAM, and 120GB of available storage each
+
+|Worker nodes
+|3 worker nodes with at least 12 CPU cores, 32GB RAM, and 50GB of available storage each
+
+|Load balancer
+|Service type "LoadBalancer" available for ingress traffic to be sent to services in the operational environment cluster
+
+|FQDN resolution
+|A method for pointing the FQDN of Astra Control Center to the load balanced IP address
+
+|Astra Trident
+a|
+
 * Astra Trident 21.04 or newer installed and configured if NetApp ONTAP version 9.5 or newer will be used as a storage backend
 * Astra Trident 21.10.1 or newer installed and configured if Astra Data Store will be used as a storage backend
+
+|===
+
 
 NOTE: These requirements assume that Astra Control Center is the only application running in the operational environment. If the environment is running additional applications, adjust these minimum requirements accordingly.
 
