@@ -10,17 +10,17 @@ summary: Get started with Astra Control Center by verifying support for your Kub
 :icons: font
 :imagesdir: ../media/get-started/
 
-Get started by verifying support for your Kubernetes clusters, apps, licenses, and web browser.
+Get started by verifying the readiness of your operational environment, Kubernetes clusters, apps, licenses, and web browser.
 
-== Kubernetes cluster general requirements
+== Operational environment requirements
 
-Astra Control Center requires one of the following types of host clusters:
+Astra Control Center requires one of the following types of operational environments:
 
 * Red Hat OpenShift Container Platform 4.6.8, 4.7, or 4.8
 * Rancher 2.5
 * Kubernetes 1.19 to 1.21 (including 1.21.x)
 
-The cluster must meet the following general requirements so you can discover and manage it from Astra Control Center.
+The operational environment must meet the following requirements to host Astra Control Center:
 
 * A `kubeconfig.yaml` file that defines only one _context_ element (visit the Kubernetes documentation for https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[information about creating kubeconfig files^])
 * At least 300GB available in backend ONTAP storage capacity
@@ -30,9 +30,9 @@ The cluster must meet the following general requirements so you can discover and
 * Service type "LoadBalancer" available for ingress traffic to be sent to services in the OpenShift cluster
 * A method for pointing the FQDN of Astra Control Center to the load balanced IP address
 * Astra Trident 21.04 or newer installed and configured if NetApp ONTAP version 9.5 or newer will be used as a storage backend
-* Astra Trident 21.10.1 or newer installed and configured if Astra Trident will be used as a storage backend
+* Astra Trident 21.10.1 or newer installed and configured if Astra Data Store will be used as a storage backend
 
-NOTE: These requirements assume that Astra Control Center is the only application running on the OpenShift cluster. If the cluster is running additional applications, adjust these minimum requirements accordingly.
+NOTE: These requirements assume that Astra Control Center is the only application running in the operational environment. If the environment is running additional applications, adjust these minimum requirements accordingly.
 
 * *Image registry*: You must have an existing private Docker image registry to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
 
@@ -42,27 +42,29 @@ NOTE: These requirements assume that Astra Control Center is the only applicatio
 ** ontap-san
 ** ontap-san-economy
 
-If you are planning to manage the Kubernetes cluster from Astra Control Center as well as use the cluster to host the Astra Control Center installation, the cluster has the following additional requirements:
+If you plan to manage the operational environment cluster from Astra Control Center, the cluster has the following additional requirements:
 
 * The most recent version of the Kubernetes https://kubernetes-csi.github.io/docs/snapshot-controller.html[snapshot-controller component^] is installed
 * An Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[volumesnapshotclass object^] has been defined by an administrator
 * A default Kubernetes storage class exists on the cluster
 * At least one storage class is configured to use Astra Trident
-* A method for pointing the FQDN of Astra Control Center to the external IP address of the Astra Control Center service
-
-//Make sure that your cluster meets the minimum requirements and that you follow Kubernetes best practices so that Astra Control Center is highly available in your Kubernetes cluster.
-
-NOTE: When managing application clusters in a Rancher environment, modify the application cluster's default context in the kubeconfig file provided by Rancher to use a control plane context instead of the Rancher API server context. This reduces load on the Rancher API server and improves performance.
 
 [NOTE]
 ======================
 During app cloning, Astra Control Center needs to allow OpenShift to mount volumes and change the ownership of files if necessary. Because of this, you need to configure an ONTAP volume export policy to allow volume operations to complete successfully. You can do so with the following commands:
 
 `export-policy rule modify -vserver <storage virtual machine name> -policyname <policy name>  -ruleindex 1 -superuser sysm --anon 65534`
-
 ======================
 
-NOTE: If you plan to add a second OpenShift cluster as a managed compute resource, you need to ensure that the Astra Trident Volume Snapshot feature is enabled. See the official Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
+NOTE: If you plan to add a second OpenShift operational environment as a managed compute resource, you need to ensure that the Astra Trident Volume Snapshot feature is enabled. To enable and test volume snapshots with Astra Trident, https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[see the official Astra Trident instructions^].
+
+NOTE: When managing application clusters in a Rancher environment, modify the application cluster's default context in the kubeconfig file provided by Rancher to use a control plane context instead of the Rancher API server context. This reduces load on the Rancher API server and improves performance.
+
+//* A method for pointing the FQDN of Astra Control Center to the external IP address of the Astra Control Center service
+
+//Make sure that your cluster meets the minimum requirements and that you follow Kubernetes best practices so that Astra Control Center is highly available in your Kubernetes cluster.
+
+
 
 ////
 === Non-OpenShift Kubernetes clusters
@@ -75,6 +77,16 @@ The Kubernetes cluster you use for Astra Control Center should already be deploy
 * Kubernetes version 1.18, 1.19, or 1.20
 * At least 3 worker nodes
 ////
+
+== Kubernetes cluster requirements
+
+Astra Control Center has the following requirements for clusters that you plan to add to and manage from Astra Control Center.
+
+
+
+
+
+
 
 == App management requirements
 Astra Control has the following app management requirements:
