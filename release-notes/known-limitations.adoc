@@ -24,7 +24,33 @@ There should be no pods running in that namespace or the namespace should not ex
 
 = Astra Control Center cannot manage two identically named clusters in the same cloud
 //DOC-3744/ASTRACTL-11632
-If you try to add a cluster with the same name of a cluster that already exists in your cloud, the operation will fail. You must remove the existing cluster and corresponding credentials and retry the request.
+If you try to add a cluster with the same name of a cluster that already exists in your cloud, the operation will fail. As a workaround, do the following:
+
+. Edit your kubectl configmaps:
+----
+kubectl edit configmaps -n kube-system kubeadm-config
+----
+
+. Change the cluster name from `kubernetes` to a new custom name.
+. Edit kubeconfig (.kube/config).
+. Update cluster name from `kubernetes` to a new custom name (`xyz-cluster` is used in the example below):
++
+[subs=+quotes]
+----
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: ExAmPLERb2tCcjZ5K3E2Njk4eQotLExAMpLEORCBDRVJUSUZJQ0FURS0txxxxXX==
+    server: https://x.x.x.x:6443
+  *name: xyz-cluster*
+contexts:
+- context:
+    *cluster: xyz-cluster*
+    namespace: default
+    user: kubernetes-admin
+  name: kubernetes-admin@kubernetes
+current-context: kubernetes-admin@kubernetes
+----
 
 == Clones of apps installed using pass by reference operators can fail
 Astra Control supports apps installed with namespace-scoped operators. These operators are generally designed with a "pass-by-value" rather than "pass-by-reference" architecture. The following are some operator apps that follow these patterns:
