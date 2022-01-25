@@ -63,7 +63,9 @@ To begin managing your apps, add a Kubernetes cluster and manage it as a compute
 
 TIP: We recommend that Astra Control Center manage the cluster it is deployed on first before you add other clusters to Astra Control Center to manage. Having the initial cluster under management is necessary to send Kubemetrics data and cluster-associated data for metrics and troubleshooting. You can use the *Add Cluster* feature to manage a cluster with Astra Control Center.
 
+
 .What you'll need
+ 
 
 IMPORTANT: Before you add a cluster, review and perform the necessary link:add-cluster-reqs.html[prerequisite tasks^].
 

@@ -66,7 +66,7 @@ Complete the deployment by performing link:setup_overview.html[setup tasks].
 == Download the Astra Control Center bundle
 
 . Download the Astra Control Center bundle (`astra-control-center-[version].tar.gz`) from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
-. Download the zip of Astra Control Center certificates and keys from https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
+. Download the zip of Astra Control Center certificates and keys from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
 . (Optional) Use the following command to verify the signature of the bundle:
 +
 ----
@@ -295,9 +295,9 @@ IMPORTANT: If you are using a registry that does not require authorization, you 
 .. Change the `accountName` string to the name you want to associate with the account.
 .. Change the `astraAddress` string to the FQDN you want to use in your browser to access Astra. Do not use `http://` or `https://` in the address. Copy this FQDN for use in a <<Log in to the Astra Control Center UI,later step>>.
 .. Change the `email` string to the default initial administrator address. Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>.
-.. Change `enrolled` for autoSupport to `false` for sites without internet connectivity or retain `true` for connected sites.
+.. Change `enrolled` for AutoSupport to `false` for sites without internet connectivity or retain `true` for connected sites.
 .. (Optional) Add a first name `firstName` and last name `lastName` of the user associated with the account. You can perform this step now or later within the UI.
-.. (Optional) Change the `storageClass` value to another Trident storageClass resource if required by your installation.
+.. (Optional) Change the `storageClass` value to another Astra Trident StorageClass resource if required by your installation.
 .. (For installations using Astra Data Store preview) See this known issue for link:../release-notes/known-issues-ads.html#astra-data-store-cannot-be-used-as-a-storage-class-for-astra-control-center-due-to-mongodb-pod-liveness-probe-failure[additional required changes] to the YAML.
 
 +
@@ -363,7 +363,7 @@ Each pod should have a status of `Running`. It may take several minutes before t
 Sample response:
 +
 ----
-NAME                                         READY   STATUS    RESTARTS   AGE
+NAME                                       READY   STATUS    RESTARTS   AGE
 acc-helm-repo-5f75c5f564-bzqmt             1/1     Running   0          11m
 activity-6b8f7cccb9-mlrn4                  1/1     Running   0          9m2s
 api-token-authentication-6hznt             1/1     Running   0          8m50s
@@ -442,7 +442,7 @@ vault-controller-86c94fbf4f-krttq          1/1     Running   0          9m24s
 kubectl logs deploy/acc-operator-controller-manager -n netapp-acc-operator -c manager -f
 ----
 
-. When all the pods are running, verify installation success by retrieving the AstraControlCenter instance installed by the Astra Control Center Operator.
+. When all the pods are running, verify installation success by retrieving the `AstraControlCenter` instance installed by the Astra Control Center Operator.
 +
 ----
 kubectl get acc -o yaml -n [netapp-acc or custom namespace]
