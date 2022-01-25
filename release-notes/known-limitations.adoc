@@ -24,17 +24,19 @@ There should be no pods running in that namespace or the namespace should not ex
 
 == Astra Control Center cannot manage two identically named clusters in the same cloud
 //DOC-3744/ASTRACTL-11632
-If you try to add a cluster with the same name of a cluster that already exists in your cloud, the operation will fail. As a workaround, do the following:
+If you try to add a cluster with the same name of a cluster that already exists in your cloud, the operation will fail. This issue most often occurs in a standard Kubernetes environment if you have not changed the cluster name default in Kubernetes configuration files.
 
-. Edit your kubectl configmaps:
+As a workaround, do the following:
+
+. Edit your kubeadm-config ConfigMap:
 +
 ----
 kubectl edit configmaps -n kube-system kubeadm-config
 ----
 
-. Change the cluster name from `kubernetes` to a new custom name.
-. Edit kubeconfig (.kube/config).
-. Update cluster name from `kubernetes` to a new custom name (`xyz-cluster` is used in the example below):
+. Change the `clusterName` field value from `kubernetes` (the Kubernetes default name) to a unique custom name.
+. Edit kubeconfig (`.kube/config`).
+. Update cluster name from `kubernetes` to a unique custom name (`xyz-cluster` is used in the examples below). Make the update in both `clusters` and `contexts` sections as shown in this example:
 +
 [subs=+quotes]
 ----
