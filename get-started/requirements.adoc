@@ -20,7 +20,7 @@ Astra Control Center requires one of the following types of operational environm
 * Rancher 2.5
 * Kubernetes 1.19 to 1.21 (including 1.21.x)
 
-The operational environment must meet the following requirements to host Astra Control Center:
+The operational environment must meet its own basic resource requirements, plus the following additional requirements to host Astra Control Center:
 
 |===
 |Component |Requirement
@@ -47,7 +47,6 @@ a|
 * Astra Trident 21.10.1 or newer installed and configured if Astra Data Store will be used as a storage backend
 
 |===
-
 
 NOTE: These requirements assume that Astra Control Center is the only application running in the operational environment. If the environment is running additional applications, adjust these minimum requirements accordingly.
 
