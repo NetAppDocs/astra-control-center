@@ -67,7 +67,7 @@ TIP: We recommend that Astra Control Center manage the cluster it is deployed on
 ======================
 When Astra Control manages a cluster, it keeps track of the cluster's default StorageClass. If you change the StorageClass using `kubectl` commands, Astra Control reverts the change. To change the default StorageClass in a cluster managed by Astra Control, use one of the following methods:
 
-* Use the Astra Control API `PUT /managedClusters` endpoint, and assign a different default StorageClass with the `DefaultStorageClass` argument
+* Use the Astra Control API `PUT /managedClusters` endpoint, and assign a different default StorageClass with the `DefaultStorageClass` parameter
 * Remove the cluster from Astra Control management and re-add it with a different default StorageClass selected
 ======================
 
