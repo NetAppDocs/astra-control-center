@@ -31,11 +31,11 @@ Ensure that the operating environment you choose to host Astra Control Center me
 //|Controller nodes
 //|3 controller nodes with 4 CPU cores, 16GB RAM, and 120GB of available storage each
 
-|Worker cluster
-|At least 3 worker nodes total
+|Worker nodes
+|At least 3 worker nodes total, with 4 additional CPU cores and 8GB additional RAM each
 
-|Worker cluster additional resources
-|Astra Control Center requires that the cluster have an additional 12 CPU cores, 24GB RAM, and 50GB of available storage
+//|Worker cluster additional resources
+//|Astra Control Center requires that the cluster have an additional 12 CPU cores, 24GB RAM, and 50GB of available storage
 
 |Load balancer
 |Service type "LoadBalancer" available for ingress traffic to be sent to services in the operational environment cluster
