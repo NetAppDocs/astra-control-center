@@ -58,9 +58,9 @@ At a high level, Astra Control Service works like this:
 
 * You get started with Astra Control Service by setting up your cloud provider and by registering for an Astra account.
 +
-** For GKE clusters, Astra Control Service uses https://cloud.netapp.com/cloud-volumes-service-for-gcp[NetApp Cloud Volumes Service for Google Cloud^] as the storage backend for your persistent volumes.
+** For GKE clusters, Astra Control Service uses https://cloud.netapp.com/cloud-volumes-service-for-gcp[NetApp Cloud Volumes Service for Google Cloud^] or Google Persistent Disks as the storage backend for your persistent volumes.
 +
-** For AKS clusters, Astra Control Service uses https://cloud.netapp.com/azure-netapp-files[Azure NetApp Files^] as the storage backend for your persistent volumes.
+** For AKS clusters, Astra Control Service uses https://cloud.netapp.com/azure-netapp-files[Azure NetApp Files^] or Azure Disk Storage as the storage backend for your persistent volumes.
 
 * You add your first Kubernetes compute to Astra Control Service. Astra Control Service then does the following:
 
@@ -73,7 +73,7 @@ In Azure, Astra Control Service also creates a resource group, a storage account
 ** Uses that new admin role to install https://docs.netapp.com/us-en/trident/index.html[Astra Trident^] on the cluster and to create one or more storage classes.
 
 +
-** Uses Astra Trident to provision persistent volumes for your apps.
+** If you use Azure NetApp Files or NetApp Cloud Volumes Service for Google Cloud as your storage backend, Astra Control Service uses Astra Trident to provision persistent volumes for your apps.
 
 * At this point, you can add apps to your cluster. Persistent volumes will be provisioned on the new default storage class.
 
