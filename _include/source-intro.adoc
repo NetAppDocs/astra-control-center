@@ -71,7 +71,7 @@ In Azure, Astra Control Service also creates a resource group, a storage account
 ** Creates a new admin role and Kubernetes service account on the cluster.
 
 ** Uses that new admin role to install https://docs.netapp.com/us-en/trident/index.html[Astra Trident^] on the cluster and to create one or more storage classes.
-
+ 
 +
 ** If you use Azure NetApp Files or NetApp Cloud Volumes Service for Google Cloud as your storage backend, Astra Control Service uses Astra Trident to provision persistent volumes for your apps.
 
