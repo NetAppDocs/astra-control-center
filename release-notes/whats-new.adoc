@@ -10,7 +10,23 @@ summary: NetApp periodically updates Astra Control Center to bring you new featu
 :icons: font
 :imagesdir: ../media/release-notes/
 
-We're pleased to announce the latest 21.12 release of Astra Control Center.
+We're pleased to announce the latest 22.04 release of Astra Control Center.
+
+== 27 April 2022 (22.04)
+
+Updated release of Astra Control Center.
+
+.New features and support
+
+*
+
+.Resolved issues
+* link:../release-notes/resolved-issues.html[Resolved issues for this release]
+
+.Known issues and limitations
+* link:../release-notes/known-issues.html[Known issues for this release]
+* link:../release-notes/known-issues-ads.html[Known issues with Astra Data Store preview and this Astra Control Center release]
+* link:../release-notes/known-limitations.html[Known limitations for this release]
 
 == 14 December 2021 (21.12)
 
