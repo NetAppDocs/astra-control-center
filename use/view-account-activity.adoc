@@ -5,15 +5,16 @@ keywords: activity, log, activities, download log, download csv, csv
 summary: You can view details about the activities in your Astra Control account. For example, when new users were invited, when compute was added, or when a snapshot was taken. You also have the ability to export your account activity to a CSV file.
 ---
 
-= View account activity
+= Monitor account activity
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/use/
 
 [.lead]
+//NOTE: Nearly identical to comparable ACS topic
 You can view details about the activities in your Astra Control account. For example, when new users were invited, when a cluster was added, or when a snapshot was taken. You also have the ability to export your account activity to a CSV file.
 
-.Steps to view all account activity in Astra Control
+.Steps to monitor all account activity in Astra Control
 
 . Select *Activity*.
 
