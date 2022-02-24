@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar
 permalink: concepts/licensing.html
-keywords: activity, log, activities, download log, download csv, csv
-summary: You can view details about the activities in your Astra Control account. For example, when new users were invited, when compute was added, or when a snapshot was taken. You also have the ability to export your account activity to a CSV file.
+keywords: license, licensing
+summary: You can learn about how license consumption is calculated, and about the behavior of Astra Control Center when a license is not installed and when a license is installed.
 ---
 
 = Licensing
@@ -11,4 +11,26 @@ summary: You can view details about the activities in your Astra Control account
 :imagesdir: ../media/concepts/
 
 [.lead]
-Placeholder information for licensing calculation conceptual info.
+Astra Control Center functions with reduced features if no license is installed, and full functionality with a license installed. Learn how Astra Control Center calculates license consumption based on your environment.
+
+== Functionality with no license installed
+When no license is installed, the Astra Control Center web UI displays a banner with a message warning that system functionality is limited. In addition to the banner, web UI buttons and API functionality are disabled for the following actions and features in Astra Control Center:
+
+* Manually creating local snapshots or backups**
+* Creating schedules for local snapshots or backups**
+* Restoring from a snapshot or backup**
+* Cloning from a snapshot or current state**
+* Managing new applications**
+* Applying a new license if the number of cores currently managed by the Astra Control Center instance exceeds the cores count in the license being applied
+
+**You can always perform these app-specific actions if the managed app is an Astra Control Center app, regardless of license status.
+
+NOTE: On Astra Control Center systems without a license, you can always add a cluster or add a bucket.
+
+== How license consumption is calculated
+
+When you add a new cluster to Astra Control Center, it does not count toward consumed licenses until at least one application running on the cluster is managed by Astra Control Center. You can also add an Astra Data Store storage backend to Astra Control Center without affecting license consumption. This enables you to manage an Astra Data Store backend from an unlicensed Astra Control Center system.
+
+When you start managing an app on a cluster, the cluster's CPU units are included in the Astra Control Center license consumption calculation. However, if all of the managed apps on a cluster are Astra Control Center apps, the cluster is ignored in the consumption calculation. This enables you to use an unlicensed Astra Control Center system to manage another Astra Control Center system and back up and restore its Astra Control Center apps.
+
+NOTE: You cannot manage Astra Data Store apps in Astra Control Center, but you can use Astra Control Center to mange apps in another Astra Control Center system.
