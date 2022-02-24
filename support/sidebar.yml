@@ -1,5 +1,7 @@
 section: support
 title: Knowledge and support
 entries:
+  - title: Troubleshooting
+    url: /support/troubleshooting-acc.html
   - title: Get help
     url: /support/get-help.html
