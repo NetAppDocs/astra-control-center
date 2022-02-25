@@ -11,7 +11,7 @@ summary: Learn about how the actions you can perform with Astra Control Center d
 :imagesdir: ../media/concepts/
 
 [.lead]
-Learn about how the actions you can perform with Astra Control Center differ based on license status, and about how your use of Astra Control Center affects license consumption.
+Astra Control Center has full functionality when a license is installed, and reduced functionality without a license. Learn about how the actions you can perform with Astra Control Center differ based on license status, and about how your use of Astra Control Center affects license consumption.
 
 == Functionality with no license installed
 When no license is installed, the Astra Control Center web UI displays a banner with a message warning that system functionality is limited. In addition to the banner, web UI buttons and API functionality are disabled for the following actions and features:
