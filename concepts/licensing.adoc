@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: concepts/licensing.html
 keywords: license, licensing
-summary: You can learn about how license consumption is calculated, and about the behavior of Astra Control Center when a license is not installed and when a license is installed.
+summary: Learn about how the actions you can perform with Astra Control Center differ based on license status, and about how your use of Astra Control Center affects license consumption.
 ---
 
 = Licensing
@@ -11,7 +11,7 @@ summary: You can learn about how license consumption is calculated, and about th
 :imagesdir: ../media/concepts/
 
 [.lead]
-Astra Control Center functions with reduced features if no license is installed, and full functionality with a license installed. Learn how Astra Control Center calculates license consumption based on your environment.
+Learn about how the actions you can perform with Astra Control Center differ based on license status, and about how your use of Astra Control Center affects license consumption.
 
 == Functionality with no license installed
 When no license is installed, the Astra Control Center web UI displays a banner with a message warning that system functionality is limited. In addition to the banner, web UI buttons and API functionality are disabled for the following actions and features in Astra Control Center:
