@@ -9,12 +9,19 @@ entries:
         url: /use/define-custom-app.html
   - title: Protect apps
     entries:
+      - title: Protection overview
+        url: /use/protection-overview.html
       - title: Protect apps
         url: /use/protect-apps.html
       - title: Restore apps
         url: /use/restore-apps.html
       - title: Clone and migrate apps
         url: /use/clone-apps.html
+      - title: Manage app execution hooks
+        url: /use/execution-hooks.html
+        entries:
+          - title: Execution hook examples
+            url: /use/execution-hook-examples.html
   - title: View app and cluster health
     entries:
       - title: Dashboard summary
@@ -31,6 +38,8 @@ entries:
         url: /use/manage-notifications.html
       - title: Manage credentials
         url: /use/manage-credentials.html
+      - title: Monitor account activity
+        url: /use/view-account-activity.html
       - title: Update an existing license
         url: /use/update-licenses.html
   - title: Manage buckets
@@ -43,5 +52,7 @@ entries:
     url: /use/update-licenses.html
   - title: Unmanage apps and clusters
     url: /use/unmanage.html
+  - title: Upgrade Astra Control Center
+    url: /use/upgrade-acc.html
   - title: Uninstall Astra Control Center
     url: /use/uninstall_acc.html

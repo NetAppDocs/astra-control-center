@@ -5,6 +5,8 @@ entries:
     url: /concepts/intro.html
   - title: Architecture and components
     url: /concepts/architecture.html
+  - title: Data protection
+    url: /concepts/data-protection.html
   - title: Validated vs standard apps
     url: /concepts/validated-vs-standard.html
   - title: Storage classes and PV size

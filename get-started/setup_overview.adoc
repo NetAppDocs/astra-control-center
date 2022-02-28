@@ -10,7 +10,7 @@ summary: After you install Astra Control Center, log in to the UI, and change yo
 :icons: font
 :imagesdir: ../media/get-started/
 
-After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up a license, add clusters, manage storage, and add buckets.
+Astra Control Center supports and monitors ONTAP and Astra Data Store as the storage backend. After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up a license, add clusters, manage storage, and add buckets.
 
 .Tasks
 * <<Add a license for Astra Control Center>>
@@ -59,7 +59,7 @@ NOTE: If you have an evaluation license, be sure you store your account ID to av
 
 == Add cluster
 //REFERENCED IN UI. DO NOT MODIFY WITHOUT NOTIFYING UX.
-To begin managing your apps, add a Kubernetes cluster and manage it as a compute resource. You have to add a cluster for Astra Control Center to discover your Kubernetes applications.
+To begin managing your apps, add a Kubernetes cluster and manage it as a compute resource. You have to add a cluster for Astra Control Center to discover your Kubernetes applications. For Astra Data Store preview, you want to add the Kubernetes app cluster that contains applications that are using volumes provisioned by Astra Data Store preview.
 
 TIP: We recommend that Astra Control Center manage the cluster it is deployed on first before you add other clusters to Astra Control Center to manage. Having the initial cluster under management is necessary to send Kubemetrics data and cluster-associated data for metrics and troubleshooting. You can use the *Add Cluster* feature to manage a cluster with Astra Control Center.
 
@@ -81,7 +81,7 @@ IMPORTANT: If you create your own `kubeconfig` file, you should define only *one
 . Select *Configure storage*.
 . Select the storage class to be used for this Kubernetes cluster, and select *Review*.
 +
-NOTE: You should select a Trident storage class backed by ONTAP storage.
+NOTE: You should select a Trident storage class backed by ONTAP storage or Astra Data Store.
 +
 image:cluster-storage.png[Shows the storage class to be used for the cluster.]
 . Review the information, and if everything looks good, select *Add cluster*.
@@ -96,37 +96,41 @@ IMPORTANT: After you add a cluster to be managed in Astra Control Center, it mig
 
 You can add a storage backend so that Astra Control can manage its resources. Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend as well as additional storage metrics.
 
-You can add a storage backend in the following ways:
+You can add a discovered storage backend by navigating prompts from the Dashboard or the Backends menu.
 
-*	Configure storage when you are adding a cluster. See link:../get-started/setup_overview.html#add-cluster[Add cluster].
-*	Add a discovered storage backend using either the Dashboard or the Backends option.
+.What you'll need
 
-You can add an already discovered storage backend using these options:
+* You have link:../get-started/setup_overview.html#add-cluster[added a cluster] and it is managed by Astra Control.
++
+NOTE: The managed cluster has a supported backend attached to it that can be discovered by Astra Control.
 
-* <<Add storage backend using Dashboard>>
-* <<Add storage backend using Backends option>>
+* For Astra Data Store preview installations: You have added your Kubernetes app cluster.
++
+NOTE: After you add your Kubernetes app cluster for Astra Data Store, the cluster appears as `unmanaged` in the list of discovered backends. You must next add the compute cluster that contains Astra Data Store and underlies the Kubernetes app cluster. You can do this from *Backends* in the UI. Select the Actions menu for the cluster, select `Manage`, and link:../get-started/setup_overview.html#add-cluster[add the cluster]. After the cluster state of `unmanaged` changes to the name of the Kubernetes cluster, you can proceed with adding a backend.
 
-=== Add storage backend using Dashboard
+.Steps
 
-. From the Dashboard do one of the following:
+. Do one of the following:
+* From *Dashboard*:
 .. From the Dashboard Storage backend section, select *Manage*.
 .. From the Dashboard Resource Summary > Storage backends section, select *Add*.
-. Enter the ONTAP admin credentials and select *Review*.
-. Confirm the backend details and select *Manage*.
-+
-The backend appears in the list with summary information.
+* From *Backends*:
+.. In the left navigation area, select *Backends*.
+.. Select *Manage*.
+. Do one of the following depending on your backend type:
+* *Astra Data Store*:
+... Select the *Astra Data Store* tab.
+... Select the managed compute cluster and select *Next*.
+... Confirm the backend details and select *Manage storage backend*.
 
-=== Add storage backend using Backends option
+* *ONTAP*:
+... Enter the ONTAP admin credentials and select *Review*.
+... Confirm the backend details and select *Manage*.
 
-. In the left navigation area, select *Backends*.
-. Select *Manage*.
-. Enter the ONTAP admin credentials and select *Review*.
-. Confirm the backend details and select *Manage*.
 +
-The backend appears in the list with summary information.
-. To see details of the backend storage, select it.
-+
-TIP: Persistent volumes used by apps in the managed compute cluster are also displayed.
+The backend appears in `available` state in the list with summary information.
+
+NOTE: You might need to refresh the page for the backend to appear.
 
 == Add a bucket
 
@@ -144,7 +148,7 @@ Use any of the following bucket types:
 
 NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon’s S3 support.
 
-For instructions on how to add buckets using the Astra API, see link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
+For instructions on how to add buckets using the Astra Control API, see link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
 
 .Steps
 
@@ -152,13 +156,13 @@ For instructions on how to add buckets using the Astra API, see link:https://doc
 .. Select *Add*.
 .. Select the bucket type.
 +
-NOTE: When you add a bucket, select the correct bucket provider type with credentials that are correct for that provider. For example, the UI accepts NetApp ONTAP S3 as the type with StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail.
+NOTE: When you add a bucket, select the correct bucket provider and provide the right credentials for that provider. For example, the UI accepts NetApp ONTAP S3 as the type and accepts StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail.
 
 .. Create a new bucket name or enter an existing bucket name and optional description.
 +
 TIP: The bucket name and description appear as a backup location that you can choose later when you’re creating a backup. The name also appears during protection policy configuration.
 
-.. Enter the name or IP address of the S3 server.
+.. Enter the name or IP address of the S3 endpoint.
 .. If you want this bucket to be the default bucket for all backups, check the `Make this bucket the default bucket for this private cloud` option.
 +
 NOTE: This option does not appear for the first bucket you create.
@@ -189,5 +193,5 @@ Now that you’ve logged in and added clusters to Astra Control Center, you're r
 
 [discrete]
 == Find more information
-* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra API^]
+* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra Control API^]
 * link:../release-notes/known-issues.html[Known issues]
