@@ -168,7 +168,7 @@ The cluster that hosts Astra Control Center communicates using the following TCP
 |Astra Control Center worker node
 |9090
 |HTTPS
-|Metrics data communication - ensure each managed cluster can access this port on the cluster hosting Astra Control Center (two way communication required)
+|Metrics data communication - ensure each managed cluster can access this port on the cluster hosting Astra Control Center (two-way communication required)
 
 |Astra Control Center
 |Hosted Cloud Insights service (https://cloudinsights.netapp.com)
