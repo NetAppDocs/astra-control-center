@@ -8,7 +8,7 @@ NOTE: It's tempting to think of these two categories as "supported" and "unsuppo
 Validated apps for Astra Control include the following:
 
 * MySQL 8.0.25
-* MariaDB 10.5.9
+* MariaDB 10.5.9 
 * PostgreSQL 11.12
 * Jenkins 2.277.4 LTS and 2.289.1 LTS
 
