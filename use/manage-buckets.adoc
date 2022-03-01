@@ -71,7 +71,7 @@ NOTE: When you add a bucket, select the correct bucket provider and provide the 
 
 .Steps
 .	From left navigation, select *Buckets*.
-. From the Actions menu, select *Edit*.
+. From the Options menu in the *Actions* column, select *Edit*.
 . Change any information other than the bucket type.
 +
 TIP: You can't modify the bucket type.

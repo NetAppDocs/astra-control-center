@@ -115,8 +115,8 @@ image:acc_apps_discovered4.png[Screen shot of discovered apps]
 Astra Control shows you the Helm apps and custom-labeled apps in the namespace. If Helm labels are available, they’re designated with a tag icon.
 . Look at the *Group* column to see which namespace the application is running in (it's designated with the folder icon).
 .	Decide whether you want to manage each app individually or at the namespace level.
-.	Find the app you want at the desired level in the hierarchy, and from the Actions menu, select *Manage*.
-.	If you don’t want to manage an app, from the Actions menu next to the app, select *Ignore*.
+.	Find the app you want at the desired level in the hierarchy, and select *Manage* from the Options menu in the *Actions* column.
+.	If you don’t want to manage an app, select *Ignore* from the Options menu in the *Actions* column.
 +
 For example, if you want to manage all apps under the "maria" namespace together so that they have the same snapshot and backup policies, you would manage the namespace and ignore the apps in the namespace.
 
@@ -193,8 +193,8 @@ Also, you might want to manage apps under one namespace together (Namespace-mana
 . From the left navigation bar, select *Applications*.
 . Select *Discovered* as the filter.
 . Select the app.
-. From the Actions menu, select *Ignore*.
-. To unignore, from the Actions menu, select *Unignore*.
+. From the Options menu in the *Actions* column, select *Ignore*.
+. To unignore, select *Unignore*.
 
 == Unmanage apps
 
@@ -207,7 +207,7 @@ NOTE: If you unmanage an app, any backups or snapshots that were created earlier
 . From the left navigation bar, select *Applications*.
 . Select *Managed* as the filter.
 . Select the app.
-. From the Actions menu, select *Unmanage*.
+. From the Options menu in the *Actions* column, select *Unmanage*.
 . Review the information.
 . Type "unmanage" to confirm.
 . Select *Yes, Unmanage Application*.

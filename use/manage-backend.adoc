@@ -86,7 +86,7 @@ You can unmanage the backend.
 .Steps
 .	From left navigation, select *Backends*.
 . Select the storage backend.
-. From the Actions menu, select *Unmanage*.
+. From the Options menu in the *Actions* column, select *Unmanage*.
 . Type "unmanage" to confirm the removal.
 . Select *Yes, remove storage backend*.
 
