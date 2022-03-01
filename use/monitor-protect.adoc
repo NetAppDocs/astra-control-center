@@ -12,7 +12,7 @@ summary: You can configure several optional settings to enhance your Astra Contr
 
 You can configure several optional settings to enhance your Astra Control Center experience. If the network where you’re running Astra Control Center requires a proxy for connecting to the Internet (to upload support bundles to NetApp Support Site or establish a connection to Cloud Insights), you should configure a proxy server in Astra Control Center. To monitor and gain insight into your complete infrastructure, create a connection to NetApp Cloud Insights. To collect Kubernetes events from systems monitored by Astra Control Center, add a Fluentd connection.
 
-NOTE: After you enable the Cloud Insights connection, you can view throughput information on the *Backends* page as well as connect to Cloud Insights from here after selecting a storage backend. You can also find the information on the *Dashboard* in the Cluster section, and also connect to Cloud Insights from here.
+
 
 == Add a proxy server
 
@@ -64,9 +64,11 @@ You can disable the proxy server connection. You will be warned before you disab
 
 To monitor and gain insight into your complete infrastructure, connect NetApp Cloud Insights with your Astra Control Center instance. Cloud Insights is included in your Astra Control Center license.
 
-NOTE: Cloud Insights should be accessible from the network that Astra Control Center uses, or indirectly via a proxy server.
+Cloud Insights should be accessible from the network that Astra Control Center uses, or indirectly via a proxy server.
 
-NOTE: When Astra Control Center is connected to Cloud Insights, an Acquisition Unit pod gets created. This pod collects data from the storage backends that are managed by Astra Control Center and pushes it to Cloud Insights. This pod requires 8 GB RAM and 2 CPU cores.
+When Astra Control Center is connected to Cloud Insights, an Acquisition Unit pod gets created. This pod collects data from the storage backends that are managed by Astra Control Center and pushes it to Cloud Insights. This pod requires 8 GB RAM and 2 CPU cores.
+
+NOTE: After you enable the Cloud Insights connection, you can view throughput information on the *Backends* page as well as connect to Cloud Insights from here after selecting a storage backend. You can also find the information on the *Dashboard* in the Cluster section, and also connect to Cloud Insights from there.
 
 .What you'll need
 
@@ -74,7 +76,7 @@ NOTE: When Astra Control Center is connected to Cloud Insights, an Acquisition U
 * A valid Astra Control Center license.
 * A proxy server if the network where you're running Astra Control Center requires a proxy for connecting to the Internet.
 
-TIP: If you are new to Cloud Insights, familiarize yourself with the features and capabilities link:https://docs.netapp.com/us-en/cloudinsights/index.html[here^].
+TIP: If you are new to Cloud Insights, familiarize yourself with the features and capabilities. See link:https://docs.netapp.com/us-en/cloudinsights/index.html[Cloud Insights documentation^].
 
 .Steps
 
@@ -92,11 +94,13 @@ https://<environment-name>.c01.cloudinsights.netapp.com/
 You get the tenant URL when you get the Cloud Insights license. If you do not have the tenant URL, see the link:https://docs.netapp.com/us-en/cloudinsights/task_cloud_insights_onboarding_1.html[Cloud Insights documentation^].
 
 .. To get the link:https://docs.netapp.com/us-en/cloudinsights/API_Overview.html#api-access-tokens[API token^], log in to your Cloud Insights tenant URL.
-.. In Cloud Insights, generate a *Read only* type API token.
+.. In Cloud Insights, generate both a *Read/Write* and a *Read only* API Access token by clicking *Admin* > *API Access*.
 +
 image:cloud-insights-api.png[Shows the Cloud Insights API token generation page.]
 .. Copy the *Read only* key. You will need to paste it into the Astra Control Center window for enabling the Cloud Insights connection.
+.. For the Read API Access Token key permissions, select: Assets, Alerts, Acquisition Unit, Data Collection.
 .. In Cloud Insights, generate a *Read/Write* type API token.
+.. For the Read/Write API Access Token key permissions, select: Assets, Data Ingestion, Log Ingestion, Acquisition Unit, Data Collection.
 .. Copy the *Read/Write* key. You will need to paste it into the Astra Control Center *Connect Cloud Insights* window.
 +
 NOTE: We recommend that you generate a *Read only* key and a *Read/Write* key, and not use the same key for both purposes. By default, the token expiry period is set to one year. We recommend that you keep the default selection to give the token the maximum duration before it expires. If your token expires, the telemetry will stop.
