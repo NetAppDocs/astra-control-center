@@ -16,29 +16,29 @@ IMPORTANT: If you have an evaluation license for Astra Control Center, you can g
 
 You must first link:../get-started/setup_overview.html[activate support for your NetApp serial number] in order to use these non self-service support options. A NetApp Support Site (NSS) SSO account is required for chat and web ticketing along with case management.
 
-You can access support options from the Astra Control Center UI by selecting the *Support* tab from the main menu.
-
-image:astracc-support.png[Shows the Astra Control Center Support page.]
-
 == Self-support options
 
-These options are available for free 24x7:
+You can access support options from the Astra Control Center UI by selecting the *Support* tab from the main menu.
+
+These options are available for free, 24x7:
 
 * https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Astra[Knowledge base (login required)^]
 +
 Search for articles, FAQs, or Break Fix information related to Astra Control.
 
-* Documentation
+* Documentation center
 +
 This is the doc site that you're currently viewing.
 
-* https://netapppub.slack.com/#astra[Slack^]
+* https://netapppub.slack.com/#astra[Get help via Slack^]
 +
 Go to the containers channel in thePub workspace to connect with peers and experts.
 
-* Generate support bundles to provide to NetApp Support for troubleshooting
+* Create a support case
++
+Generate support bundles to provide to NetApp Support for troubleshooting
 
-* Feedback email
+* Give feedback about Astra Control
 +
 Send an email to astra.feedback@netapp.com to let us know your thoughts, ideas, or concerns.
 
@@ -52,7 +52,8 @@ Astra Control Center enables the admin user to generate bundles, which include i
 
 NOTE: The time taken by Astra Control Center to generate the bundle depends on the size of your Astra Control Center installation as well as the parameters of the requested support bundle. The time duration that you specified when requesting a support bundle dictates the time it takes for the bundle to be generated (for example, a shorter time period results in faster bundle generation).
 
-Before you begin, determine whether a proxy connection will be required to upload bundles to NSS. If a proxy connection is needed, verify that Astra Control Center has been configured to use a proxy server.
+.Before you begin
+Determine whether a proxy connection will be required to upload bundles to NSS. If a proxy connection is needed, verify that Astra Control Center has been configured to use a proxy server.
 
 . Select *Accounts* > *Connections*.
 . Check the proxy settings in *Connection settings*.
@@ -67,9 +68,7 @@ You can choose between quick or custom timeframes.
 +
 NOTE: You can choose a custom date range as well as specify a custom time period during the date range.
 .. After you make the selections, select *Confirm*.
-.. Check the *Upload the bundle to the NetApp Support Site when generated*.
-+
-image:upload-bundle.png[Shows the upload Support bundle to NSS checkbox.]
+.. Select the *Upload the bundle to the NetApp Support Site when generated* check box.
 .. Select *Generate Bundle*.
 +
 When the support bundle is ready, a notification appears on the *Accounts* > *Notification* page in the Alerts area, on the *Activity* page, and also in the notifications list (accessible by selecting the icon in the top-right side of the UI).
@@ -81,18 +80,17 @@ TIP: The notifications icon at the top-right side of the UI provides information
 === If you have an air-gapped installation
 
 If you have an air-gapped installation, perform the following steps after the Support bundle is generated.
-When the bundle is available for download, it appears next to *Generated* in the *Support Bundles* section of the *Support* page as shown:
+When the bundle is available for download, the Download icon appears next to *Generate* in the *Support Bundles* section of the *Support* page.
 
-image:support-bundle.png[Shows the Support bundle generated and ready for download.]
-
-. Select the *Download* icon to download the bundle locally.
+.Steps
+. Select the Download icon to download the bundle locally.
 . Manually upload the bundle to NSS.
 +
 You can use one of the following methods to do this:
 
 * Use https://upload.netapp.com/sg[NetApp Authenticated File Upload (login required)^].
 * Attach the bundle to the case directly on NSS.
-* Use NetApp AIQ.
+* Use NetApp Active IQ.
 
 [discrete]
 == Find more information
