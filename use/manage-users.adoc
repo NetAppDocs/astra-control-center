@@ -89,7 +89,7 @@ Users with the Owner or Admin role can remove other users from the account at an
 .Steps
 
 . In the *Manage Your Account* navigation area, select *Account*.
-. In the *Users* tab, select the checkbox in the row of each user that you want to remove.
+. In the *Users* tab, select the check box in the row of each user that you want to remove.
 . From the Options menu in the *Actions* column, select *Remove user/s*.
 . When you're prompted, confirm deletion by typing the word "remove" and then select *Yes, Remove User*.
 

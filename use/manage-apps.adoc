@@ -213,7 +213,7 @@ NOTE: If you unmanage an app, any backups or snapshots that were created earlier
 
 Astra Control also discovers the system apps running on a Kubernetes cluster. We don't show you these system apps by default because it's rare that you'd need to back them up.
 
-You can display system apps from the Applications page by selecting the *Show system apps* checkbox under the Cluster filter in the toolbar.
+You can display system apps from the Applications page by selecting the *Show system apps* check box under the Clusters filter in the toolbar.
 
 image:acc_apps_system_apps3.png[A screenshot that shows the Show System Apps option that is available in the Apps page.]
 

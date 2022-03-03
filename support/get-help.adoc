@@ -22,25 +22,15 @@ You can access support options from the Astra Control Center UI by selecting the
 
 These options are available for free, 24x7:
 
-* https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Astra[Knowledge base (login required)^]
-+
-Search for articles, FAQs, or Break Fix information related to Astra Control.
+* https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Astra[*Knowledge base* (login required)^]: Search for articles, FAQs, or Break Fix information related to Astra Control.
 
-* Documentation center
-+
-This is the doc site that you're currently viewing.
+* *Documentation center*: This is the doc site that you're currently viewing.
 
-* https://netapppub.slack.com/#astra[Get help via Slack^]
-+
-Go to the containers channel in thePub workspace to connect with peers and experts.
+* https://netapppub.slack.com/#astra[*Get help via Slack*^]: Go to the containers channel in thePub workspace to connect with peers and experts.
 
-* Create a support case
-+
-Generate support bundles to provide to NetApp Support for troubleshooting
+* *Create a support case*: Generate support bundles to provide to NetApp Support for troubleshooting.
 
-* Give feedback about Astra Control
-+
-Send an email to astra.feedback@netapp.com to let us know your thoughts, ideas, or concerns.
+* *Give feedback about Astra Control*: Send an email to astra.feedback@netapp.com to let us know your thoughts, ideas, or concerns.
 
 == Enable daily scheduled support bundle upload to NetApp Support
 
