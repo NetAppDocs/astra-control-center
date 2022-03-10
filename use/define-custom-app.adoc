@@ -11,7 +11,7 @@ summary: Creating a custom app lets you group elements of your Kubernetes cluste
 :imagesdir: ../media/use/
 
 [.lead]
-Creating a custom app lets you group elements of your Kubernetes cluster into a single app.
+Creating a custom app lets you group elements of your Kubernetes cluster into a single app. This collection of Kubernetes resources is based on a namespace and a label.
 
 A custom app gives you more granular control over what to include in an Astra Control operation, including:
 
@@ -41,9 +41,9 @@ The Custom App window shows which resources will be included or excluded from yo
 
 . In the pop-up window, enter the app name, choose the cluster in the **Cluster** drop-down, and choose the app's namespace from the **Namespace** drop-down.
 
-. Either type the label in the **Labels** field or select that label from the resources listed below.
+. From the drop-down *Label* list, select a label for the apps and namespace.
 
-. After defining the custom app for the one deployment, repeat the process other deployments.
+. After defining the custom app for the one deployment, repeat the process for other deployments, as needed.
 
 When you finish creating the two custom apps, you can treat these resources as any other Astra Control application. They can clone them, create backups and snapshots, and create a custom Protection Policy for each group of resources based on the Kubernetes labels.
 
