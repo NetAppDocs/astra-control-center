@@ -73,7 +73,7 @@ When Astra Control manages a cluster, it keeps track of the cluster's default St
 
 .What you'll need
 
-IMPORTANT: Before you add a cluster, review and perform the necessary link:add-cluster-reqs.html[prerequisite tasks^].
+* Before you add a cluster, review and perform the necessary link:add-cluster-reqs.html[prerequisite tasks^].
 
 .Steps
 . From the *Dashboard* in the Astra Control Center UI, select *Add* in the Clusters section.
@@ -102,23 +102,53 @@ IMPORTANT: After you add a cluster to be managed in Astra Control Center, it mig
 
 == Add a storage backend
 
-You can add a storage backend so that Astra Control can manage its resources. Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend as well as additional storage metrics.
+You can add a storage backend so that Astra Control can manage its resources. You can deploy a new storage backend on a managed cluster or use an existing storage backend.
 
-You can add a discovered storage backend by navigating prompts from the Dashboard or the Backends menu.
+Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend as well as additional storage metrics.
 
 .What you'll need
 
-* You have link:../get-started/setup_overview.html#add-cluster[added a cluster] and it is managed by Astra Control.
+* You have link:../get-started/setup_overview.html#add-cluster[added a Kubernetes cluster] and it is managed by Astra Control.
 +
 NOTE: The managed cluster has a supported backend attached to it that can be discovered by Astra Control.
 
-* For Astra Data Store preview installations: You have added your Kubernetes app cluster.
+* (Astra Data Store installations only) You have added your Kubernetes app cluster.
 +
 NOTE: After you add your Kubernetes app cluster for Astra Data Store, the cluster appears as `unmanaged` in the list of discovered backends. You must next add the compute cluster that contains Astra Data Store and underlies the Kubernetes app cluster. You can do this from *Backends* in the UI. Select the Actions menu for the cluster, select `Manage`, and link:../get-started/setup_overview.html#add-cluster[add the cluster]. After the cluster state of `unmanaged` changes to the name of the Kubernetes cluster, you can proceed with adding a backend.
 
+.Options
+
+* Deploy new storage resources
+* Use an existing storage backend
+
+=== Deploy new storage resources
+You can deploy a new Astra Data Store and manage the associated storage backend.
+
+.Steps
+. You can add a new storage backend by navigating prompts from the Dashboard or the Backends menu:
+* From *Dashboard*:
+.. From the Dashboard Storage backend section, select *Manage*.
+.. From the Dashboard Resource Summary > Storage backends section, select *Add*.
+* From *Backends*:
+.. In the left navigation area, select *Backends*.
+.. Select *Manage*.
+. Deploy *Astra Data Store*:
+.. Select the *Astra Data Store* option within the *Deploy New* tab.
+.. Select the managed compute cluster and select *Next*.
+.. Confirm the backend details and select *Manage storage backend*.
+//START HERE
++
+The backend appears in `available` state in the list with summary information.
+
+NOTE: You might need to refresh the page for the backend to appear.
+
+=== Use an existing storage backend
+
+You can bring an existing ONTAP or Astra Data Store storage backend into Astra Control Center management.
+
 .Steps
 
-. Do one of the following:
+. You can add a discovered storage backend by navigating prompts from the Dashboard or the Backends menu:
 * From *Dashboard*:
 .. From the Dashboard Storage backend section, select *Manage*.
 .. From the Dashboard Resource Summary > Storage backends section, select *Add*.
