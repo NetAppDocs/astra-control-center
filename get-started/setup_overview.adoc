@@ -125,17 +125,26 @@ NOTE: After you add your Kubernetes app cluster for Astra Data Store, the cluste
 You can deploy a new Astra Data Store and manage the associated storage backend.
 
 .Steps
-. You can add a new storage backend by navigating prompts from the Dashboard or the Backends menu:
+. Navigate from the Dashboard or the Backends menu:
 * From *Dashboard*:
 .. From the Dashboard Storage backend section, select *Manage*.
 .. From the Dashboard Resource Summary > Storage backends section, select *Add*.
 * From *Backends*:
 .. In the left navigation area, select *Backends*.
 .. Select *Manage*.
-. Deploy *Astra Data Store*:
+. Choose the new deployment option:
 .. Select the *Astra Data Store* option within the *Deploy New* tab.
-.. Select the managed compute cluster and select *Next*.
-.. Confirm the backend details and select *Manage storage backend*.
+. Add the Astra Data Store package:
+.. Select *Add packages* and select the version of Astra Data Store you want to deploy.
+.. Enter a name for the Astra Data Store application.
+. Select an Astra Data Store license that you have previously uploaded or use the *Add license* option to upload a license to use with the application.
++
+NOTE: Astra Data licenses with full permissions are associated with your Kubernetes cluster, and these associated cluster should appear automatically.
+For Astra Data Store preview licenses, you must add a cluster to Astra Control management to proceed if you have not done so already. If no association has been made between the preview license and cluster, you can define this association on the next page.
+
+. (Astra Data Store preview licenses only) If you have not added a Kubernetes cluster to Astra Control management or selected the cluster that should be associated with your preview license, you need to do so from the *Kubernetes cluster* page. Select an existing cluster from the list or select *add the underlying cluster* to add a cluster to Astra Control management.
+.  
+
 //START HERE
 +
 The backend appears in `available` state in the list with summary information.
@@ -144,26 +153,28 @@ NOTE: You might need to refresh the page for the backend to appear.
 
 === Use an existing storage backend
 
-You can bring an existing ONTAP or Astra Data Store storage backend into Astra Control Center management.
+You can bring a discovered ONTAP or Astra Data Store storage backend into Astra Control Center management.
 
 .Steps
 
-. You can add a discovered storage backend by navigating prompts from the Dashboard or the Backends menu:
+. Navigate from the Dashboard or the Backends menu:
 * From *Dashboard*:
 .. From the Dashboard Storage backend section, select *Manage*.
 .. From the Dashboard Resource Summary > Storage backends section, select *Add*.
 * From *Backends*:
 .. In the left navigation area, select *Backends*.
 .. Select *Manage*.
+. Select the *Use existingh* tab.
 . Do one of the following depending on your backend type:
 * *Astra Data Store*:
-... Select the *Astra Data Store* tab.
+... Select *Astra Data Store*.
 ... Select the managed compute cluster and select *Next*.
-... Confirm the backend details and select *Manage storage backend*.
+... Confirm the backend details and select *Add storage backend*.
 
 * *ONTAP*:
+... Select *ONTAP*.
 ... Enter the ONTAP admin credentials and select *Review*.
-... Confirm the backend details and select *Manage*.
+... Confirm the backend details and select *Add storage backend*.
 
 +
 The backend appears in `available` state in the list with summary information.
