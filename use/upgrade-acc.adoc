@@ -622,8 +622,8 @@ spec:
 
 .Steps for OpenShift ingress controller
 
-* Procure your certificate and get the key, certificate, and CA files ready for use by the OpenShift route.
-* Create the OpenShift route:
+. Procure your certificate and get the key, certificate, and CA files ready for use by the OpenShift route.
+. Create the OpenShift route:
 +
 ----
 oc create route edge --service=traefik
