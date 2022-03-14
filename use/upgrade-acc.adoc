@@ -313,7 +313,7 @@ conditions:
 
 . Complete one of the following steps:
 +
-* If you do want to use an ingress, see link://use/upgrade-acc.html#set-up-ingress[Set up ingress].
+* If you do want to use an ingress, see link:../use/upgrade-acc.html#set-up-ingress[Set up ingress].
 
 * If you don't want to use an ingress, set ingressType to `AccTraefik`.
 +
@@ -560,7 +560,7 @@ The steps differ depending on the type of ingress controller you use:
 
 * The required https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/[ingress controller] should already be deployed.
 * The https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class[ingress class] corresponding to the ingress controller should already be created.
-* You are using Kubernetes versions between and including v1.19 and v1.21
+* You are using Kubernetes versions between and including v1.19 and v1.21.
 
 .Steps for Nginx ingress controller
 

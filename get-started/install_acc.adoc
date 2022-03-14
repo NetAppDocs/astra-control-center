@@ -306,7 +306,7 @@ IMPORTANT: If you are using a registry that does not require authorization, you 
 +
 This deploys the Astra Control Center `traefik` gateway as a Kubernetes LoadBalancer type service. You also need to provide an external load balancer (such as MetalLB) for Astra Control Center to get an external IP.
 +
-* If you want to use an ingress, see link://get-started/install_acc.html#set-up-ingress[Set up ingress].
+* If you want to use an ingress, see link:../get-started/install_acc.html#set-up-ingress[Set up ingress].
 
 
 .. (For installations using Astra Data Store preview) See this known issue for link:../release-notes/known-issues-ads.html#astra-data-store-cannot-be-used-as-a-storage-class-for-astra-control-center-due-to-mongodb-pod-liveness-probe-failure[additional required changes] to the YAML.
@@ -347,14 +347,13 @@ The steps differ depending on the type of ingress controller you use:
 
 * The required https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/[ingress controller] should already be deployed.
 * The https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class[ingress class] corresponding to the ingress controller should already be created.
-* You are using Kubernetes versions between and including v1.19 and v1.21
+* You are using Kubernetes versions between and including v1.19 and v1.21.
 
 .Steps for Nginx ingress controller
 
 . Create a secret of type http://kubernetes.io/tls[`kubernetes.io/tls`] for a TLS private key and certificate in `netapp-acc` (or custom-named) namespace as described in https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets[TLS secrets].
 . Deploy an ingress resource in `netapp-acc` (or custom-named) namespace for either a deprecated or a new schema:
 .. For a deprecated schema, follow this sample:
-
 +
 ----
 apiVersion: extensions/v1beta1
@@ -379,8 +378,7 @@ spec:
         pathType: ImplementationSpecific
 ----
 
-.. For a new schema, follow this example:
-
+.. For a new schema, follow this sample:
 +
 ----
 apiVersion: networking.k8s.io/v1
