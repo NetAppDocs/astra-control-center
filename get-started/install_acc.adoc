@@ -57,6 +57,7 @@ To install Astra Control Center, do the following steps:
 * <<Set up namespace and secret for registries with auth requirements>>
 * <<Install the Astra Control Center operator>>
 * <<Configure Astra Control Center>>
+* <<Set up ingress>>
 * <<Complete Astra Control Center and operator installation>>
 * <<Verify system status>>
 * <<Log in to the Astra Control Center UI>>
@@ -298,6 +299,16 @@ IMPORTANT: If you are using a registry that does not require authorization, you 
 .. Change `enrolled` for autoSupport to `false` for sites without internet connectivity or retain `true` for connected sites.
 .. (Optional) Add a first name `firstName` and last name `lastName` of the user associated with the account. You can perform this step now or later within the UI.
 .. (Optional) Change the `storageClass` value to another Trident storageClass resource if required by your installation.
+
+.. Complete one of the following steps:
++
+* If you don't want to create an Ingress resource to obtain the traffic information in Astra Control Center, set `ingressType` to `"AccTraefik"`.
++
+This deploys the Astra Control Center `traefik` gateway as a Kubernetes LoadBalancer type service. You also need to provide an external load balancer (such as MetalLB) for Astra Control Center to get an external IP.
++
+* If you want to use an ingress, see link://get-started/install_acc.html#set-up-ingress[Set up ingress].
+
+
 .. (For installations using Astra Data Store preview) See this known issue for link:../release-notes/known-issues-ads.html#astra-data-store-cannot-be-used-as-a-storage-class-for-astra-control-center-due-to-mongodb-pod-liveness-probe-failure[additional required changes] to the YAML.
 
 +
@@ -311,6 +322,7 @@ spec:
   *accountName: "Example"*
   astraVersion: "ASTRA_VERSION"
   *astraAddress: "astra.example.com"*
+  *ingressType: "Generic"*
   autoSupport:
     *enrolled: true*
   *email: "[admin@example.com]"*
@@ -321,6 +333,92 @@ spec:
     *secret: "astra-registry-cred"*
   *storageClass: "ontap-gold"*
 ----
+
+== Set up ingress
+
+You can set up a Kubernetes ingress object that manages external access to the services, such as load balancing in a cluster.
+
+The steps differ depending on the type of ingress controller you use:
+
+* Nginx ingress controller
+* OpenShift ingress controller
+
+.What you'll need
+
+* The required https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/[ingress controller] should already be deployed.
+* The https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class[ingress class] corresponding to the ingress controller should already be created.
+* You are using Kubernetes versions between and including v1.19 and v1.21
+
+.Steps for Nginx ingress controller
+
+. Create a secret of type http://kubernetes.io/tls[`kubernetes.io/tls`] for a TLS private key and certificate in `netapp-acc` (or custom-named) namespace as described in https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets[TLS secrets].
+. Deploy an ingress resource in `netapp-acc` (or custom-named) namespace for either a deprecated or a new schema:
+.. For a deprecated schema, follow this sample:
+
++
+----
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-acc
+  namespace: [netapp-acc or custom namespace]
+  annotations:
+    kubernetes.io/ingress.class: [class name for nginx controller]
+spec:
+  tls:
+  - hosts:
+    - <ACC address>
+    secretName: [tls secret name]
+  rules:
+  - host: [ACC address]
+    http:
+      paths:
+      - backend:
+        serviceName: traefik
+        servicePort: 80
+        pathType: ImplementationSpecific
+----
+
+.. For a new schema, follow this example:
+
++
+----
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: netapp-acc-ingress
+  namespace: [netapp-acc or custom namespace]
+spec:
+  ingressClassName: [class name for nginx controller]
+  tls:
+  - hosts:
+    - <ACC address>
+    secretName: [tls secret name]
+  rules:
+  - host: <ACC addess>
+    http:
+      paths:
+        - path:
+          backend:
+            service:
+              name: traefik
+              port:
+                number: 80
+          pathType: ImplementationSpecific
+----
+
+.Steps for OpenShift ingress controller
+
+* Procure your certificate and get the key, certificate, and CA files ready for use by the OpenShift route.
+* Create the OpenShift route:
++
+----
+oc create route edge --service=traefik
+--port=80 -n [netapp-acc or custom namespace]
+--insecure-policy=Redirect --hostname=<ACC address>
+--cert=cert.pem --key=key.pem
+----
+
 
 == Complete Astra Control Center and operator installation
 

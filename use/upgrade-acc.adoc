@@ -40,6 +40,7 @@ The Astra Control Center upgrade process guides you through the following high-l
 * <<Add the images to your local registry>>
 * <<Install the updated Astra Control Center operator>>
 * <<Upgrade Astra Control Center>>
+* <<Set up ingress>>
 * <<Upgrade third-party services>>
 * <<Verify system status>>
 
@@ -310,6 +311,34 @@ conditions:
     type: Upgrading
 ----
 
+. Complete one of the following steps:
++
+* If you do want to use an ingress, see link://use/upgrade-acc.html#set-up-ingress[Set up ingress].
+
+* If you don't want to use an ingress, set ingressType to `AccTraefik`.
++
+.Sample CR
++
+----
+apiVersion: astra.netapp.io/v1
+kind: AstraControlCenter
+metadata:
+  name: astra
+spec:
+  accountName: "Example"
+  astraVersion: "ASTRA_VERSION"
+  astraAddress: "astra.example.com"
+  *ingressType: "Generic"*
+  autoSupport:
+    enrolled: true
+  email: "[admin@example.com]"
+  firstName: "SRE"
+  lastName: "Admin"
+  imageRegistry:
+    name: "[your_registry_path]"
+    secret: "astra-registry-cred"
+  storageClass: "ontap-gold"
+----
 
 == Upgrade third-party services
 The third-party services Traefik and Cert-manager are not upgraded during earlier upgrade steps. You can optionally upgrade them using the procedure described here or retain existing service versions if your system requires it. The following is the recommended Traefik and Certs-manager upgrade sequence:
@@ -513,6 +542,116 @@ STATUS: deployed
 REVISION: 2
 TEST SUITE: None
 ----
+
+== Set up ingress
+
+You can set up a Kubernetes ingress object that manages external access to the services, such as load balancing in a cluster.
+
+The steps differ depending on the type of ingress controller you use:
+
+* Nginx ingress controller
+* OpenShift ingress controller
+
+.What you'll need
+
+* In the CR spec,
+** If `crd.externalTraefik` is present, it should be set to `false` OR
+** If `crd.externalTraefik` is `true`, `crd.shouldUpgrade` should also be `true`.
+
+* The required https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/[ingress controller] should already be deployed.
+* The https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class[ingress class] corresponding to the ingress controller should already be created.
+* You are using Kubernetes versions between and including v1.19 and v1.21
+
+.Steps for Nginx ingress controller
+
+. Use the existing secret `secure-testing-cert` or create a secret of type http://kubernetes.io/tls[`kubernetes.io/tls`] for a TLS private key and certificate in `netapp-acc` (or custom-named) namespace as described in https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets[TLS secrets].
+. Deploy an ingress resource in `netapp-acc` (or custom-named) namespace for either a deprecated or a new schema:
+.. For a deprecated schema, follow this sample:
+
++
+----
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-acc
+  namespace: [netapp-acc or custom namespace]
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  tls:
+  - hosts:
+    - <ACC address>
+    secretName: [tls secret name]
+  rules:
+  - host: [ACC address]
+    http:
+      paths:
+      - backend:
+        serviceName: traefik
+        servicePort: 80
+        pathType: ImplementationSpecific
+----
+
+.. For a new schema, follow this example:
+
++
+----
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: netapp-acc-ingress
+  namespace: [netapp-acc or custom namespace]
+spec:
+  ingressClassName: [class name for nginx controller]
+  tls:
+  - hosts:
+    - <ACC address>
+    secretName: [tls secret name]
+  rules:
+  - host: <ACC address>
+    http:
+      paths:
+        - path:
+          backend:
+            service:
+              name: traefik
+              port:
+                number: 80
+          pathType: ImplementationSpecific
+----
+
+.Steps for OpenShift ingress controller
+
+* Procure your certificate and get the key, certificate, and CA files ready for use by the OpenShift route.
+* Create the OpenShift route:
++
+----
+oc create route edge --service=traefik
+--port=80 -n [netapp-acc or custom namespace]
+--insecure-policy=Redirect --hostname=<ACC address>
+--cert=cert.pem --key=key.pem
+----
+
+=== Verify ingress set up
+
+You can verify the ingress set up before you continue.
+
+. Ensure that Traefik has changed to `clusterIP` from Loadbalancer:
++
+----
+kubectl get service traefik -n [netapp-acc or custom namespace]
+----
+
+. Verify routes in Traefik:
+
+----
+Kubectl get ingressroute ingressroutetls -n [netapp-acc or custom namespace]
+-o yaml | grep "Host("
+----
++
+NOTE: The result should be empty.
+
+
 
 == Verify system status
 
