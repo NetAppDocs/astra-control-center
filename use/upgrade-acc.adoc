@@ -42,7 +42,7 @@ The Astra Control Center upgrade process guides you through the following high-l
 * <<Upgrade Astra Control Center>>
 * <<Upgrade third-party services>>
 * <<Verify system status>>
-* <<Set up ingress>>
+* <<Set up ingress for load balancing>>
 
 
 IMPORTANT: Do not execute the following command during the entirety of the upgrade process to avoid deleting all Astra Control Center pods: `kubectl delete -f astra_control_center_operator_deploy.yaml`
@@ -551,7 +551,7 @@ TEST SUITE: None
 . Log in to Astra Control Center.
 . Verify that all your managed clusters and apps are still present and protected.
 
-== Set up ingress
+== Set up ingress for load balancing
 
 You can set up a Kubernetes ingress object that manages external access to the services, such as load balancing in a cluster.
 
