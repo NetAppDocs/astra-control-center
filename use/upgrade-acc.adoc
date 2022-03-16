@@ -40,9 +40,9 @@ The Astra Control Center upgrade process guides you through the following high-l
 * <<Add the images to your local registry>>
 * <<Install the updated Astra Control Center operator>>
 * <<Upgrade Astra Control Center>>
-* <<Set up ingress>>
 * <<Upgrade third-party services>>
 * <<Verify system status>>
+* <<Set up ingress>>
 
 
 IMPORTANT: Do not execute the following command during the entirety of the upgrade process to avoid deleting all Astra Control Center pods: `kubectl delete -f astra_control_center_operator_deploy.yaml`
@@ -543,9 +543,19 @@ REVISION: 2
 TEST SUITE: None
 ----
 
+
+
+
+== Verify system status
+
+. Log in to Astra Control Center.
+. Verify that all your managed clusters and apps are still present and protected.
+
 == Set up ingress
 
 You can set up a Kubernetes ingress object that manages external access to the services, such as load balancing in a cluster.
+
+NOTE: For additional details about the service type of "LoadBalancer" and ingress, see link:../get-started/requirements.html[Requirements].
 
 The steps differ depending on the type of ingress controller you use:
 
@@ -650,10 +660,3 @@ Kubectl get ingressroute ingressroutetls -n [netapp-acc or custom namespace]
 ----
 +
 NOTE: The result should be empty.
-
-
-
-== Verify system status
-
-. Log in to Astra Control Center.
-. Verify that all your managed clusters and apps are still present and protected.
