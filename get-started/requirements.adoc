@@ -32,7 +32,7 @@ Ensure that the operating environment you choose to host Astra Control Center me
 //|3 controller nodes with 4 CPU cores, 16GB RAM, and 120GB of available storage each
 
 |Worker nodes
-|At least 3 worker nodes total, with 4 CPU cores and 8GB RAM each
+|At least 3 worker nodes total, with 4 CPU cores and 12GB RAM each
 
 //|Worker cluster additional resources
 //|Astra Control Center requires that the cluster have an additional 12 CPU cores, 24GB RAM, and 50GB of available storage
@@ -65,7 +65,9 @@ NOTE: These requirements assume that Astra Control Center is the only applicatio
 ======================
 During app cloning in OpenShift environments, Astra Control Center needs to allow OpenShift to mount volumes and change the ownership of files. Because of this, you need to configure an ONTAP volume export policy to allow these operations. You can do so with the following commands:
 
-`export-policy rule modify -vserver <storage virtual machine name> -policyname <policy name>  -ruleindex 1 -superuser sysm --anon 65534`
+. `export-policy rule modify -vserver <storage virtual machine name> -policyname <policy name> -ruleindex 1 -superuser sys`
+
+. `export-policy rule modify -vserver <storage virtual machine name> -policyname <policy name> -ruleindex 1 -anon 65534`
 ======================
 
 NOTE: If you plan to add a second OpenShift operational environment as a managed compute resource, you need to ensure that the Astra Trident Volume Snapshot feature is enabled. To enable and test volume snapshots with Astra Trident, https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[see the official Astra Trident instructions^].
@@ -174,7 +176,7 @@ If you want to try Astra Control Center, you can link:setup_overview.html#add-a-
 
 Astra Control Center uses a service of the type "LoadBalancer" (svc/traefik in the Astra Control Center namespace), and requires that it be assigned an accessible external IP address. If load balancers are permitted in your environment and you don't already have one configured, you can use https://docs.netapp.com/us-en/netapp-solutions/containers/rh-os-n_LB_MetalLB.html#installing-the-metallb-load-balancer[MetalLB^] to automatically assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
 
-NOTE: MetalLB version 0.11.0 is not supported.
+//NOTE: MetalLB version 0.11.0 is not supported.
 
 ////
 Astra Control Center uses a service of the type "LoadBalancer" and requires the Kubernetes cluster to expose that service on an external IP address. For on-premises OpenShift clusters, NetApp has internally validated https://docs.netapp.com/us-en/netapp-solutions/containers/rh-os-n_LB_MetalLB.html#installing-the-metallb-load-balancer[MetalLB^] for use with Astra Control Center. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the external IP address assigned to the service for Astra Control Center.
