@@ -139,15 +139,25 @@ You can deploy a new Astra Data Store and manage the associated storage backend.
 .. Enter a name for the Astra Data Store application.
 . Select an Astra Data Store license that you have previously uploaded or use the *Add license* option to upload a license to use with the application.
 +
-NOTE: Astra Data licenses with full permissions are associated with your Kubernetes cluster, and these associated cluster should appear automatically.
-For Astra Data Store preview licenses, you must add a cluster to Astra Control management to proceed if you have not done so already. If no association has been made between the preview license and cluster, you can define this association on the next page.
+NOTE: Astra Data licenses with full permissions are associated with your Kubernetes cluster, and these associated cluster should appear automatically. If there is no managed cluster, you can select the Add a Cluster option to add one to Astra Control management.
++
+For Astra Data Store preview licenses, if no association has been made between the preview license and cluster, you can define this association on the next page of the wizard.
 
 . (Astra Data Store preview licenses only) If you have not added a Kubernetes cluster to Astra Control management or selected the cluster that should be associated with your preview license, you need to do so from the *Kubernetes cluster* page. Select an existing cluster from the list or select *add the underlying cluster* to add a cluster to Astra Control management.
-.  
-
-//START HERE
+. Select the deployment template size for the Kubernetes cluster that will provide resources for Astra Data Store.
+. Configure the nodes:
+.. (Optional) Add a node label to identify the pool of worker nodes that supports this Astra Data Store cluster.
+.. Configure the capacity (GiB) per node manually or select the maximum node capacity allowed.
+.. Configure a maximum number of nodes allowed in the cluster or allow the maximum number of nodes on the cluster.
+. (Astra Data Store full licenses only) Enter the key of the label you want to use for Protection Domains rack failures.
+//Super unclear in UI as is.
+. Configure the management network:
+.. Enter a management IP address for Astra Data Store internal management that is on the same subnet as worker node IP addresses.
+.. Choose to use the same NIC for both management and data networks or configure them separately.
+//Need instructions for getting list of NICs using CLI.
+. Review the configuration overview and the configuration as a custom resource. Select *Deploy storage backend* to begin installation.
 +
-The backend appears in `available` state in the list with summary information.
+After a successful installation, the backend appears with a status of `healthy` in the list along with active performance information.
 
 NOTE: You might need to refresh the page for the backend to appear.
 
