@@ -40,7 +40,7 @@ The Astra Control Center upgrade process guides you through the following high-l
 * <<Add the images to your local registry>>
 * <<Install the updated Astra Control Center operator>>
 * <<Upgrade Astra Control Center>>
-* <<Upgrade third-party services>>
+* <<(Optional) Upgrade third-party services>>
 * <<Verify system status>>
 * <<Set up ingress for load balancing>>
 
@@ -191,7 +191,8 @@ deployment.apps/acc-operator-controller-manager configured
 
 == Upgrade Astra Control Center
 
-. Edit the Astra Control Center custom resource (CR) and change the Astra version (`astraVersion` inside of `Spec`) number to the latest:
+. Edit the Astra Control Center custom resource (CR):
+.. Change the Astra version (`astraVersion` inside of `Spec`) number to the latest:
 +
 ----
 kubectl edit acc -n [netapp-acc or custom namespace]
@@ -199,97 +200,27 @@ kubectl edit acc -n [netapp-acc or custom namespace]
 +
 NOTE: Changing the Astra version is the only requirement for an Astra Control Center upgrade. Your registry path must match the registry path where you pushed the images in a <<substep_image_local_registry_push,previous step>>.
 
-. Verify that the pods terminate and become available again:
+. Do one of the following:
+.. If you don't have your own IngressController or ingress and have been using the Astra Control Center with its Traefik gateway as a LoadBalancer type service and would like to continue with that setup, specify another field `ingressType` (if not already present) and set it to `AccTraefik`.
 +
 ----
-watch kubectl get pods -n [netapp-acc or custom namespace]
+ingressType:AccTraefik
+----
+.. If you want to switch to the default Astra Control Center generic ingress deployment, provide your own IngressController/Ingress setup (with TLS termination, etc.), open up a route to Astra Control Center, and set `ingressType` to `Generic`.
++
+----
+ingressType:Generic
+----
++
+TIP: If you omit the field, the process becomes the generic deployment. If you don't want the generic deployment, be sure to add the field.
+
+. (Optional) Verify that the pods terminate and become available again:
++
+----
+watch kubectl get po -n [netapp-acc or custom namespace]
 ----
 
-. Verify that all system components upgraded successfully.
-+
-----
-kubectl get pods -n [netapp-acc or custom namespace]
-----
-+
-Each pod should have a status of `Running` and `Age` that is recent. It may take several minutes before the system pods are deployed.
-+
-Sample response:
-+
-----
-NAME                                         READY   STATUS    RESTARTS   AGE
-acc-helm-repo-5f75c5f564-bzqmt             1/1     Running   0          11m
-activity-6b8f7cccb9-mlrn4                  1/1     Running   0          9m2s
-api-token-authentication-6hznt             1/1     Running   0          8m50s
-api-token-authentication-qpfgb             1/1     Running   0          8m50s
-api-token-authentication-sqnb7             1/1     Running   0          8m50s
-asup-5578bbdd57-dxkbp                      1/1     Running   0          9m3s
-authentication-56bff4f95d-mspmq            1/1     Running   0          7m31s
-bucketservice-6f7968b95d-9rrrl             1/1     Running   0          8m36s
-cert-manager-5f6cf4bc4b-82khn              1/1     Running   0          6m19s
-cert-manager-cainjector-76cf976458-sdrbc   1/1     Running   0          6m19s
-cert-manager-webhook-5b7896bfd8-2n45j      1/1     Running   0          6m19s
-cloud-extension-749d9f684c-8bdhq           1/1     Running   0          9m6s
-cloud-insights-service-7d58687d9-h5tzw     1/1     Running   2          8m56s
-composite-compute-968c79cb5-nv7l4          1/1     Running   0          9m11s
-composite-volume-7687569985-jg9gg          1/1     Running   0          8m33s
-credentials-5c9b75f4d6-nx9cz               1/1     Running   0          8m42s
-entitlement-6c96fd8b78-zt7f8               1/1     Running   0          8m28s
-features-5f7bfc9f68-gsjnl                  1/1     Running   0          8m57s
-fluent-bit-ds-h88p7                        1/1     Running   0          7m22s
-fluent-bit-ds-krhnj                        1/1     Running   0          7m23s
-fluent-bit-ds-l5bjj                        1/1     Running   0          7m22s
-fluent-bit-ds-lrclb                        1/1     Running   0          7m23s
-fluent-bit-ds-s5t4n                        1/1     Running   0          7m23s
-fluent-bit-ds-zpr6v                        1/1     Running   0          7m22s
-graphql-server-5f5976f4bd-vbb4z            1/1     Running   0          7m13s
-identity-56f78b8f9f-8h9p9                  1/1     Running   0          8m29s
-influxdb2-0                                1/1     Running   0          11m
-krakend-6f8d995b4d-5khkl                   1/1     Running   0          7m7s
-license-5b5db87c97-jmxzc                   1/1     Running   0          9m
-login-ui-57b57c74b8-6xtv7                  1/1     Running   0          7m10s
-loki-0                                     1/1     Running   0          11m
-monitoring-operator-9dbc9c76d-8znck        2/2     Running   0          7m33s
-nats-0                                     1/1     Running   0          11m
-nats-1                                     1/1     Running   0          10m
-nats-2                                     1/1     Running   0          10m
-nautilus-6b9d88bc86-h8kfb                  1/1     Running   0          8m6s
-nautilus-6b9d88bc86-vn68r                  1/1     Running   0          8m35s
-openapi-b87d77dd8-5dz9h                    1/1     Running   0          9m7s
-polaris-consul-consul-5ljfb                1/1     Running   0          11m
-polaris-consul-consul-s5d5z                1/1     Running   0          11m
-polaris-consul-consul-server-0             1/1     Running   0          11m
-polaris-consul-consul-server-1             1/1     Running   0          11m
-polaris-consul-consul-server-2             1/1     Running   0          11m
-polaris-consul-consul-twmpq                1/1     Running   0          11m
-polaris-mongodb-0                          2/2     Running   0          11m
-polaris-mongodb-1                          2/2     Running   0          10m
-polaris-mongodb-2                          2/2     Running   0          10m
-polaris-ui-84dc87847f-zrg8w                1/1     Running   0          7m12s
-polaris-vault-0                            1/1     Running   0          11m
-polaris-vault-1                            1/1     Running   0          11m
-polaris-vault-2                            1/1     Running   0          11m
-public-metrics-657698b66f-67pgt            1/1     Running   0          8m47s
-storage-backend-metrics-6848b9fd87-w7x8r   1/1     Running   0          8m39s
-storage-provider-5ff5868cd5-r9hj7          1/1     Running   0          8m45s
-telegraf-ds-dw4hg                          1/1     Running   0          7m23s
-telegraf-ds-k92gn                          1/1     Running   0          7m23s
-telegraf-ds-mmxjl                          1/1     Running   0          7m23s
-telegraf-ds-nhs8s                          1/1     Running   0          7m23s
-telegraf-ds-rj7lw                          1/1     Running   0          7m23s
-telegraf-ds-tqrkb                          1/1     Running   0          7m23s
-telegraf-rs-9mwgj                          1/1     Running   0          7m23s
-telemetry-service-56c49d689b-ffrzx         1/1     Running   0          8m42s
-tenancy-767c77fb9d-g9ctv                   1/1     Running   0          8m52s
-traefik-5857d87f85-7pmx8                   1/1     Running   0          6m49s
-traefik-5857d87f85-cpxgv                   1/1     Running   0          5m34s
-traefik-5857d87f85-lvmlb                   1/1     Running   0          4m33s
-traefik-5857d87f85-t2xlk                   1/1     Running   0          4m33s
-traefik-5857d87f85-v9wpf                   1/1     Running   0          7m3s
-trident-svc-595f84dd78-zb8l6               1/1     Running   0          8m54s
-vault-controller-86c94fbf4f-krttq          1/1     Running   0          9m24s
-----
-
-. Verify that the Astra status conditions indicate that the upgrade is complete and ready:
+. Wait for the Astra status conditions to indicate that the upgrade is complete and ready:
 +
 ----
 kubectl get -o yaml -n [netapp-acc or custom namespace] astracontrolcenters.astra.netapp.io astra
@@ -311,41 +242,47 @@ conditions:
     type: Upgrading
 ----
 
-. Complete one of the following steps:
-+
-* If you do want to use an ingress, see link:../use/upgrade-acc.html#set-up-ingress[Set up ingress].
+. Log back in and verify that all managed clusters and apps are still present and protected.
+. If the operator did not update the Cert-manager, upgrade third-party services, next.
 
-* If you don't want to use an ingress, set ingressType to `AccTraefik`.
-+
-.Sample CR
-+
-----
-apiVersion: astra.netapp.io/v1
-kind: AstraControlCenter
-metadata:
-  name: astra
-spec:
-  accountName: "Example"
-  astraVersion: "ASTRA_VERSION"
-  astraAddress: "astra.example.com"
-  *ingressType: "Generic"*
-  autoSupport:
-    enrolled: true
-  email: "[admin@example.com]"
-  firstName: "SRE"
-  lastName: "Admin"
-  imageRegistry:
-    name: "[your_registry_path]"
-    secret: "astra-registry-cred"
-  storageClass: "ontap-gold"
-----
 
-== Upgrade third-party services
+== (Optional) Upgrade third-party services
 The third-party services Traefik and Cert-manager are not upgraded during earlier upgrade steps. You can optionally upgrade them using the procedure described here or retain existing service versions if your system requires it. The following is the recommended Traefik and Certs-manager upgrade sequence:
 
 . <<Set up acc-helm-repo to upgrade Traefik and Cert-manager>>
 . <<Update Traefik service using acc-helm-repo>>
 . <<Update the Cert-manager service>>
+
+Upgrades to Traefik and Cert-manager are handled a bit differently.
+
+* *Traefik*: By default, Astra Control Center manages the lifecycle of the Traefik deployment.  Setting `externalTraefik` to `false` (default) indicates that no external Traefik exists in the system and and Traefik is being installed and managed by Astra Control Center. In this case,  `externalTraefik` is set to `false`.
++
+On the other hand, if you have your own Traefik deployment, set `externalTraefik` to `true`. In this case, you maintain the deployment and Astra Control Center will upgrade the CRDs.
+
+* *Cert-manager*: By default, Astra Control Center installs the cert-manager (and CRDs) unless you set `externalCertManager` to `true`. Set `shouldUpgrade` to `true` to have Astra Control Center upgrade the CRDs.
+
+Traefik is upgraded if any of the following conditions are met:
+
+* externalTraefik: false
+OR
+* externalTraefik: true AND shouldUpgrade: true.
+
+.Steps
+
+. Edit the `acc` CR:
++
+----
+kubectl edit acc -n [netapp-acc or custom namespace]
+----
+
+. Change the `externalTraefik` field and the `shouldUpgrade` field to either `true` or `false` as needed.
++
+----
+crds:
+    externalTraefik: false
+    externalCertManager: false
+    shouldUpgrade: false
+----
 
 == Set up acc-helm-repo to upgrade Traefik and Cert-manager
 

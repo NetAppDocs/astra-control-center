@@ -32,18 +32,18 @@ OpenShift example:
 oc get apiservices
 ----
 
-* You have created an FQDN address for Astra Control Center in your data center.
+* The Astra FQDN you plan to use needs to be routable to this cluster. This means that you either have a DNS entry in your internal DNS server or you are using a core URL route that is already registered.
 
 .About this task
 The Astra Control Center installation process does the following:
 
-* Installs the Astra components into the `netapp-acc` (or custom named) namespace.
+* Installs the Astra components into the `netapp-acc` (or custom-named) namespace.
 * Creates a default account.
 * Establishes a default administrative user email address and default one-time password of `ACC-<UUID_of_installation>` for this instance of Astra Control Center. This user is assigned the Owner role in the system and is needed for first time login to the UI.
 * Helps you determine that all Astra Control Center pods are running.
 * Installs the Astra UI.
 
-NOTE: Podman commands can be used in place of Docker commands if you are using Red Hat’s Podman instead of Docker Engine.
+NOTE: If you are using Red Hat’s Podman instead of Docker Engine, Podman commands can be used in place of Docker commands.
 
 IMPORTANT: Do not execute the following command during the entirety of the installation process to avoid deleting all Astra Control Center pods: `kubectl delete -f astra_control_center_operator_deploy.yaml`
 
@@ -57,12 +57,12 @@ To install Astra Control Center, do the following steps:
 * <<Set up namespace and secret for registries with auth requirements>>
 * <<Install the Astra Control Center operator>>
 * <<Configure Astra Control Center>>
-* <<Set up ingress for load balancing>>
 * <<Complete Astra Control Center and operator installation>>
 * <<Verify system status>>
+* <<Set up ingress for load balancing>>
 * <<Log in to the Astra Control Center UI>>
 
-Complete the deployment by performing link:setup_overview.html[setup tasks].
+
 
 == Download the Astra Control Center bundle
 
@@ -302,9 +302,9 @@ IMPORTANT: If you are using a registry that does not require authorization, you 
 
 .. Complete one of the following steps:
 +
-* If you don't want to create an ingress resource to obtain the traffic information in Astra Control Center, set `ingressType` to `"accTraefik"`.
+* If you don't want to create an ingress resource to send the traffic information to Astra Control Center, set `ingressType` to `AccTraefik`.
 +
-This deploys the Astra Control Center `traefik` gateway as a Kubernetes load balancer type service. You also need to provide an external load balancer (such as MetalLB) for Astra Control Center to get an external IP.
+This deploys the Astra Control Center `traefik` gateway as a Kubernetes LoadBalancer type service. You also need to provide an external load balancer (such as MetalLB) for Astra Control Center to get an external IP. See link:../get-started/requirements.html[Requirements].
 +
 * If you do want to use an ingress, see link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[Set up ingress for load balancing].
 
@@ -688,7 +688,7 @@ metadata:
  selfLink: ""
 ----
 
-. To get the one-time password you will use when you log in to Astra Control Center, copy the `status.uuid` value from the response in the previous step. The password is `ACC-` followed by the UUID value (`ACC-[UUID]` or, in this example, `ACC-c49008a5-4ef1-4c5d-a53e-830daf994116`).
+. To get the one-time password you will use when you log in to Astra Control Center, copy the `status.uuid` value from the response in the previous step. The password is `ACC-` followed by the UUID value (`ACC-[UUID]` or, in this example, `ACC-9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f`).
 
 == Set up ingress for load balancing
 
@@ -696,10 +696,10 @@ You can set up a Kubernetes ingress controller that manages external access to s
 
 You can choose to use a service load balancer or other ingress controller:
 
-* *Service load balancer*: Astra Control Center uses a service of the type "LoadBalancer" (svc/traefik in the Astra Control Center namespace), and requires that it be assigned an accessible external IP address. If load balancers are permitted in your environment and you don’t already have one configured, you can use MetalLB or another service load balancer to assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
-* *Other ingress controller*: This is the default action with Astra Control Center. After Astra Control Center is deployed, you will need to configure the ingress controller to expose Astra Control Center with a URL.
+* *Service load balancer (ingressType:AccTraefik)*: Astra Control Center uses a service of the type "LoadBalancer" (svc/traefik in the Astra Control Center namespace), and requires that it be assigned an accessible external IP address. If load balancers are permitted in your environment and you don’t already have one configured, you can use MetalLB or another service load balancer to assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
+* *Other ingress controller (ingressType:Generic)*: This is the default action with Astra Control Center. After Astra Control Center is deployed, you will need to configure the ingress controller to expose Astra Control Center with a URL.
 
-NOTE: For additional details about the service type of "LoadBalancer" and ingress, see link:../get-started/requirements.html[Requirements].
+NOTE: For details about the service type of "LoadBalancer" and ingress, see link:../get-started/requirements.html[Requirements].
 
 The steps differ depending on the type of ingress controller you use:
 
@@ -710,7 +710,7 @@ The steps differ depending on the type of ingress controller you use:
 
 * The required https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/[ingress controller] should already be deployed.
 * The https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class[ingress class] corresponding to the ingress controller should already be created.
-* You are using Kubernetes versions between and including v1.19 and v1.21.
+* You are using Kubernetes versions between and including v1.19 and v1.22.
 
 .Steps for Nginx ingress controller
 
@@ -775,7 +775,7 @@ spec:
 +
 ----
 oc create route edge --service=traefik
---port=80 -n [netapp-acc or custom namespace]
+--port=web -n [netapp-acc or custom namespace]
 --insecure-policy=Redirect --hostname=<ACC address>
 --cert=cert.pem --key=key.pem
 ----
