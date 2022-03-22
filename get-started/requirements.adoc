@@ -16,9 +16,10 @@ Get started by verifying support for your Kubernetes clusters, apps, licenses, a
 
 Astra Control Center requires one of the following types of host clusters:
 
-* Red Hat OpenShift Container Platform 4.6.8, 4.7, or 4.8
-* Rancher 2.5
-* Kubernetes 1.19 to 1.21 (including 1.21.x)
+* Red Hat OpenShift Container Platform 4.6.8, 4.7, 4.8, or 4.9
+* Rancher 2.5.8, 2.5.9, or 2.6
+* Kubernetes 1.20 to 1.23
+* VMware Tanzu Kubernetes Grid 1.12.2 or 1.4
 
 The cluster must meet the following general requirements so you can discover and manage it from Astra Control Center.
 
@@ -29,7 +30,7 @@ The cluster must meet the following general requirements so you can discover and
 * Service type "LoadBalancer" available for ingress traffic to be sent to services in the OpenShift cluster
 * A method for pointing the FQDN of Astra Control Center to the load balanced IP address
 * Astra Trident 21.04 or newer installed and configured if NetApp ONTAP version 9.5 or newer will be used as a storage backend
-* Astra Trident 21.10.1 or newer installed and configured if Astra Trident will be used as a storage backend
+* Astra Trident 21.10.1 or newer installed and configured if Astra Data Store will be used as a storage backend
 
 NOTE: These requirements assume that Astra Control Center is the only application running on the OpenShift cluster. If the cluster is running additional applications, adjust these minimum requirements accordingly.
 
