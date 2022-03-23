@@ -92,7 +92,8 @@ The Kubernetes cluster you use for Astra Control Center should already be deploy
 
 == Application cluster requirements
 
-Astra Control Center has the following requirements for clusters that you plan to manage from Astra Control Center. These requirements also apply if the cluster you plan to manage is the operational environment cluster that hosts Astra Control Center. Astra Control Center management functions require a small amount of memory and CPU resources from each managed cluster.
+Astra Control Center has the following requirements for clusters that you plan to manage from Astra Control Center. These requirements also apply if the cluster you plan to manage is the operational environment cluster that hosts Astra Control Center.
+// Astra Control Center management functions require a small amount of memory and CPU resources from each managed cluster.
 
 //* An additional 1.5Gib memory and 0.25 CPU cores to support Astra Control Center management functions
 * The most recent version of the Kubernetes https://kubernetes-csi.github.io/docs/snapshot-controller.html[snapshot-controller component^] is installed
