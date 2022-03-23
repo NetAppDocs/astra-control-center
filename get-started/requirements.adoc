@@ -47,7 +47,7 @@ Ensure that the operating environment you choose to host Astra Control Center me
 a|
 
 * Astra Trident 21.04 or newer installed and configured if NetApp ONTAP version 9.5 or newer will be used as a storage backend
-* Astra Trident 21.10.1 or newer installed and configured if Astra Data Store will be used as a storage backend
+* Astra Trident 21.10.1 or newer installed and configured if Astra Data Store preview will be used as a storage backend
 
 |===
 
