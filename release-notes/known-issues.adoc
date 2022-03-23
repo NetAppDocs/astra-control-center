@@ -205,10 +205,10 @@ customresourcedefinition.apiextensions.k8s.io "agents.monitoring.netapp.com" del
 
 == Uninstall of Astra Control Center fails to clean up Traefik CRDs
 //ASTRACTL-9180/DOC-3630/Q2 and PI4
-You can manually delete the Traefik CRDs:
+You can manually delete the Traefik CRDs. CRDs are global resources, and deleting them might impact other applications on the cluster.
 
 .Steps
-. Confirm which CRDs were not deleted by the uninstall process:
+. List Traefik CRDs installed on the cluster:
 +
 ----
 kubectl get crds |grep -E 'traefik'
