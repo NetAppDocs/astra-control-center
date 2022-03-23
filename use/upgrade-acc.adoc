@@ -40,8 +40,9 @@ The Astra Control Center upgrade process guides you through the following high-l
 * <<Add the images to your local registry>>
 * <<Install the updated Astra Control Center operator>>
 * <<Upgrade Astra Control Center>>
-* <<Upgrade third-party services>>
+* <<(Optional) Upgrade third-party services>>
 * <<Verify system status>>
+* <<Set up ingress for load balancing>>
 
 
 IMPORTANT: Do not execute the following command during the entirety of the upgrade process to avoid deleting all Astra Control Center pods: `kubectl delete -f astra_control_center_operator_deploy.yaml`
@@ -198,97 +199,27 @@ kubectl edit acc -n [netapp-acc or custom namespace]
 +
 NOTE: Changing the Astra version is the only requirement for an Astra Control Center upgrade. Your registry path must match the registry path where you pushed the images in a <<substep_image_local_registry_push,previous step>>.
 
-. Verify that the pods terminate and become available again:
+. Do one of the following:
+.. If you don't have your own IngressController or ingress and have been using the Astra Control Center with its Traefik gateway as a LoadBalancer type service and would like to continue with that setup, specify another field `ingressType` (if not already present) and set it to `AccTraefik`.
 +
 ----
-watch kubectl get pods -n [netapp-acc or custom namespace]
+ingressType:AccTraefik
+----
+.. If you want to switch to the default Astra Control Center generic ingress deployment, provide your own IngressController/Ingress setup (with TLS termination, etc.), open up a route to Astra Control Center, and set `ingressType` to `Generic`.
++
+----
+ingressType:Generic
+----
++
+TIP: If you omit the field, the process becomes the generic deployment. If you don't want the generic deployment, be sure to add the field.
+
+. (Optional) Verify that the pods terminate and become available again:
++
+----
+watch kubectl get po -n [netapp-acc or custom namespace]
 ----
 
-. Verify that all system components upgraded successfully.
-+
-----
-kubectl get pods -n [netapp-acc or custom namespace]
-----
-+
-Each pod should have a status of `Running` and `Age` that is recent. It may take several minutes before the system pods are deployed.
-+
-Sample response:
-+
-----
-NAME                                         READY   STATUS    RESTARTS   AGE
-acc-helm-repo-5f75c5f564-bzqmt             1/1     Running   0          11m
-activity-6b8f7cccb9-mlrn4                  1/1     Running   0          9m2s
-api-token-authentication-6hznt             1/1     Running   0          8m50s
-api-token-authentication-qpfgb             1/1     Running   0          8m50s
-api-token-authentication-sqnb7             1/1     Running   0          8m50s
-asup-5578bbdd57-dxkbp                      1/1     Running   0          9m3s
-authentication-56bff4f95d-mspmq            1/1     Running   0          7m31s
-bucketservice-6f7968b95d-9rrrl             1/1     Running   0          8m36s
-cert-manager-5f6cf4bc4b-82khn              1/1     Running   0          6m19s
-cert-manager-cainjector-76cf976458-sdrbc   1/1     Running   0          6m19s
-cert-manager-webhook-5b7896bfd8-2n45j      1/1     Running   0          6m19s
-cloud-extension-749d9f684c-8bdhq           1/1     Running   0          9m6s
-cloud-insights-service-7d58687d9-h5tzw     1/1     Running   2          8m56s
-composite-compute-968c79cb5-nv7l4          1/1     Running   0          9m11s
-composite-volume-7687569985-jg9gg          1/1     Running   0          8m33s
-credentials-5c9b75f4d6-nx9cz               1/1     Running   0          8m42s
-entitlement-6c96fd8b78-zt7f8               1/1     Running   0          8m28s
-features-5f7bfc9f68-gsjnl                  1/1     Running   0          8m57s
-fluent-bit-ds-h88p7                        1/1     Running   0          7m22s
-fluent-bit-ds-krhnj                        1/1     Running   0          7m23s
-fluent-bit-ds-l5bjj                        1/1     Running   0          7m22s
-fluent-bit-ds-lrclb                        1/1     Running   0          7m23s
-fluent-bit-ds-s5t4n                        1/1     Running   0          7m23s
-fluent-bit-ds-zpr6v                        1/1     Running   0          7m22s
-graphql-server-5f5976f4bd-vbb4z            1/1     Running   0          7m13s
-identity-56f78b8f9f-8h9p9                  1/1     Running   0          8m29s
-influxdb2-0                                1/1     Running   0          11m
-krakend-6f8d995b4d-5khkl                   1/1     Running   0          7m7s
-license-5b5db87c97-jmxzc                   1/1     Running   0          9m
-login-ui-57b57c74b8-6xtv7                  1/1     Running   0          7m10s
-loki-0                                     1/1     Running   0          11m
-monitoring-operator-9dbc9c76d-8znck        2/2     Running   0          7m33s
-nats-0                                     1/1     Running   0          11m
-nats-1                                     1/1     Running   0          10m
-nats-2                                     1/1     Running   0          10m
-nautilus-6b9d88bc86-h8kfb                  1/1     Running   0          8m6s
-nautilus-6b9d88bc86-vn68r                  1/1     Running   0          8m35s
-openapi-b87d77dd8-5dz9h                    1/1     Running   0          9m7s
-polaris-consul-consul-5ljfb                1/1     Running   0          11m
-polaris-consul-consul-s5d5z                1/1     Running   0          11m
-polaris-consul-consul-server-0             1/1     Running   0          11m
-polaris-consul-consul-server-1             1/1     Running   0          11m
-polaris-consul-consul-server-2             1/1     Running   0          11m
-polaris-consul-consul-twmpq                1/1     Running   0          11m
-polaris-mongodb-0                          2/2     Running   0          11m
-polaris-mongodb-1                          2/2     Running   0          10m
-polaris-mongodb-2                          2/2     Running   0          10m
-polaris-ui-84dc87847f-zrg8w                1/1     Running   0          7m12s
-polaris-vault-0                            1/1     Running   0          11m
-polaris-vault-1                            1/1     Running   0          11m
-polaris-vault-2                            1/1     Running   0          11m
-public-metrics-657698b66f-67pgt            1/1     Running   0          8m47s
-storage-backend-metrics-6848b9fd87-w7x8r   1/1     Running   0          8m39s
-storage-provider-5ff5868cd5-r9hj7          1/1     Running   0          8m45s
-telegraf-ds-dw4hg                          1/1     Running   0          7m23s
-telegraf-ds-k92gn                          1/1     Running   0          7m23s
-telegraf-ds-mmxjl                          1/1     Running   0          7m23s
-telegraf-ds-nhs8s                          1/1     Running   0          7m23s
-telegraf-ds-rj7lw                          1/1     Running   0          7m23s
-telegraf-ds-tqrkb                          1/1     Running   0          7m23s
-telegraf-rs-9mwgj                          1/1     Running   0          7m23s
-telemetry-service-56c49d689b-ffrzx         1/1     Running   0          8m42s
-tenancy-767c77fb9d-g9ctv                   1/1     Running   0          8m52s
-traefik-5857d87f85-7pmx8                   1/1     Running   0          6m49s
-traefik-5857d87f85-cpxgv                   1/1     Running   0          5m34s
-traefik-5857d87f85-lvmlb                   1/1     Running   0          4m33s
-traefik-5857d87f85-t2xlk                   1/1     Running   0          4m33s
-traefik-5857d87f85-v9wpf                   1/1     Running   0          7m3s
-trident-svc-595f84dd78-zb8l6               1/1     Running   0          8m54s
-vault-controller-86c94fbf4f-krttq          1/1     Running   0          9m24s
-----
-
-. Verify that the Astra status conditions indicate that the upgrade is complete and ready:
+. Wait for the Astra status conditions to indicate that the upgrade is complete and ready:
 +
 ----
 kubectl get -o yaml -n [netapp-acc or custom namespace] astracontrolcenters.astra.netapp.io astra
@@ -310,211 +241,157 @@ conditions:
     type: Upgrading
 ----
 
+. Log back in and verify that all managed clusters and apps are still present and protected.
+. If the operator did not update the Cert-manager, upgrade third-party services, next.
 
-== Upgrade third-party services
-The third-party services Traefik and Cert-manager are not upgraded during earlier upgrade steps. You can optionally upgrade them using the procedure described here or retain existing service versions if your system requires it. The following is the recommended Traefik and Certs-manager upgrade sequence:
 
-. <<Set up acc-helm-repo to upgrade Traefik and Cert-manager>>
-. <<Update Traefik service using acc-helm-repo>>
-. <<Update the Cert-manager service>>
+== (Optional) Upgrade third-party services
+The third-party services Traefik and Cert-manager are not upgraded during earlier upgrade steps. You can optionally upgrade them using the procedure described here or retain existing service versions if your system requires it.
 
-== Set up acc-helm-repo to upgrade Traefik and Cert-manager
+* *Traefik*: By default, Astra Control Center manages the lifecycle of the Traefik deployment.  Setting `externalTraefik` to `false` (default) indicates that no external Traefik exists in the system and and Traefik is being installed and managed by Astra Control Center. In this case,  `externalTraefik` is set to `false`.
++
+On the other hand, if you have your own Traefik deployment, set `externalTraefik` to `true`. In this case, you maintain the deployment and Astra Control Center will upgrade the CRDs.
 
-. Find the `enterprise-helm-repo` that is loaded to your local Docker cache:
+* *Cert-manager*: By default, Astra Control Center installs the cert-manager (and CRDs) unless you set `externalCertManager` to `true`. Set `shouldUpgrade` to `true` to have Astra Control Center upgrade the CRDs.
+
+Traefik is upgraded if any of the following conditions are met:
+
+* externalTraefik: false
+OR
+* externalTraefik: true AND shouldUpgrade: true.
+
+.Steps
+
+. Edit the `acc` CR:
 +
 ----
-docker images enterprise-helm-repo
-----
-+
-Response:
-+
-----
-REPOSITORY             TAG         IMAGE ID       CREATED        SIZE
-enterprise-helm-repo   21.10.218   7a182d6b30f3   20 hours ago   464MB
+kubectl edit acc -n [netapp-acc or custom namespace]
 ----
 
-. Start a container using the tag from the previous step:
+. Change the `externalTraefik` field and the `shouldUpgrade` field to either `true` or `false` as needed.
 +
 ----
-docker run -dp 8082:8080 enterprise-helm-repo:21.10.218
-----
-+
-Response:
-+
-----
-940436e67fa86d2c4559ac4987b96bb35588313c2c9ddc9cec195651963f08d8
+crds:
+    externalTraefik: false
+    externalCertManager: false
+    shouldUpgrade: false
 ----
 
-. Add the Helm repo to your local host repositories:
-+
-----
-helm repo add acc-helm-repo http://localhost:8082/
-----
-+
-Response:
-+
-----
-"acc-helm-repo" has been added to your repositories
-----
 
-. Save the following Python script as a file, for example, `set_previous_values.py`:
-+
-NOTE: This Python script creates two files that are used in later upgrade steps to retain helm values.
 
-+
-----
-#!/usr/bin/env python3
-import json
-import os
 
-NAMESPACE = "netapp-acc"
-
-os.system(f"helm get values traefik -n {NAMESPACE} -o json > traefik_values.json")
-os.system(f"helm get values cert-manager -n {NAMESPACE} -o json > cert_manager_values.json")
-
-# reformat traefik values
-f = open("traefik_values.json", "r")
-traefik_values = {'traefik': json.load(f)}
-f.close()
-
-with open('traefik_values.json', 'w') as output_file:
-    json.dump(traefik_values, output_file)
-
-# reformat cert-manager values
-f = open("cert_manager_values.json", "r")
-cm_values = {'cert-manager': json.load(f)}
-f.close()
-
-cm_values['global'] = cm_values['cert-manager']['global']
-del cm_values['cert-manager']['global']
-
-with open('cert_manager_values.json', 'w') as output_file:
-    json.dump(cm_values, output_file)
-
-print('Done')
-----
-
-. Run the script:
-+
-----
-python3.7 ./set_previous_values.py
-----
-
-== Update Traefik service using acc-helm-repo
-
-NOTE: You must already have <<Set up acc-helm-repo to upgrade Traefik and Cert-manager,set up acc-helm-repo>> before completing the following procedure.
-
-. Download the Traefik bundle using a secure, file-transfer tool, such as GNU wget:
-+
-----
-wget http://localhost:8082/traefik-0.2.0.tgz
-----
-
-. Extract the images:
-+
-----
-tar -vxzf traefik-0.2.0.tgz
-----
-
-. Apply the Traefik CRDs:
-+
-----
-kubectl apply -f ./traefik/charts/traefik/crds/
-----
-
-. Find the Helm chart version to use with your upgraded Traefik:
-+
-----
-helm search repo acc-helm-repo/traefik
-----
-+
-Response:
-+
-----
-NAME                                    CHART VERSION   APP VERSION DESCRIPTION
-acc-helm-repo/traefik                 0.2.0           2.5.3       Helm chart for Traefik Ingress controller
-acc-helm-repo/traefik-ingressroutes   0.2.0           2.5.3       A Helm chart for Kubernetes
-----
-
-. Validate the traefik_values.json file for upgrade:
-.. Open the traefik_values.json file.
-.. Check if there is a value for the `imagePullSecret` field. If it is empty, remove the following text from the file:
-+
-----
-"imagePullSecrets": [{"name": ""}],
-----
-
-.. Ensure that the traefik image is directed to the correct location and has the correct name:
-+
-----
-image: [your_registry_path]/traefik
-----
-
-. Upgrade your Traefik configuration:
-+
-----
-helm upgrade --version 0.2.0 --namespace netapp-acc -f traefik_values.json traefik acc-helm-repo/traefik
-----
-+
-Response:
-+
-----
-Release "traefik" has been upgraded. Happy Helming!
-NAME: traefik
-LAST DEPLOYED: Mon Oct 25 22:53:19 2021
-NAMESPACE: netapp-acc
-STATUS: deployed
-REVISION: 2
-TEST SUITE: None
-----
-
-== Update the Cert-manager service
-
-NOTE: You must already have completed the <<Update Traefik service using acc-helm-repo,Traefik update>> and <<Set up acc-helm-repo to upgrade Traefik and Cert-manager,added acc-helm-repo in Helm>> before completing the following procedure.
-
-. Find the helm chart version to use with your upgraded Cert-manager:
-+
-----
-helm search repo acc-helm-repo/cert-manager
-----
-+
-Response:
-+
-----
-NAME CHART VERSION APP VERSION DESCRIPTION
-acc-helm-repo/cert-manager 0.3.0 v1.5.4 A Helm chart for cert-manager
-acc-helm-repo/cert-manager-certificates 0.1.0 1.16.0 A Helm chart for Kubernetes
-----
-
-. Validate the cert_manager_values.json file for upgrade:
-.. Open the cert_manager_values.json file.
-.. Check if there is a value for the `imagePullSecret` field. If it is empty, remove the following text from the file:
-+
-----
-"imagePullSecrets": [{"name": ""}],
-----
-
-.. Ensure that the three cert-manager images are directed to the correct location and have the correct names.
-
-. Upgrade your Cert-manager configuration:
-+
-----
-helm upgrade --version 0.3.0 --namespace netapp-acc -f cert_manager_values.json cert-manager acc-helm-repo/cert-manager
-----
-+
-Response:
-+
-----
-Release "cert-manager" has been upgraded. Happy Helming!
-NAME: cert-manager
-LAST DEPLOYED: Tue Nov 23 11:20:05 2021
-NAMESPACE: netapp-acc
-STATUS: deployed
-REVISION: 2
-TEST SUITE: None
-----
 
 == Verify system status
 
 . Log in to Astra Control Center.
 . Verify that all your managed clusters and apps are still present and protected.
+
+== Set up ingress for load balancing
+
+You can set up a Kubernetes ingress object that manages external access to the services, such as load balancing in a cluster.
+
+NOTE: For additional details about the service type of "LoadBalancer" and ingress, see link:../get-started/requirements.html[Requirements].
+
+The steps differ depending on the type of ingress controller you use:
+
+* Nginx ingress controller
+* OpenShift ingress controller
+
+.What you'll need
+
+* In the CR spec,
+** If `crd.externalTraefik` is present, it should be set to `false` OR
+** If `crd.externalTraefik` is `true`, `crd.shouldUpgrade` should also be `true`.
+
+* The required https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/[ingress controller] should already be deployed.
+* The https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class[ingress class] corresponding to the ingress controller should already be created.
+* You are using Kubernetes versions between and including v1.19 and v1.21.
+
+.Steps for Nginx ingress controller
+
+. Use the existing secret `secure-testing-cert` or create a secret of type http://kubernetes.io/tls[`kubernetes.io/tls`] for a TLS private key and certificate in `netapp-acc` (or custom-named) namespace as described in https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets[TLS secrets].
+. Deploy an ingress resource in `netapp-acc` (or custom-named) namespace for either a deprecated or a new schema:
+.. For a deprecated schema, follow this sample:
+
++
+----
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-acc
+  namespace: [netapp-acc or custom namespace]
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  tls:
+  - hosts:
+    - <ACC address>
+    secretName: [tls secret name]
+  rules:
+  - host: [ACC address]
+    http:
+      paths:
+      - backend:
+        serviceName: traefik
+        servicePort: 80
+        pathType: ImplementationSpecific
+----
+
+.. For a new schema, follow this example:
+
++
+----
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: netapp-acc-ingress
+  namespace: [netapp-acc or custom namespace]
+spec:
+  ingressClassName: [class name for nginx controller]
+  tls:
+  - hosts:
+    - <ACC address>
+    secretName: [tls secret name]
+  rules:
+  - host: <ACC address>
+    http:
+      paths:
+        - path:
+          backend:
+            service:
+              name: traefik
+              port:
+                number: 80
+          pathType: ImplementationSpecific
+----
+
+.Steps for OpenShift ingress controller
+
+. Procure your certificate and get the key, certificate, and CA files ready for use by the OpenShift route.
+. Create the OpenShift route:
++
+----
+oc create route edge --service=traefik
+--port=80 -n [netapp-acc or custom namespace]
+--insecure-policy=Redirect --hostname=<ACC address>
+--cert=cert.pem --key=key.pem
+----
+
+=== Verify ingress set up
+
+You can verify the ingress set up before you continue.
+
+. Ensure that Traefik has changed to `clusterIP` from Loadbalancer:
++
+----
+kubectl get service traefik -n [netapp-acc or custom namespace]
+----
+
+. Verify routes in Traefik:
+
+----
+Kubectl get ingressroute ingressroutetls -n [netapp-acc or custom namespace]
+-o yaml | grep "Host("
+----
++
+NOTE: The result should be empty.
