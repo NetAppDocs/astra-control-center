@@ -40,7 +40,7 @@ The Astra Control Center upgrade process guides you through the following high-l
 * <<Add the images to your local registry>>
 * <<Install the updated Astra Control Center operator>>
 * <<Upgrade Astra Control Center>>
-* <<(Optional) Upgrade third-party services>>
+* <<Upgrade third-party services (Optional)>>
 * <<Verify system status>>
 * <<Set up ingress for load balancing>>
 
@@ -245,7 +245,7 @@ conditions:
 . If the operator did not update the Cert-manager, upgrade third-party services, next.
 
 
-== (Optional) Upgrade third-party services
+== Upgrade third-party services (Optional)
 The third-party services Traefik and Cert-manager are not upgraded during earlier upgrade steps. You can optionally upgrade them using the procedure described here or retain existing service versions if your system requires it.
 
 * *Traefik*: By default, Astra Control Center manages the lifecycle of the Traefik deployment.  Setting `externalTraefik` to `false` (default) indicates that no external Traefik exists in the system and and Traefik is being installed and managed by Astra Control Center. In this case,  `externalTraefik` is set to `false`.
@@ -289,6 +289,10 @@ crds:
 == Set up ingress for load balancing
 
 You can set up a Kubernetes ingress object that manages external access to the services, such as load balancing in a cluster.
+
+* Default upgrade uses the generic ingress deployment. In this case, you will also need to set up an ingress controller or ingress resource.
+
+* If you don't want an ingress controller and want to retain what you already have, set `ingressType` to `AccTraefik`.
 
 NOTE: For additional details about the service type of "LoadBalancer" and ingress, see link:../get-started/requirements.html[Requirements].
 
@@ -372,7 +376,7 @@ spec:
 +
 ----
 oc create route edge --service=traefik
---port=80 -n [netapp-acc or custom namespace]
+--port=web -n [netapp-acc or custom namespace]
 --insecure-policy=Redirect --hostname=<ACC address>
 --cert=cert.pem --key=key.pem
 ----
