@@ -73,6 +73,7 @@ When Astra Control manages a cluster, it keeps track of the cluster's default St
 
 .What you'll need
 
+
 IMPORTANT: Before you add a cluster, review and perform the necessary link:add-cluster-reqs.html[prerequisite tasks^].
 
 .Steps
