@@ -77,7 +77,10 @@ NOTE: If you plan to add a second OpenShift operational environment as a managed
 When hosting Astra Control Center on a Tanzu Kubernetes Grid cluster, keep in mind the following considerations.
 
 * Configuration with Trident
+// DOC-4067
 * PodSecurityPolicy: document what RBAC components we need in order to enable the functions ACC relies on.
+//DOC-4056
+* Disable the Tanzu Kubernetes Grid default storage class enforcement on any application clusters intended to be managed by Astra Control. You can do this by editing the TanzuKubernetesCluster resource on the namespace cluster.
 
 NOTE: The default VMware Tanzu Kubernetes Grid configuration file token expires ten hours after deployment. If you use Tanzu Kubernetes Grid, you must generate a Tanzu Kubernetes Cluster configuration file with a non-expiring token to prevent connection issues between Astra Control Center and managed application clusters. For instructions, visit https://docs.vmware.com/en/VMware-NSX-T-Data-Center/3.2/nsx-application-platform/GUID-52A52C0B-9575-43B6-ADE2-E8640E22C29F.html[the VMware NSX-T Data Center Product Documentation.]
 
