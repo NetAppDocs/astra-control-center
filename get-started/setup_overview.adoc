@@ -118,10 +118,10 @@ NOTE: The managed cluster has a supported backend attached to it that can be dis
 +
 IMPORTANT: After you add your Kubernetes app cluster for Astra Data Store and it is managed by Astra Control, the cluster appears as `unmanaged` in the list of discovered backends. You must next add the compute cluster that contains Astra Data Store and underlies the Kubernetes app cluster. You can do this from *Backends* in the UI. Select the Actions menu for the cluster, select `Manage`, and link:../get-started/setup_overview.html#add-cluster[add the cluster]. After the cluster state of `unmanaged` changes to the name of the Kubernetes cluster, you can proceed with adding a backend.
 
-* You have uploaded the version of the installation bundle you intend to deploy to a location that is accessible to Astra Control.
+* You have link:../use/manage-connections.html[uploaded the version of the installation bundle you intend to deploy] to a location that is accessible to Astra Control.
 //add reference to package management topic
 
-* You have uploaded the Astra Data Store license for you deployment to a location that is accessible to Astra Control.
+* You have uploaded the Astra Data Store license for your deployment to a location that is accessible to Astra Control.
 
 .Options
 
