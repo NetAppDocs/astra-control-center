@@ -26,7 +26,7 @@ Ensure that the operating environment you choose to host Astra Control Center me
 |===
 |Component |Requirement
 
-|Backend ONTAP storage capacity
+|ONTAP backend storage capacity
 |At least 300GB available
 
 //|Controller nodes
@@ -104,8 +104,6 @@ The Kubernetes cluster you use for Astra Control Center should already be deploy
 
 //=== VMWare Tanzu Kubernetes Grid considerations
 //Consider the following points if you host Astra Control Center on a VMware Tanzu Kubernetes Grid cluster.
-
-
 
 == Application cluster requirements
 
@@ -194,9 +192,9 @@ If you want to try Astra Control Center, you can link:setup_overview.html#add-a-
 
 //Astra Control Center uses a service of the type "LoadBalancer" (svc/traefik in the Astra Control Center namespace), and requires that it be assigned an accessible external IP address. If load balancers are permitted in your environment and you don't already have one configured, you can use https://docs.netapp.com/us-en/netapp-solutions/containers/rh-os-n_LB_MetalLB.html#installing-the-metallb-load-balancer[MetalLB^] to automatically assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
 
-You can choose the type of network ingress Astra Control Center uses. By default, Astra Control Center deploys the Astra Control Center gateway (service/treafik) as a cluster-wide resource. Astra Control Center also supports using a service load balancer, if they are permitted in your environment. If you would rather use a service load balancer and you don’t already have one configured, you can use MetalLB to automatically assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
+You can choose the type of network ingress Astra Control Center uses. By default, Astra Control Center deploys the Astra Control Center gateway (service/traefik) as a cluster-wide resource. Astra Control Center also supports using a service load balancer, if they are permitted in your environment. If you would rather use a service load balancer and you don’t already have one configured, you can use the MetalLB load balancer to automatically assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
 
-NOTE: If you are hosting Astra Control Center on a Tanzu Kubernetes Grid cluster, use the `kubectl get nsxlbmonitors -A` command check to see if you already have a service monitor configured to accept ingress traffic. If one exists, you should not install metalLB, as the existing service monitor will override any new load balancer configuration.
+NOTE: If you are hosting Astra Control Center on a Tanzu Kubernetes Grid cluster, use the `kubectl get nsxlbmonitors -A` command to see if you already have a service monitor configured to accept ingress traffic. If one exists, you should not install MetalLB, because the existing service monitor will override any new load balancer configuration.
 
 //NOTE: MetalLB version 0.11.0 is not supported.
 
