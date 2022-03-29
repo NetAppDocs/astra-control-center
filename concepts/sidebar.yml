@@ -7,6 +7,8 @@ entries:
     url: /concepts/architecture.html
   - title: Data protection
     url: /concepts/data-protection.html
+  - title: Licensing
+    url: /concepts/licensing.html
   - title: Validated vs standard apps
     url: /concepts/validated-vs-standard.html
   - title: Storage classes and PV size
