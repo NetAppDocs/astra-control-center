@@ -11,3 +11,5 @@ entries:
     url: /concepts/validated-vs-standard.html
   - title: Storage classes and PV size
     url: /concepts/choose-class-and-size.html
+  - title: User roles and namespaces
+    url: /concepts/user-roles-namespaces.html
