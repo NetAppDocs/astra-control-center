@@ -41,7 +41,7 @@ To clone apps to a different cluster, you need a default bucket. When you add yo
 . Select *Applications*.
 . Do one of the following:
 +
-* Select the drop-down list in the *Actions* column for the desired app.
+* Select the Options menu in the *Actions* column for the desired app.
 * Select the name of the desired app, and select the status drop-down list at the top right of the page.
 . Select *Clone*.
 //+

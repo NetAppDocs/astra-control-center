@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: use/manage-buckets.html
 keywords: how to set up object storage in astra, how to set up astra buckets, s3, astra, setting up astra control, how to set up astra control center, kubernetes
-summary: Adding object store bucket providers is essential if you want to back up your applications and persistent storage of if you want to clone applications across clusters.
+summary: Adding object store bucket providers is essential if you want to back up your applications and persistent storage or if you want to clone applications across clusters.
 ---
 
 = Manage buckets
@@ -12,11 +12,13 @@ summary: Adding object store bucket providers is essential if you want to back u
 
 An object store bucket provider is essential if you want to back up your applications and persistent storage or if you want to clone applications across clusters. Using Astra Control Center, add an object store provider as your off-cluster, backup destination for your apps.
 
+
+
 You don’t need a bucket if you are cloning your application configuration and persistent storage to the same cluster.
 
 // Cloning to a different cluster using an existing backup or snapshot  - requires a bucket.
 
-Use any of the following bucket providers:
+Use one of the following Amazon Simple Storage Service (S3) bucket providers:
 
 * NetApp ONTAP S3
 * NetApp StorageGRID S3
@@ -26,9 +28,6 @@ NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket pr
 
 // TIP: Ensure you use a single bucket type; otherwise, mixing bucket types can cause errors.
 
-
-You cannot delete a bucket; however, you can edit it.
-// Cannot delete a bucket using UI or API.
 
 A bucket can be in one of these states:
 
@@ -42,6 +41,7 @@ You can do these tasks related to managing buckets:
 
 * link:../get-started/setup_overview.html#add-a-bucket[Add a bucket]
 * <<Edit a bucket>>
+* <<Remove a bucket>>
 
 NOTE: S3 buckets in Astra Control Center do not report available capacity. Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
 
@@ -71,12 +71,36 @@ NOTE: When you add a bucket, select the correct bucket provider and provide the 
 
 .Steps
 .	From left navigation, select *Buckets*.
-. From the Actions menu, select *Edit*.
+. From the Options menu in the *Actions* column, select *Edit*.
 . Change any information other than the bucket type.
 +
 TIP: You can't modify the bucket type.
 
 . Select *Update*.
+
+== Remove a bucket
+
+You can remove a bucket that is no longer in use or is not healthy. You might want to do this to keep your object store configuration simple and up-to-date.
+
+You cannot remove a default bucket. If you want to remove that bucket, first select another bucket as the default.
+
+.What you'll need
+
+* You should check to ensure that there are no running or completed backups for this bucket before you begin.
+* You should check to ensure that the bucket is not being used for any scheduled backups.
+
+If there are, you will not be able to continue.
+
+
+.Steps
+. From left navigation, select *Buckets*.
+. From the *Actions* menu, select *Remove*.
+
++
+NOTE: Astra Control ensures first that there are no schedule policies using the bucket for backups and that there are no active backups in the bucket you are about to remove.
+
+. Type "remove" to confirm the action.
+. Select *Yes, remove bucket*.
 
 == Find more information
 
