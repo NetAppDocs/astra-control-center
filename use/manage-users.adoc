@@ -12,6 +12,32 @@ summary: Add users to your Astra Control Center system and remove users that sho
 
 You can add, remove, and edit users of your Astra Control Center installation using the Astra Control Center UI. You can use the Astra Control UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to manage users.
 
+== Invite users
+
+Account Owners and Admins can invite new users to Astra Control Center.
+
+.Steps
+
+. In the *Manage Your Account* navigation area, select *Account*.
+. Select the *Users* tab.
+. Select *Invite User*.
+. Enter the user's name and email address.
+. Select a user role with the appropriate system permissions.
++
+Each role provides the following permissions:
++
+
+* A *Viewer* can view resources.
+* A *Member* has Viewer role permissions and can manage apps and clusters, but cannot unmanage apps or clusters, or delete snapshots or backups.
+* An *Admin* has Member role permissions and can add and remove any other users except the Owner.
+* An *Owner* has Admin role permissions and can add and remove any user accounts.
+. To add constraints to a user with a Member or Viewer role, enable the *Restrict role to constraints* check box.
++
+For more information on adding constraints, see link:manage-roles.html[Manage roles].
+. Select *Invite users*.
++
+The user receives an email informing them that they’ve been invited to Astra Control Center. The email includes temporary password, which they'll need to change upon first login.
+
 == Add users
 
 Account Owners and Admins can add more users to the Astra Control Center installation.
@@ -34,6 +60,9 @@ Each role provides the following permissions:
 * A *Member* has Viewer role permissions and can manage apps and clusters, but cannot unmanage apps or clusters, or delete snapshots or backups.
 * An *Admin* has Member role permissions and can add and remove any other users except the Owner.
 * An *Owner* has Admin role permissions and can add and remove any user accounts.
+. To add constraints to a user with a Member or Viewer role, enable the *Restrict role to constraints* check box.
++
+For more information on adding constraints, see link:manage-roles.html[Manage roles].
 . Select *Add*.
 
 //image:screenshot-invite-users.gif[A screenshot of the Invite Users screen where you enter a name, email address, and select a role.]
