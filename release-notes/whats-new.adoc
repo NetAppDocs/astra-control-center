@@ -18,7 +18,8 @@ Updated release of Astra Control Center.
 
 .New features and support
 
-*
+* link:../get-started/requirements.html[Additional support for upstream Kubernetes 1.22 and 1.23, Red Hat OpenShift 4.9, and Rancher Kubernetes Engine (RKE) 1.3.3]
+* link:../get-started/requirements.html#service-type-loadbalancer-for-on-premises-kubernetes-clusters[Support for additional load balancers, including metalLB 0.11.0].
 
 .Resolved issues
 * link:../release-notes/resolved-issues.html[Resolved issues for this release]

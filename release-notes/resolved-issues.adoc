@@ -12,29 +12,57 @@ summary: Known issues identify problems that might prevent you from using this r
 
 These issues have been corrected in this release of the product.
 
-== Extra backups are retained as part of scheduled backup
-//ASTRACTL-10069/DOC-3609
-Sometimes one or more backups in Astra Control Center are retained beyond the number specified to be retained in the backup schedule. These extra backups should be deleted as part of a scheduled backup but are not deleted and are stuck in a `pending` state.
+== Selecting a bucket provider type with credentials for another type causes data protection failures
+//DOC-3560/ASTRACTL-9574/ASTRACTL-9504/Q2 and PI4
+When you add a bucket, select the correct bucket provider and enter the right credentials for that provider. For example, the UI accepts NetApp ONTAP S3 as the type and accepts StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail.
 
-== Backup or clone fails for apps using PVCs with decimal units in Astra Control Center
-//ASTRACTL-9948/DOC-3612
-Volumes created with decimal units fail using the Astra Control Center backup or clone process.
+== Custom app execution hook scripts time out and cause post-snapshot scripts not to execute
+//ASTRACTL-12927/DOC-3909
+If an execution hook takes longer than 25 minutes to run, the hook will fail, creating an event log entry with a return code of "N/A". Any affected snapshot will timeout and be marked as failed, with a resulting event log entry noting the timeout.
 
-== Astra Control Center UI slow to show changes to app resources such as persistent volume changes
-// DOC-3563/ASTRACTL-9540/AD AH
-After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. This delay in the UI can also occur when any app resources are added or modified. In this case, a data protection operation is successful within minutes and you can use the management software for the storage backend to confirm the change in volume size.
+Because execution hooks often reduce or completely disable the functionality of the application they are running against, you should always try to minimize the time your custom execution hooks take to run.
 
-== Incorrect cluster role binding created by Astra Control Center custom resource definition during installation
-//ASTRACTL-11352/DOC-3726
-The patch to correct cluster role binding during installation is no longer required in this release.
+== Simultaneous app restore operations in the same namespace can fail
+//DOC-3910 and ASTRACTL-13362
+If you try to restore one or more individually managed apps within a namespace simultaneously, the restore operations can fail after a long period of time. As a workaround, restore each app one at a time.
 
-== ASUP collection stuck in a generating or uploading state
-//DOC-3813/ASTRACTL-12325
-If an ASUP pod is stopped or restarted, an ASUP collection might become stuck in a generating or uploading state.
+== Upgrade fails if source version uses a container image registry that does not require authentication and target version uses a container image registry that requires authentication
+//DOC-3919 and ASTRACTL-13466
+If you upgrade an Astra Control Center system that uses a registry that doesn't require authentication to a newer version that uses a registry that requires authentication, the upgrade fails. As a workaround, perform the following steps:
 
-== Operator-deployed apps and namespaces
-//DOC-3899/ASTRACTL-13098
-An operator and the app it deploys must use the same namespace. Astra Control supports only one operator-deployed app per namespace.
+. Log in to a host that has network access to the Astra Control Center cluster.
+. Ensure that the host has the following configuration:
++
+* `kubectl` version 1.19 or later is installed
+* The KUBECONFIG environment variable is set to the kubeconfig file for the Astra Control Center cluster
+
+. Execute the following script:
++
+[source,shell]
+----
+
+namespace="<netapp-acc>"
+statefulsets=("polaris-vault" "polaris-mongodb" "influxdb2" "nats" "loki")
+for ss in ${statefulsets[@]}; do
+	existing=$(kubectl get -n ${namespace} statefulsets.apps ${ss} -o jsonpath='{.spec.template.spec.imagePullSecrets}')
+	if [ "${existing}" = "[{}]" ] || [ "${existing}" = "[{},{},{}]" ]; then
+		kubectl patch -n ${namespace} statefulsets.apps ${ss} --type merge --patch '{"spec": {"template": {"spec": {"imagePullSecrets": []}}}}'
+	else
+		echo "${ss} not patched"
+	fi
+done
+----
++
+You should see output similar to the following:
++
+----
+statefulset.apps/polaris-vault patched
+statefulset.apps/polaris-mongodb patched
+statefulset.apps/influxdb2 patched
+statefulset.apps/nats patched
+statefulset.apps/loki patched
+----
+. Proceed with the upgrade using the link:../use/upgrade-acc.html#add-the-images-to-your-local-registry[Astra Control Center upgrade instructions].
 
 == Find more information
 
