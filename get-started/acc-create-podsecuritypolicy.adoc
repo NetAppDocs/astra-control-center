@@ -10,7 +10,7 @@ summary: You need to create a less restrictive pod security policy to enable Ast
 :icons: font
 :imagesdir: ../media/get-started/
 
-Astra Control needs to create and manage Kubernetes pods on the clusters it manages. You need to create a less restrictive pod security policy to enable Astra Control to create and manage these pods. You then need to create a new role for the security policy and bind it to the Astra Control service account.
+Astra Control needs to create and manage Kubernetes pods on the clusters it manages. If your cluster uses a restrictive pod security policy that doesn't allow privileged pod creation or allow processes within the pod containers to run as the root user, you need to create a less restrictive pod security policy to enable Astra Control to create and manage these pods. 
 
 .Steps
 

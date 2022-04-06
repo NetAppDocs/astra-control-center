@@ -133,7 +133,7 @@ metadata:
 ----
 kubectl apply -f astracontrol-service-account.yaml
 ----
-. Create a custom pod security policy for the cluster that enables Astra Control to create and manage pods. For instructions, see link:acc-create-podsecuritypolicy.html[Create a custom pod security policy].
+. (Optional) If your cluster uses a restrictive pod security policy that doesn't allow privileged pod creation or allow processes within the pod containers to run as the root user, create a custom pod security policy for the cluster that enables Astra Control to create and manage pods. For instructions, see link:acc-create-podsecuritypolicy.html[Create a custom pod security policy].
 . Grant cluster admin permissions as follows:
 .. Create a `ClusterRoleBinding` file called `astracontrol-clusterrolebinding.yaml`.
 +
