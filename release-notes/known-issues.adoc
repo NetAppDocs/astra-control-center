@@ -40,6 +40,10 @@ The following known issues affect the current release:
 
 .Storage backends
 * <<AWS Elastic Container Registry (ECR) token expires after 12 hours and causes cross-cluster clone operations to fail>>
+* <<Astra Control cannot access monitoring data from a cluster containing CVO with AWS backend>>
+
+.Role-based access control
+* <<A user with RBAC constraints can clone or restore but cannot access the namespace due to insufficient privileges>>
 
 .Other issues
 * <<500 internal service error when attempting Trident app data management>>
@@ -102,7 +106,19 @@ After you complete these steps, the credential associated with the cluster is up
 
 == AWS Elastic Container Registry (ECR) token expires after 12 hours and causes cross-cluster clone operations to fail
 //DOC-4102/POLARIS-2485
-To correct this issue, authenticate with the ECR again and generate a new secret for clone operations to resume successfully.
+This issue occurs when managing a storage backend from Cloud Volumes ONTAP (CVO) configured for AWS. To correct this issue, authenticate with the ECR again and generate a new secret for clone operations to resume successfully.
+
+== Astra Control cannot access monitoring data from a cluster containing CVO with AWS backend
+//DOC-4102/POLARIS-2485
+The issue is caused when the cluster you try to discover and manage using Astra Control does not have AWS ECR access.
+
+== A user with RBAC constraints can clone or restore but cannot access the namespace due to insufficient privileges
+//DOC-4137/ASTRACTL-16344/ASTRACTL-16131
+Any user with RBAC constraints by namespace name/ID or by namespace labels can clone or restore to a new namespace on the same cluster or to any other cluster in their organization's account. However, the same user cannot access that namespace until the account admin/owner grants access. As a workaround, after a new namespace is created by a clone or restore operation, the account admin/owner can edit the member user account and update role constraints for the affected user.
+
+== A user with RBAC constraints can restore a deleted namespace app but cannot access the restored namespace app due to insufficient privileges
+//DOC-4137/ASTRACTL-16274
+Any user with RBAC constraints by namespace name/ID or by namespace labels can perform an in-place restore of a deleted namespace app, but the same user cannot access the restored app until the account admin/owner grants the user access. As a workaround, after a namespace app is restored to the original location, the account admin/owner can edit the member user account and update role constraints for the affected user.
 
 == 500 internal service error when attempting Trident app data management
 //DOC-3903/ASTRA-13162/PI4
