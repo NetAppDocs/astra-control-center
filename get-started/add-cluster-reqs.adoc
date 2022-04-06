@@ -132,52 +132,7 @@ metadata:
 ----
 kubectl apply -f astracontrol-service-account.yaml
 ----
-. Create a PodSecurityPolicy for the cluster that is less restrictive than the default, so that Astra Control Center can create and update pods:
-+
-----
-apiVersion: policy/v1beta1
-kind: PodSecurityPolicy
-metadata:
-  name: astracontrol
-  annotations:
-    seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
-spec:
-  privileged: true
-  allowPrivilegeEscalation: true
-  allowedCapabilities:
-  - '*'
-  volumes:
-  - '*'
-  hostNetwork: true
-  hostPorts:
-  - min: 0
-    max: 65535
-  hostIPC: true
-  hostPID: true
-  runAsUser:
-    rule: 'RunAsAny'
-  seLinux:
-    rule: 'RunAsAny'
-  supplementalGroups:
-    rule: 'RunAsAny'
-  fsGroup:
-    rule: 'RunAsAny'
-----
-. Create a new role for the PodSecurityPolicy:
-+
-----
-kubectl-admin create role psp:astracontrol \
-    --verb=use \
-    --resource=podsecuritypolicy \
-    --resource-name=astracontrol
-----
-. Bind the role to the service account:
-+
-----
-kubectl-admin create rolebinding default:psp:astracontrol \
-    --role=psp:astracontrol \
-    --serviceaccount=astracontrol-service-account:default
-----
+. Create a custom pod security policy for the cluster that enables Astra Control to create and manage pods. For instructions, see link:acc-create-podsecuritypolicy.html[Create a custom pod security policy].
 . Grant cluster admin permissions as follows:
 .. Create a `ClusterRoleBinding` file called `astracontrol-clusterrolebinding.yaml`.
 +
