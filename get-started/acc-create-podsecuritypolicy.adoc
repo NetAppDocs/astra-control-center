@@ -48,7 +48,7 @@ spec:
 ----
 . Create a new role for the pod security policy.
 +
-[source,bash]
+[source,sh]
 ----
 kubectl-admin create role psp:astracontrol \
     --verb=use \
