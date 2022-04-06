@@ -15,21 +15,33 @@ Known issues identify problems that might prevent you from using this release of
 
 The following known issues affect the current release:
 
+.Apps
 * <<App with user-defined label goes into "removed" state>>
 * <<Unable to stop running app backup>>
+
+.Backup, restore and clone
 * <<During app restore from backup Trident creates a larger PV than the original PV>>
 * <<Clone performance impacted by large persistent volumes>>
 * <<App clones fail using a specific version of PostgreSQL>>
 * <<App clones fail when using Service Account level OCP Security Context Constraints (SCC)>>
-* <<Reusing buckets between instances of Astra Control Center causes failures>>
-* <<Backups and snapshots might not be retained during removal of an Astra Control Center instance>>
 * link:known-issues.html#clone-operation-cant-use-other-buckets-besides-the-default[Clone operation can't use other buckets besides the default]
+
+.Buckets
+* <<Reusing buckets between instances of Astra Control Center causes failures>>
+
+.Astra Control uninstall and removal
+* <<Backups and snapshots might not be retained during removal of an Astra Control Center instance>>
+* <<Uninstall of Astra Control Center fails to clean up the monitoring-operator pod on the managed cluster>>
+* <<Uninstall of Astra Control Center fails to clean up Traefik CRDs>>
+
+.Clusters
 * <<Managing a cluster with Astra Control Center fails when default kubeconfig file contains more than one context>>
+* <<Cluster is in `removed` state although cluster and network are otherwise working as expected>>
+
+.Other issues
 * <<500 internal service error when attempting Trident app data management>>
 * link:known-issues.html#cant-determine-asup-tar-bundle-status-in-scaled-environment[Can't determine ASUP tar bundle status in scaled environment]
 * <<Snapshots eventually begin to fail when using external-snapshotter version 4.2.0>>
-* <<Uninstall of Astra Control Center fails to clean up the monitoring-operator pod on the managed cluster>>
-* <<Uninstall of Astra Control Center fails to clean up Traefik CRDs>>
 
 == App with user-defined label goes into "removed" state
 //ASTRACTL-9643/DOC-3415/Q2
@@ -75,6 +87,15 @@ During an app backup or app restore, you can optionally specify a bucket ID. An 
 == Managing a cluster with Astra Control Center fails when default kubeconfig file contains more than one context
 //ASTRACTL-8872/DOC-3612/Q2 and PI4
 You cannot use a kubeconfig with more than one cluster and context in it. See the link:https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Astra/Managing_cluster_with_Astra_Control_Center_may_fail_when_using_default_kubeconfig_file_contains_more_than_one_context[knowledgebase article] for more information.
+
+== Cluster is in `removed` state although cluster and network are otherwise working as expected
+//DOC-3613/Q2 and PI4
+If a cluster is in `removed` state yet cluster and network connectivity appears healthy (external attempts to access the cluster using Kubernetes APIs are successful), the kubeconfig you provided to Astra Control might no longer be valid. This can be due to certificate rotation or expiration on the cluster. To correct this issue, update the credentials associated with the cluster in Astra Control using the link:https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API]:
+
+. Run a POST call to add an updated kubeconfig file to the `/credentials` endpoint and retrieve the assigned `id` from the response body.
+. Run a PUT call from the `/clusters` endpoint using the appropriate cluster ID and set the `credentialID` to the `id` value from the previous step.
+
+After you complete these steps, the credential associated with the cluster is updated and the cluster should reconnect and update its state to `available`.
 
 == 500 internal service error when attempting Trident app data management
 //DOC-3903/ASTRA-13162/PI4
