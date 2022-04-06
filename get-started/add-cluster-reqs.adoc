@@ -120,6 +120,7 @@ Adjust the name and namespace as needed. If changes are made here, you should ap
 *astracontrol-service-account.yaml*
 ----
 +
+[source,yaml]
 ----
 apiVersion: v1
 kind: ServiceAccount
@@ -144,6 +145,7 @@ Adjust any names and namespaces modified when creating the service account as ne
 *astracontrol-clusterrolebinding.yaml*
 ----
 +
+[source,yaml]
 ----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -188,6 +190,7 @@ The indices for each element in the `secrets` array begin with 0. In the above e
 *create-kubeconfig.sh*
 ----
 +
+[source,sh]
 ----
 # Update these to match your environment.
 # Replace TOKEN_INDEX with the correct value

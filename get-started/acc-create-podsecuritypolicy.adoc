@@ -16,6 +16,7 @@ Astra Control needs to create and manage Kubernetes pods on the clusters it mana
 
 . Create a pod security policy for the cluster that is less restrictive than the default, and save it in a file. For example:
 +
+[source,yaml]
 ----
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
