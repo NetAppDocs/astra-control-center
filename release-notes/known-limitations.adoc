@@ -66,7 +66,7 @@ Note that Astra Control might not be able to clone an operator that is designed 
 
 == In-place restore operations of apps that use a certification manager  fail
 //ASTRACTL-16478/DOC-4152
-This release of Astra Control Center does not support in-place restore of apps with certification managers. Cloning operations in this scenario are supported.
+This release of Astra Control Center does not support in-place restore of apps with certification managers. Cloning operations for apps with certification managers, however, are supported.
 
 == OLM-enabled and cluster-scoped operator deployed apps not supported
 //DOC-3553/ASTRACTL-9490/AD AH/Q2 and PI4
