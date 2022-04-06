@@ -1,0 +1,65 @@
+---
+sidebar: sidebar
+permalink: get-started/acc-create-podsecuritypolicy.html
+keywords: Create podsecurity policy, pod, security, policy, Astra Control, kubernetes
+summary: You need to create a less restrictive pod security policy to enable Astra Control to create and update pods on managed clusters.
+---
+
+= Create a custom pod security policy
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/get-started/
+
+Astra Control needs to create and manage Kubernetes pods on the clusters it manages. If your cluster uses a restrictive pod security policy that doesn't allow privileged pod creation or allow processes within the pod containers to run as the root user, you need to create a less restrictive pod security policy to enable Astra Control to create and manage these pods.
+
+.Steps
+
+. Create a pod security policy for the cluster that is less restrictive than the default, and save it in a file. For example:
++
+[source,yaml]
+----
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: astracontrol
+  annotations:
+    seccomp.security.alpha.kubernetes.io/allowedProfileNames: '*'
+spec:
+  privileged: true
+  allowPrivilegeEscalation: true
+  allowedCapabilities:
+  - '*'
+  volumes:
+  - '*'
+  hostNetwork: true
+  hostPorts:
+  - min: 0
+    max: 65535
+  hostIPC: true
+  hostPID: true
+  runAsUser:
+    rule: 'RunAsAny'
+  seLinux:
+    rule: 'RunAsAny'
+  supplementalGroups:
+    rule: 'RunAsAny'
+  fsGroup:
+    rule: 'RunAsAny'
+----
+. Create a new role for the pod security policy.
++
+[source,sh]
+----
+kubectl-admin create role psp:astracontrol \
+    --verb=use \
+    --resource=podsecuritypolicy \
+    --resource-name=astracontrol
+----
+. Bind the new role to the service account.
++
+[source,sh]
+----
+kubectl-admin create rolebinding default:psp:astracontrol \
+    --role=psp:astracontrol \
+    --serviceaccount=astracontrol-service-account:default
+----
