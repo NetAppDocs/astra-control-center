@@ -10,11 +10,28 @@ summary: NetApp periodically updates Astra Control Center to bring you new featu
 :icons: font
 :imagesdir: ../media/release-notes/
 
-We're pleased to announce the latest 21.12 release of Astra Control Center.
+We're pleased to announce the latest 22.04 release of Astra Control Center.
+
+== 27 April 2022 (22.04)
+
+.New features and support
+
+* link:../get-started/requirements.html[Additional support for upstream Kubernetes 1.22 and 1.23, Red Hat OpenShift 4.9, and Rancher Kubernetes Engine (RKE) 1.3.3]
+* link:../get-started/requirements.html#service-type-loadbalancer-for-on-premises-kubernetes-clusters[Support for additional load balancers, including metalLB 0.11.0]
+* link:../concepts/user-roles-namespaces.html[Namespace role-based access control (RBAC)]
+* link:../get-started/add-first-cluster.html#manage-a-private-cluster[Hybrid access for private clusters in Azure Kubernetes Service (AKS)]
+* link:../get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Generic ingress enablement for resource consumption by various ingress controllers]
+* link:../use/manage-buckets.html#remove-a-bucket[Bucket removal from Astra Control]
+
+.Resolved issues
+* link:../release-notes/resolved-issues.html[Resolved issues for this release]
+
+.Known issues and limitations
+* link:../release-notes/known-issues.html[Known issues for this release]
+* link:../release-notes/known-issues-ads.html[Known issues with Astra Data Store preview and this Astra Control Center release]
+* link:../release-notes/known-limitations.html[Known limitations for this release]
 
 == 14 December 2021 (21.12)
-
-Updated release of Astra Control Center.
 
 .New features and support
 

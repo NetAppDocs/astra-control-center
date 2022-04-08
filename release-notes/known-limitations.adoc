@@ -64,14 +64,9 @@ Astra Control supports apps installed with namespace-scoped operators. These ope
 
 Note that Astra Control might not be able to clone an operator that is designed with a “pass-by-reference” architecture (for example, the CockroachDB operator). During these types of cloning operations, the cloned operator attempts to reference Kubernetes secrets from the source operator despite having its own new secret as part of the cloning process. The clone operation might fail because Astra Control is unaware of the Kubernetes secrets in the source operator.
 
-== Cluster is in `removed` state although cluster and network are otherwise working as expected
-//DOC-3613/Q2 and PI4
-If a cluster is in `removed` state yet cluster and network connectivity appears healthy (external attempts to access the cluster using Kubernetes APIs are successful), the kubeconfig you provided to Astra Control might no longer be valid. This can be due to certificate rotation or expiration on the cluster. To correct this issue, update the credentials associated with the cluster in Astra Control using the link:https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API]:
-
-. Run a POST call to add an updated kubeconfig file to the `/credentials` endpoint and retrieve the assigned `id` from the response body.
-. Run a PUT call from the `/clusters` endpoint using the appropriate cluster ID and set the `credentialID` to the `id` value from the previous step.
-
-After you complete these steps, the credential associated with the cluster is updated and the cluster should reconnect and update its state to `available`.
+== In-place restore operations of apps that use a certification manager fail
+//ASTRACTL-16478/DOC-4152
+This release of Astra Control Center does not support in-place restore of apps with certification managers. Cloning operations for apps with certification managers, however, are supported.
 
 == OLM-enabled and cluster-scoped operator deployed apps not supported
 //DOC-3553/ASTRACTL-9490/AD AH/Q2 and PI4
@@ -84,10 +79,6 @@ If you clone an app between clusters, the source and destination clusters must b
 == S3 buckets in Astra Control Center do not report available capacity
 //DOC-3561/ASTRACTL-9425/Q2 and PI4
 Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
-
-== metalLB 0.11.0 is not supported
-//DOC-3872/ASTRACTL-12718/Q2 and PI4
-metalLB 0.11.0 is not a supported load balancer for Astra Control Center. For more information regarding supported load balancers, see link:../get-started/requirements.html#service-type-loadbalancer-for-on-premises-kubernetes-clusters[Astra Control Center requirements].
 
 == Apps deployed with Helm 2 are not supported
 //From requirements section
