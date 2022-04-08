@@ -19,5 +19,7 @@ entries:
         url: /get-started/add-cluster-reqs.html
       - title: Add a custom TLS certificate
         url: /get-started/add-custom-tls-certificate.html
+      - title: Create a custom pod security policy
+        url: /get-started/acc-create-podsecuritypolicy.html
   - title: FAQ
     url: /get-started/faq.html

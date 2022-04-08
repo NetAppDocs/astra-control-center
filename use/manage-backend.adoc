@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: use/manage-backend.html
-keywords: how to use astra control, what is astra storage, how to set up astra storage backend, ontap storage in astra, kubernetes,
+keywords: how to use astra control, what is astra storage, how to set up astra storage backend, ontap storage in astra, backend storage in astra 
 summary: Add storage for your on-premises Kubernetes applications. Astra Control discovers and uses the already-deployed resources, including Trident, ONTAP, and associated storage classes.
 ---
 
@@ -20,6 +20,7 @@ You can complete the following tasks related to managing a storage backend:
 * link:../get-started/setup_overview.html#add-a-storage-backend[Add a storage backend]
 * <<View storage backend details>>
 * <<Unmanage a storage backend>>
+* <<Remove a storage backend>>
 
 //
 //== Add a storage backend
@@ -86,9 +87,33 @@ You can unmanage the backend.
 .Steps
 .	From left navigation, select *Backends*.
 . Select the storage backend.
-. From the Actions menu, select *Unmanage*.
-. Type "unmanage" to confirm the removal.
-. Select *Yes, remove storage backend*.
+. From the Options menu in the *Actions* column, select *Unmanage*.
+. Type "unmanage" to confirm the action.
+. Select *Yes, unmanage storage backend*.
+
+== Remove a storage backend
+
+You can remove a storage backend that is no longer in use. You might want to do this to keep your configuration simple and up-to-date.
+
+TIP: If you are removing an Astra Data Store backend, it must not have been created by vCenter.
+
+.What you'll need
+* Ensure that the storage backend is unmanaged.
+* Ensure that the storage backend does not have any volumes associated with the Astra Data Store cluster.
+
+.Steps
+.	From left navigation, select *Backends*.
+. If the backend is managed, unmanage it.
+.. Select *Managed*.
+.. Select the storage backend.
+.. From the  *Actions* option, select *Unmanage*.
+.. Type "unmanage" to confirm the action.
+.. Select *Yes, unmanage storage backend*.
+. Select *Discovered*.
+.. Select the storage backend.
+.. From the  *Actions* option, select *Remove*.
+.. Type "remove" to confirm the action.
+.. Select *Yes, remove storage backend*.
 
 == Find more information
 

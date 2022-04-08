@@ -23,3 +23,7 @@ You can convert an evaluation license to a full license, or you can update an ex
 . Select *Add*.
 
 The *Account* > *Licenses* page displays the license information, expiration date, license serial number, account ID, and CPU units used.
+
+== For more information
+
+* link:../concepts/licensing.html[Astra Control Center licensing]

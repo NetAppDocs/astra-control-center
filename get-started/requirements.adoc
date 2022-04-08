@@ -16,16 +16,17 @@ Get started by verifying the readiness of your operational environment, applicat
 
 Astra Control Center requires one of the following types of operational environments:
 
-* Red Hat OpenShift Container Platform 4.6.8, 4.7, or 4.8
-* Rancher 2.5
-* Kubernetes 1.19 to 1.21 (including 1.21.x)
+* Kubernetes 1.20 to 1.23
+* Rancher 2.5.8, 2.5.9, or 2.6
+* Red Hat OpenShift Container Platform 4.6.8, 4.7, 4.8, or 4.9
+* VMware Tanzu Kubernetes Grid 1.12.2 or 1.4
 
 Ensure that the operating environment you choose to host Astra Control Center meets the basic resource requirements outlined in the environment's official documentation. Astra Control Center requires the following resources in addition to the environment's resource requirements:
 
 |===
 |Component |Requirement
 
-|Backend ONTAP storage capacity
+|ONTAP backend storage capacity
 |At least 300GB available
 
 //|Controller nodes
@@ -37,11 +38,11 @@ Ensure that the operating environment you choose to host Astra Control Center me
 //|Worker cluster additional resources
 //|Astra Control Center requires that the cluster have an additional 12 CPU cores, 24GB RAM, and 50GB of available storage
 
-|Load balancer
-|Service type "LoadBalancer" available for ingress traffic to be sent to services in the operational environment cluster
+|FQDN address
+|An FQDN address for Astra Control Center
 
-|FQDN resolution
-|A method for pointing the FQDN of Astra Control Center to the load balanced IP address
+//|FQDN resolution
+//|A method for pointing the FQDN of Astra Control Center to the load balanced IP address
 
 |Astra Trident
 a|
@@ -72,6 +73,22 @@ During app cloning in OpenShift environments, Astra Control Center needs to allo
 
 NOTE: If you plan to add a second OpenShift operational environment as a managed compute resource, you need to ensure that the Astra Trident Volume Snapshot feature is enabled. To enable and test volume snapshots with Astra Trident, https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[see the official Astra Trident instructions^].
 
+=== Tanzu Kubernetes Grid cluster requirements
+When hosting Astra Control Center on a Tanzu Kubernetes Grid cluster, keep in mind the following considerations.
+
+//* Configuration with Trident
+//DOC-4056
+* Disable the Tanzu Kubernetes Grid default storage class enforcement on any application clusters intended to be managed by Astra Control. You can do this by editing the `TanzuKubernetesCluster` resource on the namespace cluster.
+//DOC-4067
+* You must create a security policy that allows Astra Control Center to create pods within the cluster. You can do this using the following commands:
++
+----
+kubectl config use-context <context-of-workload-cluster>
+kubectl create clusterrolebinding default-tkg-admin-privileged-binding --clusterrole=psp:vmware-system-privileged --group=system:authenticated
+----
+
+NOTE: The default VMware Tanzu Kubernetes Grid configuration file token expires ten hours after deployment. If you use Tanzu Kubernetes Grid, you must generate a Tanzu Kubernetes Cluster configuration file with a non-expiring token to prevent connection issues between Astra Control Center and managed application clusters. For instructions, visit https://docs.vmware.com/en/VMware-NSX-T-Data-Center/3.2/nsx-application-platform/GUID-52A52C0B-9575-43B6-ADE2-E8640E22C29F.html[the VMware NSX-T Data Center Product Documentation.]
+
 //* A method for pointing the FQDN of Astra Control Center to the external IP address of the Astra Control Center service
 
 //Make sure that your cluster meets the minimum requirements and that you follow Kubernetes best practices so that Astra Control Center is highly available in your Kubernetes cluster.
@@ -89,6 +106,9 @@ The Kubernetes cluster you use for Astra Control Center should already be deploy
 * Kubernetes version 1.18, 1.19, or 1.20
 * At least 3 worker nodes
 ////
+
+//=== VMWare Tanzu Kubernetes Grid considerations
+//Consider the following points if you host Astra Control Center on a VMware Tanzu Kubernetes Grid cluster.
 
 == Application cluster requirements
 
@@ -173,9 +193,13 @@ Astra Control Center requires an Astra Control Center license for full functiona
 
 If you want to try Astra Control Center, you can link:setup_overview.html#add-a-full-or-evaluation-license[use a 90-day evaluation license].
 
-== Service type "LoadBalancer" for on-premises Kubernetes clusters
+== Ingress for on-premises Kubernetes clusters
 
-Astra Control Center uses a service of the type "LoadBalancer" (svc/traefik in the Astra Control Center namespace), and requires that it be assigned an accessible external IP address. If load balancers are permitted in your environment and you don't already have one configured, you can use https://docs.netapp.com/us-en/netapp-solutions/containers/rh-os-n_LB_MetalLB.html#installing-the-metallb-load-balancer[MetalLB^] to automatically assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
+//Astra Control Center uses a service of the type "LoadBalancer" (svc/traefik in the Astra Control Center namespace), and requires that it be assigned an accessible external IP address. If load balancers are permitted in your environment and you don't already have one configured, you can use https://docs.netapp.com/us-en/netapp-solutions/containers/rh-os-n_LB_MetalLB.html#installing-the-metallb-load-balancer[MetalLB^] to automatically assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
+
+You can choose the type of network ingress Astra Control Center uses. By default, Astra Control Center deploys the Astra Control Center gateway (service/traefik) as a cluster-wide resource. Astra Control Center also supports using a service load balancer, if they are permitted in your environment. If you would rather use a service load balancer and you don’t already have one configured, you can use the MetalLB load balancer to automatically assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
+
+NOTE: If you are hosting Astra Control Center on a Tanzu Kubernetes Grid cluster, use the `kubectl get nsxlbmonitors -A` command to see if you already have a service monitor configured to accept ingress traffic. If one exists, you should not install MetalLB, because the existing service monitor will override any new load balancer configuration.
 
 //NOTE: MetalLB version 0.11.0 is not supported.
 
@@ -186,6 +210,8 @@ Astra Control Center uses a service of the type "LoadBalancer" and requires the 
 == Networking requirements
 
 The operational environment that hosts Astra Control Center communicates using the following TCP ports. You should ensure that these ports are allowed through any firewalls, and configure firewalls to allow any HTTPS egress traffic originating from the Astra network. Some ports require connectivity both ways between the environment hosting Astra Control Center and each managed cluster (noted where applicable).
+
+NOTE: You can deploy Astra Control Center in a dual-stack Kubernetes cluster, and Astra Control Center can manage applications and storage backends that have been configured for dual-stack operation. For more information about dual-stack cluster requirements, see the https://kubernetes.io/docs/concepts/services-networking/dual-stack/[Kubernetes documentation^].
 
 |===
 |Source |Destination |Port |Protocol |Purpose
@@ -270,6 +296,14 @@ The operational environment that hosts Astra Control Center communicates using t
 |Trident service communication with each managed cluster’s Trident instance
 ////
 
+////
+== Storage backend requirements
+Astra Control Center supports the following storage backends. Some storage backends require specific configuration to work correctly.
+
+* Astra Data Store
+* NetApp Cloud Volumes ONTAP
+* SolidFire Element OS
+////
 == Supported web browsers
 
 Astra Control Center supports recent versions of Firefox, Safari, and Chrome with a minimum resolution of 1280 x 720.
