@@ -19,7 +19,7 @@ The following known issues affect the current release:
 * <<App with user-defined label goes into "removed" state>>
 * <<Unable to stop running app backup>>
 
-.Backup, restore and clone
+.Backup, restore, and clone
 * <<During app restore from backup Trident creates a larger PV than the original PV>>
 * <<Clone performance impacted by large persistent volumes>>
 * <<App clones fail using a specific version of PostgreSQL>>
@@ -39,7 +39,7 @@ The following known issues affect the current release:
 * <<Astra Control cannot access monitoring data from a cluster containing CVO with AWS backend>>
 
 .Role-based access control
-* <<A member user with RBAC constraints can clone or restore app but cannot access the new associated namespace due to insufficient privileges>>
+* <<A member user with RBAC constraints can clone or restore app but cannot access the new associated namespace>>
 * <<A member user with RBAC constraints can restore a deleted app but cannot access the restored app>>
 * <<A member user without RBAC constraints can add and manage a cluster but cannot unmanage it>>
 
@@ -111,7 +111,7 @@ This issue occurs when managing a storage backend from Cloud Volumes ONTAP (CVO)
 //DOC-4102/POLARIS-2485
 The issue is caused when the cluster you try to discover and manage using Astra Control does not have AWS ECR access.
 
-== A member user with RBAC constraints can clone or restore app but cannot access the new associated namespace due to insufficient privileges
+== A member user with RBAC constraints can clone or restore app but cannot access the new associated namespace
 //DOC-4137/ASTRACTL-16344/ASTRACTL-16131
 Any `member` user with RBAC constraints by namespace name/ID or by namespace labels can clone or restore an app to a new namespace on the same cluster or to any other cluster in their organization's account. However, the same user cannot access the cloned or restored app in the new namespace. As a workaround, after a new namespace is created by a clone or restore operation, the account admin/owner can edit the `member` user account and update role constraints for the affected user to grant access to the new namespace.
 
