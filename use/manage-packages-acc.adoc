@@ -1,0 +1,105 @@
+---
+sidebar: sidebar
+permalink: use/manage-packages-acc.html
+keywords: manage package, packages, install
+summary: You can upload and install packages to Astra Control Center.
+---
+
+= Manage software packages
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/use/
+
+After you configure a Docker image repository, you can upload and install packages to add functionality to Astra Control Center. From the *Packages* page, you can add and remove packages whose images you have added to your repository. You can use the CLI or the Astra Control web UI to manage software packages.
+
+.What you'll need
+
+* Kubernetes cluster with Astra Control Center installed
+* A connected Docker image repository. For more information, see link:manage-connections.html[Manage repository connections].
+
+== Upload software packages to the Docker image repository
+Astra Control references package images in a connected repository. You can upload images to the repository using the CLI.
+
+.Steps
+
+. In the *Manage Your Account* navigation area, select *Account*.
+. Select the *Packages* tab.
+. Select the *Add* button.
+. In the file selection dialog, select the upload icon.
+. Choose an Astra Control bundle file, in `.yaml` format, to upload.
+. Select *Add*.
+
+== Manage software packages using the Astra Control web UI
+After you have connected an image repository to Astra Control Center, you can install packages that are stored in the repository. You can also remove packages that you have previously installed.
+
+=== Add a software package
+You can add a software package that has been uploaded to the image repository.
+
+.Steps
+
+. In the *Manage Your Account* navigation area, select *Account*.
+. Select the *Packages* tab.
+. Select the *Add* button.
+. In the file selection dialog, select the upload icon.
+. Choose an Astra Control bundle file, in `.yaml` format, to upload.
+. Select *Add*.
+
+.Result
+
+If the bundle file is valid and the package is located in your image repository, the package is added to Astra Control. When the status in the *Status* column chnanges to *Available*, you can use the package. You can hover over the status for a package to get more information.
+
+NOTE: If one or more images for a package are not found in your image repository, an error message appears for that package.
+
+=== Remove a software package
+You can remove a software package that you previously installed in Astra Control.
+
+.Steps
+
+. In the *Manage Your Account* navigation area, select *Account*.
+. Select the *Packages* tab.
++
+You can see the list of installed packages and their statuses on this page.
+. In the *Actions* column for the package, open the actions menu.
+. Select *Delete*.
+
+.Result
+
+The package is deleted from Astra Control.
+
+
+== Manage software packages using the Astra Control CLI
+You can use the CLI to install software packages that are stored in the repository. You can also use the CLI to remove packages that you have previously installed.
+
+=== Add a software package
+You can add a software package that has been uploaded to the image repository.
+
+.Steps
+
+. In the *Manage Your Account* navigation area, select *Account*.
+. Select the *Packages* tab.
+. Select the *Add* button.
+. In the file selection dialog, select the upload icon.
+. Choose an Astra Control bundle file, in `.yaml` format, to upload.
+. Select *Add*.
+
+.Result
+
+If the bundle file is valid and the package is located in your image repository, the package is added to Astra Control. When the status in the *Status* column chnanges to *Available*, you can use the package. You can hover over the status for a package to get more information.
+
+NOTE: If one or more images for a package are not found in your image repository, an error message appears for that package.
+
+=== Remove a software package
+You can remove a software package that you previously installed in Astra Control.
+
+.Steps
+
+. In the *Manage Your Account* navigation area, select *Account*.
+. Select the *Packages* tab.
++
+You can see the list of installed packages and their statuses on this page.
+. In the *Actions* column for the package, open the actions menu.
+. Select *Delete*.
+
+.Result
+
+The package is deleted from Astra Control.
