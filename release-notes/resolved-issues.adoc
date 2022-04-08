@@ -20,49 +20,13 @@ When you add a bucket, select the correct bucket provider and enter the right cr
 //ASTRACTL-12927/DOC-3909
 If an execution hook takes longer than 25 minutes to run, the hook will fail, creating an event log entry with a return code of "N/A". Any affected snapshot will timeout and be marked as failed, with a resulting event log entry noting the timeout.
 
-Because execution hooks often reduce or completely disable the functionality of the application they are running against, you should always try to minimize the time your custom execution hooks take to run.
-
 == Simultaneous app restore operations in the same namespace can fail
 //DOC-3910 and ASTRACTL-13362
-If you try to restore one or more individually managed apps within a namespace simultaneously, the restore operations can fail after a long period of time. As a workaround, restore each app one at a time.
+If you try to restore one or more individually managed apps within a namespace simultaneously, the restore operations can fail after a long period of time.
 
 == Upgrade fails if source version uses a container image registry that does not require authentication and target version uses a container image registry that requires authentication
 //DOC-3919 and ASTRACTL-13466
-If you upgrade an Astra Control Center system that uses a registry that doesn't require authentication to a newer version that uses a registry that requires authentication, the upgrade fails. As a workaround, perform the following steps:
-
-. Log in to a host that has network access to the Astra Control Center cluster.
-. Ensure that the host has the following configuration:
-+
-* `kubectl` version 1.19 or later is installed
-* The KUBECONFIG environment variable is set to the kubeconfig file for the Astra Control Center cluster
-
-. Execute the following script:
-+
-[source,shell]
-----
-
-namespace="<netapp-acc>"
-statefulsets=("polaris-vault" "polaris-mongodb" "influxdb2" "nats" "loki")
-for ss in ${statefulsets[@]}; do
-	existing=$(kubectl get -n ${namespace} statefulsets.apps ${ss} -o jsonpath='{.spec.template.spec.imagePullSecrets}')
-	if [ "${existing}" = "[{}]" ] || [ "${existing}" = "[{},{},{}]" ]; then
-		kubectl patch -n ${namespace} statefulsets.apps ${ss} --type merge --patch '{"spec": {"template": {"spec": {"imagePullSecrets": []}}}}'
-	else
-		echo "${ss} not patched"
-	fi
-done
-----
-+
-You should see output similar to the following:
-+
-----
-statefulset.apps/polaris-vault patched
-statefulset.apps/polaris-mongodb patched
-statefulset.apps/influxdb2 patched
-statefulset.apps/nats patched
-statefulset.apps/loki patched
-----
-. Proceed with the upgrade using the link:../use/upgrade-acc.html#add-the-images-to-your-local-registry[Astra Control Center upgrade instructions].
+If you upgrade an Astra Control Center system that uses a registry that doesn't require authentication to a newer version that uses a registry that requires authentication, the upgrade fails.
 
 == Find more information
 

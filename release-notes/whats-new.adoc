@@ -18,22 +18,12 @@ Updated release of Astra Control Center.
 
 .New features and support
 
-Role-based access control (RBAC)
-• API implementation for namespace RBAC
-• RBAC credential change for namespace scoping
-• Hybrid access for private clusters in Azure Kubernetes Service (AKS)
-• Bucket removal:
-− Remove a bucket from Astra Control
-− Namespaces
-− Advanced namespace lifecycle
-− Namespace scoping authorization and filtering
-− Generic ingress
-• Enable a generic ingress resource to be consumed by various ingress controllers
-• MongoDB
-• Enable secure logins to MongoDB
-
 * link:../get-started/requirements.html[Additional support for upstream Kubernetes 1.22 and 1.23, Red Hat OpenShift 4.9, and Rancher Kubernetes Engine (RKE) 1.3.3]
 * link:../get-started/requirements.html#service-type-loadbalancer-for-on-premises-kubernetes-clusters[Support for additional load balancers, including metalLB 0.11.0].
+* link:../concepts/user-roles-namespaces.html[Namespace role-based access control (RBAC)]
+* link:../get-started/add-first-cluster.html#manage-a-private-cluster[Hybrid access for private clusters in Azure Kubernetes Service (AKS)]
+* link:../get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Enable a generic ingress resource to be consumed by various ingress controllers]
+* link:../use/manage-buckets.html#remove-a-bucket[Remove a bucket from Astra Control]
 
 .Resolved issues
 * link:../release-notes/resolved-issues.html[Resolved issues for this release]

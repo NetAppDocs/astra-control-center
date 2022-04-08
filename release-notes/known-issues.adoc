@@ -24,15 +24,11 @@ The following known issues affect the current release:
 * <<Clone performance impacted by large persistent volumes>>
 * <<App clones fail using a specific version of PostgreSQL>>
 * <<App clones fail when using Service Account level OCP Security Context Constraints (SCC)>>
+* <<App clones fail after an application is deployed with a set storage class>>
 * link:known-issues.html#clone-operation-cant-use-other-buckets-besides-the-default[Clone operation can't use other buckets besides the default]
 
 .Buckets
 * <<Reusing buckets between instances of Astra Control Center causes failures>>
-
-.Astra Control uninstall and removal
-* <<Backups and snapshots might not be retained during removal of an Astra Control Center instance>>
-* <<Uninstall of Astra Control Center fails to clean up the monitoring-operator pod on the managed cluster>>
-* <<Uninstall of Astra Control Center fails to clean up Traefik CRDs>>
 
 .Clusters
 * <<Managing a cluster with Astra Control Center fails when default kubeconfig file contains more than one context>>
@@ -51,6 +47,11 @@ The following known issues affect the current release:
 * <<500 internal service error when attempting Trident app data management>>
 * link:known-issues.html#cant-determine-asup-tar-bundle-status-in-scaled-environment[Can't determine ASUP tar bundle status in scaled environment]
 * <<Snapshots eventually begin to fail when using external-snapshotter version 4.2.0>>
+
+.Astra Control uninstall and removal
+* <<Backups and snapshots might not be retained during removal of an Astra Control Center instance>>
+* <<Uninstall of Astra Control Center fails to clean up the monitoring-operator pod on the managed cluster>>
+* <<Uninstall of Astra Control Center fails to clean up Traefik CRDs>>
 
 == App with user-defined label goes into "removed" state
 //ASTRACTL-9643/DOC-3415/Q2
@@ -81,17 +82,13 @@ An application clone might fail if the original security context constraints are
 After an application is deployed with a storage class explicitly set (for example, `helm install ...-set global.storageClass=netapp-cvs-perf-extreme`), subsequent attempts to clone the application require that the target cluster have the originally specified storage class.
 Cloning an application with an explicitly set storage class to a cluster that does not have the same storage class will fail. There are no recovery steps in this scenario.
 
-== Reusing buckets between instances of Astra Control Center causes failures
-//ASTRACTL-9296 (Low probability)/ASTRACTL-9837/DOC-3575/Q2 and PI4
-If you try to reuse a bucket used by another or previous installation of Astra Control Center, backup and restore operations will fail. You must use a different bucket or completely clean out the previously used bucket. You can't share buckets between instances of Astra Control Center.
-
-== Backups and snapshots might not be retained during removal of an Astra Control Center instance
-//AD AH review
-If you have an evaluation license, be sure you store your account ID to avoid data loss in the event of Astra Control Center failure if you are not sending ASUPs.
-
 == Clone operation can't use other buckets besides the default
 //DOC-3595/ASTRACTL-10071/Q2 and PI4
 During an app backup or app restore, you can optionally specify a bucket ID. An app clone operation, however, always uses the default bucket that has been defined. There is no option to change buckets for a clone. If you want control over which bucket is used, you can either link:../use/manage-buckets.html#edit-a-bucket[change the bucket default] or do a link:../use/protect-apps.html#create-a-backup[backup] followed by a link:../use/restore-apps.html[restore] separately.
+
+== Reusing buckets between instances of Astra Control Center causes failures
+//ASTRACTL-9296 (Low probability)/ASTRACTL-9837/DOC-3575/Q2 and PI4
+If you try to reuse a bucket used by another or previous installation of Astra Control Center, backup and restore operations will fail. You must use a different bucket or completely clean out the previously used bucket. You can't share buckets between instances of Astra Control Center.
 
 == Managing a cluster with Astra Control Center fails when default kubeconfig file contains more than one context
 //ASTRACTL-8872/DOC-3612/Q2 and PI4
@@ -138,6 +135,10 @@ During ASUP collection, the status of the bundle in the UI is reported as either
 == Snapshots eventually begin to fail when using external-snapshotter version 4.2.0
 // DOC-3891 and ASTRACTL-12523
 When you use Kubernetes snapshot-controller (also known as external-snapshotter) version 4.2.0 with Kubernetes 1.20 or 1.21, snapshots can eventually begin to fail. To prevent this, use a different https://kubernetes-csi.github.io/docs/snapshot-controller.html[supported version^] of external-snapshotter, such as version 4.2.1, with Kubernetes versions 1.20 or 1.21.
+
+== Backups and snapshots might not be retained during removal of an Astra Control Center instance
+//AD AH review
+If you have an evaluation license, be sure you store your account ID to avoid data loss in the event of Astra Control Center failure if you are not sending ASUPs.
 
 == Uninstall of Astra Control Center fails to clean up the monitoring-operator pod on the managed cluster
 //DOC-3530/ASTRACTL-9496/Q2 and PI4
