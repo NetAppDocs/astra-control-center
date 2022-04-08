@@ -43,7 +43,9 @@ The following known issues affect the current release:
 * <<Astra Control cannot access monitoring data from a cluster containing CVO with AWS backend>>
 
 .Role-based access control
-* <<A user with RBAC constraints can clone or restore but cannot access the namespace due to insufficient privileges>>
+* <<A member user with RBAC constraints can clone or restore app but cannot access the new associated namespace due to insufficient privileges>>
+* <<A member user with RBAC constraints can restore a deleted app but cannot access the restored app>>
+* <<A member user without RBAC constraints can add and manage a cluster but cannot unmanage it>>
 
 .Other issues
 * <<500 internal service error when attempting Trident app data management>>
@@ -112,13 +114,18 @@ This issue occurs when managing a storage backend from Cloud Volumes ONTAP (CVO)
 //DOC-4102/POLARIS-2485
 The issue is caused when the cluster you try to discover and manage using Astra Control does not have AWS ECR access.
 
-== A user with RBAC constraints can clone or restore but cannot access the namespace due to insufficient privileges
+== A member user with RBAC constraints can clone or restore app but cannot access the new associated namespace due to insufficient privileges
 //DOC-4137/ASTRACTL-16344/ASTRACTL-16131
-Any user with RBAC constraints by namespace name/ID or by namespace labels can clone or restore to a new namespace on the same cluster or to any other cluster in their organization's account. However, the same user cannot access that namespace until the account admin/owner grants access. As a workaround, after a new namespace is created by a clone or restore operation, the account admin/owner can edit the member user account and update role constraints for the affected user to grant access to the new namespace.
+Any `member` user with RBAC constraints by namespace name/ID or by namespace labels can clone or restore an app to a new namespace on the same cluster or to any other cluster in their organization's account. However, the same user cannot access the cloned or restored app in the new namespace. As a workaround, after a new namespace is created by a clone or restore operation, the account admin/owner can edit the `member` user account and update role constraints for the affected user to grant access to the new namespace.
 
-== A user with RBAC constraints can restore a deleted namespace app but cannot access the restored namespace app due to insufficient privileges
+== A member user with RBAC constraints can restore a deleted app but cannot access the restored app
 //DOC-4137/ASTRACTL-16274
-Any user with RBAC constraints by namespace name/ID or by namespace labels can perform an in-place restore of a deleted namespace app, but the same user cannot access the restored app until the account admin/owner grants the user access. As a workaround, after a namespace app is restored to the original location, the account admin/owner can edit the member user account and update role constraints for the affected user to grant access to the new namespace.
+Any `member` user with RBAC constraints by namespace name/ID or by namespace labels can perform an in-place restore of an app after deleting the app's namespace, but the same user cannot access the restored app from the restored original namespace. As a workaround, after an app is restored to the original namespace, the account admin/owner can edit the `member` user account and update role constraints for the affected user to grant access to the restored namespace.
+
+== A member user without RBAC constraints can add and manage a cluster but cannot unmanage it
+//DOC-4137/ASTRACTL-16274
+Any `member` user with no RBAC constraints by namespace name/ID or by namespace labels can add and manage a cluster, but the same user cannot unmanage the cluster until the account admin/owner grants the user access.
+As a workaround, the account admin/owner can edit the `member` user account and add RBAC constraints for the affected user that permit cluster unmanage operations.
 
 == 500 internal service error when attempting Trident app data management
 //DOC-3903/ASTRA-13162/PI4
