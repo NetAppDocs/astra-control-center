@@ -21,7 +21,7 @@ After you connect Docker and artifact repositories, you can upload and import pa
 
 == Upload a software package to the connected repositories
 Astra Control references package images and artifacts in connected repositories. You can upload images and artifacts to the repositories using the CLI.
-//done
+
 .Steps
 
 . Download the software package from the NetApp Support Site, and save it on a machine that has the `kubectl` utility installed.
@@ -37,17 +37,17 @@ Astra Control references package images and artifacts in connected repositories.
 kubectl astra packages push-images -m BUNDLE_FILE -r MY_REGISTRY -u MY_REGISTRY_USER -p MY_REGISTRY_PASSWORD
 ----
 . Copy the package artifacts to the artifact repository. Replace BUNDLE_FILE with the name of the Astra Control bundle file, and NETWORK_LOCATION with the network location to copy the artifact files to:
++
 ----
 kubectl astra packages copy-artifacts -m BUNDLE_FILE -n NETWORK_LOCATION
 ----
 
 == Add a software package
-// done
 You can import software packages using an Astra Control bundle file. Doing this installs the package and makes the software available for Astra Control to use.
 
 === Add a software package using the Astra Control web UI
 You can use the Astra Control web UI to add a software package that has been uploaded to the connected repositories.
-//done
+
 .Steps
 
 . In the *Manage Your Account* navigation area, select *Account*.
@@ -65,7 +65,7 @@ NOTE: If one or more images or artifacts for a package are not found in your rep
 
 === Add a software package using the CLI
 You can use the CLI to import a software package that you have uploaded to the connected repositories. To do this, you first need to record your Astra Control account ID and an API token.
-//done
+
 .Steps
 
 . Using a web browser, log in to the Astra Control web UI.
