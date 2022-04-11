@@ -81,3 +81,8 @@ You can remove the connection to an artifact repository if it is no longer neede
 .Result
 
 The repository is disconnected. In the *Artifact Repository* section, the repository should show a connected status.
+
+
+[discrete]
+== Find more information
+* link:manage-packages-acc.html[Manage software packages]
