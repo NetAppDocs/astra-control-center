@@ -106,7 +106,7 @@ You can add a storage backend so that Astra Control can manage its resources. Yo
 
 Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend as well as additional storage metrics.
 
-.What you'll need
+.What you'll need for all deployments
 
 * You have link:../get-started/setup_overview.html#add-cluster[added a Kubernetes cluster] and it is managed by Astra Control.
 +
@@ -134,17 +134,17 @@ You can deploy a new Astra Data Store and manage the associated storage backend.
 .Steps
 . Navigate from the Dashboard or the Backends menu:
 * From *Dashboard*:
-.. From the Storage backend section, select *Manage*.
+.. From the Storage backend section, select *Add*.
 .. From the Resource Summary > Storage backends section, select *Add*.
 * From *Backends*:
 .. In the left navigation area, select *Backends*.
-.. Select *Manage*.
+.. Select *Add*.
 . Select the *Astra Data Store* deployment option within the *Deploy* tab.
 . Select the Astra Data Store package to deploy:
 .. Enter a name for the Astra Data Store application.
 .. Choose the version of Astra Data Store you want to deploy.
 +
-NOTE: If you have not yet uploaded the version you intend to deploy, you can exit the wizard and use the package service to upload the installation bundle.
+NOTE: If you have not yet uploaded the version you intend to deploy, you can use the *Add package* option or exit the wizard and use the package service to upload the installation bundle.
 
 . Select an Astra Data Store license that you have previously uploaded or use the *Add license* option to upload a license to use with the application.
 +
@@ -153,11 +153,17 @@ For Astra Data Store preview licenses, if no association has been made between t
 
 . (Astra Data Store preview licenses only) If you have not added a Kubernetes cluster to Astra Control management or selected the cluster that should be associated with your preview license, you need to do so from the *Kubernetes cluster* page. Select an existing cluster from the list or select *add the underlying cluster* to add a cluster to Astra Control management.
 . Select the deployment template size for the Kubernetes cluster that will provide resources for Astra Data Store.
++
+TIP: When picking a template, select larger nodes with more memory and cores for larger workloads or a greater number of nodes for smaller workloads. You should select a template based on what your license allows. Each template option suggests the number of eligible nodes that satisfy the template pattern for memory and cores and capacity for each node.
+
 . Configure the nodes:
 .. Add a node label to identify the pool of worker nodes that supports this Astra Data Store cluster.
 .. Configure the capacity (GiB) per node manually or select the maximum node capacity allowed.
 .. Configure a maximum number of nodes allowed in the cluster or allow the maximum number of nodes on the cluster.
 . (Astra Data Store full licenses only) Enter the key of the label you want to use for Protection Domains.
++
+NOTE: Create at least three unique labels for the key for each node. For example, if your key is `astra.datastore.protection.domain`, you might create the following labels: `astra.datastore.protection.domain=domain1`,`astra.datastore.protection.domain=domain2`, and `astra.datastore.protection.domain=domain3`.
+
 //Super unclear in UI as is.
 . Configure the management network:
 .. Enter a management IP address for Astra Data Store internal management that is on the same subnet as worker node IP addresses.
