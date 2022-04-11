@@ -10,15 +10,16 @@ summary: You can upload and install packages to Astra Control Center.
 :icons: font
 :imagesdir: ../media/use/
 
-You can connect repositories to Astra Control to use as a reference for package installation images and upgrade packages. When you install packages, Astra Control imports them from the image repository. When you upgrade Astra Control Center, Astra Control Center pulls the software upgrade package from the artifact repository.
+You can connect repositories to Astra Control to use as a reference for software package installation images and artifacts. When you import software packages, Astra Control uses the installation images from the image repository, and binaries from the artifact repository.
 
 .What you'll need
 
 * Kubernetes cluster with Astra Control Center installed
-
+* A running Docker repository that you have access to
+* A running artifact repository (such as Artifactory) that you have access to
 
 == Connect a Docker image repository
-You can connect a Docker image repository to hold package installation images, such as those for Astra Data Store. When you install packages, Astra Control imports them from the image repository.
+You can connect a Docker image repository to hold package installation images, such as those for Astra Data Store. When you install packages, Astra Control imports the package image files from the image repository.
 
 .Steps
 
@@ -49,9 +50,8 @@ You can remove the connection to a Docker image repository if it is no longer ne
 
 The repository is disconnected. In the *Docker Image Repository* section, the repository should show a disconnected status.
 
-
 == Connect an artifact repository
-You can connect an artifact repository, such as Artifactory, to host Astra Control Center upgrade packages.
+You can connect an artifact repository to host artifacts such as software package binaries. When you install packages, Astra Control imports the artifacts for the software packages from the image repository.
 
 .Steps
 
@@ -77,7 +77,6 @@ You can remove the connection to an artifact repository if it is no longer neede
 . In the *Artifact Repository* section, select the menu at the top right.
 . Select *Disconnect*.
 . Select *Yes, disconnect artifact repository*.
-
 
 .Result
 

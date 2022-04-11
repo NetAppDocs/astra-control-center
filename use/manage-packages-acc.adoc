@@ -10,31 +10,39 @@ summary: You can upload and install packages to Astra Control Center.
 :icons: font
 :imagesdir: ../media/use/
 
-After you configure a Docker image repository, you can upload and install packages to add functionality to Astra Control Center. From the *Packages* page, you can add and remove packages whose images you have added to your repository. You can use the CLI or the Astra Control web UI to manage software packages.
+After you connect Docker and artifact repositories, you can upload and import packages to add functionality to Astra Control Center. You can use the CLI or the Astra Control web UI to manage software packages.
 
 .What you'll need
 
 * Kubernetes cluster with Astra Control Center installed
-* A connected Docker image repository. For more information, see link:manage-connections.html[Manage repository connections].
+* A connected Docker image repository to hold package images. For more information, see link:manage-connections.html[Manage repository connections].
+* A connected artifact repository to hold package binaries and artifacts. For more information, see link:manage-connections.html[Manage repository connections].
+* A software package from the NetApp Support Site
 
-== Upload software packages to the Docker image repository
+== Upload a software package to the Docker image repository
 Astra Control references package images in a connected repository. You can upload images to the repository using the CLI.
-
+//done
 .Steps
 
-. In the *Manage Your Account* navigation area, select *Account*.
-. Select the *Packages* tab.
-. Select the *Add* button.
-. In the file selection dialog, select the upload icon.
-. Choose an Astra Control bundle file, in `.yaml` format, to upload.
-. Select *Add*.
+. Download the software package from the NetApp Support Site, and save it on a machine that has the `kubectl` utility installed.
+. Extract the compressed package file, and change directory to the location of the manifest `.yaml` file (for example, `acc.manifest.bundle.yaml`).
+. Push the package images to the Docker repository:
++
+----
+kubectl astra packages push-images -m acc.manifest.bundle.yaml -r MY_REGISTRY -u MY_REGISTRY_USER -p MY_REGISTRY_PASSWORD
+----
+. Copy the package artifacts to the artifact repository:
+----
+kubectl astra packages copy-artifacts -m acc.manifest.bundle.yaml -r MY_REGISTRY -u MY_REGISTRY_USER -p MY_REGISTRY_PASSWORD
+----
 
-== Manage software packages using the Astra Control web UI
-After you have connected an image repository to Astra Control Center, you can install packages that are stored in the repository. You can also remove packages that you have previously installed.
+== Add a software package
+// done
+You can import software packages using an Astra Control bundle file. Doing this installs the package and makes the software available for Astra Control to use.
 
-=== Add a software package
-You can add a software package that has been uploaded to the image repository.
-
+=== Add a software package using the Astra Control web UI
+You can use the Astra Control web UI to add a software package that has been uploaded to the connected repositories.
+//done
 .Steps
 
 . In the *Manage Your Account* navigation area, select *Account*.
@@ -46,12 +54,41 @@ You can add a software package that has been uploaded to the image repository.
 
 .Result
 
-If the bundle file is valid and the package is located in your image repository, the package is added to Astra Control. When the status in the *Status* column chnanges to *Available*, you can use the package. You can hover over the status for a package to get more information.
+If the bundle file is valid and the package images and artifacts are located in your connected repositories, the package is added to Astra Control. When the status in the *Status* column changes to *Available*, you can use the package. You can hover over the status for a package to get more information.
+
+NOTE: If one or more images or artifacts for a package are not found in your repository, an error message appears for that package.
+
+=== Add a software package using the CLI
+You can use the CLI to import a software package that you have uploaded to the connected repositories. To do this, you need your Astra Control account ID and an API token.
+//done
+.Steps
+
+. Using a web browser, log in to the Astra Control web UI.
+. From the Dashboard, select the user icon at the top right.
+. Select *API access*.
+. Note the Account ID near the top of the screen.
+. Select *Generate API token*.
+. In the resulting dialog, select *Generate API token*.
+. Note the resulting token, and select *Close*.
+In the CLI, change directories to the location of the `.yaml` bundle file in the extracted package contents.
+. Import the package using the bundle file, making the following substitutions:
++
+
+* Replace SERVER with the DNS name of the Astra Control instance.
+* Replace ACCOUNT_ID and TOKEN with the account ID and API token you recorded earlier.
++
+----
+kubectl astra packages import -m acc.manifest.bundle.yaml -u SERVER -a ACCOUNT_ID -k TOKEN
+----
+
+.Result
+
+If the bundle file is valid and the package images and artifacts are located in your connected repositories, the package is added to Astra Control.
 
 NOTE: If one or more images for a package are not found in your image repository, an error message appears for that package.
 
-=== Remove a software package
-You can remove a software package that you previously installed in Astra Control.
+== Remove a software package
+You can use the Astra Control web UI to remove a software package that you previously imported in Astra Control.
 
 .Steps
 
@@ -64,36 +101,47 @@ You can see the list of installed packages and their statuses on this page.
 
 .Result
 
-The package is deleted from Astra Control.
+The package is deleted from Astra Control, but the images and artifacts for the package remain in your repositories.
+
+////
+=== Remove software packages using the Astra Control web UI
+
+.Steps
+
+. Using a web browser, log in to the Astra Control web UI.
+. From the Dashboard, select the user icon at the top right.
+. Select *API access*.
+. Note the Account ID near the top of the screen.
+. Select *Generate API token*.
+. In the resulting dialog, select *Generate API token*.
+. Note the resulting token, and select *Close*.
+In the CLI, change directories to the location of the `.yaml` bundle file in the extracted package contents.
+. Remove the package using the bundle file, making the following substitutions:
++
+
+* Replace SERVER with the DNS name of the Astra Control instance.
+* Replace ACCOUNT_ID and TOKEN with the account ID and API token you recorded earlier.
++
+----
+kubectl astra packages delete -m acc.manifest.bundle.yaml -u SERVER -a ACCOUNT_ID -k TOKEN
+----
+
+.Result
+
+The package is deleted from Astra Control, but the images and artifacts for the package remain in your repositories.
 
 
 == Manage software packages using the Astra Control CLI
 You can use the CLI to install software packages that are stored in the repository. You can also use the CLI to remove packages that you have previously installed.
 
-=== Add a software package
-You can add a software package that has been uploaded to the image repository.
 
-.Steps
-
-. In the *Manage Your Account* navigation area, select *Account*.
-. Select the *Packages* tab.
-. Select the *Add* button.
-. In the file selection dialog, select the upload icon.
-. Choose an Astra Control bundle file, in `.yaml` format, to upload.
-. Select *Add*.
-
-.Result
-
-If the bundle file is valid and the package is located in your image repository, the package is added to Astra Control. When the status in the *Status* column chnanges to *Available*, you can use the package. You can hover over the status for a package to get more information.
-
-NOTE: If one or more images for a package are not found in your image repository, an error message appears for that package.
 
 === Remove a software package
 You can remove a software package that you previously installed in Astra Control.
 
 .Steps
 
-. In the *Manage Your Account* navigation area, select *Account*.
+. From the Dashboard the *Manage Your Account* navigation area, select *Account*.
 . Select the *Packages* tab.
 +
 You can see the list of installed packages and their statuses on this page.
@@ -103,3 +151,4 @@ You can see the list of installed packages and their statuses on this page.
 .Result
 
 The package is deleted from Astra Control.
+////
