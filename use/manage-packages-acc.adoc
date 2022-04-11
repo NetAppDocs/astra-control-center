@@ -19,7 +19,7 @@ After you connect Docker and artifact repositories, you can upload and import pa
 * A connected artifact repository to hold software package binaries and artifacts. For more information, see link:manage-connections.html[Manage repository connections].
 * A software package from the NetApp Support Site
 
-== Upload a software package to the connected repositories
+== Upload a software package to the repositories
 Astra Control references package images and artifacts in connected repositories. You can upload images and artifacts to the repositories using the CLI.
 
 .Steps
