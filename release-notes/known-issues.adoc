@@ -27,9 +27,6 @@ The following known issues affect the current release:
 * <<App clones fail after an application is deployed with a set storage class>>
 * link:known-issues.html#clone-operation-cant-use-other-buckets-besides-the-default[Clone operation can't use other buckets besides the default]
 
-.Buckets
-* <<Reusing buckets between instances of Astra Control Center causes failures>>
-
 .Clusters
 * <<Managing a cluster with Astra Control Center fails when default kubeconfig file contains more than one context>>
 * <<Cluster is in `removed` state although cluster and network are otherwise working as expected>>
@@ -85,10 +82,6 @@ Cloning an application with an explicitly set storage class to a cluster that do
 == Clone operation can't use other buckets besides the default
 /DOC-3595/ASTRACTL-10071/Q2 and PI4
 During an app backup or app restore, you can optionally specify a bucket ID. An app clone operation, however, always uses the default bucket that has been defined. There is no option to change buckets for a clone. If you want control over which bucket is used, you can either link:../use/manage-buckets.html#edit-a-bucket[change the bucket default] or do a link:../use/protect-apps.html#create-a-backup[backup] followed by a link:../use/restore-apps.html[restore] separately.
-
-== Reusing buckets between instances of Astra Control Center causes failures
-/ASTRACTL-9296 (Low probability)/ASTRACTL-9837/DOC-3575/Q2 and PI4
-If you try to reuse a bucket used by another or previous installation of Astra Control Center, backup and restore operations will fail. You must use a different bucket or completely clean out the previously used bucket. You can't share buckets between instances of Astra Control Center.
 
 == Managing a cluster with Astra Control Center fails when default kubeconfig file contains more than one context
 /ASTRACTL-8872/DOC-3612/Q2 and PI4

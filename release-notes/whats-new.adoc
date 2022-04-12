@@ -16,7 +16,7 @@ We're pleased to announce the latest 22.04 release of Astra Control Center.
 
 .New features and support
 
-* link:../get-started/requirements.html[Additional support for upstream Kubernetes 1.22 and 1.23, Red Hat OpenShift 4.9, and Rancher Kubernetes Engine (RKE) 1.3.3]
+* link:../get-started/requirements.html[Additional support for upstream Kubernetes, Red Hat OpenShift, Rancher Kubernetes Engine (RKE), and VMware Tanzu Kubernetes Grid]
 * link:../get-started/requirements.html#service-type-loadbalancer-for-on-premises-kubernetes-clusters[Support for additional load balancers, including metalLB 0.11.0]
 * link:../concepts/user-roles-namespaces.html[Namespace role-based access control (RBAC)]
 * link:../get-started/add-first-cluster.html#manage-a-private-cluster[Hybrid access for private clusters in Azure Kubernetes Service (AKS)]
