@@ -19,7 +19,8 @@ Astra Control Center requires one of the following types of operational environm
 * Kubernetes 1.20 to 1.23
 * Rancher 2.5.8, 2.5.9, or 2.6
 * Red Hat OpenShift Container Platform 4.6.8, 4.7, 4.8, or 4.9
-* VMware Tanzu Kubernetes Grid 1.12.2 or 1.4
+* VMware Tanzu Kubernetes Grid 1.4
+* VMware Tanzu Kubernetes Grid Integrated Edition 1.12.2
 
 Ensure that the operating environment you choose to host Astra Control Center meets the basic resource requirements outlined in the environment's official documentation. Astra Control Center requires the following resources in addition to the environment's resource requirements:
 
@@ -192,6 +193,8 @@ Astra Control Center requires an Astra Control Center license for full functiona
 * Configure data protection policies
 
 If you want to try Astra Control Center, you can link:setup_overview.html#add-a-full-or-evaluation-license[use a 90-day evaluation license].
+
+To learn more about how licenses work, see link:../concepts/licensing.html[Licensing].
 
 == Ingress for on-premises Kubernetes clusters
 
