@@ -13,19 +13,19 @@ summary: Known issues identify problems that might prevent you from using this r
 These issues have been corrected in this release of the product.
 
 == Selecting a bucket provider type with credentials for another type causes data protection failures
-//DOC-3560/ASTRACTL-9574/ASTRACTL-9504/Q2 and PI4
+/DOC-3560/ASTRACTL-9574/ASTRACTL-9504/Q2 and PI4
 When you add a bucket, select the correct bucket provider and enter the right credentials for that provider. For example, the UI accepts NetApp ONTAP S3 as the type and accepts StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail.
 
 == Custom app execution hook scripts time out and cause post-snapshot scripts not to execute
-//ASTRACTL-12927/DOC-3909
+/ASTRACTL-12927/DOC-3909
 If an execution hook takes longer than 25 minutes to run, the hook will fail, creating an event log entry with a return code of "N/A". Any affected snapshot will timeout and be marked as failed, with a resulting event log entry noting the timeout.
 
 == Simultaneous app restore operations in the same namespace can fail
-//DOC-3910 and ASTRACTL-13362
+/DOC-3910 and ASTRACTL-13362
 If you try to restore one or more individually managed apps within a namespace simultaneously, the restore operations can fail after a long period of time.
 
 == Upgrade fails if source version uses a container image registry that does not require authentication and target version uses a container image registry that requires authentication
-//DOC-3919 and ASTRACTL-13466
+/DOC-3919 and ASTRACTL-13466
 If you upgrade an Astra Control Center system that uses a registry that doesn't require authentication to a newer version that uses a registry that requires authentication, the upgrade fails.
 
 == Find more information
