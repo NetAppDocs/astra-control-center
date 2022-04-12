@@ -10,17 +10,18 @@ summary: NetApp periodically updates Astra Control Center to bring you new featu
 :icons: font
 :imagesdir: ../media/release-notes/
 
-We're pleased to announce the latest 22.04 release of Astra Control Center.
+We're pleased to announce the latest 22.04.0 release of Astra Control Center.
 
-== 27 April 2022 (22.04)
+== 26 April 2022 (22.04.0)
 
 .New features and support
 
 * link:../get-started/requirements.html[Additional support for upstream Kubernetes, Red Hat OpenShift, Rancher Kubernetes Engine (RKE), and VMware Tanzu Kubernetes Grid]
-* link:../get-started/requirements.html#service-type-loadbalancer-for-on-premises-kubernetes-clusters[Support for additional load balancers, including metalLB 0.11.0]
+* link:../get-started/requirements.html#service-type-loadbalancer-for-on-premises-kubernetes-clusters[Enhanced support for load balancers]
 * link:../concepts/user-roles-namespaces.html[Namespace role-based access control (RBAC)]
 * link:../get-started/add-first-cluster.html#manage-a-private-cluster[Hybrid access for private clusters in Azure Kubernetes Service (AKS)]
 * link:../get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Generic ingress enablement for resource consumption by various ingress controllers]
+* link:../concepts/licensing.html#functionality-with-no-license-installed[Licensing consumption calculations]
 * link:../use/manage-buckets.html#remove-a-bucket[Bucket removal from Astra Control]
 
 .Resolved issues
