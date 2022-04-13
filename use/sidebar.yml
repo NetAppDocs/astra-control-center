@@ -54,8 +54,6 @@ entries:
     url: /use/manage-backend.html
   - title: Monitor and protect infrastructure
     url: /use/monitor-protect.html
-  - title: Update an existing license
-    url: /use/update-licenses.html
   - title: Unmanage apps and clusters
     url: /use/unmanage.html
   - title: Upgrade Astra Control Center
