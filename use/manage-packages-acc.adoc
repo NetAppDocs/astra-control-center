@@ -10,7 +10,7 @@ summary: You can upload and install packages to Astra Control Center.
 :icons: font
 :imagesdir: ../media/use/
 
-After you connect Docker and artifact repositories, you can upload and import packages to add functionality to Astra Control Center. You can use the CLI or the Astra Control web UI to manage software packages.
+NetApp delivers additional capabilities for Astra Control Center with software packages that you can download from the NetApp Support Site. After you connect Docker and artifact repositories, you can upload and import packages to add this functionality to Astra Control Center. You can use the CLI or the Astra Control Center web UI to manage software packages.
 
 .What you'll need
 
@@ -20,7 +20,7 @@ After you connect Docker and artifact repositories, you can upload and import pa
 * A software package from the NetApp Support Site
 
 == Upload a software package to the repositories
-Astra Control references package images and artifacts in connected repositories. You can upload images and artifacts to the repositories using the CLI.
+Astra Control Center references package images and artifacts in connected repositories. You can upload images and artifacts to the repositories using the CLI.
 
 .Steps
 
@@ -43,10 +43,10 @@ kubectl astra packages copy-artifacts -m BUNDLE_FILE -n NETWORK_LOCATION
 ----
 
 == Add a software package
-You can import software packages using an Astra Control bundle file. Doing this installs the package and makes the software available for Astra Control to use.
+You can import software packages using an Astra Control Center bundle file. Doing this installs the package and makes the software available for Astra Control Center to use.
 
 === Add a software package using the Astra Control web UI
-You can use the Astra Control web UI to add a software package that has been uploaded to the connected repositories.
+You can use the Astra Control Center web UI to add a software package that has been uploaded to the connected repositories.
 
 .Steps
 
@@ -59,16 +59,16 @@ You can use the Astra Control web UI to add a software package that has been upl
 
 .Result
 
-If the bundle file is valid and the package images and artifacts are located in your connected repositories, the package is added to Astra Control. When the status in the *Status* column changes to *Available*, you can use the package. You can hover over the status for a package to get more information.
+If the bundle file is valid and the package images and artifacts are located in your connected repositories, the package is added to Astra Control Center. When the status in the *Status* column changes to *Available*, you can use the package. You can hover over the status for a package to get more information.
 
 NOTE: If one or more images or artifacts for a package are not found in your repository, an error message appears for that package.
 
 === Add a software package using the CLI
-You can use the CLI to import a software package that you have uploaded to the connected repositories. To do this, you first need to record your Astra Control account ID and an API token.
+You can use the CLI to import a software package that you have uploaded to the connected repositories. To do this, you first need to record your Astra Control Center account ID and an API token.
 
 .Steps
 
-. Using a web browser, log in to the Astra Control web UI.
+. Using a web browser, log in to the Astra Control Center web UI.
 . From the Dashboard, select the user icon at the top right.
 . Select *API access*.
 . Note the Account ID near the top of the screen.
@@ -89,12 +89,12 @@ kubectl astra packages import -m BUNDLE_FILE -u SERVER -a ACCOUNT_ID -k TOKEN
 
 .Result
 
-If the bundle file is valid and the package images and artifacts are located in your connected repositories, the package is added to Astra Control.
+If the bundle file is valid and the package images and artifacts are located in your connected repositories, the package is added to Astra Control Center.
 
 NOTE: If one or more images or artifacts for a package are not found in your repository, an error message appears for that package.
 
 == Remove a software package
-You can use the Astra Control web UI to remove a software package that you previously imported in Astra Control.
+You can use the Astra Control Center web UI to remove a software package that you previously imported in Astra Control Center.
 
 .Steps
 
@@ -107,7 +107,7 @@ You can see the list of installed packages and their statuses on this page.
 
 .Result
 
-The package is deleted from Astra Control, but the images and artifacts for the package remain in your repositories.
+The package is deleted from Astra Control Center, but the images and artifacts for the package remain in your repositories.
 
 ////
 === Remove software packages using the Astra Control web UI
