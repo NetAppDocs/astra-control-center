@@ -225,6 +225,5 @@ kubectl delete crd ingressroutes.traefik.containo.us ingressroutetcps.traefik.co
 
 == Find more information
 
-* link:../release-notes/resolved-issues.html[Resolved issues]
 * link:../release-notes/known-issues-ads.html[Known issues with Astra Data Store prreview and this Astra Control Center release]
 * link:../release-notes/known-limitations.html[Known limitations]
