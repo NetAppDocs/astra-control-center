@@ -13,7 +13,7 @@ summary: Known limitations identify platforms, devices, or functions that are no
 Known limitations identify platforms, devices, or functions that are not supported by this release of the product, or that do not interoperate correctly with it. Review these limitations carefully.
 
 == The same cluster cannot be managed by two Astra Control Center instances
-/DOC-3600/Q2 and PI4
+/DOC-3600/Q2/PI4/PI5
 If you want to manage a cluster on another Astra Control Center instance, you should first link:../use/unmanage.html#stop-managing-compute[unmanage the cluster] from the instance on which it is managed before you manage it on another instance. After you remove the cluster from management, verify that the cluster is unmanaged by executing this command:
 
 ----
@@ -22,9 +22,9 @@ oc get pods n -netapp-monitoring
 
 There should be no pods running in that namespace or the namespace should not exist. If either of those are true, the cluster is unmanaged.
 
-== Astra Control Center cannot manage two identically named clusters in the same cloud
-/DOC-3744/ASTRACTL-11632
-If you try to add a cluster with the same name of a cluster that already exists in your cloud, the operation will fail. This issue most often occurs in a standard Kubernetes environment if you have not changed the cluster name default in Kubernetes configuration files.
+== Astra Control Center cannot manage two identically named clusters
+/DOC-3744/ASTRACTL-11632/PI5
+If you try to add a cluster with the same name of a cluster that already exists, the operation will fail. This issue most often occurs in a standard Kubernetes environment if you have not changed the cluster name default in Kubernetes configuration files.
 
 As a workaround, do the following:
 
@@ -56,21 +56,25 @@ current-context: kubernetes-admin@kubernetes
 ----
 
 == Clones of apps installed using pass by reference operators can fail
+//PI5
 Astra Control supports apps installed with namespace-scoped operators. These operators are generally designed with a "pass-by-value" rather than "pass-by-reference" architecture. The following are some operator apps that follow these patterns:
 
 * https://github.com/k8ssandra/cass-operator/tree/v1.7.1[Apache K8ssandra^]
++
+NOTE: For k8ssandra, in-place restore operations are supported. A restore operation to a new namespace or cluster requires that the original instance of the application to be taken down. This is to ensure that the peer group information carried over does not lead to cross-instance communication. Cloning of the app is not supported.
+
 * https://github.com/jenkinsci/kubernetes-operator[Jenkins CI^]
 * https://github.com/percona/percona-xtradb-cluster-operator[Percona XtraDB Cluster^]
 
 Note that Astra Control might not be able to clone an operator that is designed with a “pass-by-reference” architecture (for example, the CockroachDB operator). During these types of cloning operations, the cloned operator attempts to reference Kubernetes secrets from the source operator despite having its own new secret as part of the cloning process. The clone operation might fail because Astra Control is unaware of the Kubernetes secrets in the source operator.
 
-== In-place restore operations of apps that use a certification manager fail
-/ASTRACTL-16478/DOC-4152
-This release of Astra Control Center does not support in-place restore of apps with certification managers. Cloning operations for apps with certification managers, however, are supported.
+== In-place restore operations of apps that use a certificate manager are not supported
+/ASTRACTL-16478/DOC-4152/PI5
+This release of Astra Control Center does not support in-place restore of apps with certificate managers. Restore operations to a different namespace and clone operations are supported.
 
 == OLM-enabled and cluster-scoped operator deployed apps not supported
-/DOC-3553/ASTRACTL-9490/AD AH/Q2 and PI4
-Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators or cluster-scoped operators.
+/DOC-3553/ASTRACTL-9490/AD AH/Q2/PI4/PI5
+Astra Control Center does not support application management activities with cluster-scoped operators.
 
 == Cloning apps can only be done with same K8s distribution
 /ASTRACTL-7079
@@ -92,17 +96,9 @@ Ensure that you link:../use/monitor-protect.html#add-a-proxy-server[enter the co
 /DOC-3583/Q2 and PI4
 This release does not support the ability to manage Astra as an app using snapshot, backup, or restore options.
 
-== Unhealthy pods affect app management
-/From ACS RN
-If a managed app has pods in an unhealthy state, Astra Control can't create new backups and clones.
-
 == Existing connections to a Postgres pod causes failures
 /From ACS RN
 When you perform operations on Postgres pods, you shouldn't connect directly within the pod to use the psql command. Astra Control requires psql access to freeze and thaw the databases. If there is a pre-existing connection, the snapshot, backup, or clone will fail.
-
-== Trident isn't uninstalled from a cluster
-/From ACS RN
-When you unmanage a cluster from Astra Control Center, Trident isn't automatically uninstalled from the cluster. To uninstall Trident, you'll need to https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html[follow these steps in the Trident documentation^].
 
 == Find more information
 

@@ -4,9 +4,10 @@ url: /release-notes/rn_overview.html
 entries:
   - title: What's new in this release of Astra Control Center
     url: /release-notes/whats-new.html
-  - title: Known issues with Astra Data Store preview and this Astra Control Center release
-    url: /release-notes/known-issues-ads.html
   - title: Known issues
     url: /release-notes/known-issues.html
+    entries:
+      - title: Known issues with Astra Data Store preview and this Astra Control Center release
+        url: /release-notes/known-issues-ads.html
   - title: Known limitations
     url: /release-notes/known-limitations.html
