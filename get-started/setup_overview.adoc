@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: get-started/setup_overview.html
-keywords: set up astra control, setup astra control, setting up Astra Control Center, astra control license, add cluster, import storage, add bucket
+keywords: set up astra control, astra control license, add cluster, add storage backend, import storage, add bucket
 summary: After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up a license, add clusters, manage storage, and add buckets.
 ---
 
@@ -151,23 +151,26 @@ NOTE: If you have not yet uploaded the version you intend to deploy, you can use
 NOTE: Astra Data Store licenses with full permissions are associated with your Kubernetes cluster, and these associated clusters should appear automatically. If there is no managed cluster, you can select the *Add a Cluster* option to add one to Astra Control management.
 For Astra Data Store preview licenses, if no association has been made between the preview license and cluster, you can define this association on the next page of the wizard.
 
-. (Astra Data Store preview licenses only) If you have not added a Kubernetes cluster to Astra Control management or selected the cluster that should be associated with your preview license, you need to do so from the *Kubernetes cluster* page. Select an existing cluster from the list or select *add the underlying cluster* to add a cluster to Astra Control management.
+. If you have not added a Kubernetes cluster to Astra Control management, you need to do so from the *Kubernetes cluster* page. Select an existing cluster from the list or select *add the underlying cluster* to add a cluster to Astra Control management.
 . Select the deployment template size for the Kubernetes cluster that will provide resources for Astra Data Store.
 +
 TIP: When picking a template, select larger nodes with more memory and cores for larger workloads or a greater number of nodes for smaller workloads. You should select a template based on what your license allows. Each template option suggests the number of eligible nodes that satisfy the template pattern for memory and cores and capacity for each node.
 
 . Configure the nodes:
 .. Add a node label to identify the pool of worker nodes that supports this Astra Data Store cluster.
++
+IMPORTANT: The label must be added to each individual node in the cluster that will be used for Astra Data Store deployment prior to the start of deployment or deployment will fail.
+
 .. Configure the capacity (GiB) per node manually or select the maximum node capacity allowed.
 .. Configure a maximum number of nodes allowed in the cluster or allow the maximum number of nodes on the cluster.
 . (Astra Data Store full licenses only) Enter the key of the label you want to use for Protection Domains.
 +
 NOTE: Create at least three unique labels for the key for each node. For example, if your key is `astra.datastore.protection.domain`, you might create the following labels: `astra.datastore.protection.domain=domain1`,`astra.datastore.protection.domain=domain2`, and `astra.datastore.protection.domain=domain3`.
 
-//Super unclear in UI as is.
 . Configure the management network:
 .. Enter a management IP address for Astra Data Store internal management that is on the same subnet as worker node IP addresses.
 .. Choose to use the same NIC for both management and data networks or configure them separately.
+.. Enter data network IP address pool, subnet mask and gateway for storage access.
 //Need instructions for getting list of NICs using CLI.
 . Review the configuration and select *Deploy storage backend* to begin installation.
 
@@ -188,7 +191,7 @@ You can bring a discovered ONTAP or Astra Data Store storage backend into Astra 
 .. From the Dashboard Resource Summary > Storage backends section, select *Add*.
 * From *Backends*:
 .. In the left navigation area, select *Backends*.
-.. Select *Manage*.
+.. Select *Manage* on a discovered backend from the managed cluster or select *Add* to manage an additional existing backend.
 . Select the *Use existing* tab.
 . Do one of the following depending on your backend type:
 * *Astra Data Store*:
