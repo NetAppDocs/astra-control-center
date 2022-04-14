@@ -55,6 +55,10 @@ contexts:
 current-context: kubernetes-admin@kubernetes
 ----
 
+== A user with namespace RBAC constraints can add and unmanage a cluster
+/DOC-4137/ASTRACTL-16274
+A user with namespace RBAC constraints should not be allowed to add or unmanage clusters. Due to a current limitation, Astra does not prevent such users from unmanaging clusters.
+
 == Clones of apps installed using pass by reference operators can fail
 //PI5
 Astra Control supports apps installed with namespace-scoped operators. These operators are generally designed with a "pass-by-value" rather than "pass-by-reference" architecture. The following are some operator apps that follow these patterns:

@@ -38,7 +38,6 @@ The following known issues affect the current release:
 .Role-based access control
 * <<A member user with RBAC constraints can clone or restore app but cannot access the new associated namespace>>
 * <<A member user with RBAC constraints can restore a deleted app but cannot access the restored app>>
-* <<A member user without RBAC constraints can add and manage a cluster but cannot unmanage it>>
 
 .Other issues
 * <<500 internal service error when attempting Trident app data management>>
@@ -111,11 +110,6 @@ Any `member` user with RBAC constraints by namespace name/ID or by namespace lab
 == A member user with RBAC constraints can restore a deleted app but cannot access the restored app
 /DOC-4137/ASTRACTL-16274
 Any `member` user with RBAC constraints by namespace name/ID or by namespace labels can perform an in-place restore of an app after deleting the app's namespace, but the same user cannot access the restored app from the restored original namespace. As a workaround, after an app is restored to the original namespace, the account admin/owner can edit the `member` user account and update role constraints for the affected user to grant access to the restored namespace.
-
-== A member user without RBAC constraints can add and manage a cluster but cannot unmanage it
-/DOC-4137/ASTRACTL-16274
-Any `member` user with no RBAC constraints by namespace name/ID or by namespace labels can add and manage a cluster, but the same user cannot unmanage the cluster until the account admin/owner grants the user access.
-As a workaround, the account admin/owner can edit the `member` user account and add RBAC constraints for the affected user that permit cluster unmanage operations.
 
 == 500 internal service error when attempting Trident app data management
 /DOC-3903/ASTRA-13162/PI4
