@@ -55,11 +55,11 @@ The following known issues affect the current release:
 If you define an app with a non-existent k8s label, Astra Control Center will create, manage, and then immediately remove the app. To avoid this, add the k8s label to pods and resources after the app is managed by Astra Control Center.
 
 == Unable to stop running app backup
-/ DOC-3552/ASTRACTL-9586/DOC-3894/ASTRACTL-13029/Q2 and PI4
+/DOC-3552/ASTRACTL-9586/DOC-3894/ASTRACTL-13029/Q2 and PI4
 There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in link:../use/protect-apps.html#delete-backups[Delete backups]. To delete a failed backup, use the link:https:/docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^].
 
 == During app restore from backup Trident creates a larger PV than the original PV
-/ DOC-3562/ASTRACTL-9560/Q2 and PI4
+/DOC-3562/ASTRACTL-9560/Q2 and PI4
 If you resize a persistent volume after creating a backup and then restore from that backup, the persistent volume size will match the new size of the PV instead of using the size of the backup.
 
 == Clone performance impacted by large persistent volumes

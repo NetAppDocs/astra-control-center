@@ -63,7 +63,6 @@ metadata:
 Astra Control Center shows the Astra Data Store preview storage backend in an `Unknown` state from the Backends page in the UI. In this condition, the storage backend is actually available and can be communicated with. A component within the storage backend is likely in an unhealthy state and needs to be returned to a healthy state for the storage backend to show as `available`.
 
 == Find more information
-//Add ADS links
 * link:../release-notes/resolved-issues.html[Resolved issues]
 * link:../release-notes/known-issues.html[Known issues]
 * link:../release-notes/known-limitations.html[Known limitations]
