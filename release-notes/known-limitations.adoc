@@ -12,9 +12,28 @@ summary: Known limitations identify platforms, devices, or functions that are no
 
 Known limitations identify platforms, devices, or functions that are not supported by this release of the product, or that do not interoperate correctly with it. Review these limitations carefully.
 
-= Cluster management limitations
+.Cluster management limitations
+* <<The same cluster cannot be managed by two Astra Control Center instances>>
+* <<Astra Control Center cannot manage two identically named clusters>>
 
-The following limitations apply to the management of clusters using Astra Control Center.
+.Role-based Access Control (RBAC) limitations
+* <<A user with namespace RBAC constraints can add and unmanage a cluster>>
+* <<A member user with RBAC constraints can clone or restore app but cannot access the new associated namespace>>
+* <<A member user with RBAC constraints can restore a deleted app but cannot access the restored app>>
+
+.App management limitations
+* <<Clones of apps installed using pass by reference operators can fail>>
+* <<In-place restore operations of apps that use a certificate manager are not supported>>
+* <<OLM-enabled and cluster-scoped operator deployed apps not supported>>
+* <<Cloning apps can only be done with same K8s distribution>>
+* <<Apps deployed with Helm 2 are not supported>>
+* <<Data protection for Astra Control Center as app not yet available>>
+
+.General limitations
+* <<S3 buckets in Astra Control Center do not report available capacity>>
+* <<Astra Control Center does not validate the details you enter for your proxy server>>
+* <<Existing connections to a Postgres pod causes failures>>
+
 
 == The same cluster cannot be managed by two Astra Control Center instances
 /DOC-3600/Q2/PI4/PI5
@@ -59,10 +78,6 @@ contexts:
 current-context: kubernetes-admin@kubernetes
 ----
 
-= Role-based Access Control (RBAC) limitations
-
-The following limitations apply to the way Astra Control limits user access to resources or capabilities.
-
 == A user with namespace RBAC constraints can add and unmanage a cluster
 /DOC-4137/ASTRACTL-16274/PI5
 A user with namespace RBAC constraints should not be allowed to add or unmanage clusters. Due to a current limitation, Astra does not prevent such users from unmanaging clusters.
@@ -74,10 +89,6 @@ Any `member` user with RBAC constraints by namespace name/ID or by namespace lab
 == A member user with RBAC constraints can restore a deleted app but cannot access the restored app
 /DOC-4137/ASTRACTL-16274/PI5
 Any `member` user with RBAC constraints by namespace name/ID or by namespace labels can perform an in-place restore of an app after deleting the app's namespace, but the same user cannot access the restored app from the restored original namespace. As a workaround, after an app is restored to the original namespace, the account admin/owner can edit the `member` user account and update role constraints for the affected user to grant access to the restored namespace.
-
-= App management limitations
-
-The following limitations affect management of applications.
 
 == Clones of apps installed using pass by reference operators can fail
 //PI5
@@ -111,10 +122,6 @@ If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Ma
 == Data protection for Astra Control Center as app not yet available
 /DOC-3583/Q2 and PI4
 This release does not support the ability to manage Astra as an app using snapshot, backup, or restore options.
-
-= General limitations
-
-These limitations affect other Astra Control Center functionality.
 
 == S3 buckets in Astra Control Center do not report available capacity
 /DOC-3561/ASTRACTL-9425/Q2 and PI4
