@@ -35,10 +35,6 @@ The following known issues affect the current release:
 * <<AWS Elastic Container Registry (ECR) token expires after 12 hours and causes cross-cluster clone operations to fail>>
 * <<Astra Control cannot access monitoring data from a cluster containing CVO with AWS backend>>
 
-.Role-based access control
-* <<A member user with RBAC constraints can clone or restore app but cannot access the new associated namespace>>
-* <<A member user with RBAC constraints can restore a deleted app but cannot access the restored app>>
-
 .Other issues
 * <<500 internal service error when attempting Trident app data management>>
 * link:known-issues.html#cant-determine-asup-tar-bundle-status-in-scaled-environment[Can't determine ASUP tar bundle status in scaled environment]
@@ -102,14 +98,6 @@ This issue occurs when managing a storage backend from Cloud Volumes ONTAP (CVO)
 == Astra Control cannot access monitoring data from a cluster containing CVO with AWS backend
 /DOC-4102/POLARIS-2485
 The issue is caused when the cluster you try to discover and manage using Astra Control does not have AWS ECR access.
-
-== A member user with RBAC constraints can clone or restore app but cannot access the new associated namespace
-/DOC-4137/ASTRACTL-16344/ASTRACTL-16131
-Any `member` user with RBAC constraints by namespace name/ID or by namespace labels can clone or restore an app to a new namespace on the same cluster or to any other cluster in their organization's account. However, the same user cannot access the cloned or restored app in the new namespace. As a workaround, after a new namespace is created by a clone or restore operation, the account admin/owner can edit the `member` user account and update role constraints for the affected user to grant access to the new namespace.
-
-== A member user with RBAC constraints can restore a deleted app but cannot access the restored app
-/DOC-4137/ASTRACTL-16274
-Any `member` user with RBAC constraints by namespace name/ID or by namespace labels can perform an in-place restore of an app after deleting the app's namespace, but the same user cannot access the restored app from the restored original namespace. As a workaround, after an app is restored to the original namespace, the account admin/owner can edit the `member` user account and update role constraints for the affected user to grant access to the restored namespace.
 
 == 500 internal service error when attempting Trident app data management
 /DOC-3903/ASTRA-13162/PI4
