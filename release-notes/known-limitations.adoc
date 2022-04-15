@@ -12,6 +12,10 @@ summary: Known limitations identify platforms, devices, or functions that are no
 
 Known limitations identify platforms, devices, or functions that are not supported by this release of the product, or that do not interoperate correctly with it. Review these limitations carefully.
 
+= Cluster management limitations
+
+The following limitations apply to the management of clusters using Astra Control Center.
+
 == The same cluster cannot be managed by two Astra Control Center instances
 /DOC-3600/Q2/PI4/PI5
 If you want to manage a cluster on another Astra Control Center instance, you should first link:../use/unmanage.html#stop-managing-compute[unmanage the cluster] from the instance on which it is managed before you manage it on another instance. After you remove the cluster from management, verify that the cluster is unmanaged by executing this command:
@@ -55,6 +59,10 @@ contexts:
 current-context: kubernetes-admin@kubernetes
 ----
 
+= Role-based Access Control (RBAC) limitations
+
+The following limitations apply to the way Astra Control limits user access to resources or capabilities.
+
 == A user with namespace RBAC constraints can add and unmanage a cluster
 /DOC-4137/ASTRACTL-16274/PI5
 A user with namespace RBAC constraints should not be allowed to add or unmanage clusters. Due to a current limitation, Astra does not prevent such users from unmanaging clusters.
@@ -66,6 +74,10 @@ Any `member` user with RBAC constraints by namespace name/ID or by namespace lab
 == A member user with RBAC constraints can restore a deleted app but cannot access the restored app
 /DOC-4137/ASTRACTL-16274/PI5
 Any `member` user with RBAC constraints by namespace name/ID or by namespace labels can perform an in-place restore of an app after deleting the app's namespace, but the same user cannot access the restored app from the restored original namespace. As a workaround, after an app is restored to the original namespace, the account admin/owner can edit the `member` user account and update role constraints for the affected user to grant access to the restored namespace.
+
+= App management limitations
+
+The following limitations affect management of applications.
 
 == Clones of apps installed using pass by reference operators can fail
 //PI5
@@ -92,21 +104,25 @@ Astra Control Center does not support application management activities with clu
 /ASTRACTL-7079
 If you clone an app between clusters, the source and destination clusters must be the same distribution of Kubernetes. For example, if you clone an app from an OpenShift 4.7 cluster, use a destination cluster that is also OpenShift 4.7.
 
-== S3 buckets in Astra Control Center do not report available capacity
-/DOC-3561/ASTRACTL-9425/Q2 and PI4
-Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
-
 == Apps deployed with Helm 2 are not supported
 /From requirements section
 If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) is fully supported. For more information, see link:../get-started/requirements.html[Astra Control Center requirements].
 
-== Astra Control Center does not validate the details you enter for your proxy server
-/From email request/AD AH/Q2 and PI4
-Ensure that you link:../use/monitor-protect.html#add-a-proxy-server[enter the correct values] when establishing a connection.
-
 == Data protection for Astra Control Center as app not yet available
 /DOC-3583/Q2 and PI4
 This release does not support the ability to manage Astra as an app using snapshot, backup, or restore options.
+
+= General limitations
+
+These limitations affect other Astra Control Center functionality.
+
+== S3 buckets in Astra Control Center do not report available capacity
+/DOC-3561/ASTRACTL-9425/Q2 and PI4
+Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
+
+== Astra Control Center does not validate the details you enter for your proxy server
+/From email request/AD AH/Q2 and PI4
+Ensure that you link:../use/monitor-protect.html#add-a-proxy-server[enter the correct values] when establishing a connection.
 
 == Existing connections to a Postgres pod causes failures
 /From ACS RN

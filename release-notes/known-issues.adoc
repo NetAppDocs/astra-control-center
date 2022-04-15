@@ -16,10 +16,7 @@ Known issues identify problems that might prevent you from using this release of
 The following known issues affect the current release:
 
 .Apps
-* <<App with user-defined label goes into "removed" state>>
 * <<Unable to stop running app backup>>
-
-.Backup, restore, and clone
 * <<During app restore from backup Trident creates a larger PV than the original PV>>
 * <<Clone performance impacted by large persistent volumes>>
 * <<App clones fail using a specific version of PostgreSQL>>
@@ -44,10 +41,6 @@ The following known issues affect the current release:
 * <<Backups and snapshots might not be retained during removal of an Astra Control Center instance>>
 * <<Uninstall of Astra Control Center fails to clean up the monitoring-operator pod on the managed cluster>>
 * <<Uninstall of Astra Control Center fails to clean up Traefik CRDs>>
-
-== App with user-defined label goes into "removed" state
-/ASTRACTL-9643/DOC-3415/Q2
-If you define an app with a non-existent k8s label, Astra Control Center will create, manage, and then immediately remove the app. To avoid this, add the k8s label to pods and resources after the app is managed by Astra Control Center.
 
 == Unable to stop running app backup
 /DOC-3552/ASTRACTL-9586/DOC-3894/ASTRACTL-13029/Q2 and PI4
