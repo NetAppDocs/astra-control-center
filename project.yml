@@ -21,6 +21,9 @@ sidebar:
       url: /acc-earlier-versions.html
     - title: Legal notices
       url: /legal-notices.html
+product-family:
+  name: Astra
+  repo: astra-family
 
 homepage:
   tiles:
