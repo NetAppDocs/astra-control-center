@@ -97,7 +97,7 @@ You can update the license for an Astra Data Store storage backend to support a 
 
 .What you'll need
 
-* A deployed Astra Data Store storage backend
+* A deployed and managed Astra Data Store storage backend
 * An Astra Data Store license file (contact your NetApp sales representative to purchase an Astra Data Store license)
 
 .Steps
@@ -119,6 +119,7 @@ You can add nodes to an Astra Data Store cluster, up to the number of nodes supp
 .What you'll need
 
 * A deployed and licensed Astra Data Store storage backend
+* You have added the Astra Data Store software package in Astra Control Center
 * One or more new nodes to add to the cluster
 
 .Steps
@@ -132,8 +133,8 @@ You can add nodes to an Astra Data Store cluster, up to the number of nodes supp
 .. Do one of the following:
 +
 * If you want Astra Data Store to always use the maximum available number of nodes according to your license, enable the *Always use up to maximum number of nodes allowed* check box.
-* If you don't want Astra Data Store to always use the maximum available number of nodes, select the desired number of nodes to use.
-.. Assign the new node or nodes to Protection Domains.
+* If you don't want Astra Data Store to always use the maximum available number of nodes, select the desired number of total nodes to use.
+.. If you deployed Astra Data Store with Protection Domains enabled, assign the new node or nodes to Protection Domains.
 . Select *Next*.
 . Enter IP address and network information for each new node. Enter a single IP address for a single new node, or an IP address pool for multiple new nodes.
 +
