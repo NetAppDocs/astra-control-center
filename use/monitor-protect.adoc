@@ -28,7 +28,7 @@ IMPORTANT: Astra Control Center does not validate the details you enter for your
 +
 image:proxy-connect.png[Shows the Connect option to enable proxy connection.]
 . Enter the proxy server name or IP address and the proxy port number.
-. If your proxy server requires authentication, select the checkbox, and enter the username and password.
+. If your proxy server requires authentication, select the check box, and enter the username and password.
 . Select *Connect*.
 
 .Result

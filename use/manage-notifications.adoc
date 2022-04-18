@@ -13,18 +13,13 @@ summary: Astra notifies you when actions have completed or failed. For example, 
 [.lead]
 Astra notifies you when actions have completed or failed. For example, you'll see a notification if a backup of an app completed successfully.
 
-The number of unread notifications is available in the top right of the interface:
+You can manage these notifications from the top right of the interface:
 
-image:screenshot-unread-notifications.gif[A screenshot that shows the Astra interface where you can view the number of unread notifications.]
-
-You can view these notifications and mark them as read (this can come in handy if you like to clear unread notifications like we do).
+image:screenshot-unread-notifications.png[A screenshot that shows the Astra interface where you can view the number of unread notifications.]
 
 .Steps
 
 . Select the number of unread notifications in the top right.
-+
-image:screenshot-expand-notifications.gif[A screenshot that shows the expanded notifications in the Astra interface.]
-
 . Review the notifications and then select *Mark as read* or *Show all notifications*.
 +
 If you selected *Show all notifications*, the Notifications page loads.

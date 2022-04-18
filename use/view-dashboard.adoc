@@ -13,9 +13,7 @@ summary: Select Dashboard to see a high-level view of your apps, compute, and th
 [.lead]
 Select the *Dashboard* to see a high-level view of your apps, clusters, storage backends, and their health.
 
-image:dashboard.png[Shows the Astra Control Center Dashboard.]
-
-These aren't just static numbers or statuses--you can drill down from each of these. For example, if apps aren't fully protected, you can hover over the icon to identify which apps aren't fully protected, which includes a reason why.
+These aren't just static numbers or statuses--you can drill down from each. For example, if apps aren't fully protected, you can hover over the icon to identify which apps aren't fully protected, which includes a reason why.
 
 == Applications tile
 The *Applications* tile helps you identify the following:
