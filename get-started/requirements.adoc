@@ -244,10 +244,10 @@ NOTE: You can deploy Astra Control Center in a dual-stack Kubernetes cluster, an
 |Amazon S3 storage communication
 
 |Astra Control Center
-|NetApp ActiveIQ (https://activeiq.solidfire.com)
+|NetApp AutoSupport (https://support.netapp.com)
 |443
 |HTTPS
-|NetApp ActiveIQ communication
+|NetApp AutoSupport communication
 
 |===
 
