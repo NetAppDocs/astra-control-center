@@ -44,10 +44,6 @@ entries:
         url: /use/view-account-activity.html
       - title: Update an existing license
         url: /use/update-licenses.html
-      - title: Manage repository connections
-        url: /use/manage-connections.html
-      - title: Manage software packages
-        url: /use/manage-packages-acc.html
   - title: Manage buckets
     url: /use/manage-buckets.html
   - title: Manage the storage backend
