@@ -16,7 +16,6 @@ Known issues identify problems that might prevent you from using this release of
 The following known issues affect the current release:
 
 .Apps
-* <<Unable to stop running app backup>>
 * <<During app restore from backup Trident creates a larger PV than the original PV>>
 * <<Clone performance impacted by large persistent volumes>>
 * <<App clones fail using a specific version of PostgreSQL>>
@@ -35,10 +34,6 @@ The following known issues affect the current release:
 * <<Backups and snapshots might not be retained during removal of an Astra Control Center instance>>
 * <<Uninstall of Astra Control Center fails to clean up the monitoring-operator pod on the managed cluster>>
 * <<Uninstall of Astra Control Center fails to clean up Traefik CRDs>>
-
-== Unable to stop running app backup
-/DOC-3552/ASTRACTL-9586/DOC-3894/ASTRACTL-13029/Q2 and PI4
-There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in link:../use/protect-apps.html#delete-backups[Delete backups]. To delete a failed backup, use the link:https:/docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^].
 
 == During app restore from backup Trident creates a larger PV than the original PV
 /DOC-3562/ASTRACTL-9560/Q2 and PI4
