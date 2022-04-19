@@ -106,20 +106,17 @@ You can add a storage backend so that Astra Control can manage its resources. Yo
 
 Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend as well as additional storage metrics.
 
-.What you'll need for all deployments
-
-* You have link:../get-started/setup_overview.html#add-cluster[added a Kubernetes cluster] and it is managed by Astra Control.
-+
-NOTE: The managed cluster has a supported backend attached to it that can be discovered by Astra Control.
-
-.What you'll need for Astra Data Store deployments
+.What you'll need for existing Astra Data Store deployments
 
 * You have added your Kubernetes app cluster and the underlying compute cluster.
 +
 IMPORTANT: After you add your Kubernetes app cluster for Astra Data Store and it is managed by Astra Control, the cluster appears as `unmanaged` in the list of discovered backends. You must next add the compute cluster that contains Astra Data Store and underlies the Kubernetes app cluster. You can do this from *Backends* in the UI. Select the Actions menu for the cluster, select `Manage`, and link:../get-started/setup_overview.html#add-cluster[add the cluster]. After the cluster state of `unmanaged` changes to the name of the Kubernetes cluster, you can proceed with adding a backend.
 
+.What you'll need for new Astra Data Store deployments
+
 * You have link:../use/manage-connections.html[uploaded the version of the installation bundle you intend to deploy] to a location that is accessible to Astra Control.
-//add reference to package management topic
+
+* You have added the Kubernetes cluster that you intend to use for deployment.
 
 * You have uploaded the Astra Data Store license for your deployment to a location that is accessible to Astra Control.
 
@@ -171,11 +168,10 @@ NOTE: Create at least three unique labels for the key for each node. For example
 .. Enter a management IP address for Astra Data Store internal management that is on the same subnet as worker node IP addresses.
 .. Choose to use the same NIC for both management and data networks or configure them separately.
 .. Enter data network IP address pool, subnet mask and gateway for storage access.
-//Need instructions for getting list of NICs using CLI.
 . Review the configuration and select *Deploy storage backend* to begin installation.
 
 .Result
-After a successful installation, the backend appears with a status of `healthy` in the backends list along with active performance information.
+After a successful installation, the backend appears with a status of `available` in the backends list along with active performance information.
 
 NOTE: You might need to refresh the page for the backend to appear.
 
