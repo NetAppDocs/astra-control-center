@@ -90,7 +90,7 @@ Any `member` user with RBAC constraints by namespace name/ID or by namespace lab
 There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in link:../use/protect-apps.html#delete-backups[Delete backups]. To delete a failed backup, use the link:https:/docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^].
 
 == Clones of apps installed using pass by reference operators can fail
-//PI5
+//DOC-4008/DOC-4010/PI5
 Astra Control supports apps installed with namespace-scoped operators. These operators are generally designed with a "pass-by-value" rather than "pass-by-reference" architecture. The following are some operator apps that follow these patterns:
 
 * https://github.com/k8ssandra/cass-operator/tree/v1.7.1[Apache K8ssandra^]
