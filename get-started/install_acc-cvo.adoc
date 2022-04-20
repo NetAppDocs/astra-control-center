@@ -137,7 +137,7 @@ Follow the Cloud Manager documentation to complete the following steps. See the 
 
 * https://docs.netapp.com/us-en/occm/task_getting_started_aws.html[Getting started with Cloud Volumes ONTAP in AWS^].
 
-* https://docs.netapp.com/us-en/occm/task_creating_connectors_aws.html#create-a-connector[Create a connector in AWS using Cloud Manager]
+* https://docs.netapp.com/us-en/occm/task_creating_connectors_aws.html#create-a-connector[Create a connector in AWS using Cloud Manager^]
 
 .Steps
 . Add your credentials to Cloud Manager.
@@ -170,7 +170,7 @@ You can deploy Astra Control Center on a self-managed Kubernetes cluster hosted 
 
 Before you deploy Astra Control Cloud in Azure, you will need the following items:
 
-* Astra Control Center license. See link:../concepts/licensing.html[ACC licensing].
+* Astra Control Center license. See link:../concepts/licensing.html[Astra Control Center licensing].
 * link:../requirements.html[Met Astra Control Center requirements].
 * NetApp Cloud Central account
 * Red Hat OpenShift Container Platform (OCP) 4.8
@@ -319,10 +319,10 @@ Trident is automatically installed as part of the import and discovery process.
 
 
 . Import the OpenShift cluster. The cluster will connect to the working environment you just created.
+.. View the NetApp cluster details by selecting *K8s* > *Cluster list* > *Cluster Details*.
 +
 image:acc-cvo-azure-connected.png[Imported cluster in Cloud Manager]
 
-.. View the NetApp cluster details by selecting *K8s* > *Cluster list* > *Cluster Details*.
 .. In the upper right corner, note the Trident version.
 .. Note the CVO cluster storage classes showing NetApp as the provisioner.
 
@@ -331,6 +331,6 @@ image:acc-cvo-azure-connected.png[Imported cluster in Cloud Manager]
 
 === Install and configure Astra Control Center
 
-Install Astra Control Center with the standard link:../get-started/install_acc.html[installation instructions]. 
+Install Astra Control Center with the standard link:../get-started/install_acc.html[installation instructions].
 
 Using Astra Control Center, add an Azure bucket. See link:../get-started/setup_overview.html[Set up Astra Control Center and add buckets].
