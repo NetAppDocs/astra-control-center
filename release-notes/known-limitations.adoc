@@ -32,7 +32,7 @@ Known limitations identify platforms, devices, or functions that are not support
 * <<S3 buckets in Astra Control Center do not report available capacity>>
 * <<Astra Control Center does not validate the details you enter for your proxy server>>
 * <<Existing connections to a Postgres pod causes failures>>
-
+* <<Backups and snapshots might not be retained during removal of an Astra Control Center instance>>
 
 == The same cluster cannot be managed by two Astra Control Center instances
 /DOC-3600/Q2/PI4/PI5
@@ -129,6 +129,10 @@ Ensure that you link:../use/monitor-protect.html#add-a-proxy-server[enter the co
 == Existing connections to a Postgres pod causes failures
 /From ACS RN
 When you perform operations on Postgres pods, you shouldn't connect directly within the pod to use the psql command. Astra Control requires psql access to freeze and thaw the databases. If there is a pre-existing connection, the snapshot, backup, or clone will fail.
+
+== Backups and snapshots might not be retained during removal of an Astra Control Center instance
+/AD AH review
+If you have an evaluation license, be sure you store your account ID to avoid data loss in the event of Astra Control Center failure if you are not sending ASUPs.
 
 == Find more information
 

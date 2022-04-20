@@ -30,11 +30,6 @@ The following known issues affect the current release:
 * link:known-issues.html#cant-determine-asup-tar-bundle-status-in-scaled-environment[Can't determine ASUP tar bundle status in scaled environment]
 * <<Snapshots might fail with snapshot controller version 4.2.0>>
 
-.Astra Control uninstall and removal
-* <<Backups and snapshots might not be retained during removal of an Astra Control Center instance>>
-* <<Uninstall of Astra Control Center fails to clean up the monitoring-operator pod on the managed cluster>>
-* <<Uninstall of Astra Control Center fails to clean up Traefik CRDs>>
-
 == During app restore from backup Trident creates a larger PV than the original PV
 /DOC-3562/ASTRACTL-9560/Q2 and PI4
 If you resize a persistent volume after creating a backup and then restore from that backup, the persistent volume size will match the new size of the PV instead of using the size of the backup.
@@ -76,100 +71,6 @@ During ASUP collection, the status of the bundle in the UI is reported as either
 == Snapshots might fail with snapshot controller version 4.2.0
 / DOC-3891 and ASTRACTL-12523
 When you use Kubernetes snapshot-controller (also known as external-snapshotter) version 4.2.0 with Kubernetes 1.20 or 1.21, snapshots can eventually begin to fail. To prevent this, use a different https:/kubernetes-csi.github.io/docs/snapshot-controller.html[supported version^] of external-snapshotter, such as version 4.2.1, with Kubernetes versions 1.20 or 1.21.
-
-== Backups and snapshots might not be retained during removal of an Astra Control Center instance
-/AD AH review
-If you have an evaluation license, be sure you store your account ID to avoid data loss in the event of Astra Control Center failure if you are not sending ASUPs.
-
-== Uninstall of Astra Control Center fails to clean up the monitoring-operator pod on the managed cluster
-/DOC-3530/ASTRACTL-9496/Q2 and PI4
-If you did not unmanage your clusters before you uninstalled Astra Control Center, you can manually delete the pods in the netapp-monitoring namespace and the namespace with the following commands:
-
-.Steps
-. Delete `acc-monitoring` agent:
-+
-----
-oc delete agents acc-monitoring -n netapp-monitoring
-----
-Result:
-+
-----
-agent.monitoring.netapp.com "acc-monitoring" deleted
-----
-. Delete the namespace:
-+
-----
-oc delete ns netapp-monitoring
-----
-Result:
-+
-----
-namespace "netapp-monitoring" deleted
-----
-. Confirm resources removed:
-+
-----
-oc get pods -n netapp-monitoring
-----
-Result:
-+
-----
-No resources found in netapp-monitoring namespace.
-----
-. Confirm monitoring agent removed:
-+
-----
-oc get crd|grep agent
-----
-+
-Sample result:
-+
-----
-agents.monitoring.netapp.com                     2021-07-21T06:08:13Z
-----
-
-. Delete custom resource definition (CRD) information:
-+
-----
-oc delete crds agents.monitoring.netapp.com
-----
-+
-Result:
-+
-----
-customresourcedefinition.apiextensions.k8s.io "agents.monitoring.netapp.com" deleted
-----
-
-== Uninstall of Astra Control Center fails to clean up Traefik CRDs
-/ASTRACTL-9180/DOC-3630/Q2 and PI4
-You can manually delete the Traefik CRDs. CRDs are global resources, and deleting them might impact other applications on the cluster.
-
-.Steps
-. List Traefik CRDs installed on the cluster:
-+
-----
-kubectl get crds |grep -E 'traefik'
-----
-+
-Response
-+
-----
-ingressroutes.traefik.containo.us             2021-06-23T23:29:11Z
-ingressroutetcps.traefik.containo.us          2021-06-23T23:29:11Z
-ingressrouteudps.traefik.containo.us          2021-06-23T23:29:12Z
-middlewares.traefik.containo.us               2021-06-23T23:29:12Z
-middlewaretcps.traefik.containo.us            2021-06-23T23:29:12Z
-serverstransports.traefik.containo.us         2021-06-23T23:29:13Z
-tlsoptions.traefik.containo.us                2021-06-23T23:29:13Z
-tlsstores.traefik.containo.us                 2021-06-23T23:29:14Z
-traefikservices.traefik.containo.us           2021-06-23T23:29:15Z
-----
-
-. Delete the CRDs:
-+
-----
-kubectl delete crd ingressroutes.traefik.containo.us ingressroutetcps.traefik.containo.us ingressrouteudps.traefik.containo.us middlewares.traefik.containo.us serverstransports.traefik.containo.us tlsoptions.traefik.containo.us tlsstores.traefik.containo.us traefikservices.traefik.containo.us middlewaretcps.traefik.containo.us
-----
 
 == Find more information
 
