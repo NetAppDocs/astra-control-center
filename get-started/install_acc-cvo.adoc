@@ -10,7 +10,7 @@ summary: To install Astra Control Center after addressing some environmental pre
 :icons: font
 :imagesdir: ../media/get-started/
 
-With Astra Control Center, you can manage your apps in a hybrid cloud environment with self-managed Kubernetes clusters and Cloud Volumes ONTAP instances. You can deploy Astra Control Center in Amazon Web Services and Microsoft Azure.
+With Astra Control Center, you can manage your apps in a hybrid cloud environment with self-managed Kubernetes clusters and Cloud Volumes ONTAP instances. You can deploy Astra Control Center in your on-premise Kubernetes clusters or in one of the self-managed Kubernetes clusters in the cloud environment.
 
 With one of these deployments, you can perform app data management operations using Cloud Volumes ONTAP as a storage backend. You can also configure an S3 bucket as the backup target.
 
@@ -30,16 +30,17 @@ To install Astra Control Center in Amazon Web Services (AWS) and Microsoft Azure
 
 You can deploy Astra Control Center on a self-managed Kubernetes cluster hosted on an Amazon Web Services (AWS) public cloud.
 
+Only self-managed OpenShift Container Platform (OCP) clusters are supported for deploying Astra Control Center.
 
 === What you'll need for AWS
 
-Before you deploy Astra Control Cloud in AWS, you will need the following items:
+Before you deploy Astra Control Center in AWS, you will need the following items:
 
-* Astra Control Center license. See link:../concepts/licensing.html[Astra Control Center licensing].
-* link:../requirements.html[Met Astra Control Center requirements].
+* Astra Control Center license. See link:../get-started/requirements.html[Astra Control Center licensing requirements].
+* link:../get-started/requirements.html[Meet Astra Control Center requirements].
 * NetApp Cloud Central account
 * Red Hat OpenShift Container Platform (OCP) permissions (on namespace level to create pods)
-* AWS credentials with permissions that enable you to create buckets and connectors
+* AWS credentials, Access ID and Secret Key with permissions that enable you to create buckets and connectors
 * AWS account Elastic Container Registry (ECR) access and login
 * AWS hosted zone and Route 53 entry required to access the Astra Control UI
 
@@ -65,7 +66,7 @@ Astra Control Center requires the following resources in addition to the environ
 | Worker nodes (AWS EC2 requirement) | At least 3 worker nodes total, with 8 vCPU cores and 32GB RAM each
 | Load balancer | Service type "LoadBalancer" available for ingress traffic to be sent to services in the operational environment cluster
 | FQDN | A method for pointing the FQDN of Astra Control Center to the load balanced IP address
-| Astra Trident (installed as part of the Kubernetes cluster discovery in NetApp Cloud Manager) | Astra Trident 21.04 or newer installed and configured if NetApp ONTAP version 9.5 or newer will be used as a storage backend
+| Astra Trident (installed as part of the Kubernetes cluster discovery in NetApp Cloud Manager) | Astra Trident 21.04 or newer installed and configured and NetApp ONTAP version 9.5 or newer as a storage backend
 | Image registry | You must have an existing private AWS Elastic Container Registry to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
 
 NOTE: The Astra Control Center hosted cluster and the managed cluster must have access to the same image registry to be able to back up and restore apps using the Restic-based image.
@@ -91,8 +92,8 @@ Each of these steps is explained in more detail below.
 
 . <<Ensure that you have sufficient IAM permissions>>.
 . <<Install a RedHat OpenShift cluster on AWS>>.
-. <<Configure AWS>> to create a virtual private cloud, set up EC2 compute instances, create an AWS S3 bucket, create an Elastic Container Register (ECR) to host the ACC images, and push the images to this registry.
-. <<Configure NetApp Cloud Manager>> to create a workspace, add a connector to AWS, create a working environment, and import the cluster.
+. <<Configure AWS>>.
+. <<Configure NetApp Cloud Manager>>.
 . <<Install Astra Control Center>>.
 
 
@@ -146,20 +147,23 @@ Follow the Cloud Manager documentation to complete the following steps. See the 
 . Create a working environment for your cloud environment.
 .. Location:  "Amazon Web Services (AWS)"
 .. Type: "Cloud Volumes ONTAP HA"
-+
-This imports your Red Hat OpenShift cluster and assigns it a default storage class. You select the storage class.
-Trident is automatically installed as part of the import and discovery process.
 
 . Import the OpenShift cluster. The cluster will connect to the working environment you just created.
 .. View the NetApp cluster details by selecting *K8s* > *Cluster list* > *Cluster Details*.
 .. In the upper right corner, note the Trident version.
 .. Note the Cloud Volumes ONTAP cluster storage classes showing NetApp as the provisioner.
++
+This imports your Red Hat OpenShift cluster and assigns it a default storage class. You select the storage class.
+Trident is automatically installed as part of the import and discovery process.
+
 . Note all the persistent volumes and volumes in this CVO deployment.
 
 TIP: Cloud Volumes ONTAP can operate as a single node or in High Availability. If HA is enabled, note the HA status and node deployment status running in AWS.
 
 === Install Astra Control Center
 Follow the standard link:../get-started/install_acc.html[Astra Control Center installation instructions].
+
+
 
 == Deploy Astra Control Center in Microsoft Azure
 
@@ -168,10 +172,10 @@ You can deploy Astra Control Center on a self-managed Kubernetes cluster hosted 
 
 === What you'll need for Azure
 
-Before you deploy Astra Control Cloud in Azure, you will need the following items:
+Before you deploy Astra Control Center in Azure, you will need the following items:
 
-* Astra Control Center license. See link:../concepts/licensing.html[Astra Control Center licensing].
-* link:../requirements.html[Met Astra Control Center requirements].
+* Astra Control Center license. See link:../get-started/requirements.html[Astra Control Center licensing requirements].
+* link:../get-started/requirements.html[Meet Astra Control Center requirements].
 * NetApp Cloud Central account
 * Red Hat OpenShift Container Platform (OCP) 4.8
 * Red Hat OpenShift Container Platform (OCP) permissions (on namespace level to create pods)
@@ -195,8 +199,8 @@ See link:../get-started/requirements.html#operational-environment-requirements[A
 | Worker nodes (Azure compute requirement) | At least 3 worker nodes total, with 8 vCPU cores and 32GB RAM each
 | Load balancer | Service type "LoadBalancer" available for ingress traffic to be sent to services in the operational environment cluster
 | FQDN (Azure DNS zone) | A method for pointing the FQDN of Astra Control Center to the load balanced IP address
-| Astra Trident (installed as part of the Kubernetes cluster discovery in NetApp Cloud Manager) | Astra Trident 21.04 or newer installed and configured if NetApp ONTAP version 9.5 or newer will be used as a storage backend
-| Image registry | You must have an existing private Azure ACR Elastic Container Registry to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
+| Astra Trident (installed as part of the Kubernetes cluster discovery in NetApp Cloud Manager) | Astra Trident 21.04 or newer installed and configured and NetApp ONTAP version 9.5 or newer will be used as a storage backend
+| Image registry | You must have an existing private Azure Container Registry (ACR) to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
 
 NOTE: You need to enable anonymous access to pull Restic images for backups.
 
@@ -228,7 +232,7 @@ The first step is to install a RedHat OpenShift cluster on Azure.
 
 For installation instructions, see the following:
 
-* https://docs.openshift.com/container-platform/4.8/installing/installing_aws/installing-aws-default.html[Installing OpenShift cluster on Azure^].
+* https://docs.openshift.com/container-platform/4.8/installing/installing_aws/installing-azure-default.html[Installing OpenShift cluster on Azure^].
 
 * https://docs.openshift.com/container-platform/4.8/installing/installing_azure/installing-azure-account.html#installing-azure-account[Installing an Azure account^].
 
@@ -245,17 +249,17 @@ You might want to create a platform cluster resource group and a target app Open
 Ensure that you have sufficient IAM roles and permissions that enable you to install a RedHat OpenShift cluster and a NetApp Cloud Volumes ONTAP connector.
 
 === Configure Azure
-Next, configure Azure to create a virtual private cloud, set up EC2 compute instances, create an Azure Blob S3 bucket, create an Azure Elastic Container Register (ACR) to host the Astra Control Center images, and push the images to this registry.
+Next, configure Azure to create a virtual private cloud, set up compute instances, create an Azure Blob S3 bucket, create an Azure Container Register (ACR) to host the Astra Control Center images, and push the images to this registry.
 
-Follow the Azure documentation to complete the following steps. See https://docs.openshift.com/container-platform/4.8/installing/installing_aws/installing-aws-default.html[Installing OpenShift cluster on Azure^].
+Follow the Azure documentation to complete the following steps. See https://docs.openshift.com/container-platform/4.8/installing/installing_aws/installing-azure-default.html[Installing OpenShift cluster on Azure^].
 
 . Create an Azure virtual private cloud.
-. Review the EC2 compute instances. This can be a bare metal server or VMs in Azure.
+. Review the compute instances. This can be a bare metal server or VMs in Azure.
 . If the instance type does not already match the Astra minimum resource requirements for master and worker nodes, change the instance type in Azure to meet the Astra requirements.  See link:../get-started/requirements.html[Astra Control Center  requirements].
 . Create at least one Azure Blob S3 bucket to store your backups.
 . Create a storage account. You will need a storage account to create a container to be used as a bucket in Astra Control Center.
 . Create a secret, which is required for bucket access.
-. Create an Azure Elastic Container Registry (ACR) to host all the Astra Control Center images.
+. Create an Azure Container Registry (ACR) to host all the Astra Control Center images.
 . Set up ACR access for Docker push/pull all the Astra Control Center images.
 . Push the ACC images to this registry by entering the following script:
 +
@@ -313,10 +317,6 @@ image:acc-cvo-azure-connectors.png[Switching connectors in Cloud Manager]
 +
 image:acc-cvo-azure-working-environment.png[Creating a working environment in Cloud Manager]
 
-+
-This imports your Red Hat OpenShift cluster and assigns a default storage class. You select the storage class.
-Trident is automatically installed as part of the import and discovery process.
-
 
 . Import the OpenShift cluster. The cluster will connect to the working environment you just created.
 .. View the NetApp cluster details by selecting *K8s* > *Cluster list* > *Cluster Details*.
@@ -325,6 +325,10 @@ image:acc-cvo-azure-connected.png[Imported cluster in Cloud Manager]
 
 .. In the upper right corner, note the Trident version.
 .. Note the CVO cluster storage classes showing NetApp as the provisioner.
+
++
+This imports your Red Hat OpenShift cluster and assigns a default storage class. You select the storage class.
+Trident is automatically installed as part of the import and discovery process.
 
 . Note all the persistent volumes and volumes in this CVO deployment.
 . Cloud Volumes ONTAP can operate as a single node or in High Availability. If HA is enabled, note the HA status and node deployment status running in Azure.
