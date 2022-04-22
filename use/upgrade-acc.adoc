@@ -410,7 +410,7 @@ kubectl get service traefik -n [netapp-acc or custom namespace]
 ----
 
 . Verify routes in Traefik:
-
++
 ----
 Kubectl get ingressroute ingressroutetls -n [netapp-acc or custom namespace]
 -o yaml | grep "Host("
