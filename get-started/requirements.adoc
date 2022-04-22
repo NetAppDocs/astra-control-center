@@ -48,7 +48,7 @@ Ensure that the operating environment you choose to host Astra Control Center me
 |Astra Trident
 a|
 
-* Astra Trident 21.04 or newer installed and configured if NetApp ONTAP version 9.5 or newer will be used as a storage backend
+* Astra Trident 21.04 or newer installed and configured
 * Astra Trident 21.10.1 or newer installed and configured if Astra Data Store preview will be used as a storage backend
 
 |===
@@ -111,6 +111,13 @@ The Kubernetes cluster you use for Astra Control Center should already be deploy
 
 //=== VMWare Tanzu Kubernetes Grid considerations
 //Consider the following points if you host Astra Control Center on a VMware Tanzu Kubernetes Grid cluster.
+
+== Supported storage backends
+Astra Control Center supports the following storage backends.
+
+* Astra Data Store
+* NetApp ONTAP AFF and FAS systems
+* NetApp Cloud Volumes ONTAP
 
 == Application cluster requirements
 
