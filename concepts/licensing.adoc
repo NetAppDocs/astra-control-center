@@ -28,7 +28,7 @@ The following operations require a valid license:
 
 //* Applying a new license if the number of CPU cores currently managed by the Astra Control Center instance exceeds the CPU core count in the license being applied
 
-NOTE: You can add a cluster, add a bucket, and manage an Astra Data Store storage backend without a license.
+NOTE: You can add a cluster, add a bucket, and manage an Astra Data Store storage backend without a license. However, you need a valid Astra Control Center license to manage apps using Astra Data Store as a storage backend.
 
 //NOTE: On Astra Control Center systems without a license, you can always add a cluster or add a bucket.
 
@@ -39,7 +39,7 @@ When you add a new cluster to Astra Control Center, it doesn't count toward cons
 When you start managing an app on a cluster, the cluster's CPU units are included in the Astra Control Center license consumption calculation.
 //However, if all of the managed apps on a cluster are Astra Control Center apps, the cluster is ignored in the consumption calculation. This enables you to use an unlicensed Astra Control Center system to manage another Astra Control Center system and back up and restore its Astra Control Center apps.
 
-NOTE: You cannot manage Astra Data Store apps in Astra Control Center, but you can use Astra Control Center to manage apps in another Astra Control Center system.
+//NOTE: You cannot manage Astra Data Store apps in Astra Control Center, but you can use Astra Control Center to manage apps in another Astra Control Center system.
 
 == Find more information
 * link:../use/update-licenses.html[Update an existing license]
