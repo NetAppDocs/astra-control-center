@@ -63,7 +63,7 @@ Astra Control Center requires the following resources in addition to the environ
 | Component
 | Requirement
 | Backend NetApp Cloud Volumes ONTAP storage capacity | At least 300GB available
-| Worker nodes (AWS EC2 requirement) | At least 3 worker nodes total, with 8 vCPU cores and 32GB RAM each
+| Worker nodes (AWS EC2 requirement) | At least 3 worker nodes total, with 4 vCPU cores and 12GB RAM each
 | Load balancer | Service type "LoadBalancer" available for ingress traffic to be sent to services in the operational environment cluster
 | FQDN | A method for pointing the FQDN of Astra Control Center to the load balanced IP address
 | Astra Trident (installed as part of the Kubernetes cluster discovery in NetApp Cloud Manager) | Astra Trident 21.04 or newer installed and configured and NetApp ONTAP version 9.5 or newer as a storage backend
@@ -198,7 +198,7 @@ See link:../get-started/requirements.html#operational-environment-requirements[A
 | Component
 | Requirement
 | Backend NetApp Cloud Volumes ONTAP storage capacity | At least 300GB available
-| Worker nodes (Azure compute requirement) | At least 3 worker nodes total, with 8 vCPU cores and 32GB RAM each
+| Worker nodes (Azure compute requirement) | At least 3 worker nodes total, with 4 vCPU cores and 12GB RAM each
 | Load balancer | Service type "LoadBalancer" available for ingress traffic to be sent to services in the operational environment cluster
 | FQDN (Azure DNS zone) | A method for pointing the FQDN of Astra Control Center to the load balanced IP address
 | Astra Trident (installed as part of the Kubernetes cluster discovery in NetApp Cloud Manager) | Astra Trident 21.04 or newer installed and configured and NetApp ONTAP version 9.5 or newer will be used as a storage backend
