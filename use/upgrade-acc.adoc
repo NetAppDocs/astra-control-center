@@ -268,7 +268,7 @@ The third-party services Traefik and Cert-manager are not upgraded during earlie
 
 * *Traefik*: By default, Astra Control Center manages the lifecycle of the Traefik deployment.  Setting `externalTraefik` to `false` (default) indicates that no external Traefik exists in the system and and Traefik is being installed and managed by Astra Control Center. In this case,  `externalTraefik` is set to `false`.
 +
-On the other hand, if you have your own Traefik deployment, set `externalTraefik` to `true`. In this case, you maintain the deployment and Astra Control Center will upgrade the CRDs.
+On the other hand, if you have your own Traefik deployment, set `externalTraefik` to `true`. In this case, you maintain the deployment and Astra Control Center will not upgrade the CRDs, unless `shouldUpgrade` is set to `true`.
 
 * *Cert-manager*: By default, Astra Control Center installs the cert-manager (and CRDs) unless you set `externalCertManager` to `true`. Set `shouldUpgrade` to `true` to have Astra Control Center upgrade the CRDs.
 
