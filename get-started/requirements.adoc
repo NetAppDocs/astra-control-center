@@ -17,7 +17,7 @@ Get started by verifying the readiness of your operational environment, applicat
 Astra Control Center requires one of the following types of operational environments:
 
 * Kubernetes 1.20 to 1.23
-* Rancher 2.5.8, 2.5.9, or 2.6
+* Rancher 2.5.8, 2.5.9, or 2.6 with RKE1
 * Red Hat OpenShift Container Platform 4.6.8, 4.7, 4.8, or 4.9
 * VMware Tanzu Kubernetes Grid 1.4
 * VMware Tanzu Kubernetes Grid Integrated Edition 1.12.2
@@ -48,7 +48,7 @@ Ensure that the operating environment you choose to host Astra Control Center me
 |Astra Trident
 a|
 
-* Astra Trident 21.04 or newer installed and configured if NetApp ONTAP version 9.5 or newer will be used as a storage backend
+* Astra Trident 21.04 or newer installed and configured
 * Astra Trident 21.10.1 or newer installed and configured if Astra Data Store preview will be used as a storage backend
 
 |===
@@ -111,6 +111,13 @@ The Kubernetes cluster you use for Astra Control Center should already be deploy
 
 //=== VMWare Tanzu Kubernetes Grid considerations
 //Consider the following points if you host Astra Control Center on a VMware Tanzu Kubernetes Grid cluster.
+
+== Supported storage backends
+Astra Control Center supports the following storage backends.
+
+* Astra Data Store
+* NetApp ONTAP AFF and FAS systems
+* NetApp Cloud Volumes ONTAP
 
 == Application cluster requirements
 
