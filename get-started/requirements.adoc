@@ -116,7 +116,7 @@ The Kubernetes cluster you use for Astra Control Center should already be deploy
 Astra Control Center supports the following storage backends.
 
 * Astra Data Store
-* NetApp ONTAP AFF and FAS systems
+* NetApp ONTAP 9.5 or newer AFF and FAS systems
 * NetApp Cloud Volumes ONTAP
 
 == Application cluster requirements
