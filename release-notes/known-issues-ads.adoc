@@ -15,7 +15,7 @@ Known issues identify problems that might prevent you from using this release of
 The following known issues affect the management of Astra Data Store with this current release of the Astra Control Center:
 
 == Astra Data Store preview cannot be used as a storage class for Astra Control Center due to MongoDB pod liveness probe failure
-/ASTRACTL-13036/DOC-3904/BURT1439334/Keep until ADS GA
+//ASTRACTL-13036/DOC-3904/BURT1439334/Keep until ADS GA
 When you attempt to use Astra Data Store preview as the storage class provisioner during an Astra Control Center deployment, the MongoDB pod liveness probe fails, resulting in a deployment that will not complete.
 
 To correct this issue, make the following changes in addition to the standard YAML changes when completing the link:../get-started/install_acc.html#configure-astra-control-center[Astra Control Center installation process]:

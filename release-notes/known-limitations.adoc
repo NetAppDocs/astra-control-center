@@ -32,10 +32,10 @@ Known limitations identify platforms, devices, or functions that are not support
 * <<S3 buckets in Astra Control Center do not report available capacity>>
 * <<Astra Control Center does not validate the details you enter for your proxy server>>
 * <<Existing connections to a Postgres pod causes failures>>
-
+* <<Backups and snapshots might not be retained during removal of an Astra Control Center instance>>
 
 == The same cluster cannot be managed by two Astra Control Center instances
-/DOC-3600/Q2/PI4/PI5
+//DOC-3600/Q2/PI4/PI5
 If you want to manage a cluster on another Astra Control Center instance, you should first link:../use/unmanage.html#stop-managing-compute[unmanage the cluster] from the instance on which it is managed before you manage it on another instance. After you remove the cluster from management, verify that the cluster is unmanaged by executing this command:
 
 ----
@@ -45,7 +45,7 @@ oc get pods n -netapp-monitoring
 There should be no pods running in that namespace or the namespace should not exist. If either of those are true, the cluster is unmanaged.
 
 == Astra Control Center cannot manage two identically named clusters
-/DOC-3744/ASTRACTL-11632/PI5
+//DOC-3744/ASTRACTL-11632/PI5
 If you try to add a cluster with the same name of a cluster that already exists, the operation will fail. This issue most often occurs in a standard Kubernetes environment if you have not changed the cluster name default in Kubernetes configuration files.
 
 As a workaround, do the following:
@@ -78,19 +78,19 @@ current-context: kubernetes-admin@kubernetes
 ----
 
 == A user with namespace RBAC constraints can add and unmanage a cluster
-/DOC-4137/ASTRACTL-16274/PI5
+//DOC-4137/ASTRACTL-16274/PI5
 A user with namespace RBAC constraints should not be allowed to add or unmanage clusters. Due to a current limitation, Astra does not prevent such users from unmanaging clusters.
 
 == A member with namespace constraints cannot access the cloned or restored apps until admin adds the namespace to the constraint
-/DOC-4137/ASTRACTL-16344/ASTRACTL-16131/PI5
+//DOC-4137/ASTRACTL-16344/ASTRACTL-16131/PI5
 Any `member` user with RBAC constraints by namespace name/ID or by namespace labels can clone or restore an app to a new namespace on the same cluster or to any other cluster in their organization's account. However, the same user cannot access the cloned or restored app in the new namespace. After a new namespace is created by a clone or restore operation, the account admin/owner can edit the `member` user account and update role constraints for the affected user to grant access to the new namespace.
 
 == App backups that are in progress cannot be stopped
-/DOC-3552/ASTRACTL-9586/DOC-3894/ASTRACTL-13029/Q2/PI4/PI5
+//DOC-3552/ASTRACTL-9586/DOC-3894/ASTRACTL-13029/Q2/PI4/PI5
 There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in link:../use/protect-apps.html#delete-backups[Delete backups]. To delete a failed backup, use the link:https:/docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^].
 
 == Clones of apps installed using pass by reference operators can fail
-//PI5
+//DOC-4008/DOC-4010/PI5
 Astra Control supports apps installed with namespace-scoped operators. These operators are generally designed with a "pass-by-value" rather than "pass-by-reference" architecture. The following are some operator apps that follow these patterns:
 
 * https://github.com/k8ssandra/cass-operator/tree/v1.7.1[Apache K8ssandra^]
@@ -103,32 +103,36 @@ NOTE: For k8ssandra, in-place restore operations are supported. A restore operat
 Note that Astra Control might not be able to clone an operator that is designed with a “pass-by-reference” architecture (for example, the CockroachDB operator). During these types of cloning operations, the cloned operator attempts to reference Kubernetes secrets from the source operator despite having its own new secret as part of the cloning process. The clone operation might fail because Astra Control is unaware of the Kubernetes secrets in the source operator.
 
 == In-place restore operations of apps that use a certificate manager are not supported
-/ASTRACTL-16478/DOC-4152/PI5
+//ASTRACTL-16478/DOC-4152/PI5
 This release of Astra Control Center does not support in-place restore of apps with certificate managers. Restore operations to a different namespace and clone operations are supported.
 
 == OLM-enabled and cluster-scoped operator deployed apps not supported
-/DOC-3553/ASTRACTL-9490/AD AH/Q2/PI4/PI5
+//DOC-3553/ASTRACTL-9490/AD AH/Q2/PI4/PI5
 Astra Control Center does not support application management activities with cluster-scoped operators.
 
 == Cloning apps can only be done with same K8s distribution
-/ASTRACTL-7079
+//ASTRACTL-7079
 If you clone an app between clusters, the source and destination clusters must be the same distribution of Kubernetes. For example, if you clone an app from an OpenShift 4.7 cluster, use a destination cluster that is also OpenShift 4.7.
 
 == Apps deployed with Helm 2 are not supported
-/From requirements section
+//From requirements section
 If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) is fully supported. For more information, see link:../get-started/requirements.html[Astra Control Center requirements].
 
 == S3 buckets in Astra Control Center do not report available capacity
-/DOC-3561/ASTRACTL-9425/Q2 and PI4
+//DOC-3561/ASTRACTL-9425/Q2 and PI4
 Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
 
 == Astra Control Center does not validate the details you enter for your proxy server
-/From email request/AD AH/Q2 and PI4
+//From email request/AD AH/Q2 and PI4
 Ensure that you link:../use/monitor-protect.html#add-a-proxy-server[enter the correct values] when establishing a connection.
 
 == Existing connections to a Postgres pod causes failures
-/From ACS RN
+//From ACS RN
 When you perform operations on Postgres pods, you shouldn't connect directly within the pod to use the psql command. Astra Control requires psql access to freeze and thaw the databases. If there is a pre-existing connection, the snapshot, backup, or clone will fail.
+
+== Backups and snapshots might not be retained during removal of an Astra Control Center instance
+//AD AH review
+If you have an evaluation license, be sure you store your account ID to avoid data loss in the event of Astra Control Center failure if you are not sending ASUPs.
 
 == Find more information
 

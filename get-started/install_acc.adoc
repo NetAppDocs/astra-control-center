@@ -191,7 +191,7 @@ Response
 secret/astra-registry-cred created
 ----
 
-.. (Optional) If you want the cluster to be automatically managed by Astra Control Center after installation, make sure that you provide the kubeconfig as a secret within the Astra Control Center namespace you intend to deploy into using this command:
+.. [[substep_kubeconfig_secret]](Optional) If you want the cluster to be automatically managed by Astra Control Center after installation, make sure that you provide the kubeconfig as a secret within the Astra Control Center namespace you intend to deploy into using this command:
 +
 ----
 kubectl create secret generic [acc-kubeconfig-cred or custom secret name] --from-file=<path-to-your-kubeconfig> -n [netapp-acc or custom namespace]
@@ -215,7 +215,7 @@ imagePullSecrets:
 .. Change `[your_registry_path]` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<substep_image_local_registry_push,previous step>>.
 .. Change `[your_registry_path]` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in a <<substep_image_local_registry_push,previous step>>.
 .. (For installations using Astra Data Store preview) See this known issue regarding link:../release-notes/known-issues-ads.html#astra-data-store-cannot-be-used-as-a-storage-class-for-astra-control-center-due-to-mongodb-pod-liveness-probe-failure[storage class provisioners and additional changes you will need to make to the YAML].
-.. (Optional) If you want the cluster to be automatically managed by Astra Control Center after installation and you have already created the secret containing the kubeconfig for this cluster, provide the name of the secret by adding a new field to this YAML file called `astraKubeConfigSecret: "acc-kubeconfig-cred or custom secret name"`
+.. (Optional) If you want the cluster to be automatically managed by Astra Control Center after installation and you have already <<substep_kubeconfig_secret,created the secret containing the kubeconfig for this cluster>>, provide the name of the secret by adding a new field to this YAML file called `astraKubeConfigSecret: "acc-kubeconfig-cred or custom secret name"`
 +
 [subs=+quotes]
 ----
@@ -726,8 +726,8 @@ The steps differ depending on the type of ingress controller you use:
 .Steps for Nginx ingress controller
 
 . Create a secret of type http://kubernetes.io/tls[`kubernetes.io/tls`] for a TLS private key and certificate in `netapp-acc` (or custom-named) namespace as described in https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets[TLS secrets].
-. Deploy an ingress resource in `netapp-acc` (or custom-named) namespace for either a deprecated or a new schema:
-.. For a deprecated schema, follow this sample:
+. Deploy an ingress resource in `netapp-acc` (or custom-named) namespace using either the `vibeta1` (deprecated in Kubernetes version less than or 1.22) or `v1` resource type for either a deprecated or a new schema:
+.. For a `v1beta1` deprecated schema, follow this sample:
 +
 ----
 apiVersion: extensions/v1beta1
@@ -752,7 +752,7 @@ spec:
         pathType: ImplementationSpecific
 ----
 
-.. For a new schema, follow this sample:
+.. For the `v1` new schema, follow this sample:
 +
 ----
 apiVersion: networking.k8s.io/v1
