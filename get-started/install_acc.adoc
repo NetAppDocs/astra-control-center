@@ -477,11 +477,13 @@ NOTE: `accHost` cluster registration is one of the last operations, and if it fa
 kubectl get acc -o yaml -n [netapp-acc or custom namespace]
 ----
 
-. Check the `status.deploymentState` field in the response for the `Deployed` value. If deployment was unsuccessful, an error message appears instead.
-+
-NOTE: You will use the `uuid` in the next step.
+. In the YAML, check the `status.deploymentState` field in the response for the `Deployed` value. If deployment was unsuccessful, an error message appears instead.
+. To get the one-time password you will use when you log in to Astra Control Center, copy the `status.uuid` value. The password is `ACC-` followed by the UUID value (`ACC-[UUID]` or, in this example, `ACC-9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f`).
 
-+
+// Start snippet: collapsible block (open on page load)
+.YAML Details
+[%collapsible]
+====
 [subs=+quotes]
 ----
 name: astra
@@ -702,8 +704,9 @@ metadata:
  resourceVersion: ""
  selfLink: ""
 ----
+====
+// End snippet
 
-. To get the one-time password you will use when you log in to Astra Control Center, copy the `status.uuid` value from the response in the previous step. The password is `ACC-` followed by the UUID value (`ACC-[UUID]` or, in this example, `ACC-9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f`).
 
 == Set up ingress for load balancing
 

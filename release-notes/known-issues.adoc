@@ -16,7 +16,7 @@ Known issues identify problems that might prevent you from using this release of
 The following known issues affect the current release:
 
 .Apps
-* <<During app restore from backup Trident creates a larger PV than the original PV>>
+* <<During app restore from backup, Trident creates a larger PV than the original PV>>
 * <<Clone performance impacted by large persistent volumes>>
 * <<App clones fail using a specific version of PostgreSQL>>
 * <<App clones fail when using Service Account level OCP Security Context Constraints (SCC)>>
@@ -30,13 +30,13 @@ The following known issues affect the current release:
 * link:known-issues.html#cant-determine-asup-tar-bundle-status-in-scaled-environment[Can't determine ASUP tar bundle status in scaled environment]
 * <<Snapshots might fail with snapshot controller version 4.2.0>>
 
-== During app restore from backup Trident creates a larger PV than the original PV
+== During app restore from backup, Trident creates a larger PV than the original PV
 //DOC-3562/ASTRACTL-9560/Q2 and PI4
 If you resize a persistent volume after creating a backup and then restore from that backup, the persistent volume size will match the new size of the PV instead of using the size of the backup.
 
 == Clone performance impacted by large persistent volumes
 //from ACS repo
-Clones of very large and consumed persistent volumes might be intermittently slow, dependent on cluster access to the object store. If the clone is hung and no data has been copied for more than 30 minutes, Astra Control terminates the clone action.
+Clones of very large and consumed persistent volumes might be intermittently slow, dependent on cluster access to the object store. If the clone operation is not progressing and no data has been copied for more than 30 minutes, Astra Control terminates the clone action.
 
 == App clones fail using a specific version of PostgreSQL
 //DOC-3543/ASTRACTL-9408/Q2 and PI4
@@ -44,7 +44,7 @@ App clones within the same cluster consistently fail with the Bitnami PostgreSQL
 
 == App clones fail when using Service Account level OCP Security Context Constraints (SCC)
 //ASTRACTL-10060/DOC-3594/Q2 and PI4
-An application clone might fail if the original security context constraints are configured at the service account level within the namespace on the OCP cluster. When the application clone fails, it appears in the Managed Applications area in Astra Control Center with status `Removed`. See the https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Astra/Application_clone_is_failing_for_an_application_in_Astra_Control_Center[knowledgebase article] for more information.
+An application clone might fail if the original security context constraints are configured at the service account level within the namespace on the OpenShift Container Platform cluster. When the application clone fails, it appears in the Managed Applications area in Astra Control Center with status `Removed`. See the https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Astra/Application_clone_is_failing_for_an_application_in_Astra_Control_Center[knowledgebase article] for more information.
 
 == App clones fail after an application is deployed with a set storage class
 //DOC-3892/ASTRACTL-13183/PI4/astractl-13184?
