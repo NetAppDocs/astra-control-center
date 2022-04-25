@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: get-started/install_overview.html
-keywords: astra installation, install astra control center, openshift, amazon web services, google cloud platform, azure, how to install astra control, deploy, download from netapp support
+keywords: astra installation, install astra control center, openshift, amazon web services, azure, how to install astra control, deploy, download from netapp support
 summary: You have choices for Astra Control Center installation.
 ---
 
