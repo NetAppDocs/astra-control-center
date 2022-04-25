@@ -481,7 +481,7 @@ kubectl get acc -o yaml -n [netapp-acc or custom namespace]
 . To get the one-time password you will use when you log in to Astra Control Center, copy the `status.uuid` value. The password is `ACC-` followed by the UUID value (`ACC-[UUID]` or, in this example, `ACC-9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f`).
 
 // Start snippet: collapsible block (open on page load)
-.YAML Details
+.Sample YAML Details
 [%collapsible]
 ====
 [subs=+quotes]
