@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: use/manage-backend.html
-keywords: how to use astra control, what is astra storage, how to set up astra storage backend, ontap storage in astra, kubernetes,
+keywords: how to use astra control, what is astra storage, how to set up astra storage backend, ontap storage in astra, backend storage in astra 
 summary: Add storage for your on-premises Kubernetes applications. Astra Control discovers and uses the already-deployed resources, including Trident, ONTAP, and associated storage classes.
 ---
 
@@ -20,6 +20,10 @@ You can complete the following tasks related to managing a storage backend:
 * link:../get-started/setup_overview.html#add-a-storage-backend[Add a storage backend]
 * <<View storage backend details>>
 * <<Unmanage a storage backend>>
+* <<Update a storage backend license>>
+* <<Add nodes to a storage backend cluster>>
+* <<Remove a storage backend>>
+
 
 //
 //== Add a storage backend
@@ -84,11 +88,86 @@ image:../use/acc_backends_ci_connection2.png[A screenshot of the Backends page]
 You can unmanage the backend.
 
 .Steps
-.	From left navigation, select *Backends*.
+.	From the left navigation, select *Backends*.
 . Select the storage backend.
-. From the Actions menu, select *Unmanage*.
-. Type "unmanage" to confirm the removal.
-. Select *Yes, remove storage backend*.
+. From the Options menu in the *Actions* column, select *Unmanage*.
+. Type "unmanage" to confirm the action.
+. Select *Yes, unmanage storage backend*.
+
+== Remove a storage backend
+
+You can remove a storage backend that is no longer in use. You might want to do this to keep your configuration simple and up-to-date.
+
+TIP: If you are removing an Astra Data Store backend, it must not have been created by vCenter.
+
+.What you'll need
+* Ensure that the storage backend is unmanaged.
+* Ensure that the storage backend does not have any volumes associated with the Astra Data Store cluster.
+
+.Steps
+.	From left navigation, select *Backends*.
+. If the backend is managed, unmanage it.
+.. Select *Managed*.
+.. Select the storage backend.
+.. From the  *Actions* option, select *Unmanage*.
+.. Type "unmanage" to confirm the action.
+.. Select *Yes, unmanage storage backend*.
+. Select *Discovered*.
+.. Select the storage backend.
+.. From the  *Actions* option, select *Remove*.
+.. Type "remove" to confirm the action.
+.. Select *Yes, remove storage backend*.
+
+== Update a storage backend license
+You can update the license for an Astra Data Store storage backend to support a larger deployment or enhanced features.
+
+.What you'll need
+
+* A deployed and managed Astra Data Store storage backend
+* An Astra Data Store license file (contact your NetApp sales representative to purchase an Astra Data Store license)
+
+.Steps
+
+.	From the left navigation, select *Backends*.
+. Select the name of a storage backend.
+. Under *Basic Information*, you can see the type of license installed, if any.
++
+If you hover over the license information, a popup appears with more information, such as expiration and entitlement information.
+. Under *License*, select the edit icon next to the license name.
+. In the *Update license* page, select *Add license*.
+. Select a license file that you have obtained from NetApp.
+. Select *Add*.
+. Select *Update*.
+
+== Add nodes to a storage backend cluster
+You can add nodes to an Astra Data Store cluster, up to the number of nodes supported by the type of license installed for Astra Data Store.
+
+.What you'll need
+
+* A deployed and licensed Astra Data Store storage backend
+* You have added the Astra Data Store software package in Astra Control Center
+* One or more new nodes to add to the cluster
+
+.Steps
+
+.	From the left navigation, select *Backends*.
+. Select the name of a storage backend.
+. Under Basic Information, you can see the number of nodes in this storage backend cluster.
+. Under *Nodes*, select the edit icon next to the number of nodes.
+. In the *Add nodes* page, enter information about the new node or nodes:
+.. Assign a node label for each node.
+.. Do one of the following:
++
+* If you want Astra Data Store to always use the maximum available number of nodes according to your license, enable the *Always use up to maximum number of nodes allowed* check box.
+* If you don't want Astra Data Store to always use the maximum available number of nodes, select the desired number of total nodes to use.
+.. If you deployed Astra Data Store with Protection Domains enabled, assign the new node or nodes to Protection Domains.
+. Select *Next*.
+. Enter IP address and network information for each new node. Enter a single IP address for a single new node, or an IP address pool for multiple new nodes.
++
+If Astra Data Store can use the IP addresses configured during deployment, you don't need to enter any IP address information.
+. Select *Next*.
+. Review the configuration for the new node or nodes.
+. Select *Add nodes*.
 
 == Find more information
 

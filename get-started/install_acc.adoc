@@ -32,18 +32,18 @@ OpenShift example:
 oc get apiservices
 ----
 
-* You have created an FQDN address for Astra Control Center in your data center.
+* The Astra FQDN you plan to use needs to be routable to this cluster. This means that you either have a DNS entry in your internal DNS server or you are using a core URL route that is already registered.
 
 .About this task
 The Astra Control Center installation process does the following:
 
-* Installs the Astra components into the `netapp-acc` (or custom named) namespace.
+* Installs the Astra components into the `netapp-acc` (or custom-named) namespace.
 * Creates a default account.
 * Establishes a default administrative user email address and default one-time password of `ACC-<UUID_of_installation>` for this instance of Astra Control Center. This user is assigned the Owner role in the system and is needed for first time login to the UI.
 * Helps you determine that all Astra Control Center pods are running.
 * Installs the Astra UI.
 
-NOTE: Podman commands can be used in place of Docker commands if you are using Red Hat’s Podman instead of Docker Engine.
+NOTE: If you are using Red Hat’s Podman instead of Docker Engine, Podman commands can be used in place of Docker commands.
 
 IMPORTANT: Do not execute the following command during the entirety of the installation process to avoid deleting all Astra Control Center pods: `kubectl delete -f astra_control_center_operator_deploy.yaml`
 
@@ -59,9 +59,10 @@ To install Astra Control Center, do the following steps:
 * <<Configure Astra Control Center>>
 * <<Complete Astra Control Center and operator installation>>
 * <<Verify system status>>
+* <<Set up ingress for load balancing>>
 * <<Log in to the Astra Control Center UI>>
 
-Complete the deployment by performing link:setup_overview.html[setup tasks].
+
 
 == Download the Astra Control Center bundle
 
@@ -178,7 +179,7 @@ Sample response:
 namespace/netapp-acc created
 ----
 
-..  Create a secret for the `netapp-acc` (or custom named) namespace. Add Docker information and run the following command:
+.. Create a secret for the `netapp-acc` (or custom named) namespace. Add Docker information and run the following command:
 +
 ----
 kubectl create secret docker-registry astra-registry-cred -n [netapp-acc or custom namespace] --docker-server=[your_registry_path] --docker-username=[username] --docker-password=[token]
@@ -188,6 +189,12 @@ Response
 +
 ----
 secret/astra-registry-cred created
+----
+
+.. [[substep_kubeconfig_secret]](Optional) If you want the cluster to be automatically managed by Astra Control Center after installation, make sure that you provide the kubeconfig as a secret within the Astra Control Center namespace you intend to deploy into using this command:
++
+----
+kubectl create secret generic [acc-kubeconfig-cred or custom secret name] --from-file=<path-to-your-kubeconfig> -n [netapp-acc or custom namespace]
 ----
 
 == Install the Astra Control Center operator
@@ -297,7 +304,23 @@ IMPORTANT: If you are using a registry that does not require authorization, you 
 .. Change the `email` string to the default initial administrator address. Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>.
 .. Change `enrolled` for AutoSupport to `false` for sites without internet connectivity or retain `true` for connected sites.
 .. (Optional) Add a first name `firstName` and last name `lastName` of the user associated with the account. You can perform this step now or later within the UI.
-.. (Optional) Change the `storageClass` value to another Astra Trident StorageClass resource if required by your installation.
+.. (Optional) Change the `storageClass` value to another Trident storageClass resource if required by your installation.
+.. (Optional) If you want the cluster to be automatically managed by Astra Control Center after installation and you have already <<substep_kubeconfig_secret,created the secret containing the kubeconfig for this cluster>>, provide the name of the secret by adding a new field to this YAML file called `astraKubeConfigSecret: "acc-kubeconfig-cred or custom secret name"`
+
+.. Complete one of the following steps:
++
+* *Other ingress controller (ingressType:Generic)*: This is the default action with Astra Control Center. After Astra Control Center is deployed, you will need to configure the ingress controller to expose Astra Control Center with a URL.
++
+The default Astra Control Center installation sets up its gateway (`service/traefik`) to be of the type `ClusterIP`. This default installation requires you to additionally set up a Kubernetes IngressController/Ingress to route traffic to it. If you want to use an ingress, see link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[Set up ingress for load balancing].
+
+* *Service load balancer (ingressType:AccTraefik)*: If you don't want to install an IngressController or create an Ingress resource, set `ingressType` to `AccTraefik`.
++
+This deploys the Astra Control Center `traefik` gateway as a Kubernetes LoadBalancer type service.
++
+Astra Control Center uses a service of the type "LoadBalancer" (`svc/traefik` in the Astra Control Center namespace), and requires that it be assigned an accessible external IP address. If load balancers are permitted in your environment and you don’t already have one configured, you can use MetalLB or another external service load balancer to assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
++
+NOTE: For details about the service type of "LoadBalancer" and ingress, see link:../get-started/requirements.html[Requirements].
+
 .. (For installations using Astra Data Store preview) See this known issue for link:../release-notes/known-issues-ads.html#astra-data-store-cannot-be-used-as-a-storage-class-for-astra-control-center-due-to-mongodb-pod-liveness-probe-failure[additional required changes] to the YAML.
 
 +
@@ -311,6 +334,8 @@ spec:
   *accountName: "Example"*
   astraVersion: "ASTRA_VERSION"
   *astraAddress: "astra.example.com"*
+  *astraKubeConfigSecret: "acc-kubeconfig-cred or custom secret name"*
+  *ingressType: "Generic"*
   autoSupport:
     *enrolled: true*
   *email: "[admin@example.com]"*
@@ -321,6 +346,8 @@ spec:
     *secret: "astra-registry-cred"*
   *storageClass: "ontap-gold"*
 ----
+
+
 
 == Complete Astra Control Center and operator installation
 
@@ -441,6 +468,8 @@ vault-controller-86c94fbf4f-krttq          1/1     Running   0          9m24s
 ----
 kubectl logs deploy/acc-operator-controller-manager -n netapp-acc-operator -c manager -f
 ----
++
+NOTE: `accHost` cluster registration is one of the last operations, and if it fails it will not cause deployment to fail. In the event of a cluster registration failure indicated in the logs, you can attempt registration again through the add cluster workflow link:../get-started/setup_overview.html#add-cluster[in the UI] or API.
 
 . When all the pods are running, verify installation success by retrieving the `AstraControlCenter` instance installed by the Astra Control Center Operator.
 +
@@ -448,11 +477,13 @@ kubectl logs deploy/acc-operator-controller-manager -n netapp-acc-operator -c ma
 kubectl get acc -o yaml -n [netapp-acc or custom namespace]
 ----
 
-. Check the `status.deploymentState` field in the response for the `Deployed` value. If deployment was unsuccessful, an error message appears instead.
-+
-NOTE: You will use the `uuid` in the next step.
+. In the YAML, check the `status.deploymentState` field in the response for the `Deployed` value. If deployment was unsuccessful, an error message appears instead.
+. To get the one-time password you will use when you log in to Astra Control Center, copy the `status.uuid` value. The password is `ACC-` followed by the UUID value (`ACC-[UUID]` or, in this example, `ACC-9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f`).
 
-+
+// Start snippet: collapsible block (open on page load)
+.Sample YAML Details
+[%collapsible]
+====
 [subs=+quotes]
 ----
 name: astra
@@ -673,8 +704,97 @@ metadata:
  resourceVersion: ""
  selfLink: ""
 ----
+====
+// End snippet
 
-. To get the one-time password you will use when you log in to Astra Control Center, copy the `status.uuid` value from the response in the previous step. The password is `ACC-` followed by the UUID value (`ACC-[UUID]` or, in this example, `ACC-c49008a5-4ef1-4c5d-a53e-830daf994116`).
+
+== Set up ingress for load balancing
+
+You can set up a Kubernetes ingress controller that manages external access to services, such as load balancing in a cluster.
+
+This procedure explains how to set up an ingress controller (`ingressType:Generic`). This is the default action with Astra Control Center. After Astra Control Center is deployed, you will need to configure the ingress controller to expose Astra Control Center with a URL.
+
+NOTE: If you don't want to set up an ingress controller, you can set `ingressType:AccTraefik)`. Astra Control Center uses a service of the type "LoadBalancer" (`svc/traefik` in the Astra Control Center namespace), and requires that it be assigned an accessible external IP address. If load balancers are permitted in your environment and you don’t already have one configured, you can use MetalLB or another external service load balancer to assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address. For details about the service type of "LoadBalancer" and ingress, see link:../get-started/requirements.html[Requirements].
+
+The steps differ depending on the type of ingress controller you use:
+
+* Nginx ingress controller
+* OpenShift ingress controller
+
+.What you'll need
+
+* The required https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/[ingress controller] should already be deployed.
+* The https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class[ingress class] corresponding to the ingress controller should already be created.
+* You are using Kubernetes versions between and including v1.19 and v1.22.
+
+.Steps for Nginx ingress controller
+
+. Create a secret of type http://kubernetes.io/tls[`kubernetes.io/tls`] for a TLS private key and certificate in `netapp-acc` (or custom-named) namespace as described in https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets[TLS secrets].
+. Deploy an ingress resource in `netapp-acc` (or custom-named) namespace using either the `vibeta1` (deprecated in Kubernetes version less than or 1.22) or `v1` resource type for either a deprecated or a new schema:
+.. For a `v1beta1` deprecated schema, follow this sample:
++
+----
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-acc
+  namespace: [netapp-acc or custom namespace]
+  annotations:
+    kubernetes.io/ingress.class: [class name for nginx controller]
+spec:
+  tls:
+  - hosts:
+    - <ACC address>
+    secretName: [tls secret name]
+  rules:
+  - host: [ACC address]
+    http:
+      paths:
+      - backend:
+        serviceName: traefik
+        servicePort: 80
+        pathType: ImplementationSpecific
+----
+
+.. For the `v1` new schema, follow this sample:
++
+----
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: netapp-acc-ingress
+  namespace: [netapp-acc or custom namespace]
+spec:
+  ingressClassName: [class name for nginx controller]
+  tls:
+  - hosts:
+    - <ACC address>
+    secretName: [tls secret name]
+  rules:
+  - host: <ACC addess>
+    http:
+      paths:
+        - path:
+          backend:
+            service:
+              name: traefik
+              port:
+                number: 80
+          pathType: ImplementationSpecific
+----
+
+.Steps for OpenShift ingress controller
+
+. Procure your certificate and get the key, certificate, and CA files ready for use by the OpenShift route.
+. Create the OpenShift route:
++
+----
+oc create route edge --service=traefik
+--port=web -n [netapp-acc or custom namespace]
+--insecure-policy=Redirect --hostname=<ACC address>
+--cert=cert.pem --key=key.pem
+----
+
 
 == Log in to the Astra Control Center UI
 

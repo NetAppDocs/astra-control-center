@@ -33,12 +33,8 @@ link:../get-started/requirements.html[Learn more about the Astra Control Center 
 +
 Optionally, install Astra Control Center using Red Hat OperatorHub.
 
-* Discover your Trident configuration backed by the ONTAP storage backend. Or, discover your https://docs.netapp.com/us-en/astra-data-store/index.html[Astra Data Store preview] clusters as your storage backend.
-+
-You install the images on an OpenShift registry or use your local registry.
-
 [role="quick-margin-para"]
-link:../get-started/install_acc.html[Learn more about installing Astra Control Center].
+link:../get-started/install_overview.html[Learn more about installing Astra Control Center].
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png[Three] Complete some initial setup tasks
 
@@ -46,7 +42,7 @@ link:../get-started/install_acc.html[Learn more about installing Astra Control C
 
 * Add a license.
 * Add a Kubernetes cluster and Astra Control Center discovers details.
-* Add an ONTAP or Astra Data Store preview storage backend.
+* Add an ONTAP or https://docs.netapp.com/us-en/astra-data-store/index.html[Astra Data Store preview] storage backend.
 * Optionally, add an object store bucket that will store your app backups.
 
 
@@ -66,7 +62,7 @@ After you finish setting up Astra Control Center, here's what you might do next:
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-5.png[Five] Continue from this Quick Start
 
 [role="quick-margin-para"]
-link:../get-started/install_acc.html[Install Astra Control Center].
+link:../get-started/install_overview.html[Install Astra Control Center].
 
 
 == Find more information
