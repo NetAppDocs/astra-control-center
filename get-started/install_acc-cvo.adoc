@@ -15,9 +15,6 @@ With Astra Control Center, you can manage your apps in a hybrid cloud environmen
 With one of these deployments, you can perform app data management operations using Cloud Volumes ONTAP as a storage backend. You can also configure an S3 bucket as the backup target.
 
 
-
-NOTE: Astra Control Center does not support Amazon FSx for NetApp ONTAP.
-
 To install Astra Control Center in Amazon Web Services (AWS) and Microsoft Azure with a Cloud Volumes ONTAP storage backend, perform the following steps depending on your cloud environment.
 
 * <<Deploy Astra Control Center in Amazon Web Services>>
