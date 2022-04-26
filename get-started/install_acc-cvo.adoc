@@ -15,9 +15,6 @@ With Astra Control Center, you can manage your apps in a hybrid cloud environmen
 With one of these deployments, you can perform app data management operations using Cloud Volumes ONTAP as a storage backend. You can also configure an S3 bucket as the backup target.
 
 
-
-NOTE: Astra Control Center does not support Amazon FSx for NetApp ONTAP.
-
 To install Astra Control Center in Amazon Web Services (AWS) and Microsoft Azure with a Cloud Volumes ONTAP storage backend, perform the following steps depending on your cloud environment.
 
 * <<Deploy Astra Control Center in Amazon Web Services>>
@@ -71,12 +68,12 @@ Astra Control Center requires the following resources in addition to the environ
 
 NOTE: The Astra Control Center hosted cluster and the managed cluster must have access to the same image registry to be able to back up and restore apps using the Restic-based image.
 
-| Astra Trident / ONTAP configuration | Astra Control Center requires that a storage class be created and set as the default storage class. Astra Control Center supports the following ONTAP kubectl storage classes that are created when you import your Kubernetes cluster into NetApp Cloud Manager. These are provided by Astra Trident:
+| Astra Trident / ONTAP configuration | Astra Control Center requires that a storage class be created and set as the default storage class. Astra Control Center supports the following ONTAP Kubernetes storage classes that are created when you import your Kubernetes cluster into NetApp Cloud Manager. These are provided by Astra Trident:
 
-* `vsaworkingenvironment-<>-ha-nas                 csi.trident.netapp.io   Delete          Immediate              false                  40d`
-* `vsaworkingenvironment-<>-ha-san                 csi.trident.netapp.io   Delete          Immediate              false                  40d`
-* `vsaworkingenvironment-<>-single-nas           csi.trident.netapp.io   Delete          Immediate              false                  54d`
-* `vsaworkingenvironment-<>-single-san           csi.trident.netapp.io   Delete          Immediate              false                  54d`
+* `vsaworkingenvironment-<>-ha-nas               csi.trident.netapp.io`
+* `vsaworkingenvironment-<>-ha-san               csi.trident.netapp.io`
+* `vsaworkingenvironment-<>-single-nas           csi.trident.netapp.io`
+* `vsaworkingenvironment-<>-single-san           csi.trident.netapp.io`
 |
 |===
 
@@ -130,7 +127,7 @@ NOTE: The AWS Elastic Container Registry (ECR) token expires after 12 hours and 
 Here's an example of an AWS deployment:
 
 
-image:acc-cvo-aws.png[Astra Control Center with Cloud Volumes ONTAP deployment example]
+image:acc-cvo-aws2.png[Astra Control Center with Cloud Volumes ONTAP deployment example]
 
 
 === Configure NetApp Cloud Manager
@@ -206,12 +203,12 @@ See link:../get-started/requirements.html#operational-environment-requirements[A
 
 NOTE: You need to enable anonymous access to pull Restic images for backups.
 
-| Astra Trident / ONTAP configuration | Astra Control Center requires that a storage class be created and set as the default storage class. Astra Control Center supports the following ONTAP kubectl storage classes that are created when you import your Kubernetes cluster into NetApp Cloud Manager. These are provided by Astra Trident:
+| Astra Trident / ONTAP configuration | Astra Control Center requires that a storage class be created and set as the default storage class. Astra Control Center supports the following ONTAP Kubernetes storage classes that are created when you import your Kubernetes cluster into NetApp Cloud Manager. These are provided by Astra Trident:
 
-* `vsaworkingenvironment-<>-ha-nas                 csi.trident.netapp.io   Delete          Immediate              false                  40d`
-* `vsaworkingenvironment-<>-ha-san                 csi.trident.netapp.io   Delete          Immediate              false                  40d`
-* `vsaworkingenvironment-<>-single-nas           csi.trident.netapp.io   Delete          Immediate              false                  54d`
-* `vsaworkingenvironment-<>-single-san           csi.trident.netapp.io   Delete          Immediate              false                  54d`
+* `vsaworkingenvironment-<>-ha-nas               csi.trident.netapp.io`
+* `vsaworkingenvironment-<>-ha-san               csi.trident.netapp.io`
+* `vsaworkingenvironment-<>-single-nas           csi.trident.netapp.io`
+* `vsaworkingenvironment-<>-single-san           csi.trident.netapp.io`
 |
 |===
 
@@ -275,9 +272,9 @@ This script requires ACC manifest file and your Azure ACR location.
 *Example*:
 +
 ----
-manifestfile=astra-control-center-22.04.41.manifestt
-AZ_ACR_REGISTRY=astraaccregistry.azurecr.io
-ASTRA_REGISTRY=docker.repo.eng.netapp.com/globalcicd/astra
+manifestfile=astra-control-center-<version>.manifest
+AZ_ACR_REGISTRY=<target image repository>
+ASTRA_REGISTRY=<source ACC image repository>
 
 while IFS= read -r image; do
     echo "image: $ASTRA_REGISTRY/$image $AZ_ACR_REGISTRY/$image"
