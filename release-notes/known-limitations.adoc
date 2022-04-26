@@ -25,7 +25,6 @@ Known limitations identify platforms, devices, or functions that are not support
 * <<Clones of apps installed using pass-by-reference operators can fail>>
 * <<In-place restore operations of apps that use a certificate manager are not supported>>
 * <<OLM-enabled and cluster-scoped operator deployed apps not supported>>
-* <<Cloning apps can only be done with same K8s distribution>>
 * <<Apps deployed with Helm 2 are not supported>>
 
 .General limitations
@@ -109,10 +108,6 @@ This release of Astra Control Center does not support in-place restore of apps w
 == OLM-enabled and cluster-scoped operator deployed apps not supported
 //DOC-3553/ASTRACTL-9490/AD AH/Q2/PI4/PI5
 Astra Control Center does not support application management activities with cluster-scoped operators.
-
-== Cloning apps can only be done with same K8s distribution
-//ASTRACTL-7079
-If you clone an app between clusters, the source and destination clusters must be the same distribution of Kubernetes. For example, if you clone an app from an OpenShift 4.7 cluster, use a destination cluster that is also OpenShift 4.7.
 
 == Apps deployed with Helm 2 are not supported
 //From requirements section
