@@ -11,7 +11,7 @@ summary: Astra Control Center supports  Trident storage classes backed by ONTAP 
 :imagesdir: ../media/concepts/
 
 [.lead]
-Astra Control Center supports ONTAP or Astra Data Store as the storage backend. You should understand how storage class and persistent volume (PV) size can help you meet your performance objectives.
+Astra Control Center supports ONTAP or Astra Data Store as the storage backend. 
 
 == Overview
 Astra Control Center supports the following:

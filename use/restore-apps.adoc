@@ -14,20 +14,17 @@ summary: Astra can restore your application configuration and persistent storage
 Astra Control can restore your application from a snapshot or backup. Restoring from an existing snapshot will be faster when restoring the application to the same cluster. You can use the Astra Control UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to restore apps.
 
 //Restoring from a backup can take some time because the data is transferred from your object store. Because of this, restoring from an existing snapshot to the same cluster will be faster than other methods.
-
-NOTE: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
-
+.About this task
+//ASTRACTL-12847/DOC-4147
+* It is highly recommended to snapshot or backup your application before proceeding with the restore. This will allow you to clone from the snapshot or backup in the event the restore is unsuccessful.
+* If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
 //DOC-3556
-NOTE: If you restore to a different cluster, ensure that the cluster is using the same persistent volume access mode (for example, ReadWriteMany). The restore operation will fail if the destination persistent volume access mode is different.
-
-[NOTE]
-===============================
-When you create a project for hosting an app on an OpenShift cluster, the project (or Kubernetes namespace) is assigned a SecurityContext UID. To enable Astra Control Center to protect your app and move the app to another cluster or project in OpenShift, you need to add policies that enable the app to run as any UID. As an example, the following OpenShift CLI commands grant the appropriate policies to a WordPress app.
-
+* If you restore to a different cluster, ensure that the cluster is using the same persistent volume access mode (for example, ReadWriteMany). The restore operation will fail if the destination persistent volume access mode is different.
+* When you create a project for hosting an app on an OpenShift cluster, the project (or Kubernetes namespace) is assigned a SecurityContext UID. To enable Astra Control Center to protect your app and move the app to another cluster or project in OpenShift, you need to add policies that enable the app to run as any UID. As an example, the following OpenShift CLI commands grant the appropriate policies to a WordPress app.
++
 `oc new-project wordpress`
 `oc adm policy add-scc-to-group anyuid system:serviceaccounts:wordpress`
 `oc adm policy add-scc-to-user privileged -z default -n wordpress`
-===============================
 
 .Steps
 
@@ -36,8 +33,7 @@ When you create a project for hosting an app on an OpenShift cluster, the projec
 . If you want to restore from a snapshot, keep the *Snapshots* icon selected. Otherwise, select the *Backups* icon to restore from a backup.
 //+
 //image:screenshot-restore-snapshot-or-backup.gif[A screenshot of the Data protection tab where you can view Snapshots or Backups.]
-. Select the drop-down list in the *Actions* column for the snapshot or backup from which you want to restore.
-. Select *Restore application*.
+. From the Options menu in the *Actions* column for the snapshot or backup from which you want to restore, select *Restore application*.
 //+
 //image:screenshot-restore-app.gif["A screenshot of the app page where you can select the drop-down list in the actions column and select Restore application."]
 . *Restore details*: Specify details for the restored app. By default, the current cluster and namespace appear. Leave these values intact to restore an app in-place, which reverts the app to an earlier version of itself. Change these values if you want to restore to a different cluster or namespace.
