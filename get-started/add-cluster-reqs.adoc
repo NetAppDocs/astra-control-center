@@ -24,7 +24,7 @@ Make sure your clusters have one or more worker nodes with at least 1GB RAM avai
 +
 NOTE: If you plan to add a second OpenShift 4.6, 4.7, or 4.8 cluster as a managed compute resource, you should ensure that the Astra Trident Volume Snapshot feature is enabled. See the official Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
 
-* Astra Trident StorageClasses configured with a link:requirements.html#supported_storage_backends[supported storage backend] (required for any type of cluster)
+* Astra Trident StorageClasses configured with a link:requirements.html#supported-storage-backends[supported storage backend] (required for any type of cluster)
 * The superuser and user ID set on the backing ONTAP system to back up and restore apps with Astra Control Center. Run the following command in the ONTAP command line:
 `export-policy rule modify -vserver <storage virtual machine name> -policyname <policy name>  -ruleindex 1 -superuser sysm --anon 65534`
 * An Astra Trident `volumesnapshotclass` object that has been defined by an administrator. See the Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
