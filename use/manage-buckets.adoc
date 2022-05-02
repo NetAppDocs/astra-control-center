@@ -42,26 +42,12 @@ You can do these tasks related to managing buckets:
 
 * link:../get-started/setup_overview.html#add-a-bucket[Add a bucket]
 * <<Edit a bucket>>
+* <<Rotate or remove credentials>>
 * <<Remove a bucket>>
 
 NOTE: S3 buckets in Astra Control Center do not report available capacity. Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
 
 // DOC-3561
-
-== Remove credentials
-
-Remove S3 credentials from an account at any time using the Astra Control API.
-
-For details, see https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra Control API^].
-
-
-TIP: The first set of credentials that you add to Astra Control is always in use because Astra Control uses the credentials to authenticate the backup bucket. It’s best not to remove these credentials.
-
-//.Steps
-//. Select *Account* > *Credentials*.
-//.	From the State drop-down list, select the credentials you want to remove.
-//. Select *Remove*.
-//.	Type the *remove* to confirm deletion and then select *Yes, remove credentials*.
 
 
 == Edit a bucket
@@ -71,13 +57,42 @@ You can change the access credential information for a bucket and change whether
 NOTE: When you add a bucket, select the correct bucket provider and provide the right credentials for that provider. For example, the UI accepts NetApp ONTAP S3 as the type and accepts StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail. See the link:../release-notes/known-issues.html#selecting-a-bucket-provider-type-with-credentials-for-another-type-causes-data-protection-failures[Release Notes].
 
 .Steps
-.	From left navigation, select *Buckets*.
+.	From the left navigation, select *Buckets*.
 . From the Options menu in the *Actions* column, select *Edit*.
 . Change any information other than the bucket type.
 +
 TIP: You can't modify the bucket type.
 
 . Select *Update*.
+
+== Rotate or remove credentials
+
+You might want to rotate or remove credentials.
+
+If you rotate credentials, rotate them during a maintenance window when no backups are in progress (scheduled or on-demand).
+
+Remove S3 credentials from an account at any time using the Astra Control API. For details about removing credentials, see https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra Control API^].
+
+
+TIP: The first set of credentials that you add to Astra Control is always in use because Astra Control uses the credentials to authenticate the backup bucket. Do not remove these credentials if the bucket is in active use as this will lead to backup failures and backup unavailability.
+
+
+
+.Steps to edit and rotate credentials
+
+. From the left navigation, select *Buckets*.
+. From the Options menu in the *Actions* column, select *Edit*.
+. Create the new credential.
+. Select *Update*.
+
+
+//.Steps
+//. Select *Account* > *Credentials*.
+//.	From the State drop-down list, select the credentials you want to remove.
+//. Select *Remove*.
+//.	Type the *remove* to confirm deletion and then select *Yes, remove credentials*.
+
+
 
 == Remove a bucket
 
@@ -102,6 +117,8 @@ NOTE: Astra Control ensures first that there are no schedule policies using the 
 
 . Type "remove" to confirm the action.
 . Select *Yes, remove bucket*.
+
+
 
 == Find more information
 
