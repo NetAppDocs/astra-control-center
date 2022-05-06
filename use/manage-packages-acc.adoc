@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: use/manage-packages-acc.html
 keywords: manage package, packages, install
-summary: You can upload and install packages to Astra Control Center. 
+summary: You can upload and install packages to Astra Control Center.
 ---
 
 = Manage software packages
