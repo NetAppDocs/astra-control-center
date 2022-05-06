@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: use/manage-buckets.html
-keywords: how to set up object storage in astra, how to set up astra buckets, s3, astra, setting up astra control, how to set up astra control center, kubernetes
+keywords: how to set up object storage in astra, how to set up astra buckets, s3, astra, setting up astra control, astra control center, kubernetes
 summary: Adding object store bucket providers is essential if you want to back up your applications and persistent storage or if you want to clone applications across clusters.
 ---
 
