@@ -16,14 +16,17 @@ You should ensure that the prerequisite conditions are met before you add a clus
 == What you'll need before you add a cluster
 
 * One of the following types of clusters:
-** Clusters running OpenShift 4.6, 4.7, or 4.8, which has Astra Trident StorageClasses backed by Astra Data Store or ONTAP 9.5 or later
-** Clusters running Rancher 2.5
-** Clusters running Kubernetes 1.19 to 1.21 (including 1.21.x)
+** Clusters running OpenShift 4.6.8, 4.7, 4.8, or 4.9
+** Clusters running Rancher 2.5.8, 2.5.9, or 2.6 with RKE1
+** Clusters running Kubernetes 1.20 to 1.23
+** Clusters running VMware Tanzu Kubernetes Grid 1.4
+** Clusters running VMware Tanzu Kubernetes Grid Integrated Edition 1.12.2
 +
 Make sure your clusters have one or more worker nodes with at least 1GB RAM available for running telemetry services.
 +
 NOTE: If you plan to add a second OpenShift 4.6, 4.7, or 4.8 cluster as a managed compute resource, you should ensure that the Astra Trident Volume Snapshot feature is enabled. See the official Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
 
+* Astra Trident StorageClasses configured with a link:requirements.html#supported-storage-backends[supported storage backend] (required for any type of cluster)
 * The superuser and user ID set on the backing ONTAP system to back up and restore apps with Astra Control Center. Run the following command in the ONTAP command line:
 `export-policy rule modify -vserver <storage virtual machine name> -policyname <policy name>  -ruleindex 1 -superuser sysm --anon 65534`
 * An Astra Trident `volumesnapshotclass` object that has been defined by an administrator. See the Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
@@ -120,6 +123,7 @@ Adjust the name and namespace as needed. If changes are made here, you should ap
 *astracontrol-service-account.yaml*
 ----
 +
+[source,yaml]
 ----
 apiVersion: v1
 kind: ServiceAccount
@@ -132,6 +136,7 @@ metadata:
 ----
 kubectl apply -f astracontrol-service-account.yaml
 ----
+. (Optional) If your cluster uses a restrictive pod security policy that doesn't allow privileged pod creation or allow processes within the pod containers to run as the root user, create a custom pod security policy for the cluster that enables Astra Control to create and manage pods. For instructions, see link:acc-create-podsecuritypolicy.html[Create a custom pod security policy].
 . Grant cluster admin permissions as follows:
 .. Create a `ClusterRoleBinding` file called `astracontrol-clusterrolebinding.yaml`.
 +
@@ -143,6 +148,7 @@ Adjust any names and namespaces modified when creating the service account as ne
 *astracontrol-clusterrolebinding.yaml*
 ----
 +
+[source,yaml]
 ----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -187,6 +193,7 @@ The indices for each element in the `secrets` array begin with 0. In the above e
 *create-kubeconfig.sh*
 ----
 +
+[source,sh]
 ----
 # Update these to match your environment.
 # Replace TOKEN_INDEX with the correct value

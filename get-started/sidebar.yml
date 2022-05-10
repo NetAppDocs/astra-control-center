@@ -12,6 +12,8 @@ entries:
       url: /get-started/install_acc.html
     - title: Install Astra Control Center using OpenShift OperatorHub
       url: /get-started/acc_operatorhub_install.html
+    - title: Install Astra Control Center with a Cloud Volumes ONTAP storage backend
+      url: /get-started/install_acc-cvo.html 
   - title: Set up Astra Control Center
     url: /get-started/setup_overview.html
     entries:
@@ -19,5 +21,7 @@ entries:
         url: /get-started/add-cluster-reqs.html
       - title: Add a custom TLS certificate
         url: /get-started/add-custom-tls-certificate.html
+      - title: Create a custom pod security policy
+        url: /get-started/acc-create-podsecuritypolicy.html
   - title: FAQ
     url: /get-started/faq.html

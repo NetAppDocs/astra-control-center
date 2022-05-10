@@ -10,7 +10,33 @@ summary: Add users to your Astra Control Center system and remove users that sho
 :icons: font
 :imagesdir: ../media/use/
 
-You can add, remove, and edit users of your Astra Control Center installation using the Astra Control Center UI. You can use the Astra UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to manage users.
+You can invite, add, remove, and edit users of your Astra Control Center installation using the Astra Control UI. You can use the Astra Control UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to manage users.
+
+== Invite users
+
+Account Owners and Admins can invite new users to Astra Control Center.
+
+.Steps
+
+. In the *Manage Your Account* navigation area, select *Account*.
+. Select the *Users* tab.
+. Select *Invite User*.
+. Enter the user's name and email address.
+. Select a user role with the appropriate system permissions.
++
+Each role provides the following permissions:
++
+
+* A *Viewer* can view resources.
+* A *Member* has Viewer role permissions and can manage apps and clusters, unmanage apps, and delete snapshots and backups.
+* An *Admin* has Member role permissions and can add and remove any other users except the Owner.
+* An *Owner* has Admin role permissions and can add and remove any user accounts.
+. To add constraints to a user with a Member or Viewer role, enable the *Restrict role to constraints* check box.
++
+For more information on adding constraints, see link:manage-roles.html[Manage roles].
+. Select *Invite users*.
++
+The user receives an email informing them that they’ve been invited to Astra Control Center. The email includes temporary password, which they'll need to change upon first login.
 
 == Add users
 
@@ -31,9 +57,12 @@ Each role provides the following permissions:
 +
 
 * A *Viewer* can view resources.
-* A *Member* has Viewer role permissions and can manage apps and clusters, but cannot unmanage apps or clusters, or delete snapshots or backups.
+* A *Member* has Viewer role permissions and can manage apps and clusters, unmanage apps, and delete snapshots and backups.
 * An *Admin* has Member role permissions and can add and remove any other users except the Owner.
 * An *Owner* has Admin role permissions and can add and remove any user accounts.
+. To add constraints to a user with a Member or Viewer role, enable the *Restrict role to constraints* check box.
++
+For more information on adding constraints, see link:manage-roles.html[Manage roles].
 . Select *Add*.
 
 //image:screenshot-invite-users.gif[A screenshot of the Invite Users screen where you enter a name, email address, and select a role.]
@@ -59,12 +88,12 @@ If your account has Admin or Owner role permissions, you can reset passwords for
 .Steps
 
 . In the *Manage Your Account* navigation area, select *Account*.
-. In the *Users* tab, select the drop-down list in the *State* column for the user.
+. Select the *Actions* drop-down list.
 . Select *Reset Password*.
 . Enter a temporary password that conforms to the password requirements.
 . Enter the password again to confirm.
 +
-NOTE: Next time the user logs in, the user will be prompted to change the password.
+NOTE: The next time the user logs in, the user will be prompted to change the password.
 
 . Select *Reset password*.
 
@@ -75,8 +104,13 @@ Users with the Owner role can change the role of all users, while users with the
 .Steps
 
 . In the *Manage Your Account* navigation area, select *Account*.
-. In the *Users* tab, select the drop-down list in the *Role* column for the user.
-. Select a new role and then select *Change Role* when prompted.
+. Select the *Actions* drop-down list.
+. Select *Edit role*.
+. Select a new role.
+. To apply constraints to the role, enable the *Restrict role to constraints* check box and select a constraint from the list.
++
+If there are no constraints, you can add a constraint. For more information, see link:manage-roles.html[Manage roles].
+. Select *Confirm*.
 
 .Result
 
