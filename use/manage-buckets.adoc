@@ -126,7 +126,6 @@ If there are, you will not be able to continue.
 .Steps
 . From left navigation, select *Buckets*.
 . From the *Actions* menu, select *Remove*.
-
 +
 NOTE: Astra Control ensures first that there are no schedule policies using the bucket for backups and that there are no active backups in the bucket you are about to remove.
 
