@@ -95,7 +95,7 @@ Each of these steps is explained in more detail below.
 
 
 === Ensure that you have sufficient IAM permissions
-Ensure that you have sufficient IAM roles and permissions that enable you to install a RedHat OpenShift cluster and a NetApp Cloud Volumes ONTAP connector.
+Ensure that you have sufficient IAM roles and permissions that enable you to install a RedHat OpenShift cluster and a NetApp Cloud Manager Connector.
 
 See https://docs.netapp.com/us-en/cloud-manager-setup-admin/concept-accounts-aws.html#initial-aws-credentials[Initial AWS credentials^].
 
@@ -106,23 +106,23 @@ Install a RedHat OpenShift Container Platform cluster on AWS.
 For installation instructions, see https://docs.openshift.com/container-platform/4.8/installing/installing_aws/installing-aws-default.html[Installing a cluster on AWS in OpenShift Container Platform^].
 
 === Configure AWS
-Next, configure AWS to create a virtual private cloud, set up EC2 compute instances, create an AWS S3 bucket, create an Elastic Container Register (ECR) to host the Astra Control Center images, and push the images to this registry.
+Next, configure AWS to create a virtual network, set up EC2 compute instances, create an AWS S3 bucket, create an Elastic Container Register (ECR) to host the Astra Control Center images, and push the images to this registry.
 
 Follow the AWS documentation to complete the following steps. See https://docs.openshift.com/container-platform/4.8/installing/installing_aws/installing-aws-default.html[AWS installation documentation^].
 
 
 
-. Create an AWS virtual private cloud.
+. Create an AWS virtual network.
 . Review the EC2 compute instances. This can be a bare metal server or VMs in AWS.
 . If the instance type does not already match the Astra minimum resource requirements for master and worker nodes, change the instance type in AWS to meet the Astra requirements.  See link:../requirements.html[Astra Control Center requirements].
 . Create at least one AWS S3 bucket to store your backups.
 . Create an AWS Elastic Container Registry (ECR) to host all the ACC images.
 +
-NOTE: If you do not create the ECR, Astra Control Center cannot access monitoring data from a cluster containing CVO with an AWS backend. The issue is caused when the cluster you try to discover and manage using Astra Control Center does not have AWS ECR access.
+NOTE: If you do not create the ECR, Astra Control Center cannot access monitoring data from a cluster containing Cloud Volumes ONTAP with an AWS backend. The issue is caused when the cluster you try to discover and manage using Astra Control Center does not have AWS ECR access.
 
 . Push the ACC images to your defined registry.
 
-NOTE: The AWS Elastic Container Registry (ECR) token expires after 12 hours and causes cross-cluster clone operations to fail. This issue occurs when managing a storage backend from Cloud Volumes ONTAP (CVO) configured for AWS. To correct this issue, authenticate with the ECR again and generate a new secret for clone operations to resume successfully.
+NOTE: The AWS Elastic Container Registry (ECR) token expires after 12 hours and causes cross-cluster clone operations to fail. This issue occurs when managing a storage backend from Cloud Volumes ONTAP configured for AWS. To correct this issue, authenticate with the ECR again and generate a new secret for clone operations to resume successfully.
 
 Here's an example of an AWS deployment:
 
@@ -155,7 +155,7 @@ Follow the Cloud Manager documentation to complete the following steps. See the 
 This imports your Red Hat OpenShift cluster and assigns it a default storage class. You select the storage class.
 Trident is automatically installed as part of the import and discovery process.
 
-. Note all the persistent volumes and volumes in this CVO deployment.
+. Note all the persistent volumes and volumes in this Cloud Volumes ONTAP deployment.
 
 TIP: Cloud Volumes ONTAP can operate as a single node or in High Availability. If HA is enabled, note the HA status and node deployment status running in AWS.
 
@@ -245,19 +245,19 @@ NOTE: OpenShift might create its own resource groups. In addition to these, you 
 You might want to create a platform cluster resource group and a target app OpenShift cluster resource group.
 
 === Ensure that you have sufficient IAM permissions
-Ensure that you have sufficient IAM roles and permissions that enable you to install a RedHat OpenShift cluster and a NetApp Cloud Volumes ONTAP connector.
+Ensure that you have sufficient IAM roles and permissions that enable you to install a RedHat OpenShift cluster and a NetApp Cloud Manager Connector.
 
 See https://docs.netapp.com/us-en/cloud-manager-setup-admin/concept-accounts-azure.html[Azure credentials and permissions^].
 
 === Configure Azure
-Next, configure Azure to create a virtual private cloud, set up compute instances, create an Azure Blob S3 bucket, create an Azure Container Register (ACR) to host the Astra Control Center images, and push the images to this registry.
+Next, configure Azure to create a virtual network, set up compute instances, create an Azure Blob container, create an Azure Container Register (ACR) to host the Astra Control Center images, and push the images to this registry.
 
 Follow the Azure documentation to complete the following steps. See https://docs.openshift.com/container-platform/4.8/installing/installing_aws/installing-azure-default.html[Installing OpenShift cluster on Azure^].
 
-. Create an Azure virtual private cloud.
+. Create an Azure virtual network.
 . Review the compute instances. This can be a bare metal server or VMs in Azure.
 . If the instance type does not already match the Astra minimum resource requirements for master and worker nodes, change the instance type in Azure to meet the Astra requirements.  See link:../get-started/requirements.html[Astra Control Center  requirements].
-. Create at least one Azure Blob S3 bucket to store your backups.
+. Create at least one Azure Blob container to store your backups.
 . Create a storage account. You will need a storage account to create a container to be used as a bucket in Astra Control Center.
 . Create a secret, which is required for bucket access.
 . Create an Azure Container Registry (ACR) to host all the Astra Control Center images.
@@ -325,13 +325,13 @@ image:acc-cvo-azure-working-environment.png[Creating a working environment in Cl
 image:acc-cvo-azure-connected.png[Imported cluster in Cloud Manager]
 
 .. In the upper right corner, note the Trident version.
-.. Note the CVO cluster storage classes showing NetApp as the provisioner.
+.. Note the Cloud Volumes ONTAP cluster storage classes showing NetApp as the provisioner.
 
 +
 This imports your Red Hat OpenShift cluster and assigns a default storage class. You select the storage class.
 Trident is automatically installed as part of the import and discovery process.
 
-. Note all the persistent volumes and volumes in this CVO deployment.
+. Note all the persistent volumes and volumes in this Cloud Volumes ONTAP deployment.
 . Cloud Volumes ONTAP can operate as a single node or in High Availability. If HA is enabled, note the HA status and node deployment status running in Azure.
 
 === Install and configure Astra Control Center
