@@ -153,13 +153,15 @@ NOTE: If you selected a manual approval strategy, you will be prompted to approv
 . From the console within the details view of the Astra Control Center operator, select `Create instance` in the Provided APIs section.
 . Complete the `Create AstraControlCenter` form field:
 .. Keep or adjust the Astra Control Center name.
-.. (Optional) Enable or disable Auto Support. Retaining Auto Support functionality is recommended.
-.. Enter the Astra Control Center address. Do not enter `http://` or `https://` in the address.
-.. Enter the Astra Control Center version; for example, 21.12.60.
+.. Add labels for the Astra Control Center.
+.. Enable or disable Auto Support. Retaining Auto Support functionality is recommended.
+.. Enter the Astra Control Center address. Do not enter `http://` or `https://` in the address field.
+.. Enter the Astra Control Center version; for example, 22.04.1.
 .. Enter an account name, email address, and admin last name.
 .. Retain the default volume reclaim policy.
-.. In *Image Registry*, enter your local container image registry path. Do not enter `http://` or `https://` in the address.
+.. Select the ingress type.
 .. If you use a registry that requires authentication, enter the secret.
+.. In *Image Registry*, enter your local container image registry path. Do not enter `http://` or `https://` in the address field.
 .. Enter the admin first name.
 .. Configure resources scaling.
 .. Retain the default storage class.
