@@ -17,7 +17,7 @@ We're pleased to announce the latest 22.04.0 release of Astra Control Center.
 .New features and support
 
 * link:../concepts/user-roles-namespaces.html[Namespace role-based access control (RBAC)]
-* link:../get-started/install_acc-cvo.html[Support for Cloud Volumes ONTAP (CVO)]
+* link:../get-started/install_acc-cvo.html[Support for Cloud Volumes ONTAP]
 * link:../get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Generic ingress enablement for Astra Control Center]
 * link:../use/manage-buckets.html#remove-a-bucket[Bucket removal from Astra Control]
 * link:../get-started/requirements.html#tanzu-kubernetes-grid-cluster-requirements[Support for VMware Tanzu Portfolio]
