@@ -43,13 +43,14 @@ Astra Control can restore your application from a snapshot or backup. Restoring 
 * Choose the destination cluster for the app.
 * Select *Review*.
 
+. *Restore Summary*: Review details about the restore action, type "restore", and select *Restore*.
+
 // Q2 note only; remove for Q3 and later - DOC-3548
 //NOTE: If you are restoring an app that has been deleted, choose a different name and namespace for the app than the original name. If the name for the restored app is the same as the deleted app, the restore operation will fail.
 
 //* Choose the destination cluster for the app.
 //* Select *Review*.
 
-. *Restore Summary*: Review details about the restore action, type "restore", and select *Restore*.
 //+
 //image:screenshot-restore-summary.gif[]
 
