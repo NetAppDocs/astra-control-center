@@ -6,7 +6,7 @@ summary: Astra is a Kubernetes application data lifecycle management service tha
 
 ---
 
-= Intro to Astra Control
+= Learn about Astra Control
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/concepts/
