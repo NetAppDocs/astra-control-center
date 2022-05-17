@@ -72,9 +72,6 @@ Astra Control uses bucket credentials to gain access and provide secret keys for
 
 If you rotate credentials, rotate them during a maintenance window when no backups are in progress (scheduled or on-demand).
 
-
-
-
 .Steps to edit and rotate credentials
 
 . From the left navigation, select *Buckets*.
@@ -91,7 +88,7 @@ If you rotate credentials, rotate them during a maintenance window when no backu
 
 === Remove bucket credentials
 
-You should only remove bucket credentials if new credentials have been applied to a bucket, or if the bucket is no longer actively used.
+You should remove bucket credentials only if new credentials have been applied to a bucket, or if the bucket is no longer actively used.
 
 
 TIP: The first set of credentials that you add to Astra Control is always in use because Astra Control uses the credentials to authenticate the backup bucket. Do not remove these credentials if the bucket is in active use as this will lead to backup failures and backup unavailability.
