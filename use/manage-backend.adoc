@@ -137,19 +137,19 @@ If you hover over the license information, a popup appears with more information
 . In the *Update license* page, do one of the following:
 +
 |===
-|Status |Action
+|License status |Action
 
 |At least one license has been added to Astra Data Store.
 a|
 
-.. Select a license from the list.
+Select a license from the list.
 
 |No licenses have been added to Astra Data Store.
 a|
 
 .. Select the *Add* button.
-.. Select a license file to add.
-.. Select *Add*.
+.. Select a license file to upload.
+.. Select *Add* to upload the license file.
 
 |===
 
