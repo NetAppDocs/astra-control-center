@@ -16,22 +16,22 @@ You can create backups, clones, snapshots, and protection policies for your apps
 
 You can use the following example workflow to get started protecting your apps.
 
-==== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png[One] Back up all apps
+=== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png[One] Back up all apps
 
 [role="quick-margin-para"]
 To make sure that your apps are immediately protected, link:protect-apps.html#create-a-backup[create a manual backup of all apps].
 
-==== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png[Two] Configure a protection policy for each app
+=== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png[Two] Configure a protection policy for each app
 
 [role="quick-margin-para"]
 To automate future backups and snapshots, link:protect-apps.html#configure-a-protection-policy[configure a protection policy for each app]. As an example, you can start with weekly backups and daily snapshots, with one month retention for both. Automating backups and snapshots with a protection policy is strongly recommended over manual backups and snapshots.
 
-==== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png[Three] Optional: Adjust the protection policies
+=== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png[Three] Optional: Adjust the protection policies
 
 [role="quick-margin-para"]
 As apps and their usage patterns change, adjust the protection policies as needed to provide the best protection.
 
-==== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png[Four] In case of a disaster, restore your apps
+=== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png[Four] In case of a disaster, restore your apps
 
 [role="quick-margin-para"]
 If data loss occurs, you can recover by link:restore-apps.html[restoring the latest backup] first for each app. You can then restore the latest snapshot (if available).
