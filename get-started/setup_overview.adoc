@@ -111,6 +111,10 @@ IMPORTANT: After you add your Kubernetes app cluster for Astra Data Store and it
 
 * You have uploaded the Astra Data Store license for your deployment to a location that is accessible to Astra Control.
 
+//* You have the IPs you need for the new Astra Data Store.
+
+//* You have the node label you intend to use for the K8s worker nodes for ADS.
+
 .Options
 
 * <<Deploy storage resources>>
