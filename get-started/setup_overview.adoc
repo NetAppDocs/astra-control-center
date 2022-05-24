@@ -141,7 +141,7 @@ NOTE: If you have not yet uploaded the version you intend to deploy, you can use
 . Select an Astra Data Store license that you have previously uploaded or use the *Add license* option to upload a license to use with the application.
 +
 NOTE: Astra Data Store licenses with full permissions are associated with your Kubernetes cluster, and these associated clusters should appear automatically. If there is no managed cluster, you can select the *Add a Cluster* option to add one to Astra Control management.
-For Astra Data Store preview licenses, if no association has been made between the preview license and cluster, you can define this association on the next page of the wizard.
+For Astra Data Store licenses, if no association has been made between the license and cluster, you can define this association on the next page of the wizard.
 
 . If you have not added a Kubernetes cluster to Astra Control management, you need to do so from the *Kubernetes cluster* page. Select an existing cluster from the list or select *add the underlying cluster* to add a cluster to Astra Control management.
 . Select the deployment template size for the Kubernetes cluster that will provide resources for Astra Data Store.
