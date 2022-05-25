@@ -25,7 +25,7 @@ We're pleased to announce the latest 22.04.0 release of Astra Control Center.
 
 .Known issues and limitations
 * link:../release-notes/known-issues.html[Known issues for this release]
-* link:../release-notes/known-issues-ads.html[Known issues with Astra Data Store preview and this Astra Control Center release]
+* link:../release-notes/known-issues-ads.html[Known issues with Astra Data Store and this Astra Control Center release]
 * link:../release-notes/known-limitations.html[Known limitations for this release]
 
 == 14 December 2021 (21.12)
