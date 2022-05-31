@@ -321,8 +321,6 @@ Astra Control Center uses a service of the type "LoadBalancer" (`svc/traefik` in
 +
 NOTE: For details about the service type of "LoadBalancer" and ingress, see link:../get-started/requirements.html[Requirements].
 
-.. (For installations using Astra Data Store preview) See this known issue for link:../release-notes/known-issues-ads.html#astra-data-store-cannot-be-used-as-a-storage-class-for-astra-control-center-due-to-mongodb-pod-liveness-probe-failure[additional required changes] to the YAML.
-
 +
 [subs=+quotes]
 ----

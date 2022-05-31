@@ -12,53 +12,8 @@ summary: Known issues identify problems that might prevent you from using this r
 
 Known issues identify problems that might prevent you from using this release of the product successfully.
 
-The following known issues affect the management of Astra Data Store with this current release of the Astra Control Center:
-
-== Astra Data Store cannot be used as a storage class for Astra Control Center due to MongoDB pod liveness probe failure
-//ASTRACTL-13036/DOC-3904/BURT1439334/Keep until ADS GA
-When you attempt to use Astra Data Store as the storage class provisioner during an Astra Control Center deployment, the MongoDB pod liveness probe fails, resulting in a deployment that will not complete.
-
-To correct this issue, make the following changes in addition to the standard YAML changes when completing the link:../get-started/install_acc.html#configure-astra-control-center[Astra Control Center installation process]:
-
-. Edit the link:../get-started/install_acc.html#configure-the-astra-control-center-operator[Astra Control Center operator deployment YAML (astra_control_center_operator_deploy.yaml)] to change the Helm install timeout:
-+
-----
-- name: ACCOP_HELM_INSTALLTIMEOUT
-  value: 20m
-----
-
-. Edit the link:../get-started/install_acc.html#configure-astra-control-center[Astra Control Center custom resource (CR) file (astra_control_center_min.yaml)] and include the highlighted additional values under `spec`:
-+
-[subs=+quotes]
-----
-apiVersion: astra.netapp.io/v1
-kind: AstraControlCenter
-metadata:
-  name: astra
-*spec:*
-  accountName: "Example"
-  astraVersion: "ASTRA_VERSION"
-  astraAddress: "astra.example.com"
-  autoSupport:
-    enrolled: true
-  email: "[admin@example.com]"
-  firstName: "SRE"
-  lastName: "Admin"
-  imageRegistry:
-    name: "[your_registry_path]"
-    secret: "astra-registry-cred"
-  storageClass: "ontap-gold"
-  *additionalValues:*
-    *polaris-mongodb:*
-      *mongodb:*
-        *livenessProbe:*
-          *initialDelaySeconds: 400*
-      *metrics:*
-        *livenessProbe:*
-          *initialDelaySeconds: 400*
-----
+https://docs.netapp.com/us-en/astra-data-store/release-notes/known-issues.html[See these known issues] that might affect the management of Astra Data Store with the current release of the Astra Control Center.
 
 == Find more information
 * link:../release-notes/known-issues.html[Known issues]
 * link:../release-notes/known-limitations.html[Known limitations]
-* https://docs.netapp.com/us-en/astra-data-store/index.html[Astra Data Store documentation]
