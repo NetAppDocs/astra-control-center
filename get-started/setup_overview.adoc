@@ -126,8 +126,7 @@ You can deploy a new Astra Data Store and manage the associated storage backend.
 .Steps
 . Navigate from the Dashboard or the Backends menu:
 * From *Dashboard*:
-.. From the Storage backend section, select *Add*.
-.. From the Resource Summary > Storage backends section, select *Add*.
+.. From the Resource Summary, select a link from the Storage Backends pane and select *Add* from the Backends section.
 * From *Backends*:
 .. In the left navigation area, select *Backends*.
 .. Select *Add*.
@@ -136,7 +135,7 @@ You can deploy a new Astra Data Store and manage the associated storage backend.
 .. Enter a name for the Astra Data Store application.
 .. Choose the version of Astra Data Store you want to deploy.
 +
-NOTE: If you have not yet uploaded the version you intend to deploy, you can use the *Add package* option or exit the wizard and use the package service to upload the installation bundle.
+NOTE: If you have not yet uploaded the version you intend to deploy, you can use the *Add package* option or exit the wizard and use link:../use/manage-packages-acc.html[package management] to upload the installation bundle.
 
 . Select an Astra Data Store license that you have previously uploaded or use the *Add license* option to upload a license to use with the application.
 +
@@ -163,10 +162,10 @@ NOTE: Create at least three unique labels for the key for each node. For example
 .. Enter a management IP address for Astra Data Store internal management that is on the same subnet as worker node IP addresses.
 .. Choose to use the same NIC for both management and data networks or configure them separately.
 .. Enter data network IP address pool, subnet mask and gateway for storage access.
-. Review the configuration and select *Deploy storage backend* to begin installation.
+. Review the configuration and select *Deploy* to begin installation.
 
 .Result
-After a successful installation, the backend appears with a status of `available` in the backends list along with active performance information.
+After a successful installation, the backend appears in `available` state in the backends list along with active performance information.
 
 NOTE: You might need to refresh the page for the backend to appear.
 
@@ -178,8 +177,7 @@ You can bring a discovered ONTAP or Astra Data Store storage backend into Astra 
 
 . Navigate from the Dashboard or the Backends menu:
 * From *Dashboard*:
-.. From the Storage backend section, select *Add*.
-.. From the Resource Summary > Storage backends section, select *Add*.
+.. From the Resource Summary, select a link from the Storage Backends pane and select *Add* from the Backends section.
 * From *Backends*:
 .. In the left navigation area, select *Backends*.
 .. Select *Manage* on a discovered backend from the managed cluster or select *Add* to manage an additional existing backend.
