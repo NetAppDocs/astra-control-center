@@ -27,8 +27,8 @@ Ensure that the operating environment you choose to host Astra Control Center me
 |===
 |Component |Requirement
 
-|ONTAP backend storage capacity
-|At least 300GB available
+|Storage backend capacity
+|At least 500GB available
 
 //|Controller nodes
 //|3 controller nodes with 4 CPU cores, 16GB RAM, and 120GB of available storage each
