@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: use/manage-backend.html
-keywords: how to use astra control, what is astra storage, how to set up astra storage backend, ontap storage in astra, backend storage in astra 
+keywords: how to use astra control, what is astra storage, how to set up astra storage backend, ontap storage in astra, backend storage in astra
 summary: Add storage for your on-premises Kubernetes applications. Astra Control discovers and uses the already-deployed resources, including Trident, ONTAP, and associated storage classes.
 ---
 
@@ -130,13 +130,29 @@ You can update the license for an Astra Data Store storage backend to support a 
 
 .	From the left navigation, select *Backends*.
 . Select the name of a storage backend.
-. Under *Basic Information*, you can see the type of license installed, if any.
+. Under *Basic Information*, you can see the type of license installed.
 +
 If you hover over the license information, a popup appears with more information, such as expiration and entitlement information.
 . Under *License*, select the edit icon next to the license name.
-. In the *Update license* page, select *Add license*.
-. Select a license file that you have obtained from NetApp.
-. Select *Add*.
+. In the *Update license* page, do one of the following:
++
+|===
+|License status |Action
+
+|At least one license has been added to Astra Data Store.
+a|
+
+Select a license from the list.
+
+|No licenses have been added to Astra Data Store.
+a|
+
+.. Select the *Add* button.
+.. Select a license file to upload.
+.. Select *Add* to upload the license file.
+
+|===
+
 . Select *Update*.
 
 == Add nodes to a storage backend cluster
