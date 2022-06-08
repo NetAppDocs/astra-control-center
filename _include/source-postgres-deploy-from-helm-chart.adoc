@@ -37,7 +37,7 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 . Deploy Postgres with the command:
 +
 ----
-Helm install <name> --namespace <namespace> --create-namespace -–set persistence.storageClass=<storage_class>
+helm install <name> --namespace <namespace> --create-namespace -–set global.storageClass=<storage_class>
 ----
 +
 NOTE: If the volume size is changed, use Kibibyte (Ki), Mebibyte (Mi) or Gibibyte (Gi) units.
