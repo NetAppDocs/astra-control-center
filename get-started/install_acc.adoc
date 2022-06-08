@@ -42,10 +42,13 @@ The Astra Control Center installation process does the following:
 * Establishes a default administrative user email address and default one-time password of `ACC-<UUID_of_installation>` for this instance of Astra Control Center. This user is assigned the Owner role in the system and is needed for first time login to the UI.
 * Helps you determine that all Astra Control Center pods are running.
 * Installs the Astra UI.
+//VMware ADS EAP review
 
-NOTE: If you are using Red Hat’s Podman instead of Docker Engine, Podman commands can be used in place of Docker commands.
+IMPORTANT: (Applies to the Astra Data Store Early Access Program (EAP) release only) If you intend to manage Astra Data Store using Astra Control Center and enable VMware workflows, deploy Astra Control Center only on the `pcloud` namespace and not on the `netapp-acc` namespace or a custom namespace described in the steps of this procedure.
 
 IMPORTANT: Do not execute the following command during the entirety of the installation process to avoid deleting all Astra Control Center pods: `kubectl delete -f astra_control_center_operator_deploy.yaml`
+
+NOTE: If you are using Red Hat’s Podman instead of Docker Engine, Podman commands can be used in place of Docker commands.
 
 .Steps
 
