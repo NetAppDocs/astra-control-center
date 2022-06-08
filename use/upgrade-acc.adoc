@@ -221,12 +221,12 @@ additionalValues:
 .. If you don't have your own IngressController or ingress and have been using the Astra Control Center with its Traefik gateway as a LoadBalancer type service and would like to continue with that setup, specify another field `ingressType` (if not already present) and set it to `AccTraefik`.
 +
 ----
-ingressType:AccTraefik
+ingressType: AccTraefik
 ----
 .. If you want to switch to the default Astra Control Center generic ingress deployment, provide your own IngressController/Ingress setup (with TLS termination, etc.), open up a route to Astra Control Center, and set `ingressType` to `Generic`.
 +
 ----
-ingressType:Generic
+ingressType: Generic
 ----
 +
 TIP: If you omit the field, the process becomes the generic deployment. If you don't want the generic deployment, be sure to add the field.
