@@ -19,7 +19,7 @@ NetApp delivers additional capabilities for Astra Control Center with software p
 * A connected artifact repository to hold software package binaries and artifacts. For more information, see link:manage-connections.html[Manage repository connections].
 * A software package from the NetApp Support Site
 
-== Upload a software package to the repositories
+== Upload software package images to the repositories
 Astra Control Center references package images and artifacts in connected repositories. You can upload images and artifacts to the repositories using the CLI.
 
 .Steps
