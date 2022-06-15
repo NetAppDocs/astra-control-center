@@ -5,6 +5,7 @@ settings:
     pdf_enabled: true
   prod:
     pdf_enabled: true
+    harmony_enabled: true
 sidebar:
   entries:
     - title: Astra Control Center docs
@@ -123,3 +124,4 @@ homepage:
           url: https://cloud.netapp.com/kubernetes-hub
         - title: Where to get help
           url: /support/get-help.html
+
