@@ -1,6 +1,6 @@
 Learn how to deploy Jenkins from the https://bitnami.com/stack/jenkins/helm[Bitnami Helm chart^]. After you deploy Jenkins on your cluster, you can register the application with Astra Control.
 
-Jenkins is a validated app for Astra Control. 
+Jenkins is a validated app for Astra Control.
 
 * https://docs.netapp.com/us-en/astra/learn/validated-vs-standard.html[Learn the difference between a validated app and a standard app in Astra Control Service^].
 
@@ -40,7 +40,7 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 . Create the `jenkins` namespace and deploy Jenkins into it with the command:
 +
 ----
-Helm install <name> --namespace <namespace> --create-namespace -–set persistence.storageClass=<storage_class>
+helm install <name> bitnami/jenkins –namespace <namespace> --create-namespace –set global.storageClass=<storage_class_name>
 ----
 +
 NOTE: If the volume size is changed, use Kibibyte (Ki), Mebibyte (Mi) or Gibibyte (Gi) units.

@@ -36,7 +36,8 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 
 +
 ----
-Helm install <name> --namespace <namespace> --create-namespace -–set persistence.storageClass=<storage_class>
+helm install <name> bitnami/mysql –namespace <namespace>
+--create-namespace –set global.storageClass=<storage_class_name>
 ----
 
 +
