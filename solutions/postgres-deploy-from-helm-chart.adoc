@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: solutions/postgres-deploy-from-helm-chart.html
-keywords: how to deploy apps in astra, how to deploy postgres from a helm chart, set up from helm chart, astra, astra control, kubernetes
+keywords: how to deploy apps in astra, how to deploy postgres from a helm chart, set up from helm chart, astra control, kubernetes
 summary: Learn how to deploy Postgres from a Helm chart. After you deploy Postgres on your cluster, you can register the application with Astra Control.
 ---
 
