@@ -62,7 +62,7 @@ for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do
 done
 ----
 ////
-This content should replace above script - commented out for DOC-4286
+This content should replace above script - commented out for DOC-4286. Note that for ADS, copying the artifacts isn't necessary as ADS doesn't have artifacts.
 . Push the package images to the Docker repository. Make the following substitutions:
 +
 
