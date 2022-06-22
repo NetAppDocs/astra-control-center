@@ -55,6 +55,15 @@ You can complete the following tasks related to managing a storage backend:
 == View storage backend details
 You can view storage backend information from the Dashboard or from the Backends option.
 
+In the Storage Backend Details page, for Astra Data Store, you can see the following information:
+
+* Astra Data Store cluster
+** Throughput, IOPS, and latency
+** Used capacity compared to total capacity
+* For each Astra Data Store cluster volume
+** Used capacity compared to total capacity
+** Throughput
+
 === View storage backend details from the Dashboard
 
 .Steps
