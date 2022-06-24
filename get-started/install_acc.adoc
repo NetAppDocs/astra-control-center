@@ -99,7 +99,7 @@ cd astra-control-center-[version]
 ----
 ls ../kubectl-astra/
 ----
-. Copy the file to the same location as the `kubectl` utility. Replace `<binary-name>` with the name of the file you need:
+. Copy the file to the same location as the standard `kubectl` utility. In this example, the `kubectl` utility is located in the `/usr/local/bin` directory. Replace `<binary-name>` with the name of the file you need:
 +
 ----
 cp ../kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
