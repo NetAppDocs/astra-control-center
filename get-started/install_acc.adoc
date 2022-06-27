@@ -54,9 +54,9 @@ NOTE: If you are using Red Hat’s Podman instead of Docker Engine, Podman comma
 
 To install Astra Control Center, do the following steps:
 
-* <<Download the Astra Control Center bundle>>
+* <<Download and unpack the Astra Control Center bundle>>
 //* <<Unpack the bundle and change directory>>
-* <<Unpack the bundle>>
+//* <<Unpack the bundle>>
 * <<Install the NetApp Astra kubectl plugin>>
 * <<Add the images to your local registry>>
 * <<Set up namespace and secret for registries with auth requirements>>
@@ -66,8 +66,6 @@ To install Astra Control Center, do the following steps:
 * <<Verify system status>>
 * <<Set up ingress for load balancing>>
 * <<Log in to the Astra Control Center UI>>
-
-
 
 == Download and unpack the Astra Control Center bundle
 
