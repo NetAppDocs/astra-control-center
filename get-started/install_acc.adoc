@@ -78,7 +78,8 @@ To install Astra Control Center, do the following steps:
 openssl dgst -sha256 -verify astra-control-center[version].pub -signature <astra-control-center[version].sig astra-control-center[version].tar.gz
 ----
 
-== Unpack the bundle and change directory
+//== Unpack the bundle and change directory
+== Unpack the bundle
 
 . Extract the images:
 +
@@ -86,23 +87,25 @@ openssl dgst -sha256 -verify astra-control-center[version].pub -signature <astra
 tar -vxzf astra-control-center-[version].tar.gz
 ----
 
-. Change to the Astra directory.
-+
-----
-cd astra-control-center-[version]
-----
-
 == Install the NetApp Astra kubectl plugin
+
+The NetApp Astra `kubectl` command line plugin saves time when performing common tasks associated with deploying and upgrading Astra Control Center.
+
+.What you'll need
+
+NetApp provides binaries for the plugin for different CPU architectures and operating systems. You need to know which CPU and operating system you have before you perform this task. On Linux and Mac operating systems, you can use the `uname -a` command to gather this information.
+
+.Steps
 
 . List the available NetApp Astra `kubectl` plugin binaries, and note the name of the file you need for your operating system and CPU architecture:
 +
 ----
-ls ../kubectl-astra/
+ls kubectl-astra/
 ----
 . Copy the file to the same location as the standard `kubectl` utility. In this example, the `kubectl` utility is located in the `/usr/local/bin` directory. Replace `<binary-name>` with the name of the file you need:
 +
 ----
-cp ../kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
+cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 ----
 
 == Add the images to your local registry
