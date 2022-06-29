@@ -108,7 +108,7 @@ cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 
 == Add the images to your local registry
 
-. Change to the Astra directory.
+. Change to the Astra directory:
 +
 ----
 cd acc
