@@ -61,8 +61,8 @@ You can connect an artifact repository to host artifacts such as software packag
 . In the *Artifact Repository* section, select the menu at the top right.
 . Select *Connect*.
 . Add the URL and port for the repository.
-//. If authentication is required, enable the *Use authentication* check box and enter the credentials for the repository.
-. Enter the credentials for the repository.
+. If authentication is required, enable the *Use authentication* check box and enter the credentials for the repository.
+//. Enter the credentials for the repository.
 . Select *Connect*.
 
 .Result
