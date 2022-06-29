@@ -15,9 +15,10 @@ With Astra Control Center, you can manage your apps in a hybrid cloud environmen
 With one of these deployments, you can perform app data management operations using Cloud Volumes ONTAP as a storage backend. You can also configure an S3 bucket as the backup target.
 
 
-To install Astra Control Center in Amazon Web Services (AWS) and Microsoft Azure with a Cloud Volumes ONTAP storage backend, perform the following steps depending on your cloud environment.
+To install Astra Control Center in Amazon Web Services (AWS), Google Cloud Platform (GCP) and Microsoft Azure with a Cloud Volumes ONTAP storage backend, perform the following steps depending on your cloud environment.
 
 * <<Deploy Astra Control Center in Amazon Web Services>>
+* <<Deploy Astra Control Center in Google Cloud Platform>>
 * <<Deploy Astra Control Center in Microsoft Azure>>
 
 
@@ -162,6 +163,194 @@ TIP: Cloud Volumes ONTAP can operate as a single node or in High Availability. I
 === Install Astra Control Center
 Follow the standard link:../get-started/install_acc.html[Astra Control Center installation instructions].
 
+
+
+
+
+== Deploy Astra Control Center in Google Cloud Platform
+
+You can deploy Astra Control Center on a self-managed Kubernetes cluster hosted on a Google Cloud Platform (GCP) public cloud.
+
+Only self-managed OpenShift Container Platform (OCP) clusters are supported for deploying Astra Control Center.
+
+=== What you'll need for GCP
+
+Before you deploy Astra Control Center in GCP, you will need the following items:
+
+* Astra Control Center license. See link:../get-started/requirements.html[Astra Control Center licensing requirements].
+* link:../get-started/requirements.html[Meet Astra Control Center requirements].
+* NetApp Cloud Central account
+* Red Hat OpenShift Container Platform (OCP) 4.10
+* Red Hat OpenShift Container Platform (OCP) permissions (on namespace level to create pods)
+* GCP Service Account with permissions that enable you to create buckets and connectors
+
+
+
+=== Operational environment requirements for GCP
+
+
+NOTE: Ensure that the operating environment you choose to host Astra Control Center meets the basic resource requirements outlined in the environment’s official documentation.
+
+Astra Control Center requires the following resources in addition to the environment’s resource requirements:
+
+
+[cols=2*,options="header",cols="1h,2a"]
+|===
+| Component
+| Requirement
+| Backend NetApp Cloud Volumes ONTAP storage capacity | At least 300GB available
+| Worker nodes (GCP compute requirement) | At least 3 worker nodes total, with 4 vCPU cores and 12GB RAM each
+| Load balancer | Service type "LoadBalancer" available for ingress traffic to be sent to services in the operational environment cluster
+| FQDN (GCP DNS zone) | A method for pointing the FQDN of Astra Control Center to the load balanced IP address
+| Astra Trident (installed as part of the Kubernetes cluster discovery in NetApp Cloud Manager) | Astra Trident 21.04 or newer installed and configured and NetApp ONTAP version 9.5 or newer as a storage backend
+| Image registry | You must have an existing private registry, such as Google Container Registry, to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
+
+NOTE: You need to enable anonymous access to pull Restic images for backups.
+
+| Astra Trident / ONTAP configuration | Astra Control Center requires that a storage class be created and set as the default storage class. Astra Control Center supports the following ONTAP Kubernetes storage classes that are created when you import your Kubernetes cluster into NetApp Cloud Manager. These are provided by Astra Trident:
+
+* `vsaworkingenvironment-<>-ha-nas               csi.trident.netapp.io`
+* `vsaworkingenvironment-<>-ha-san               csi.trident.netapp.io`
+* `vsaworkingenvironment-<>-single-nas           csi.trident.netapp.io`
+* `vsaworkingenvironment-<>-single-san           csi.trident.netapp.io`
+|
+|===
+
+NOTE: These requirements assume that Astra Control Center is the only application running in the operational environment. If the environment is running additional applications, adjust these minimum requirements accordingly.
+
+
+
+=== Overview of deployment for GCP
+Here is an overview of the process to install Astra Control Center for GCP with Cloud Volumes ONTAP as a storage backend.
+
+Each of these steps is explained in more detail below.
+
+. <<Install a RedHat OpenShift cluster on GCP>>.
+. <<Create a GCP Project and Virtual Private Cloud>>.
+. <<Ensure that you have sufficient IAM permissions>>.
+. <<Configure GCP>>.
+. <<Configure NetApp Cloud Manager>>.
+. <<Install and configure Astra Control Center>>.
+
+
+
+
+
+=== Install a RedHat OpenShift cluster on GCP
+The first step is to install a RedHat OpenShift cluster on GCP.
+
+For installation instructions, see the following:
+
+* https://access.redhat.com/documentation/en-us/openshift_container_platform/4.10/html-single/installing/index#installing-on-gcp[Installing an OpenShift cluster in GCP^]
+
+* https://cloud.google.com/iam/docs/creating-managing-service-accounts#creating_a_service_account[Creating a GCP Service Account^]
+
+=== Create a GCP Project and Virtual Private Cloud
+
+Create at least one GCP Project and Virtual Private Cloud (VPC).
+
+NOTE: OpenShift might create its own resource groups. In addition to these, you should also define a GCP VPC. Refer to OpenShift documentation.
+
+You might want to create a platform cluster resource group and a target app OpenShift cluster resource group.
+
+
+=== Ensure that you have sufficient IAM permissions
+Ensure that you have sufficient IAM roles and permissions that enable you to install a RedHat OpenShift cluster and a NetApp Cloud Manager Connector.
+
+See https://docs.netapp.com/us-en/cloud-manager-setup-admin/task-creating-connectors-gcp.html#setting-up-permissions[Initial GCP credentials and permissions^].
+
+=== Configure GCP
+Next, configure GCP to create a VPC, set up compute instances, create a Google Cloud Object Storage, create an Google Container Register to host the Astra Control Center images, and push the images to this registry.
+
+Follow the GCP documentation to complete the following steps. See Installing OpenShift cluster in GCP.
+
+. Create a GCP Project and VPC in the GCP that you plan on using for the OCP cluster with CVO backend.
+
+. Review the compute instances. This can be a bare metal server or VMs in GCP.
+. If the instance type does not already match the Astra minimum resource requirements for master and worker nodes, change the instance type in GCP to meet the Astra requirements. See link:../get-started/requirements.html[Astra Control Center requirements].
+
+. Create at least one GCP Cloud Storage Bucket to store your backups.
+
+. Create a secret, which is required for bucket access.
+
+. Create a Google Container Registry to host all the Astra Control Center images.
+
+. Set up Google Container Registry access for Docker push/pull for all the Astra Control Center images.
++
+Example: ACC images can be pushed to this registry by entering the following script:
++
+----
+gcloud auth activate-service-account <service account email address>
+--key-file=<GCP Service Account JSON file>
+----
+
++
+This script requires an Astra Control Center manifest file and your Google Image Registry location.
+
++
+Example:
++
+----
+manifestfile=astra-control-center-<version>.manifest
+GCP_CR_REGISTRY=<target image repository>
+ASTRA_REGISTRY=<source ACC image repository>
+
+while IFS= read -r image; do
+    echo "image: $ASTRA_REGISTRY/$image $GCP_CR_REGISTRY/$image"
+    root_image=${image%:*}
+    echo $root_image
+    docker pull $ASTRA_REGISTRY/$image
+    docker tag $ASTRA_REGISTRY/$image $GCP_CR_REGISTRY/$image
+    docker push $GCP_CR_REGISTRY/$image
+done < astra-control-center-22.04.41.manifest
+----
+
+. Set up DNS zones.
+
+
+=== Configure NetApp Cloud Manager
+Using Cloud Manager, create a workspace, add a connector to GCP, create a working environment, and import the cluster.
+
+Follow the Cloud Manager documentation to complete the following steps. See https://docs.netapp.com/us-en/occm/task_getting_started_gcp.html[Getting started with Cloud Volumes ONTAP in GCP^].
+
+.What you'll need
+* Access to the GCP Service Account with the required IAM permissions and roles
+
+.Steps
+. Add your credentials to Cloud Manager. See https://docs.netapp.com/us-en/cloud-manager-setup-admin/task-adding-gcp-accounts.html[Adding GCP accounts^].
+. Add a connector for GCP.
+.. Choose "GCP" as the Provider.
+.. Enter GCP credentials. See https://docs.netapp.com/us-en/cloud-manager-setup-admin/task-creating-connectors-gcp.html[Creating a connector in GCP from Cloud Manager^].
+.. Ensure that the connector is running and switch to that connector.
+. Create a working environment for your cloud environment.
+.. Location:  "GCP"
+.. Type: "Cloud Volumes ONTAP HA"
+
+. Import the OpenShift cluster. The cluster will connect to the working environment you just created.
+.. View the NetApp cluster details by selecting *K8s* > *Cluster list* > *Cluster Details*.
+.. In the upper right corner, note the Trident version.
+.. Note the Cloud Volumes ONTAP cluster storage classes showing "NetApp" as the provisioner.
++
+This imports your Red Hat OpenShift cluster and assigns it a default storage class. You select the storage class.
+Trident is automatically installed as part of the import and discovery process.
+
+. Note all the persistent volumes and volumes in this Cloud Volumes ONTAP deployment.
+
+TIP: Cloud Volumes ONTAP can operate as a single node or in High Availability (HA). If HA is enabled, note the HA status and node deployment status running in AWS.
+
+=== Install Astra Control Center
+Follow the standard link:../get-started/install_acc.html[Astra Control Center installation instructions].
+
+
+. Generate the Docker Secret to pull images for the Astra Control Center installation:
++
+----
+kubectl create secret docker-registry <secret name>
+--docker-server=<Registry location>
+--docker-username=_json_key
+--docker-password="$(cat <GCP Service Account JSON file>)"
+--namespace=pcloud
+----
 
 
 == Deploy Astra Control Center in Microsoft Azure
