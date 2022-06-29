@@ -33,8 +33,8 @@ oc get apiservices
 
 .Steps
 
-* <<Download the Astra Control Center bundle>>
-* <<Unpack the bundle and change directory>>
+* <<Download and unpack the Astra Control Center bundle>>
+* <<Install the NetApp Astra kubectl plugin>>
 * <<Add the images to your local registry>>
 * <<Find the operator install page>>
 * <<Install the operator>>
