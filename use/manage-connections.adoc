@@ -28,7 +28,8 @@ You can connect a Docker image repository to hold package installation images, s
 . In the *Docker Image Repository* section, select the menu at the top right.
 . Select *Connect*.
 . Add the URL and port for the repository.
-. If authentication is required, enable the *Use authentication* check box and enter the credentials for the repository.
+//. If authentication is required, enable the *Use authentication* check box and
+. Enter the credentials for the repository.
 . Select *Connect*.
 
 .Result
@@ -61,6 +62,7 @@ You can connect an artifact repository to host artifacts such as software packag
 . Select *Connect*.
 . Add the URL and port for the repository.
 . If authentication is required, enable the *Use authentication* check box and enter the credentials for the repository.
+//. Enter the credentials for the repository.
 . Select *Connect*.
 
 .Result
