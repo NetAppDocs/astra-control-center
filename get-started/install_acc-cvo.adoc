@@ -336,7 +336,7 @@ Trident is automatically installed as part of the import and discovery process.
 
 . Note all the persistent volumes and volumes in this Cloud Volumes ONTAP deployment.
 
-TIP: Cloud Volumes ONTAP can operate as a single node or in High Availability (HA). If HA is enabled, note the HA status and node deployment status running in AWS.
+TIP: Cloud Volumes ONTAP can operate as a single node or in High Availability (HA). If HA is enabled, note the HA status and node deployment status running in GCP.
 
 === Install Astra Control Center
 Follow the standard link:../get-started/install_acc.html[Astra Control Center installation instructions].
