@@ -34,6 +34,7 @@ If there is a match, the NetApp-provided default execution hooks for that app ap
 == Important notes about custom execution hooks
 Consider the following when planning execution hooks for your apps.
 
+* An execution hook must use a script to perform actions. Many execution hooks can reference the same script.
 * Astra Control requires the scripts that execution hooks use to be written in the format of executable shell scripts.
 * Script size is limited to 128KB.
 * Astra Control uses execution hook settings and any matching criteria to determine which hooks are applicable to a snapshot, backup, or restore operation.
@@ -69,8 +70,10 @@ You can view the existing uploaded scripts. You can also see which scripts are i
 
 .Steps
 
-. Do a thing
-. Do another thing
+. Go to *Account*.
+. Select the *Scripts* tab.
++
+You can see a list of existing uploaded scripts on this page. The *Used by* column shows which execution hooks are using each script.
 
 
 == Add a script
@@ -78,16 +81,38 @@ You can add one or more scripts that execution hooks can reference. Many executi
 
 .Steps
 
-. Do a thing
-. Do another thing
+. Go to *Account*.
+. Select the *Scripts* tab.
+. Select *Add*.
+. Do one of the following:
+* Upload a custom script.
+.. Select the *Upload file* option.
+.. Browse to a file and upload it.
+.. Give the script a unique name.
+.. (Optional) Enter any notes other administrators should know about the script.
+.. Select *Save script*.
+* Paste in a custom script from the clipboard.
+.. Select the *Paste or type* option.
+.. Select the text field and paste the script text into the field.
+.. Give the script a unique name.
+.. (Optional) Enter any notes other administrators should know about the script.
+. Select *Save script*.
 
-== Remove a script
+.Result
+The new script appears in the list on the *Scripts* tab.
+
+
+== Delete a script
 You can remove a script from the system if it is no longer needed and not used by any execution hooks.
 
 .Steps
 
-. Do a thing
-. Do another thing
+. Go to *Account*.
+. Select the *Scripts* tab.
+. Choose a script you want to remove, and select the menu in the *Actions* column.
+. Select *Delete*.
+
+NOTE: If the script is associated with one or more execution hooks, the *Delete* action is unavailable. To delete the script, first edit the associated execution hooks and associate them with a different script.
 
 == Create a custom execution hook
 You can create a custom execution hook for an app. See link:execution-hook-examples.html[Execution hook examples^] for hook examples. You need to have Owner, Admin, or Member permissions to create execution hooks.
@@ -114,7 +139,7 @@ NOTE: When you create a custom shell script to use as an execution hook, remembe
 ... (Optional) Enter any notes other administrators should know about the script.
 ... Select *Save script*.
 ** Paste in a custom script from the clipboard.
-... Select the *Paste from clipboard* option.
+... Select the *Paste or type* option.
 ... Select the text field and paste the script text into the field.
 ... Give the script a unique name.
 ... (Optional) Enter any notes other administrators should know about the script.
@@ -122,6 +147,17 @@ NOTE: When you create a custom shell script to use as an execution hook, remembe
 +
 This instructs the execution hook to use this script.
 . Select *Add hook*.
+
+== Check the state of an execution hook
+During a running snapshot or backup operation, you can check the state of any execution hooks that are running as part of the operation.
+
+.Steps
+
+. Select *Applications* and then select the name of a managed app.
+. Select the *Data protection* tab.
+. Select *Snapshots* to see running snapshots, or *Backups* to see running backups.
++
+The *Hook state* shows the status of the execution hook run after the operation is complete. You can hover over the state for more details. For example, if there are execution hook failures during an operation, hovering over the hook state for that operation gives a list of failed execution hooks. To see reasons for each failure, you can check the *Activity* page in the left-side navigation area.
 
 == Disable an execution hook
 You can disable an execution hook if you want to temporarily prevent it from running before or after a snapshot of an app. You need to have Owner, Admin, or Member permissions to disable execution hooks.
