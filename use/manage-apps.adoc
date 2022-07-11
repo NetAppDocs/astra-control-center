@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: use/manage-apps.html
 keywords: how to manage apps with astra control, discover app, how to manage kubernetes apps, astra control, astra
-summary: After you add Kubernetes clusters to Astra Control, you can install apps on that cluster (outside of Astra Control), and then go to the Apps page in Astra Control to start managing the apps.
+summary: After you add Kubernetes clusters to Astra Control, you can install apps on that cluster (outside of Astra Control), and then go to the Applications page in Astra Control to start managing the apps.
 ---
 
 = Start managing apps
@@ -10,7 +10,7 @@ summary: After you add Kubernetes clusters to Astra Control, you can install app
 :icons: font
 :imagesdir: ../media/use/
 
-After you link:../get-started/setup_overview.html#add-cluster[add a cluster to Astra Control management], you can install apps on the cluster (outside of Astra Control), and then go to the Apps page in Astra Control to start managing the apps and their resources.
+After you link:../get-started/setup_overview.html#add-cluster[add a cluster to Astra Control management], you can install apps on the cluster (outside of Astra Control), and then go to the Applications page in Astra Control to start managing the apps and their resources.
 
 == App management requirements
 Astra Control has the following app management requirements:
@@ -70,6 +70,9 @@ kubectl apply -f myapp.yaml
 * *Helm 3*: If you use Helm to install apps, Astra Control requires Helm version 3. Managing and cloning apps installed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Managing apps installed with Helm 2 is not supported.
 * *Operator-deployed apps*: Astra Control supports apps installed with namespace-scoped operators. These operators are generally designed with a "pass-by-value" rather than "pass-by-reference" architecture. The following are some operator apps that follow these patterns:
 ** https://github.com/k8ssandra/cass-operator/tree/v1.7.1[Apache K8ssandra^]
++
+NOTE: For K8ssandra, in-place restore operations are supported. A restore operation to a new namespace or cluster requires that the original instance of the application to be taken down. This is to ensure that the peer group information carried over does not lead to cross-instance communication. Cloning of the app is not supported.
+
 ** https://github.com/jenkinsci/kubernetes-operator[Jenkins CI^]
 ** https://github.com/percona/percona-xtradb-cluster-operator[Percona XtraDB Cluster^]
 
@@ -97,9 +100,8 @@ NOTE: Apps installed with Helm 2 are not supported.
 
 You can perform the following activities to manage apps:
 
-*	Manage apps
-** <<Manage apps by namespace>>
-** <<Manage apps by Kubernetes label>>
+* <<Manage apps by namespace>>
+* <<Manage apps by Kubernetes label>>
 //*	<<Rename apps>>
 * <<Ignore apps>>
 *	<<Unmanage apps>>
@@ -115,13 +117,24 @@ NOTE: After a data protection operation (clone, backup, restore) and subsequent 
 
 === Manage apps by namespace
 
-The *Discovered* section of the Apps page shows namespaces and any Helm-installed apps or custom-labeled apps in those namespaces. You can choose to manage each app individually or at the namespace level. It all comes down to the level of granularity that you need for data protection operations.
+The *Discovered* section of the Applications page shows namespaces and any Helm-installed apps or custom-labeled apps in those namespaces. You can choose to manage each app individually or at the namespace level. It all comes down to the level of granularity that you need for data protection operations.
 
 For example, you might want to set a backup policy for "maria" that has a weekly cadence, but you might need to back up "mariadb" (which is in the same namespace) more frequently than that. Based on those needs, you would need to manage the apps separately and not under a single namespace.
 
 While Astra Control enables you to separately manage both levels of the hierarchy (the namespace and the apps in that namespace), the best practice is to choose one or the other. Actions that you take in Astra Control can fail if the actions take place at the same time at both the namespace and app level.
 
 .Steps
+
+. Navigate from the Dashboard or the Backends menu:
+* From *Dashboard*: From the Resource Summary, select a link from the Storage Backends pane and select *Add* from the Backends section.
+* From *Backends*:
+.. In the left navigation area, select *Backends*.
+.. Select *Add*.
+. Select the *Astra Data Store* deployment option within the *Deploy* tab.
+. Select the Astra Data Store package to deploy:
+.. Enter a name for the Astra Data Store application.
+.. Choose the version of Astra Data Store you want to deploy.
++
 
 . From the left navigation bar, select *Applications*.
 . Select the *Discovered* filter.
@@ -153,7 +166,7 @@ Apps that you chose to manage are now available from the *Managed* tab. Any igno
 
 === Manage apps by Kubernetes label
 
-Astra Control includes an action at the top of the Apps page named *Define custom app*. You can use this action to manage apps that are identified with a Kubernetes label. link:../use/define-custom-app.html[Learn more about defining custom apps by Kubernetes label].
+Astra Control includes an action at the top of the Applications page named *Define custom app*. You can use this action to manage apps that are identified with a Kubernetes label. link:../use/define-custom-app.html[Learn more about defining custom apps by Kubernetes label].
 
 .Steps
 
@@ -233,7 +246,7 @@ Astra Control also discovers the system apps running on a Kubernetes cluster. We
 
 You can display system apps from the Applications page by selecting the *Show system apps* check box under the Clusters filter in the toolbar.
 
-image:acc_apps_system_apps3.png[A screenshot that shows the Show System Apps option that is available in the Apps page.]
+image:acc_apps_system_apps3.png[A screenshot that shows the Show System Apps option that is available in the Applications page.]
 
 TIP: Astra Control itself is not a standard app; it is a "system app." You should not try to manage Astra Control itself. Astra Control itself isn't shown by default for management.
 

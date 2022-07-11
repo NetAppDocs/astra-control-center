@@ -15,7 +15,7 @@ Creating a custom app enables you to group elements of your Kubernetes cluster i
 
 A custom app gives you more granular control over what to include in an Astra Control operation, including:
 
-* Clone 
+* Clone
 * Snapshot
 * Backup
 * Protection Policy
@@ -35,7 +35,7 @@ WARNING: Overlapping policies for the same resource under different names can ca
 
 .Steps
 
-. From the Apps page, select **+ Define**.
+. From the Applications page, select **+ Define**.
 +
 The Custom App window shows which resources will be included or excluded from your custom app. This helps you make sure you are choosing the correct criteria for defining your custom app.
 
