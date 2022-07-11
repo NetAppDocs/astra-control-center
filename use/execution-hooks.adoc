@@ -59,6 +59,7 @@ NOTE: You should always test your execution hook scripts before enabling them in
 === Determining whether a hook will run
 Use the following table to help determine if a custom execution hook will run for your app.
 
+[stripes=even]
 |===
 |Scenario |Operation |Existing snapshot |Existing backup |Namespace |Cluster |Snapshot hooks run |Backup hooks run |Restore hooks run
 
