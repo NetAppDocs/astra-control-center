@@ -1,0 +1,179 @@
+---
+sidebar: sidebar
+permalink: get-started/acc_cluster_cr_options.html
+keywords: astra cr, cluster cr, astra control center, how to configure, deploy
+summary: Understand Astra Control Center cluster CR options for custom configurations during deployment.
+---
+
+= Understand Astra Control Center cluster CR options
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/get-started/
+
+Understand Astra Control Center cluster CR options for custom configurations during deployment.
+
+Setting
+
+Type	Optional	Default	Example Value	Description
+astraVersion	string
+
+1.5.2	Version of AstraControlCenter to deploy. You are provided a Helm repository with a corresponding version.
+astraAddress	string
+
+astra.example.com	AstraAddress defines how Astra will be found in the data center. This IP address and/or DNS A record must be created prior to provisioning Astra Control Center.
+accountName	string
+
+Example	Astra Control Center account name. There can be only one.
+email	string
+
+admin@example.com	The username of the SRE to be added as the first user of Astra. This email address will be notified by Astra Control Service as events warrant.
+firstName	string
+
+SRE	The first name of the SRE supporting Astra.
+lastName	string
+
+Admin	The last name of the SRE supporting Astra.
+storageClass	string	Yes	default	ontap-gold	The storage class to be used for PVCs. If not set, default storage class will be used.
+volumeReclaimPolicy
+Yes
+Retain	Reclaim policy to be set for persistent volumes
+astraResourcesScaler	string
+
+Default	Scaling options for AstraControlCenter Resource limits.
+astraKubeConfigSecret	string
+
+acc-kubeconfig-cred	AstraKubeConfigSecret if present and secret exists operator will attempt to add that KubeConfig to become the first managed cluster.
+ingressType	string	Yes	Generic	Generic	IngressType The type of ingress to that ACC should be configured for. Valid values are "Generic" and "AccTraefik"
+avpDeploy	bool	Yes	true
+Option to allow user to disable deployment of AVP operator. Defaults to true
+imageRegistry
+Yes
+
+The container image registry that is hosting the Astra application images, ACC Operator and ACC Helm Repository.
+
+name	string
+
+example.registry.com/astra	The name of the image registry. For example "example.registry/astra". Do not prefix with protocol.
+
+secret	string
+
+astra-registry-cred	The name of the Kubernetes secret that will authenticate with the image registry.
+autoSupport
+
+
+
+AutoSupport indicates willingness to participate in NetApp's proactive support application, NetApp Active IQ. An internet connection is required (port 442) and all support data is anonymized. The default election is false and indicates no support data will be sent to NetApp.
+
+enrolled	bool	Yes	false
+Enrolled determines if you want to send anonymous data to NetApp for support purposes.
+
+url	string	Yes
+https://support.netapp.com/asupprod/post/1.0/postAsup	URL determines where the anonymous data will be sent
+crds
+
+
+
+Options for how ACC should handle CRDs.
+
+externalTraefik	bool	Yes
+
+By default, ACC will install the required Traefik CRDs. Note, CRDs are a cluster wide object and installing them may have an impact on other parts of the cluster. You can use this flag to signal to ACC that these CRDs will be installed and managed by the cluster administrator outside of ACC.
+
+extrenalCertManager	bool	Yes
+
+By default, ACC will install the required cert-manager CRDs. Note, CRDs are a cluster wide object and installing them may have an impact on other parts of the cluster. You can use this flag to signal to ACC that these CRDs will be installed and managed by the cluster administrator outside of ACC.
+
+shouldUpgrade	bool	Yes
+
+Determines if CRDs should be upgraded when ACC is upgraded.
+mtls
+
+
+
+Options for how ACC should implement service to service mTLS in the cluster.
+
+enabled	bool	Yes	true
+By default, ACC will use mTLS for service to service communication. This should be disabled when using a service mesh to encrypt service to service communication instead.
+
+certDuration	string (Duration)	Yes	2140h	2140h	The duration of time in hours to use as a lifespan when issuing service TLS certificates. This only works when mtls.enabled = true.
+additionalValues	object	Yes
+
+Additional values to apply to the AstraControlCenter deployment.
+Config Combinations
+There are some config settings in the above table that will greatly affect the way ACC is installed and may conflict with other settings. This section details what those are and how to avoid incompatible combinations.
+
+astraResourcesScaler
+By default, Astra Control Center deploys with resource requests set for most of the components within Astra. This allows the Astra Control Center software stack to perform better in customer environments under application load and scale tests.
+
+But, for developer efficiency, one of the core concepts of the acc-operator is to be able to deploy ACC using smaller developer clusters including CaaS and Docker Desktop running on a developer's laptop. A CR field called AstraResourcesScalar has been provided and may be set to "Off" to allow the resource requests to be disabled allowing for deployment on smaller clusters.
+
+ingressType
+There are two valid values for ingressType: Generic and AccTraefik.
+
+Combo Warning: When mTLS is disabled via the mtls.enabled setting in the CR, you MUST use ingressType: Generic.
+
+Generic (default)
+When ingressType is set to Generic, Astra Control does not install any ingress resources. The assumption is that the user has a common way of securing and routing traffic through their network to applications running on Kubernetes clusters and they want to use the same mechanisms here. When the user creates an ingress to route traffic to Astra Control, it needs to point to the internal traefik service on port 80. Here is an example of an Nginx ingress resource that works with the Generic ingressType setting.
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: netapp-acc-ingress
+  namespace: [netapp-acc or custom namespace]
+spec:
+  ingressClassName: [class name for nginx controller]
+  tls:
+  - hosts:
+    - <ACC address>
+    secretName: [tls secret name]
+  rules:
+  - host: <ACC addess>
+    http:
+      paths:
+        - path:
+          backend:
+            service:
+              name: traefik
+              port:
+                number: 80
+          pathType: ImplementationSpecific
+AccTraefik
+When ingressType is set to AccTraefik, ACC will deploy its Traefik gateway as a Kubernetes LoadBalancer type service. Users will need to provide an external Load Balancer (like MetalLB) though for it to get an External IP.
+
+mtls
+The settings in this section of the CR will determine how intra-application communication is secured. It is very important for the user to know ahead of time whether they will be using a service mesh or not.
+
+Combo Warning: When mTLS is disabled via the mts.enabled setting in the CR, you MUST use ingressType: Generic.
+
+enabled=true
+When enabled = true, Astra will deploy an internal service to service communication network that secures all traffic within the application.
+
+Warning: Attempting to cover Astra in a service mesh while this setting is true will be problematic. Is the user does this, Astra will cease to work as expected.
+
+enabled=false
+When enabled = false, Astra will not secure internal traffic itself. The user is expected to cover the Astra namespaces with a service mesh themself.
+
+Warning: If no service mesh is used and this setting is disabled, internal communication will be insecure!
+
+additionalValues
+There is a way to provide custom Helm Chart value overrides at deploy time. Override values can be specified as spec.AdditionalValues. This allows the ability to customize Astra Control Center in ways that were not anticipated for specific customer environments, or for development usage.
+
+Warning: Using AdditionalValues should be reserved for support and development usage. The use of them is subject to Helm's sensitivity to value layout, and the chart value locations do indeed change from one release to the next. Using AdditionalValues to customize the AstraControlCenter deployment may not be backwards compatible. Any time this is used on a customer deployment, a Jira card must be created to provide an API supported mechanism to apply the required customization.
+
+AdditionalValues require supplying the acc-operator component key as well as all the helm chart value layering. The required yaml layout will normally closely match acc-values.yaml.
+The value that is to be overridden need not already exist in acc-values.yaml it only needs to be a value that can be replaced somewhere in helm's values stack (see above).
+AdditionalValues are merged into the existing values, so there is no need to provide the entire acc-values.yaml object again, only the values to be overridden need to be specified here.
+This example changes the type of the traefik service deployed from its default of LoadBalancer to NodePort
+
+apiVersion: astra.netapp.io/v1
+kind: AstraControlCenter
+metadata:
+  name: astra
+spec:
+  astraVersion: "xx.yy.zz"
+  ...
+  additionalValues:
+    traefik:                   # <- acc-operator component key
+      traefik:                 # <- traefik folder embedded in traefik .tgz
+        service:               # <- values.yaml object to override
+          type: NodePort       # <- values.yaml actual value(s) to override
