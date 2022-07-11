@@ -45,6 +45,7 @@ Consider the following when planning execution hooks for your apps.
 
 NOTE: Since execution hooks often reduce or completely disable the functionality of the application they are running against, you should always try to minimize the time your custom execution hooks take to run.
 
+=== Order of execution
 When a data protection operation is run, execution hook events take place in the following order:
 
 //. Any applicable NetApp-provided default pre-snapshot execution hooks are run on the appropriate containers.
@@ -54,6 +55,125 @@ When a data protection operation is run, execution hook events take place in the
 //. Any applicable NetApp-provided default post-snapshot execution hooks are run on the appropriate containers.
 
 NOTE: You should always test your execution hook scripts before enabling them in a production environment. You can use the 'kubectl exec' command to conveniently test the scripts. After you enable the execution hooks in a production environment, test the resulting snapshots and backups to ensure they are consistent. You can do this by cloning the app to a temporary namespace, restoring the snapshot or backup, and then testing the app.
+
+=== Determining whether a hook will run
+Use the following table to help determine if a custom execution hook will run for your app.
+
+|===
+|Scenario |Operation |Existing snapshot |Existing backup |Namespace |Cluster |Snapshot hooks run |Backup hooks run |Restore hooks run
+
+|1
+|Clone
+|N
+|N
+|New
+|Same
+|Y
+|N
+|Y
+
+|2
+|Clone
+|N
+|N
+|New
+|Different
+|Y
+|Y
+|Y
+
+|3
+|Clone + restore
+|Y
+|N
+|New
+|Same
+|N
+|N
+|Y
+
+|4
+|Clone + restore
+|N
+|Y
+|New
+|Same
+|N
+|N
+|Y
+
+|5
+|Clone + restore
+|Y
+|N
+|New
+|Different
+|N
+|Y
+|Y
+
+|6
+|Clone + restore
+|N
+|Y
+|New
+|Different
+|N
+|N
+|Y
+
+|7
+|Restore
+|Y
+|N
+|Existing
+|Same
+|N
+|N
+|Y
+
+|8
+|Restore
+|N
+|Y
+|Existing
+|Same
+|N
+|N
+|Y
+
+|9
+|Snapshot
+|N/A
+|N/A
+|N/A
+|N/A
+|Y
+|N/A
+|N/A
+
+|10
+|Backup
+|N
+|N/A
+|N/A
+|N/A
+|Y
+|Y
+|N/A
+
+|11
+|Backup
+|Y
+|N/A
+|N/A
+|N/A
+|N
+|Y
+|N/A
+
+|===
+
 
 == View existing execution hooks
 You can view existing custom execution hooks for an app.
