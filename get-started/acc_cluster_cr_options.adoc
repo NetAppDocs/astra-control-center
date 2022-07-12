@@ -12,91 +12,154 @@ summary: Understand Astra Control Center cluster CR options for custom configura
 
 Understand Astra Control Center cluster CR options for custom configurations during deployment.
 
-Setting
+|===
+|Setting |Type |Use |Value Example |Description
 
-Type	Optional	Default	Example Value	Description
-astraVersion	string
+| astraVersion
+| string
+| Required
+| 1.5.2
+| Version of AstraControlCenter to deploy. You are provided a Helm repository with a corresponding version.
 
-1.5.2	Version of AstraControlCenter to deploy. You are provided a Helm repository with a corresponding version.
-astraAddress	string
+| astraAddress
+| string
+| Required
+| astra.example.com
+| AstraAddress defines how Astra will be found in the data center. This IP address and/or DNS A record must be created prior to provisioning Astra Control Center.
 
-astra.example.com	AstraAddress defines how Astra will be found in the data center. This IP address and/or DNS A record must be created prior to provisioning Astra Control Center.
-accountName	string
+| accountName
+| string
+| Required
+| Example
+| Astra Control Center account name. There can be only one.
 
-Example	Astra Control Center account name. There can be only one.
-email	string
+| email
+| string
+| Required
+| admin@example.com
+| The username of the SRE to be added as the first user of Astra. This email address will be notified by Astra Control Service as events warrant.
 
-admin@example.com	The username of the SRE to be added as the first user of Astra. This email address will be notified by Astra Control Service as events warrant.
-firstName	string
+| firstName
+| string
+| Required
+| SRE
+| The first name of the SRE supporting Astra.
 
-SRE	The first name of the SRE supporting Astra.
-lastName	string
+| lastName
+| string
+| Required
+| Admin
+| The last name of the SRE supporting Astra.
 
-Admin	The last name of the SRE supporting Astra.
-storageClass	string	Yes	default	ontap-gold	The storage class to be used for PVCs. If not set, default storage class will be used.
-volumeReclaimPolicy
-Yes
-Retain	Reclaim policy to be set for persistent volumes
-astraResourcesScaler	string
+| storageClass
+| string
+| Optional (default)
+| ontap-gold
+| The storage class to be used for PVCs. If not set, default storage class will be used.
 
-Default	Scaling options for AstraControlCenter Resource limits.
-astraKubeConfigSecret	string
+| volumeReclaimPolicy
+| Undefined
+| Optional
+| Retain
+| Reclaim policy to be set for persistent volumes
 
-acc-kubeconfig-cred	AstraKubeConfigSecret if present and secret exists operator will attempt to add that KubeConfig to become the first managed cluster.
-ingressType	string	Yes	Generic	Generic	IngressType The type of ingress to that ACC should be configured for. Valid values are "Generic" and "AccTraefik"
-avpDeploy	bool	Yes	true
-Option to allow user to disable deployment of AVP operator. Defaults to true
-imageRegistry
-Yes
+| astraResourcesScaler
+| string
+| Required
+| Default
+| Scaling options for AstraControlCenter Resource limits.
 
-The container image registry that is hosting the Astra application images, ACC Operator and ACC Helm Repository.
+| astraKubeConfigSecret
+| string
+| Required
+| acc-kubeconfig-cred
+| AstraKubeConfigSecret if present and secret exists operator will attempt to add that KubeConfig to become the first managed cluster.
 
-name	string
+| ingressType
+| string
+| Optional
+| Generic (this is the default value)
+| The type of ingress to that ACC should be configured for. Valid values are "Generic" and "AccTraefik"
 
-example.registry.com/astra	The name of the image registry. For example "example.registry/astra". Do not prefix with protocol.
+| avpDeploy
+| bool
+| Optional
+| true (this is the default value)
+| Option to allow user to disable deployment of AVP operator. Defaults to true
 
-secret	string
+| imageRegistry
+| Undefined
+| Optional
+| N/A
+| The container image registry that is hosting the Astra application images, ACC Operator and ACC Helm Repository.
 
-astra-registry-cred	The name of the Kubernetes secret that will authenticate with the image registry.
-autoSupport
+| imageRegistry.name
+| string
+| Required if imageRegistry selected
+| example.registry.com/astra
+| The name of the image registry. For example "example.registry/astra". Do not prefix with protocol.
 
+| imageRegistry.secret
+| string
+| Required if imageRegistry selected
+| astra-registry-cred
+| The name of the Kubernetes secret that will authenticate with the image registry.
 
+| autoSupport
+| Undefined
+| Required
+| N/A
+| AutoSupport indicates willingness to participate in NetApp's pro-active support application, NetApp Active IQ. An internet connection is required (port 442) and all support data is anonymized. The default election is false and indicates no support data will be sent to NetApp.
 
-AutoSupport indicates willingness to participate in NetApp's proactive support application, NetApp Active IQ. An internet connection is required (port 442) and all support data is anonymized. The default election is false and indicates no support data will be sent to NetApp.
+| autoSupport.enrolled
+| bool
+| Optional, but either `enrolled` or `url` fields must be selected
+| false (this value is the default)
+| Enrolled determines if you want to send anonymous data to NetApp for support purposes.
 
-enrolled	bool	Yes	false
-Enrolled determines if you want to send anonymous data to NetApp for support purposes.
+| url
+| string
+| Optional, but either `enrolled` or `url` fields must be selected
+| https://support.netapp.com/asupprod/post/1.0/postAsup
+| URL determines where the anonymous data will be sent
 
-url	string	Yes
-https://support.netapp.com/asupprod/post/1.0/postAsup	URL determines where the anonymous data will be sent
-crds
+| crds
+| Undefined
+| Undefined
+| N/A
+| Options for how ACC should handle CRDs.
 
+| crds.externalTraefik
+| bool
+| Optional
+| True (this value is the default)
+| By default, ACC will install the required Traefik CRDs. Note, CRDs are a cluster wide object and installing them may have an impact on other parts of the cluster. You can use this flag to signal to ACC that these CRDs will be installed and managed by the cluster administrator outside of ACC.
 
+| externalCertManager
+| bool
+| Optional
+| True (this value is the default)
+| By default, ACC will install the required cert-manager CRDs. Note, CRDs are a cluster wide object and installing them may have an impact on other parts of the cluster. You can use this flag to signal to ACC that these CRDs will be installed and managed by the cluster administrator outside of ACC.
 
-Options for how ACC should handle CRDs.
+| shouldUpgrade
+| bool
+| Optional
+| Undefined
+| Determines if CRDs should be upgraded when ACC is upgraded.
 
-externalTraefik	bool	Yes
+| mtls
+|
+|
+| 
+| Options for how ACC should implement service to service mTLS in the cluster.
 
-By default, ACC will install the required Traefik CRDs. Note, CRDs are a cluster wide object and installing them may have an impact on other parts of the cluster. You can use this flag to signal to ACC that these CRDs will be installed and managed by the cluster administrator outside of ACC.
-
-extrenalCertManager	bool	Yes
-
-By default, ACC will install the required cert-manager CRDs. Note, CRDs are a cluster wide object and installing them may have an impact on other parts of the cluster. You can use this flag to signal to ACC that these CRDs will be installed and managed by the cluster administrator outside of ACC.
-
-shouldUpgrade	bool	Yes
-
-Determines if CRDs should be upgraded when ACC is upgraded.
-mtls
-
-
-
-Options for how ACC should implement service to service mTLS in the cluster.
-
-enabled	bool	Yes	true
+enabled| bool| Yes| true
 By default, ACC will use mTLS for service to service communication. This should be disabled when using a service mesh to encrypt service to service communication instead.
 
-certDuration	string (Duration)	Yes	2140h	2140h	The duration of time in hours to use as a lifespan when issuing service TLS certificates. This only works when mtls.enabled = true.
-additionalValues	object	Yes
+certDuration| string (Duration)| Yes| 2140h| 2140h| The duration of time in hours to use as a lifespan when issuing service TLS certificates. This only works when mtls.enabled = true.
+additionalValues| object| Yes
+
+|===
 
 Additional values to apply to the AstraControlCenter deployment.
 Config Combinations
