@@ -60,7 +60,7 @@ When a data protection operation is run, execution hook events take place in the
 
 NOTE: You should always test your execution hook scripts before enabling them in a production environment. You can use the 'kubectl exec' command to conveniently test the scripts. After you enable the execution hooks in a production environment, test the resulting snapshots and backups to ensure they are consistent. You can do this by cloning the app to a temporary namespace, restoring the snapshot or backup, and then testing the app.
 
-=== Determining whether a hook will run
+=== Determine whether a hook will run
 Use the following table to help determine if a custom execution hook will run for your app.
 
 |===
