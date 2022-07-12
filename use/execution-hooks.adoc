@@ -83,7 +83,7 @@ Use the following table to help determine if a custom execution hook will run fo
 |Y
 
 |3
-|Clone + restore
+|Clone or restore
 |Y
 |N
 |New
@@ -93,7 +93,7 @@ Use the following table to help determine if a custom execution hook will run fo
 |Y
 
 |4
-|Clone + restore
+|Clone or restore
 |N
 |Y
 |New
@@ -103,7 +103,7 @@ Use the following table to help determine if a custom execution hook will run fo
 |Y
 
 |5
-|Clone + restore
+|Clone or restore
 |Y
 |N
 |New
@@ -113,7 +113,7 @@ Use the following table to help determine if a custom execution hook will run fo
 |Y
 
 |6
-|Clone + restore
+|Clone or restore
 |N
 |Y
 |New
