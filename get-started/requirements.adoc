@@ -122,6 +122,7 @@ Astra Control Center supports the following storage backends.
 * Astra Data Store
 * NetApp ONTAP 9.5 or newer AFF and FAS systems
 * NetApp Cloud Volumes ONTAP
+* Google Cloud Platform
 
 == Application cluster requirements
 
