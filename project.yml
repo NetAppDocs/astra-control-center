@@ -14,7 +14,7 @@ sidebar:
     - section: get-started
     - section: use
     - section: rest-api
-    - section: solutions
+    #- section: solutions (retired with DOC-4309)
     - section: support
     - title: Earlier versions
       url: /acc-earlier-versions.html
