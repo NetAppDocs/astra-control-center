@@ -21,6 +21,7 @@ You can complete the following tasks related to managing a storage backend:
 * <<View storage backend details>>
 * <<Unmanage a storage backend>>
 * <<Update a storage backend license>>
+* <<Upgrade an Astra Data Store storage backend>>
 * <<Add nodes to a storage backend cluster>>
 * <<Remove a storage backend>>
 
@@ -163,6 +164,27 @@ a|
 |===
 
 . Select *Update*.
+
+== Upgrade an Astra Data Store storage backend
+You can upgrade your Astra Data Store backend from within Astra Control Center. To do so, you must first upload an upgrade package; Astra Control Center will use this upgrade package to upgrade Astra Data Store.
+
+.What you'll need
+* A managed Astra Data Store storage backend
+* An uploaded Astra Data Store upgrade package (see link:manage-packages-acc.html[Manage software packages])
+
+.Steps
+
+. Select *Backends*.
+. Choose an Astra Data Store storage backend from the list, and select the corresponding menu in the *Actions* column.
+. Select *Upgrade*.
+. Select a version to upgrade to from the list.
++
+If you have several upgrade packages in your repository that are different versions, you can open the drop-down list to select the version you need.
+. Select *Next*.
+. Select *Start Upgrade*.
+
+.Result
+The *Backends* page displays an *Upgrading* status in the *Status* column until the upgrade is complete.
 
 == Add nodes to a storage backend cluster
 You can add nodes to an Astra Data Store cluster, up to the number of nodes supported by the type of license installed for Astra Data Store.
