@@ -177,7 +177,7 @@ You can upgrade your Astra Data Store backend from within Astra Control Center. 
 . Select *Backends*.
 . Choose an Astra Data Store storage backend from the list, and select the corresponding menu in the *Actions* column.
 . Select *Upgrade*.
-. Select a version to upgrade to from the list.
+. Select an upgrade version from the list.
 +
 If you have several upgrade packages in your repository that are different versions, you can open the drop-down list to select the version you need.
 . Select *Next*.
