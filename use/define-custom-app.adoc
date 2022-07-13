@@ -20,12 +20,7 @@ A custom app gives you more granular control over what to include in an Astra Co
 * Backup
 * Protection Policy
 
-In most cases you will want to use Astra Control's features on your entire app. However, you can also create a custom app to use these features by the labels you assign to Kubernetes objects in a namespace.
-
-
-NOTE: Custom apps can be created only within a specified namespace on a single cluster. Astra Control does not support the ability for a custom app to span multiple namespaces or clusters.
-
-A label is a key/value pair you can assign to Kubernetes objects for identification. Labels make it easier to sort, organize, and find your Kubernetes objects. To learn more about Kubernetes labels, https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/[see the official Kubernetes documentation^].
+In most cases you will want to use Astra Control's protection functionality on your entire app. However, you can also use protection features according to the labels you assign to Kubernetes objects in a namespace.
 
 WARNING: Overlapping policies for the same resource under different names can cause data conflicts. If you create a custom app for a resource, be sure it's not being cloned or backed up under any other policies.
 
@@ -36,14 +31,17 @@ WARNING: Overlapping policies for the same resource under different names can ca
 .Steps
 
 . From the Applications page, select **+ Define**.
+. In the `Define application` window, enter the app name.
+. Choose the managed cluster in the *Cluster* drop-down list.
+. Choose a namespace for the app from the *Namespace* drop-down list.
 +
-The Custom App window shows which resources will be included or excluded from your custom app. This helps you make sure you are choosing the correct criteria for defining your custom app.
+NOTE: Custom apps can be created only within a specified namespace on a single cluster. Astra Control does not support the ability for a custom app to span multiple namespaces or clusters.
 
-. In the pop-up window, enter the app name, choose the cluster in the **Cluster** drop-down, and choose the app's namespace from the **Namespace** drop-down.
+. From the *Label* drop-down list, select a label for the app and namespace.
++
+TIP: A label is a key/value pair you can assign to Kubernetes objects for identification. Labels make it easier to sort, organize, and find your Kubernetes objects. To learn more about Kubernetes labels, https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/[see the official Kubernetes documentation^].
 
-. From the drop-down *Label* list, select a label for the apps and namespace.
-
-. After defining the custom app for the one deployment, repeat the process for other deployments, as needed.
+. After you select `Define`, repeat the process for other apps, as needed.
 
 When you finish creating the two custom apps, you can treat these resources as any other Astra Control application. They can clone them, create backups and snapshots, and create a custom Protection Policy for each group of resources based on the Kubernetes labels.
 
