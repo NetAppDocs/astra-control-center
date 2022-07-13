@@ -20,7 +20,7 @@ You can complete the following tasks related to managing a storage backend:
 * link:../get-started/setup_overview.html#add-a-storage-backend[Add a storage backend]
 * <<View storage backend details>>
 * <<Unmanage a storage backend>>
-* <<Update a storage backend license>>
+* <<Update an Astra Data Store storage backend license>>
 * <<Upgrade an Astra Data Store storage backend>>
 * <<Add nodes to a storage backend cluster>>
 * <<Remove a storage backend>>
@@ -128,7 +128,7 @@ TIP: If you are removing an Astra Data Store backend, it must not have been crea
 .. Type "remove" to confirm the action.
 .. Select *Yes, remove storage backend*.
 
-== Update a storage backend license
+== Update an Astra Data Store storage backend license
 You can update the license for an Astra Data Store storage backend to support a larger deployment or enhanced features.
 
 .What you'll need
