@@ -10,7 +10,7 @@ summary: After you add Kubernetes clusters to Astra Control, you can install app
 :icons: font
 :imagesdir: ../media/use/
 
-After you link:../get-started/setup_overview.html#add-cluster[add a cluster to Astra Control management], you can install apps on the cluster (outside of Astra Control), and then go to the Applications page in Astra Control to start managing the apps and their resources.
+After you link:../get-started/setup_overview.html#add-cluster[add a cluster to Astra Control management], you can install apps on the cluster (outside of Astra Control) and then go to the Applications page in Astra Control to start managing the apps and their resources.
 
 == App management requirements
 Astra Control has the following app management requirements:
@@ -76,52 +76,39 @@ NOTE: For K8ssandra, in-place restore operations are supported. A restore operat
 ** https://github.com/jenkinsci/kubernetes-operator[Jenkins CI^]
 ** https://github.com/percona/percona-xtradb-cluster-operator[Percona XtraDB Cluster^]
 
-Note that Astra Control might not be able to clone an operator that is designed with a “pass-by-reference” architecture (for example, the CockroachDB operator). During these types of cloning operations, the cloned operator attempts to reference Kubernetes secrets from the source operator despite having its own new secret as part of the cloning process. The clone operation might fail because Astra Control is unaware of the Kubernetes secrets in the source operator.
+Astra Control might not be able to clone an operator that is designed with a “pass-by-reference” architecture (for example, the CockroachDB operator). During these types of cloning operations, the cloned operator attempts to reference Kubernetes secrets from the source operator despite having its own new secret as part of the cloning process. The clone operation might fail because Astra Control is unaware of the Kubernetes secrets in the source operator.
 
 NOTE: An operator and the app it installs must use the same namespace; you might need to modify the deployment .yaml file for the operator to ensure this is the case.
 
 == Install apps on your cluster
 
-Now that you've added your cluster to Astra Control, you can install apps or manage existing apps on the cluster. Any app that is scoped to a namespace can be managed. After the pods are online, you can manage the app with Astra Control.
-
-For help with deploying validated apps from Helm charts, refer to the following:
-
-* link:../solutions/mariadb-deploy-from-helm-chart.html[Deploy MariaDB from a Helm chart]
-* link:../solutions/mysql-deploy-from-helm-chart.html[Deploy MySQL from a Helm chart]
-* link:../solutions/postgres-deploy-from-helm-chart.html[Deploy Postgres from a Helm chart]
-* link:../solutions/jenkins-deploy-from-helm-chart.html[Deploy Jenkins from a Helm chart]
-
+After you've link:../get-started/setup_overview.html#add-cluster[added your cluster] to Astra Control, you can install apps or manage existing apps on the cluster. Any app that is scoped to a namespace can be managed. After the pods are online, you can manage the app with Astra Control.
 
 == Manage apps
 
 Astra Control enables you to manage your apps at the namespace level or by Kubernetes label.
 
-NOTE: Apps installed with Helm 2 are not supported.
+.What you'll need
+* A cluster added to Astra Control.
+* One or more installed apps on the cluster. <<Supported app installation methods,Read more about supported app installation methods>>.
+* link:../use/manage-apps.html#what-about-system-apps[Understand managing standard and system apps]
 
-You can perform the following activities to manage apps:
+NOTE: For instructions on how to manage apps using the Astra Control API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
+
+.App management options
 
 * <<Manage apps by namespace>>
 * <<Manage apps by Kubernetes label>>
 //*	<<Rename apps>>
-* <<Ignore apps>>
 *	<<Unmanage apps>>
 
-TIP: Astra Control itself is not a standard app; it is a "system app." You should not try to manage Astra Control itself. Astra Control itself isn't shown by default for management. To see system apps, use the “Show system apps” filter.
+=== Manage apps by namespace or label
 
-For instructions on how to manage apps using the Astra Control API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
-
-
-NOTE: After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
-
-//DOC-3563
-
-=== Manage apps by namespace
-
-The Applications page in Astra Control shows namespaces and any Helm-installed apps or custom-labeled apps in those namespaces. You can choose to manage each app individually or at the namespace level. It all comes down to the level of granularity that you need for data protection operations.
-
-For example, you might want to set a backup policy for "maria" that has a weekly cadence, but you might need to back up "mariadb" (which is in the same namespace) more frequently than that. Based on those needs, you would need to manage the apps separately and not under a single namespace.
+You can choose to manage an app individually or at the namespace level. It all comes down to the level of granularity that you need for data protection operations.
 
 Although Astra Control enables you to separately manage both levels of the hierarchy (the namespace and the apps in that namespace), the best practice is to choose one or the other. Actions that you take in Astra Control can fail if the actions take place at the same time at both the namespace and app level.
+
+TIP: As an example, you might want to set a backup policy for "maria" that has a weekly cadence, but you might need to back up "mariadb" (which is in the same namespace) more frequently than that. Based on those needs, you would need to manage the apps separately and not under a single namespace.
 
 .Steps
 
@@ -139,8 +126,6 @@ Although Astra Control enables you to separately manage both levels of the hiera
 . From the left navigation bar, select *Applications*.
 . Select the *Discovered* filter.
 +
-image:acc_apps_discovered4.png[Screen shot of discovered apps filter]
-+
 .	View the list of discovered namespaces. Expand the namespace to view the apps and associated resources.
 +
 Astra Control shows you the Helm apps and custom-labeled apps in the namespace. If Helm labels are available, they’re designated with a tag icon.
@@ -152,8 +137,6 @@ Astra Control shows you the Helm apps and custom-labeled apps in the namespace. 
 For example, if you want to manage all apps under the "maria" namespace together so that they have the same snapshot and backup policies, you would manage the namespace and ignore the apps in the namespace.
 
 .	To see the list of managed apps, select *Managed* as the display filter.
-+
-image:acc_apps_managed3.png[Screen shot of managed apps filter]
 +
 NOTE: The app you just added might have a warning icon under the Protected column, indicating that it is not backed up and not scheduled for backups yet.
 
@@ -209,20 +192,6 @@ Astra Control enables management of the app. You can now find it in the *Managed
 // From the Actions menu, select *Rename*.
 //. Enter the new name.
 //. Select *Rename*.
-
-== Ignore apps
-
-If an app has been discovered, it appears in the Discovered list. In this case, you can clean up the Discovered list so that new apps that are newly installed are easier to find. Or, you might have apps that you are managing and later decide you no longer want to manage them. If you don't want to manage these apps, you can indicate that they should be ignored.
-
-Also, you might want to manage apps under one namespace together (Namespace-managed). You can ignore apps that you want to exclude from the namespace.
-
-.Steps
-
-. From the left navigation bar, select *Applications*.
-. Select *Discovered* as the filter.
-. Select the app.
-. From the Options menu in the *Actions* column, select *Ignore*.
-. To unignore, select *Unignore*.
 
 == Unmanage apps
 
