@@ -81,13 +81,14 @@ NOTE: An operator and the app it installs must use the same namespace; you might
 
 Now that you've added your cluster to Astra Control, you can install apps or manage existing apps on the cluster. Any app that is scoped to a namespace can be managed. After the pods are online, you can manage the app with Astra Control.
 
+////
 For help with deploying validated apps from Helm charts, refer to the following:
 
 * link:../solutions/mariadb-deploy-from-helm-chart.html[Deploy MariaDB from a Helm chart]
 * link:../solutions/mysql-deploy-from-helm-chart.html[Deploy MySQL from a Helm chart]
 * link:../solutions/postgres-deploy-from-helm-chart.html[Deploy Postgres from a Helm chart]
 * link:../solutions/jenkins-deploy-from-helm-chart.html[Deploy Jenkins from a Helm chart]
-
+////
 
 == Manage apps
 
