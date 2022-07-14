@@ -16,7 +16,7 @@ Get started by verifying the readiness of your operational environment, applicat
 
 Astra Control Center requires one of the following types of operational environments:
 
-// * Google Anthos 1.10 or 1.11
+* Google Anthos 1.10 or 1.11
 * Cisco IKS with Kubernetes 1.21.13-iks.0
 * Kubernetes 1.22 to 1.24
 * Rancher Kubernetes Engine (RKE):
