@@ -86,101 +86,65 @@ After you've link:../get-started/setup_overview.html#add-cluster[added your clus
 
 == Manage apps
 
-Astra Control enables you to manage your apps at the namespace level or by Kubernetes label.
-
-.What you'll need
-* A cluster added to Astra Control.
-* One or more installed apps on the cluster. <<Supported app installation methods,Read more about supported app installation methods>>.
-* link:../use/manage-apps.html#what-about-system-apps[Understand managing standard and system apps]
-
-NOTE: For instructions on how to manage apps using the Astra Control API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
-
-.App management options
-
-* <<Manage apps by namespace>>
-* <<Manage apps by Kubernetes label>>
-//*	<<Rename apps>>
-*	<<Unmanage apps>>
-
-=== Manage apps by namespace or label
-
-You can choose to manage an app individually or at the namespace level. It all comes down to the level of granularity that you need for data protection operations.
+You can choose to manage an app individually or manage all apps associated with a namespace. It all comes down to the level of granularity that you need for data protection operations.
 
 Although Astra Control enables you to separately manage both levels of the hierarchy (the namespace and the apps in that namespace), the best practice is to choose one or the other. Actions that you take in Astra Control can fail if the actions take place at the same time at both the namespace and app level.
 
 TIP: As an example, you might want to set a backup policy for "maria" that has a weekly cadence, but you might need to back up "mariadb" (which is in the same namespace) more frequently than that. Based on those needs, you would need to manage the apps separately and not under a single namespace.
 
+.What you'll need
+* A cluster added to Astra Control.
+* One or more installed apps on the cluster. <<Supported app installation methods,Read more about supported app installation methods>>.
+* Namespaces specified on the cluster added to Astra Control.
+* (Optional) Kubernetes labels.
++
+TIP: A label is a key/value pair you can assign to Kubernetes objects for identification. Labels make it easier to sort, organize, and find your Kubernetes objects. To learn more about Kubernetes labels, https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/[see the official Kubernetes documentation^].
+
+NOTE: Before you begin, you should also understand link:../use/manage-apps.html#what-about-system-apps[managing standard and system apps]. For instructions on how to manage apps using the Astra Control API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
+
+.App management options
+
+* <<Manage individual apps>>
+* <<Manage all applications in a namespace>>
+
+.Additional app options
+//*	<<Rename apps>>
+*	<<Unmanage apps>>
+
+=== Manage individual apps
+
+You can define the details for each app that you want to be managed by Astra Control, including the namespace, cluster association, and Kubernetes label.
+
+Custom apps can be defined only within a specified namespace on a single cluster. Astra Control does not support the ability for a custom app to span multiple namespaces or clusters.
+
 .Steps
 
-. Navigate from the Dashboard or the Backends menu:
-* From *Dashboard*: From the Resource Summary, select a link from the Storage Backends pane and select *Add* from the Backends section.
-* From *Backends*:
-.. In the left navigation area, select *Backends*.
-.. Select *Add*.
-. Select the *Astra Data Store* deployment option within the *Deploy* tab.
-. Select the Astra Data Store package to deploy:
-.. Enter a name for the Astra Data Store application.
-.. Choose the version of Astra Data Store you want to deploy.
-+
+. From the Applications page, select **+ Define**.
+. In the `Define application` window, enter the app name.
+. Choose the cluster that is already managed by Astra Control in the *Cluster* drop-down list.
+. Choose a namespace for the app from the *Namespace* drop-down list.
+. From the *Label* drop-down list, select a label for the app and namespace.
+. After you select `Define`, repeat the process for other apps, as needed.
 
-. From the left navigation bar, select *Applications*.
-. Select the *Discovered* filter.
-+
-.	View the list of discovered namespaces. Expand the namespace to view the apps and associated resources.
-+
-Astra Control shows you the Helm apps and custom-labeled apps in the namespace. If Helm labels are available, they’re designated with a tag icon.
-. Look at the *Group* column to see which namespace the application is running in (it's designated with the folder icon).
-.	Decide whether you want to manage each app individually or at the namespace level.
-.	Find the app you want at the desired level in the hierarchy, and select *Manage* from the Options menu in the *Actions* column.
-.	If you don’t want to manage an app, select *Ignore* from the Options menu in the *Actions* column.
-+
-For example, if you want to manage all apps under the "maria" namespace together so that they have the same snapshot and backup policies, you would manage the namespace and ignore the apps in the namespace.
+After you finish defining an app, the app appears in the list of managed apps on the Applications page. You can now manage its resources in Astra Control. Once the app is managed, you can clone it, create backups and snapshots, or create a custom Protection Policy for each group of resources based on Kubernetes labels.
 
-.	To see the list of managed apps, select *Managed* as the display filter.
-+
 NOTE: The app you just added might have a warning icon under the Protected column, indicating that it is not backed up and not scheduled for backups yet.
 
-.	To see details of a particular app, select the app name.
+TIP: To see details of a particular app, select the app name.
 
+=== Manage all applications in a namespace
 
-.Result
-
-Apps that you chose to manage are now available from the *Managed* tab. Any ignored apps will move to the *Ignored* tab. Ideally, the Discovered tab will show zero apps, so that as new apps are installed, they are easier to find and manage.
-
-=== Manage apps by Kubernetes label
-
-Astra Control includes an action at the top of the Applications page named *Define custom app*. You can use this action to manage apps that are identified with a Kubernetes label. link:../use/define-custom-app.html[Learn more about defining custom apps by Kubernetes label].
+You can add all app resources in a namespace to Astra Control management. This method is preferable to adding apps individually if you intend to manage and protect all apps in a particular namespace in a similar way and at common intervals.
 
 .Steps
 
-. From the left navigation bar, select *Applications*.
-. Select *Define*.
-. In the *Define custom application* dialog box, provide the required information to manage the app:
-
-.. *New App*: Enter the display name of the app.
-
-.. *Cluster*: Select the cluster where the app resides.
-
-.. *Namespace:* Select the namespace for the app.
-
-.. *Label:* Enter a label or select a label from the resources below.
-
-.. *Selected Resources*: View and manage the selected Kubernetes resources that you'd like to protect (pods, secrets, persistent volumes, and more).
+. From the Clusters page, select a cluster.
+. Select the `Namespaces` tab.
+. Select the actions menu for the namespace that contains the app resources you want to manage and select `Define as application`.
 +
-** View the available labels by expanding a resource and selecting the number of labels.
-** Select one of the labels.
-+
-After you choose a label, it displays in the *Label* field. Astra Control also updates the *Unselected Resources* section to show the resources that don't match the selected label.
+NOTE: Select the `Show system namespaces` checkbox to reveal system namespaces that are usually not used in app management by default. link:../use/manage-apps.html#what-about-system-apps[Read more].
 
-.. *Unselected Resources*: Verify the app resources that you don't want to protect.
-
-. Select *Define custom application*.
-
-.Result
-
-Astra Control enables management of the app. You can now find it in the *Managed* tab.
-
-
+After the process completes, the application resources associated with the namespace appear in the namespace row.
 
 //== Rename apps
 //If an app has been renamed outside of Astra Control, you can rename it to manage it effectively.
@@ -202,9 +166,8 @@ NOTE: If you unmanage an app, any backups or snapshots that were created earlier
 .Steps
 
 . From the left navigation bar, select *Applications*.
-. Select *Managed* as the filter.
 . Select the app.
-. From the Options menu in the *Actions* column, select *Unmanage*.
+. From the menu in the *Actions* column, select *Unmanage*.
 . Review the information.
 . Type "unmanage" to confirm.
 . Select *Yes, Unmanage Application*.
