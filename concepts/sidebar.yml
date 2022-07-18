@@ -11,6 +11,8 @@ entries:
     url: /concepts/licensing.html
   - title: Validated vs standard apps
     url: /concepts/validated-vs-standard.html
+  - title: Understanding app management
+    url: /learn/app-management.html
   - title: Storage classes and PV size
     url: /concepts/choose-class-and-size.html
   - title: User roles and namespaces
