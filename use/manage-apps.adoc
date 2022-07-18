@@ -150,6 +150,8 @@ You can add all Kubernetes resources in a namespace to Astra Control management 
 . Select the *Namespaces* tab.
 . Select the Actions menu for the namespace that contains the app resources you want to manage and select *Define as application*.
 +
+TIP: If you want to manage multiple namespaces, select the namespaces and select the *Actions* button in the upper-left corner and select *manage*.
++
 NOTE: Select the *Show system namespaces* checkbox to reveal system namespaces that are usually not used in app management by default. link:../use/manage-apps.html#what-about-system-apps[Read more].
 
 After the process completes, the application resources associated with the namespace appear in the namespace row.
