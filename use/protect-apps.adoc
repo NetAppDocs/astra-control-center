@@ -132,11 +132,31 @@ Delete the scheduled or on-demand snapshots that you no longer need.
 
 Astra Control Center deletes the snapshot.
 
+== Cancel backups
+
+You can cancel a backup that is in progress. 
+
+TIP: You cannot cancel a backup that is in the Pending state. It must be in a Running state to cancel the backup.
+
+.Steps
+
+. Select *Applications* and then select the name of an app.
+. Select *Data Protection*.
+. Select *Backups*.
+//+
+//image:screenshot-data-protection-backups.gif[A screenshot of the Backups option that's available in the far right of the data protection tab.]
+
+. From the Options menu in the *Actions* column for the desired backup, select *Cancel*.
+. Type the word "cancel" to confirm deletion and then select *Yes, cancel backup*.
+
+
 == Delete backups
 
 Delete the scheduled or on-demand backups that you no longer need.
 
 NOTE: There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use these instructions. To delete a failed backup, https://docs.netapp.com/us-en/astra-automation/index.html[use the Astra Control API^].
+
+.Steps
 
 . Select *Applications* and then select the name of an app.
 . Select *Data Protection*.
