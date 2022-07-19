@@ -20,9 +20,10 @@ You can complete the following tasks related to managing a storage backend:
 * link:../get-started/setup_overview.html#add-a-storage-backend[Add a storage backend]
 * <<View storage backend details>>
 * <<Unmanage a storage backend>>
+* <<Remove a storage backend>>
 * <<Update a storage backend license>>
 * <<Add nodes to a storage backend cluster>>
-* <<Remove a storage backend>>
+* <<Remove nodes from a storage backend cluster>>
 
 
 //
@@ -193,6 +194,29 @@ If Astra Data Store can use the IP addresses configured during deployment, you d
 . Select *Next*.
 . Review the configuration for the new node or nodes.
 . Select *Add nodes*.
+
+
+== Remove nodes from a storage backend cluster
+
+You can remove nodes from an Astra Data Store cluster. These nodes can be healthy or failed nodes.
+
+Removing a node from an Astra Data Store cluster moves its data to other nodes in the cluster and removes the node from Astra Data Store.
+
+The process requires the following conditions:
+
+* There must be enough free space in the other nodes to receive the data.
+* There must be 4 or more nodes in the cluster.
+
+.Steps
+
+.	From the left navigation, select *Backends*.
+. Select the name of a storage backend.
+. Select the *Nodes* tab.
+. From the Actions menu, select *Remove*.
+. Confirm the deletion by entering "remove".
+. Select *Yes, remove node*.
+
+
 
 == Find more information
 
