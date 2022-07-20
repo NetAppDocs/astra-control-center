@@ -12,7 +12,10 @@ summary: Protect your apps by taking snapshots and backups using an automated pr
 
 Protect your apps by taking snapshots and backups using an automated protection policy or on an ad-hoc basis. You can use the Astra UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to protect apps.
 
-NOTE: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
+[NOTE]
+====
+* If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
+* When you take a snapshot or backup of a consistency-sensitive app such as a database, the snapshot or backup will be crash-consistent unless you use an execution hook to safely pause the app and flush its data to disk first. To create application-consistent snapshots and backups, use execution hooks before and after snapshots or backups of these types of apps. See link:execution-hooks.html[Execution hooks] for more information.
 
 [NOTE]
 ===============================
@@ -132,11 +135,31 @@ Delete the scheduled or on-demand snapshots that you no longer need.
 
 Astra Control Center deletes the snapshot.
 
+== Cancel backups
+
+You can cancel a backup that is in progress. 
+
+TIP: You cannot cancel a backup that is in the Pending state. It must be in a Running state to cancel the backup.
+
+.Steps
+
+. Select *Applications* and then select the name of an app.
+. Select *Data Protection*.
+. Select *Backups*.
+//+
+//image:screenshot-data-protection-backups.gif[A screenshot of the Backups option that's available in the far right of the data protection tab.]
+
+. From the Options menu in the *Actions* column for the desired backup, select *Cancel*.
+. Type the word "cancel" to confirm deletion and then select *Yes, cancel backup*.
+
+
 == Delete backups
 
 Delete the scheduled or on-demand backups that you no longer need.
 
 NOTE: There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use these instructions. To delete a failed backup, https://docs.netapp.com/us-en/astra-automation/index.html[use the Astra Control API^].
+
+.Steps
 
 . Select *Applications* and then select the name of an app.
 . Select *Data Protection*.
