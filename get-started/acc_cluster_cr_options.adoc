@@ -90,18 +90,18 @@ You can use the following Astra Control Center cluster CR options to create cust
 | imageRegistry
 | Undefined
 | Optional
-| N/A
+|
 | The container image registry that is hosting the Astra application images, Astra Control Center Operator, and Astra Control Center Helm Repository.
 
 | imageRegistry.name
 | string
-| Required if imageRegistry selected
+| Required if you are using imageRegistry
 | example.registry.com/astra
-| The name of the image registry. For example "example.registry/astra". Do not prefix with protocol.
+| The name of the image registry. Do not prefix with protocol.
 
 | imageRegistry.secret
 | string
-| Required if imageRegistry selected
+| Required if you are using imageRegistry
 | astra-registry-cred
 | The name of the Kubernetes secret used to authenticate with the image registry.
 
@@ -126,7 +126,7 @@ You can use the following Astra Control Center cluster CR options to create cust
 | crds
 | Undefined
 | Undefined
-| N/A
+|
 | Options for how Astra Control Center should handle CRDs.
 
 | crds.externalTraefik
@@ -178,12 +178,13 @@ However, in scenarios using smaller developer clusters (including CaaS and Docke
 
 === ingressType
 There are two valid values for ingressType:
+
 * Generic
-* AccTraefik.
+* AccTraefik
 
 .Generic (default)
 When `ingressType` is set to `Generic`, Astra Control does not install any ingress resources. The assumption is that the user has a common way of securing and routing traffic through their network to applications running on Kubernetes clusters and they want to use the same mechanisms here. When the user creates an ingress to route traffic to Astra Control, the ingress needs to point to the internal traefik service on port 80. Here is an example of an Nginx ingress resource that works with the Generic ingressType setting.
-+
+
 ----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -215,11 +216,11 @@ WARNING: When mTLS is disabled using the mtls.enabled setting in the CR, you mus
 When `ingressType` is set to `AccTraefik`, Astra Control Center deploys its Traefik gateway as a Kubernetes LoadBalancer type service. Users need to provide an external Load Balancer (like MetalLB) for Astra Control Center to get an external IP.
 
 === mtls
-The settings used in the CR determines how intra-application communication is secured. It is very important for the user to know ahead of time whether they will be using a service mesh or not.
+The settings used in the CR determine how intra-application communication is secured. It is very important for the user to know ahead of time whether they will be using a service mesh or not.
 
 * `enabled=true`: When this setting is enabled, Astra will deploy an internal service-to-service communication network that secures all traffic within the application.
 
-WARNING: Attempting to cover Astra Control Center in a service mesh while this setting is `true` will cause Astra Control Center to cease to work as expected.
+WARNING: Do not cover Astra Control Center in a service mesh while this setting is `true`.
 
 * `enabled=false`: When this setting is disabled, Astra Control Center will not secure internal traffic and you must secure Astra namespaces independently with a service mesh.
 
