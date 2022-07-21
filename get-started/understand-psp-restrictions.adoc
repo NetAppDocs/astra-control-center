@@ -218,6 +218,7 @@ cpu-limit-range   2022-06-27T19:01:23Z
 ----
 
 . Delete the limit ranges by name:
++
 [source,sh]
 ----
 $kubectl delete limitrange cpu-limit-range -n netapp-acc
