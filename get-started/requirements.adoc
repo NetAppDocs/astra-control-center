@@ -84,7 +84,7 @@ When hosting Astra Control Center on a VMware Tanzu Kubernetes Grid (TKG) or Tan
 //DOC-4056
 * Disable the TKG or TKGi default storage class enforcement on any application clusters intended to be managed by Astra Control. You can do this by editing the `TanzuKubernetesCluster` resource on the namespace cluster.
 //DOC-4067
-* You must create a pod security policy that allows Astra Control Center to create pods within the cluster. You can do this using the following commands:
+* You need to create a pod security policy that allows Astra Control Center to create pods within the cluster. You can do this using the following commands:
 +
 ----
 kubectl config use-context <context-of-workload-cluster>
