@@ -60,7 +60,7 @@ Astra Control Center creates several pod security policies during installation. 
 During Astra Control Center installation, the Astra Control Center operator installs a custom pod security policy, a Role object, and a RoleBinding object to support the deployment of Astra Control Center services in the Astra Control Center namespace.
 
 The new policy and objects have the following attributes:
-[source, sh]
+[source,sh]
 ----
 $ kubectl get psp
 NAME                           PRIV    CAPS          SELINUX    RUNASUSER          FSGROUP     SUPGROUP    READONLYROOTFS   VOLUMES
@@ -81,7 +81,7 @@ During backup operations, Astra Control Center creates a dynamic pod security po
 
 The new policy and objects have the following attributes:
 
-[source, sh]
+[source,sh]
 ----
 $ kubectl get psp
 NAME                           PRIV    CAPS                            SELINUX    RUNASUSER          FSGROUP     SUPGROUP    READONLYROOTFS   VOLUMES
@@ -101,7 +101,7 @@ When you manage a cluster, Astra Control Center installs the netapp-monitoring o
 
 The new policy and objects have the following attributes:
 
-[source, sh]
+[source,sh]
 ----
 $ kubectl get psp
 NAME                           PRIV    CAPS                            SELINUX    RUNASUSER          FSGROUP     SUPGROUP    READONLYROOTFS   VOLUMES
@@ -123,7 +123,7 @@ Some environments use NetworkPolicy constructs to restrict traffic between names
 
 . Delete any NetworkPolicy resources that exist in the Astra Control Center namespace:
 +
-[source sh]
+[source,sh]
 ----
 $kubectl get networkpolicy -n netapp-acc
 ----
