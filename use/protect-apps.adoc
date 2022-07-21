@@ -14,6 +14,15 @@ Protect your apps by taking snapshots and backups using an automated protection 
 
 NOTE: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
 
+You can do the following tasks related to protecting your app data:
+
+* <<Configure a protection policy>>
+* <<Create a snapshot>>
+* <<Create a backup>>
+* <<View snapshots and backups>>
+* <<Delete snapshots>>
+* <<Cancel backups>>
+* <<Delete backups>>
 
 [NOTE]
 ===============================
@@ -27,15 +36,6 @@ When you create a project for hosting an app on an OpenShift cluster, the projec
 ===============================
 
 
-You can do the following tasks related to protecting your app data:
-
-* <<Configure a protection policy>>
-* <<Create a snapshot>>
-* <<Create a backup>>
-* <<View snapshots and backups>>
-* <<Delete snapshots>>
-* <<Cancel backups>>
-* <<Delete backups>>
 
 
 
