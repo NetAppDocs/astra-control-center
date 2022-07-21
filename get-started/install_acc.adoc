@@ -18,18 +18,14 @@ For Red Hat OpenShift environments, you can also use an link:../get-started/acc_
 * link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
 * Ensure all cluster operators are in a healthy state and available.
 +
-OpenShift example:
-+
 ----
-oc get clusteroperators
+kubectl get clusteroperators
 ----
 
 * Ensure all API services are in a healthy state and available:
 +
-OpenShift example:
-+
 ----
-oc get apiservices
+kubectl get apiservices
 ----
 
 * The Astra FQDN you plan to use needs to be routable to this cluster. This means that you either have a DNS entry in your internal DNS server or you are using a core URL route that is already registered.
@@ -55,8 +51,6 @@ NOTE: If you are using Red Hat’s Podman instead of Docker Engine, Podman comma
 To install Astra Control Center, do the following steps:
 
 * <<Download and unpack the Astra Control Center bundle>>
-//* <<Unpack the bundle and change directory>>
-//* <<Unpack the bundle>>
 * <<Install the NetApp Astra kubectl plugin>>
 * <<Add the images to your local registry>>
 * <<Set up namespace and secret for registries with auth requirements>>
@@ -74,16 +68,13 @@ To install Astra Control Center, do the following steps:
 . (Optional) Use the following command to verify the signature of the bundle:
 +
 ----
-openssl dgst -sha256 -verify astra-control-center[version].pub -signature <astra-control-center[version].sig astra-control-center[version].tar.gz
+openssl dgst -sha256 -verify AstraControlCenter-public.pub -signature astra-control-center-[version].tar.gz.sig astra-control-center-[version].tar.gz
 ----
 . Extract the images:
 +
 ----
 tar -vxzf astra-control-center-[version].tar.gz
 ----
-
-//== Unpack the bundle and change directory
-//== Unpack the bundle
 
 == Install the NetApp Astra kubectl plugin
 
@@ -113,54 +104,16 @@ cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 ----
 cd acc
 ----
-. Add the files in the Astra Control Center image directory to your local registry.
-+
-NOTE: See sample scripts for the automatic loading of images below.
 
-.. Log in to your registry:
+. Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
 +
-Docker:
-+
-----
-docker login [your_registry_path]
-----
-+
-Podman:
-+
-----
-podman login [your_registry_path]
-----
 
-.. Use the appropriate script to load the images, tag the images, and [[substep_image_local_registry_push]]push the images to your local registry:
-+
-Docker:
-+
-----
-export REGISTRY=[Docker_registry_path]
-for astraImageFile in $(ls images/*.tar) ; do
-  # Load to local cache. And store the name of the loaded image trimming the 'Loaded images: '
-  astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image: //')
-  astraImage=$(echo ${astraImage} | sed 's!localhost/!!')
-  # Tag with local image repo.
-  docker tag ${astraImage} ${REGISTRY}/${astraImage}
-  # Push to the local repo.
-  docker push ${REGISTRY}/${astraImage}
-done
-----
-+
-Podman:
+* Replace BUNDLE_FILE with the name of the Astra Control bundle file.
+* Replace MY_REGISTRY with the URL of the Docker repository.
+* Replace MY_REGISTRY_USER and MY_REGISTRY_PASSWORD with the credentials for the repository.
 +
 ----
-export REGISTRY=[Registry_path]
-for astraImageFile in $(ls images/*.tar) ; do
-  # Load to local cache. And store the name of the loaded image trimming the 'Loaded images: '
-  astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image(s): //')
-  astraImage=$(echo ${astraImage} | sed 's!localhost/!!')
-  # Tag with local image repo.
-  podman tag ${astraImage} ${REGISTRY}/${astraImage}
-  # Push to the local repo.
-  podman push ${REGISTRY}/${astraImage}
-done
+kubectl astra packages push-images -m BUNDLE_FILE -r MY_REGISTRY -u MY_REGISTRY_USER -p MY_REGISTRY_PASSWORD
 ----
 
 == Set up namespace and secret for registries with auth requirements
@@ -316,8 +269,6 @@ NOTE: If additional customizations are required for your environment, you can us
 ----
 vim astra_control_center_min.yaml
 ----
-+
-NOTE: Properties configured by the CR cannot be changed after initial Astra Control Center deployment.
 +
 IMPORTANT: If you are using a registry that does not require authorization, you must delete the  `secret` line within `imageRegistry` or the installation will fail.
 
