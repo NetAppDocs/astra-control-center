@@ -117,7 +117,7 @@ netapp-monitoring-role-binding-privileged             Role/netapp-monitoring-rol
 ----
 
 == Enable network communication between namespaces
-Some environments use NetworkPolicy constructs to restrict traffic between namespaces. The Astra Control Center operator, Astra Control Center, and the Astra Plugin for VMware are all in different namespaces. The services in these different namespaces need to be able to communicate with one another. To enable this communication, follow these steps.
+Some environments use NetworkPolicy constructs to restrict traffic between namespaces. The Astra Control Center operator, Astra Control Center, and the Astra Plugin for VMware vSphere are all in different namespaces. The services in these different namespaces need to be able to communicate with one another. To enable this communication, follow these steps.
 
 .Steps
 
