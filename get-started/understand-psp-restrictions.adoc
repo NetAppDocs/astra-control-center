@@ -134,7 +134,7 @@ $kubectl get networkpolicy -n netapp-acc
 $kubectl delete networkpolicy <OBJECT_NAME> -n netapp-acc
 ----
 
-. Apply the following resource file to configure the acc-avp-network-policy object to allow Astra Plugin for VMware services to make requests to Astra Control Center services. Replace the information in brackets <> with information from your environment:
+. Apply the following resource file to configure the acc-avp-network-policy object to allow Astra Plugin for VMware vSphere services to make requests to Astra Control Center services. Replace the information in brackets <> with information from your environment:
 +
 [source,yaml]
 ----
