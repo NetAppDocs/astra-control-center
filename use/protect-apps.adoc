@@ -134,9 +134,9 @@ Astra Control Center deletes the snapshot.
 
 == Cancel backups
 
-You can cancel a backup that is in progress. 
+You can cancel a backup that is in progress.
 
-TIP: You cannot cancel a backup that is in the Pending state. It must be in a Running state to cancel the backup.
+TIP: To cancel a backup, the backup must be in a Running state. You cannot cancel a backup that is in a Pending state.
 
 .Steps
 
