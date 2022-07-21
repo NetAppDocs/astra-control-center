@@ -10,7 +10,7 @@ summary: You need to understand how pod security policies work when you install 
 :icons: font
 :imagesdir: ../media/get-started/
 
-Astra Control Center supports privilege limitation through pod security policies. Pod security policies enable you to limit what users or groups are able to run containers and what privileges those containers can have.
+Astra Control Center supports privilege limitation through pod security policies (PSPs). Pod security policies enable you to limit what users or groups are able to run containers and what privileges those containers can have.
 
 Some Kubernetes distributions, such as RKE2, have a default pod security policy that is too restrictive, and causes problems when installing Astra Control Center.
 
@@ -176,7 +176,7 @@ spec:
 
 
 == Remove resource limitations
-Some environments use the ResourceQuotas and LimitRanges objects to prevent the resources in a namespace from consuming all available CPU and memory on the cluster. Astra Control Center does not set maximum limits, so it will not be in compliance with those resources. They need to be removed from the namespaces where Astra will be installed.
+Some environments use the ResourceQuotas and LimitRanges objects to prevent the resources in a namespace from consuming all available CPU and memory on the cluster. Astra Control Center does not set maximum limits, so it will not be in compliance with those resources. You need to remove them from the namespaces where you plan to install Astra Control Center.
 
 You can use the following steps to retrieve and remove these quotas and limits. In these examples, the command output is shown immediately after the command.
 
@@ -187,6 +187,7 @@ You can use the following steps to retrieve and remove these quotas and limits. 
 [source,sh]
 ----
 $ kubectl get quota -n netapp-acc
+
 NAME          AGE   REQUEST                                        LIMIT
 pods-high     16s   requests.cpu: 0/20, requests.memory: 0/100Gi   limits.cpu: 0/200, limits.memory: 0/1000Gi
 pods-low      15s   requests.cpu: 0/1, requests.memory: 0/1Gi      limits.cpu: 0/2, limits.memory: 0/2Gi
@@ -198,8 +199,10 @@ pods-medium   16s   requests.cpu: 0/10, requests.memory: 0/20Gi    limits.cpu: 0
 ----
 $ kubectl delete resourcequota  pods-high -n netapp-acc
 resourcequota "pods-high" deleted
+
 $ kubectl delete resourcequota  pods-low -n netapp-acc
 resourcequota "pods-low" deleted
+
 $ kubectl delete resourcequota  pods-medium -n netapp-acc
 resourcequota "pods-medium" deleted
 ----
@@ -209,6 +212,7 @@ resourcequota "pods-medium" deleted
 [source,sh]
 ----
 $ kubectl get limits -n netapp-acc
+
 NAME              CREATED AT
 cpu-limit-range   2022-06-27T19:01:23Z
 ----
