@@ -1,12 +1,8 @@
 section: use
 title: Use Astra
 entries:
-  - title: Manage apps
-    entries:
-      - title: Start managing apps
-        url: /use/manage-apps.html
-      - title: Define a custom app
-        url: /use/define-custom-app.html
+  - title: Start managing apps
+    url: /use/manage-apps.html
   - title: Protect apps
     entries:
       - title: Protection overview
