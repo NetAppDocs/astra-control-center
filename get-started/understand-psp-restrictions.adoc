@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: get-started/understand-psp-restrictions.html
 keywords: login, Astra Control Center, web ui, tls, certificate
-summary: You need to understand how pod security policies work when you install Astra Control Center.
+summary: You need to understand how pod security policies work before installing Astra Control Center.
 ---
 
 = Understand pod security policy restrictions
@@ -14,7 +14,7 @@ Astra Control Center supports privilege limitation through pod security policies
 
 Some Kubernetes distributions, such as RKE2, have a default pod security policy that is too restrictive, and causes problems when installing Astra Control Center.
 
-You can use the examples included here to configure pod security policies that provide the protection you need without interfering with Astra Control Center functions.
+You can use the information and examples included here to understand pod security policies that Astra Control Center creates, and configure pod security policies that provide the protection you need without interfering with Astra Control Center functions.
 
 == Default policy for installation of Astra Control Center
 You can use the following resource file to create a default pod security policy that provides protection, but does not impede the installation of Astra Control Center.
