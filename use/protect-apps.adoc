@@ -26,6 +26,17 @@ When you create a project for hosting an app on an OpenShift cluster, the projec
 `oc adm policy add-scc-to-user privileged -z default -n wordpress`
 ===============================
 
+You can do the following tasks related to protecting your app data:
+
+* <<Configure a protection policy>>
+* <<Create a snapshot>>
+* <<Create a backup>>
+* <<View snapshots and backups>>
+* <<Delete snapshots>>
+* <<Cancel backups>>
+* <<Delete backups>>
+
+
 == Configure a protection policy
 
 A protection policy protects an app by creating snapshots, backups, or both at a defined schedule. You can choose to create snapshots and backups hourly, daily, weekly, and monthly, and you can specify the number of copies to retain. As an example, a protection policy might create weekly backups and daily snapshots, and retain the backups and snapshots for one month. How often you create snapshots and backups and how long you retain them depends on the needs of your organization.
@@ -137,9 +148,9 @@ Astra Control Center deletes the snapshot.
 
 == Cancel backups
 
-You can cancel a backup that is in progress. 
+You can cancel a backup that is in progress.
 
-TIP: You cannot cancel a backup that is in the Pending state. It must be in a Running state to cancel the backup.
+TIP: To cancel a backup, the backup must be in a Running state. You cannot cancel a backup that is in a Pending state.
 
 .Steps
 
