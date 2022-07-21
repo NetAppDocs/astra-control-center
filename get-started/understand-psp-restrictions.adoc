@@ -57,8 +57,9 @@ After you install this default pod security policy, you can proceed with the nor
 Astra Control Center creates several pod security policies during installation. Some of these are permanent, and some of them are created during certain operations and are removed once the operation is complete.
 
 === Policies created during installation
-During Astra Control Center installation, the Astra Control Center operator installs a custom pod security policy, Role, and RoleBinding to support the deployment of Astra Control Center services in the Astra Control Center namespace.
+During Astra Control Center installation, the Astra Control Center operator installs a custom pod security policy, a Role object, and a RoleBinding object to support the deployment of Astra Control Center services in the Astra Control Center namespace.
 
+The new policy and objects have the following attributes:
 [source, sh]
 ----
 $ kubectl get psp
@@ -76,49 +77,72 @@ netapp-astra-deployment-rb               Role/netapp-astra-deployment-role      
 ----
 
 === Policies created during backup operations
-During backup operations, ACC will create a dynamic PSP, ClusterRole, and RoleBinding to support the backup process which happens in a separate namespace
+During backup operations, Astra Control Center creates a dynamic pod security policy, a ClusterRole object, and a RoleBinding object. These support the backup process, which happens in a separate namespace.
+
+The new policy and objects have the following attributes:
 
 [source, sh]
 ----
 $ kubectl get psp
-NAME                           PRIV    CAPS          SELINUX    RUNASUSER          FSGROUP     SUPGROUP    READONLYROOTFS   VOLUMES
-avp-psp                        false                 RunAsAny   RunAsAny           RunAsAny    RunAsAny    false            *
-netapp-astra-deployment-psp    false                 RunAsAny   RunAsAny           RunAsAny    RunAsAny    false            *
+NAME                           PRIV    CAPS                            SELINUX    RUNASUSER          FSGROUP     SUPGROUP    READONLYROOTFS   VOLUMES
+netapp-astra-backup            false   DAC_READ_SEARCH                 RunAsAny   RunAsAny           RunAsAny    RunAsAny    false            *
+
+$ kubectl get role
+NAME                  CREATED AT
+netapp-astra-backup   2022-07-21T00:00:00Z
+
+$ kubectl get rolebinding
+NAME                  ROLE                       AGE
+netapp-astra-backup   Role/netapp-astra-backup   62s
 ----
 
 === Policies created during cluster management
-When you manage a cluster, Astra Control Center installs the netapp-monitoring operator in the managed cluster which will create a PSP, ClusterRole, and RoleBinding in order to deploy its telemetry services in its own namespace.
+When you manage a cluster, Astra Control Center installs the netapp-monitoring operator in the managed cluster. This operator creates a pod security policy, a ClusterRole object, and a RoleBinding object to deploy telemetry services in the Astra Control Center namespace.
+
+The new policy and objects have the following attributes:
 
 [source, sh]
 ----
 $ kubectl get psp
-NAME                           PRIV    CAPS          SELINUX    RUNASUSER          FSGROUP     SUPGROUP    READONLYROOTFS   VOLUMES
-avp-psp                        false                 RunAsAny   RunAsAny           RunAsAny    RunAsAny    false            *
-netapp-astra-deployment-psp    false                 RunAsAny   RunAsAny           RunAsAny    RunAsAny    false            *
+NAME                           PRIV    CAPS                            SELINUX    RUNASUSER          FSGROUP     SUPGROUP    READONLYROOTFS   VOLUMES
+netapp-monitoring-psp-nkmo     true    AUDIT_WRITE,NET_ADMIN,NET_RAW   RunAsAny   RunAsAny           RunAsAny    RunAsAny    false            *
+
+$ kubectl get role
+NAME                                           CREATED AT
+netapp-monitoring-role-privileged              2022-07-21T00:00:00Z
+
+$ kubectl get rolebinding
+NAME                                                  ROLE                                                AGE
+netapp-monitoring-role-binding-privileged             Role/netapp-monitoring-role-privileged              2m5s
 ----
 
-== NetworkPolicy resource configuration
-Some environments use NetworkPolicy resources to restrict East↔West traffic between namespaces. Currently, the ACC operator is installed in a different namespace than ACC and AVP is also in a separate namespace. The services in those namespaces are required to talk to services in the ACC namespace.
+== Enable network communication between namespaces
+Some environments use NetworkPolicy constructs to restrict traffic between namespaces. The Astra Control Center operator, Astra Control Center, and the Astra Plugin for VMware are all in different namespaces. The services in these different namespaces need to be able to communicate with one another. To enable this communication, follow these steps.
 
-First, delete any NetworkPolicy resources that exist on the ACC namespace.
+.Steps
 
+. Delete any NetworkPolicy resources that exist in the Astra Control Center namespace:
++
 [source sh]
 ----
 $kubectl get networkpolicy -n netapp-acc
-
-Foreach networkpolicy returned above
-
-$kubectl delete networkpolicy [] -n netapp-acc
+----
+. For each NetworkPolicy object that is returned by the preceding command, use the following command to delete it. Replace <OBJECT_NAME> with the name of the returned object:
++
+[source,sh]
+----
+$kubectl delete networkpolicy <OBJECT_NAME> -n netapp-acc
 ----
 
-=== acc-avp-network-policy
-This network policy allows AVP services to make requests to ACC services.
+. Apply the following YAML to configure the acc-avp-network-policy object to allow Astra Plugin for VMware services to make requests to Astra Control Center services. Replace the information in brackets <> with information from your environment:
++
+[source,yaml]
 ----
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: acc-avp-network-policy
-  namespace: <netapp-acc> # REPLACE THIS WITH THE ACC NAMESPACE NAME
+  namespace: <ACC_NAMESPACE_NAME> # REPLACE THIS WITH THE ASTRA CONTROL CENTER NAMESPACE NAME
 spec:
   podSelector: {}
   policyTypes:
@@ -127,19 +151,18 @@ spec:
     - from:
         - namespaceSelector:
             matchLabels:
-              kubernetes.io/metadata.name: <avp_namespace> # REPLACE THIS WITH THE AVP NAMESPACE NAME
+              kubernetes.io/metadata.name: <PLUGIN_NAMESPACE_NAME> # REPLACE THIS WITH THE ASTRA PLUGIN FOR VMWARE VSPHERE NAMESPACE NAME
 ----
 
-
-=== acc-operator-network-policy
-This network policy allows the ACC operator to make requests to ACC services
-
+. Apply the following YAML to configure the acc-operator-network-policy object to allow the Astra Control Center operator to communicate with Astra Control Center services. Replace the information in brackets <> with information from your environment:
++
+[source,yaml]
 ----
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: acc-operator-network-policy
-  namespace: <netapp-acc> # REPLACE THIS WITH THE ACC NAMESPACE NAME
+  namespace: <ACC_NAMESPACE_NAME> # REPLACE THIS WITH THE ASTRA CONTROL CENTER NAMESPACE NAME
 spec:
   podSelector: {}
   policyTypes:
@@ -148,37 +171,50 @@ spec:
     - from:
         - namespaceSelector:
             matchLabels:
-              kubernetes.io/metadata.name: <netapp-acc-operator> # REPLACE THIS WITH THE ACC-OPERATOR NAMESPACE NAME
+              kubernetes.io/metadata.name: <NETAPP-ACC-OPERATOR> # REPLACE THIS WITH THE ACC-OPERATOR NAMESPACE NAME
 ----
 
 
-== ResourceQuotas and LimitRanges resource configuration
-Some environments use ResourceQuotas and LimitRanges to prevent the resources in a namespace from consuming all available CPU and memory on the cluster. Astra Control does not set maximum limits so it will not be in compliance with those resources. They need to be removed from the namespaces where Astra will be installed.
+== Remove resource limitations
+Some environments use the ResourceQuotas and LimitRanges objects to prevent the resources in a namespace from consuming all available CPU and memory on the cluster. Astra Control Center does not set maximum limits, so it will not be in compliance with those resources. They need to be removed from the namespaces where Astra will be installed.
 
-Here are some example commands to retrieve and remove them:
+You can use the following steps to retrieve and remove these quotas and limits. In these examples, the command output is shown immediately after the command.
 
+.Steps
+
+. Get the resource quotas in the netapp-acc namespace:
++
 [source,sh]
 ----
-# First, get the resource quotas in the netapp-acc namespace
 $ kubectl get quota -n netapp-acc
 NAME          AGE   REQUEST                                        LIMIT
 pods-high     16s   requests.cpu: 0/20, requests.memory: 0/100Gi   limits.cpu: 0/200, limits.memory: 0/1000Gi
 pods-low      15s   requests.cpu: 0/1, requests.memory: 0/1Gi      limits.cpu: 0/2, limits.memory: 0/2Gi
 pods-medium   16s   requests.cpu: 0/10, requests.memory: 0/20Gi    limits.cpu: 0/20, limits.memory: 0/200Gi
-
-# Then delete all of them by name
+----
+. Delete all of the resource quotas by name:
++
+[source,sh]
+----
 $ kubectl delete resourcequota  pods-high -n netapp-acc
 resourcequota "pods-high" deleted
 $ kubectl delete resourcequota  pods-low -n netapp-acc
 resourcequota "pods-low" deleted
 $ kubectl delete resourcequota  pods-medium -n netapp-acc
 resourcequota "pods-medium" deleted
+----
 
-# Next, get the limit ranges in the netapp-acc namespace
+. Get the limit ranges in the netapp-acc namespace:
++
+[source,sh]
+----
 $ kubectl get limits -n netapp-acc
 NAME              CREATED AT
 cpu-limit-range   2022-06-27T19:01:23Z
+----
 
-# Then delete the limit ranges by name
+. Delete the limit ranges by name:
+[source,sh]
+----
 $kubectl delete limitrange cpu-limit-range -n netapp-acc
 ----
