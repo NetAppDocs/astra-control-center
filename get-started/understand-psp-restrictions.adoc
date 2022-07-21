@@ -16,8 +16,8 @@ Some Kubernetes distributions, such as RKE2, have a default pod security policy 
 
 You can use the examples included here to configure pod security policies that provide the protection you need without interfering with Astra Control Center functions.
 
-== Default policy
-You can use the following resource file to create a default PSP that provides protection, but does not impede the installation of Astra Control Center.
+== Default policy for installation of Astra Control Center
+You can use the following resource file to create a default pod security policy that provides protection, but does not impede the installation of Astra Control Center.
 
 [source, yaml]
 ----
@@ -53,10 +53,10 @@ privileged    false              RunAsAny   MustRunAsNonRoot   RunAsAny   RunAsA
 
 After you install this default pod security policy, you can proceed with the normal Astra Control Center link:install_overview.html[installation instructions].
 
-== Policies installed by Astra Control Center
+== PSPs installed by Astra Control Center
 Astra Control Center creates several pod security policies during installation. Some of these are permanent, and some of them are created during certain operations and are removed once the operation is complete.
 
-=== Policies created during installation
+=== PSPs created during installation
 During Astra Control Center installation, the Astra Control Center operator installs a custom pod security policy, a Role object, and a RoleBinding object to support the deployment of Astra Control Center services in the Astra Control Center namespace.
 
 The new policy and objects have the following attributes:
@@ -76,7 +76,7 @@ NAME                                     ROLE                                   
 netapp-astra-deployment-rb               Role/netapp-astra-deployment-role             32m
 ----
 
-=== Policies created during backup operations
+=== PSPs created during backup operations
 During backup operations, Astra Control Center creates a dynamic pod security policy, a ClusterRole object, and a RoleBinding object. These support the backup process, which happens in a separate namespace.
 
 The new policy and objects have the following attributes:
@@ -96,7 +96,7 @@ NAME                  ROLE                       AGE
 netapp-astra-backup   Role/netapp-astra-backup   62s
 ----
 
-=== Policies created during cluster management
+=== PSPs created during cluster management
 When you manage a cluster, Astra Control Center installs the netapp-monitoring operator in the managed cluster. This operator creates a pod security policy, a ClusterRole object, and a RoleBinding object to deploy telemetry services in the Astra Control Center namespace.
 
 The new policy and objects have the following attributes:
@@ -134,7 +134,7 @@ $kubectl get networkpolicy -n netapp-acc
 $kubectl delete networkpolicy <OBJECT_NAME> -n netapp-acc
 ----
 
-. Apply the following YAML to configure the acc-avp-network-policy object to allow Astra Plugin for VMware services to make requests to Astra Control Center services. Replace the information in brackets <> with information from your environment:
+. Apply the following resource file to configure the acc-avp-network-policy object to allow Astra Plugin for VMware services to make requests to Astra Control Center services. Replace the information in brackets <> with information from your environment:
 +
 [source,yaml]
 ----
@@ -154,7 +154,7 @@ spec:
               kubernetes.io/metadata.name: <PLUGIN_NAMESPACE_NAME> # REPLACE THIS WITH THE ASTRA PLUGIN FOR VMWARE VSPHERE NAMESPACE NAME
 ----
 
-. Apply the following YAML to configure the acc-operator-network-policy object to allow the Astra Control Center operator to communicate with Astra Control Center services. Replace the information in brackets <> with information from your environment:
+. Apply the following resource file to configure the acc-operator-network-policy object to allow the Astra Control Center operator to communicate with Astra Control Center services. Replace the information in brackets <> with information from your environment:
 +
 [source,yaml]
 ----
