@@ -23,6 +23,7 @@ When you create a project for hosting an app on an OpenShift cluster, the projec
 `oc adm policy add-scc-to-user privileged -z default -n wordpress`
 ===============================
 
+
 You can do the following tasks related to protecting your app data:
 
 * <<Configure a protection policy>>
@@ -32,6 +33,7 @@ You can do the following tasks related to protecting your app data:
 * <<Delete snapshots>>
 * <<Cancel backups>>
 * <<Delete backups>>
+
 
 
 == Configure a protection policy
