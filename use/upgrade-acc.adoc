@@ -255,7 +255,6 @@ On the other hand, if you have your own Traefik deployment, set `externalTraefik
 Traefik is upgraded if any of the following conditions are met:
 
 * externalTraefik: false
-OR
 * externalTraefik: true AND shouldUpgrade: true.
 
 .Steps
