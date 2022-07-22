@@ -16,18 +16,14 @@ To upgrade Astra Control Center, download the installation bundle from the NetAp
 * link:../get-started/requirements.html[Before you begin upgrade, ensure your environment still meets the minimum requirements for Astra Control Center deployment].
 * Ensure all cluster operators are in a healthy state and available.
 +
-OpenShift example:
-+
 ----
-oc get clusteroperators
+kubectl get clusteroperators
 ----
 
 * Ensure all API services are in a healthy state and available.
 +
-OpenShift example:
-+
 ----
-oc get apiservices
+kubectl get apiservices
 ----
 
 * Log out of your Astra Control Center.
@@ -57,7 +53,7 @@ NOTE: Podman commands can be used in place of Docker commands if you are using R
 . (Optional) Use the following command to verify the signature of the bundle:
 +
 ----
-openssl dgst -sha256 -verify astra-control-center[version].pub -signature <astra-control-center[version].sig astra-control-center[version].tar.gz
+openssl dgst -sha256 -verify AstraControlCenter-public.pub -signature astra-control-center-[version].tar.gz.sig astra-control-center-[version].tar.gz
 ----
 
 == Unpack the bundle and change directory
@@ -71,36 +67,20 @@ tar -vxzf astra-control-center-[version].tar.gz
 . Change to the Astra directory.
 +
 ----
-cd astra-control-center-[version]
+cd acc
 ----
 
 == Add the images to your local registry
 
-. Add the files in the Astra Control Center image directory to your local registry.
+. Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
 +
-NOTE: See a sample script for the automatic loading of images below.
 
-.. Log in to your Docker registry:
+* Replace BUNDLE_FILE with the name of the Astra Control bundle file.
+* Replace MY_REGISTRY with the URL of the Docker repository.
+* Replace MY_REGISTRY_USER and MY_REGISTRY_PASSWORD with the credentials for the repository.
 +
 ----
-docker login [your_registry_path]
-----
-
-.. Load the images into Docker.
-.. Tag the images.
-.. [[substep_image_local_registry_push]]Push the images to your local registry.
-+
-----
-export REGISTRY=[your_registry_path]
-for astraImageFile in $(ls images/*.tar)
-  # Load to local cache. And store the name of the loaded image trimming the 'Loaded images: '
-  do astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image: //')
-  astraImage=$(echo ${astraImage} | sed 's!localhost/!!')
-  # Tag with local image repo.
-  docker tag ${astraImage} ${REGISTRY}/${astraImage}
-  # Push to the local repo.
-  docker push ${REGISTRY}/${astraImage}
-done
+kubectl astra packages push-images -m BUNDLE_FILE -r MY_REGISTRY -u MY_REGISTRY_USER -p MY_REGISTRY_PASSWORD
 ----
 
 == Install the updated Astra Control Center operator
@@ -275,7 +255,6 @@ On the other hand, if you have your own Traefik deployment, set `externalTraefik
 Traefik is upgraded if any of the following conditions are met:
 
 * externalTraefik: false
-OR
 * externalTraefik: true AND shouldUpgrade: true.
 
 .Steps
