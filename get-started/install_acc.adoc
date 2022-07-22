@@ -12,7 +12,7 @@ summary: To install Astra Control Center after addressing some environmental pre
 
 To install Astra Control Center, download the installation bundle from the NetApp Support Site and perform the following steps to install Astra Control Center Operator and Astra Control Center in your environment. You can use this procedure to install Astra Control Center in internet-connected or air-gapped environments.
 
-For Red Hat OpenShift environments, you can also use an link:../get-started/acc_operatorhub_install.html[alternative procedure] to install Astra Control Center using OpenShift OperatorHub.
+For Red Hat OpenShift environments, you can use an link:../get-started/acc_operatorhub_install.html[alternative procedure] to install Astra Control Center using OpenShift OperatorHub. For other environments, see these link:../get-started/install_acc-cvo.html[procedures].
 
 .What you'll need
 * link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
@@ -28,7 +28,7 @@ kubectl get clusteroperators
 kubectl get apiservices
 ----
 
-* The Astra FQDN you plan to use needs to be routable to this cluster. This means that you either have a DNS entry in your internal DNS server or you are using a core URL route that is already registered.
+* Ensure the Astra FQDN you plan to use is routable to this cluster. This means that you either have a DNS entry in your internal DNS server or you are using a core URL route that is already registered.
 
 .About this task
 The Astra Control Center installation process does the following:
@@ -359,8 +359,11 @@ kubectl get pods -n [netapp-acc or custom namespace]
 +
 Each pod should have a status of `Running`. It may take several minutes before the system pods are deployed.
 +
-Sample response:
-+
+// Start snippet: collapsible block (open on page load)
+.Sample response
+[%collapsible]
+====
+[subs=+quotes]
 ----
 NAME                                       READY   STATUS    RESTARTS   AGE
 acc-helm-repo-5f75c5f564-bzqmt             1/1     Running   0          11m
@@ -434,6 +437,8 @@ traefik-5857d87f85-v9wpf                   1/1     Running   0          7m3s
 trident-svc-595f84dd78-zb8l6               1/1     Running   0          8m54s
 vault-controller-86c94fbf4f-krttq          1/1     Running   0          9m24s
 ----
+====
+// End snippet
 
 . (Optional) To ensure the installation is completed, you can watch the `acc-operator` logs using the following command.
 +

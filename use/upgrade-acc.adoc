@@ -53,7 +53,7 @@ NOTE: Podman commands can be used in place of Docker commands if you are using R
 . (Optional) Use the following command to verify the signature of the bundle:
 +
 ----
-openssl dgst -sha256 -verify astra-control-center[version].pub -signature <astra-control-center[version].sig astra-control-center[version].tar.gz
+openssl dgst -sha256 -verify AstraControlCenter-public.pub -signature astra-control-center-[version].tar.gz.sig astra-control-center-[version].tar.gz
 ----
 
 == Unpack the bundle and change directory
@@ -67,7 +67,7 @@ tar -vxzf astra-control-center-[version].tar.gz
 . Change to the Astra directory.
 +
 ----
-cd astra-control-center-[version]
+cd acc
 ----
 
 == Add the images to your local registry
