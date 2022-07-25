@@ -15,19 +15,23 @@ Using Astra Control Center, you can quickly protect applications to a remote clu
 
 Astra Control Center replicates application Snapshot copies to a remote cluster, providing scheduled, asynchronous, disaster recovery data protection. The replication process includes volume snapshots (of the persistent volumes replicated by SnapMirror) and app metadata.
 
-The following images show the scheduled backup and restore process compared to the replication process. The backup process copies data to S3 buckets and restores from S3 buckets. On the other hand, replication is done by replicating to ONTAP and then a fail over creates the K8s resources.
+The following images show the scheduled backup and restore process compared to the replication process.
+
+The backup process copies data to S3 buckets and restores from S3 buckets.
 
 image:acc-backup.png[Scheduled backup and restore image]
+
+On the other hand, replication is done by replicating to ONTAP and then failing over that creates the K8s resources.
 
 image:acc-replication.png[Replication and fail over image]
 
 Using Astra Control Center, you can do the following tasks related to replicating applications:
 
 * <<Set up a replication relationship>>
-* <<Replicate (or fail over) applications to a destination cluster>>
+* <<Replicate applications (fail over) to a destination cluster>>
 * <<Resync a failed over replication>>
-* <<Replicate (or fail back) applications back to the original cluster>>
-* <<Delete the replication relationship>>
+* <<Replicate applications (fail back) back to the original cluster>>
+* <<Delete a SnapMirror replication relationship>>
 
 
 == Prerequisites
