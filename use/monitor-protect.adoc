@@ -12,6 +12,7 @@ summary: You can configure several optional settings to enhance your Astra Contr
 
 You can configure several optional settings to enhance your Astra Control Center experience. If the network where you’re running Astra Control Center requires a proxy for connecting to the Internet (to upload support bundles to NetApp Support Site or establish a connection to Cloud Insights), you should configure a proxy server in Astra Control Center. To monitor and gain insight into your complete infrastructure, create a connection to NetApp Cloud Insights. To collect Kubernetes events from systems monitored by Astra Control Center, add a Fluentd connection.
 
+You can also monitor Astra Data Store storage backend throughput, IOPS, and capacity from the Astra Control Center Storage Backends page. See link:../use/manage-backend.html[Manage storage backends].
 
 
 == Add a proxy server
