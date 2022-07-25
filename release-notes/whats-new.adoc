@@ -16,7 +16,30 @@ We're pleased to announce the latest 22.08.0 release of Astra Control Center.
 
 .New features and support
 
-* link:../get-started/setup_overview.html#add-a-storage-backend[Astra Data Store deployment from Astra Control Center]
+* link:../use/manage-apps.html#manage-apps[Improved app management that allows you to directly define and manage the apps you care about].
+* NetApp SnapMirror disaster recovery workflows.
+* link:../use/execution-hooks.html[Enhanced provide-your-own execution hooks functionality].
++
+.Details
+[%collapsible]
+====
+In addition to pre- and post-snapshot execution hooks, you can now configure the following types of execution hooks:
+
+* Pre-backup
+* Post-backup
+* Post-restore
+
+You can also now assign the same script to many different hooks, and use the Astra Control web UI to determine which execution hooks are using a certain script. The Activity log now records more detailed information about hook failure events.
+
+IMPORTANT: The NetApp-provided default pre- and post-snapshot execution hooks for specific applications have been removed in this release. When you upgrade to this release, you must provide your own execution hooks for snapshots or Astra Control will take crash-consistent snapshots only.
+
+====
+// End snippet
+* Support for Amazon FSx and AWS.
+* link:../get-started/requirements.html[Support for VMware Tanzu Kubernetes Grid Integrated Edition (TKGI)].
+* link:../get-started/requirements.html#operational-environment-requirements[Support for Google Anthos].
+* https://docs.netapp.com/us-en/astra-automation/index.html[LDAP authentication (via Astra Control API)].
+* link:../get-started/understand-psp-restrictions.html[Pod security policies].
 
 .Known issues and limitations
 * link:../release-notes/known-issues.html[Known issues for this release]
