@@ -80,7 +80,7 @@ In the Storage Backend Details page, for Astra Data Store, you can see the follo
 
 View information about the backend health, capacity, and performance (IOPS throughput and/or latency).
 
-With a connection to Cloud Insights, you can see the volumes that the Kubernetes apps are using, which are stored on a selected storage backend.
+You can see the volumes that the Kubernetes apps are using, which are stored on a selected storage backend. With Cloud Insights, you can see additional information. See https://docs.netapp.com/us-en/cloudinsights/[Cloud Insights documentation].
 
 .Steps
 . In the left navigation area, select *Backends*.
