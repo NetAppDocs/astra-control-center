@@ -21,14 +21,14 @@ To install Astra Control Center in Amazon Web Services (AWS), Google Cloud Platf
 * <<Deploy Astra Control Center in Google Cloud Platform>>
 * <<Deploy Astra Control Center in Microsoft Azure>>
 
-
+Only self-managed OpenShift Container Platform (OCP) clusters are validated for deploying Astra Control Center.
 
 
 == Deploy Astra Control Center in Amazon Web Services
 
 You can deploy Astra Control Center on a self-managed Kubernetes cluster hosted on an Amazon Web Services (AWS) public cloud.
 
-Only self-managed OpenShift Container Platform (OCP) clusters are supported for deploying Astra Control Center.
+
 
 === What you'll need for AWS
 
@@ -221,7 +221,7 @@ NOTE: These requirements assume that Astra Control Center is the only applicatio
 
 
 === Overview of deployment for GCP
-Here is an overview of the process to install Astra Control Center for GCP with Cloud Volumes ONTAP as a storage backend.
+Here is an overview of the process to install Astra Control Center on a self-managed OCP cluster in GCP with Cloud Volumes ONTAP as a storage backend.
 
 Each of these steps is explained in more detail below.
 
