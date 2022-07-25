@@ -75,7 +75,7 @@ cd acc
 . Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
 +
 
-* Replace BUNDLE_FILE with the name of the Astra Control bundle file.
+* Replace BUNDLE_FILE with the name of the Astra Control bundle file (for example, `acc.manifest.bundle.yaml`).
 * Replace MY_REGISTRY with the URL of the Docker repository.
 * Replace MY_REGISTRY_USER and MY_REGISTRY_PASSWORD with the credentials for the repository.
 +
