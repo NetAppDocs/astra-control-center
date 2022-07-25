@@ -117,7 +117,7 @@ You can use the following Astra Control Center cluster CR options to create cust
 | false (this value is the default)
 | Enrolled determines if you want to send anonymous data to NetApp for support purposes. The default election is `false` and indicates no support data will be sent to NetApp.
 
-| url
+| autoSupport.url
 | string
 | Optional, but either `enrolled` or `url` fields must be selected
 | https://support.netapp.com/asupprod/post/1.0/postAsup
@@ -135,13 +135,13 @@ You can use the following Astra Control Center cluster CR options to create cust
 | True (this value is the default)
 | By default, Astra Control Center will install the required Traefik CRDs. CRDs are cluster-wide objects and installing them may have an impact on other parts of the cluster. You can use this flag to signal to Astra Control Center that these CRDs will be installed and managed by the cluster administrator outside of Astra Control Center.
 
-| externalCertManager
+| crds.externalCertManager
 | Boolean
 | Optional
 | True (this value is the default)
 | By default, Astra Control Center will install the required cert-manager CRDs. CRDs are cluster-wide objects and installing them may have an impact on other parts of the cluster. You can use this flag to signal to Astra Control Center that these CRDs will be installed and managed by the cluster administrator outside of Astra Control Center.
 
-| shouldUpgrade
+| crds.shouldUpgrade
 | Boolean
 | Optional
 | Undefined
@@ -174,7 +174,7 @@ Some Astra Control Center cluster CR configuration settings greatly affect the w
 === astraResourcesScaler
 By default, Astra Control Center deploys with resource requests set for most of the components within Astra. This configuration allows the Astra Control Center software stack to perform better in environments under increased application load and scale.
 
-However, in scenarios using smaller developer clusters (including CaaS and Docker Desktop running on a developer's laptop), the acc-operator is also able to deploy Astra Control Center. The CR field  `AstraResourcesScalar` may be set to `Off`. This disables resource requests and allows for deployment on smaller clusters.
+However, in scenarios using smaller development or test clusters, the CR field `AstraResourcesScalar` may be set to `Off`. This disables resource requests and allows for deployment on smaller clusters.
 
 === ingressType
 There are two valid values for ingressType:
