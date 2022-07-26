@@ -15,7 +15,10 @@ Using Astra Control, you can quickly protect applications to a remote cluster in
 
 Astra Control replicates application Snapshot copies to a remote cluster, providing scheduled, asynchronous, disaster recovery protection. The replication process includes volume snapshots (of the persistent volumes replicated by SnapMirror) and app metadata.
 
+For a comparison between backups/restores and replication, see link:../concepts/data-protection.html[Data protection concepts].
+
 The following images show the scheduled backup and restore process compared to the replication process.
+
 
 The backup process copies data to S3 buckets and restores from S3 buckets:
 
