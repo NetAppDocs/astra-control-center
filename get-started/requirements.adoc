@@ -97,9 +97,7 @@ See link:understand-psp-restrictions.html[Understand pod security policy restric
 NOTE: The default VMware TKG and TKGi configuration file token expires ten hours after deployment. If you use Tanzu portfolio products, you must generate a Tanzu Kubernetes Cluster configuration file with a non-expiring token to prevent connection issues between Astra Control Center and managed application clusters. For instructions, visit https://docs.vmware.com/en/VMware-NSX-T-Data-Center/3.2/nsx-application-platform/GUID-52A52C0B-9575-43B6-ADE2-E8640E22C29F.html[the VMware NSX-T Data Center Product Documentation.]
 
 === Google Anthos cluster requirements
-When hosting Astra Control Center on a Google Anthos cluster, note the following:
-
-* Google Anthos includes the MetalLB load balancer and the Istio ingress gateway service by default.
+When hosting Astra Control Center on a Google Anthos cluster, note that Google Anthos includes the MetalLB load balancer and the Istio ingress gateway service by default, enabling you to simply use the generic ingress capabilities of Astra Control Center during installation. See link:install_acc.html#configure-astra-control-center[Configure Astra Control Center] for details.
 
 //* A method for pointing the FQDN of Astra Control Center to the external IP address of the Astra Control Center service
 
