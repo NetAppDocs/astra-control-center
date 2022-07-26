@@ -39,3 +39,5 @@ Replicating applications is different than backing up and restoring applications
 Replicating applications places the data on a destination volume and incrementally updates it.
 
 * *Backing up and restoring applications*: When backing up applications, Astra Control creates a Snapshot of the app data and stores it in an object storage bucket. When a restore is needed, the data in the bucket must be copied to a volume on the ONTAP cluster to be accessible, a more lengthy process than replication. The restore process requires this additional copy operation to the destination cluster compared to the replication process, where the application can just start using the replicated data on the destination ONTAP cluster.
+
+To learn how to replicate apps, see link:../use/replication.html[Replicate apps to a remote system using SnapMirror technology].
