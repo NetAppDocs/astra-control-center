@@ -22,11 +22,11 @@ The following images show the scheduled backup and restore process compared to t
 
 The backup process copies data to S3 buckets and restores from S3 buckets:
 
-image:acc-backup.png[Scheduled backup and restore image]
+image:acc-backup_5.5in.png[Scheduled backup and restore image]
 
 On the other hand, replication is done by replicating to ONTAP and then failing over that creates the Kubernetes resources on a destination cluster:
 
-image:acc-replication.png[Replication and fail over image]
+image:acc-replication_5.5in.png[Replication and fail over image]
 
 Using Astra Control, you can do the following tasks related to replicating applications:
 
