@@ -26,6 +26,8 @@ Known limitations identify platforms, devices, or functions that are not support
 * <<In-place restore operations of apps that use a certificate manager are not supported>>
 * <<OLM-enabled and cluster-scoped operator deployed apps not supported>>
 * <<Apps deployed with Helm 2 are not supported>>
+* <<Astra cannot manage custom resources or cluster-scoped resources individually>>
+* <<Namespace names must be unique and not use the same name as deleted namespaces>>
 
 .General limitations
 * <<S3 buckets in Astra Control Center do not report available capacity>>
@@ -112,6 +114,14 @@ Astra Control Center does not support application management activities with clu
 == Apps deployed with Helm 2 are not supported
 //From requirements section
 If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) is fully supported. For more information, see link:../get-started/requirements.html[Astra Control Center requirements].
+
+== Astra cannot manage custom resources or cluster-scoped resources individually
+DOC-4292/ASTRACTL-18850
+Astra cannot define a custom application in some cases because it cannot find custom objects using labels.
+
+== Namespace names must be unique and not use the same name as deleted namespaces
+DOC-4390/ASTRACTL-19452
+If you define an app based on a namespace and add new resources to that namespace after defining it, the new resources become part of the defined app and Astra will manage them automatically. If you delete the namespace without deleting the app and later create a new namespace with the same name, the app you defined based on the namespace continues to model whatever is in the namespace for which it was originally defined.
 
 == S3 buckets in Astra Control Center do not report available capacity
 //DOC-3561/ASTRACTL-9425/Q2 and PI4
