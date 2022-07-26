@@ -11,6 +11,8 @@ entries:
         url: /use/protect-apps.html
       - title: Restore apps
         url: /use/restore-apps.html
+      - title: Replicate apps to a remote system
+        url: /use/replication.html 
       - title: Clone and migrate apps
         url: /use/clone-apps.html
       - title: Manage app execution hooks

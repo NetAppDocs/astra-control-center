@@ -25,3 +25,17 @@ CAUTION: _You can't be fully protected until you have a recent backup_. This is 
 == Clones
 
 A _clone_ is an exact duplicate of an app, its configuration, and its persistent storage. You can manually create a clone on either the same Kubernetes cluster or on another cluster. Cloning an app can be useful if you need to move applications and storage from one Kubernetes cluster to another.
+
+== Replication to a remote cluster
+
+Using Astra Control, you can quickly protect applications to a remote cluster in preparation for disaster recovery using SnapMirror technology, a feature of ONTAP.
+
+Astra Control replicates Snapshot backup copies to a remote cluster, providing scheduled, asynchronous, disaster recovery data protection. The replication process can create volume snapshots and app snapshots.
+
+Replicating applications is different than backing up and restoring applications in case of a disaster in the following ways:
+
+* *Replicating applications*: Astra Control uses ONTAP paired clusters that are in a SnapMirror relationship connecting the source Kubernetes cluster and ONTAP system to a destination Kubernetes cluster and ONTAP system. Using SnapMirror, Astra Control replicates Snapshots of applications to a destination ONTAP system. To fail over, Astra Control can quickly bring the replicated application online by recreating the application on the destination Kubernetes cluster with the replicated volumes on the destination ONTAP cluster.
++
+Replicating applications places the data on a destination volume and incrementally updates it.
+
+* *Backing up and restoring applications*: When backing up applications, Astra Control creates a Snapshot of the app data and stores it in an object storage bucket. When a restore is needed, the data in the bucket must be copied to a volume on the ONTAP cluster to be accessible, a more lengthy process than replication. The restore process requires this additional copy operation to the destination cluster compared to the replication process, where the application can just start using the replicated data on the destination ONTAP cluster.
