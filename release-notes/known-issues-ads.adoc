@@ -12,7 +12,11 @@ summary: Known issues identify problems that might prevent you from using this r
 
 Known issues identify problems that might prevent you from using this release of the product successfully.
 
-https://docs.netapp.com/us-en/astra-data-store/release-notes/known-issues.html[See these known issues] that might affect the management of Astra Data Store with the current release of the Astra Control Center.
+== Unmanaging a cluster with Astra Data Store requires first removing a managed system app
+DOC-4412/ASTRACTL-19768
+If you manage the astrads-system app on the same cluster that contains Astra Data Store, you must first unmanage the app before the cluster can be unmanaged. You cannot unmanage this type of app using the Astra Control Center UI. Instead, use an Astra Control API request to manually remove the app `DELETE /apps/{id}`.
+
+NOTE: https://docs.netapp.com/us-en/astra-data-store/release-notes/known-issues.html[See these additional known issues] that might affect the management of Astra Data Store with the current release of the Astra Control Center.
 
 == Find more information
 * link:../release-notes/known-issues.html[Known issues]
