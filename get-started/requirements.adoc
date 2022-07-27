@@ -214,6 +214,7 @@ Replication to protect an app in Astra Control requires the following prerequisi
 * ONTAP SnapMirror asynchronous licenses using the Data Protection bundle must be enabled on both the source and destination ONTAP clusters. See https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html[SnapMirror licensing overview in ONTAP].
 * Both source and destination Kubernetes clusters and ONTAP clusters must be managed by Astra Control.
 
+Learn how to link:../use/replication.html[replicate apps to a remote system using SnapMirror technology].
 
 === Supported application installation methods
 Astra Control supports the following application installation methods:
