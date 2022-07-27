@@ -21,7 +21,7 @@ To install Astra Control Center in Amazon Web Services (AWS), Google Cloud Platf
 * <<Deploy Astra Control Center in Google Cloud Platform>>
 * <<Deploy Astra Control Center in Microsoft Azure>>
 
-Only self-managed OpenShift Container Platform (OCP) clusters are validated for deploying Astra Control Center.
+You can manage your apps in distributions with self-managed Kubernetes clusters, such with OpenShift Container Platform (OCP). Only self-managed OCP clusters are validated for deploying Astra Control Center.
 
 
 == Deploy Astra Control Center in Amazon Web Services
@@ -37,7 +37,7 @@ Before you deploy Astra Control Center in AWS, you will need the following items
 * Astra Control Center license. See link:../get-started/requirements.html[Astra Control Center licensing requirements].
 * link:../get-started/requirements.html[Meet Astra Control Center requirements].
 * NetApp Cloud Central account
-* Red Hat OpenShift Container Platform (OCP) permissions (on namespace level to create pods)
+* If using OCP, Red Hat OpenShift Container Platform (OCP) permissions (on namespace level to create pods)
 * AWS credentials, Access ID and Secret Key with permissions that enable you to create buckets and connectors
 * AWS account Elastic Container Registry (ECR) access and login
 * AWS hosted zone and Route 53 entry required to access the Astra Control UI
@@ -171,7 +171,6 @@ Follow the standard link:../get-started/install_acc.html[Astra Control Center in
 
 You can deploy Astra Control Center on a self-managed Kubernetes cluster hosted on a Google Cloud Platform (GCP) public cloud.
 
-Only self-managed OpenShift Container Platform (OCP) clusters are supported for deploying Astra Control Center.
 
 === What you'll need for GCP
 
@@ -180,8 +179,8 @@ Before you deploy Astra Control Center in GCP, you will need the following items
 * Astra Control Center license. See link:../get-started/requirements.html[Astra Control Center licensing requirements].
 * link:../get-started/requirements.html[Meet Astra Control Center requirements].
 * NetApp Cloud Central account
-* Red Hat OpenShift Container Platform (OCP) 4.10
-* Red Hat OpenShift Container Platform (OCP) permissions (on namespace level to create pods)
+* If using OCP, Red Hat OpenShift Container Platform (OCP) 4.10
+* If using OCP, Red Hat OpenShift Container Platform (OCP) permissions (on namespace level to create pods)
 * GCP Service Account with permissions that enable you to create buckets and connectors
 
 
@@ -365,8 +364,8 @@ Before you deploy Astra Control Center in Azure, you will need the following ite
 * Astra Control Center license. See link:../get-started/requirements.html[Astra Control Center licensing requirements].
 * link:../get-started/requirements.html[Meet Astra Control Center requirements].
 * NetApp Cloud Central account
-* Red Hat OpenShift Container Platform (OCP) 4.8
-* Red Hat OpenShift Container Platform (OCP) permissions (on namespace level to create pods)
+* If using OCP, Red Hat OpenShift Container Platform (OCP) 4.8
+* If using OCP, Red Hat OpenShift Container Platform (OCP) permissions (on namespace level to create pods)
 * Azure credentials with permissions that enable you to create buckets and connectors
 
 
