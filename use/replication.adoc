@@ -24,9 +24,16 @@ The backup process copies data to S3 buckets and restores from S3 buckets:
 
 image:acc-backup_5.5in.png[Scheduled backup and restore image]
 
-On the other hand, replication is done by replicating to ONTAP and then failing over that creates the Kubernetes resources on a destination cluster:
+On the other hand, replication is done by replicating to ONTAP and then a fail over creates the Kubernetes resources:
 
 image:acc-replication_5.5in.png[Replication and fail over image]
+
+You can replicate apps in different scenarios, such as the following on-premises only, hybrid, and multi-cloud scenarios;
+
+* On-premise site A to on-premise site B
+* On-premise to cloud with Cloud Volumes ONTAP
+* Cloud with Cloud Volumes ONTAP to on-premise
+* Cloud with Cloud Volumes ONTAP to cloud (between different regions in the same cloud provider or to different cloud providers)
 
 Using Astra Control, you can do the following tasks related to replicating applications:
 
@@ -39,17 +46,9 @@ Using Astra Control, you can do the following tasks related to replicating appli
 
 == Replication prerequisites
 
-Replication to protect an app in Astra Control requires the following prerequisites that must be met before you begin:
+See the link:../get-started/requirements.html[replication prerequisites] before you begin.
 
-* The app's host Kubernetes cluster and a destination Kubernetes cluster must be available and connected to two ONTAP clusters, ideally at different failure domains or sites.
-* ONTAP clusters must be paired and paired before SVMs. See https://docs.netapp.com/us-en/ontap-sm-classic/peering/index.html[Cluster and SVM peering overview].
-* The volumes' host SVM must be paired with the remote SVM.
-* The paired remote SVM must be available to Trident on the destination cluster.
-* Trident version 22.04 or greater must exist on both the source and destination ONTAP clusters.
-* ONTAP SnapMirror asynchronous licenses using the Data Protection bundle must be enabled on both the source and destination ONTAP clusters. See https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html[SnapMirror licensing overview in ONTAP].
-* Both source and destination Kubernetes clusters and ONTAP clusters must be managed by Astra Control.
-+
-NOTE: You can simultaneously replicate a different app (running on the other cluster/site) in the opposite direction. For example, Apps A, B, C can be replicated from Datacenter 1 to Datacenter 2; and Apps X, Y, Z can be replicated from Datacenter 2 to Datacenter 1.
+
 
 
 == Replication statuses and life cycle
@@ -62,7 +61,7 @@ The following statuses indicate the life cycle of the replication relationship:
 * *Established*: A replication relationship exists. Astra Control periodically checks that the PVCs are available, checks the replication relationship, periodically creates Snapshots of the app, and identifies any new source PVCs in the app. If so, Astra Control creates the resources to include them in the replication.
 * *Failing over*: Astra Control breaks the SnapMirror relationships and restores the app's Kubernetes resources from the last successfully replicated app Snapshot.
 
-* *Failed over*: Astra Control uses the most recent (successful) replicated app Snapshot copy, stops replicating from the source cluster, and restores the Kubernetes resources.
+* *Failed over*: Astra Control uses the most recent (successful) replicated app Snapshot, stops replicating from the source cluster, and restores the Kubernetes resources.
 
 * *Resyncing*: Astra Control stops the app that's running, removes the Kubernetes app, stops pods on the new destination and resyncs the SnapMirror relationships. During the resyncing process, the status shows as "Establishing."
 
@@ -70,7 +69,7 @@ The following statuses indicate the life cycle of the replication relationship:
 
 * *Deleting*:
 ** If the replication relationship was established but not failed over yet, Astra Control removes PVCs that were created during replication and deletes the destination managed app.
-** If the replication was failed over already, Astra Control retains the PVCs and destination app.
+** If the replication failed over already, Astra Control retains the PVCs and destination app.
 
 
 The following states indicate the health of the replication relationship:
@@ -209,7 +208,9 @@ The following actions occur as a result of the fail back:
 
 == Fail back applications to the original source cluster
 
-Using Astra Control, you can replicate or "fail back" applications from a destination cluster back to the original cluster. In this case, Astra Control makes the destination site the new primary and replicates applications back to the original cluster, similar to reversing replication. However, this starts from a relationship that has completed a fail over to a destination. Next, it replicates back to the original replication direction, but preserves the data written on the destination app while failed over.
+Using Astra Control, you can "fail back" applications from the original destination cluster back to the original cluster after a "fail over". In this workflow to restore the original replication direction, Astra Control replicates any application changes back to the original source cluster before reversing the replication direction.
+
+This starts from a relationship that has completed a fail over to a destination. Next, it replicates back to the original replication direction, but preserves the data written on the destination app while failed over.
 
 This process involves the following tasks:
 
