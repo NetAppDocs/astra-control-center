@@ -213,6 +213,8 @@ Replication to protect an app in Astra Control requires the following prerequisi
 * Trident version 22.04 or greater must exist on both the source and destination ONTAP clusters.
 * ONTAP SnapMirror asynchronous licenses using the Data Protection bundle must be enabled on both the source and destination ONTAP clusters. See https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html[SnapMirror licensing overview in ONTAP].
 * Both source and destination Kubernetes clusters and ONTAP clusters must be managed by Astra Control.
++
+NOTE: You can simultaneously replicate a different app (running on the other cluster/site) in the opposite direction. For example, Apps A, B, C can be replicated from Datacenter 1 to Datacenter 2; and Apps X, Y, Z can be replicated from Datacenter 2 to Datacenter 1.
 
 Learn how to link:../use/replication.html[replicate apps to a remote system using SnapMirror technology].
 
