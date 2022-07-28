@@ -21,7 +21,7 @@ We're pleased to announce the latest release of Astra Control Center.
 * link:../use/execution-hooks.html[Enhanced provide-your-own execution hooks functionality]
 * link:../get-started/requirements.html[Support for VMware Tanzu Kubernetes Grid Integrated Edition (TKGI)]
 * link:../get-started/requirements.html#operational-environment-requirements[Support for Google Anthos]
-* https://docs.netapp.com/us-en/astra-automation/workflows_infra/ldap_overview.html[LDAP integration (via Astra Control API)^]
+* https://docs.netapp.com/us-en/astra-automation/workflows_infra/ldap_prepare.html[LDAP integration (via Astra Control API)^]
 
 .Known issues and limitations
 * link:../release-notes/known-issues.html[Known issues for this release]

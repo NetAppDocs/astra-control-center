@@ -119,14 +119,15 @@ If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Ma
 DOC-4292/ASTRACTL-18850
 Astra cannot define a custom application in some cases because it cannot find custom objects using labels.
 
-== Label selectors should be updated if a namespace uses the same name as a namespace previously removed in Astra Control
+== Astra Control cannot manage app if app is still associated with removed namespace
 DOC-4390/ASTRACTL-19452
 If you do the following:
 
-. Remove a namespace after adding an app associated with that namespace to Astra.
-. Create a new namespace with the same name as the previously removed namespace.
+* Remove a namespace after adding an app associated with that namespace to Astra.
+* Create a new namespace with the same name as the previously removed namespace.
+* Attempt to define an app on the new namespace in Astra Control using the same label selector criteria as the previously defined app that was associated with the removed namespace.
 
-You will not be able to define and manage an application on the new namespace with Astra Control if the associated label selector requirements (for example, `app in (mysql, mariadb)`) are the same as the label selector requirements associated with the removed namespace. You should first unmanage the old application and then define a new app with different requirements for the label selector (for example, `app in (mariadb, jenkins)`).
+Attempts to manage the app with Astra Control will fail. You should first unmanage the application before adding another application with the same namespace name and identical label selector criteria.
 
 == S3 buckets in Astra Control Center do not report available capacity
 //DOC-3561/ASTRACTL-9425/Q2 and PI4
