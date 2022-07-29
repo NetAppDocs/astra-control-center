@@ -697,6 +697,7 @@ NOTE: If you don't want to set up an ingress controller, you can set `ingressTyp
 
 The steps differ depending on the type of ingress controller you use:
 
+* Istio ingress
 * Nginx ingress controller
 * OpenShift ingress controller
 
@@ -705,6 +706,53 @@ The steps differ depending on the type of ingress controller you use:
 * The required https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/[ingress controller] should already be deployed.
 * The https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class[ingress class] corresponding to the ingress controller should already be created.
 * You are using Kubernetes versions between and including v1.19 and v1.22.
+
+.Steps for Istio ingress
+
+. Configure Istio ingress.
++
+NOTE: This procedure assumes that Istio is deployed using the "default" configuration profile. 
+
+. Gather or create the desired certificate and private key file for the Ingress Gateway.
++
+You can use a CA-signed or self-signed certificate. The common name must be the Astra address (FQDN).
++
+Sample command: 
++
+----
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 
+-keyout tls.key -out tls.crt
+----
+
+. Create a secret `astra-ingress-tls` of type `kubernetes.io/tls` for a TLS private key and certificate in the `istio-system namespace` as described in TLS secrets.
++
+Sample command: 
++
+----
+kubectl create secret tls astra-ingress-tls 
+--key="tls.key"
+--cert="tls.crt" -n istio-system
+----
++
+TIP: The name of the secret should match the `spec.tls.secretName` provided in `istio-ingress.yaml` file.
+
+
+. Deploy an ingress resource in `netapp-acc` (or custom-named) namespace using either the v1beta1 (deprecated in Kubernetes version less than or 1.22) or v1 resource type for either a deprecated or a new schema:
++
+----
+kubectl apply -f istio-ingress
+----
+
+. Deploy Astra Control Center as usual.
+
+. Check the status of the ingress:
++
+----
+kubectl get ingress -n netapp-acc 
+NAME    CLASS HOSTS             ADDRESS         PORTS   AGE 
+ingress istio astra.example.com 172.16.103.248  80, 443 1h 
+----
+
 
 .Steps for Nginx ingress controller
 
