@@ -142,9 +142,13 @@ NOTE: Astra Data Store licenses with full permissions are associated with your K
 For Astra Data Store licenses, if no association has been made between the license and cluster, you can define this association on the next page of the wizard.
 
 . If you have not added a Kubernetes cluster to Astra Control management, you need to do so from the *Kubernetes cluster* page. Select an existing cluster from the list or select *add the underlying cluster* to add a cluster to Astra Control management.
-. Select the deployment template size for the Kubernetes cluster that will provide resources for Astra Data Store.
+. Select a template size for the Kubernetes cluster that will provide resources for Astra Data Store. You can choose one of the following:
 +
-TIP: When picking a template, select larger nodes with more memory and cores for larger workloads or a greater number of nodes for smaller workloads. You should select a template based on what your license allows. Each template option suggests the number of eligible nodes that satisfy the template pattern for memory and cores and capacity for each node.
+* If you choose `Recommended Kubernetes worker node requirements`, select a template from large to small based on what your license allows.
+
+* If you choose `Custom Kubernetes worker node requirements`, select the number of cores and total memory you want for each cluster node. You can also show the eligible number of nodes in the cluster that meet your selection criteria for cores and memory.
++
+TIP: When picking a template, select larger nodes with more memory and cores for larger workloads or a greater number of nodes for smaller workloads. You should select a template based on what your license allows. Each recommended template option suggests the number of eligible nodes that satisfy the template pattern for memory and cores and capacity for each node.
 
 . Configure the nodes:
 .. Add a node label to identify the pool of worker nodes that supports this Astra Data Store cluster.

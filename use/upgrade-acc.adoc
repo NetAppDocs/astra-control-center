@@ -211,7 +211,7 @@ The 22.08 version of Astra Control Center does not support upgrades from previou
 //ingressType: Generic
 //----
 //+
-////TIP: If you omit the field, the process becomes the generic deployment. If you don't want the generic deployment, be sure to add the field.
+//TIP: If you omit the field, the process becomes the generic deployment. If you don't want the generic deployment, be sure to add the field.
 
 //. (Optional) Verify that the pods terminate and become available again:
 //+
