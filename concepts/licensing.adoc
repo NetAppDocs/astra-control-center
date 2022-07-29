@@ -25,6 +25,7 @@ The following operations require a valid license:
 * Configuring a protection policy to schedule snapshots or backups
 * Restoring from a snapshot or backup
 * Cloning from a snapshot or current state
+* Replicating applications to a remote system 
 
 //* Applying a new license if the number of CPU cores currently managed by the Astra Control Center instance exceeds the CPU core count in the license being applied
 
