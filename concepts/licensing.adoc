@@ -25,7 +25,7 @@ The following operations require a valid license:
 * Configuring a protection policy to schedule snapshots or backups
 * Restoring from a snapshot or backup
 * Cloning from a snapshot or current state
-* Replicating applications to a remote system 
+* Replicating applications to a remote system
 
 //* Applying a new license if the number of CPU cores currently managed by the Astra Control Center instance exceeds the CPU core count in the license being applied
 
@@ -38,6 +38,18 @@ NOTE: You can add a cluster, add a bucket, and manage an Astra Data Store storag
 When you add a new cluster to Astra Control Center, it doesn't count toward consumed licenses until at least one application running on the cluster is managed by Astra Control Center. You can also add an Astra Data Store storage backend to Astra Control Center without affecting license consumption. This enables you to manage an Astra Data Store backend from an unlicensed Astra Control Center system.
 
 When you start managing an app on a cluster, any of that cluster's CPU units that exceed the Astra Data Store license capacity are included in the Astra Control Center license consumption calculation.
+
+Note the following calculation for core consumption with Astra Data Store clusters:
+
+* If the Astra Data Store license is an evaluation license, the deduction of core consumption will be entirely from the Astra Control Center license when apps are managed.
+
+* If the Astra Data Store license is a paid license, the deduction will be different. Consider the following example:
+
+** *Configuration Example*: The example uses an Astra Control Center license of 100 cores and an Astra Data Store license of 100 cores. There is an Astra Data Store cluster consisting of 1 master and 7 worker nodes with only 4 worker nodes used for the Astra Data Store cluster. Each worker has 12 CPUs but only 9 are used for Astra Data Store cluster.
+
+** Core deduction from the Astra Control Center license will be 48 cores when apps are managed.
+** 2 x worker nodes did not count towards the Astra Data Store license. (12 x 3 = 36) 36 cores are deducted from the Astra Control Center license.
+** 4 x worker nodes had 3 remaining cores that do not count towards the Astra Data Store license. ((12 - 9) * 4 = 12) 12 cores are deducted from the Astra Control Center license.
 //However, if all of the managed apps on a cluster are Astra Control Center apps, the cluster is ignored in the consumption calculation. This enables you to use an unlicensed Astra Control Center system to manage another Astra Control Center system and back up and restore its Astra Control Center apps.
 
 //NOTE: You cannot manage Astra Data Store apps in Astra Control Center, but you can use Astra Control Center to manage apps in another Astra Control Center system.
