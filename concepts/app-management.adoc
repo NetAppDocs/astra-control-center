@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: learn/app-management.html
-keywords: custom app, labels, kubernetes labels, kubernetes resources, pods, define custom app
+keywords: app, labels, kubernetes labels, kubernetes resources, pods, define app
 summary: Describes the type of managed apps in Astra Control.
 ---
 
@@ -23,4 +23,4 @@ image:diagram-managed-app2.png[A conceptual image that shows Astra managing an i
 
 * A group of resources that are identified by a Kubernetes label within a namespace
 +
-image:diagram-managed-app3.png[A conceptual image that shows Astra managing a custom app based on a Kubernetes label.]
+image:diagram-managed-app3.png[A conceptual image that shows Astra managing an app based on a Kubernetes label.]
