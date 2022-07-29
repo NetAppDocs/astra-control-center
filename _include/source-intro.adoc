@@ -1,6 +1,6 @@
 
 
-Astra Control is a Kubernetes application data lifecycle management solution that simplifies operations for stateful applications. Easily protect, back up, and migrate Kubernetes workloads, and instantly create working application clones.
+Astra Control is a Kubernetes application data lifecycle management solution that simplifies operations for stateful applications. Easily protect, back up, replicate, and migrate Kubernetes workloads, and instantly create working application clones.
 
 == Features
 
@@ -9,7 +9,7 @@ Astra Control offers critical capabilities for Kubernetes application data lifec
 * Automatically manage persistent storage
 * Create application-aware, on-demand snapshots and backups
 * Automate policy-driven snapshot and backup operations
-* Create disaster recovery policies to replicate data to a remote system
+* Replicate application to a remote system using NetApp SnapMirror technology
 * Migrate applications and data from one Kubernetes cluster to another
 * Easily clone an application from production to staging
 * Visualize application health and protection status
@@ -79,7 +79,7 @@ Astra Control's Free Plan enables you to manage up to 10 apps in your account. I
 
 Astra Control Center runs locally in your own private cloud.
 
-Astra Control Center supports OpenShift Kubernetes clusters with:
+Astra Control Center supports Kubernetes clusters with:
 
 * Trident storage backends with ONTAP 9.5 and above
 * Astra Data Store storage backends
