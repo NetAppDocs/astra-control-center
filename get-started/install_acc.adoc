@@ -30,6 +30,7 @@ kubectl get apiservices
 ----
 
 * Ensure the Astra FQDN you plan to use is routable to this cluster. This means that you either have a DNS entry in your internal DNS server or you are using a core URL route that is already registered.
+* (Anthos installations only) If a cert-manager already exists in the cluster, you need to perform some prerequisite steps so that Astra Control Center does not install its own cert-manager. 
 
 .About this task
 The Astra Control Center installation process does the following:
@@ -280,6 +281,14 @@ IMPORTANT: If you are using a registry that does not require authorization, you 
 .. Change the `astraAddress` string to the FQDN you want to use in your browser to access Astra. Do not use `http://` or `https://` in the address. Copy this FQDN for use in a <<Log in to the Astra Control Center UI,later step>>.
 .. Change the `email` string to the default initial administrator address. Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>.
 .. Change `enrolled` for AutoSupport to `false` for sites without internet connectivity or retain `true` for connected sites.
+.. (Anthos installations only) If you use an external cert-manager, add the following lines to `spec`:
++
+----
+spec:
+  crds:
+    externalCertManager: true
+----
+
 .. (Optional) Add a first name `firstName` and last name `lastName` of the user associated with the account. You can perform this step now or later within the UI.
 .. (Optional) Change the `storageClass` value to another Trident storageClass resource if required by your installation.
 .. (Optional) If you want the cluster to be automatically managed by Astra Control Center after installation and you have already <<substep_kubeconfig_secret,created the secret containing the kubeconfig for this cluster>>, provide the name of the secret by adding a new field to this YAML file called `astraKubeConfigSecret: "acc-kubeconfig-cred or custom secret name"`
