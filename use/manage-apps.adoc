@@ -68,9 +68,10 @@ Astra Control supports the following application installation methods:
 kubectl apply -f myapp.yaml
 ----
 * *Helm 3*: If you use Helm to install apps, Astra Control requires Helm version 3. Managing and cloning apps installed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Managing apps installed with Helm 2 is not supported.
-* *Operator-deployed apps*:  Astra Control supports apps installed with namespace-scoped operators that are generally designed with a "pass-by-value" rather than "pass-by-reference" architecture. An operator and the app it installs must use the same namespace; you might need to modify the deployment .yaml file for the operator to ensure this is the case.
-
+* *Operator-deployed apps*:  Astra Control supports apps installed with namespace-scoped operators that are, in general, designed with a "pass-by-value" rather than "pass-by-reference" architecture. An operator and the app it installs must use the same namespace; you might need to modify the deployment .yaml file for the operator to ensure this is the case.
++
 The following are some operator apps that follow these patterns:
+
 ** https://github.com/k8ssandra/cass-operator/tree/v1.7.1[Apache K8ssandra^]
 +
 NOTE: For K8ssandra, in-place restore operations are supported. A restore operation to a new namespace or cluster requires that the original instance of the application to be taken down. This is to ensure that the peer group information carried over does not lead to cross-instance communication. Cloning of the app is not supported.
@@ -100,7 +101,9 @@ TIP: As an example, you might want to set a backup policy for "maria" that has a
 +
 TIP: A label is a key/value pair you can assign to Kubernetes objects for identification. Labels make it easier to sort, organize, and find your Kubernetes objects. To learn more about Kubernetes labels, https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/[see the official Kubernetes documentation^].
 
-Before you begin, you should also understand link:../use/manage-apps.html#what-about-system-apps[managing standard and system namespaces]. For instructions on how to manage apps using the Astra Control API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
+Before you begin, you should also understand link:../use/manage-apps.html#what-about-system-apps[managing standard and system namespaces].
+
+For instructions on how to manage apps using the Astra Control API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
 
 .App management options
 
@@ -169,7 +172,7 @@ After the process completes, the applications that are associated with the names
 //. Enter the new name.
 //. Select *Rename*.
 
-== Unmanage apps
+=== Unmanage apps
 
 When you no longer want to back up, snapshot, or clone an app, you can stop managing it.
 
