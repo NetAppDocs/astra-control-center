@@ -96,4 +96,4 @@ NAME                     READY   AGE
 astra-ca-clusterissuer   True    9s
 ----
 
-. Complete the link:../get-started/install_acc.html[Astra Control Center installation process]. There is a link:..get-started/install_acc.html#configure-astra-control-center[required configuration step for the Astra Control Center cluster YAML] in which you change the CRD value to indicate that the cert-manager is externally installed. You must complete this step during installation so that Astra Control Center recognizes the external cert-manager.
+. Complete the link:../get-started/install_acc.html[Astra Control Center installation process]. There is a link:../get-started/install_acc.html#configure-astra-control-center[required configuration step for the Astra Control Center cluster YAML] in which you change the CRD value to indicate that the cert-manager is externally installed. You must complete this step during installation so that Astra Control Center recognizes the external cert-manager.
