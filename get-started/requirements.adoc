@@ -97,6 +97,12 @@ When hosting Astra Control Center on a VMware Tanzu Kubernetes Grid (TKG) or Tan
 //DOC-4056
 * Disable the TKG or TKGi default storage class enforcement on any application clusters intended to be managed by Astra Control. You can do this by editing the `TanzuKubernetesCluster` resource on the namespace cluster.
 //DOC-4067
+* As part of Astra Control Center installation, the following resources are created in a pod security policy (PSP) restricted environment:
+** pod security policy
+** RBAC Role
+** RBAC RoleBinding
+The RBAC Role and RoleBinding resources are created in the `netapp-acc` namespace.
+////
 * You need to create a pod security policy that allows Astra Control Center to create pods within the cluster. You can do this using the following commands:
 +
 ----
@@ -105,6 +111,7 @@ kubectl create clusterrolebinding default-tkg-admin-privileged-binding --cluster
 ----
 +
 See link:understand-psp-restrictions.html[Understand pod security policy restrictions] for more information about pod security policies and Astra Control Center.
+////
 * Be aware of specific requirements for Astra Trident when you deploy Astra Control Center in a TKG or TKGi environment. For more information, see the https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html#other-known-configuration-options[Astra Trident documentation^].
 
 NOTE: The default VMware TKG and TKGi configuration file token expires ten hours after deployment. If you use Tanzu portfolio products, you must generate a Tanzu Kubernetes Cluster configuration file with a non-expiring token to prevent connection issues between Astra Control Center and managed application clusters. For instructions, visit https://docs.vmware.com/en/VMware-NSX-T-Data-Center/3.2/nsx-application-platform/GUID-52A52C0B-9575-43B6-ADE2-E8640E22C29F.html[the VMware NSX-T Data Center Product Documentation.]
