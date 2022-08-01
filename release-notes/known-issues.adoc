@@ -29,7 +29,7 @@ The following known issues affect the current release:
 .Other issues
 * <<App data management operations fail with Internal Service Error (500) when Astra Trident is offline>>
 * <<Snapshots might fail with snapshot controller version 4.2.0>>
-* <<Event logs are not showing up in Cloud Insights due to incorrect DNS setting>>
+* <<Event logs are not showing up in Cloud Insights if DNS is set to UDP>>
 
 == Restore of an app results in PV size larger than original PV
 //DOC-3562/ASTRACTL-9560/Q2 and PI4/PI5
@@ -78,8 +78,8 @@ When you use Kubernetes snapshot-controller (also known as external-snapshotter)
 
 After you complete these steps, the credential associated with the cluster is updated and the cluster should reconnect and update its state to `available`.
 
-== Event logs are not showing up in Cloud Insights due to incorrect DNS setting
-DOC-4405/ASTRACTL-16703/in review
+== Event logs are not showing up in Cloud Insights if DNS is set to UDP
+DOC-4405/ASTRACTL-16703
 The default DNS mode for Fluent Bit for a managed cluster in Astra Control is UDP. If there are DNS resolution failures while using FQDN that appear in fluent-bit pod logs on the managed cluster, change the telemetry-service environment variable `TELEMETRY_FLUENTBIT_DNS_MODE` from UDP to TCP.
 
 Run this command on the cluster and then change the environment variable to `TCP`:
