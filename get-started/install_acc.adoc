@@ -740,7 +740,80 @@ TIP: The name of the secret should match the `spec.tls.secretName` provided in `
 . Deploy an ingress resource in `netapp-acc` (or custom-named) namespace using either the v1beta1 (deprecated in Kubernetes version less than or 1.22) or v1 resource type for either a deprecated or a new schema:
 +
 ----
-kubectl apply -f istio-ingress
+kubectl apply -f istio-ingress.yaml
+----
++
+Output:
++
+----
+apiVersion: networking.k8s.io/v1beta1
+kind: IngressClass
+metadata:
+  name: istio
+spec:
+  controller: istio.io/ingress-controller
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress
+  namespace: istio-system
+spec:
+  ingressClassName: istio
+  tls:
+  - hosts:
+    - <ACC addess>
+    secretName: astra-ingress-tls
+  rules:
+  - host: <ACC addess>
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          serviceName: traefik
+          servicePort: 80
+----
+
++
+For the v1 new schema, follow this sample:
++
+----
+kubectl apply -f istio-Ingress.yaml
+----
++
+Output:
++
+----
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: istio
+spec:
+  controller: istio.io/ingress-controller
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+  namespace: istio-system
+spec:
+  ingressClassName: istio
+  tls:
+  - hosts:
+    - <ACC addess>
+    secretName: astra-ingress-tls
+  rules:
+  - host: <ACC addess>
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: traefik
+            port:
+              number: 80
 ----
 
 . Deploy Astra Control Center as usual.
