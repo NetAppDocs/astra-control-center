@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
-permalink: get-started/anthos-prereqs.html
-keywords: astra control center, anthos, prereq, cert-manager, install
+permalink: get-started/cert-manager-prereqs.html
+keywords: astra control center, prereq, requirement, cert-manager, install
 summary: If a cert-manager already exists in the cluster, you need to perform some prerequisite steps so that Astra Control Center does not install its own cert-manager.
 ---
 
@@ -10,7 +10,7 @@ summary: If a cert-manager already exists in the cluster, you need to perform so
 :icons: font
 :imagesdir: ../media/get-started/
 
-If a cert-manager already exists in your Google Anthos Kubernetes cluster, you need to perform some prerequisite steps so that Astra Control Center does not install its own cert-manager.
+If a cert-manager already exists in your Kubernetes cluster, you need to perform some prerequisite steps so that Astra Control Center does not install its own cert-manager.
 
 .Steps
 
@@ -29,7 +29,7 @@ cert-manager   essential-cert-manager-cainjector-66dc99cc56-9ldmt   1/1     Runn
 cert-manager   essential-cert-manager-webhook-56b76db9cc-fjqrq      1/1     Running    0     6d5h
 ----
 
-. Generate a private key:
+. Create a certificate/key pair for the astraAddress FQDN:
 +
 ----
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt

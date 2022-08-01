@@ -30,6 +30,7 @@ oc get apiservices
 
 * Create an FQDN address for Astra Control Center in your data center.
 * Obtain the necessary permissions and access to the Red Hat OpenShift Container Platform to perform the installation steps described.
+* If a cert-manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps] so that Astra Control Center does not install its own cert-manager.
 
 .Steps
 
