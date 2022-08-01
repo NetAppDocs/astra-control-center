@@ -181,7 +181,7 @@ In this situation, you are swapping the source and destination. The original sou
 
 The following actions occur as a result of the reverse replication:
 
-* Astra Control execution hooks (if present) stop any writes to the original source app.
+* Astra Control triggers execution hooks (if present) to stop any writes to the original source app.
 * Astra Control takes a Snapshot and replicates it before stopping the app on the source cluster.
 * Astra Control brings the application online with the latest replicated data.
 * Replication is re-established in the reverse direction.
