@@ -11,13 +11,13 @@ summary: Astra can restore your application configuration and persistent storage
 :imagesdir: ../media/use/
 
 [.lead]
-Using Astra Control, you can achieve disaster recovery by configuring app replication to a remote cluster in preparation using NetApp SnapMirror technology. The replication process includes data in persistent volumes replicated by SnapMirror and the app metadata protected by Astra Control.
+Using Astra Control, you can achieve disaster recovery by configuring app replication to a remote cluster in preparation using NetApp SnapMirror technology. Astra Control asynchronously replicates the app snapshot copies to a remote cluster. The replication process includes data in persistent volumes replicated by SnapMirror and the app metadata protected by Astra Control.
 
 For a comparison between backups/restores and replication, see link:../concepts/data-protection.html[Data protection concepts].
 
 
 
-You can replicate apps in different scenarios, such as the following on-premises only, hybrid, and multi-cloud scenarios;
+You can replicate apps in different scenarios, such as the following on-premises only, hybrid, and multi-cloud scenarios:
 
 * On-premise site A to on-premise site B
 * On-premise to cloud with Cloud Volumes ONTAP
@@ -79,21 +79,21 @@ Astra Control creates an application Snapshot used for replication.
 
 . To see the application Snapshot status, select the *Applications* > *Snapshots* tab.
 +
-The Snapshot name uses the format of "replication-schedule-<string>". Astra Control retains the last Snapshot that was used for replication. Any older replication Snapshots are deleted aftr successful completion of replication.
+The Snapshot name uses the format of "replication-schedule-<string>". Astra Control retains the last Snapshot that was used for replication. Any older replication Snapshots are deleted after successful completion of replication.
 
 .Result
 
 This creates the replication relationship.
 
-Astra Control completes following actions as a result of establishing the relationship:
+Astra Control completes the following actions as a result of establishing the relationship:
 
 * Creates a namespace on the destination (if it doesn't exist)
 * Creates a PVC on the destination namespace corresponding to the source app's PVCs.
 * Takes an initial app-consistent Snapshot.
 * Establishes the SnapMirror relationship for persistent volumes using the initial Snapshot.
 
-The Data Protection page shows the replication relationship status:
-<Health state> | <Relationship life cycle>
+The Data Protection page shows the replication relationship state and status:
+<Health status> | <Relationship life cycle state>
 
 For example:
 Normal | Established
@@ -120,14 +120,12 @@ The following actions occur as a result of the fail over procedure:
 //* On the destination cluster, an app is started based on the latest replicated state from the source app and continues to run based on the latest replicated state from the source app.
 
 * On the destination cluster, the app is started based on the latest replicated Snapshot.
-* The source cluster and app (of operational) is not stopped and will continue to run.
+* The source cluster and app (if operational) are not stopped and will continue to run.
+* The replication state changes to "Failing over" and then to "Failed over" when it has completed.
+* The source app's protection policy is copied to the destination app based on the schedules present on the source app at the time of the fail over.
+* Astra Control shows the app both on the source and destination clusters and its respective health.
 
 //* The source and destination apps will diverge with updates occurring to either app.
-
-* The replication status changes to "Failing over" and then to "Failed over" when it has completed.
-* The source app's protection policy is copied to the destination app based on the schedules present on the source app at the time of the fail over.
-
-* Astra Control shows the app both on the source and destination clusters and its respective health.
 
 == Resync a failed over replication
 
@@ -141,7 +139,7 @@ The process stops the app on the new destination cluster before re-establishing 
 
 
 
-NOTE: During the resync process, the life cycle status shows as "Establishing."
+NOTE: During the resync process, the life cycle state shows as "Establishing."
 
 .Steps
 . From the Astra Control left navigation, select *Applications*.
@@ -198,7 +196,7 @@ The following actions occur as a result of the reverse replication:
 
 == Fail back applications to the original source cluster
 
-Using Astra Control, you can achieve "fail back" after a "fail over" operation by using the following sequence of operations. In this workflow to restore the original replication direction, Astra Control replicates (resync) any application changes back to the original source cluster before reversing the replication direction.
+Using Astra Control, you can achieve "fail back" after a "fail over" operation by using the following sequence of operations. In this workflow to restore the original replication direction, Astra Control replicates (resyncs) any application changes back to the original source cluster before reversing the replication direction.
 
 This process starts from a relationship that has completed a fail over to a destination and involves the following steps:
 
@@ -223,7 +221,7 @@ This process starts from a relationship that has completed a fail over to a dest
 
 .Result
 
-This combines the results form "resync" and "reverse relationship" operations to bring the application online on the original source cluster with replication resumed to the original destination cluster.
+This combines the results from the "resync" and "reverse relationship" operations to bring the application online on the original source cluster with replication resumed to the original destination cluster.
 
 //The following actions occur as a result of the fail back:
 
@@ -257,10 +255,22 @@ The following actions occur as a result of deleting a replication relationship:
 * If the app has been brought online on the destination cluster (failed over), Astra Control retains PVCs and destination apps. Source and destination apps are now treated as independent apps. The backup schedules remain on both apps but are not associated with each other. 
 
 
-== Replication life cycle state and status
+== Replication relationship health status and relationship life cycle states
 
-Astra Control displays states of the life cycle of the replication relationship and the health of the relationship itself.
+Astra Control displays the health of the relationship and the states of the life cycle of the replication relationship.
 
+=== Replication relationship health statuses
+
+The following statuses indicate the health of the replication relationship:
+
+* *Normal*: The relationship is either establishing or has established, and the most recent Snapshot transferred successfully.
+* *Warning*: The relationship is either failing over or has failed over (and therefore is no longer protecting the source app).
+* *Critical*
+** The relationship is establishing or failed over, and the last reconcile attempt failed.
+** The relationship is established, and the last attempt to reconcile the addition of a new PVC is failing.
+** The relationship is established (so a successful Snapshot has replicated, and failover is possible), but the most recent Snapshot failed or failed to replicate.
+
+=== Replication life cycle states
 The following states states reflect the different stages of the replication life cycle:
 
 * *Establishing*: A new replication relationship is being created. Astra Control creates a namespace if needed, creates persistent volume claims (PVCs) on new volumes on the destination cluster, and creates SnapMirror relationships. This status can also indicate that the replication is resyncing or reversing replication.
@@ -276,13 +286,3 @@ The following states states reflect the different stages of the replication life
 * *Deleting*:
 ** If the replication relationship was established but not failed over yet, Astra Control removes PVCs that were created during replication and deletes the destination managed app.
 ** If the replication failed over already, Astra Control retains the PVCs and destination app.
-
-
-The following statuses indicate the health of the replication relationship:
-
-* *Normal*: The relationship is either establishing or has established, and the most recent Snapshot transferred successfully.
-* *Warning*: The relationship is either failing over or has failed over (and therefore is no longer protecting the source app).
-* *Critical*
-** The relationship is establishing or failed over, and the last reconcile attempt failed.
-** The relationship is established, and the last attempt to reconcile the addition of a new PVC is failing.
-** The relationship is established (so a successful Snapshot has replicated, and failover is possible), but the most recent Snapshot failed or failed to replicate.

@@ -205,7 +205,7 @@ Astra Control has the following application management requirements:
 
 == Replication prerequisites
 
-Astra Control application replication requires the following prerequisites that must be met before you begin:
+Astra Control application replication requires that the following prerequisites must be met before you begin:
 
 * Astra Control Center must be deployed in a third fault domain or secondary site to achieve seamless disaster recovery.
 * The app's host Kubernetes cluster and a destination Kubernetes cluster must be available and connected to two ONTAP clusters, ideally at different failure domains or sites.
