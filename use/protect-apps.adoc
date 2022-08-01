@@ -10,7 +10,7 @@ summary: Protect your apps by taking snapshots and backups using an automated pr
 :icons: font
 :imagesdir: ../media/use/
 
-Protect your apps by taking snapshots and backups using an automated protection policy or on an ad-hoc basis. You can use the Astra UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to protect apps.
+Protect all apps by taking snapshots and backups using an automated protection policy or on an ad-hoc basis. You can use the Astra UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to protect apps.
 
 If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
 
@@ -129,7 +129,7 @@ The snapshots display by default.
 
 Delete the scheduled or on-demand snapshots that you no longer need.
 
-NOTE: You cannot delete a Snapshot copy that is currently being replicated. 
+NOTE: You cannot delete a Snapshot copy that is currently being replicated.
 
 .Steps
 
