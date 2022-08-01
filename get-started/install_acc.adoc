@@ -751,7 +751,7 @@ The steps differ depending on the type of ingress controller you use:
 .Steps for Nginx ingress controller
 
 . Create a secret of type http://kubernetes.io/tls[`kubernetes.io/tls`] for a TLS private key and certificate in `netapp-acc` (or custom-named) namespace as described in https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets[TLS secrets].
-. Deploy an ingress resource in `netapp-acc` (or custom-named) namespace using either the `vibeta1` (deprecated in Kubernetes version less than or 1.22) or `v1` resource type for either a deprecated or a new schema:
+. Deploy an ingress resource in `netapp-acc` (or custom-named) namespace using either the `v1beta1` (deprecated in Kubernetes version less than or 1.22) or `v1` resource type for either a deprecated or a new schema:
 .. For a `v1beta1` deprecated schema, follow this sample:
 +
 ----
