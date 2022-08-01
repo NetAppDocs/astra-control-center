@@ -18,7 +18,7 @@ Additionally, you can replicate applications to a remote cluster in preparation 
 
 You can use the following example workflow to get started protecting your apps.
 
-=== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png[One] Back up all apps
+=== image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png[One] Protect all apps
 
 [role="quick-margin-para"]
 To make sure that your apps are immediately protected, link:protect-apps.html#create-a-backup[create a manual backup of all apps].
