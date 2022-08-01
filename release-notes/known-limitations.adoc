@@ -21,13 +21,13 @@ Known limitations identify platforms, devices, or functions that are not support
 * <<A member with namespace constraints cannot access the cloned or restored apps until admin adds the namespace to the constraint>>
 
 .App management limitations
-* <<App backups that are in progress cannot be stopped>>
+[.line-through]#* <<App backups that are in progress cannot be stopped>>#
 * <<Clones of apps installed using pass-by-reference operators can fail>>
 * <<In-place restore operations of apps that use a certificate manager are not supported>>
 * <<OLM-enabled and cluster-scoped operator deployed apps not supported>>
 * <<Apps deployed with Helm 2 are not supported>>
 * <<Astra cannot manage custom resources or cluster-scoped resources individually>>
-* <<Label selectors should be updated if a namespace uses the same name as a namespace previously removed in Astra Control>>
+* <<Astra Control cannot manage app if app is still associated with removed namespace>>
 
 .General limitations
 * <<S3 buckets in Astra Control Center do not report available capacity>>
@@ -86,9 +86,9 @@ A user with namespace RBAC constraints should not be allowed to add or unmanage 
 //DOC-4137/ASTRACTL-16344/ASTRACTL-16131/PI5
 Any `member` user with RBAC constraints by namespace name/ID or by namespace labels can clone or restore an app to a new namespace on the same cluster or to any other cluster in their organization's account. However, the same user cannot access the cloned or restored app in the new namespace. After a new namespace is created by a clone or restore operation, the account admin/owner can edit the `member` user account and update role constraints for the affected user to grant access to the new namespace.
 
-== App backups that are in progress cannot be stopped
+[.line-through]#== App backups that are in progress cannot be stopped#
 //DOC-3552/ASTRACTL-9586/DOC-3894/ASTRACTL-13029/Q2/PI4/PI5
-There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in link:../use/protect-apps.html#delete-backups[Delete backups]. To delete a failed backup, use the link:https:/docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^].
+[.line-through]#There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in link:../use/protect-apps.html#delete-backups[Delete backups]. To delete a failed backup, use the link:https:/docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^].#
 
 == Clones of apps installed using pass-by-reference operators can fail
 //DOC-4008/DOC-4010/PI5
@@ -116,7 +116,7 @@ Astra Control Center does not support application management activities with clu
 If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) is fully supported. For more information, see link:../get-started/requirements.html[Astra Control Center requirements].
 
 == Astra cannot manage custom resources or cluster-scoped resources individually
-DOC-4292/ASTRACTL-18850
+DOC-4292/ASTRACTL-18850/Needs review
 Astra cannot define a custom application in some cases because it cannot find custom objects using labels.
 
 == Astra Control cannot manage app if app is still associated with removed namespace
