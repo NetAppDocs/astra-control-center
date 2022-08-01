@@ -12,7 +12,11 @@ summary: Known issues identify problems that might prevent you from using this r
 
 Known issues identify problems that might prevent you from using this release of the product successfully.
 
-https://docs.netapp.com/us-en/astra-data-store/release-notes/known-issues.html[See these known issues] that might affect the management of Astra Data Store with the current release of the Astra Control Center.
+https://docs.netapp.com/us-en/astra-data-store/release-notes/known-issues.html[See these additional Astra Data Store known issues^] that might affect the management of Astra Data Store with the current release of the Astra Control Center.
+
+== Astra Data Store volume details do not appear in Storage Backends page of the Astra Control Center UI
+DOC-4431/ASTRACTL-20034/in review
+Details such as capacity and throughput do not appear in the UI. When this issue occurs, unmanage the storage backend and add it back again.
 
 == Find more information
 * link:../release-notes/known-issues.html[Known issues]
