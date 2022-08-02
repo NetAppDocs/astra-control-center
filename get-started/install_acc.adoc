@@ -729,7 +729,7 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 
 Sample command: 
 +
 ----
-kubectl create secret tls [<tls secret name] 
+kubectl create secret tls [tls secret name] 
 --key="tls.key"
 --cert="tls.crt" -n istio-system
 ----
@@ -759,9 +759,9 @@ spec:
   tls:
   - hosts:
     - <ACC addess>
-    secretName: [<tls secret name]
+    secretName: [tls secret name]
   rules:
-  - host: [<ACC addess]
+  - host: [ACC addess]
     http:
       paths:
       - path: /
@@ -798,7 +798,7 @@ spec:
   tls:
   - hosts:
     - <ACC addess>
-    secretName: [<tls secret name]
+    secretName: [tls secret name]
   rules:
   - host: [ACC addess]
     http:
