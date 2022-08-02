@@ -11,7 +11,7 @@ summary: Astra can restore your application configuration and persistent storage
 :imagesdir: ../media/use/
 
 [.lead]
-Using Astra Control, you can achieve disaster recovery by configuring app replication to a remote cluster in preparation using NetApp SnapMirror technology. Astra Control asynchronously replicates the app snapshot copies to a remote cluster. The replication process includes data in persistent volumes replicated by SnapMirror and the app metadata protected by Astra Control.
+Using Astra Control, you can build business continuity for your applications with a low-RPO (Recovery Point Objective) and low-RTO (Recovery Time Objective) using asynchronous replication capabilities of NetApp SnapMirror technology. Once configured, this enables your applications to replicate data and application changes continuously from one cluster to another.
 
 For a comparison between backups/restores and replication, see link:../concepts/data-protection.html[Data protection concepts].
 
