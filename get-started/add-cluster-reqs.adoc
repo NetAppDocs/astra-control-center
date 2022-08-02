@@ -33,7 +33,7 @@ NOTE: If you plan to add a second OpenShift 4.6, 4.7, or 4.8 cluster as a manage
 * Astra Trident StorageClasses configured with a link:requirements.html#supported-storage-backends[supported storage backend] (required for any type of cluster)
 * The superuser and user ID set on the backing ONTAP system to back up and restore apps with Astra Control Center. Run the following command in the ONTAP command line:
 `export-policy rule modify -vserver <storage virtual machine name> -policyname <policy name>  -ruleindex 1 -superuser sysm --anon 65534`
-* An Astra Trident `volumesnapshotclass` object that has been defined by an administrator. See the Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
+//* An Astra Trident `volumesnapshotclass` object that has been defined by an administrator. See the Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
 * Ensure that you have only a single default storage class defined for your Kubernetes cluster.
 
 ////
