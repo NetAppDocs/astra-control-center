@@ -102,7 +102,7 @@ TIP: As an example, you might want to set a backup policy for "maria" that has a
 +
 TIP: A label is a key/value pair you can assign to Kubernetes objects for identification. Labels make it easier to sort, organize, and find your Kubernetes objects. To learn more about Kubernetes labels, https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/[see the official Kubernetes documentation^].
 
-Before you begin, you should also understand link:../use/manage-apps.html#what-about-system-apps[managing standard and system namespaces].
+Before you begin, you should also understand link:../use/manage-apps.html#what-about-system-namespaces[managing standard and system namespaces].
 
 For instructions on how to manage apps using the Astra Control API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
 
@@ -158,7 +158,7 @@ You can add all Kubernetes resources in a namespace to Astra Control management 
 TIP: If you want to manage multiple namespaces, select the namespaces and select the *Actions* button in the upper-left corner and select *manage*.
 
 +
-NOTE: Select the *Show system namespaces* checkbox to reveal system namespaces that are usually not used in app management by default. image:acc_namespace_system.png[A screenshot that shows the *Show system namespaces* option that is available in the Namespaces tab.]  link:../use/manage-apps.html#what-about-system-apps[Read more].
+NOTE: Select the *Show system namespaces* checkbox to reveal system namespaces that are usually not used in app management by default. image:acc_namespace_system.png[A screenshot that shows the *Show system namespaces* option that is available in the Namespaces tab.]  link:../use/manage-apps.html#what-about-system-namespaces[Read more].
 
 After the process completes, the applications that are associated with the namespace appear in the `Associated applications` column.
 
