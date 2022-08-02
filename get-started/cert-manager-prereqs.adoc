@@ -5,7 +5,7 @@ keywords: astra control center, prereq, requirement, cert-manager, install
 summary: If a cert-manager already exists in the cluster, you need to perform some prerequisite steps so that Astra Control Center does not install its own cert-manager.
 ---
 
-= External cert-manager configuration for Astra Control Center
+= Configure an external cert-manager
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/get-started/

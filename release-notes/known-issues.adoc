@@ -92,5 +92,5 @@ This change ensures the managed cluster takes TCP as the DNS mode and then resol
 
 == Find more information
 
-* link:../release-notes/known-issues-ads.html[Known issues with Astra Data Store prreview and this Astra Control Center release]
+* link:../release-notes/known-issues-ads.html[Known issues with Astra Data Store preview and this Astra Control Center release]
 * link:../release-notes/known-limitations.html[Known limitations]
