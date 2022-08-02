@@ -14,7 +14,7 @@ image:astra-ads-architecture-diagram-v3.png[Astra Control architecture diagram a
 ** Astra Control Service uses the following storage backends:
 *** https://www.netapp.com/cloud-services/cloud-volumes-service-for-google-cloud/[NetApp Cloud Volumes Service for Google Cloud^] or Google Persistent Disk as the storage backend for GKE clusters
 *** https://www.netapp.com/cloud-services/azure-netapp-files/[Azure NetApp Files^] or Azure Managed Disks as the storage backend for AKS clusters.
-*** https://docs.aws.amazon.com/ebs/[Amazon Elastic Block Store (EBS)^] or https://docs.aws.amazon.com/fsx/[Amazon FSx for NetApp ONTAP^] as backend storage options for AWS clusters.
+*** https://docs.aws.amazon.com/ebs/[Amazon Elastic Block Store (EBS)^] or https://docs.aws.amazon.com/fsx/[Amazon FSx for NetApp ONTAP^] as backend storage options for EKS clusters.
 +
 ** Astra Control Center uses the following storage backends:
 
