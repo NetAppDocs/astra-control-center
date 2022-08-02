@@ -19,6 +19,9 @@ We're pleased to announce the latest release of Astra Control Center.
 * link:../use/manage-apps.html#manage-apps[Improved app management that enables you to directly define and manage the apps you care about]
 * link:../use/replication.html[App replication using NetApp SnapMirror technology]
 * link:../use/execution-hooks.html[Enhanced provide-your-own execution hooks functionality]
++
+NOTE: The NetApp provided default pre- and post-snapshot execution hooks for specific applications have been removed in this release. If you upgrade to this release and do not provide your own execution hooks for snapshots, Astra Control will take crash-consistent snapshots only. Visit the https://github.com/NetApp/Verda[NetApp Verda] GitHub repository for sample execution hook scripts that you can modify to fit your environment.
+
 * link:../get-started/requirements.html[Support for VMware Tanzu Kubernetes Grid Integrated Edition (TKGI)]
 * link:../get-started/requirements.html#operational-environment-requirements[Support for Google Anthos]
 * https://docs.netapp.com/us-en/astra-automation/workflows_infra/ldap_prepare.html[LDAP authentication (via Astra Control API)^]
