@@ -724,12 +724,12 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 
 -keyout tls.key -out tls.crt
 ----
 
-. Create a secret `astra-ingress-tls` of type `kubernetes.io/tls` for a TLS private key and certificate in the `istio-system namespace` as described in TLS secrets.
+. Create a secret `tls secret name` of type `kubernetes.io/tls` for a TLS private key and certificate in the `istio-system namespace` as described in TLS secrets.
 +
 Sample command: 
 +
 ----
-kubectl create secret tls astra-ingress-tls 
+kubectl create secret tls [<tls secret name] 
 --key="tls.key"
 --cert="tls.crt" -n istio-system
 ----
@@ -738,10 +738,6 @@ TIP: The name of the secret should match the `spec.tls.secretName` provided in `
 
 
 . Deploy an ingress resource in `netapp-acc` (or custom-named) namespace using either the v1beta1 (deprecated in Kubernetes version less than or 1.22) or v1 resource type for either a deprecated or a new schema:
-+
-----
-kubectl apply -f istio-ingress.yaml
-----
 +
 Output:
 +
@@ -763,9 +759,9 @@ spec:
   tls:
   - hosts:
     - <ACC addess>
-    secretName: astra-ingress-tls
+    secretName: [<tls secret name]
   rules:
-  - host: <ACC addess>
+  - host: [<ACC addess]
     http:
       paths:
       - path: /
@@ -802,9 +798,9 @@ spec:
   tls:
   - hosts:
     - <ACC addess>
-    secretName: astra-ingress-tls
+    secretName: [<tls secret name]
   rules:
-  - host: <ACC addess>
+  - host: [ACC addess]
     http:
       paths:
       - path: /

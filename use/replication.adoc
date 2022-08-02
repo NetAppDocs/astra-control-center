@@ -31,6 +31,7 @@ Using Astra Control, you can do the following tasks related to replicating appli
 * <<Set up a replication relationship>>
 * <<Bring a replicated app online on the destination cluster (fail over)>>
 * <<Resync a failed over replication>>
+* <<Reverse application replication>>
 * <<Fail back applications to the original source cluster>>
 * <<Delete an application replication relationship>>
 
@@ -181,10 +182,19 @@ In this situation, you are swapping the source and destination. The original sou
 
 The following actions occur as a result of the reverse replication:
 
-* Astra Control triggers execution hooks (if present) to stop any writes to the original source app.
-* Astra Control takes a Snapshot and replicates it before stopping the app on the source cluster.
-* Astra Control brings the application online with the latest replicated data.
+* A Snapshot is taken of the original source app's Kubernetes resources.
+* The original source app's pods are gracefully stopped by deleting the app's Kubernetes resources (leaving PVCs and PVs in place).
+* After the pods are shut down, Snapshots of the app's volumes are taken and replicated.
+* The SnapMirror relationships are broken, making the destination volumes ready for read/write.
+* The app's Kubernetes resources are restored from the pre-shutdown Snapshot, using the volume data replicated after the original source app was shut down.
 * Replication is re-established in the reverse direction.
+
+
+//* Astra Control triggers execution hooks (if present) to stop any writes to the original source app.
+//* Astra Control takes a Snapshot and replicates it before stopping the app on the source cluster.
+//* Astra Control brings the application online with the latest replicated data.
+//* Replication is re-established in the reverse direction.
+
 
 //* Astra Control stops any writes to the original source app and takes a Snapshot of the original source app before beginning the reverse process.
 //* Then, the app is stopped on the original source cluster.
@@ -237,14 +247,12 @@ This combines the results from the "resync" and "reverse relationship" operation
 == Delete an application replication relationship
 
 
-Deleting the relationship results in two separate apps with no relationship between them. Subsequently, the Applications Data Protection > Replication page shows a dotted line between the source and destination.
+Deleting the relationship results in two separate apps with no relationship between them.
 
 .Steps
 . From the Astra Control left navigation, select *Applications*.
 . In the Application page, select the *Data Protection* > *Replication* tab.
 . In the Data Protection > Replication tab, from the Application Protection box or in the relationship diagram, select *Delete replication relationship*.
-+
-A dotted line appears in the diagram to indicate that there is no longer a relationship.
 
 .Result
 
