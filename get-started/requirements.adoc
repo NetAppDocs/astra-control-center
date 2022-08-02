@@ -219,7 +219,7 @@ NOTE: You can simultaneously replicate a different app (running on the other clu
 
 Learn how to link:../use/replication.html[replicate apps to a remote system using SnapMirror technology].
 
-=== Supported application installation methods
+== Supported application installation methods
 Astra Control supports the following application installation methods:
 
 * *Manifest file*: Astra Control supports apps installed from a manifest file using kubectl. For example:
