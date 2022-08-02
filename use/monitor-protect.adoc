@@ -71,6 +71,8 @@ Cloud Insights should be accessible from the network that Astra Control Center u
 
 When Astra Control Center is connected to Cloud Insights, an Acquisition Unit pod gets created. This pod collects data from the storage backends that are managed by Astra Control Center and pushes it to Cloud Insights. This pod requires 8 GB RAM and 2 CPU cores.
 
+Additionally, if you manage Astra Data Store clusters on Astra Control (that is connected to Cloud Insights), an Acquisition Unit pod is created on Astra Data Store for each Astra Data Store cluster and the metrics are sent from Astra Data Store to the paired Cloud Insights system. Each pod requires 8 GB RAM and 2 CPU cores. 
+
 NOTE: After you enable the Cloud Insights connection, you can view throughput information on the *Backends* page as well as connect to Cloud Insights from here after selecting a storage backend. You can also find the information on the *Dashboard* in the Cluster section, and also connect to Cloud Insights from there.
 
 .What you'll need
