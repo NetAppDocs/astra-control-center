@@ -52,8 +52,6 @@ NOTE: If you have an evaluation license, be sure you store your account ID to av
 //REFERENCED IN UI. DO NOT MODIFY WITHOUT NOTIFYING UX.
 To begin managing your apps, add a Kubernetes cluster and manage it as a compute resource. You have to add a cluster for Astra Control Center to discover your Kubernetes applications. For Astra Data Store, you want to add the Kubernetes app cluster that contains applications that are using volumes provisioned by Astra Data Store.
 
-If no volume snapshot class is configured on the cluster when you add it, Astra Control Center attempts to configure one with a default configuration. If the volume snapshot class installation fails, you need to manually install it. See the Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
-
 TIP: We recommend that Astra Control Center manage the cluster it is deployed on first before you add other clusters to Astra Control Center to manage. Having the initial cluster under management is necessary to send Kubemetrics data and cluster-associated data for metrics and troubleshooting. You can use the *Add Cluster* feature to manage a cluster with Astra Control Center.
 
 [NOTE]
@@ -215,7 +213,7 @@ Use any of the following bucket types:
 * NetApp ONTAP S3
 * NetApp StorageGRID S3
 * Generic S3
-* Microsoft Azure 
+* Microsoft Azure
 
 NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon’s S3 support.
 
