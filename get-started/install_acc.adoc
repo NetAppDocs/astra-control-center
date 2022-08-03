@@ -107,7 +107,7 @@ cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 cd acc
 ----
 
-. Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
+. [[substep_image_local_registry_push]]Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
 +
 
 * Replace BUNDLE_FILE with the name of the Astra Control bundle file (for example, `acc.manifest.bundle.yaml`).
