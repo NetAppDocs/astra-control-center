@@ -21,7 +21,6 @@ The following known issues affect the current release:
 * <<App clones fail when using Service Account level OCP Security Context Constraints (SCC)>>
 * <<App clones fail after an application is deployed with a set storage class>>
 * <<App backups and snapshots fail if the volumesnapshotclass is added after a cluster is managed>>
-* <<Adding another app to a replicated source namespace keeps the app replicating indefinitely>>
 
 .Clusters
 * <<Managing a cluster with Astra Control Center fails when default kubeconfig file contains more than one context>>
@@ -50,10 +49,6 @@ Backups and snapshots fail with a `UI 500 error` in this scenario. As a workarou
 * Refresh the app list.
 * Unmanage an app and then define and manage it again with Astra Control.
 * Define and manage a new app. This has the effect of restoring replication operations on all apps for that cluster.
-
-== Adding another app to a replicated source namespace keeps the app replicating indefinitely
-DOC-4424/ASTRACTL-20017
-Do not add PVCs to an Astra managed app if the app is part of an existing replication relationship. Doing so causes the replication status of `replicating` to hang. If you encounter this error, delete the app replication relationship, add the PVCs, and then create the replication relationship again.
 
 == App clones fail after an application is deployed with a set storage class
 //DOC-3892/ASTRACTL-13183/PI4/PI5
