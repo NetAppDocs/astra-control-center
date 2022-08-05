@@ -18,6 +18,66 @@ https://docs.netapp.com/us-en/astra-data-store/release-notes/known-issues.html[S
 DOC-4431/ASTRACTL-20034/in review
 Details such as capacity and throughput do not appear in the UI. When this issue occurs, unmanage the storage backend and add it back again.
 
+== Unmanaging a cluster with Astra Data Store requires first removing a managed system app
+DOC-4412/ASTRACTL-19768/in review
+If you added a cluster that contains Astra Data Store to an Astra Control Center cluster, the astrads-system app is managed by default as a hidden application. To unmanage the cluster, you must first unmanage the astrads-system app. You cannot unmanage this type of app using the Astra Control Center UI. Instead, use an Astra Control API request to manually remove the app:
+
+.Details
+[%collapsible]
+====
+
+.Steps
+
+. Get the ID for the managed cluster using this API:
++
+----
+/accounts/{account_id}/topology/v1/managedClusters
+----
++
+Response:
++
+[subs=+quotes]
+----
+{
+"items": [
+{
+"type": "application/astra-managedCluster",
+"version": "1.1",
+*"id": "123ab987-0bc0-00d0-a00a-1234567abd8d",*
+"name": "astrads-cluster-1234567",
+...
+----
+
+. Get the managed astrads-system app ID:
++
+----
+/accounts/{account_id}/topology/v2/managedClusters/{managedCluster_id}/apps
+----
++
+Response:
++
+[subs=+quotes]
+----
+{
+  "items": [
+    [
+      *"1b011d11-bb88-40c7-a1a1-ab1234c123d3",*
+      "astrads-system",
+      "ready"
+    ]
+  ],
+  "metadata": {}
+}
+----
+
+. Delete the astrads-system app using the app ID you acquired in the previous step (`1b011d11-bb88-40c7-a1a1-ab1234c123d3`).
++
+----
+/accounts/{account_id}/k8s/v2/apps/{astrads-system_app_id}
+----
+====
+// End snippet
+
 == Find more information
 * link:../release-notes/known-issues.html[Known issues]
 * link:../release-notes/known-limitations.html[Known limitations]
