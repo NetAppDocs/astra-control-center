@@ -24,6 +24,7 @@ The following known issues affect the current release:
 
 .Clusters
 * <<Managing a cluster with Astra Control Center fails when default kubeconfig file contains more than one context>>
+* << Unmanaging a cluster with Astra Data Store requires first removing a managed system app>>
 
 .Other issues
 * <<App data management operations fail with Internal Service Error (500) when Astra Trident is offline>>
@@ -58,6 +59,66 @@ Cloning an application with an explicitly set storage class to a cluster that do
 == Managing a cluster with Astra Control Center fails when default kubeconfig file contains more than one context
 //ASTRACTL-8872/DOC-3612/Q2 and PI4/PI5
 You cannot use a kubeconfig with more than one cluster and context in it. See the link:https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Astra/Managing_cluster_with_Astra_Control_Center_may_fail_when_using_default_kubeconfig_file_contains_more_than_one_context[knowledgebase article^] for more information.
+
+== Unmanaging a cluster with Astra Data Store requires first removing a managed system app
+DOC-4412/ASTRACTL-19768/in review
+If you added a cluster that contains Astra Data Store to an Astra Control Center cluster, the astrads-system app is managed by default as a hidden application. To unmanage the cluster, you must first unmanage the astrads-system app. You cannot unmanage this type of app using the Astra Control Center UI. Instead, use an Astra Control API request to manually remove the app:
+
+.Details
+[%collapsible]
+====
+
+.Steps
+
+. Get the ID for the managed cluster using this API:
++
+----
+/accounts/{account_id}/topology/v1/managedClusters
+----
++
+Response:
++
+[subs=+quotes]
+----
+{
+"items": [
+{
+"type": "application/astra-managedCluster",
+"version": "1.1",
+*"id": "123ab987-0bc0-00d0-a00a-1234567abd8d",*
+"name": "astrads-cluster-1234567",
+...
+----
+
+. Get the managed astrads-system app ID:
++
+----
+/accounts/{account_id}/topology/v2/managedClusters/{managedCluster_id}/apps
+----
++
+Response:
++
+[subs=+quotes]
+----
+{
+  "items": [
+    [
+      *"1b011d11-bb88-40c7-a1a1-ab1234c123d3",*
+      "astrads-system",
+      "ready"
+    ]
+  ],
+  "metadata": {}
+}
+----
+
+. Delete the astrads-system app using the app ID you acquired in the previous step (`1b011d11-bb88-40c7-a1a1-ab1234c123d3`).
++
+----
+/accounts/{account_id}/k8s/v2/apps/{astrads-system_app_id}
+----
+====
+// End snippet
 
 == App data management operations fail with Internal Service Error (500) when Astra Trident is offline
 //DOC-3903/ASTRA-13162/PI4/PI5
