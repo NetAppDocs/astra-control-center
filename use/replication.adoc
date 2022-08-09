@@ -40,7 +40,7 @@ Using Astra Control, you can do the following tasks related to replicating appli
 
 == Replication prerequisites
 
-See the link:../get-started/requirements.html[replication prerequisites] before you begin.
+See the link:../get-started/requirements.html#replication-prerequisites[replication prerequisites] before you begin.
 
 
 

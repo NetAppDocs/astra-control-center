@@ -376,77 +376,83 @@ Each pod should have a status of `Running`. It may take several minutes before t
 ====
 [subs=+quotes]
 ----
-NAME                                       READY   STATUS    RESTARTS   AGE
-acc-helm-repo-5f75c5f564-bzqmt             1/1     Running   0          11m
-activity-6b8f7cccb9-mlrn4                  1/1     Running   0          9m2s
-api-token-authentication-6hznt             1/1     Running   0          8m50s
-api-token-authentication-qpfgb             1/1     Running   0          8m50s
-api-token-authentication-sqnb7             1/1     Running   0          8m50s
-asup-5578bbdd57-dxkbp                      1/1     Running   0          9m3s
-authentication-56bff4f95d-mspmq            1/1     Running   0          7m31s
-bucketservice-6f7968b95d-9rrrl             1/1     Running   0          8m36s
-cert-manager-5f6cf4bc4b-82khn              1/1     Running   0          6m19s
-cert-manager-cainjector-76cf976458-sdrbc   1/1     Running   0          6m19s
-cert-manager-webhook-5b7896bfd8-2n45j      1/1     Running   0          6m19s
-cloud-extension-749d9f684c-8bdhq           1/1     Running   0          9m6s
-cloud-insights-service-7d58687d9-h5tzw     1/1     Running   2          8m56s
-composite-compute-968c79cb5-nv7l4          1/1     Running   0          9m11s
-composite-volume-7687569985-jg9gg          1/1     Running   0          8m33s
-credentials-5c9b75f4d6-nx9cz               1/1     Running   0          8m42s
-entitlement-6c96fd8b78-zt7f8               1/1     Running   0          8m28s
-features-5f7bfc9f68-gsjnl                  1/1     Running   0          8m57s
-fluent-bit-ds-h88p7                        1/1     Running   0          7m22s
-fluent-bit-ds-krhnj                        1/1     Running   0          7m23s
-fluent-bit-ds-l5bjj                        1/1     Running   0          7m22s
-fluent-bit-ds-lrclb                        1/1     Running   0          7m23s
-fluent-bit-ds-s5t4n                        1/1     Running   0          7m23s
-fluent-bit-ds-zpr6v                        1/1     Running   0          7m22s
-graphql-server-5f5976f4bd-vbb4z            1/1     Running   0          7m13s
-identity-56f78b8f9f-8h9p9                  1/1     Running   0          8m29s
-influxdb2-0                                1/1     Running   0          11m
-krakend-6f8d995b4d-5khkl                   1/1     Running   0          7m7s
-license-5b5db87c97-jmxzc                   1/1     Running   0          9m
-login-ui-57b57c74b8-6xtv7                  1/1     Running   0          7m10s
-loki-0                                     1/1     Running   0          11m
-monitoring-operator-9dbc9c76d-8znck        2/2     Running   0          7m33s
-nats-0                                     1/1     Running   0          11m
-nats-1                                     1/1     Running   0          10m
-nats-2                                     1/1     Running   0          10m
-nautilus-6b9d88bc86-h8kfb                  1/1     Running   0          8m6s
-nautilus-6b9d88bc86-vn68r                  1/1     Running   0          8m35s
-openapi-b87d77dd8-5dz9h                    1/1     Running   0          9m7s
-polaris-consul-consul-5ljfb                1/1     Running   0          11m
-polaris-consul-consul-s5d5z                1/1     Running   0          11m
-polaris-consul-consul-server-0             1/1     Running   0          11m
-polaris-consul-consul-server-1             1/1     Running   0          11m
-polaris-consul-consul-server-2             1/1     Running   0          11m
-polaris-consul-consul-twmpq                1/1     Running   0          11m
-polaris-mongodb-0                          2/2     Running   0          11m
-polaris-mongodb-1                          2/2     Running   0          10m
-polaris-mongodb-2                          2/2     Running   0          10m
-polaris-ui-84dc87847f-zrg8w                1/1     Running   0          7m12s
-polaris-vault-0                            1/1     Running   0          11m
-polaris-vault-1                            1/1     Running   0          11m
-polaris-vault-2                            1/1     Running   0          11m
-public-metrics-657698b66f-67pgt            1/1     Running   0          8m47s
-storage-backend-metrics-6848b9fd87-w7x8r   1/1     Running   0          8m39s
-storage-provider-5ff5868cd5-r9hj7          1/1     Running   0          8m45s
-telegraf-ds-dw4hg                          1/1     Running   0          7m23s
-telegraf-ds-k92gn                          1/1     Running   0          7m23s
-telegraf-ds-mmxjl                          1/1     Running   0          7m23s
-telegraf-ds-nhs8s                          1/1     Running   0          7m23s
-telegraf-ds-rj7lw                          1/1     Running   0          7m23s
-telegraf-ds-tqrkb                          1/1     Running   0          7m23s
-telegraf-rs-9mwgj                          1/1     Running   0          7m23s
-telemetry-service-56c49d689b-ffrzx         1/1     Running   0          8m42s
-tenancy-767c77fb9d-g9ctv                   1/1     Running   0          8m52s
-traefik-5857d87f85-7pmx8                   1/1     Running   0          6m49s
-traefik-5857d87f85-cpxgv                   1/1     Running   0          5m34s
-traefik-5857d87f85-lvmlb                   1/1     Running   0          4m33s
-traefik-5857d87f85-t2xlk                   1/1     Running   0          4m33s
-traefik-5857d87f85-v9wpf                   1/1     Running   0          7m3s
-trident-svc-595f84dd78-zb8l6               1/1     Running   0          8m54s
-vault-controller-86c94fbf4f-krttq          1/1     Running   0          9m24s
+NAME                                        READY   STATUS    RESTARTS   AGE
+acc-helm-repo-5f75c5f564-bzqmt               1/1     Running   0          11m
+activity-6b8f7cccb9-mlrn4                    1/1     Running   0          9m2s
+api-token-authentication-6hznt               1/1     Running   0          8m50s
+api-token-authentication-qpfgb               1/1     Running   0          8m50s
+api-token-authentication-sqnb7               1/1     Running   0          8m50s
+asup-5578bbdd57-dxkbp                        1/1     Running   0          9m3s
+authentication-56bff4f95d-mspmq              1/1     Running   0          7m31s
+bucketservice-6f7968b95d-9rrrl               1/1     Running   0          8m36s
+cert-manager-5f6cf4bc4b-82khn                1/1     Running   0          6m19s
+cert-manager-cainjector-76cf976458-sdrbc     1/1     Running   0          6m19s
+cert-manager-webhook-5b7896bfd8-2n45j        1/1     Running   0          6m19s
+certificates-1a599d9f76-ab6sk                2/2     Running   0          8m35s
+certificates-1a599d9f76-ab8fj                2/2     Running   0          8m52s
+certificates-expiry-check-12331210--1-fc26j  1/1     Running   0          8m19s
+cloud-extension-749d9f684c-8bdhq             1/1     Running   0          9m6s
+cloud-insights-service-7d58687d9-h5tzw       1/1     Running   2          8m56s
+composite-compute-968c79cb5-nv7l4            1/1     Running   0          9m11s
+composite-volume-7687569985-jg9gg            1/1     Running   0          8m33s
+credentials-5c9b75f4d6-nx9cz                 1/1     Running   0          8m42s
+entitlement-6c96fd8b78-zt7f8                 1/1     Running   0          8m28s
+features-5f7bfc9f68-gsjnl                    1/1     Running   0          8m57s
+fluent-bit-ds-h88p7                          1/1     Running   0          7m22s
+fluent-bit-ds-krhnj                          1/1     Running   0          7m23s
+fluent-bit-ds-l5bjj                          1/1     Running   0          7m22s
+fluent-bit-ds-lrclb                          1/1     Running   0          7m23s
+fluent-bit-ds-s5t4n                          1/1     Running   0          7m23s
+fluent-bit-ds-zpr6v                          1/1     Running   0          7m22s
+graphql-server-5f5976f4bd-vbb4z              1/1     Running   0          7m13s
+identity-56f78b8f9f-8h9p9                    1/1     Running   0          8m29s
+influxdb2-0                                  1/1     Running   0          11m
+keycloak-operator-5d47896894-74gq5           1/1     Running   0          8m23s
+krakend-6f8d995b4d-5khkl                     1/1     Running   0          7m7s
+license-5b5db87c97-jmxzc                     1/1     Running   0          9m
+login-ui-57b57c74b8-6xtv7                    1/1     Running   0          7m10s
+loki-0                                       1/1     Running   0          11m
+metrics-facade-db5c565d-5rncg                2/2     Running   0          7m39s
+monitoring-operator-9dbc9c76d-8znck          2/2     Running   0          7m33s
+nats-0                                       1/1     Running   0          11m
+nats-1                                       1/1     Running   0          10m
+nats-2                                       1/1     Running   0          10m
+nautilus-6b9d88bc86-h8kfb                    1/1     Running   0          8m6s
+nautilus-6b9d88bc86-vn68r                    1/1     Running   0          8m35s
+openapi-b87d77dd8-5dz9h                      1/1     Running   0          9m7s
+packages-94b56b6b8-jb9rk                     2/2     Running   0          10m
+polaris-consul-consul-server-0               1/1     Running   0          11m
+polaris-consul-consul-server-1               1/1     Running   0          11m
+polaris-consul-consul-server-2               1/1     Running   0          11m
+polaris-keycloak-0                           1/1     Running   0          7m22s
+polaris-keycloak-1                           1/1     Running   0          7m19s
+polaris-keycloak-2                           1/1     Running   0          7m17s
+polaris-keycloak-db-0                        1/1     Running   0          7m16s
+polaris-keycloak-db-1                        1/1     Running   0          7m13s
+polaris-keycloak-db-2                        1/1     Running   0          7m10s
+polaris-mongodb-0                            2/2     Running   0          11m
+polaris-mongodb-1                            2/2     Running   0          10m
+polaris-mongodb-2                            2/2     Running   0          10m
+polaris-ui-84dc87847f-zrg8w                  1/1     Running   0          7m12s
+polaris-vault-0                              1/1     Running   0          11m
+polaris-vault-1                              1/1     Running   0          11m
+polaris-vault-2                              1/1     Running   0          11m
+public-metrics-657698b66f-67pgt              1/1     Running   0          8m47s
+storage-backend-metrics-6848b9fd87-w7x8r     1/1     Running   0          8m39s
+storage-provider-5ff5868cd5-r9hj7            1/1     Running   0          8m45s
+telegraf-ds-dw4hg                            1/1     Running   0          7m23s
+telegraf-ds-k92gn                            1/1     Running   0          7m23s
+telegraf-ds-mmxjl                            1/1     Running   0          7m23s
+telegraf-ds-nhs8s                            1/1     Running   0          7m23s
+telegraf-ds-rj7lw                            1/1     Running   0          7m23s
+telegraf-ds-tqrkb                            1/1     Running   0          7m23s
+telegraf-rs-9mwgj                            1/1     Running   0          7m23s
+telemetry-service-56c49d689b-ffrzx           1/1     Running   0          8m42s
+tenancy-767c77fb9d-g9ctv                     1/1     Running   0          8m52s
+traefik-5857d87f85-7pmx8                     1/1     Running   0          6m49s
+traefik-5857d87f85-cpxgv                     1/1     Running   0          5m34s
+trident-svc-595f84dd78-zb8l6                 1/1     Running   0          8m54s
+vault-controller-86c94fbf4f-krttq            1/1     Running   0          9m24s
 ----
 ====
 // End snippet
@@ -474,31 +480,37 @@ kubectl get acc -o yaml -n [netapp-acc or custom namespace]
 ====
 [subs=+quotes]
 ----
-name: astra
+   name: astra
    namespace: netapp-acc
    resourceVersion: "104424560"
-   selfLink: /apis/astra.netapp.io/v1/namespaces/netapp-acc/astracontrolcenters/astra
    uid: 9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f
  spec:
    accountName: Example
+   additionalValues: {}
    astraAddress: astra.example.com
-   astraVersion: 21.12.60
+   astraKubeConfigSecret: ""
+   astraResourcesScaler: "Off"
+   astraVersion: 22.08.0-18
    autoSupport:
      enrolled: true
      url: https://support.netapp.com/asupprod/post/1.0/postAsup
+   avpDeploy: false
    crds: {}
    email: admin@example.com
    firstName: SRE
    imageRegistry:
      name: registry_name/astra
-     secret: astra-registry-cred
+   ingressType: AccTraefik
    lastName: Admin
+   mtls:
+     certDuration: 2140h0m0s
+     enabled: true
  status:
    accConditionHistory:
      items:
-     - astraVersion: 21.12.60
+     - astraVersion: 22.08.0-18
        condition:
-         lastTransitionTime: "2021-11-23T02:23:59Z"
+         lastTransitionTime: "2022-08-05T18:03:46Z"
          message: Deploying is currently in progress.
          reason: InProgress
          status: "False"
@@ -506,8 +518,11 @@ name: astra
        generation: 2
        observedSpec:
          accountName: Example
+         additionalValues: {}
          astraAddress: astra.example.com
-         astraVersion: 21.12.60
+         astraKubeConfigSecret: ""
+         astraResourcesScaler: "Off"
+         astraVersion: 22.08.0-18
          autoSupport:
            enrolled: true
            url: https://support.netapp.com/asupprod/post/1.0/postAsup
@@ -516,12 +531,14 @@ name: astra
          firstName: SRE
          imageRegistry:
            name: registry_name/astra
-           secret: astra-registry-cred
          lastName: Admin
-       timestamp: "2021-11-23T02:23:59Z"
-     - astraVersion: 21.12.60
+         mtls:
+          certDuration: 2140h0m0s
+          enabled: true
+       timestamp: "2022-08-05T18:03:46Z"
+     - astraVersion: 22.08.0-18
        condition:
-         lastTransitionTime: "2021-11-23T02:23:59Z"
+         lastTransitionTime: "2022-08-05T18:03:46Z"
          message: Deploying is currently in progress.
          reason: InProgress
          status: "True"
@@ -529,22 +546,28 @@ name: astra
        generation: 2
        observedSpec:
          accountName: Example
+         additionalValues: {}
          astraAddress: astra.example.com
-         astraVersion: 21.12.60
+         astraKubeConfigSecret: ""
+         astraResourcesScaler: "Off"
+         astraVersion: 22.08.0-18
          autoSupport:
            enrolled: true
            url: https://support.netapp.com/asupprod/post/1.0/postAsup
+         avpDeploy: false
          crds: {}
          email: admin@example.com
          firstName: SRE
          imageRegistry:
            name: registry_name/astra
-           secret: astra-registry-cred
          lastName: Admin
-       timestamp: "2021-11-23T02:23:59Z"
-     - astraVersion: 21.12.60
+         mtls:
+           certDuration: 2140h0m0s
+           enabled: true
+       timestamp: "2022-08-05T18:03:46Z"
+     - astraVersion: 22.08.0-18
        condition:
-         lastTransitionTime: "2021-11-23T02:29:41Z"
+         lastTransitionTime: "2022-08-05T18:16:50Z"
          message: Post Install was successful
          observedGeneration: 2
          reason: Complete
@@ -553,117 +576,139 @@ name: astra
        generation: 2
        observedSpec:
          accountName: Example
+         additionalValues: {}
          astraAddress: astra.example.com
-         astraVersion: 21.12.60
+         astraKubeConfigSecret: ""
+         astraResourcesScaler: "Off"
+         astraVersion: 22.08.0-18
          autoSupport:
            enrolled: true
            url: https://support.netapp.com/asupprod/post/1.0/postAsup
+         avpDeploy: false
          crds: {}
          email: admin@example.com
          firstName: SRE
          imageRegistry:
            name: registry_name/astra
-           secret: astra-registry-cred
+         ingressType: AccTraefik
          lastName: Admin
-       timestamp: "2021-11-23T02:29:41Z"
-     - astraVersion: 21.12.60
+         mtls:
+           certDuration: 2140h0m0s
+           enabled: true
+       timestamp: "2022-08-05T18:16:50Z"
+     - astraVersion: 22.08.0-18
        condition:
-         lastTransitionTime: "2021-11-23T02:29:41Z"
+         lastTransitionTime: "2022-08-05T18:03:46Z"
          message: Deploying succeeded.
          reason: Complete
          status: "False"
          type: Deploying
        generation: 2
-       observedGeneration: 2
        observedSpec:
          accountName: Example
+         additionalValues: {}
          astraAddress: astra.example.com
-         astraVersion: 21.12.60
+         astraKubeConfigSecret: ""
+         astraResourcesScaler: "Off"
+         astraVersion: 22.08.0-18
          autoSupport:
            enrolled: true
            url: https://support.netapp.com/asupprod/post/1.0/postAsup
+         avpDeploy: false
          crds: {}
          email: admin@example.com
          firstName: SRE
          imageRegistry:
            name: registry_name/astra
-           secret: astra-registry-cred
+         ingressType: AccTraefik
          lastName: Admin
-       observedVersion: 21.12.60
-       timestamp: "2021-11-23T02:29:41Z"
-     - astraVersion: 21.12.60
+         mtls:
+           certDuration: 2140h0m0s
+           enabled: true
+       timestamp: "2022-08-05T18:16:50Z"
+     - astraVersion: 22.08.0-18
        condition:
-         lastTransitionTime: "2021-11-23T02:29:41Z"
+         lastTransitionTime: "2022-08-05T18:03:46Z"
          message: Astra is deployed
          reason: Complete
          status: "True"
          type: Deployed
        generation: 2
-       observedGeneration: 2
        observedSpec:
          accountName: Example
+         additionalValues: {}
          astraAddress: astra.example.com
-         astraVersion: 21.12.60
+         astraKubeConfigSecret: ""
+         astraResourcesScaler: "Off"
+         astraVersion: 22.08.0-18
          autoSupport:
            enrolled: true
            url: https://support.netapp.com/asupprod/post/1.0/postAsup
+         avpDeploy: false
          crds: {}
          email: admin@example.com
          firstName: SRE
          imageRegistry:
            name: registry_name/astra
-           secret: astra-registry-cred
+         ingressType: AccTraefik
          lastName: Admin
-       observedVersion: 21.12.60
-       timestamp: "2021-11-23T02:29:41Z"
-     - astraVersion: 21.12.60
+         mtls:
+           certDuration: 2140h0m0s
+           enabled: true
+       timestamp: "2022-08-05T18:16:50Z"
+     - astraVersion: 22.08.0-18
        condition:
-         lastTransitionTime: "2021-11-23T02:29:41Z"
+         lastTransitionTime: "2022-08-05T18:16:50Z"
          message: Astra is deployed
          reason: Complete
          status: "True"
          type: Ready
        generation: 2
-       observedGeneration: 2
        observedSpec:
          accountName: Example
+         additionalValues: {}
          astraAddress: astra.example.com
-         astraVersion: 21.12.60
+         astraKubeConfigSecret: ""
+         astraResourcesScaler: "Off"
+         astraVersion: 22.08.0-18
          autoSupport:
            enrolled: true
            url: https://support.netapp.com/asupprod/post/1.0/postAsup
+         avpDeploy: false
          crds: {}
          email: admin@example.com
          firstName: SRE
          imageRegistry:
            name: registry_name/astra
-           secret: astra-registry-cred
+         ingressType: AccTraefik
          lastName: Admin
-       observedVersion: 21.12.60
-       timestamp: "2021-11-23T02:29:41Z"
+         mtls:
+           certDuration: 2140h0m0s
+           enabled: true
+       timestamp: "2022-08-05T18:16:50Z"
    certManager: deploy
    cluster:
      type: OCP
-     vendorVersion: 4.7.5
-     version: v1.20.0+bafe72f
+     vendorVersion: 4.9.29
+     version: v1.22.5+a36406b
    conditions:
-   - lastTransitionTime: "2021-12-08T16:19:55Z"
+   - lastTransitionTime: "2022-08-05T18:23:41Z"
      message: Astra is deployed
      reason: Complete
      status: "True"
      type: Ready
-   - lastTransitionTime: "2021-12-08T16:19:55Z"
+   - lastTransitionTime: "2022-08-05T18:23:41Z"
      message: Deploying succeeded.
      reason: Complete
      status: "False"
      type: Deploying
-   - lastTransitionTime: "2021-12-08T16:19:53Z"
+   - lastTransitionTime: "2022-08-05T18:23:41Z"
      message: Post Install was successful
      observedGeneration: 2
      reason: Complete
      status: "True"
      type: PostInstallComplete
-   *- lastTransitionTime: "2021-12-08T16:19:55Z"*
+   *- lastTransitionTime: "2022-08-05T18:23:41Z"*
      *message: Astra is deployed*
      *reason: Complete*
      *status: "True"*
@@ -672,20 +717,29 @@ name: astra
    observedGeneration: 2
    observedSpec:
      accountName: Example
+     additionalValues: {}
      astraAddress: astra.example.com
-     astraVersion: 21.12.60
+     astraKubeConfigSecret: ""
+     astraResourcesScaler: "Off"
+     astraVersion: 22.08.0-18
      autoSupport:
        enrolled: true
        url: https://support.netapp.com/asupprod/post/1.0/postAsup
+     avpDeploy: false
      crds: {}
      email: admin@example.com
      firstName: SRE
      imageRegistry:
        name: registry_name/astra
-       secret: astra-registry-cred
+     ingressType: AccTraefik
      lastName: Admin
-   observedVersion: 21.12.60
+     mtls:
+       certDuration: 2140h0m0s
+       enabled: true
+   observedVersion: 22.08.0-18
    postInstall: Complete
+   serviceMesh:
+     type: None
    *uuid: 9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f*
 kind: List
 metadata:

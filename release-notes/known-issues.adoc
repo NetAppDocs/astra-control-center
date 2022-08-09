@@ -42,12 +42,12 @@ App clones within the same cluster consistently fail with the Bitnami PostgreSQL
 An application clone might fail if the original security context constraints are configured at the service account level within the namespace on the OpenShift Container Platform cluster. When the application clone fails, it appears in the Managed Applications area in Astra Control Center with status `Removed`. See the https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Astra/Application_clone_is_failing_for_an_application_in_Astra_Control_Center[knowledgebase article^] for more information.
 
 == App backups and snapshots fail if the volumesnapshotclass is added after a cluster is managed
-DOC-4419/ASTRACTL-19849/In review and might need KB
+//DOC-4419/ASTRACTL-19849/In review and might need KB
 Backups and snapshots fail with a `UI 500 error` in this scenario. As a workaround, do one of the following:
 
 * Refresh the app list.
-* Unmanage an app and then define and manage it again with Astra Control.
-* Define and manage a new app. This has the effect of restoring replication operations on all apps for that cluster.
+* Unmanage an app.
+* Define and manage a new app.
 
 == App clones fail after an application is deployed with a set storage class
 //DOC-3892/ASTRACTL-13183/PI4/PI5
