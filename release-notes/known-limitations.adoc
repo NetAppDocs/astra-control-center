@@ -25,7 +25,6 @@ Known limitations identify platforms, devices, or functions that are not support
 * <<In-place restore operations of apps that use a certificate manager are not supported>>
 * <<OLM-enabled and cluster-scoped operator deployed apps not supported>>
 * <<Apps deployed with Helm 2 are not supported>>
-* <<Astra Control requires applications to include at least one active pod>>
 
 .General limitations
 * <<S3 buckets in Astra Control Center do not report available capacity>>
@@ -108,10 +107,6 @@ Astra Control Center does not support application management activities with clu
 == Apps deployed with Helm 2 are not supported
 //From requirements section
 If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) is fully supported. For more information, see link:../get-started/requirements.html[Astra Control Center requirements].
-
-== Astra Control requires applications to include at least one active pod
-DOC-4292/ASTRACTL-18850
-Astra can’t manage and protect an application if there are no active pods that match with the label selector criteria specified in the app definition.
 
 == S3 buckets in Astra Control Center do not report available capacity
 //DOC-3561/ASTRACTL-9425/Q2 and PI4
