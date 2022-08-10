@@ -6,6 +6,7 @@ settings:
   prod:
     pdf_enabled: true
     harmony_enabled: true
+  rss_page: "release-notes/whats-new.html"  
 sidebar:
   entries:
     - title: Astra Control Center docs
