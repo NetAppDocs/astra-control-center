@@ -5,16 +5,19 @@ keywords: proxy, cloud insights, connections, fluent bit, accounts, protect, sec
 summary: You can configure several optional settings to enhance your Astra Control Centre experience. If the network where you're running Astra Control Center requires a proxy for connecting to the Internet, configure that proxy server in Astra Control Center. You can use NetApp Cloud Insights to monitor and gain insight into your complete infrastructure. You can add a Fluent Bit connection to collect data and logs from your containers.
 ---
 
-= Monitor and protect infrastructure
+= Monitor infrastructure with Cloud Insights and Fluentd connections
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/use/
 
-You can configure several optional settings to enhance your Astra Control Center experience. If the network where you’re running Astra Control Center requires a proxy for connecting to the Internet (to upload support bundles to NetApp Support Site or establish a connection to Cloud Insights), you should configure a proxy server in Astra Control Center. To monitor and gain insight into your complete infrastructure, create a connection to NetApp Cloud Insights. To collect Kubernetes events from systems monitored by Astra Control Center, add a Fluentd connection.
+You can configure several optional settings to enhance your Astra Control Center experience. To monitor and gain insight into your complete infrastructure, create a connection to NetApp Cloud Insights. To collect Kubernetes events from systems monitored by Astra Control Center, add a Fluentd connection.
+
+If the network where you’re running Astra Control Center requires a proxy for connecting to the Internet (to upload support bundles to NetApp Support Site or establish a connection to Cloud Insights), you should configure a proxy server in Astra Control Center.
+
+You can also monitor Astra Data Store storage backend throughput, IOPS, and capacity from the Astra Control Center Storage Backends page. See link:../use/manage-backend.html[Manage storage backends].
 
 
-
-== Add a proxy server
+== Add a proxy server for connections to Cloud Insight or to NetApp Support Site
 
 If the network where you’re running Astra Control Center requires a proxy for connecting to the Internet (to upload support bundles to NetApp Support Site or establish a connection to Cloud Insights), you should configure a proxy server in Astra Control Center.
 
@@ -67,6 +70,8 @@ To monitor and gain insight into your complete infrastructure, connect NetApp Cl
 Cloud Insights should be accessible from the network that Astra Control Center uses, or indirectly via a proxy server.
 
 When Astra Control Center is connected to Cloud Insights, an Acquisition Unit pod gets created. This pod collects data from the storage backends that are managed by Astra Control Center and pushes it to Cloud Insights. This pod requires 8 GB RAM and 2 CPU cores.
+
+Additionally, if you manage Astra Data Store clusters on Astra Control (that is connected to Cloud Insights), an Acquisition Unit pod is created on Astra Data Store for each Astra Data Store cluster and the metrics are sent from Astra Data Store to the paired Cloud Insights system. Each pod requires 8 GB RAM and 2 CPU cores. 
 
 NOTE: After you enable the Cloud Insights connection, you can view throughput information on the *Backends* page as well as connect to Cloud Insights from here after selecting a storage backend. You can also find the information on the *Dashboard* in the Cluster section, and also connect to Cloud Insights from there.
 
