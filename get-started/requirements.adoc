@@ -192,7 +192,6 @@ Astra Control has the following application management requirements:
 |PersistentVolumeClaim
 |Pod
 |PodDisruptionBudget
-|PodTemplate
 
 |PodTemplate
 |ReplicaSet
