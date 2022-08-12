@@ -6,6 +6,7 @@ settings:
   prod:
     pdf_enabled: true
     harmony_enabled: true
+  rss_page: "release-notes/whats-new.html"  
 sidebar:
   entries:
     - title: Astra Control Center docs
@@ -15,7 +16,7 @@ sidebar:
     - section: get-started
     - section: use
     - section: rest-api
-    - section: solutions
+    #- section: solutions (retired with DOC-4309)
     - section: support
     - title: Earlier versions
       url: /acc-earlier-versions.html
@@ -50,6 +51,8 @@ homepage:
           url: /use/protect-apps.html
         - title: Clone and migrate apps
           url: /use/clone-apps.html
+        - title: Replicate apps to a remote system
+          url: /use/replication.html
     - title: Use Astra Control API
       links:
         - title: Get started with the Astra Control API
@@ -67,18 +70,18 @@ homepage:
     - title: Use Astra Control Service
       #image: ./media/outline_directions_run_black_18dp.png
       links:
-        - title: Intro to Astra Control Service
+        - title: Learn about Astra Control Service
           url: https://docs.netapp.com/us-en/astra/get-started/intro.html
-        - title: What's new
+        - title: What's new in Astra Control Service
           url: https://docs.netapp.com/us-en/astra/release-notes/whats-new.html
         - title: Quick start for Astra Control Service
           url: https://docs.netapp.com/us-en/astra/get-started/quick-start.html
     - title: Use Astra Data Store
       #image: ./media/outline_directions_run_black_18dp.png
       links:
-        - title: Intro to Astra Data Store
+        - title: Learn about Astra Data Store
           url: https://docs.netapp.com/us-en/astra-data-store/concepts/intro.html
-        - title: What's in this release of Astra Data Store
+        - title: What's new in Astra Data Store
           url: https://docs.netapp.com/us-en/astra-data-store/release-notes/whats-new.html
         - title: Quick start for Astra Data Store
           url: https://docs.netapp.com/us-en/astra-data-store/get-started/quick-start.html
@@ -102,16 +105,6 @@ homepage:
           url: https://cloud.netapp.com/hubfs/SB-4110-0221-MySQL-Astra%20(2).pdf
         - title: Simplify Jenkins lifecycle management
           url: https://cloud.netapp.com/hubfs/SB-4100-Jenkins%20(2).pdf
-    - title: Demos & tutorials
-      links:
-        - title: Deploy Jenkins
-          url: /solutions/jenkins-deploy-from-helm-chart.html
-        - title: Deploy MariaDB
-          url: /solutions/mariadb-deploy-from-helm-chart.html
-        - title: Deploy MySQL
-          url: /solutions/mysql-deploy-from-helm-chart.html
-        - title: Deploy Postgres
-          url: /solutions/postgres-deploy-from-helm-chart.html
     - title: Blogs & community
       links:
         - title: Slack channel
@@ -124,4 +117,3 @@ homepage:
           url: https://cloud.netapp.com/kubernetes-hub
         - title: Where to get help
           url: /support/get-help.html
-
