@@ -177,23 +177,23 @@ Astra Control has the following application management requirements:
 |ClusterRoleBinding
 |ConfigMap
 
+|CronJob
 |CustomResourceDefinition
 |CustomResource
-|CronJob
 
 |DaemonSet
-|HorizontalPodAutoscaler
-|Ingress
-
 |DeploymentConfig
-|MutatingWebhook
-|PersistentVolumeClaim
+|HorizontalPodAutoscaler
 
+|Ingress
+|MutatingWebhook
+|NetworkPolicy
+
+|PersistentVolumeClaim
 |Pod
 |PodDisruptionBudget
-|PodTemplate
 
-|NetworkPolicy
+|PodTemplate
 |ReplicaSet
 |Role
 
