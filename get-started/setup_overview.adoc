@@ -191,8 +191,12 @@ You can bring a discovered ONTAP or Astra Data Store storage backend into Astra 
 .. Confirm the backend details and select *Add storage backend*.
 
 * *ONTAP*:
-.. Select *ONTAP*.
-.. Enter the ONTAP admin credentials and select *Review*.
+.. Select *ONTAP* and select *Next*.
+.. Enter the ONTAP cluster management IP address and admin credentials.
++
+NOTE: The user whose credentials you enter here must have the `ontapi` user login access method enabled within ONTAP System Manager on the ONTAP cluster. If you plan to use SnapMirror replication, enable the access methods `ontapi` and `http` for the user on both ONTAP clusters. See https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts^] for more information.
+
+.. Select *Review*.
 .. Confirm the backend details and select *Add storage backend*.
 
 .Result
