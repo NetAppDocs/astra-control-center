@@ -11,7 +11,7 @@ summary: Learn about how the actions you can perform with Astra Control Center d
 :imagesdir: ../media/concepts/
 
 [.lead]
-Astra Control Center requires a license to be installed for the full App Data Management functionality to be enabled. When you deploy Astra Control Center without a license, a banner is displayed in the web UI, warning that system functionality is limited.
+Astra Control Center requires a license to be installed for the full app data management functionality to be enabled. When you deploy Astra Control Center without a license, a banner is displayed in the web UI, warning that system functionality is limited.
 
 
 //Astra Control Center has full functionality when a license is installed, and reduced functionality without a license. Learn about how the actions you can perform with Astra Control Center differ based on license status, and about how your use of Astra Control Center affects license consumption.
