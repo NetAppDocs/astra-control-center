@@ -101,7 +101,7 @@ cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 
 == Add the images to your local registry
 
-. Select the container engine your operational environment uses (Docker or Podman), and perform the following tasks: 
+. Select the container engine your operational environment uses (Docker or Podman), and perform the associated tasks: 
 
 // start tabbed block for docker and podman approaches
 
