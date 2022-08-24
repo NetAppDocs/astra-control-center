@@ -26,7 +26,7 @@ These options are available for free, 24x7:
 
 * *Documentation center*: This is the doc site that you're currently viewing.
 
-* https://discord.gg/NetApp[*Get help via Discord*^]: Go to the containers channel in thePub workspace to connect with peers and experts.
+* https://discord.gg/NetApp[*Get help via Discord*^]: Go to Astra in the Pub category to connect with peers and experts.
 
 * *Create a support case*: Generate support bundles to provide to NetApp Support for troubleshooting.
 
