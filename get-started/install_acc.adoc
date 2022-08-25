@@ -188,7 +188,9 @@ Response:
 namespace/netapp-acc-operator created
 ----
 
-.. Create a secret for the `netapp-acc-operator` namespace. Add Docker information and run the following command. The placeholder `your_registry_path` should match the location of the images that you uploaded earlier (for example, `[Registry_URL]/netapp/astra/astracc/22.08.0-20`):
+.. Create a secret for the `netapp-acc-operator` namespace. Add Docker information and run the following command: 
++
+NOTE: The placeholder `your_registry_path` should match the location of the images that you uploaded earlier (for example, `[Registry_URL]/netapp/astra/astracc/22.08.0-20`).
 +
 ----
 kubectl create secret docker-registry astra-registry-cred -n netapp-acc-operator --docker-server=[your_registry_path] --docker-username=[username] --docker-password=[token]
