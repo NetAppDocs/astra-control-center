@@ -112,6 +112,7 @@ cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 --
 . Change to the Astra directory:
 +
+[source,sh]
 ----
 cd acc
 ----
