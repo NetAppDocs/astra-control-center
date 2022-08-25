@@ -122,6 +122,7 @@ cd acc
 * Replace MY_REGISTRY with the URL of the Docker repository.
 * Replace MY_REGISTRY_USER and MY_REGISTRY_PASSWORD with the credentials for the repository.
 +
+[source,sh]
 ----
 kubectl astra packages push-images -m BUNDLE_FILE -r MY_REGISTRY -u MY_REGISTRY_USER -p MY_REGISTRY_PASSWORD
 ----
@@ -131,11 +132,13 @@ kubectl astra packages push-images -m BUNDLE_FILE -r MY_REGISTRY -u MY_REGISTRY_
 --
 . Log in to your registry:
 +
+[source,sh]
 ----
 podman login [your_registry_path]
 ----
 . Run the following script, making the <YOUR_REGISTRY> substitution as noted in the comments:
 +
+[source,sh]
 ----
 # You need to be at the root of the tarball.
 # You should see these files to confirm correct location:
