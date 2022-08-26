@@ -50,7 +50,7 @@ Ensure that the operating environment you choose to host Astra Control Center me
 //|3 controller nodes with 4 CPU cores, 16GB RAM, and 120GB of available storage each
 
 |Worker nodes
-|At least 3 worker nodes, with 12 CPU cores and 16GB RAM each
+|At least 3 worker nodes total, with 4 CPU cores and 12GB RAM each
 
 //|Worker cluster additional resources
 //|Astra Control Center requires that the cluster have an additional 12 CPU cores, 24GB RAM, and 50GB of available storage
@@ -177,23 +177,23 @@ Astra Control has the following application management requirements:
 |ClusterRoleBinding
 |ConfigMap
 
+|CronJob
 |CustomResourceDefinition
 |CustomResource
-|CronJob
 
 |DaemonSet
-|HorizontalPodAutoscaler
-|Ingress
-
 |DeploymentConfig
-|MutatingWebhook
-|PersistentVolumeClaim
+|HorizontalPodAutoscaler
 
+|Ingress
+|MutatingWebhook
+|NetworkPolicy
+
+|PersistentVolumeClaim
 |Pod
 |PodDisruptionBudget
-|PodTemplate
 
-|NetworkPolicy
+|PodTemplate
 |ReplicaSet
 |Role
 
@@ -220,6 +220,14 @@ Astra Control application replication requires that the following prerequisites 
 * The paired remote SVM must be available to Trident on the destination cluster.
 * Trident version 22.04 or greater must exist on both the source and destination ONTAP clusters.
 * ONTAP SnapMirror asynchronous licenses using the Data Protection bundle must be enabled on both the source and destination ONTAP clusters. See https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html[SnapMirror licensing overview in ONTAP^].
+* The Astra Trident backend configuration file must contain the following line:
++
+----
+"replicationPolicy": "MirrorAllSnapshots"
+----
++
+See https://docs.netapp.com/us-en/trident/trident-use/backends.html[Configure backends^] for more information.
+* When you add an ONTAP storage backend to Astra Control Center, the user whose credentials you use to enable communication between Astra Control Center and the storage backend must have the user login access methods `http` and `ontapi` enabled within ONTAP System Manager on both ONTAP clusters. See https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts^] for more information.
 * Both source and destination Kubernetes clusters and ONTAP clusters must be managed by Astra Control.
 +
 NOTE: You can simultaneously replicate a different app (running on the other cluster or site) in the opposite direction. For example, Apps A, B, C can be replicated from Datacenter 1 to Datacenter 2; and Apps X, Y, Z can be replicated from Datacenter 2 to Datacenter 1.
@@ -273,6 +281,8 @@ To learn more about how licenses work, see link:../concepts/licensing.html[Licen
 You can choose the type of network ingress Astra Control Center uses. By default, Astra Control Center deploys the Astra Control Center gateway (service/traefik) as a cluster-wide resource. Astra Control Center also supports using a service load balancer, if they are permitted in your environment. If you would rather use a service load balancer and you don’t already have one configured, you can use the MetalLB load balancer to automatically assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
 
 NOTE: If you are hosting Astra Control Center on a Tanzu Kubernetes Grid cluster, use the `kubectl get nsxlbmonitors -A` command to see if you already have a service monitor configured to accept ingress traffic. If one exists, you should not install MetalLB, because the existing service monitor will override any new load balancer configuration.
+
+For more information, see link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[Set up ingress for load balancing].
 
 //NOTE: MetalLB version 0.11.0 is not supported.
 
