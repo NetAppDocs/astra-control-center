@@ -376,7 +376,7 @@ Each pod should have a status of `Running`. It may take several minutes before t
 ====
 [subs=+quotes]
 ----
-NAME                                     READY   STATUS   RESTARTS AGE
+NAME                                     READY  STATUS   RESTARTS AGE
 acc-helm-repo-6b44d68d94-d8m55           1/1    Running  0        13m
 activity-78f99ddf8-hltct                 1/1    Running  0        10m
 api-token-authentication-457nl           1/1    Running  0        9m28s
