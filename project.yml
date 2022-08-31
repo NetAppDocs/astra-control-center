@@ -120,8 +120,8 @@ homepage:
           url: https://cloud.netapp.com/hubfs/SB-4100-Jenkins%20(2).pdf
     - title: Blogs & community
       links:
-        - title: Slack channel
-          url: https://netapppub.slack.com/#astra
+        - title: Discord channel
+          url: https://discord.gg/NetApp
         - title: Astra Control blog
           url: https://cloud.netapp.com/blog/topic/astra
         - title: NetApp Community
