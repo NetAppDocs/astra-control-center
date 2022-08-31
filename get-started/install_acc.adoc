@@ -540,6 +540,7 @@ kubectl get AstraControlCenter -n netapp-acc
 ----
 +
 Response:
++
 ----
 NAME    UUID                                      VERSION     ADDRESS         READY
 astra   ACC-9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f  22.08.0-20  10.111.111.111  True
