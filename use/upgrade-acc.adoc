@@ -64,26 +64,85 @@ openssl dgst -sha256 -verify AstraControlCenter-public.pub -signature astra-cont
 tar -vxzf astra-control-center-[version].tar.gz
 ----
 
-. Change to the Astra directory.
+== Add the images to your local registry
+
+. Complete the appropriate step sequence for your container engine: 
+
+// start tabbed block for docker and podman approaches
+
+[role="tabbed-block"]
+====
+
+.Docker
+--
+. Change to the Astra directory:
 +
+[source,sh]
 ----
 cd acc
 ----
-
-== Add the images to your local registry
-
-. Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
+. [[substep_image_local_registry_push]]Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
 +
 
-* Replace BUNDLE_FILE with the name of the Astra Control bundle file (for example, `acc.manifest.bundle.yaml`).
+* Replace BUNDLE_FILE with the name of the Astra Control bundle file (for example, `acc.manifest.yaml`).
 * Replace MY_REGISTRY with the URL of the Docker repository.
-* Replace MY_REGISTRY_USER and MY_REGISTRY_PASSWORD with the credentials for the repository.
+* Replace MY_REGISTRY_USER and MY_REGISTRY_PASSWORD with your user credentials for the repository. Alternatively, you can replace the credentials flags with a registry-generated authentication token. 
 +
+[source,sh]
 ----
 kubectl astra packages push-images -m BUNDLE_FILE -r MY_REGISTRY -u MY_REGISTRY_USER -p MY_REGISTRY_PASSWORD
 ----
+--
+
+.Podman
+--
+. Log in to your registry:
++
+[source,sh]
+----
+podman login [your_registry_path]
+----
+. Run the following script, making the <YOUR_REGISTRY> substitution as noted in the comments:
++
+[source,sh]
+----
+# You need to be at the root of the tarball.
+# You should see these files to confirm correct location:
+#   acc.manifest.yaml
+#   acc/
+
+# Replace <YOUR_REGISTRY> with your own registry (e.g registry.customer.com or registry.customer.com/testing, etc..)
+export REGISTRY=<YOUR_REGISTRY>
+export PACKAGENAME=acc
+export PACKAGEVERSION=22.08.0-20
+export DIRECTORYNAME=acc
+for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do
+  # Load to local cache
+  astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image: //')
+ 
+  # Remove path and keep imageName.
+  astraImageNoPath=$(echo ${astraImage} | sed 's:.*/::')
+ 
+  # Tag with local image repo.
+  podman tag ${astraImage} ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
+ 
+  # Push to the local repo.
+  podman push ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
+done
+----
+--
+
+====
+
+// end tabbed block
 
 == Install the updated Astra Control Center operator
+
+. Change the directory:
++
+----
+cd manifests
+----
 
 . Edit the Astra Control Center operator deployment yaml (`astra_control_center_operator_deploy.yaml`) to refer to your local registry and secret.
 +

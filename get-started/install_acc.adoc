@@ -119,7 +119,7 @@ cd acc
 . [[substep_image_local_registry_push]]Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
 +
 
-* Replace BUNDLE_FILE with the name of the Astra Control bundle file (for example, `acc.manifest.bundle.yaml`).
+* Replace BUNDLE_FILE with the name of the Astra Control bundle file (for example, `acc.manifest.yaml`).
 * Replace MY_REGISTRY with the URL of the Docker repository.
 * Replace MY_REGISTRY_USER and MY_REGISTRY_PASSWORD with your user credentials for the repository. Alternatively, you can replace the credentials flags with a registry-generated authentication token. 
 +
@@ -143,7 +143,7 @@ podman login [your_registry_path]
 ----
 # You need to be at the root of the tarball.
 # You should see these files to confirm correct location:
-#   acc.manifest.bundle.yaml
+#   acc.manifest.yaml
 #   acc/
 
 # Replace <YOUR_REGISTRY> with your own registry (e.g registry.customer.com or registry.customer.com/testing, etc..)
@@ -175,6 +175,12 @@ done
 
 == Set up namespace and secret for registries with auth requirements
 
+. Export the KUBECONFIG for the Astra Control Center host cluster: 
++
+----
+export KUBECONFIG=[file path] 
+----
+
 .  If you use a registry that requires authentication, you need to do the following:
 .. Create the `netapp-acc-operator` namespace:
 +
@@ -201,6 +207,8 @@ Sample response:
 ----
 secret/astra-registry-cred created
 ----
++
+NOTE: If you delete the namespace after the secret is generated, you need to regenerate the secret for the namespace after the namespace is recreated.
 
 .. Create the `netapp-acc` (or custom named) namespace.
 +
@@ -233,6 +241,12 @@ kubectl create secret generic [acc-kubeconfig-cred or custom secret name] --from
 ----
 
 == Install the Astra Control Center operator
+
+. Change the directory:
++
+----
+cd manifests
+----
 
 . Edit the Astra Control Center operator deployment YAML (`astra_control_center_operator_deploy.yaml`) to refer to your local registry and secret.
 +
