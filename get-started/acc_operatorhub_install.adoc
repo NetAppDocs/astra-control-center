@@ -100,11 +100,12 @@ cd acc
 
 * Replace BUNDLE_FILE with the name of the Astra Control bundle file (for example, `acc.manifest.yaml`).
 * Replace MY_REGISTRY with the URL of the Docker repository.
-* Replace MY_REGISTRY_USER and MY_REGISTRY_PASSWORD with your user credentials for the repository. Alternatively, you can replace the credentials flags with a registry-generated authentication token. 
+* Replace MY_REGISTRY_USER with the user name.
+* Replace MY_REGISTRY_TOKEN with an authorized token for the repository.
 +
 [source,sh]
 ----
-kubectl astra packages push-images -m BUNDLE_FILE -r MY_REGISTRY -u MY_REGISTRY_USER -p MY_REGISTRY_PASSWORD
+kubectl astra packages push-images -m BUNDLE_FILE -r MY_REGISTRY -u MY_REGISTRY_USER -p MY_REGISTRY_TOKEN
 ----
 --
 
