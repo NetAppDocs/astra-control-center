@@ -87,7 +87,7 @@ cd acc
 * Replace BUNDLE_FILE with the name of the Astra Control bundle file (for example, `acc.manifest.yaml`).
 * Replace MY_REGISTRY with the URL of the Docker repository.
 * Replace MY_REGISTRY_USER with the user name.
-* Replace MY_REGISTRY_TOKEN with an authorized token for the repository.
+* Replace MY_REGISTRY_TOKEN with an authorized token for the registry.
 +
 [source,sh]
 ----
@@ -235,6 +235,12 @@ clusterrolebinding.rbac.authorization.k8s.io/acc-operator-proxy-rolebinding unch
 configmap/acc-operator-manager-config unchanged
 service/acc-operator-controller-manager-metrics-service unchanged
 deployment.apps/acc-operator-controller-manager configured
+----
+
+. Verify pods are running:
++
+----
+kubectl get pods -n netapp-acc-operator
 ----
 
 == Upgrade Astra Control Center

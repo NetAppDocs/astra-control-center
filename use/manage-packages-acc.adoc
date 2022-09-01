@@ -32,7 +32,7 @@ Astra Control Center references package images and artifacts in connected reposi
 * Replace BUNDLE_FILE with the name of the Astra Control bundle file (for example, `acc.manifest.yaml`).
 * Replace MY_REGISTRY with the URL of the Docker repository.
 * Replace MY_REGISTRY_USER with the user name. 
-* Replace MY_REGISTRY_TOKEN with an authorized token for the repository.
+* Replace MY_REGISTRY_TOKEN with an authorized token for the registry.
 +
 ----
 kubectl astra packages push-images -m BUNDLE_FILE -r MY_REGISTRY -u MY_REGISTRY_USER -p MY_REGISTRY_TOKEN
