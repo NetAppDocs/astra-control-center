@@ -377,7 +377,7 @@ The steps differ depending on the type of ingress controller you use:
 +
 ----
 apiVersion: extensions/v1beta1
-kind: Ingress
+kind: IngressClass
 metadata:
   name: ingress-acc
   namespace: [netapp-acc or custom namespace]

@@ -692,7 +692,7 @@ ingress istio astra.example.com 172.16.103.248  80, 443 1h 
 +
 ----
 apiVersion: extensions/v1beta1
-kind: Ingress
+Kind: IngressClass
 metadata:
   name: ingress-acc
   namespace: [netapp-acc or custom namespace]
