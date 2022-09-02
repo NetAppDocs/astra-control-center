@@ -12,7 +12,7 @@ entries:
       - title: Restore apps
         url: /use/restore-apps.html
       - title: Replicate apps to a remote system
-        url: /use/replication.html
+        url: /use/replicate_snapmirror.html
       - title: Clone and migrate apps
         url: /use/clone-apps.html
       - title: Manage app execution hooks
