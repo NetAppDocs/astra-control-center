@@ -232,7 +232,7 @@ See https://docs.netapp.com/us-en/trident/trident-use/backends.html[Configure ba
 +
 NOTE: You can simultaneously replicate a different app (running on the other cluster or site) in the opposite direction. For example, Apps A, B, C can be replicated from Datacenter 1 to Datacenter 2; and Apps X, Y, Z can be replicated from Datacenter 2 to Datacenter 1.
 
-Learn how to link:../use/replication.html[replicate apps to a remote system using SnapMirror technology].
+Learn how to link:../use/replicate_snapmirror.html[replicate apps to a remote system using SnapMirror technology].
 
 == Supported application installation methods
 Astra Control supports the following application installation methods:
