@@ -36,7 +36,6 @@ Astra Control is available in two deployment models:
 | What is the storage backend support? | NetApp cloud service offerings |
 
 * NetApp ONTAP AFF and FAS systems
-* Astra Data Store as storage backend
 * Cloud Volumes ONTAP storage backend
 |===
 
@@ -81,10 +80,8 @@ Astra Control's Free Plan enables you to manage up to 10 apps in your account. I
 
 Astra Control Center runs locally in your own private cloud.
 
-Astra Control Center supports Kubernetes clusters with:
+Astra Control Center supports Kubernetes clusters with: Trident storage backends with ONTAP 9.5 and above.
 
-* Trident storage backends with ONTAP 9.5 and above
-* Astra Data Store storage backends
 
 In a cloud connected environment Astra Control Center uses Cloud Insights to provide advanced monitoring and telemetry. In the absence of a Cloud Insights connection, limited (7-days of metrics) monitoring and telemetry is available in Astra Control Center and also exported to Kubernetes native monitoring tools (such as Prometheus and Grafana) through open metrics end points.
 
@@ -110,7 +107,7 @@ Learn more about how to https://docs.netapp.com/us-en/astra-control-center/get-s
 Astra Control Center does this:
 
 * Discovers details about the cluster including namespaces and enables you to define and protect the apps.
-* Discovers your Astra Trident or Astra Data Store configuration on the clusters that you choose to manage and lets you monitor the storage backends.
+* Discovers your Astra Trident configuration on the clusters that you choose to manage and lets you monitor the storage backends.
 
 You can add apps to your cluster. Or, if you have some apps already in the cluster being managed, you can use Astra Control Center to manage them. Then, use Astra Control Center to create snapshots, backups, clones and replication relationships.
 
@@ -119,7 +116,6 @@ You can add apps to your cluster. Or, if you have some apps already in the clust
 
 * https://docs.netapp.com/us-en/astra/index.html[Astra Control Service documentation^]
 * https://docs.netapp.com/us-en/astra-control-center/index.html[Astra Control Center documentation^]
-* https://docs.netapp.com/us-en/astra-data-store/index.html[Astra Data Store documentation]
 * https://docs.netapp.com/us-en/trident/index.html[Astra Trident documentation^]
 * https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra Control API^]
 * https://docs.netapp.com/us-en/cloudinsights/[Cloud Insights documentation^]

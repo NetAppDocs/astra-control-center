@@ -28,7 +28,6 @@ NOTE: The NetApp provided default pre- and post-snapshot execution hooks for spe
 
 .Known issues and limitations
 * link:../release-notes/known-issues.html[Known issues for this release]
-* link:../release-notes/known-issues-ads.html[Known issues with Astra Data Store and this Astra Control Center release]
 * link:../release-notes/known-limitations.html[Known limitations for this release]
 
 == 26 April 2022 (22.04.0)
@@ -39,7 +38,7 @@ NOTE: The NetApp provided default pre- and post-snapshot execution hooks for spe
 
 .New features and support
 
-* https://docs.netapp.com/us-en/astra-control-center-2204/get-started/setup_overview.html#add-a-storage-backend[Astra Data Store deployment from Astra Control Center]
+
 * https://docs.netapp.com/us-en/astra-control-center-2204/concepts/user-roles-namespaces.html[Namespace role-based access control (RBAC)]
 * https://docs.netapp.com/us-en/astra-control-center-2204/get-started/install_acc-cvo.html[Support for Cloud Volumes ONTAP]
 * https://docs.netapp.com/us-en/astra-control-center-2204/get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Generic ingress enablement for Astra Control Center]
@@ -48,7 +47,6 @@ NOTE: The NetApp provided default pre- and post-snapshot execution hooks for spe
 
 .Known issues and limitations
 * https://docs.netapp.com/us-en/astra-control-center-2204/release-notes/known-issues.html[Known issues for this release]
-* https://docs.netapp.com/us-en/astra-control-center-2204/release-notes/known-issues-ads.html[Known issues with Astra Data Store and this Astra Control Center release]
 * https://docs.netapp.com/us-en/astra-control-center-2204/release-notes/known-limitations.html[Known limitations for this release]
 
 ====
@@ -66,7 +64,6 @@ NOTE: The NetApp provided default pre- and post-snapshot execution hooks for spe
 * https://docs.netapp.com/us-en/astra-control-center-2112/use/execution-hooks.html[Execution hooks^]
 * https://docs.netapp.com/us-en/astra-control-center-2112/get-started/requirements.html#supported-app-installation-methods[Support for applications deployed with namespace-scoped operators^]
 * https://docs.netapp.com/us-en/astra-control-center-2112/get-started/requirements.html[Additional support for upstream Kubernetes and Rancher^]
-* https://docs.netapp.com/us-en/astra-control-center-2112/get-started/setup_overview.html#add-a-storage-backend[Astra Data Store preview backend management and monitoring^]
 * https://docs.netapp.com/us-en/astra-control-center-2112/use/upgrade-acc.html[Astra Control Center upgrades^]
 * https://docs.netapp.com/us-en/astra-control-center-2112/get-started/acc_operatorhub_install.html[Red Hat OperatorHub option for installation^]
 
@@ -75,7 +72,6 @@ NOTE: The NetApp provided default pre- and post-snapshot execution hooks for spe
 
 .Known issues and limitations
 * https://docs.netapp.com/us-en/astra-control-center-2112/release-notes/known-issues.html[Known issues for this release^]
-* https://docs.netapp.com/us-en/astra-control-center-2112/release-notes/known-issues-ads.html[Known issues with Astra Data Store preview and this Astra Control Center release^]
 * https://docs.netapp.com/us-en/astra-control-center-2112/release-notes/known-limitations.html[Known limitations for this release^]
 
 ====
@@ -105,5 +101,4 @@ Initial release of Astra Control Center.
 
 * link:../release-notes/known-issues.html[Known issues for this release]
 * link:../release-notes/known-limitations.html[Known limitations for this release]
-* https://docs.netapp.com/us-en/astra-data-store/index.html[Astra Data Store documentation]
 * link:../acc-earlier-versions.html[Earlier versions of Astra Control Center documentation]

@@ -65,7 +65,6 @@ Ensure that the operating environment you choose to host Astra Control Center me
 a|
 Astra Trident 21.10.1 or newer installed and configured
 Astra Trident 22.04 or newer for SnapMirror-based application replication
-//* Astra Trident 21.10.1 or newer installed and configured if Astra Data Store will be used as a storage backend
 
 |===
 
@@ -143,7 +142,6 @@ The Kubernetes cluster you use for Astra Control Center should already be deploy
 == Supported storage backends
 Astra Control Center supports the following storage backends.
 
-* Astra Data Store
 * NetApp ONTAP 9.5 or newer AFF and FAS systems
 * NetApp Cloud Volumes ONTAP
 //* Google Cloud Platform
@@ -383,7 +381,6 @@ NOTE: You can deploy Astra Control Center in a dual-stack Kubernetes cluster, an
 == Storage backend requirements
 Astra Control Center supports the following storage backends. Some storage backends require specific configuration to work correctly.
 
-* Astra Data Store
 * NetApp Cloud Volumes ONTAP
 * SolidFire Element OS
 ////

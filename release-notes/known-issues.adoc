@@ -70,5 +70,4 @@ After you complete these steps, the credential associated with the cluster is up
 
 == Find more information
 
-* link:../release-notes/known-issues-ads.html[Known issues with Astra Data Store preview and this Astra Control Center release]
 * link:../release-notes/known-limitations.html[Known limitations]

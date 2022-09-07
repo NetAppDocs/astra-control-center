@@ -42,7 +42,6 @@ The Astra Control Center installation process does the following:
 * Installs the Astra UI.
 //VMware ADS EAP review
 
-IMPORTANT: (Applies to the Astra Data Store Early Access Program (EAP) release only) If you intend to manage Astra Data Store using Astra Control Center and enable VMware workflows, deploy Astra Control Center only on the `pcloud` namespace and not on the `netapp-acc` namespace or a custom namespace described in the steps of this procedure.
 
 IMPORTANT: Do not execute the following command during the entirety of the installation process to avoid deleting all Astra Control Center pods: `kubectl delete -f astra_control_center_operator_deploy.yaml`
 
@@ -101,7 +100,7 @@ cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 
 == Add the images to your local registry
 
-. Complete the appropriate step sequence for your container engine: 
+. Complete the appropriate step sequence for your container engine:
 
 // start tabbed block for docker and podman approaches
 
@@ -155,13 +154,13 @@ export DIRECTORYNAME=acc
 for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do
   # Load to local cache
   astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image: //')
- 
+
   # Remove path and keep imageName.
   astraImageNoPath=$(echo ${astraImage} | sed 's:.*/::')
- 
+
   # Tag with local image repo.
   podman tag ${astraImage} ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
- 
+
   # Push to the local repo.
   podman push ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
 done
@@ -176,10 +175,10 @@ done
 
 == Set up namespace and secret for registries with auth requirements
 
-. Export the KUBECONFIG for the Astra Control Center host cluster: 
+. Export the KUBECONFIG for the Astra Control Center host cluster:
 +
 ----
-export KUBECONFIG=[file path] 
+export KUBECONFIG=[file path]
 ----
 
 .  If you use a registry that requires authentication, you need to do the following:
@@ -195,7 +194,7 @@ Response:
 namespace/netapp-acc-operator created
 ----
 
-.. Create a secret for the `netapp-acc-operator` namespace. Add Docker information and run the following command: 
+.. Create a secret for the `netapp-acc-operator` namespace. Add Docker information and run the following command:
 +
 NOTE: The placeholder `your_registry_path` should match the location of the images that you uploaded earlier (for example, `[Registry_URL]/netapp/astra/astracc/22.08.0-20`).
 +
@@ -266,7 +265,6 @@ imagePullSecrets:
 
 .. Change `[your_registry_path]` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<substep_image_local_registry_push,previous step>>.
 .. Change `[your_registry_path]` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in a <<substep_image_local_registry_push,previous step>>.
-.. (For installations using Astra Data Store preview) See this known issue regarding https://docs.netapp.com/us-en/astra-data-store-2112/release-notes/known-issues.html#mongodb-deployment-with-default-liveness-probe-value-fails-with-pods-in-crash-loop[storage class provisioners and additional changes you will need to make to the YAML^].
 +
 [subs=+quotes]
 ----
@@ -533,7 +531,7 @@ kubectl logs deploy/acc-operator-controller-manager -n netapp-acc-operator -c ma
 +
 NOTE: `accHost` cluster registration is one of the last operations, and if it fails it will not cause deployment to fail. In the event of a cluster registration failure indicated in the logs, you can attempt registration again through the add cluster workflow link:../get-started/setup_overview.html#add-cluster[in the UI] or API.
 
-. When all the pods are running, verify that the installation was successful (`READY` is `True`) and get the one-time password you will use when you log in to Astra Control Center: 
+. When all the pods are running, verify that the installation was successful (`READY` is `True`) and get the one-time password you will use when you log in to Astra Control Center:
 +
 ----
 kubectl get AstraControlCenter -n netapp-acc

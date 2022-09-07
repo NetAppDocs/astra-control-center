@@ -19,7 +19,7 @@ You can connect repositories to Astra Control to use as a reference for software
 * A running artifact repository (such as Artifactory) that you can access
 
 == Connect a Docker image repository
-You can connect a Docker image repository to hold package installation images, such as those for Astra Data Store. When you install packages, Astra Control imports the package image files from the image repository.
+You can connect a Docker image repository to hold package installation images. When you install packages, Astra Control imports the package image files from the image repository.
 
 .Steps
 
