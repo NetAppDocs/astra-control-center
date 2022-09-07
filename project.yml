@@ -38,6 +38,7 @@ sidebar:
 product-family:
   name: Astra
   repo: astra-family
+  sidebar_label: All Astra documentation
 
 homepage:
   tiles:
