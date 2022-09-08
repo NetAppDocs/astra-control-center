@@ -21,8 +21,7 @@ You can complete the following tasks related to managing a storage backend:
 * <<View storage backend details>>
 * <<Unmanage a storage backend>>
 * <<Remove a storage backend>>
-* <<Update a storage backend license>>
-* <<Upgrade a storage backend>>
+
 
 
 //
@@ -118,63 +117,7 @@ You can remove a storage backend that is no longer in use. You might want to do 
 .. Type "remove" to confirm the action.
 .. Select *Yes, remove storage backend*.
 
-== Update a storage backend license
-You can update the license for a storage backend to support a larger deployment or enhanced features.
 
-.What you'll need
-
-* A deployed and managed storage backend
-* A license file (contact your NetApp sales representative to purchase a license, if needed)
-
-.Steps
-
-.	From the left navigation, select *Backends*.
-. Select the name of a storage backend.
-. Under *Basic Information*, you can see the type of license installed.
-+
-If you hover over the license information, a popup appears with more information, such as expiration and entitlement information.
-. Under *License*, select the edit icon next to the license name.
-. In the *Update license* page, do one of the following:
-+
-|===
-|License status |Action
-
-|At least one license has been added.
-a|
-
-Select a license from the list.
-
-|No licenses have been added.
-a|
-
-.. Select the *Add* button.
-.. Select a license file to upload.
-.. Select *Add* to upload the license file.
-
-|===
-
-. Select *Update*.
-
-== Upgrade a storage backend
-You can upgrade a backend from within Astra Control Center. To do so, you must first upload an upgrade package; Astra Control Center will use this upgrade package to upgrade the backend storage.
-
-.What you'll need
-* A managed storage backend
-* An uploaded upgrade package (see link:manage-packages-acc.html[Manage software packages])
-
-.Steps
-
-. Select *Backends*.
-. Choose a storage backend from the list, and select the corresponding menu in the *Actions* column.
-. Select *Upgrade*.
-. Select an upgrade version from the list.
-+
-If you have several upgrade packages in your repository that are different versions, you can open the drop-down list to select the version you need.
-. Select *Next*.
-. Select *Start Upgrade*.
-
-.Result
-The *Backends* page displays an *Upgrading* status in the *Status* column until the upgrade is complete.
 
 
 
