@@ -14,7 +14,7 @@ We're pleased to announce the latest release of Astra Control Center.
 
 == 8 September 2022 (22.08.1)
 
-This patch release (22.08.1) for Astra Control Center (22.08.0) fixes minor bugs in NetApp SnapMirror functionality with Astra Control Center.
+This patch release (22.08.1) for Astra Control Center (22.08.0) fixes minor bugs in app replication using NetApp SnapMirror.
 
 == 10 August 2022 (22.08.0)
 
