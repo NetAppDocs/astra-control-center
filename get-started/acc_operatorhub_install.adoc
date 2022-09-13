@@ -15,22 +15,33 @@ If you use Red Hat OpenShift, you can install Astra Control Center using the Red
 After you complete this procedure, you must return to the installation procedure to complete the link:../get-started/install_acc.html#verify-system-status[remaining steps] to verify installation success and log on.
 
 .What you'll need
-* link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
-* From your OpenShift cluster, ensure all cluster operators are in a healthy state (`available` is `true`):
+* *Environmental prerequisites*: Before you begin installation, link:requirements.html[prepare your environment for Astra Control Center deployment].
+* *OpenShift cluster health*:
+From your OpenShift cluster, do the following:
+** Ensure all cluster operators are in a healthy state (`available` is `true`):
 +
 ----
 oc get clusteroperators
 ----
 
-* From your OpenShift cluster, ensure all API services are in a healthy state (`available` is `true`):
+** Ensure all API services are in a healthy state (`available` is `true`):
 +
 ----
 oc get apiservices
 ----
 
-* Create an FQDN address for Astra Control Center in your data center.
-* Obtain the necessary permissions and access to the Red Hat OpenShift Container Platform to perform the installation steps described.
-* If a cert-manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps] so that Astra Control Center does not install its own cert-manager.
+* *FQDN address*: Create an FQDN address for Astra Control Center in your data center.
+* *Permissions*: Obtain the necessary permissions and access to the Red Hat OpenShift Container Platform to perform the installation steps described.
+* *Cert-manager*: If a cert-manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps] so that Astra Control Center does not install its own cert-manager.
+* *Kubernetes ingress controller*: If you have a Kubernetes ingress controller that manages external access to services, such as load balancing in a cluster, you need to set it up for use with Astra Control Center: 
+.. Create ACC namespace:
++
+----
+oc create namespace netapp-acc
+----
+
+.. Complete link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[setup] for your ingress controller type.
+
 
 .Steps
 
@@ -202,6 +213,7 @@ NOTE: If you selected a manual approval strategy, you will be prompted to approv
 .. Retain the default storage class.
 .. Define CRD handling preferences.
 . Select `Create`.
+
 
 == What's next
 
