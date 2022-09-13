@@ -28,93 +28,128 @@ oc get clusteroperators
 oc get apiservices
 ----
 
-* You have created an FQDN address for Astra Control Center in your data center.
-* You have the necessary permissions and access to the Red Hat OpenShift Container Platform to perform the installation steps described.
+* Create an FQDN address for Astra Control Center in your data center.
+* Obtain the necessary permissions and access to the Red Hat OpenShift Container Platform to perform the installation steps described.
+* If a cert-manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps] so that Astra Control Center does not install its own cert-manager.
 
 .Steps
 
-* <<Download the Astra Control Center bundle>>
-* <<Unpack the bundle and change directory>>
+* <<Download and unpack the Astra Control Center bundle>>
+* <<Install the NetApp Astra kubectl plugin>>
 * <<Add the images to your local registry>>
 * <<Find the operator install page>>
 * <<Install the operator>>
 * <<Install Astra Control Center>>
 
-== Download the Astra Control Center bundle
+== Download and unpack the Astra Control Center bundle
 
 . Download the Astra Control Center bundle (`astra-control-center-[version].tar.gz`) from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
-. Download the zip of Astra Control Center certificates and keys from https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
+. Download the zip of Astra Control Center certificates and keys from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
 . (Optional) Use the following command to verify the signature of the bundle:
 +
 ----
-openssl dgst -sha256 -verify astra-control-center[version].pub -signature <astra-control-center[version].sig astra-control-center[version].tar.gz
+openssl dgst -sha256 -verify AstraControlCenter-public.pub -signature astra-control-center-[version].tar.gz.sig astra-control-center-[version].tar.gz
 ----
-
-== Unpack the bundle and change directory
-
 . Extract the images:
 +
 ----
 tar -vxzf astra-control-center-[version].tar.gz
 ----
 
-. Change to the Astra directory.
+== Install the NetApp Astra kubectl plugin
+
+The NetApp Astra `kubectl` command line plugin saves time when performing common tasks associated with deploying and upgrading Astra Control Center.
+
+.What you'll need
+
+NetApp provides binaries for the plugin for different CPU architectures and operating systems. You need to know which CPU and operating system you have before you perform this task. On Linux and Mac operating systems, you can use the `uname -a` command to gather this information.
+
+.Steps
+
+. List the available NetApp Astra `kubectl` plugin binaries, and note the name of the file you need for your operating system and CPU architecture:
 +
 ----
-cd astra-control-center-[version]
+ls kubectl-astra/
 ----
+. Copy the file to the same location as the standard `kubectl` utility. In this example, the `kubectl` utility is located in the `/usr/local/bin` directory. Replace `<binary-name>` with the name of the file you need:
++
+----
+cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
+----
+
 
 == Add the images to your local registry
 
-. Add the files in the Astra Control Center image directory to your local registry.
-+
-NOTE: See sample scripts for the automatic loading of images below.
+. Complete the appropriate step sequence for your container engine: 
 
-.. Log in to your registry:
+// start tabbed block for docker and podman approaches
+
+[role="tabbed-block"]
+====
+
+.Docker
+--
+. Change to the Astra directory:
 +
-Docker:
-+
+[source,sh]
 ----
-docker login [your_registry_path]
+cd acc
 ----
+. [[substep_image_local_registry_push]]Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
 +
-Podman:
+
+* Replace BUNDLE_FILE with the name of the Astra Control bundle file (for example, `acc.manifest.yaml`).
+* Replace MY_REGISTRY with the URL of the Docker repository.
+* Replace MY_REGISTRY_USER with the user name.
+* Replace MY_REGISTRY_TOKEN with an authorized token for the registry.
 +
+[source,sh]
+----
+kubectl astra packages push-images -m BUNDLE_FILE -r MY_REGISTRY -u MY_REGISTRY_USER -p MY_REGISTRY_TOKEN
+----
+--
+
+.Podman
+--
+. Log in to your registry:
++
+[source,sh]
 ----
 podman login [your_registry_path]
 ----
+. Run the following script, making the <YOUR_REGISTRY> substitution as noted in the comments:
++
+[source,sh]
+----
+# You need to be at the root of the tarball.
+# You should see these files to confirm correct location:
+#   acc.manifest.yaml
+#   acc/
 
-.. Use the appropriate script to load the images, tag the images, and [[substep_image_local_registry_push]]push the images to your local registry:
-+
-Docker:
-+
-----
-export REGISTRY=[Docker_registry_path]
-for astraImageFile in $(ls images/*.tar) ; do
-  # Load to local cache. And store the name of the loaded image trimming the 'Loaded images: '
-  astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image: //')
-  astraImage=$(echo ${astraImage} | sed 's!localhost/!!')
+# Replace <YOUR_REGISTRY> with your own registry (e.g registry.customer.com or registry.customer.com/testing, etc..)
+export REGISTRY=<YOUR_REGISTRY>
+export PACKAGENAME=acc
+export PACKAGEVERSION=22.08.1-26
+export DIRECTORYNAME=acc
+for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do
+  # Load to local cache
+  astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image: //')
+ 
+  # Remove path and keep imageName.
+  astraImageNoPath=$(echo ${astraImage} | sed 's:.*/::')
+ 
   # Tag with local image repo.
-  docker tag ${astraImage} ${REGISTRY}/${astraImage}
+  podman tag ${astraImage} ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
+ 
   # Push to the local repo.
-  docker push ${REGISTRY}/${astraImage}
+  podman push ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
 done
 ----
-+
-Podman:
-+
-----
-export REGISTRY=[Registry_path]
-for astraImageFile in $(ls images/*.tar) ; do
-  # Load to local cache. And store the name of the loaded image trimming the 'Loaded images: '
-  astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image(s): //')
-  astraImage=$(echo ${astraImage} | sed 's!localhost/!!')
-  # Tag with local image repo.
-  podman tag ${astraImage} ${REGISTRY}/${astraImage}
-  # Push to the local repo.
-  podman push ${REGISTRY}/${astraImage}
-done
-----
+--
+
+====
+
+// end tabbed block
 
 == Find the operator install page
 

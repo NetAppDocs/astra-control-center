@@ -16,7 +16,7 @@ Astra Control can restore your application from a snapshot or backup. Restoring 
 //Restoring from a backup can take some time because the data is transferred from your object store. Because of this, restoring from an existing snapshot to the same cluster will be faster than other methods.
 .About this task
 //ASTRACTL-12847/DOC-4147
-* It is highly recommended to snapshot or backup your application before proceeding with the restore. This will allow you to clone from the snapshot or backup in the event the restore is unsuccessful.
+* It is strongly recommended to take a snapshot of or back up your application before restoring it. This will enable you to clone from the snapshot or backup in the event that the restore is unsuccessful.
 * If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
 //DOC-3556
 * If you restore to a different cluster, ensure that the cluster is using the same persistent volume access mode (for example, ReadWriteMany). The restore operation will fail if the destination persistent volume access mode is different.
@@ -42,14 +42,11 @@ Astra Control can restore your application from a snapshot or backup. Restoring 
 * Enter a name and namespace for the app.
 * Choose the destination cluster for the app.
 * Select *Review*.
-
-// Q2 note only; remove for Q3 and later - DOC-3548
-//NOTE: If you are restoring an app that has been deleted, choose a different name and namespace for the app than the original name. If the name for the restored app is the same as the deleted app, the restore operation will fail.
-
-//* Choose the destination cluster for the app.
-//* Select *Review*.
++
+NOTE: If you restore to a namespace that was previously deleted, a new namespace with the same name is created as part of the restore process. Any users that had rights to manage apps in the previously deleted namespace need to manually restore rights to the newly re-created namespace.
 
 . *Restore Summary*: Review details about the restore action, type "restore", and select *Restore*.
+
 //+
 //image:screenshot-restore-summary.gif[]
 
@@ -57,4 +54,4 @@ Astra Control can restore your application from a snapshot or backup. Restoring 
 
 Astra Control Center restores the app based on the information that you provided. If you restored the app in-place, the contents of any existing persistent volumes are replaced with the contents of persistent volumes from the restored app.
 
-NOTE: After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
+NOTE: After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is a delay of up to twenty minutes before the new volume size is shown in the web UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.

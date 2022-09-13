@@ -10,11 +10,11 @@ summary: NetApp periodically updates Astra Control Center to bring you new featu
 :icons: font
 :imagesdir: ../media/release-notes/
 
-We're pleased to announce the 22.04.0 release of Astra Control Center.
+We're pleased to announce the latest release of Astra Control Center.
 
 * link:../release-notes/whats-new.html[What's in this release of Astra Control Center]
 * link:../release-notes/known-issues.html[Known issues]
-* link:../release-notes/known-issues-ads.html[Known issues with Astra Data Store preview and this Astra Control Center release]
+* link:../release-notes/known-issues-ads.html[Known issues with Astra Data Store and this Astra Control Center release]
 * link:../release-notes/known-limitations.html[Known limitations]
 
 Follow us on Twitter @NetAppDoc. Send feedback about documentation by becoming a link:https://docs.netapp.com/us-en/contribute/[GitHub contributor^] or sending an email to doccomments@netapp.com.

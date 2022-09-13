@@ -21,7 +21,6 @@ Known limitations identify platforms, devices, or functions that are not support
 * <<A member with namespace constraints cannot access the cloned or restored apps until admin adds the namespace to the constraint>>
 
 .App management limitations
-* <<App backups that are in progress cannot be stopped>>
 * <<Clones of apps installed using pass-by-reference operators can fail>>
 * <<In-place restore operations of apps that use a certificate manager are not supported>>
 * <<OLM-enabled and cluster-scoped operator deployed apps not supported>>
@@ -82,11 +81,7 @@ A user with namespace RBAC constraints should not be allowed to add or unmanage 
 
 == A member with namespace constraints cannot access the cloned or restored apps until admin adds the namespace to the constraint
 //DOC-4137/ASTRACTL-16344/ASTRACTL-16131/PI5
-Any `member` user with RBAC constraints by namespace name/ID or by namespace labels can clone or restore an app to a new namespace on the same cluster or to any other cluster in their organization's account. However, the same user cannot access the cloned or restored app in the new namespace. After a new namespace is created by a clone or restore operation, the account admin/owner can edit the `member` user account and update role constraints for the affected user to grant access to the new namespace.
-
-== App backups that are in progress cannot be stopped
-//DOC-3552/ASTRACTL-9586/DOC-3894/ASTRACTL-13029/Q2/PI4/PI5
-There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in link:../use/protect-apps.html#delete-backups[Delete backups]. To delete a failed backup, use the link:https:/docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^].
+Any `member` user with RBAC constraints by namespace name/ID can clone or restore an app to a new namespace on the same cluster or to any other cluster in their organization's account. However, the same user cannot access the cloned or restored app in the new namespace. After a new namespace is created by a clone or restore operation, the account admin/owner can edit the `member` user account and update role constraints for the affected user to grant access to the new namespace.
 
 == Clones of apps installed using pass-by-reference operators can fail
 //DOC-4008/DOC-4010/PI5
@@ -99,7 +94,7 @@ NOTE: For K8ssandra, in-place restore operations are supported. A restore operat
 * https://github.com/jenkinsci/kubernetes-operator[Jenkins CI^]
 * https://github.com/percona/percona-xtradb-cluster-operator[Percona XtraDB Cluster^]
 
-Note that Astra Control might not be able to clone an operator that is designed with a “pass-by-reference” architecture (for example, the CockroachDB operator). During these types of cloning operations, the cloned operator attempts to reference Kubernetes secrets from the source operator despite having its own new secret as part of the cloning process. The clone operation might fail because Astra Control is unaware of the Kubernetes secrets in the source operator.
+Astra Control might not be able to clone an operator that is designed with a “pass-by-reference” architecture (for example, the CockroachDB operator). During these types of cloning operations, the cloned operator attempts to reference Kubernetes secrets from the source operator despite having its own new secret as part of the cloning process. The clone operation might fail because Astra Control is unaware of the Kubernetes secrets in the source operator.
 
 == In-place restore operations of apps that use a certificate manager are not supported
 //ASTRACTL-16478/DOC-4152/PI5
@@ -132,4 +127,4 @@ If you have an evaluation license, be sure you store your account ID to avoid da
 == Find more information
 
 * link:../release-notes/known-issues.html[Known issues]
-* link:../release-notes/known-issues-ads.html[Known issues with Astra Data Store preview and this Astra Control Center release]
+* link:../release-notes/known-issues-ads.html[Known issues with Astra Data Store and this Astra Control Center release]

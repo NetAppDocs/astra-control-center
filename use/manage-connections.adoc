@@ -1,0 +1,90 @@
+---
+sidebar: sidebar
+permalink: use/manage-connections.html
+keywords: manage package, packages, install
+summary: You can upload and install packages to Astra Control Center.
+---
+
+= Manage repository connections
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/use/
+
+You can connect repositories to Astra Control to use as a reference for software package installation images and artifacts. When you import software packages, Astra Control references installation images in the image repository and binaries and other artifacts in the artifact repository.
+
+.What you'll need
+
+* Kubernetes cluster with Astra Control Center installed
+* A running Docker repository that you can access
+* A running artifact repository (such as Artifactory) that you can access
+
+== Connect a Docker image repository
+You can connect a Docker image repository to hold package installation images, such as those for Astra Data Store. When you install packages, Astra Control imports the package image files from the image repository.
+
+.Steps
+
+. In the *Manage Your Account* navigation area, select *Account*.
+. Select the *Connections* tab.
+. In the *Docker Image Repository* section, select the menu at the top right.
+. Select *Connect*.
+. Add the URL and port for the repository.
+//. If authentication is required, enable the *Use authentication* check box and
+. Enter the credentials for the repository.
+. Select *Connect*.
+
+.Result
+
+The repository is connected. In the *Docker Image Repository* section, the repository should show a connected status.
+
+== Disconnect a Docker image repository
+You can remove the connection to a Docker image repository if it is no longer needed.
+
+.Steps
+
+. In the *Manage Your Account* navigation area, select *Account*.
+. Select the *Connections* tab.
+. In the *Docker Image Repository* section, select the menu at the top right.
+. Select *Disconnect*.
+. Select *Yes, disconnect Docker image repository*.
+
+.Result
+
+The repository is disconnected. In the *Docker Image Repository* section, the repository should show a disconnected status.
+
+== Connect an artifact repository
+You can connect an artifact repository to host artifacts such as software package binaries. When you install packages, Astra Control imports the artifacts for the software packages from the image repository.
+
+.Steps
+
+. In the *Manage Your Account* navigation area, select *Account*.
+. Select the *Connections* tab.
+. In the *Artifact Repository* section, select the menu at the top right.
+. Select *Connect*.
+. Add the URL and port for the repository.
+. If authentication is required, enable the *Use authentication* check box and enter the credentials for the repository.
+//. Enter the credentials for the repository.
+. Select *Connect*.
+
+.Result
+
+The repository is connected. In the *Artifact Repository* section, the repository should show a connected status.
+
+== Disconnect an artifact repository
+You can remove the connection to an artifact repository if it is no longer needed.
+
+.Steps
+
+. In the *Manage Your Account* navigation area, select *Account*.
+. Select the *Connections* tab.
+. In the *Artifact Repository* section, select the menu at the top right.
+. Select *Disconnect*.
+. Select *Yes, disconnect artifact repository*.
+
+.Result
+
+The repository is disconnected. In the *Artifact Repository* section, the repository should show a connected status.
+
+
+[discrete]
+== Find more information
+* link:manage-packages-acc.html[Manage software packages]

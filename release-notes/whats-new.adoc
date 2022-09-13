@@ -10,24 +10,59 @@ summary: NetApp periodically updates Astra Control Center to bring you new featu
 :icons: font
 :imagesdir: ../media/release-notes/
 
-We're pleased to announce the latest 22.04.0 release of Astra Control Center.
+We're pleased to announce the latest release of Astra Control Center.
 
-== 26 April 2022 (22.04.0)
+== 8 September 2022 (22.08.1)
+
+This patch release (22.08.1) for Astra Control Center (22.08.0) fixes minor bugs in app replication using NetApp SnapMirror.
+
+== 10 August 2022 (22.08.0)
 
 .New features and support
 
-* link:../concepts/user-roles-namespaces.html[Namespace role-based access control (RBAC)]
-* link:../get-started/install_acc-cvo.html[Support for Cloud Volumes ONTAP]
-* link:../get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Generic ingress enablement for Astra Control Center]
-* link:../use/manage-buckets.html#remove-a-bucket[Bucket removal from Astra Control]
-* link:../get-started/requirements.html#tanzu-kubernetes-grid-cluster-requirements[Support for VMware Tanzu Portfolio]
+* link:../use/replicate_snapmirror.html[App replication using NetApp SnapMirror technology]
+* link:../use/manage-apps.html#manage-apps[Improved app management workflow]
+* link:../use/execution-hooks.html[Enhanced provide-your-own execution hooks functionality]
++
+NOTE: The NetApp provided default pre- and post-snapshot execution hooks for specific applications have been removed in this release. If you upgrade to this release and do not provide your own execution hooks for snapshots, Astra Control will take crash-consistent snapshots only. Visit the https://github.com/NetApp/Verda[NetApp Verda] GitHub repository for sample execution hook scripts that you can modify to fit your environment.
+
+* link:../get-started/requirements.html[Support for VMware Tanzu Kubernetes Grid Integrated Edition (TKGI)]
+* link:../get-started/requirements.html#operational-environment-requirements[Support for Google Anthos]
+* https://docs.netapp.com/us-en/astra-automation/workflows_infra/ldap_prepare.html[LDAP configuration (via Astra Control API)^]
 
 .Known issues and limitations
 * link:../release-notes/known-issues.html[Known issues for this release]
-* link:../release-notes/known-issues-ads.html[Known issues with Astra Data Store preview and this Astra Control Center release]
+* link:../release-notes/known-issues-ads.html[Known issues with Astra Data Store and this Astra Control Center release]
 * link:../release-notes/known-limitations.html[Known limitations for this release]
 
+== 26 April 2022 (22.04.0)
+// Start snippet: collapsible block (open on page load)
+.Details
+[%collapsible]
+====
+
+.New features and support
+
+* https://docs.netapp.com/us-en/astra-control-center-2204/get-started/setup_overview.html#add-a-storage-backend[Astra Data Store deployment from Astra Control Center]
+* https://docs.netapp.com/us-en/astra-control-center-2204/concepts/user-roles-namespaces.html[Namespace role-based access control (RBAC)]
+* https://docs.netapp.com/us-en/astra-control-center-2204/get-started/install_acc-cvo.html[Support for Cloud Volumes ONTAP]
+* https://docs.netapp.com/us-en/astra-control-center-2204/get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Generic ingress enablement for Astra Control Center]
+* https://docs.netapp.com/us-en/astra-control-center-2204/use/manage-buckets.html#remove-a-bucket[Bucket removal from Astra Control]
+* https://docs.netapp.com/us-en/astra-control-center-2204/get-started/requirements.html#tanzu-kubernetes-grid-cluster-requirements[Support for VMware Tanzu Portfolio]
+
+.Known issues and limitations
+* https://docs.netapp.com/us-en/astra-control-center-2204/release-notes/known-issues.html[Known issues for this release]
+* https://docs.netapp.com/us-en/astra-control-center-2204/release-notes/known-issues-ads.html[Known issues with Astra Data Store and this Astra Control Center release]
+* https://docs.netapp.com/us-en/astra-control-center-2204/release-notes/known-limitations.html[Known limitations for this release]
+
+====
+// End snippet
+
 == 14 December 2021 (21.12)
+// Start snippet: collapsible block (open on page load)
+.Details
+[%collapsible]
+====
 
 .New features and support
 
@@ -47,7 +82,14 @@ We're pleased to announce the latest 22.04.0 release of Astra Control Center.
 * https://docs.netapp.com/us-en/astra-control-center-2112/release-notes/known-issues-ads.html[Known issues with Astra Data Store preview and this Astra Control Center release^]
 * https://docs.netapp.com/us-en/astra-control-center-2112/release-notes/known-limitations.html[Known limitations for this release^]
 
+====
+// End snippet
+
 == 5 August 2021 (21.08)
+// Start snippet: collapsible block (open on page load)
+.Details
+[%collapsible]
+====
 
 Initial release of Astra Control Center.
 
@@ -59,6 +101,9 @@ Initial release of Astra Control Center.
 * https://docs.netapp.com/us-en/astra-control-center-2108/use/manage-buckets.html[Manage buckets^] and https://docs.netapp.com/us-en/astra-control-center-2108/use/manage-backend.html[storage backends^]
 * https://docs.netapp.com/us-en/astra-control-center-2108/use/manage-users.html[Manage accounts^]
 * https://docs.netapp.com/us-en/astra-control-center-2108/rest-api/api-intro.html[Automate with API^]
+
+====
+// End snippet
 
 == Find more information
 

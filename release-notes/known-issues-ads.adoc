@@ -5,60 +5,79 @@ keywords: astra, control center, ads, data store, bugs, known issues, problems
 summary: Known issues identify problems that might prevent you from using this release of the product successfully.
 ---
 
-= Known issues with Astra Data Store preview and this Astra Control Center release
+= Known issues with Astra Data Store and this Astra Control Center release
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/release-notes/
 
 Known issues identify problems that might prevent you from using this release of the product successfully.
 
-The following known issues affect the management of Astra Data Store with this current release of the Astra Control Center:
+https://docs.netapp.com/us-en/astra-data-store/release-notes/known-issues.html[See these additional Astra Data Store known issues^] that might affect the management of Astra Data Store with the current release of the Astra Control Center.
 
-== Astra Data Store preview cannot be used as a storage class for Astra Control Center due to MongoDB pod liveness probe failure
-//ASTRACTL-13036/DOC-3904/BURT1439334/Keep until ADS GA
-When you attempt to use Astra Data Store preview as the storage class provisioner during an Astra Control Center deployment, the MongoDB pod liveness probe fails, resulting in a deployment that will not complete.
+== Astra Data Store volume details do not appear in Storage Backends page of the Astra Control Center UI
+//DOC-4431/ASTRACTL-20034
+Details such as capacity and throughput do not appear in the UI. When this issue occurs, unmanage the storage backend and add it back again.
 
-To correct this issue, make the following changes in addition to the standard YAML changes when completing the link:../get-started/install_acc.html#configure-astra-control-center[Astra Control Center installation process]:
+== Unmanaging a cluster with Astra Data Store requires first removing a managed system app
+//DOC-4412/ASTRACTL-19768
+If you added a cluster that contains Astra Data Store to an Astra Control Center cluster, the astrads-system app is managed by default as a hidden application. To unmanage the cluster, you must first unmanage the astrads-system app. You cannot unmanage this type of app using the Astra Control Center UI. Instead, use an Astra Control API request to manually remove the app:
 
-. Edit the link:../get-started/install_acc.html#configure-the-astra-control-center-operator[Astra Control Center operator deployment YAML (astra_control_center_operator_deploy.yaml)] to change the Helm install timeout:
+.Details
+[%collapsible]
+====
+
+.Steps
+
+. Get the ID for the managed cluster using this API:
 +
 ----
-- name: ACCOP_HELM_INSTALLTIMEOUT
-  value: 20m
+/accounts/{account_id}/topology/v1/managedClusters
 ----
-
-. Edit the link:../get-started/install_acc.html#configure-astra-control-center[Astra Control Center custom resource (CR) file (astra_control_center_min.yaml)] and include the highlighted additional values under `spec`:
++
+Response:
 +
 [subs=+quotes]
 ----
-apiVersion: astra.netapp.io/v1
-kind: AstraControlCenter
-metadata:
-  name: astra
-*spec:*
-  accountName: "Example"
-  astraVersion: "ASTRA_VERSION"
-  astraAddress: "astra.example.com"
-  autoSupport:
-    enrolled: true
-  email: "[admin@example.com]"
-  firstName: "SRE"
-  lastName: "Admin"
-  imageRegistry:
-    name: "[your_registry_path]"
-    secret: "astra-registry-cred"
-  storageClass: "ontap-gold"
-  *additionalValues:*
-    *polaris-mongodb:*
-      *mongodb:*
-        *livenessProbe:*
-          *initialDelaySeconds: 400*
-      *metrics:*
-        *livenessProbe:*
-          *initialDelaySeconds: 400*
+{
+"items": [
+{
+"type": "application/astra-managedCluster",
+"version": "1.1",
+*"id": "123ab987-0bc0-00d0-a00a-1234567abd8d",*
+"name": "astrads-cluster-1234567",
+...
 ----
+
+. Get the managed astrads-system app ID:
++
+----
+/accounts/{account_id}/topology/v2/managedClusters/{managedCluster_id}/apps
+----
++
+Response:
++
+[subs=+quotes]
+----
+{
+  "items": [
+    [
+      *"1b011d11-bb88-40c7-a1a1-ab1234c123d3",*
+      "astrads-system",
+      "ready"
+    ]
+  ],
+  "metadata": {}
+}
+----
+
+. Delete the astrads-system app using the app ID you acquired in the previous step (`1b011d11-bb88-40c7-a1a1-ab1234c123d3`).
++
+----
+/accounts/{account_id}/k8s/v2/apps/{astrads-system_app_id}
+----
+====
+// End snippet
 
 == Find more information
 * link:../release-notes/known-issues.html[Known issues]
 * link:../release-notes/known-limitations.html[Known limitations]
-* https://docs.netapp.com/us-en/astra-data-store/index.html[Astra Data Store documentation]

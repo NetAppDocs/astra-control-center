@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: get-started/setup_overview.html
-keywords: set up astra control, setup astra control, setting up Astra Control Center, astra control license, add cluster, import storage, add bucket
+keywords: set up astra control, astra control license, add cluster, add storage backend, import storage, add bucket
 summary: After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up a license, add clusters, manage storage, and add buckets.
 ---
 
@@ -50,22 +50,21 @@ NOTE: If you have an evaluation license, be sure you store your account ID to av
 
 == Add cluster
 //REFERENCED IN UI. DO NOT MODIFY WITHOUT NOTIFYING UX.
-To begin managing your apps, add a Kubernetes cluster and manage it as a compute resource. You have to add a cluster for Astra Control Center to discover your Kubernetes applications. For Astra Data Store preview, you want to add the Kubernetes app cluster that contains applications that are using volumes provisioned by Astra Data Store preview.
+To begin managing your apps, add a Kubernetes cluster and manage it as a compute resource. You have to add a cluster for Astra Control Center to discover your Kubernetes applications. For Astra Data Store, you want to add the Kubernetes app cluster that contains applications that are using volumes provisioned by Astra Data Store.
 
 TIP: We recommend that Astra Control Center manage the cluster it is deployed on first before you add other clusters to Astra Control Center to manage. Having the initial cluster under management is necessary to send Kubemetrics data and cluster-associated data for metrics and troubleshooting. You can use the *Add Cluster* feature to manage a cluster with Astra Control Center.
 
 [NOTE]
 ======================
-When Astra Control manages a cluster, it keeps track of the cluster's default StorageClass. If you change the StorageClass using `kubectl` commands, Astra Control reverts the change. To change the default StorageClass in a cluster managed by Astra Control, use one of the following methods:
+When Astra Control manages a cluster, it keeps track of the cluster's default storage class. If you change the storage class using `kubectl` commands, Astra Control reverts the change. To change the default storage class in a cluster managed by Astra Control, use one of the following methods:
 
-* Use the Astra Control API `PUT /managedClusters` endpoint, and assign a different default StorageClass with the `DefaultStorageClass` parameter
-* Remove the cluster from Astra Control management and re-add it with a different default StorageClass selected
+* Use the Astra Control API `PUT /managedClusters` endpoint, and assign a different default storage class with the `DefaultStorageClass` parameter.
+* Use the Astra Control web UI to assign a different default storage class. See <<Change the default storage class>>.
 ======================
 
 .What you'll need
 
-
-IMPORTANT: Before you add a cluster, review and perform the necessary link:add-cluster-reqs.html[prerequisite tasks^].
+* Before you add a cluster, review and perform the necessary link:add-cluster-reqs.html[prerequisite tasks^].
 
 .Steps
 . From the *Dashboard* in the Astra Control Center UI, select *Add* in the Clusters section.
@@ -94,42 +93,113 @@ IMPORTANT: After you add a cluster to be managed in Astra Control Center, it mig
 
 == Add a storage backend
 
-You can add a storage backend so that Astra Control can manage its resources. Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend as well as additional storage metrics.
+You can add a storage backend so that Astra Control can manage its resources. You can deploy a storage backend on a managed cluster or use an existing storage backend.
 
-You can add a discovered storage backend by navigating prompts from the Dashboard or the Backends menu.
+Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend as well as additional storage metrics.
 
-.What you'll need
+.What you'll need for existing Astra Data Store deployments
 
-* You have link:../get-started/setup_overview.html#add-cluster[added a cluster] and it is managed by Astra Control.
+* You have added your Kubernetes app cluster and the underlying compute cluster.
 +
-NOTE: The managed cluster has a supported backend attached to it that can be discovered by Astra Control.
+IMPORTANT: After you add your Kubernetes app cluster for Astra Data Store and it is managed by Astra Control, the cluster appears as `unmanaged` in the list of discovered backends. You must next add the compute cluster that contains Astra Data Store and underlies the Kubernetes app cluster. You can do this from *Backends* in the UI. Select the Actions menu for the cluster, select `Manage`, and link:../get-started/setup_overview.html#add-cluster[add the cluster]. After the cluster state of `unmanaged` changes to the name of the Kubernetes cluster, you can proceed with adding a backend.
 
-* For Astra Data Store preview installations: You have added your Kubernetes app cluster.
-+
-NOTE: After you add your Kubernetes app cluster for Astra Data Store, the cluster appears as `unmanaged` in the list of discovered backends. You must next add the compute cluster that contains Astra Data Store and underlies the Kubernetes app cluster. You can do this from *Backends* in the UI. Select the Actions menu for the cluster, select `Manage`, and link:../get-started/setup_overview.html#add-cluster[add the cluster]. After the cluster state of `unmanaged` changes to the name of the Kubernetes cluster, you can proceed with adding a backend.
+.What you'll need for new Astra Data Store deployments
+
+* You have link:../use/manage-packages-acc.html[uploaded the version of the installation bundle you intend to deploy] to a location that is accessible to Astra Control.
+
+* You have added the Kubernetes cluster that you intend to use for deployment.
+
+* You have uploaded the <<Add a license for Astra Control Center,Astra Data Store license>> for your deployment to a location that is accessible to Astra Control.
+
+//* You have the IPs you need for the new Astra Data Store.
+
+//* You have the node label you intend to use for the K8s worker nodes for ADS.
+
+.Options
+
+* <<Deploy storage resources>>
+* <<Use an existing storage backend>>
+
+=== Deploy storage resources
+You can deploy a new Astra Data Store and manage the associated storage backend.
 
 .Steps
-
-. Do one of the following:
-* From *Dashboard*:
-.. From the Storage backend section, select *Add*.
-.. From the Resource Summary > Storage backends section, select *Add*.
+. Navigate from the Dashboard or the Backends menu:
+* From *Dashboard*: From the Resource Summary, select a link from the Storage Backends pane and select *Add* from the Backends section.
 * From *Backends*:
 .. In the left navigation area, select *Backends*.
 .. Select *Add*.
+. Select the *Astra Data Store* deployment option within the *Deploy* tab.
+. Select the Astra Data Store package to deploy:
+.. Enter a name for the Astra Data Store application.
+.. Choose the version of Astra Data Store you want to deploy.
++
+NOTE: If you have not yet uploaded the version you intend to deploy, you can use the *Add package* option or exit the wizard and use link:../use/manage-packages-acc.html[package management] to upload the installation bundle.
+
+. Select an Astra Data Store license that you have previously uploaded or use the *Add license* option to upload a license to use with the application.
++
+NOTE: Astra Data Store licenses with full permissions are associated with your Kubernetes cluster, and these associated clusters should appear automatically. If there is no managed cluster, you can select the *Add a Cluster* option to add one to Astra Control management.
+For Astra Data Store licenses, if no association has been made between the license and cluster, you can define this association on the next page of the wizard.
+
+. If you have not added a Kubernetes cluster to Astra Control management, you need to do so from the *Kubernetes cluster* page. Select an existing cluster from the list or select *add the underlying cluster* to add a cluster to Astra Control management.
+. Select a template size for the Kubernetes cluster that will provide resources for Astra Data Store. You can choose one of the following:
++
+* If you choose `Recommended Kubernetes worker node requirements`, select a template from large to small based on what your license allows.
+
+* If you choose `Custom Kubernetes worker node requirements`, select the number of cores and total memory you want for each cluster node. You can also show the eligible number of nodes in the cluster that meet your selection criteria for cores and memory.
++
+TIP: When picking a template, select larger nodes with more memory and cores for larger workloads or a greater number of nodes for smaller workloads. You should select a template based on what your license allows. Each recommended template option suggests the number of eligible nodes that satisfy the template pattern for memory and cores and capacity for each node.
+
+. Configure the nodes:
+.. Add a node label to identify the pool of worker nodes that supports this Astra Data Store cluster.
++
+IMPORTANT: The label must be added to each individual node in the cluster that will be used for Astra Data Store deployment prior to the start of deployment or deployment will fail.
+
+.. Configure the capacity (GiB) per node manually or select the maximum node capacity allowed.
+.. Configure a maximum number of nodes allowed in the cluster or allow the maximum number of nodes on the cluster.
+. (Astra Data Store full licenses only) Enter the key of the label you want to use for Protection Domains.
++
+NOTE: Create at least three unique labels for the key for each node. For example, if your key is `astra.datastore.protection.domain`, you might create the following labels: `astra.datastore.protection.domain=domain1`,`astra.datastore.protection.domain=domain2`, and `astra.datastore.protection.domain=domain3`.
+
+. Configure the management network:
+.. Enter a management IP address for Astra Data Store internal management that is on the same subnet as worker node IP addresses.
+.. Choose to use the same NIC for both management and data networks or configure them separately.
+.. Enter data network IP address pool, subnet mask and gateway for storage access.
+. Review the configuration and select *Deploy* to begin installation.
+
+.Result
+After a successful installation, the backend appears in `available` state in the backends list along with active performance information.
+
+NOTE: You might need to refresh the page for the backend to appear.
+
+=== Use an existing storage backend
+
+You can bring a discovered ONTAP or Astra Data Store storage backend into Astra Control Center management.
+
+.Steps
+
+. Navigate from the Dashboard or the Backends menu:
+* From *Dashboard*: From the Resource Summary, select a link from the Storage Backends pane and select *Add* from the Backends section.
+* From *Backends*:
+.. In the left navigation area, select *Backends*.
+.. Select *Manage* on a discovered backend from the managed cluster or select *Add* to manage an additional existing backend.
+. Select the *Use existing* tab.
 . Do one of the following depending on your backend type:
 * *Astra Data Store*:
-... Select the *Use existing* tab.
-... Select the *Astra Data Store* tab.
-... Select the managed compute cluster and select *Next*.
-... Confirm the backend details and select *Manage storage backend*.
+.. Select *Astra Data Store*.
+.. Select the managed compute cluster and select *Next*.
+.. Confirm the backend details and select *Add storage backend*.
 
 * *ONTAP*:
-... Select the *Use existing* tab.
-... Enter the ONTAP admin credentials and select *Review*.
-... Confirm the backend details and select *Manage*.
-
+.. Select *ONTAP* and select *Next*.
+.. Enter the ONTAP cluster management IP address and admin credentials.
 +
+NOTE: The user whose credentials you enter here must have the `ontapi` user login access method enabled within ONTAP System Manager on the ONTAP cluster. If you plan to use SnapMirror replication, enable the access methods `ontapi` and `http` for the user on both ONTAP clusters. See https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts^] for more information.
+
+.. Select *Review*.
+.. Confirm the backend details and select *Add storage backend*.
+
+.Result
 The backend appears in `available` state in the list with summary information.
 
 NOTE: You might need to refresh the page for the backend to appear.
@@ -147,6 +217,7 @@ Use any of the following bucket types:
 * NetApp ONTAP S3
 * NetApp StorageGRID S3
 * Generic S3
+* Microsoft Azure
 
 NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon’s S3 support.
 
@@ -180,6 +251,18 @@ Add S3 access credentials at any time.
 . From the Buckets dialog, select either the *Add* or *Use existing* tab.
 .. Enter a name for the credential that distinguishes it from other credentials in Astra Control.
 .. Enter the access ID and secret key by pasting the contents from your clipboard.
+
+== Change the default storage class
+You can change the default storage class for a cluster.
+
+.Steps
+
+. In the Astra Control Center web UI, select *Clusters*.
+. On the *Clusters* page, select the cluster that you want to change.
+. Select the *Storage* tab.
+. Select the *Storage classes* category.
+. Select the *Actions* menu for the storage class that you want to set as default.
+. Select *Set as default*.
 
 == What's next?
 
