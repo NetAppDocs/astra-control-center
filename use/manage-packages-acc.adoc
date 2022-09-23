@@ -25,17 +25,19 @@ Astra Control Center references package images and artifacts in connected reposi
 .Steps
 
 . Download the software package from the NetApp Support Site, and save it on a machine that has the `kubectl` utility installed.
-. Extract the compressed package file, and change directory to the location of the Astra Control bundle file (for example, `acc.manifest.bundle.yaml`).
+. Extract the compressed package file, and change directory to the location of the Astra Control bundle file (for example, `acc.manifest.yaml`).
 . Push the package images to the Docker repository. Make the following substitutions:
 +
 
-* Replace BUNDLE_FILE with the name of the Astra Control bundle file (for example, `acc.manifest.bundle.yaml`).
+* Replace BUNDLE_FILE with the name of the Astra Control bundle file (for example, `acc.manifest.yaml`).
 * Replace MY_REGISTRY with the URL of the Docker repository.
-* Replace MY_REGISTRY_USER and MY_REGISTRY_PASSWORD with the credentials for the repository.
+* Replace MY_REGISTRY_USER with the user name. 
+* Replace MY_REGISTRY_TOKEN with an authorized token for the registry.
 +
 ----
-kubectl astra packages push-images -m BUNDLE_FILE -r MY_REGISTRY -u MY_REGISTRY_USER -p MY_REGISTRY_PASSWORD
+kubectl astra packages push-images -m BUNDLE_FILE -r MY_REGISTRY -u MY_REGISTRY_USER -p MY_REGISTRY_TOKEN
 ----
+
 . If the package has artifacts, copy the artifacts to the artifact repository. Replace BUNDLE_FILE with the name of the Astra Control bundle file, and NETWORK_LOCATION with the network location to copy the artifact files to:
 +
 ----
@@ -168,7 +170,7 @@ In the CLI, change directories to the location of the `.yaml` bundle file in the
 * Replace ACCOUNT_ID and TOKEN with the account ID and API token you recorded earlier.
 +
 ----
-kubectl astra packages delete -m acc.manifest.bundle.yaml -u SERVER -a ACCOUNT_ID -k TOKEN
+kubectl astra packages delete -m acc.manifest.yaml -u SERVER -a ACCOUNT_ID -k TOKEN
 ----
 
 .Result

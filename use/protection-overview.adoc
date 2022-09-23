@@ -36,7 +36,7 @@ As apps and their usage patterns change, adjust the protection policies as neede
 === image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png[Four] Replicate apps to a remote cluster
 
 [role="quick-margin-para"]
-link:replication.html[Replicate applications] to a remote cluster by  using NetApp SnapMirror technology. Astra Control replicates Snapshots to a remote cluster, providing asynchronous, disaster recovery capability.
+link:replicate_snapmirror.html[Replicate applications] to a remote cluster by  using NetApp SnapMirror technology. Astra Control replicates Snapshots to a remote cluster, providing asynchronous, disaster recovery capability.
 
 === image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-5.png[Five] In case of a disaster, restore your apps with the latest backup or replication to remote system
 
