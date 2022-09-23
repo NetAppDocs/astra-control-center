@@ -163,6 +163,8 @@ TIP: Cloud Volumes ONTAP can operate as a single node or in High Availability. I
 === Install Astra Control Center
 Follow the standard link:../get-started/install_acc.html[Astra Control Center installation instructions].
 
++
+NOTE: AWS uses the Generic S3 bucket type.
 
 
 
@@ -339,6 +341,9 @@ TIP: Cloud Volumes ONTAP can operate as a single node or in High Availability (H
 
 === Install Astra Control Center
 Follow the standard link:../get-started/install_acc.html[Astra Control Center installation instructions].
+
++
+NOTE: GCP uses the Generic S3 bucket type.
 
 
 . Generate the Docker Secret to pull images for the Astra Control Center installation:
