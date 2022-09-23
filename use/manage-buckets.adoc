@@ -22,9 +22,12 @@ Use one of the following Amazon Simple Storage Service (S3) bucket providers:
 
 * NetApp ONTAP S3
 * NetApp StorageGRID S3
-* Generic S3
 * Microsoft Azure
+* Generic S3
++
+NOTE: Amazon Web Services (AWS) and Google Cloud Platform (GCP) use the Generic S3 bucket type.
 
++
 NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon’s S3 support.
 
 // TIP: Ensure you use a single bucket type; otherwise, mixing bucket types can cause errors.
