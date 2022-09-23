@@ -1,0 +1,229 @@
+---
+sidebar: sidebar
+permalink: get-started/acc_cluster_cr_options.html
+keywords: astra cr, cluster cr, astra control center, how to configure, deploy
+summary: Understand Astra Control Center cluster CR options for custom configurations during deployment.
+---
+
+= Understand Astra Control Center cluster CR options
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/get-started/
+
+You can use the following Astra Control Center cluster CR options to create custom configurations during deployment.
+
+|===
+|Setting |Type |Use |Value Example |Description
+
+| astraVersion
+| string
+| Required
+| 1.5.2
+| Version of AstraControlCenter to deploy. You are provided a Helm repository with a corresponding version.
+
+| astraAddress
+| string
+| Required
+| astra.example.com
+| Defines how Astra will be found in the data center. This IP address and/or DNS A record must be created prior to provisioning Astra Control Center.
+
+| accountName
+| string
+| Required
+| Example
+| Astra Control Center account name. There can be only one.
+
+| email
+| string
+| Required
+| admin@example.com
+| The username of the administrator to be added as the first user of Astra. This email address will be notified by Astra Control as events warrant.
+
+| firstName
+| string
+| Required
+| SRE
+| The first name of the administrator supporting Astra.
+
+| lastName
+| string
+| Required
+| Admin
+| The last name of the administrator supporting Astra.
+
+| storageClass
+| string
+| Optional (this is the default value)
+| ontap-gold
+| The storage class to be used for PVCs. If not set, the default storage class will be used.
+
+| volumeReclaimPolicy
+| Undefined
+| Optional
+| Retain
+| Reclaim policy to be set for persistent volumes.
+
+| astraResourcesScaler
+| string
+| Required
+| Default
+| Scaling options for AstraControlCenter Resource limits. See <<Configuration combinations and incompatibilities, setting complexities>> to understand how this settings affects others settings.
+
+| astraKubeConfigSecret
+| string
+| Required
+| acc-kubeconfig-cred
+| If this value is present and a secret exists, the operator will attempt to add that KubeConfig to become the first managed cluster.
+
+| ingressType
+| string
+| Optional
+| Generic (this is the default value)
+| The type of ingress Astra Control Center should be configured for. Valid values are `Generic` and `AccTraefik`. See <<Configuration combinations and incompatibilities, setting complexities>> to understand how this settings affects others settings.
+
+| avpDeploy
+| Boolean
+| Optional
+| true (this is the default value)
+| Option that allows a user to disable deployment of Astra Plugin for VMware vSphere operator.
+
+| imageRegistry
+| Undefined
+| Optional
+|
+| The container image registry that is hosting the Astra application images, Astra Control Center Operator, and Astra Control Center Helm Repository.
+
+| imageRegistry.name
+| string
+| Required if you are using imageRegistry
+| example.registry.com/astra
+| The name of the image registry. Do not prefix with protocol.
+
+| imageRegistry.secret
+| string
+| Required if you are using imageRegistry
+| astra-registry-cred
+| The name of the Kubernetes secret used to authenticate with the image registry.
+
+| autoSupport
+| Undefined
+| Required
+|
+| Indicates participation status in NetApp's pro-active support application, NetApp Active IQ. An internet connection is required (port 442) and all support data is anonymized.
+
+| autoSupport.enrolled
+| Boolean
+| Optional, but either `enrolled` or `url` fields must be selected
+| false (this value is the default)
+| Enrolled determines if you want to send anonymous data to NetApp for support purposes. The default election is `false` and indicates no support data will be sent to NetApp.
+
+| autoSupport.url
+| string
+| Optional, but either `enrolled` or `url` fields must be selected
+| https://support.netapp.com/asupprod/post/1.0/postAsup
+| URL determines where the anonymous data will be sent.
+
+| crds
+| Undefined
+| Undefined
+|
+| Options for how Astra Control Center should handle CRDs.
+
+| crds.externalTraefik
+| Boolean
+| Optional
+| True (this value is the default)
+| By default, Astra Control Center will install the required Traefik CRDs. CRDs are cluster-wide objects and installing them may have an impact on other parts of the cluster. You can use this flag to signal to Astra Control Center that these CRDs will be installed and managed by the cluster administrator outside of Astra Control Center.
+
+| crds.externalCertManager
+| Boolean
+| Optional
+| True (this value is the default)
+| By default, Astra Control Center will install the required cert-manager CRDs. CRDs are cluster-wide objects and installing them may have an impact on other parts of the cluster. You can use this flag to signal to Astra Control Center that these CRDs will be installed and managed by the cluster administrator outside of Astra Control Center.
+
+| crds.shouldUpgrade
+| Boolean
+| Optional
+| Undefined
+| Determines if CRDs should be upgraded when Astra Control Center is upgraded.
+
+| mtls
+|
+|
+|
+| Options for how Astra Control Center should implement service to service mTLS in the cluster. See <<Configuration combinations and incompatibilities, setting complexities>> to understand how this settings affects others settings
+
+| mtls.enabled
+| Boolean
+| Optional
+| true (this value is the default)
+| By default, Astra Control Center uses mTLS for service-to-service communication. This option should be disabled when using a service mesh to encrypt service-to-service communication instead.
+
+| mtls.certDuration
+| string
+| Optional
+| 2140h (this value is the default duration)
+| The duration of time in hours to use as a certificate lifespan when issuing service TLS certificates. This setting only works when `mtls.enabled` is set to `true`.
+
+|===
+
+== Configuration combinations and incompatibilities
+
+Some Astra Control Center cluster CR configuration settings greatly affect the way Astra Control Center is installed and could conflict with other settings. The content that follows describes important configuration settings and how to avoid incompatible combinations.
+
+=== astraResourcesScaler
+By default, Astra Control Center deploys with resource requests set for most of the components within Astra. This configuration allows the Astra Control Center software stack to perform better in environments under increased application load and scale.
+
+However, in scenarios using smaller development or test clusters, the CR field `AstraResourcesScalar` may be set to `Off`. This disables resource requests and allows for deployment on smaller clusters.
+
+=== ingressType
+There are two valid values for ingressType:
+
+* Generic
+* AccTraefik
+
+.Generic (default)
+When `ingressType` is set to `Generic`, Astra Control does not install any ingress resources. The assumption is that the user has a common way of securing and routing traffic through their network to applications running on Kubernetes clusters and they want to use the same mechanisms here. When the user creates an ingress to route traffic to Astra Control, the ingress needs to point to the internal traefik service on port 80. Here is an example of an Nginx ingress resource that works with the Generic ingressType setting.
+
+----
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: netapp-acc-ingress
+  namespace: [netapp-acc or custom namespace]
+spec:
+  ingressClassName: [class name for nginx controller]
+  tls:
+  - hosts:
+    - <ACC address>
+    secretName: [tls secret name]
+  rules:
+  - host: <ACC addess>
+    http:
+      paths:
+        - path:
+          backend:
+            service:
+              name: traefik
+              port:
+                number: 80
+          pathType: ImplementationSpecific
+----
+
+WARNING: When mTLS is disabled using the mtls.enabled setting in the CR, you must use `ingressType: Generic`.
+
+.AccTraefik
+When `ingressType` is set to `AccTraefik`, Astra Control Center deploys its Traefik gateway as a Kubernetes LoadBalancer type service. Users need to provide an external Load Balancer (like MetalLB) for Astra Control Center to get an external IP.
+
+=== mtls
+The settings used in the CR determine how intra-application communication is secured. It is very important for the user to know ahead of time whether they will be using a service mesh or not.
+
+* `enabled=true`: When this setting is enabled, Astra will deploy an internal service-to-service communication network that secures all traffic within the application.
+
+WARNING: Do not cover Astra Control Center in a service mesh while this setting is `true`.
+
+* `enabled=false`: When this setting is disabled, Astra Control Center will not secure internal traffic and you must secure Astra namespaces independently with a service mesh.
+
+WARNING: When mTLS is disabled using the mtls.enabled setting in the CR, you must use `ingressType: Generic`.
+
+WARNING: If no service mesh is used and this setting is disabled, internal communication will be unsecure.

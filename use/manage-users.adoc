@@ -12,6 +12,11 @@ summary: Add users to your Astra Control Center system and remove users that sho
 
 You can invite, add, remove, and edit users of your Astra Control Center installation using the Astra Control UI. You can use the Astra Control UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to manage users.
 
+You can also use LDAP to perform authentication for selected users.
+
+== Use LDAP
+LDAP is an industry standard protocol for accessing distributed directory information and a popular choice for enterprise authentication. You can connect Astra Control Center to an LDAP server to perform authentication for selected Astra users. At a high level, the configuration involves integrating Astra with LDAP and defining the Astra users and groups corresponding to the LDAP definitions. See https://docs.netapp.com/us-en/astra-automation/workflows_infra/ldap_prepare.html[LDAP authentication^] for more information.
+
 == Invite users
 
 Account Owners and Admins can invite new users to Astra Control Center.

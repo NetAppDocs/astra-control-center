@@ -142,9 +142,13 @@ NOTE: Astra Data Store licenses with full permissions are associated with your K
 For Astra Data Store licenses, if no association has been made between the license and cluster, you can define this association on the next page of the wizard.
 
 . If you have not added a Kubernetes cluster to Astra Control management, you need to do so from the *Kubernetes cluster* page. Select an existing cluster from the list or select *add the underlying cluster* to add a cluster to Astra Control management.
-. Select the deployment template size for the Kubernetes cluster that will provide resources for Astra Data Store.
+. Select a template size for the Kubernetes cluster that will provide resources for Astra Data Store. You can choose one of the following:
 +
-TIP: When picking a template, select larger nodes with more memory and cores for larger workloads or a greater number of nodes for smaller workloads. You should select a template based on what your license allows. Each template option suggests the number of eligible nodes that satisfy the template pattern for memory and cores and capacity for each node.
+* If you choose `Recommended Kubernetes worker node requirements`, select a template from large to small based on what your license allows.
+
+* If you choose `Custom Kubernetes worker node requirements`, select the number of cores and total memory you want for each cluster node. You can also show the eligible number of nodes in the cluster that meet your selection criteria for cores and memory.
++
+TIP: When picking a template, select larger nodes with more memory and cores for larger workloads or a greater number of nodes for smaller workloads. You should select a template based on what your license allows. Each recommended template option suggests the number of eligible nodes that satisfy the template pattern for memory and cores and capacity for each node.
 
 . Configure the nodes:
 .. Add a node label to identify the pool of worker nodes that supports this Astra Data Store cluster.
@@ -187,8 +191,12 @@ You can bring a discovered ONTAP or Astra Data Store storage backend into Astra 
 .. Confirm the backend details and select *Add storage backend*.
 
 * *ONTAP*:
-.. Select *ONTAP*.
-.. Enter the ONTAP admin credentials and select *Review*.
+.. Select *ONTAP* and select *Next*.
+.. Enter the ONTAP cluster management IP address and admin credentials.
++
+NOTE: The user whose credentials you enter here must have the `ontapi` user login access method enabled within ONTAP System Manager on the ONTAP cluster. If you plan to use SnapMirror replication, enable the access methods `ontapi` and `http` for the user on both ONTAP clusters. See https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts^] for more information.
+
+.. Select *Review*.
 .. Confirm the backend details and select *Add storage backend*.
 
 .Result
@@ -211,6 +219,7 @@ Use any of the following bucket types:
 * Generic S3
 +
 NOTE: Amazon Web Services (AWS) and Google Cloud Platform (GCP) use the Generic S3 bucket type.
+* Microsoft Azure
 
 +
 NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon’s S3 support.

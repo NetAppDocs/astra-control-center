@@ -1,0 +1,298 @@
+---
+sidebar: sidebar
+permalink: use/replicate_snapmirror.html
+keywords: replicate, replication, disaster, recovery
+summary: Astra can restore your application configuration and persistent storage from a snapshot or backup. Persistent storage backups are transferred from your object store, so restoring from an existing backup will complete the fastest.
+---
+
+= Replicate apps to a remote system using SnapMirror technology
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/use/
+
+[.lead]
+Using Astra Control, you can build business continuity for your applications with a low-RPO (Recovery Point Objective) and low-RTO (Recovery Time Objective) using asynchronous replication capabilities of NetApp SnapMirror technology. Once configured, this enables your applications to replicate data and application changes from one cluster to another.
+
+For a comparison between backups/restores and replication, see link:../concepts/data-protection.html[Data protection concepts].
+
+
+
+You can replicate apps in different scenarios, such as the following on-premises only, hybrid, and multi-cloud scenarios:
+
+* On-premise site A to on-premise site B
+* On-premise to cloud with Cloud Volumes ONTAP
+* Cloud with Cloud Volumes ONTAP to on-premise
+* Cloud with Cloud Volumes ONTAP to cloud (between different regions in the same cloud provider or to different cloud providers)
+
+Astra Control can replicate apps across on-premises clusters, on-premises to cloud (using Cloud Volumes ONTAP) or between clouds (Cloud Volumes ONTAP to Cloud Volumes ONTAP).
+
+NOTE: You can simultaneously replicate a different app (running on the other cluster or site) in the opposite direction. For example, Apps A, B, C can be replicated from Datacenter 1 to Datacenter 2; and Apps X, Y, Z can be replicated from Datacenter 2 to Datacenter 1.
+
+Using Astra Control, you can do the following tasks related to replicating applications:
+
+* <<Set up a replication relationship>>
+* <<Bring a replicated app online on the destination cluster (fail over)>>
+* <<Resync a failed over replication>>
+* <<Reverse application replication>>
+* <<Fail back applications to the original source cluster>>
+* <<Delete an application replication relationship>>
+
+
+== Replication prerequisites
+
+See the link:../get-started/requirements.html#replication-prerequisites[replication prerequisites] before you begin.
+
+
+
+
+
+== Set up a replication relationship
+
+Setting up a replication relationship involves the following that make up the replication policy;
+
+* Choosing how frequently you want Astra Control to take an app Snapshot (which includes the app's Kubernetes resources as well as the volume Snapshots for each of the app's volumes)
+* Choosing the replication schedule (included Kubernetes resources as well as persistent volume data)
+* Setting the time for the Snapshot to be taken
+
+//TIP: To stop a replication from occurring again, you can change this replication relationship schedule. Alternatively, you can pause the replication using the https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API].
+
+.Steps
+
+. From the Astra Control left navigation, select *Applications*.
+. In the Application page, select the *Data Protection* > *Replication* tab.
+. In the Data Protection > Replication tab, select *Configure replication policy*. Or, from the Application Protection box, select the Actions option and select *Configure replication policy*.
+
+. Enter or select the following information:
++
+* Destination cluster
+* *Destination storage class*: Select or enter the storage class that uses the paired SVM on the destination ONTAP cluster.
+* *Replication type*: "Asynchronous" is currently the only replication type available. 
+* *Destination namespace*: Enter a new or existing destination namespace for the destination cluster.
++
+NOTE: Any conflicting resources in the selected namespace will be overwritten. 
+
+* *Replication frequency*: Set how often you want Astra Control to take a Snapshot and replicate it to its destination.
+* *Offset*: Set the number of minutes from the top of the hour that you want Astra Control to take a Snapshot. You might want to use an offset so that it doesn't coincide with other scheduled operations. For example, if you want to take the Snapshot every 5 minutes starting at 10:02, enter "02" as the offset minutes. The result would be 10:02, 10:07, 10:12, etc.
+
+. Select *Next*, review the summary, and select *Save*.
++
+NOTE: At first, the status displays "app-mirror" before the first schedule occurs.
++
+Astra Control creates an application Snapshot used for replication.
+
+. To see the application Snapshot status, select the *Applications* > *Snapshots* tab.
++
+The Snapshot name uses the format of "replication-schedule-<string>". Astra Control retains the last Snapshot that was used for replication. Any older replication Snapshots are deleted after successful completion of replication.
+
+.Result
+
+This creates the replication relationship.
+
+Astra Control completes the following actions as a result of establishing the relationship:
+
+* Creates a namespace on the destination (if it doesn't exist)
+* Creates a PVC on the destination namespace corresponding to the source app's PVCs.
+* Takes an initial app-consistent Snapshot.
+* Establishes the SnapMirror relationship for persistent volumes using the initial Snapshot.
+
+The Data Protection page shows the replication relationship state and status:
+<Health status> | <Relationship life cycle state>
+
+For example:
+Normal | Established
+
+Learn more about replication states and status below.
+
+== Bring a replicated app online on the destination cluster (fail over)
+
+Using Astra Control, you can "fail over" replicated applications to a destination cluster. This procedure stops the replication relationship and brings the app online on the destination cluster. This procedure does not stop the app on the source cluster if it was operational.
+
+//In the event of a disaster, or if the source cluster became unavailable, or just for periodic testing of your disaster recovery plan, you can use the fail over procedure to bring an application online on the destination cluster. 
+
+
+.Steps
+. From the Astra Control left navigation, select *Applications*.
+. In the Application page, select the *Data Protection* > *Replication* tab.
+. In the Data Protection > Replication tab, from the Actions menu, select *Fail over*.
+. In the Fail over page, review the information and select *Fail over*.
+
+.Result
+
+The following actions occur as a result of the fail over procedure:
+
+//* On the destination cluster, an app is started based on the latest replicated state from the source app and continues to run based on the latest replicated state from the source app.
+
+* On the destination cluster, the app is started based on the latest replicated Snapshot.
+* The source cluster and app (if operational) are not stopped and will continue to run.
+* The replication state changes to "Failing over" and then to "Failed over" when it has completed.
+* The source app's protection policy is copied to the destination app based on the schedules present on the source app at the time of the fail over.
+* Astra Control shows the app both on the source and destination clusters and its respective health.
+
+//* The source and destination apps will diverge with updates occurring to either app.
+
+== Resync a failed over replication
+
+The resync operation re-establishes the replication relationship. You can choose the source of the relationship to retain the data on the source or destination cluster. This operation re-establishes the SnapMirror relationships to start the volume replication in the direction of choice.
+
+The process stops the app on the new destination cluster before re-establishing replication.
+
+//If replication has failed over (and the status is "Failed over") but it has not completed successfully, you might need to resync the replication. Resyncing replication re-establishes the replication relationship.
+
+//Resyncing starts with a failed over relationship (where no replication is occurring and both apps are running). The process stops the app on the new destination side, and re-establishes replication to that side. You can choose which app should be the new replication source and which one should be stopped to serve as the new destination.
+
+
+
+NOTE: During the resync process, the life cycle state shows as "Establishing."
+
+.Steps
+. From the Astra Control left navigation, select *Applications*.
+. In the Application page, select the *Data Protection* > *Replication* tab.
+. In the Data Protection > Replication tab, from the Actions menu, select *Resync*.
+. In the Resync page, select either the source or destination app instance containing the data that you want to preserve.
++
+CAUTION: Choose the resync source carefully, as the data on the destination will be overwritten.
+
+. Select *Resync* to continue.
+. Type "resync" to confirm.
+. Select *Yes, resync* to finish.
+
+.Result
+
+* The Replication page shows "Establishing" as the replication status.
+* Astra Control stops the application on the new destination cluster.
+* Astra Control re-establishes the persistent volume replication in the selected direction using SnapMirror resync.
+* The Replication page shows the updated relationship.
+//* ONTAP volumes are set to a “Data Protection” mode so that no data protection occurs during this time.
+
+== Reverse application replication
+
+This is the planned operation to move the application to the destination cluster while continuing to replicate back to the original source cluster. Astra Control stops the application on the source cluster and replicates the data to the destination before failing over the app to the destination cluster.
+
+In this situation, you are swapping the source and destination. The original source cluster becomes the new destination cluster, and the original destination cluster becomes the new source cluster.
+
+//With a relationship in an Established state, this process shuts down the app, replicates data written during the shutdown, and then starts the app on the other side, after which replication resumes in the opposite direction.
+
+
+
+.Steps
+. From the Astra Control left navigation, select *Applications*.
+. In the Application page, select the *Data Protection* > *Replication* tab.
+. In the Data Protection > Replication tab, from the Actions menu, select *Reverse replication*.
+. In the Reverse Replication page, review the information and select *Reverse replication* to continue.
+
+.Result
+
+The following actions occur as a result of the reverse replication:
+
+* A Snapshot is taken of the original source app's Kubernetes resources.
+* The original source app's pods are gracefully stopped by deleting the app's Kubernetes resources (leaving PVCs and PVs in place).
+* After the pods are shut down, Snapshots of the app's volumes are taken and replicated.
+* The SnapMirror relationships are broken, making the destination volumes ready for read/write.
+* The app's Kubernetes resources are restored from the pre-shutdown Snapshot, using the volume data replicated after the original source app was shut down.
+* Replication is re-established in the reverse direction.
+
+
+//* Astra Control triggers execution hooks (if present) to stop any writes to the original source app.
+//* Astra Control takes a Snapshot and replicates it before stopping the app on the source cluster.
+//* Astra Control brings the application online with the latest replicated data.
+//* Replication is re-established in the reverse direction.
+
+
+//* Astra Control stops any writes to the original source app and takes a Snapshot of the original source app before beginning the reverse process.
+//* Then, the app is stopped on the original source cluster.
+//* Replication starts in reverse of the original direction, dropping any changes made to the original source app.
+//* Snapshot backup schedules are removed from the original source app (that is now the destination app).
+//* Original source app Kubernetes resources are removed, leaving only PVCs.
+//* The original source volume is changed from having read/write abilities to a data protection mode.
+//* Astra Control shows the app both on the source and destination clusters.
+
+== Fail back applications to the original source cluster
+
+Using Astra Control, you can achieve "fail back" after a "fail over" operation by using the following sequence of operations. In this workflow to restore the original replication direction, Astra Control replicates (resyncs) any application changes back to the original source cluster before reversing the replication direction.
+
+This process starts from a relationship that has completed a fail over to a destination and involves the following steps:
+
+//Using Astra Control, you can "fail back" applications from the original destination cluster back to the original cluster after a "fail over". In this workflow to restore the original replication direction, Astra Control replicates any application changes back to the original source cluster before reversing the replication direction.
+
+//This starts from a relationship that has completed a fail over to a destination. Next, it replicates back to the original replication direction, but preserves the data written on the destination app while failed over.
+
+* Start with a failed over state.
+* Resync the relationship.
+* Reverse the replication.
+
+.Steps
+. From the Astra Control left navigation, select *Applications*.
+. In the Application page, select the *Data Protection* > *Replication* tab.
+. In the Data Protection > Replication tab, from the Actions menu, select *Resync*.
+. For a fail back operation, choose the failed over app as the source of the resync operation (preserving any data written post fail over).
+
+. Type "resync" to confirm.
+. Select *Yes, resync* to finish.
+. After the resync is complete, in the Data Protection > Replication tab, from the Actions menu, select *Reverse replication*.
+. In the Reverse Replication page, review the information and select *Reverse replication*.
+
+.Result
+
+This combines the results from the "resync" and "reverse relationship" operations to bring the application online on the original source cluster with replication resumed to the original destination cluster.
+
+//The following actions occur as a result of the fail back:
+
+//* Astra Control stops any writes to the original source app and takes a Snapshot of the original source app before beginning the fail back process.
+//* Then, the app is stopped on the original source cluster.
+//* Replication starts in reverse of the original direction, dropping any changes made to the original source app while failed over.
+//* The replication status changes to "Failed back."
+//* Snapshot backup schedules are removed from the original source app (that is now the destination app).
+//* Original source app Kubernetes resources are removed, leaving only PVCs.
+//* The original source volume is changed from having read/write abilities to a data protection mode.
+//* Astra Control shows the app both on the source and destination clusters.
+
+== Delete an application replication relationship
+
+
+Deleting the relationship results in two separate apps with no relationship between them.
+
+.Steps
+. From the Astra Control left navigation, select *Applications*.
+. In the Application page, select the *Data Protection* > *Replication* tab.
+. In the Data Protection > Replication tab, from the Application Protection box or in the relationship diagram, select *Delete replication relationship*.
+
+.Result
+
+The following actions occur as a result of deleting a replication relationship:
+
+* If the relationship is established but the app has not yet been brought online on the destination cluster (failed over), Astra Control retains PVCs created during initialization, leaves an "empty" managed app on the destination cluster, and retains the destination app to keep any backups that might have been created.
+
+* If the app has been brought online on the destination cluster (failed over), Astra Control retains PVCs and destination apps. Source and destination apps are now treated as independent apps. The backup schedules remain on both apps but are not associated with each other. 
+
+
+== Replication relationship health status and relationship life cycle states
+
+Astra Control displays the health of the relationship and the states of the life cycle of the replication relationship.
+
+=== Replication relationship health statuses
+
+The following statuses indicate the health of the replication relationship:
+
+* *Normal*: The relationship is either establishing or has established, and the most recent Snapshot transferred successfully.
+* *Warning*: The relationship is either failing over or has failed over (and therefore is no longer protecting the source app).
+* *Critical*
+** The relationship is establishing or failed over, and the last reconcile attempt failed.
+** The relationship is established, and the last attempt to reconcile the addition of a new PVC is failing.
+** The relationship is established (so a successful Snapshot has replicated, and failover is possible), but the most recent Snapshot failed or failed to replicate.
+
+=== Replication life cycle states
+The following states states reflect the different stages of the replication life cycle:
+
+* *Establishing*: A new replication relationship is being created. Astra Control creates a namespace if needed, creates persistent volume claims (PVCs) on new volumes on the destination cluster, and creates SnapMirror relationships. This status can also indicate that the replication is resyncing or reversing replication.
+* *Established*: A replication relationship exists. Astra Control periodically checks that the PVCs are available, checks the replication relationship, periodically creates Snapshots of the app, and identifies any new source PVCs in the app. If so, Astra Control creates the resources to include them in the replication.
+* *Failing over*: Astra Control breaks the SnapMirror relationships and restores the app's Kubernetes resources from the last successfully replicated app Snapshot.
+
+* *Failed over*: Astra Control stops replicating from the source cluster, uses the most recent (successful) replicated app Snapshot on the destination, and restores the Kubernetes resources.
+
+* *Resyncing*: Astra Control resyncs the new data on the resync source to the resync destination by using SnapMirror resync. This operation might overwrite some of the data on the destination based on the direction of the sync. Astra Control stops the app running on the destination namespace and removes the Kubernetes app. During the resyncing process, the status shows as "Establishing."
+
+* *Reversing*: The is the planned operation to move the application to the destination cluster while continuing to replicate back to the original source cluster. Astra Control stops the application on the source cluster, replicates the data to the destination before failing over the app to the destination cluster. During the reverse replication, the status shows as "Establishing."
+
+* *Deleting*:
+** If the replication relationship was established but not failed over yet, Astra Control removes PVCs that were created during replication and deletes the destination managed app.
+** If the replication failed over already, Astra Control retains the PVCs and destination app.

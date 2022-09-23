@@ -16,18 +16,14 @@ To upgrade Astra Control Center, download the installation bundle from the NetAp
 * link:../get-started/requirements.html[Before you begin upgrade, ensure your environment still meets the minimum requirements for Astra Control Center deployment].
 * Ensure all cluster operators are in a healthy state and available.
 +
-OpenShift example:
-+
 ----
-oc get clusteroperators
+kubectl get clusteroperators
 ----
 
 * Ensure all API services are in a healthy state and available.
 +
-OpenShift example:
-+
 ----
-oc get apiservices
+kubectl get apiservices
 ----
 
 * Log out of your Astra Control Center.
@@ -53,11 +49,11 @@ NOTE: Podman commands can be used in place of Docker commands if you are using R
 
 == Download the Astra Control Center bundle
 
-. Download the Astra Control Center upgrade bundle (`astra-control-center-[version].tar.gz`) from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
+. Download the Astra Control Center upgrade bundle (`astra-control-center-[version].tar.gz`) from the https:mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
 . (Optional) Use the following command to verify the signature of the bundle:
 +
 ----
-openssl dgst -sha256 -verify astra-control-center[version].pub -signature <astra-control-center[version].sig astra-control-center[version].tar.gz
+openssl dgst -sha256 -verify AstraControlCenter-public.pub -signature astra-control-center-[version].tar.gz.sig astra-control-center-[version].tar.gz
 ----
 
 == Unpack the bundle and change directory
@@ -68,42 +64,86 @@ openssl dgst -sha256 -verify astra-control-center[version].pub -signature <astra
 tar -vxzf astra-control-center-[version].tar.gz
 ----
 
-. Change to the Astra directory.
-+
-----
-cd astra-control-center-[version]
-----
-
 == Add the images to your local registry
 
-. Add the files in the Astra Control Center image directory to your local registry.
-+
-NOTE: See a sample script for the automatic loading of images below.
+. Complete the appropriate step sequence for your container engine: 
 
-.. Log in to your Docker registry:
-+
-----
-docker login [your_registry_path]
-----
+// start tabbed block for docker and podman approaches
 
-.. Load the images into Docker.
-.. Tag the images.
-.. [[substep_image_local_registry_push]]Push the images to your local registry.
+[role="tabbed-block"]
+====
+
+.Docker
+--
+. Change to the Astra directory:
 +
+[source,sh]
 ----
-export REGISTRY=[your_registry_path]
-for astraImageFile in $(ls images/*.tar)
-  # Load to local cache. And store the name of the loaded image trimming the 'Loaded images: '
-  do astraImage=$(docker load --input ${astraImageFile} | sed 's/Loaded image: //')
-  astraImage=$(echo ${astraImage} | sed 's!localhost/!!')
+cd acc
+----
+. [[substep_image_local_registry_push]]Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
++
+
+* Replace BUNDLE_FILE with the name of the Astra Control bundle file (for example, `acc.manifest.yaml`).
+* Replace MY_REGISTRY with the URL of the Docker repository.
+* Replace MY_REGISTRY_USER with the user name.
+* Replace MY_REGISTRY_TOKEN with an authorized token for the registry.
++
+[source,sh]
+----
+kubectl astra packages push-images -m BUNDLE_FILE -r MY_REGISTRY -u MY_REGISTRY_USER -p MY_REGISTRY_TOKEN
+----
+--
+
+.Podman
+--
+. Log in to your registry:
++
+[source,sh]
+----
+podman login [your_registry_path]
+----
+. Run the following script, making the <YOUR_REGISTRY> substitution as noted in the comments:
++
+[source,sh]
+----
+# You need to be at the root of the tarball.
+# You should see these files to confirm correct location:
+#   acc.manifest.yaml
+#   acc/
+
+# Replace <YOUR_REGISTRY> with your own registry (e.g registry.customer.com or registry.customer.com/testing, etc..)
+export REGISTRY=<YOUR_REGISTRY>
+export PACKAGENAME=acc
+export PACKAGEVERSION=22.08.1-26
+export DIRECTORYNAME=acc
+for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do
+  # Load to local cache
+  astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image: //')
+ 
+  # Remove path and keep imageName.
+  astraImageNoPath=$(echo ${astraImage} | sed 's:.*/::')
+ 
   # Tag with local image repo.
-  docker tag ${astraImage} ${REGISTRY}/${astraImage}
+  podman tag ${astraImage} ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
+ 
   # Push to the local repo.
-  docker push ${REGISTRY}/${astraImage}
+  podman push ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
 done
 ----
+--
+
+====
+
+// end tabbed block
 
 == Install the updated Astra Control Center operator
+
+. Change the directory:
++
+----
+cd manifests
+----
 
 . Edit the Astra Control Center operator deployment yaml (`astra_control_center_operator_deploy.yaml`) to refer to your local registry and secret.
 +
@@ -197,6 +237,12 @@ service/acc-operator-controller-manager-metrics-service unchanged
 deployment.apps/acc-operator-controller-manager configured
 ----
 
+. Verify pods are running:
++
+----
+kubectl get pods -n netapp-acc-operator
+----
+
 == Upgrade Astra Control Center
 
 . Edit the Astra Control Center custom resource (CR) (`astra_control_center_min.yaml`) and change the Astra version (`astraVersion` inside of `Spec`) number to the latest:
@@ -275,7 +321,6 @@ On the other hand, if you have your own Traefik deployment, set `externalTraefik
 Traefik is upgraded if any of the following conditions are met:
 
 * externalTraefik: false
-OR
 * externalTraefik: true AND shouldUpgrade: true.
 
 .Steps
@@ -325,7 +370,7 @@ The steps differ depending on the type of ingress controller you use:
 ** If `crd.externalTraefik` is present, it should be set to `false` OR
 ** If `crd.externalTraefik` is `true`, `crd.shouldUpgrade` should also be `true`.
 
-* The required https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/[ingress controller] should already be deployed.
+* The required https://kubernetes.io/docs/concepts/services-networking/ingress-controllers[ingress controller] should already be deployed.
 * The https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class[ingress class] corresponding to the ingress controller should already be created.
 * You are using Kubernetes versions between and including v1.19 and v1.21.
 
@@ -338,7 +383,7 @@ The steps differ depending on the type of ingress controller you use:
 +
 ----
 apiVersion: extensions/v1beta1
-kind: Ingress
+kind: IngressClass
 metadata:
   name: ingress-acc
   namespace: [netapp-acc or custom namespace]
