@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: concepts/architecture.html
-keywords: what is astra, astra control, astra control architecture, astra control center, astra control service, kubernetes, netapp, trident
+keywords: what is astra, astra control, astra control architecture, astra control center, astra control service, kubernetes, netapp, clusters, trident
 summary: Here is an overview of the various components of the Astra Control environment.
 ---
 
