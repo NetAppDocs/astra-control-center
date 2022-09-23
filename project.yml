@@ -38,6 +38,7 @@ sidebar:
 product-family:
   name: Astra
   repo: astra-family
+  sidebar_label: All Astra documentation
 
 homepage:
   tiles:
@@ -65,7 +66,7 @@ homepage:
         - title: Clone and migrate apps
           url: /use/clone-apps.html
         - title: Replicate apps to a remote system
-          url: /use/replication.html
+          url: /use/replicate_snapmirror.html
     - title: Use Astra Control API
       links:
         - title: Get started with the Astra Control API
@@ -120,8 +121,8 @@ homepage:
           url: https://cloud.netapp.com/hubfs/SB-4100-Jenkins%20(2).pdf
     - title: Blogs & community
       links:
-        - title: Slack channel
-          url: https://netapppub.slack.com/#astra
+        - title: Discord channel
+          url: https://discord.gg/NetApp
         - title: Astra Control blog
           url: https://cloud.netapp.com/blog/topic/astra
         - title: NetApp Community

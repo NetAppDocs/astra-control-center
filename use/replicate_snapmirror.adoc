@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: use/replication.html
+permalink: use/replicate_snapmirror.html
 keywords: replicate, replication, disaster, recovery
 summary: Astra can restore your application configuration and persistent storage from a snapshot or backup. Persistent storage backups are transferred from your object store, so restoring from an existing backup will complete the fastest.
 ---
