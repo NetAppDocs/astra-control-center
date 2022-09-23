@@ -16,7 +16,7 @@ include::https://raw.githubusercontent.com/NetAppDocs/common/main/_include/open-
 
 // Add required link(s)
 
-* link:NOTICE_AstraControlCenter_22.04.0.pdf[Notice for Astra Control Center^]
+* link:NOTICE_AstraControlCenter_22.08.1.pdf[Notice for Astra Control Center^]
 * link:NOTICE_AstraDataStore.pdf[Notice for Astra Data Store]
 
 == Astra Control API license
