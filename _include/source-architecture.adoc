@@ -2,7 +2,9 @@
 
 Here is an overview of the various components of the Astra Control environment.
 
-image:astra-ads-architecture-diagram-v4.png[Astra Control architecture diagram and components]
+
+image:astra-architecture-diagram-v4.png[Astra Control architecture diagram and components]
+
 
 == Astra Control components
 
@@ -17,6 +19,7 @@ image:astra-ads-architecture-diagram-v4.png[Astra Control architecture diagram a
 *** https://docs.aws.amazon.com/ebs/[Amazon Elastic Block Store (EBS)^] or https://docs.aws.amazon.com/fsx/[Amazon FSx for NetApp ONTAP^] as backend storage options for EKS clusters.
 +
 ** Astra Control Center uses the following storage backends:
+
 
 *** ONTAP AFF and FAS. As a storage software and hardware platform, ONTAP provides core storage services, support for multiple storage access protocols, and storage management functionality, such as snapshots and mirroring.
 //*** SolidFire storage backend. When you use a SolidFire storage backend, Astra Control Center doesn't report statistics and storage backend status as it does with other storage backends.
