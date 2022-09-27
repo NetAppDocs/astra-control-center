@@ -18,12 +18,14 @@ After you complete this procedure, you must return to the installation procedure
 * link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
 * From your OpenShift cluster, ensure all cluster operators are in a healthy state (`available` is `true`):
 +
+[source,sh]
 ----
 oc get clusteroperators
 ----
 
 * From your OpenShift cluster, ensure all API services are in a healthy state (`available` is `true`):
 +
+[source,sh]
 ----
 oc get apiservices
 ----
@@ -47,11 +49,13 @@ oc get apiservices
 . Download the zip of Astra Control Center certificates and keys from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
 . (Optional) Use the following command to verify the signature of the bundle:
 +
+[source,sh]
 ----
 openssl dgst -sha256 -verify AstraControlCenter-public.pub -signature astra-control-center-[version].tar.gz.sig astra-control-center-[version].tar.gz
 ----
 . Extract the images:
 +
+[source,sh]
 ----
 tar -vxzf astra-control-center-[version].tar.gz
 ----
@@ -68,11 +72,13 @@ NetApp provides binaries for the plugin for different CPU architectures and oper
 
 . List the available NetApp Astra `kubectl` plugin binaries, and note the name of the file you need for your operating system and CPU architecture:
 +
+[source,sh]
 ----
 ls kubectl-astra/
 ----
 . Copy the file to the same location as the standard `kubectl` utility. In this example, the `kubectl` utility is located in the `/usr/local/bin` directory. Replace `<binary-name>` with the name of the file you need:
 +
+[source,sh]
 ----
 cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 ----
