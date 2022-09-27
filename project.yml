@@ -58,7 +58,7 @@ homepage:
     - title: Use Astra Control Center
       links:
         - title: Manage accounts
-          url: /use/manage-users.html
+          url: /use/manage-local-users-and-roles.html
         - title: Manage apps
           url: /use/manage-apps.html
         - title: Protect apps
