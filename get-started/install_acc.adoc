@@ -707,6 +707,7 @@ spec:
 [source,sh]
 ----
 kubectl get ingress -n netapp-acc
+----
 +
 Response:
 +
