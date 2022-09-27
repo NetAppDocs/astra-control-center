@@ -196,7 +196,11 @@ You can use the following steps to retrieve and remove these quotas and limits. 
 [source,sh]
 ----
 kubectl get quota -n netapp-acc
-
+----
++
+Response:
++
+----
 NAME          AGE   REQUEST                                        LIMIT
 pods-high     16s   requests.cpu: 0/20, requests.memory: 0/100Gi   limits.cpu: 0/200, limits.memory: 0/1000Gi
 pods-low      15s   requests.cpu: 0/1, requests.memory: 0/1Gi      limits.cpu: 0/2, limits.memory: 0/2Gi
@@ -204,15 +208,17 @@ pods-medium   16s   requests.cpu: 0/10, requests.memory: 0/20Gi    limits.cpu: 0
 ----
 . Delete all of the resource quotas by name:
 +
-[source,sh]
 ----
 kubectl delete resourcequota  pods-high -n netapp-acc
+
 resourcequota "pods-high" deleted
 
 kubectl delete resourcequota  pods-low -n netapp-acc
+
 resourcequota "pods-low" deleted
 
 kubectl delete resourcequota  pods-medium -n netapp-acc
+
 resourcequota "pods-medium" deleted
 ----
 
@@ -221,7 +227,11 @@ resourcequota "pods-medium" deleted
 [source,sh]
 ----
 kubectl get limits -n netapp-acc
-
+----
++
+Response:
++
+----
 NAME              CREATED AT
 cpu-limit-range   2022-06-27T19:01:23Z
 ----
