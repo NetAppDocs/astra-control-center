@@ -31,6 +31,7 @@ cert-manager   essential-cert-manager-webhook-56b76db9cc-fjqrq      1/1     Runn
 
 . Create a certificate/key pair for the astraAddress FQDN:
 +
+[source,sh]
 ----
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt
 ----

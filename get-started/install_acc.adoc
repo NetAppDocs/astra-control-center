@@ -723,6 +723,7 @@ ingress istio astra.example.com 172.16.103.248  80, 443 1h 
 . Deploy an ingress resource in `netapp-acc` (or custom-named) namespace using either the `v1beta1` (deprecated in Kubernetes version less than or 1.22) or `v1` resource type for either a deprecated or a new schema:
 .. For a `v1beta1` deprecated schema, follow this sample:
 +
+[source,yaml]
 ----
 apiVersion: extensions/v1beta1
 Kind: IngressClass
@@ -748,6 +749,7 @@ spec:
 
 .. For the `v1` new schema, follow this sample:
 +
+[source,yaml]
 ----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
