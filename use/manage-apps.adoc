@@ -14,11 +14,12 @@ After you link:../get-started/setup_overview.html#add-cluster[add a cluster to A
 
 For more information, see link:../get-started/requirements.html#application-management-requirements[App management requirements].
 
-=== Supported app installation methods
+== Supported app installation methods
 Astra Control supports the following application installation methods:
 
 * *Manifest file*: Astra Control supports apps installed from a manifest file using kubectl. For example:
 +
+[source]
 ----
 kubectl apply -f myapp.yaml
 ----
@@ -86,11 +87,13 @@ WARNING: When defining apps, ensure that you do not include a Kubernetes resourc
 . Choose the cluster on which your application is running in the *Cluster* drop-down list.
 . Choose one or more namespaces for your application from the *Namespace* drop-down list.
 +
-NOTE: Apps can be defined within specified namespaces on a single cluster. Astra Control does not support the ability for apps to span multiple clusters.
+NOTE: Apps can be defined within one or more specified namespaces on a single cluster. Astra Control does not support the ability for apps to span multiple clusters.
 
 . Enter a label for the app and namespace. You can specify a single label or label selector criteria (query).
 +
 TIP: To learn more about Kubernetes labels, https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/[see the official Kubernetes documentation^].
++
+TIP: Two or more apps cannot manage the same namespace and label selector combination. Be sure that the combination you define is unique for the managed app.
 
 . After you select *Define*, repeat the process for other apps, as needed.
 
