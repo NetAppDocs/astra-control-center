@@ -1,0 +1,11 @@
+---
+sidebar: sidebar
+permalink: use/manage-ldap-authentication.html
+keywords: add users, edit users, remove users, delete users, manage roles
+summary: Manage users and roles on your Astra Control Center system.
+---
+
+= Manage LDAP authentication
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/use/

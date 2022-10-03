@@ -15,7 +15,11 @@ You can invite, add, remove, and edit users of your Astra Control Center install
 You can also use LDAP to perform authentication for selected users.
 
 == Use LDAP
-LDAP is an industry standard protocol for accessing distributed directory information and a popular choice for enterprise authentication. You can connect Astra Control Center to an LDAP server to perform authentication for selected Astra users. At a high level, the configuration involves integrating Astra with LDAP and defining the Astra users and groups corresponding to the LDAP definitions. You can use the Astra Control API or web UI to configure LDAP authentication and LDAP users and groups. See https://docs.netapp.com/us-en/astra-automation/workflows_infra/ldap_prepare.html[LDAP authentication^] for more information about using the Astra Control API to configure LDAP.
+LDAP is an industry standard protocol for accessing distributed directory information and a popular choice for enterprise authentication. You can connect Astra Control Center to an LDAP server to perform authentication for selected Astra users. At a high level, the configuration involves integrating Astra with LDAP and defining the Astra users and groups corresponding to the LDAP definitions. You can use the Astra Control API or web UI to configure LDAP authentication and LDAP users and groups. See the following documentation for more information:
+
+* https://docs.netapp.com/us-en/astra-automation/workflows_infra/ldap_prepare.html[Use the Astra Control API to configure LDAP authentication^]
+* link to new ldap users and groups topic
+* link to new set up ldap authentication via UI topic
 
 == Invite users
 
