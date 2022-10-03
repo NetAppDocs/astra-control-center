@@ -712,8 +712,8 @@ kubectl get ingress -n netapp-acc
 Response:
 +
 ----
-NAME    CLASS HOSTS             ADDRESS         PORTS   AGE 
-ingress istio astra.example.com 172.16.103.248  80, 443 1h 
+NAME    CLASS HOSTS             ADDRESS         PORTS   AGE
+ingress istio astra.example.com 172.16.103.248  80, 443 1h
 ----
 
 

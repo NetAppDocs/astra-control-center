@@ -57,6 +57,7 @@ Run the following eligibility checks to ensure that your cluster is ready to be 
 
 . Check the Trident version.
 +
+[source,sh]
 ----
 kubectl get tridentversions -n trident
 ----
@@ -137,6 +138,7 @@ metadata:
 ----
 .. Apply the service account:
 +
+[source,sh]
 ----
 kubectl apply -f astracontrol-service-account.yaml
 ----
