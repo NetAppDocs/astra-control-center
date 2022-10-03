@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: use/manage-ldap-authentication.html
+permalink: use/manage-remote-authentication.html
 keywords: enable ldap authentication, disable, ldap, authentication, configure, manage
 summary: Manage LDAP authentication on your Astra Control system.
 ---

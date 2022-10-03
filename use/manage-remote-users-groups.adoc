@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: use/manage-ldap-users-groups.html
+permalink: use/manage-remote-users-groups.html
 keywords: import, import users, search, search users, groups, import groups
 summary: Manage remote LDAP users and groups on your Astra Control Center system.
 ---

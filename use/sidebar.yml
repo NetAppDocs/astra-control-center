@@ -33,9 +33,9 @@ entries:
       - title: Manage local users and roles
         url: /use/manage-local-users-and-roles.html
       - title: Manage remote authentication
-        url: /use/manage-ldap-authentication.html
+        url: /use/manage-remote-authentication.html
       - title: Manage remote users and groups
-        url: /use/manage-ldap-users-groups.html
+        url: /use/manage-remote-users-groups.html
   #    - title: Manage roles
    #     url: /use/manage-roles.html
       - title: Manage notifications
