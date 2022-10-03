@@ -1,11 +1,25 @@
 ---
 sidebar: sidebar
 permalink: use/manage-ldap-authentication.html
-keywords: add users, edit users, remove users, delete users, manage roles
-summary: Manage users and roles on your Astra Control Center system.
+keywords: enable ldap authentication, disable, ldap, authentication, configure, manage
+summary: Manage LDAP authentication on your Astra Control system.
 ---
 
 = Manage LDAP authentication
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/use/
+
+LDAP is an industry standard protocol for accessing distributed directory information and a popular choice for enterprise authentication. You can connect Astra Control Center to an LDAP server to perform authentication for selected Astra users.
+
+At a high level, the configuration involves integrating Astra with LDAP and defining the Astra users and groups corresponding to the LDAP definitions. You can use the Astra Control API or web UI to configure LDAP authentication and LDAP users and groups.
+
+== Enable LDAP authentication
+
+
+
+
+== Disable LDAP authentication
+
+== Remove LDAP authentication
+
