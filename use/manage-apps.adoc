@@ -89,7 +89,7 @@ WARNING: When defining apps, ensure that you do not include a Kubernetes resourc
 +
 NOTE: Apps can be defined within one or more specified namespaces on a single cluster. Astra Control does not support the ability for apps to span multiple clusters.
 
-. Enter a label for the app and namespace. You can specify a single label or label selector criteria (query).
+. (Optional) Enter one or more labels for the Kubernetes resources in each namespace. You can specify a single label or label selector criteria (query).
 +
 TIP: To learn more about Kubernetes labels, https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/[see the official Kubernetes documentation^].
 +

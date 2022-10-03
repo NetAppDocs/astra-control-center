@@ -77,7 +77,7 @@ You can create an on-demand snapshot at any time.
 . From the Options menu in the *Actions* column for the desired app, select *Snapshot*.
 //+
 //image:screenshot-create-snapshot.gif["A screenshot of the app page where you can select the drop-down list in the actions column and select Snapshot."]
-. Customize the name of the snapshot and then select *Review*.
+. Customize the name of the snapshot and then select *Next*.
 . Review the snapshot summary and select *Snapshot*.
 
 .Result
@@ -93,14 +93,14 @@ NOTE: S3 buckets in Astra Control Center do not report available capacity. Befor
 .Steps
 
 . Select *Applications*.
-. From the Options menu in the *Actions* column for the desired app, select *Backup*.
+. From the Options menu in the *Actions* column for the desired app, select *Back up*.
 //+
 //image:screenshot-create-backup.gif["A screenshot of the app page where you can select the drop-down list in the actions column and select Backup."]
 . Customize the name of the backup.
 . Choose whether to back up the app from an existing snapshot. If you select this option, you can choose from a list of existing snapshots.
-. Choose a destination for the backup by selecting from the list of storage buckets.
-. Select *Review*.
-. Review the backup summary and select *Backup*.
+. Choose a destination bucket for the backup from the list of storage buckets.
+. Select *Next*.
+. Review the backup summary and select *Back up*.
 
 .Result
 
@@ -108,7 +108,7 @@ Astra Control Center creates a backup of the app.
 
 NOTE: If your network has an outage or is abnormally slow, a backup operation might time out. This causes the backup to fail.
 
-NOTE: There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in <<Delete backups>>. To delete a failed backup, https://docs.netapp.com/us-en/astra-automation/index.html[use the Astra Control API^].
+NOTE: There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in <<Delete backups>>. To delete a failed backup, https://docs.netapp.com/us-en/astra-automation/workflows/wf_delete_backup.html[use the Astra Control API^].
 
 NOTE: After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
 
