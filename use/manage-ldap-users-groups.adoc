@@ -2,18 +2,16 @@
 sidebar: sidebar
 permalink: use/manage-ldap-users-groups.html
 keywords: import, import users, search, search users, groups, import groups
-summary: Manage LDAP users and groups on your Astra Control Center system.
+summary: Manage remote LDAP users and groups on your Astra Control Center system.
 ---
 
-= Manage LDAP users and groups
+= Manage remote users and groups
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/use/
 
 If you have enabled LDAP authentication on your Astra Control system, you can search for LDAP users and groups, and include them in the approved users of the system.
 
-== Search for LDAP users
+== Add a remote user
 
-== Search for LDAP groups
-
-== Approve LDAP users or groups
+== Add a remote group
