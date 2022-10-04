@@ -121,9 +121,11 @@ Users with the Owner or Admin role can remove other users from the account at an
 
 Astra Control Center removes the user from the account.
 
+== Manage roles
+
 You can manage roles by adding namespace constraints and restricting user roles to those constraints. This enables you to control access to resources within your organization. You can use the Astra Control UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to manage roles.
 
-== Add a namespace constraint to a role
+=== Add a namespace constraint to a role
 
 An Admin or Owner user can add namespace constraints.
 
@@ -152,7 +154,7 @@ On the *Account* page, you can view the constraints for any Member or Viewer rol
 NOTE: If you enable constraints for a role and select *Confirm* without adding any constraints, the role is considered to have full restrictions (the role is denied access to any resources that are assigned to namespaces).
 
 
-== Remove a namespace constraint from a role
+=== Remove a namespace constraint from a role
 An Admin or Owner user can remove a namespace constraint from a role.
 
 .Steps
