@@ -12,8 +12,12 @@ summary: Manage remote LDAP users and groups on your Astra Control Center system
 
 If you have enabled LDAP authentication on your Astra Control system, you can search for LDAP users and groups, and include them in the approved users of the system.
 
+
+
 == Add a remote user
 Account Owners and Admins can add remote users to Astra Control.
+
+NOTE: You cannot add remote user if a local user with the same email address already exists on the system.  To add the user as a remote user, delete the local user from the system first.
 
 .Steps
 
