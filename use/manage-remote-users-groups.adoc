@@ -24,6 +24,9 @@ Account Owners and Admins can add remote users to Astra Control.
 . Optionally, search for an LDAP user by entering the user's email address in the *Filter by email* field.
 . Select one or more users from the list.
 . Assign a role to the user.
++
+NOTE: If you assign different roles to a user and the user's group, the more permissive role takes precedence. 
+
 . Optionally, assign one or more namespace constraints to this user, and select *Restrict role to constraints* to enforce them. You can add a new namespace constraint by selecting *Add constraint*.
 . Select *Add*.
 
@@ -46,7 +49,10 @@ In this window, you can see a list of the common names and distinguished names o
 . Select one or more groups from the list.
 . Assign a role to the groups.
 +
-NOTE: TThe role you select is assigned to all users in this group.
+NOTE: The role you select is assigned to all users in this group. If you assign different roles to a user and the user's group, the more permissive role takes precedence. 
 
 . Optionally, assign one or more namespace constraints to this group, and select *Restrict role to constraints* to enforce them. You can add a new namespace constraint by selecting *Add constraint*.
 . Select *Add*.
+
+.Result
+The new group appears in the list of remote groups, and all remote users in this group appear in the list of remote users. In this list, you can see details about the group as well as manage the group from the *Actions* menu.
