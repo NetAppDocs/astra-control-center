@@ -13,5 +13,40 @@ summary: Manage remote LDAP users and groups on your Astra Control Center system
 If you have enabled LDAP authentication on your Astra Control system, you can search for LDAP users and groups, and include them in the approved users of the system.
 
 == Add a remote user
+Account Owners and Admins can add remote users to Astra Control.
+
+.Steps
+
+. Go to the *Account* area.
+. Select the *Users & groups* tab.
+. At the far right of the page, select *Remote users*.
+. Select *Add*.
+. Optionally, search for an LDAP user by entering the user's email address in the *Filter by email* field.
+. Select one or more users from the list.
+. Assign a role to the user.
+. Optionally, assign one or more namespace constraints to this user, and select *Restrict role to constraints* to enforce them. You can add a new namespace constraint by selecting *Add constraint*.
+. Select *Add*.
+
+.Result
+The new user appears in the list of remote users. In this list, you can see active constraints on the user as well as manage the user from the *Actions* menu.
+
 
 == Add a remote group
+To add many remote users at once, account Owners and Admins can add remote groups to Astra Control. When you add a remote group, all remote users in that group are added to Astra Control and inherit the same role.
+
+.Steps
+
+. Go to the *Account* area.
+. Select the *Users & groups* tab.
+. At the far right of the page, select *Remote groups*.
+. Select *Add*.
++
+In this window, you can see a list of the common names and distinguished names of LDAP groups that Astra Control retrieved from the directory.
+. Optionally, search for an LDAP group by entering the group's common name in the *Filter by common name* field.
+. Select one or more groups from the list.
+. Assign a role to the groups.
++
+NOTE: TThe role you select is assigned to all users in this group.
+
+. Optionally, assign one or more namespace constraints to this group, and select *Restrict role to constraints* to enforce them. You can add a new namespace constraint by selecting *Add constraint*.
+. Select *Add*.
