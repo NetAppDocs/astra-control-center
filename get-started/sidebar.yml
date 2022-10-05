@@ -1,6 +1,8 @@
 section: get-started
 title: Get started
 entries:
+  - title: Learn about Astra Control Center 
+    url: /get-started/intro.html
   - title: Astra Control Center requirements
     url: /get-started/requirements.html
   - title: Quick start for Astra Control Center

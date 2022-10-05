@@ -57,6 +57,7 @@ Run the following eligibility checks to ensure that your cluster is ready to be 
 
 . Check the Trident version.
 +
+[source,sh]
 ----
 kubectl get tridentversions -n trident
 ----
@@ -117,7 +118,7 @@ Ensure that you have the following on your machine before you do the steps:
 
 .Steps
 . Create a service account as follows:
-.. Create a service account file called ``astracontrol-service-account.yaml``.
+.. Create a service account file called `astracontrol-service-account.yaml`.
 +
 Adjust the name and namespace as needed. If changes are made here, you should apply the same changes in the following steps.
 +
@@ -137,6 +138,7 @@ metadata:
 ----
 .. Apply the service account:
 +
+[source,sh]
 ----
 kubectl apply -f astracontrol-service-account.yaml
 ----
@@ -169,11 +171,13 @@ subjects:
 ----
 .. Apply the cluster role binding:
 +
+[source,sh]
 ----
 kubectl apply -f astracontrol-clusterrolebinding.yaml
 ----
 . List the service account secrets, replacing `<context>` with the correct context for your installation:
 +
+[source,sh]
 ----
 kubectl get serviceaccount astracontrol-service-account --context <context> --namespace default -o json
 ----
@@ -261,11 +265,13 @@ rm ${KUBECONFIG_FILE}.tmp
 ----
 .. Source the commands to apply them to your Kubernetes cluster.
 +
+[source,sh]
 ----
 source create-kubeconfig.sh
 ----
 . (*Optional*) Rename the kubeconfig to a meaningful name for your cluster. Protect your cluster credential.
 +
+[source,sh]
 ----
 chmod 700 create-kubeconfig.sh
 mv kubeconfig-sa.txt YOUR_CLUSTER_NAME_kubeconfig

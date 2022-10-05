@@ -19,12 +19,14 @@ For Red Hat OpenShift environments, you can use an link:../get-started/acc_opera
 * If you have configured or want to configure pod security policies in your environment, familiarize yourself with pod security policies and how they affect Astra Control Center installation. See link:understand-psp-restrictions.html[Understand pod security policy restrictions].
 * Ensure all cluster operators are in a healthy state and available.
 +
+[source,sh]
 ----
 kubectl get clusteroperators
 ----
 
 * Ensure all API services are in a healthy state and available:
 +
+[source,sh]
 ----
 kubectl get apiservices
 ----
@@ -68,11 +70,13 @@ To install Astra Control Center, do the following steps:
 . Download the zip of Astra Control Center certificates and keys from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
 . (Optional) Use the following command to verify the signature of the bundle:
 +
+[source,sh]
 ----
 openssl dgst -sha256 -verify AstraControlCenter-public.pub -signature astra-control-center-[version].tar.gz.sig astra-control-center-[version].tar.gz
 ----
 . Extract the images:
 +
+[source,sh]
 ----
 tar -vxzf astra-control-center-[version].tar.gz
 ----
@@ -89,11 +93,13 @@ NetApp provides binaries for the plugin for different CPU architectures and oper
 
 . List the available NetApp Astra `kubectl` plugin binaries, and note the name of the file you need for your operating system and CPU architecture:
 +
+[source,sh]
 ----
 ls kubectl-astra/
 ----
 . Copy the file to the same location as the standard `kubectl` utility. In this example, the `kubectl` utility is located in the `/usr/local/bin` directory. Replace `<binary-name>` with the name of the file you need:
 +
+[source,sh]
 ----
 cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 ----
@@ -153,7 +159,7 @@ export PACKAGEVERSION=22.08.1-26
 export DIRECTORYNAME=acc
 for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do
   # Load to local cache
-  astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image: //')
+  astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image(s): //')
 
   # Remove path and keep imageName.
   astraImageNoPath=$(echo ${astraImage} | sed 's:.*/::')
@@ -177,6 +183,7 @@ done
 
 . Export the KUBECONFIG for the Astra Control Center host cluster:
 +
+[source,sh]
 ----
 export KUBECONFIG=[file path]
 ----
@@ -184,6 +191,7 @@ export KUBECONFIG=[file path]
 .  If you use a registry that requires authentication, you need to do the following:
 .. Create the `netapp-acc-operator` namespace:
 +
+[source,sh]
 ----
 kubectl create ns netapp-acc-operator
 ----
@@ -198,6 +206,7 @@ namespace/netapp-acc-operator created
 +
 NOTE: The placeholder `your_registry_path` should match the location of the images that you uploaded earlier (for example, `[Registry_URL]/netapp/astra/astracc/22.08.1-26`).
 +
+[source,sh]
 ----
 kubectl create secret docker-registry astra-registry-cred -n netapp-acc-operator --docker-server=[your_registry_path] --docker-username=[username] --docker-password=[token]
 ----
@@ -212,6 +221,7 @@ NOTE: If you delete the namespace after the secret is generated, you need to reg
 
 .. Create the `netapp-acc` (or custom named) namespace.
 +
+[source,sh]
 ----
 kubectl create ns [netapp-acc or custom namespace]
 ----
@@ -224,6 +234,7 @@ namespace/netapp-acc created
 
 .. Create a secret for the `netapp-acc` (or custom named) namespace. Add Docker information and run the following command:
 +
+[source,sh]
 ----
 kubectl create secret docker-registry astra-registry-cred -n [netapp-acc or custom namespace] --docker-server=[your_registry_path] --docker-username=[username] --docker-password=[token]
 ----
@@ -236,6 +247,7 @@ secret/astra-registry-cred created
 
 .. [[substep_kubeconfig_secret]](Optional) If you want the cluster to be automatically managed by Astra Control Center after installation, make sure that you provide the kubeconfig as a secret within the Astra Control Center namespace you intend to deploy into using this command:
 +
+[source,sh]
 ----
 kubectl create secret generic [acc-kubeconfig-cred or custom secret name] --from-file=<path-to-your-kubeconfig> -n [netapp-acc or custom namespace]
 ----
@@ -244,12 +256,14 @@ kubectl create secret generic [acc-kubeconfig-cred or custom secret name] --from
 
 . Change the directory:
 +
+[source,sh]
 ----
 cd manifests
 ----
 
 . Edit the Astra Control Center operator deployment YAML (`astra_control_center_operator_deploy.yaml`) to refer to your local registry and secret.
 +
+[source,sh]
 ----
 vim astra_control_center_operator_deploy.yaml
 ----
@@ -258,6 +272,7 @@ NOTE: An annotated sample YAML follows these steps.
 
 .. If you use a registry that requires authentication, replace the default line of `imagePullSecrets: []` with the following:
 +
+[source,sh]
 ----
 imagePullSecrets:
 - name: <astra-registry-cred>
@@ -312,6 +327,7 @@ spec:
 
 . Install the Astra Control Center operator:
 +
+[source,sh]
 ----
 kubectl apply -f astra_control_center_operator_deploy.yaml
 ----
@@ -335,6 +351,7 @@ deployment.apps/acc-operator-controller-manager created
 
 . Verify pods are running:
 +
+[source,sh]
 ----
 kubectl get pods -n netapp-acc-operator
 ----
@@ -346,6 +363,7 @@ kubectl get pods -n netapp-acc-operator
 NOTE: `astra_control_center_min.yaml` is the default CR and is suitable for most installations. Familiarize yourself with all link:../get-started/acc_cluster_cr_options.html[CR options and their potential values] to ensure you deploy Astra Control Center correctly for your environment. If additional customizations are required for your environment, you can use `astra_control_center.yaml` as an alternative CR.
 
 +
+[source,sh]
 ----
 vim astra_control_center_min.yaml
 ----
@@ -359,6 +377,7 @@ IMPORTANT: If you are using a registry that does not require authorization, you 
 .. Change `enrolled` for AutoSupport to `false` for sites without internet connectivity or retain `true` for connected sites.
 .. If you use an external cert-manager, add the following lines to `spec`:
 +
+[source,sh]
 ----
 spec:
   crds:
@@ -413,6 +432,7 @@ spec:
 
 . If you didn't already do so in a previous step, create the `netapp-acc` (or custom) namespace:
 +
+[source,sh]
 ----
 kubectl create ns [netapp-acc or custom namespace]
 ----
@@ -425,6 +445,7 @@ namespace/netapp-acc created
 
 . Install Astra Control Center in the `netapp-acc` (or your custom) namespace:
 +
+[source,sh]
 ----
 kubectl apply -f astra_control_center_min.yaml -n [netapp-acc or custom namespace]
 ----
@@ -441,6 +462,7 @@ NOTE: If you prefer to use OpenShift, you can use comparable oc commands for ver
 
 . Verify that all system components installed successfully.
 +
+[source,sh]
 ----
 kubectl get pods -n [netapp-acc or custom namespace]
 ----
@@ -525,6 +547,7 @@ vault-controller-6b954f9b76-gz9nm        1/1    Running  0        11m
 
 . (Optional) To ensure the installation is completed, you can watch the `acc-operator` logs using the following command.
 +
+[source,sh]
 ----
 kubectl logs deploy/acc-operator-controller-manager -n netapp-acc-operator -c manager -f
 ----
@@ -533,6 +556,7 @@ NOTE: `accHost` cluster registration is one of the last operations, and if it fa
 
 . When all the pods are running, verify that the installation was successful (`READY` is `True`) and get the one-time password you will use when you log in to Astra Control Center:
 +
+[source,sh]
 ----
 kubectl get AstraControlCenter -n netapp-acc
 ----
@@ -578,6 +602,7 @@ You can use a CA-signed or self-signed certificate. The common name must be the 
 +
 Sample command: 
 +
+[source,sh]
 ----
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 
 -keyout tls.key -out tls.crt
@@ -587,6 +612,7 @@ openssl req -x509 -nodes -days 365 -newkey rsa:2048 
 +
 Sample command: 
 +
+[source,sh]
 ----
 kubectl create secret tls [tls secret name] 
 --key="tls.key"
@@ -633,6 +659,7 @@ spec:
 +
 For the v1 new schema, follow this sample:
 +
+[source,sh]
 ----
 kubectl apply -f istio-Ingress.yaml
 ----
@@ -675,10 +702,16 @@ spec:
 
 . Check the status of the ingress:
 +
+[source,sh]
 ----
-kubectl get ingress -n netapp-acc 
-NAME    CLASS HOSTS             ADDRESS         PORTS   AGE 
-ingress istio astra.example.com 172.16.103.248  80, 443 1h 
+kubectl get ingress -n netapp-acc
+----
++
+Response:
++
+----
+NAME    CLASS HOSTS             ADDRESS         PORTS   AGE
+ingress istio astra.example.com 172.16.103.248  80, 443 1h
 ----
 
 
@@ -688,6 +721,7 @@ ingress istio astra.example.com 172.16.103.248  80, 443 1h 
 . Deploy an ingress resource in `netapp-acc` (or custom-named) namespace using either the `v1beta1` (deprecated in Kubernetes version less than or 1.22) or `v1` resource type for either a deprecated or a new schema:
 .. For a `v1beta1` deprecated schema, follow this sample:
 +
+[source,yaml]
 ----
 apiVersion: extensions/v1beta1
 Kind: IngressClass
@@ -713,6 +747,7 @@ spec:
 
 .. For the `v1` new schema, follow this sample:
 +
+[source,yaml]
 ----
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -743,6 +778,7 @@ spec:
 . Procure your certificate and get the key, certificate, and CA files ready for use by the OpenShift route.
 . Create the OpenShift route:
 +
+[source,sh]
 ----
 oc create route edge --service=traefik
 --port=web -n [netapp-acc or custom namespace]
@@ -780,8 +816,9 @@ If any of the services are in `Error` status, you can inspect the logs. Look for
 
 . To inspect the Astra Control Center operator logs, enter the following:
 +
+[source,sh]
 ----
-kubectl logs --follow -n netapp-acc-operator $(kubectl get pods -n netapp-acc-operator -o name)  -c manager
+kubectl logs --follow -n netapp-acc-operator $(kubectl get pods -n netapp-acc-operator -o name) -c manager
 ----
 
 == What's next

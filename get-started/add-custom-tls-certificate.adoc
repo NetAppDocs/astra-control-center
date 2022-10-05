@@ -25,11 +25,13 @@ Remove the existing self-signed TLS certificate.
 . Using SSH, log in to the Kubernetes cluster that hosts Astra Control Center as an administrative user.
 . Find the TLS secret associated with the current certificate using the following command, replacing `<ACC-deployment-namespace>` with the Astra Control Center deployment namespace:
 +
+[source,sh]
 ----
 kubectl get certificate -n <ACC-deployment-namespace>
 ----
 . Delete the currently installed secret and certificate using the following commands:
 +
+[source,sh]
 ----
 kubectl delete cert cert-manager-certificates -n <ACC-deployment-namespace>
 kubectl delete secret secure-testing-cert -n <ACC-deployment-namespace>
@@ -41,6 +43,7 @@ Add a new TLS certificate that is signed by a CA.
 
 . Use the following command to create the new TLS secret with the private key and certificate files from the CA, replacing the arguments in brackets <> with the appropriate information:
 +
+[source,sh]
 ----
 kubectl create secret tls <secret-name> --key <private-key-filename> --cert <certificate-filename> -n <ACC-deployment-namespace>
 ----
@@ -75,6 +78,7 @@ Events:                    <none>
 ----
 . Create the `certificate.yaml` file using the following example, replacing the placeholder values in brackets <> with appropriate information:
 +
+[source,yaml]
 ----
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -93,6 +97,7 @@ spec:
 ----
 . Create the certificate using the following command:
 +
+[source,sh]
 ----
 kubectl apply -f certificate.yaml
 ----
