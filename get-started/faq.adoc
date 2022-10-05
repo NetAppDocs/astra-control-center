@@ -41,19 +41,6 @@ You can easily change to a full license by obtaining the NetApp license file (NL
 
 Yes, you can test out the managing apps functionality with the Evaluation license.
 
-// *How is the core consumption impacted with Astra Data Store clusters?*
-
-//When you start managing an app on a cluster, all of that cluster’s CPU units are included in the Astra Control Center license consumption. If the cluster has a licensed deployment of Astra Data Store, those CPU units are excluded from the Astra Control Center license consumption calculation.
-
-//NOTE: CPU units from Evaluation Deployments of Astra Data Store are not excluded from the Astra Control Center license consumption.
-
-//Consider the following example:
-
-//** *Configuration Example*: The example uses an Astra Control Center license of 100 cores and an Astra Data Store license of 100 cores. There is an Astra Data Store cluster consisting of 1 master and 7 worker nodes with only 4 worker nodes used for the Astra Data Store cluster. Each worker has 12 CPUs but only 9 are used for Astra Data Store cluster.
-
-//** Core deduction from the Astra Control Center license will be 48 cores when apps are managed.
-//** 2 x worker nodes did not count towards the Astra Data Store license. (12 x 3 = 36) 36 cores are deducted from the Astra Control Center license.
-//** 4 x worker nodes had 3 remaining cores that do not count towards the Astra Data Store license. ((12 - 9) * 4 = 12) 12 cores are deducted from the Astra Control Center license.
 
 
 == Registering Kubernetes clusters

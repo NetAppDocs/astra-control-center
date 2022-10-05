@@ -10,7 +10,7 @@ summary: After you install Astra Control Center, log in to the UI, and change yo
 :icons: font
 :imagesdir: ../media/get-started/
 
-Astra Control Center supports and monitors ONTAP and Astra Data Store as the storage backend. After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up a license, add clusters, manage storage, and add buckets.
+Astra Control Center supports and monitors ONTAP as the storage backend. After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up a license, add clusters, manage storage, and add buckets.
 
 .Tasks
 * <<Add a license for Astra Control Center>>
@@ -50,7 +50,7 @@ NOTE: If you have an evaluation license, be sure you store your account ID to av
 
 == Add cluster
 //REFERENCED IN UI. DO NOT MODIFY WITHOUT NOTIFYING UX.
-To begin managing your apps, add a Kubernetes cluster and manage it as a compute resource. You have to add a cluster for Astra Control Center to discover your Kubernetes applications. For Astra Data Store, you want to add the Kubernetes app cluster that contains applications that are using volumes provisioned by Astra Data Store.
+To begin managing your apps, add a Kubernetes cluster and manage it as a compute resource. You have to add a cluster for Astra Control Center to discover your Kubernetes applications.
 
 TIP: We recommend that Astra Control Center manage the cluster it is deployed on first before you add other clusters to Astra Control Center to manage. Having the initial cluster under management is necessary to send Kubemetrics data and cluster-associated data for metrics and troubleshooting. You can use the *Add Cluster* feature to manage a cluster with Astra Control Center.
 
@@ -80,7 +80,7 @@ IMPORTANT: If you create your own `kubeconfig` file, you should define only *one
 . Select *Configure storage*.
 . Select the storage class to be used for this Kubernetes cluster, and select *Review*.
 +
-NOTE: You should select a Trident storage class backed by ONTAP storage or Astra Data Store.
+NOTE: You should select a Trident storage class backed by ONTAP storage.
 +
 image:cluster-storage.png[Shows the storage class to be used for the cluster.]
 . Review the information, and if everything looks good, select *Add cluster*.
@@ -93,88 +93,15 @@ IMPORTANT: After you add a cluster to be managed in Astra Control Center, it mig
 
 == Add a storage backend
 
-You can add a storage backend so that Astra Control can manage its resources. You can deploy a storage backend on a managed cluster or use an existing storage backend.
+You can add an existing storage backend so that Astra Control can manage its resources.
 
 Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend as well as additional storage metrics.
 
-.What you'll need for existing Astra Data Store deployments
 
-* You have added your Kubernetes app cluster and the underlying compute cluster.
-+
-IMPORTANT: After you add your Kubernetes app cluster for Astra Data Store and it is managed by Astra Control, the cluster appears as `unmanaged` in the list of discovered backends. You must next add the compute cluster that contains Astra Data Store and underlies the Kubernetes app cluster. You can do this from *Backends* in the UI. Select the Actions menu for the cluster, select `Manage`, and link:../get-started/setup_overview.html#add-cluster[add the cluster]. After the cluster state of `unmanaged` changes to the name of the Kubernetes cluster, you can proceed with adding a backend.
-
-.What you'll need for new Astra Data Store deployments
-
-* You have link:../use/manage-packages-acc.html[uploaded the version of the installation bundle you intend to deploy] to a location that is accessible to Astra Control.
-
-* You have added the Kubernetes cluster that you intend to use for deployment.
-
-* You have uploaded the <<Add a license for Astra Control Center,Astra Data Store license>> for your deployment to a location that is accessible to Astra Control.
-
-//* You have the IPs you need for the new Astra Data Store.
-
-//* You have the node label you intend to use for the K8s worker nodes for ADS.
-
-.Options
-
-* <<Deploy storage resources>>
-* <<Use an existing storage backend>>
-
-=== Deploy storage resources
-You can deploy a new Astra Data Store and manage the associated storage backend.
-
-.Steps
-. Navigate from the Dashboard or the Backends menu:
-* From *Dashboard*: From the Resource Summary, select a link from the Storage Backends pane and select *Add* from the Backends section.
-* From *Backends*:
-.. In the left navigation area, select *Backends*.
-.. Select *Add*.
-. Select the *Astra Data Store* deployment option within the *Deploy* tab.
-. Select the Astra Data Store package to deploy:
-.. Enter a name for the Astra Data Store application.
-.. Choose the version of Astra Data Store you want to deploy.
-+
-NOTE: If you have not yet uploaded the version you intend to deploy, you can use the *Add package* option or exit the wizard and use link:../use/manage-packages-acc.html[package management] to upload the installation bundle.
-
-. Select an Astra Data Store license that you have previously uploaded or use the *Add license* option to upload a license to use with the application.
-+
-NOTE: Astra Data Store licenses with full permissions are associated with your Kubernetes cluster, and these associated clusters should appear automatically. If there is no managed cluster, you can select the *Add a Cluster* option to add one to Astra Control management.
-For Astra Data Store licenses, if no association has been made between the license and cluster, you can define this association on the next page of the wizard.
-
-. If you have not added a Kubernetes cluster to Astra Control management, you need to do so from the *Kubernetes cluster* page. Select an existing cluster from the list or select *add the underlying cluster* to add a cluster to Astra Control management.
-. Select a template size for the Kubernetes cluster that will provide resources for Astra Data Store. You can choose one of the following:
-+
-* If you choose `Recommended Kubernetes worker node requirements`, select a template from large to small based on what your license allows.
-
-* If you choose `Custom Kubernetes worker node requirements`, select the number of cores and total memory you want for each cluster node. You can also show the eligible number of nodes in the cluster that meet your selection criteria for cores and memory.
-+
-TIP: When picking a template, select larger nodes with more memory and cores for larger workloads or a greater number of nodes for smaller workloads. You should select a template based on what your license allows. Each recommended template option suggests the number of eligible nodes that satisfy the template pattern for memory and cores and capacity for each node.
-
-. Configure the nodes:
-.. Add a node label to identify the pool of worker nodes that supports this Astra Data Store cluster.
-+
-IMPORTANT: The label must be added to each individual node in the cluster that will be used for Astra Data Store deployment prior to the start of deployment or deployment will fail.
-
-.. Configure the capacity (GiB) per node manually or select the maximum node capacity allowed.
-.. Configure a maximum number of nodes allowed in the cluster or allow the maximum number of nodes on the cluster.
-. (Astra Data Store full licenses only) Enter the key of the label you want to use for Protection Domains.
-+
-NOTE: Create at least three unique labels for the key for each node. For example, if your key is `astra.datastore.protection.domain`, you might create the following labels: `astra.datastore.protection.domain=domain1`,`astra.datastore.protection.domain=domain2`, and `astra.datastore.protection.domain=domain3`.
-
-. Configure the management network:
-.. Enter a management IP address for Astra Data Store internal management that is on the same subnet as worker node IP addresses.
-.. Choose to use the same NIC for both management and data networks or configure them separately.
-.. Enter data network IP address pool, subnet mask and gateway for storage access.
-. Review the configuration and select *Deploy* to begin installation.
-
-.Result
-After a successful installation, the backend appears in `available` state in the backends list along with active performance information.
-
-NOTE: You might need to refresh the page for the backend to appear.
 
 === Use an existing storage backend
 
-You can bring a discovered ONTAP or Astra Data Store storage backend into Astra Control Center management.
+You can bring a discovered ONTAP storage backend into Astra Control Center management.
 
 .Steps
 
@@ -183,21 +110,13 @@ You can bring a discovered ONTAP or Astra Data Store storage backend into Astra 
 * From *Backends*:
 .. In the left navigation area, select *Backends*.
 .. Select *Manage* on a discovered backend from the managed cluster or select *Add* to manage an additional existing backend.
-. Select the *Use existing* tab.
-. Do one of the following depending on your backend type:
-* *Astra Data Store*:
-.. Select *Astra Data Store*.
-.. Select the managed compute cluster and select *Next*.
-.. Confirm the backend details and select *Add storage backend*.
-
-* *ONTAP*:
-.. Select *ONTAP* and select *Next*.
-.. Enter the ONTAP cluster management IP address and admin credentials.
+. Select *ONTAP* and select *Next*.
+. Enter the ONTAP cluster management IP address and admin credentials. The credentials must be cluster-wide credentials.
 +
-NOTE: The user whose credentials you enter here must have the `ontapi` user login access method enabled within ONTAP System Manager on the ONTAP cluster. If you plan to use SnapMirror replication, enable the access methods `ontapi` and `http` for the user on both ONTAP clusters. See https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts^] for more information.
+NOTE: The user whose credentials you enter here must have the `ontapi` user login access method enabled within ONTAP System Manager on the ONTAP cluster. If you plan to use SnapMirror replication, apply user credentials with the "admin" role, which has the access methods `ontapi` and `http`, on both ONTAP clusters. See https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts^] for more information.
 
-.. Select *Review*.
-.. Confirm the backend details and select *Add storage backend*.
+.. Select *Next*.
+.. Confirm the backend details and select *Manage*.
 
 .Result
 The backend appears in `available` state in the list with summary information.
