@@ -40,6 +40,8 @@ The *Remote Authentication* pane status moves to *Pending*, and then to *Connect
 == Disable remote authentication
 You can temporarily disable an active connection to the LDAP server.
 
+NOTE: When you disable a connection to an LDAP server, all settings are saved, and all remote users and groups that were added to Astra Control from that LDAP server are retained. You can reconnect to this LDAP server at any time.
+
 .Steps
 
 . Go to *Account > Connections*.
@@ -49,8 +51,10 @@ You can temporarily disable an active connection to the LDAP server.
 .Result
 The *Remote Authentication* pane status moves to *Disabled*. All remote authentication settings are preserved, and you can re-enable the connection at any time.
 
-== Disable remote authentication
+== Disconnect remote authentication
 You can disconnect from an LDAP server and remove the configuration settings from Astra Control.
+
+CAUTION: When you disconnect from the LDAP server, all configuration settings for that LDAP server are removed from Astra Control, as well as any remote users and groups that were added from that LDAP server.
 
 .Steps
 
