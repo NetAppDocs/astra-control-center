@@ -62,18 +62,21 @@ Astra Control Center creates several pod security policies during installation. 
 During Astra Control Center installation, the Astra Control Center operator installs a custom pod security policy, a Role object, and a RoleBinding object to support the deployment of Astra Control Center services in the Astra Control Center namespace.
 
 The new policy and objects have the following attributes:
-[source,sh]
+
 ----
-$ kubectl get psp
+kubectl get psp
+
 NAME                           PRIV    CAPS          SELINUX    RUNASUSER          FSGROUP     SUPGROUP    READONLYROOTFS   VOLUMES
 avp-psp                        false                 RunAsAny   RunAsAny           RunAsAny    RunAsAny    false            *
 netapp-astra-deployment-psp    false                 RunAsAny   RunAsAny           RunAsAny    RunAsAny    false            *
 
-$ kubectl get role
+kubectl get role
+
 NAME                                     CREATED AT
 netapp-astra-deployment-role             2022-06-27T19:34:58Z
 
-$ kubectl get rolebinding
+kubectl get rolebinding
+
 NAME                                     ROLE                                          AGE
 netapp-astra-deployment-rb               Role/netapp-astra-deployment-role             32m
 ----
@@ -83,17 +86,19 @@ During backup operations, Astra Control Center creates a dynamic pod security po
 
 The new policy and objects have the following attributes:
 
-[source,sh]
 ----
-$ kubectl get psp
+kubectl get psp
+
 NAME                           PRIV    CAPS                            SELINUX    RUNASUSER          FSGROUP     SUPGROUP    READONLYROOTFS   VOLUMES
 netapp-astra-backup            false   DAC_READ_SEARCH                 RunAsAny   RunAsAny           RunAsAny    RunAsAny    false            *
 
-$ kubectl get role
+kubectl get role
+
 NAME                  CREATED AT
 netapp-astra-backup   2022-07-21T00:00:00Z
 
-$ kubectl get rolebinding
+kubectl get rolebinding
+
 NAME                  ROLE                       AGE
 netapp-astra-backup   Role/netapp-astra-backup   62s
 ----
@@ -103,17 +108,19 @@ When you manage a cluster, Astra Control Center installs the netapp-monitoring o
 
 The new policy and objects have the following attributes:
 
-[source,sh]
 ----
-$ kubectl get psp
+kubectl get psp
+
 NAME                           PRIV    CAPS                            SELINUX    RUNASUSER          FSGROUP     SUPGROUP    READONLYROOTFS   VOLUMES
 netapp-monitoring-psp-nkmo     true    AUDIT_WRITE,NET_ADMIN,NET_RAW   RunAsAny   RunAsAny           RunAsAny    RunAsAny    false            *
 
-$ kubectl get role
+kubectl get role
+
 NAME                                           CREATED AT
 netapp-monitoring-role-privileged              2022-07-21T00:00:00Z
 
-$ kubectl get rolebinding
+kubectl get rolebinding
+
 NAME                                                  ROLE                                                AGE
 netapp-monitoring-role-binding-privileged             Role/netapp-monitoring-role-privileged              2m5s
 ----
@@ -127,13 +134,13 @@ Some environments use NetworkPolicy constructs to restrict traffic between names
 +
 [source,sh]
 ----
-$kubectl get networkpolicy -n netapp-acc
+kubectl get networkpolicy -n netapp-acc
 ----
 . For each NetworkPolicy object that is returned by the preceding command, use the following command to delete it. Replace <OBJECT_NAME> with the name of the returned object:
 +
 [source,sh]
 ----
-$kubectl delete networkpolicy <OBJECT_NAME> -n netapp-acc
+kubectl delete networkpolicy <OBJECT_NAME> -n netapp-acc
 ----
 
 . Apply the following resource file to configure the acc-avp-network-policy object to allow  Astra plugin services to make requests to Astra Control Center services. Replace the information in brackets <> with information from your environment:
@@ -188,8 +195,12 @@ You can use the following steps to retrieve and remove these quotas and limits. 
 +
 [source,sh]
 ----
-$ kubectl get quota -n netapp-acc
-
+kubectl get quota -n netapp-acc
+----
++
+Response:
++
+----
 NAME          AGE   REQUEST                                        LIMIT
 pods-high     16s   requests.cpu: 0/20, requests.memory: 0/100Gi   limits.cpu: 0/200, limits.memory: 0/1000Gi
 pods-low      15s   requests.cpu: 0/1, requests.memory: 0/1Gi      limits.cpu: 0/2, limits.memory: 0/2Gi
@@ -199,22 +210,29 @@ pods-medium   16s   requests.cpu: 0/10, requests.memory: 0/20Gi    limits.cpu: 0
 +
 [source,sh]
 ----
-$ kubectl delete resourcequota  pods-high -n netapp-acc
-resourcequota "pods-high" deleted
-
-$ kubectl delete resourcequota  pods-low -n netapp-acc
-resourcequota "pods-low" deleted
-
-$ kubectl delete resourcequota  pods-medium -n netapp-acc
-resourcequota "pods-medium" deleted
+kubectl delete resourcequota  pods-high -n netapp-acc
+----
++
+[source,sh]
+----
+kubectl delete resourcequota  pods-low -n netapp-acc
+----
++
+[source,sh]
+----
+kubectl delete resourcequota  pods-medium -n netapp-acc
 ----
 
 . Get the limit ranges in the netapp-acc namespace:
 +
 [source,sh]
 ----
-$ kubectl get limits -n netapp-acc
-
+kubectl get limits -n netapp-acc
+----
++
+Response:
++
+----
 NAME              CREATED AT
 cpu-limit-range   2022-06-27T19:01:23Z
 ----
@@ -223,5 +241,5 @@ cpu-limit-range   2022-06-27T19:01:23Z
 +
 [source,sh]
 ----
-$kubectl delete limitrange cpu-limit-range -n netapp-acc
+kubectl delete limitrange cpu-limit-range -n netapp-acc
 ----
