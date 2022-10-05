@@ -110,16 +110,13 @@ You can bring a discovered ONTAP storage backend into Astra Control Center manag
 * From *Backends*:
 .. In the left navigation area, select *Backends*.
 .. Select *Manage* on a discovered backend from the managed cluster or select *Add* to manage an additional existing backend.
-. Select the *Use existing* tab.
-. Do the following:
-* *ONTAP*:
-.. Select *ONTAP* and select *Next*.
-.. Enter the ONTAP cluster management IP address and admin credentials. The credentials must be cluster-wide credentials. 
+. Select *ONTAP* and select *Next*.
+. Enter the ONTAP cluster management IP address and admin credentials. The credentials must be cluster-wide credentials.
 +
-NOTE: The user whose credentials you enter here must have the `ontapi` user login access method enabled within ONTAP System Manager on the ONTAP cluster. If you plan to use SnapMirror replication, enable the access methods `ontapi` and `http` for the user on both ONTAP clusters. See https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts^] for more information.
+NOTE: The user whose credentials you enter here must have the `ontapi` user login access method enabled within ONTAP System Manager on the ONTAP cluster. If you plan to use SnapMirror replication, apply user credentials with the "admin" role, which has the access methods `ontapi` and `http`, on both ONTAP clusters. See https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts^] for more information.
 
-.. Select *Review*.
-.. Confirm the backend details and select *Add storage backend*.
+.. Select *Next*.
+.. Confirm the backend details and select *Manage*.
 
 .Result
 The backend appears in `available` state in the list with summary information.

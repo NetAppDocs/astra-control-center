@@ -59,7 +59,7 @@ You can view storage backend information from the Dashboard or from the Backends
 
 .Steps
 . From the left navigation, select *Dashboard*.
-. Review the Storage backend section that shows the state:
+. Review the Storage backend panel of the Dashboard that shows the state:
 +
 * *Unhealthy*: The storage is not in an optimal state. This could be due to a latency issue or an app is degraded due to a container issue, for example.
 * *All healthy*: The storage has been managed and is in an optimal state.
