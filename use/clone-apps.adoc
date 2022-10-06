@@ -52,22 +52,16 @@ To clone apps to a different cluster, you need a default bucket. When you add yo
 +
 * Enter a name.
 * Choose a destination cluster for the clone.
-* Enter destination namespaces for the clone. You should map each source namespace associated with the app to a destination namespace.
+* Enter destination namespaces for the clone. Each source namespace associated with the app maps to a destination namespace.
 * Select *Next*.
 * Choose whether you want to create the clone from an existing snapshot or backup. If you don't select this option, Astra Control Center creates the clone from the app's current state.
-//START HERE!!
+** If you chose to clone from an existing snapshot or backup, choose the snapshot or backup that you'd like to use.
 
-. *Source*: If you chose to clone from an existing snapshot or backup, choose the snapshot or backup that you'd like to use.
-//+
-//image:screenshot-clone-source.gif[]
-
-. Select *Review*.
-. *Clone Summary*: Review the details about the clone and select *Clone*.
-//+
-//image:screenshot-clone-summary.gif[]
+. Select *Next*.
+. Review the information about the clone and select *Clone*.
 
 .Result
 
-Astra Control Center clones that app based on the information that you provided. The clone operation is successful when the new app clone is in the `Available` state on the *Applications* page.
+Astra Control Center clones that app based on the information that you provided. The clone operation is successful when the new app clone is in `Healthy` state on the *Applications* page.
 
-NOTE: After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
+NOTE: After a data protection operation (clone, backup, or restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.

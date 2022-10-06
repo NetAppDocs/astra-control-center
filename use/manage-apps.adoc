@@ -85,19 +85,22 @@ WARNING: When defining apps, ensure that you do not include a Kubernetes resourc
 . From the Applications page, select *Define*.
 . In the *Define application* window, enter the app name.
 . Choose the cluster on which your application is running in the *Cluster* drop-down list.
-. Choose one or more namespaces for your application from the *Namespace* drop-down list.
+. Choose a namespace for your application from the *Namespace* drop-down list.
 +
 NOTE: Apps can be defined within one or more specified namespaces on a single cluster. Astra Control does not support the ability for apps to span multiple clusters.
 
-. (Optional) Enter one or more labels for the Kubernetes resources in each namespace. You can specify a single label or label selector criteria (query).
+. (Optional) Enter a label for the Kubernetes resources in each namespace. You can specify a single label or label selector criteria (query).
 +
 TIP: To learn more about Kubernetes labels, https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/[see the official Kubernetes documentation^].
+
+. (Optional) Add additional namespaces for the app by selecting *Add namespace* and choosing the namespace from the drop-down list.
+. (Optional) Enter single label or label selector criteria for any additional namespaces you add.
 +
 TIP: Two or more apps cannot manage the same namespace and label selector combination. Be sure that the combination you define is unique for the managed app.
 
 . After you select *Define*, repeat the process for other apps, as needed.
 
-After you finish defining an app, the app appears in the list of apps on the Applications page. You are now able to clone it and create backups and snapshots.
+After you finish defining an app, the app appears in `Healthy` state in the list of apps on the Applications page. You are now able to clone it and create backups and snapshots.
 
 NOTE: The app you just added might have a warning icon under the Protected column, indicating that it is not backed up and not scheduled for backups yet.
 
