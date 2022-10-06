@@ -26,6 +26,7 @@ kubectl get clusteroperators
 kubectl get apiservices
 ----
 
+* If you use or plan to use multiple namespaces with your apps in Astra Control, link:../use/manage-roles.html#add-a-namespace-constraint-to-a-role[modify user roles with namespace constraints] before you upgrade.
 * Log out of your Astra Control Center.
 
 .About this task
