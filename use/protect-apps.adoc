@@ -10,7 +10,7 @@ summary: Protect your apps by taking snapshots and backups using an automated pr
 :icons: font
 :imagesdir: ../media/use/
 
-Protect all apps by taking snapshots and backups using an automated protection policy or on an ad-hoc basis. You can use the Astra UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to protect apps.
+Protect all apps by taking snapshots and backups using an automated protection policy or on an ad-hoc basis. You can use the Astra Control Center UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to protect apps.
 
 .About this task
 
@@ -65,7 +65,7 @@ image:screenshot-config-protection-policy.png[A screenshot of a sample configura
 
 .Result
 
-Astra Control Center implements the data protection policy by creating and retaining snapshots and backups using the schedule and retention policy that you defined.
+Astra Control implements the data protection policy by creating and retaining snapshots and backups using the schedule and retention policy that you defined.
 
 == Create a snapshot
 
@@ -104,11 +104,11 @@ NOTE: S3 buckets in Astra Control Center do not report available capacity. Befor
 
 .Result
 
-Astra Control Center creates a backup of the app.
+Astra Control creates a backup of the app.
 
 NOTE: If your network has an outage or is abnormally slow, a backup operation might time out. This causes the backup to fail.
 
-NOTE: There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in <<Delete backups>>. To delete a failed backup, https://docs.netapp.com/us-en/astra-automation/workflows/wf_delete_backup.html[use the Astra Control API^].
+NOTE: If you need to cancel a running backup, use the instructions in <<Cancel backups>>. To delete the backup, wait until it has completed and then use the instructions in <<Delete backups>>. To delete a failed backup, https://docs.netapp.com/us-en/astra-automation/workflows/wf_delete_backup.html[use the Astra Control API^].
 
 NOTE: After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
 
@@ -131,7 +131,7 @@ The snapshots display by default.
 
 Delete the scheduled or on-demand snapshots that you no longer need.
 
-NOTE: You cannot delete a Snapshot copy that is currently being replicated.
+NOTE: You cannot delete a snapshot copy that currently is being replicated.
 
 .Steps
 
@@ -145,13 +145,13 @@ NOTE: You cannot delete a Snapshot copy that is currently being replicated.
 
 .Result
 
-Astra Control Center deletes the snapshot.
+Astra Control deletes the snapshot.
 
 == Cancel backups
 
 You can cancel a backup that is in progress.
 
-TIP: To cancel a backup, the backup must be in a Running state. You cannot cancel a backup that is in a Pending state.
+TIP: To cancel a backup, the backup must be in `Running` state. You cannot cancel a backup that is in `Pending` state.
 
 .Steps
 
@@ -169,7 +169,7 @@ TIP: To cancel a backup, the backup must be in a Running state. You cannot cance
 
 Delete the scheduled or on-demand backups that you no longer need.
 
-NOTE: There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use these instructions. To delete a failed backup, https://docs.netapp.com/us-en/astra-automation/index.html[use the Astra Control API^].
+NOTE: If you need to cancel a running backup, use the instructions in <<Cancel backups>>. To delete the backup, wait until it has completed and then use these instructions. To delete a failed backup, https://docs.netapp.com/us-en/astra-automation/index.html[use the Astra Control API^].
 
 .Steps
 
@@ -187,4 +187,4 @@ NOTE: There is no way to stop a running backup. If you need to delete the backup
 
 .Result
 
-Astra Control Center deletes the backup.
+Astra Control deletes the backup.

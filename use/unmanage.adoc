@@ -17,6 +17,7 @@ Remove any apps or clusters that you no longer want to manage from Astra Control
 Stop managing apps that you no longer want to back up, snapshot, or clone from Astra Control Center.
 
 When you unmanage an app:
+
 * Any existing backups and snapshots will be deleted.
 * Applications and data remain available.
 
@@ -38,6 +39,7 @@ Astra Control Center stops managing the app.
 Unmanage the cluster that you no longer want to manage from Astra Control Center.
 
 When you unmanage a cluster:
+
 * This action stops your cluster from being managed by Astra Control Center. It doesn't make any changes to the cluster's configuration and it doesn't delete the cluster.
 * Trident won't be uninstalled from the cluster. https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html[Learn how to uninstall Trident^].
 

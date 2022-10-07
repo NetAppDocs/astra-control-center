@@ -11,9 +11,9 @@ summary: Clone an existing app to create a duplicate app on the same Kubernetes 
 :imagesdir: ../media/use/
 
 [.lead]
-Clone an existing app to create a duplicate app on the same Kubernetes cluster or on another cluster. When Astra Control Center clones an app, it creates a clone of your application configuration and persistent storage.
+You can clone an existing app to create a duplicate app on the same Kubernetes cluster or on another cluster. When Astra Control clones an app, it creates a clone of your application configuration and persistent storage.
 
-Cloning can help if you need to move applications and storage from one Kubernetes cluster to another. For example, you might want to move workloads through a CI/CD pipeline and across Kubernetes namespaces. You can use the Astra UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to clone and migrate apps.
+Cloning can help if you need to move applications and storage from one Kubernetes cluster to another. For example, you might want to move workloads through a CI/CD pipeline and across Kubernetes namespaces. You can use the Astra Control Center UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to clone and migrate apps.
 
 .What you'll need
 
@@ -62,6 +62,6 @@ To clone apps to a different cluster, you need a default bucket. When you add yo
 
 .Result
 
-Astra Control Center clones that app based on the information that you provided. The clone operation is successful when the new app clone is in `Healthy` state on the *Applications* page.
+Astra Control clones that app based on the information that you provided. The clone operation is successful when the new app clone is in `Healthy` state on the *Applications* page.
 
 NOTE: After a data protection operation (clone, backup, or restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
