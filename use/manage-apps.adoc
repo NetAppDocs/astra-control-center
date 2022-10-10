@@ -79,9 +79,7 @@ Defining an app gives you more granular control over what to include in an Astra
 
 WARNING: When defining apps, ensure that you do not include a Kubernetes resource in multiple apps with protection policies. Overlapping protection policies on a Kubernetes resources can cause data conflicts. <<Example: Separate Protection Policy for different releases, Read more about best practices.>>
 
-You can import cluster resources that are associated with the namespaced resources in addition to those Astra Control included automatically. You can add a rule that will include resources of a specific group, kind, version and optionally, label. 
-
-You might want to do this if there are resources that Astra Control does not include automatically. 
+You can import cluster resources that are associated with the namespaced resources in addition to those Astra Control included automatically. You can add a rule that will include resources of a specific group, kind, version and optionally, label. You might want to do this if there are resources that Astra Control does not include automatically. 
 
 You cannot exclude any of the cluster-scoped resources that are automatically included by Astra Control.
 
