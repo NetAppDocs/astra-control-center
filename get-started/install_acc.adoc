@@ -160,7 +160,7 @@ export DIRECTORYNAME=acc
 for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do
   # Load to local cache
   astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image(s): //')
- 
+  
   # Remove path and keep imageName.
   astraImageNoPath=$(echo ${astraImage} | sed 's:.*/::')
 

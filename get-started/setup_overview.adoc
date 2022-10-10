@@ -93,15 +93,10 @@ IMPORTANT: After you add a cluster to be managed in Astra Control Center, it mig
 
 == Add a storage backend
 
-You can add an existing storage backend so that Astra Control can manage its resources.
+You can use an existing ONTAP storage backend so that Astra Control can manage its resources.
 
 Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend as well as additional storage metrics.
 
-
-
-=== Use an existing storage backend
-
-You can bring a discovered ONTAP storage backend into Astra Control Center management.
 
 .Steps
 
@@ -110,19 +105,18 @@ You can bring a discovered ONTAP storage backend into Astra Control Center manag
 * From *Backends*:
 .. In the left navigation area, select *Backends*.
 .. Select *Manage* on a discovered backend from the managed cluster or select *Add* to manage an additional existing backend.
-. Select the *Use existing* tab.
-. Do the following:
-* *ONTAP*:
+. In the *Use existing* tab, do the following:
 .. Select *ONTAP* and select *Next*.
 .. Enter the ONTAP cluster management IP address and admin credentials. The credentials must be cluster-wide credentials. 
 +
-NOTE: The user whose credentials you enter here must have the `ontapi` user login access method enabled within ONTAP System Manager on the ONTAP cluster. If you plan to use SnapMirror replication, enable the access methods `ontapi` and `http` for the user on both ONTAP clusters. See https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts^] for more information.
+NOTE: The user whose credentials you enter here must have the `ontapi` user login access method enabled within ONTAP System Manager on the ONTAP cluster. If you plan to use SnapMirror replication, apply user credentials with the "admin" role, which has the access methods `ontapi` and `http`, on both ONTAP clusters. See https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts^] for more information.
 
-.. Select *Review*.
-.. Confirm the backend details and select *Add storage backend*.
+. Select *Next*.
+. Confirm the backend details and select *Manage*.
+
 
 .Result
-The backend appears in `available` state in the list with summary information.
+The backend appears in the `available` state in the list with summary information.
 
 NOTE: You might need to refresh the page for the backend to appear.
 

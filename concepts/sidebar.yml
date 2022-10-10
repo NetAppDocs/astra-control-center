@@ -1,8 +1,6 @@
 section: concepts
 title: Concepts
 entries:
-  - title: Learn about Astra Control
-    url: /concepts/intro.html
   - title: Architecture and components
     url: /concepts/architecture.html
   - title: Data protection
