@@ -216,16 +216,13 @@ Use any of the following bucket types:
 
 * NetApp ONTAP S3
 * NetApp StorageGRID S3
+* Microsoft Azure
 * Generic S3
 +
 NOTE: Amazon Web Services (AWS) and Google Cloud Platform (GCP) use the Generic S3 bucket type.
-* Microsoft Azure
-
 
 +
 NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon’s S3 support.
-
-* Microsoft Azure
 
 For instructions on how to add buckets using the Astra Control API, see link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
 
@@ -247,8 +244,8 @@ NOTE: This option does not appear for the first bucket you create.
 
 . Continue by adding <<Add S3 access credentials,credential information>>.
 . Select *Add*.
-+
-NOTE: If you want this bucket to be the default bucket for all backups, see link:../use/manage-buckets.html[Manage buckets].
+
+NOTE: If you want this bucket to be the default bucket for all backups, see link:../use/manage-buckets.html#set-the-default-bucket[Set the default bucket].
 
 === Add S3 access credentials
 

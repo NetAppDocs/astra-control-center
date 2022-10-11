@@ -45,7 +45,7 @@ You can do these tasks related to managing buckets:
 
 * link:../get-started/setup_overview.html#add-a-bucket[Add a bucket]
 * <<Edit a bucket>>
-* <<Set a default bucket>>
+* <<Set the default bucket>>
 * <<Rotate or remove bucket credentials>>
 * <<Remove a bucket>>
 
@@ -69,7 +69,7 @@ TIP: You can't modify the bucket type.
 
 . Select *Update*.
 
-== Set a default bucket
+== Set the default bucket
 When you perform a clone across clusters, Astra Control requires a default bucket. Follow these steps to set a default bucket for all clusters.
 
 .Steps
