@@ -26,6 +26,7 @@ kubectl get clusteroperators
 kubectl get apiservices
 ----
 
+* If you use or plan to use multiple namespaces with your apps in Astra Control, link:../use/manage-roles.html#add-a-namespace-constraint-to-a-role[modify user roles with namespace constraints] before you upgrade.
 * Log out of your Astra Control Center.
 
 .About this task
@@ -49,7 +50,7 @@ NOTE: Podman commands can be used in place of Docker commands if you are using R
 
 == Download the Astra Control Center bundle
 
-. Download the Astra Control Center upgrade bundle (`astra-control-center-[version].tar.gz`) from the https:mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
+. Download the Astra Control Center upgrade bundle (`astra-control-center-[version].tar.gz`) from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
 . (Optional) Use the following command to verify the signature of the bundle:
 +
 ----

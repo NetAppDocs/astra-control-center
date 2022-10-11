@@ -41,7 +41,7 @@ The Astra Control Center installation process does the following:
 * Creates a default account.
 * Establishes a default administrative user email address and default one-time password. This user is assigned the Owner role in the system that is needed for first time login to the UI.
 * Helps you determine that all Astra Control Center pods are running.
-* Installs the Astra UI.
+* Installs the Astra Control Center UI.
 //VMware ADS EAP review
 
 
@@ -160,7 +160,7 @@ export DIRECTORYNAME=acc
 for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do
   # Load to local cache
   astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image(s): //')
-
+  
   # Remove path and keep imageName.
   astraImageNoPath=$(echo ${astraImage} | sed 's:.*/::')
 
