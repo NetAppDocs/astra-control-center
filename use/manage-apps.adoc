@@ -68,10 +68,6 @@ TIP: A label is a key/value pair you can assign to Kubernetes objects for identi
 * <<Define resources to manage as an app>>
 * <<Define a namespace to manage as an app>>
 
-.Additional app management options
-//*	<<Rename apps>>
-*	<<Unmanage apps>>
-
 === Define resources to manage as an app
 
 You can specify the link:../learn/app-management.html[Kubernetes resources that make up an app] that you want to manage with Astra Control. Defining an app enables you to group elements of your Kubernetes cluster into a single app. This collection of Kubernetes resources is organized by namespace and label selector criteria.
@@ -173,21 +169,6 @@ After the process completes, the applications that are associated with the names
 //. Enter the new name.
 //. Select *Rename*.
 
-=== Unmanage apps
-
-When you no longer want to back up, snapshot, or clone an app, you can stop managing it.
-
-NOTE: If you unmanage an app, any backups or snapshots that were created earlier will be lost.
-
-.Steps
-
-. From the left navigation bar, select *Applications*.
-. Select the app.
-. From the menu in the *Actions* column, select *Unmanage*.
-. Review the information.
-. Type "unmanage" to confirm.
-. Select *Yes, Unmanage Application*.
-
 == What about system namespaces?
 
 Astra Control also discovers system namespaces on a Kubernetes cluster. We don't show you these system namespaces by default because it's rare that you'd need to back up system app resources.
@@ -211,3 +192,4 @@ In order to avoid possible data conflicts, the admin will create two apps: one f
 == Find more information
 
 * https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra Control API^]
+* link:../use/unmanage.html[Unmanage an app]
