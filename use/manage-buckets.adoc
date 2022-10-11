@@ -45,6 +45,7 @@ You can do these tasks related to managing buckets:
 
 * link:../get-started/setup_overview.html#add-a-bucket[Add a bucket]
 * <<Edit a bucket>>
+* <<Set a default bucket>>
 * <<Rotate or remove bucket credentials>>
 * <<Remove a bucket>>
 
@@ -67,6 +68,17 @@ NOTE: When you add a bucket, select the correct bucket provider and provide the 
 TIP: You can't modify the bucket type.
 
 . Select *Update*.
+
+== Set a default bucket
+When you perform a clone across clusters, Astra Control requires a default bucket. Follow these steps to set a default bucket for all clusters.
+
+.Steps
+
+. Go to *Cloud instances*.
+. Select the menu in the *Actions* column for the cloud instance in the list.
+. Select *Edit*.
+. In the *Bucket* list, select the bucket you want to be the default.
+. Select *Save*.
 
 == Rotate or remove bucket credentials
 Astra Control uses bucket credentials to gain access and provide secret keys for an S3 bucket so that Astra Control Center can communicate with the bucket.
