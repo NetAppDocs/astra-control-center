@@ -61,8 +61,8 @@ You can change the access credential information for a bucket and change whether
 NOTE: When you add a bucket, select the correct bucket provider and provide the right credentials for that provider. For example, the UI accepts NetApp ONTAP S3 as the type and accepts StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail. See the link:../release-notes/known-issues.html#selecting-a-bucket-provider-type-with-credentials-for-another-type-causes-data-protection-failures[Release Notes].
 
 .Steps
-.	From the left navigation, select *Buckets*.
-. From the Options menu in the *Actions* column, select *Edit*.
+. From the left navigation, select *Buckets*.
+. From the menu in the *Actions* column, select *Edit*.
 . Change any information other than the bucket type.
 +
 TIP: You can't modify the bucket type.
