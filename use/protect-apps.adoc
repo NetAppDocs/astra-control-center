@@ -40,6 +40,8 @@ You can do the following tasks related to protecting your app data:
 
 A protection policy protects an app by creating snapshots, backups, or both at a defined schedule. You can choose to create snapshots and backups hourly, daily, weekly, and monthly, and you can specify the number of copies to retain. As an example, a protection policy might create weekly backups and daily snapshots, and retain the backups and snapshots for one month. How often you create snapshots and backups and how long you retain them depends on the needs of your organization.
 
+If you need backups or snapshots to run more frequently than once per hour, you can https://docs.netapp.com/us-en/astra-automation/workflows/workflows_before.html[use the Astra Control REST API to create snapshots and backups^].
+
 .Steps
 
 . Select *Applications* and then select the name of an app.
@@ -131,11 +133,11 @@ The snapshots display by default.
 
 Delete the scheduled or on-demand snapshots that you no longer need.
 
-NOTE: You cannot delete a snapshot copy that currently is being replicated.
+NOTE: You cannot delete a snapshot that currently is being replicated.
 
 .Steps
 
-. Select *Applications* and then select the name of an app.
+. Select *Applications* and then select the name of a managed app.
 . Select *Data Protection*.
 . From the Options menu in the *Actions* column for the desired snapshot, select *Delete snapshot*.
 //+
@@ -162,7 +164,7 @@ TIP: To cancel a backup, the backup must be in `Running` state. You cannot cance
 //image:screenshot-data-protection-backups.gif[A screenshot of the Backups option that's available in the far right of the data protection tab.]
 
 . From the Options menu in the *Actions* column for the desired backup, select *Cancel*.
-. Type the word "cancel" to confirm deletion and then select *Yes, cancel backup*.
+. Type the word "cancel" to confirm the operation and then select *Yes, cancel backup*.
 
 
 == Delete backups

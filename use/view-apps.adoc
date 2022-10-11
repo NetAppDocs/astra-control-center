@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: use/view-apps.html
 keywords: view app, view app status, view app protection status, view app pods, view persistent storage
-summary: After you start managing an app, Astra provides details about the app that enables you to identify its status, its protection status, the pods, persistent storage, and more.
+summary: After you start managing an app, Astra Control provides details about the app that enables you to identify its status, its protection status, the pods, persistent storage, and more.
 ---
 
 = View the health and details of an app
@@ -11,7 +11,7 @@ summary: After you start managing an app, Astra provides details about the app t
 :imagesdir: ../media/use/
 
 [.lead]
-After you start managing an app, Astra provides details about the app that enables you to identify its status (whether it's healthy), its protection status (whether it's fully protected in case of failure), the pods, persistent storage, and more.
+After you start managing an app, Astra Control provides details about the app that enables you to identify its status (whether it's healthy), its protection status (whether it's fully protected in case of failure), the pods, persistent storage, and more.
 
 .Steps
 
