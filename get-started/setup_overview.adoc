@@ -190,7 +190,7 @@ You can change the default storage class for a cluster.
 
 Now that you’ve logged in and added clusters to Astra Control Center, you're ready to start using Astra Control Center's application data management features.
 
-* link:../use/manage-users.html[Manage users]
+* link:../use/manage-local-users-and-roles.html[Manage local users and roles]
 * link:../use/manage-apps.html[Start managing apps]
 * link:../use/protect-apps.html[Protect apps]
 * link:../use/clone-apps.html[Clone apps]
