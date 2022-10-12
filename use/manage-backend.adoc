@@ -20,11 +20,8 @@ You can complete the following tasks related to managing a storage backend:
 * link:../get-started/setup_overview.html#add-a-storage-backend[Add a storage backend]
 * <<View storage backend details>>
 * <<Unmanage a storage backend>>
-* <<Update an Astra Data Store storage backend license>>
-* <<Upgrade an Astra Data Store storage backend>>
 * <<Remove a storage backend>>
-* <<Add nodes to a storage backend cluster>>
-* <<Remove nodes from a storage backend cluster>>
+
 
 
 //
@@ -57,20 +54,12 @@ You can complete the following tasks related to managing a storage backend:
 == View storage backend details
 You can view storage backend information from the Dashboard or from the Backends option.
 
-In the Storage Backend Details page, for Astra Data Store, you can see the following information:
-
-* Astra Data Store cluster
-** Throughput, IOPS, and latency
-** Used capacity compared to total capacity
-* For each Astra Data Store cluster volume
-** Used capacity compared to total capacity
-** Throughput
 
 === View storage backend details from the Dashboard
 
 .Steps
 . From the left navigation, select *Dashboard*.
-. Review the Storage backend section that shows the state:
+. Review the Storage backend panel of the Dashboard that shows the state:
 +
 * *Unhealthy*: The storage is not in an optimal state. This could be due to a latency issue or an app is degraded due to a container issue, for example.
 * *All healthy*: The storage has been managed and is in an optimal state.
@@ -109,11 +98,10 @@ You can unmanage the backend.
 
 You can remove a storage backend that is no longer in use. You might want to do this to keep your configuration simple and up-to-date.
 
-TIP: If you are removing an Astra Data Store backend, it must not have been created by vCenter.
 
 .What you'll need
 * Ensure that the storage backend is unmanaged.
-* Ensure that the storage backend does not have any volumes associated with the Astra Data Store cluster.
+* Ensure that the storage backend does not have any volumes associated with the cluster.
 
 .Steps
 .	From left navigation, select *Backends*.
@@ -129,114 +117,7 @@ TIP: If you are removing an Astra Data Store backend, it must not have been crea
 .. Type "remove" to confirm the action.
 .. Select *Yes, remove storage backend*.
 
-== Update an Astra Data Store storage backend license
-You can update the license for an Astra Data Store storage backend to support a larger deployment or enhanced features.
 
-.What you'll need
-
-* A deployed and managed Astra Data Store storage backend
-* An Astra Data Store license file (contact your NetApp sales representative to purchase an Astra Data Store license)
-
-.Steps
-
-.	From the left navigation, select *Backends*.
-. Select the name of a storage backend.
-. Under *Basic Information*, you can see the type of license installed.
-+
-If you hover over the license information, a popup appears with more information, such as expiration and entitlement information.
-. Under *License*, select the edit icon next to the license name.
-. In the *Update license* page, do one of the following:
-+
-|===
-|License status |Action
-
-|At least one license has been added to Astra Data Store.
-a|
-
-Select a license from the list.
-
-|No licenses have been added to Astra Data Store.
-a|
-
-.. Select the *Add* button.
-.. Select a license file to upload.
-.. Select *Add* to upload the license file.
-
-|===
-
-. Select *Update*.
-
-== Upgrade an Astra Data Store storage backend
-You can upgrade your Astra Data Store backend from within Astra Control Center. To do so, you must first upload an upgrade package; Astra Control Center will use this upgrade package to upgrade Astra Data Store.
-
-.What you'll need
-* A managed Astra Data Store storage backend
-* An uploaded Astra Data Store upgrade package (see link:manage-packages-acc.html[Manage software packages])
-
-.Steps
-
-. Select *Backends*.
-. Choose an Astra Data Store storage backend from the list, and select the corresponding menu in the *Actions* column.
-. Select *Upgrade*.
-. Select an upgrade version from the list.
-+
-If you have several upgrade packages in your repository that are different versions, you can open the drop-down list to select the version you need.
-. Select *Next*.
-. Select *Start Upgrade*.
-
-.Result
-The *Backends* page displays an *Upgrading* status in the *Status* column until the upgrade is complete.
-
-== Add nodes to a storage backend cluster
-You can add nodes to an Astra Data Store cluster, up to the number of nodes supported by the type of license installed for Astra Data Store.
-
-.What you'll need
-
-* A deployed and licensed Astra Data Store storage backend
-* You have added the Astra Data Store software package in Astra Control Center
-* One or more new nodes to add to the cluster
-
-.Steps
-
-.	From the left navigation, select *Backends*.
-. Select the name of a storage backend.
-. Under Basic Information, you can see the number of nodes in this storage backend cluster.
-. Under *Nodes*, select the edit icon next to the number of nodes.
-. In the *Add nodes* page, enter information about the new node or nodes:
-.. Assign a node label for each node.
-.. Do one of the following:
-+
-* If you want Astra Data Store to always use the maximum available number of nodes according to your license, enable the *Always use up to maximum number of nodes allowed* check box.
-* If you don't want Astra Data Store to always use the maximum available number of nodes, select the desired number of total nodes to use.
-.. If you deployed Astra Data Store with Protection Domains enabled, assign the new node or nodes to Protection Domains.
-. Select *Next*.
-. Enter IP address and network information for each new node. Enter a single IP address for a single new node, or an IP address pool for multiple new nodes.
-+
-If Astra Data Store can use the IP addresses configured during deployment, you don't need to enter any IP address information.
-. Select *Next*.
-. Review the configuration for the new node or nodes.
-. Select *Add nodes*.
-
-
-== Remove nodes from a storage backend cluster
-
-You can remove nodes from an Astra Data Store cluster. These nodes can be healthy or failed nodes.
-
-Removing a node from an Astra Data Store cluster moves its data to other nodes in the cluster and removes the node from Astra Data Store.
-
-The process requires the following conditions:
-
-* There must be enough free space in the other nodes to receive the data.
-* There must be 4 or more nodes in the cluster.
-
-.Steps
-
-.	From the left navigation, select *Backends*.
-. Select the name of a storage backend.
-. Select the *Nodes* tab.
-. From the Actions menu, select *Remove*.
-. Confirm the deletion by entering "remove".
-. Select *Yes, remove node*.
 
 
 

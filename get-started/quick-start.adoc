@@ -12,18 +12,18 @@ summary: Get started with Astra Control in a few steps.
 
 This page provides a high-level overview of the steps needed to get started with Astra Control Center. The links within each step take you to a page that provides more details.
 
-Try it out! If you want to try Astra Control Center, you can use a 90-day evaluation license. See link:../get-started/setup_overview.html#add-a-license-for-astra-control-center[licensing information] for details.
+Try it out! If you want to try Astra Control Center, you can use a 90-day evaluation license. Refer to link:../get-started/setup_overview.html#add-a-license-for-astra-control-center[licensing information] for details.
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png[One] Review Kubernetes cluster requirements
 
 [role="quick-margin-list"]
-* Astra works with Kubernetes clusters with a Trident-configured ONTAP storage backend or an Astra Data Store storage backend.
+* Astra works with Kubernetes clusters with a Trident-configured ONTAP storage backend.
 * Clusters must be running in a healthy state, with at least three online worker nodes.
 * The cluster must be running Kubernetes.
 
 
 [role="quick-margin-para"]
-link:../get-started/requirements.html[Learn more about the Astra Control Center requirements].
+Learn more about link:../get-started/requirements.html[Astra Control Center requirements].
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png[Two] Download and install Astra Control Center
 
@@ -32,22 +32,23 @@ link:../get-started/requirements.html[Learn more about the Astra Control Center 
 * Install Astra Control Center in your local environment.
 +
 Optionally, install Astra Control Center using Red Hat OperatorHub.
+Optionally, install Astra Control Center with a Cloud Volumes ONTAP storage backend. 
 
 [role="quick-margin-para"]
-link:../get-started/install_overview.html[Learn more about installing Astra Control Center].
+Learn more about link:../get-started/install_overview.html[installing Astra Control Center].
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png[Three] Complete some initial setup tasks
 
 [role="quick-margin-list"]
 
-* Add a license.
+* Add an Astra Control license and any supporting ONTAP licenses.
 * Add a Kubernetes cluster and Astra Control Center discovers details.
-* Add an ONTAP or https://docs.netapp.com/us-en/astra-data-store/index.html[Astra Data Store] storage backend.
+* Add an ONTAP storage backend.
 * Optionally, add an object store bucket that will store your app backups.
 
 
 [role="quick-margin-para"]
-link:../get-started/setup_overview.html[Learn more about the initial setup process].
+Learn more about the link:../get-started/setup_overview.html[initial setup process].
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png[Four] Use Astra Control Center
 
@@ -55,9 +56,11 @@ link:../get-started/setup_overview.html[Learn more about the initial setup proce
 After you finish setting up Astra Control Center, here's what you might do next:
 
 [role="quick-margin-list"]
-* Manage an app. link:../use/manage-apps.html[Learn more about how to manage apps].
+* Manage an app. Learn more about link:../use/manage-apps.html[how to manage apps].
+* Protect apps by configuring protection policies for apps, replicating apps to remote systems, and cloning and migrating apps. Learn more about link:../use/protection-overview.html[how to protect apps].
+* Manage accounts (including users, roles, LDAP for user authentication, credentials, repository connections, and more). Learn more about link:../use/manage-users.html[how to manage users].
 
-* Optionally, connect to NetApp Cloud Insights to display metrics on the health of your system, capacity, and throughput inside the Astra Control Center UI. link:../use/monitor-protect.html[Learn more about connecting to Cloud Insights].
+* Optionally, connect to NetApp Cloud Insights to display metrics on the health of your system, capacity, and throughput inside the Astra Control Center UI. Learn more about link:../use/monitor-protect.html[connecting to Cloud Insights].
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-5.png[Five] Continue from this Quick Start
 

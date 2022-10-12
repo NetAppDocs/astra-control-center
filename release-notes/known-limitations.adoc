@@ -127,4 +127,3 @@ If you have an evaluation license, be sure you store your account ID to avoid da
 == Find more information
 
 * link:../release-notes/known-issues.html[Known issues]
-* link:../release-notes/known-issues-ads.html[Known issues with Astra Data Store and this Astra Control Center release]

@@ -383,7 +383,6 @@ NOTE: You can deploy Astra Control Center in a dual-stack Kubernetes cluster, an
 == Storage backend requirements
 Astra Control Center supports the following storage backends. Some storage backends require specific configuration to work correctly.
 
-* Astra Data Store
 * NetApp Cloud Volumes ONTAP
 * SolidFire Element OS
 ////

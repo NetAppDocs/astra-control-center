@@ -11,27 +11,27 @@ summary: Clone an existing app to create a duplicate app on the same Kubernetes 
 :imagesdir: ../media/use/
 
 [.lead]
-Clone an existing app to create a duplicate app on the same Kubernetes cluster or on another cluster. When Astra Control Center clones an app, it creates a clone of your application configuration and persistent storage.
+You can clone an existing app to create a duplicate app on the same Kubernetes cluster or on another cluster. When Astra Control clones an app, it creates a clone of your application configuration and persistent storage.
 
-Cloning can help if you need to move applications and storage from one Kubernetes cluster to another. For example, you might want to move workloads through a CI/CD pipeline and across Kubernetes namespaces. You can use the Astra UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to clone and migrate apps.
+Cloning can help if you need to move applications and storage from one Kubernetes cluster to another. For example, you might want to move workloads through a CI/CD pipeline and across Kubernetes namespaces. You can use the Astra Control Center UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to clone and migrate apps.
 
 .What you'll need
 
 To clone apps to a different cluster, you need a default bucket. When you add your first bucket, it becomes the default bucket.
 
-.About this task
+.Clone limitations
 
-* If you deploy an app with a StorageClass explicitly set and you need to clone the app, the target cluster must have the originally specified StorageClass. Cloning an application with an explicitly set StorageClass to a cluster that does not have the same StorageClass will fail.
-* If you clone an operator-deployed instance of Jenkins CI, you need to manually restore the persistent data. This is a limitation of the app's deployment model.
-* S3 buckets in Astra Control Center do not report available capacity. Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
+* *Explicit Storage classes*: If you deploy an app with a StorageClass explicitly set and you need to clone the app, the target cluster must have the originally specified StorageClass. Cloning an application with an explicitly set StorageClass to a cluster that does not have the same StorageClass will fail.
+* *Clones and user constraints*: Any member user with namespace constraints by namespace name/ID or by namespace labels can clone or restore an app to a new namespace on the same cluster or to any other cluster in their organization’s account. However, the same user cannot access the cloned or restored app in the new namespace. After a new namespace is created by a clone or restore operation, the account admin/owner can edit the member user account and update role constraints for the affected user to grant access to the new namespace.
+* *With Jenkins CI*: If you clone an operator-deployed instance of Jenkins CI, you need to manually restore the persistent data. This is a limitation of the app's deployment model.
+* *With S3 buckets*: S3 buckets in Astra Control Center do not report available capacity. Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
 //DOC-3595/ASTRACTL-10071/Q2 and PI4
-* During an app backup or app restore, you can optionally specify a bucket ID. An app clone operation, however, always uses the default bucket that has been defined. There is no option to change buckets for a clone. If you want control over which bucket is used, you can either link:../use/manage-buckets.html#edit-a-bucket[change the bucket default] or do a link:../use/protect-apps.html#create-a-backup[backup] followed by a link:../use/restore-apps.html[restore] separately.
-* Any member user with namespace constraints by namespace name/ID or by namespace labels can clone or restore an app to a new namespace on the same cluster or to any other cluster in their organization’s account. However, the same user cannot access the cloned or restored app in the new namespace. After a new namespace is created by a clone or restore operation, the account admin/owner can edit the member user account and update role constraints for the affected user to grant access to the new namespace.
+* *Clones use default buckets*: During an app backup or app restore, you can optionally specify a bucket ID. An app clone operation, however, always uses the default bucket that has been defined. There is no option to change buckets for a clone. If you want control over which bucket is used, you can either link:../use/manage-buckets.html#edit-a-bucket[change the bucket default] or do a link:../use/protect-apps.html#create-a-backup[backup] followed by a link:../use/restore-apps.html[restore] separately.
 
 .OpenShift considerations
 
-* If you clone an app between clusters, the source and destination clusters must be the same distribution of OpenShift. For example, if you clone an app from an OpenShift 4.7 cluster, use a destination cluster that is also OpenShift 4.7.
-* When you create a project for hosting an app on an OpenShift cluster, the project (or Kubernetes namespace) is assigned a SecurityContext UID. To enable Astra Control Center to protect your app and move the app to another cluster or project in OpenShift, you need to add policies that enable the app to run as any UID. As an example, the following OpenShift CLI commands grant the appropriate policies to a WordPress app.
+* *Clusters and OpenShift versions*: If you clone an app between clusters, the source and destination clusters must be the same distribution of OpenShift. For example, if you clone an app from an OpenShift 4.7 cluster, use a destination cluster that is also OpenShift 4.7.
+* *Projects and UIDs*: When you create a project for hosting an app on an OpenShift cluster, the project (or Kubernetes namespace) is assigned a SecurityContext UID. To enable Astra Control Center to protect your app and move the app to another cluster or project in OpenShift, you need to add policies that enable the app to run as any UID. As an example, the following OpenShift CLI commands grant the appropriate policies to a WordPress app.
 +
 `oc new-project wordpress`
 `oc adm policy add-scc-to-group anyuid system:serviceaccounts:wordpress`
@@ -48,24 +48,20 @@ To clone apps to a different cluster, you need a default bucket. When you add yo
 //+
 //image:screenshot-create-clone.gif["A screenshot of the app page where you can select the drop-down list in the actions column and select Clone."]
 
-. *Clone details*: Specify details for the clone:
+. Specify details for the clone:
 +
 * Enter a name.
-* Enter a namespace for the clone.
 * Choose a destination cluster for the clone.
+* Enter destination namespaces for the clone. Each source namespace associated with the app maps to a destination namespace.
+* Select *Next*.
 * Choose whether you want to create the clone from an existing snapshot or backup. If you don't select this option, Astra Control Center creates the clone from the app's current state.
+** If you chose to clone from an existing snapshot or backup, choose the snapshot or backup that you'd like to use.
 
-. *Source*: If you chose to clone from an existing snapshot or backup, choose the snapshot or backup that you'd like to use.
-//+
-//image:screenshot-clone-source.gif[]
-
-. Select *Review*.
-. *Clone Summary*: Review the details about the clone and select *Clone*.
-//+
-//image:screenshot-clone-summary.gif[]
+. Select *Next*.
+. Review the information about the clone and select *Clone*.
 
 .Result
 
-Astra Control Center clones that app based on the information that you provided. The clone operation is successful when the new app clone is in the `Available` state on the *Applications* page.
+Astra Control clones that app based on the information that you provided. The clone operation is successful when the new app clone is in `Healthy` state on the *Applications* page.
 
-NOTE: After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
+NOTE: After a data protection operation (clone, backup, or restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.

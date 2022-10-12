@@ -85,7 +85,7 @@ You can use the following Astra Control Center cluster CR options to create cust
 | Boolean
 | Optional
 | true (this is the default value)
-| Option that allows a user to disable deployment of Astra Plugin for VMware vSphere operator.
+| Option that allows a user to disable deployment of a plugin operator.
 
 | imageRegistry
 | Undefined
