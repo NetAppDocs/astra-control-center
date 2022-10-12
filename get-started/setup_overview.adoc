@@ -126,43 +126,42 @@ Adding object store bucket providers is essential if you want to back up your ap
 
 When you add a bucket, Astra Control marks one bucket as the default bucket indicator. The first bucket that you create becomes the default bucket.
 
-You don’t need a bucket if you are cloning your application configuration and persistent storage to the same cluster.
+You don't need a bucket if you are cloning your application configuration and persistent storage to the same cluster.
 
 Use any of the following bucket types:
 
 * NetApp ONTAP S3
 * NetApp StorageGRID S3
+* Microsoft Azure
 * Generic S3
 +
 NOTE: Amazon Web Services (AWS) and Google Cloud Platform (GCP) use the Generic S3 bucket type.
-* Microsoft Azure
-
 
 +
 NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon’s S3 support.
-
-* Microsoft Azure
 
 For instructions on how to add buckets using the Astra Control API, see link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
 
 .Steps
 
 . In the left navigation area, select *Buckets*.
-.. Select *Add*.
-.. Select the bucket type.
+. Select *Add*.
+. Select the bucket type.
 +
 NOTE: When you add a bucket, select the correct bucket provider and provide the right credentials for that provider. For example, the UI accepts NetApp ONTAP S3 as the type and accepts StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail.
 
-.. Create a new bucket name or enter an existing bucket name and optional description.
+. Create a new bucket name or enter an existing bucket name and optional description.
 +
-TIP: The bucket name and description appear as a backup location that you can choose later when you’re creating a backup. The name also appears during protection policy configuration.
+TIP: The bucket name and description appear as a backup location that you can choose later when you're creating a backup. The name also appears during protection policy configuration.
 
-.. Enter the name or IP address of the S3 endpoint.
-.. If you want this bucket to be the default bucket for all backups, check the `Make this bucket the default bucket for this private cloud` option.
+. Enter the name or IP address of the S3 endpoint. 
 +
 NOTE: This option does not appear for the first bucket you create.
 
-.. Continue by adding <<Add S3 access credentials,credential information>>.
+. Continue by adding <<Add S3 access credentials,credential information>>.
+. Select *Add*.
+
+NOTE: If you want this bucket to be the default bucket for all backups, see link:../use/manage-buckets.html#set-the-default-bucket[Set the default bucket].
 
 === Add S3 access credentials
 
@@ -171,8 +170,8 @@ Add S3 access credentials at any time.
 .Steps
 
 . From the Buckets dialog, select either the *Add* or *Use existing* tab.
-.. Enter a name for the credential that distinguishes it from other credentials in Astra Control.
-.. Enter the access ID and secret key by pasting the contents from your clipboard.
+. Enter a name for the credential that distinguishes it from other credentials in Astra Control.
+. Enter the access ID and secret key by pasting the contents from your clipboard.
 
 == Change the default storage class
 You can change the default storage class for a cluster.

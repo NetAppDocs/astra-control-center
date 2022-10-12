@@ -45,6 +45,7 @@ You can do these tasks related to managing buckets:
 
 * link:../get-started/setup_overview.html#add-a-bucket[Add a bucket]
 * <<Edit a bucket>>
+* <<Set the default bucket>>
 * <<Rotate or remove bucket credentials>>
 * <<Remove a bucket>>
 
@@ -60,13 +61,24 @@ You can change the access credential information for a bucket and change whether
 NOTE: When you add a bucket, select the correct bucket provider and provide the right credentials for that provider. For example, the UI accepts NetApp ONTAP S3 as the type and accepts StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail. See the link:../release-notes/known-issues.html#selecting-a-bucket-provider-type-with-credentials-for-another-type-causes-data-protection-failures[Release Notes].
 
 .Steps
-.	From the left navigation, select *Buckets*.
-. From the Options menu in the *Actions* column, select *Edit*.
+. From the left navigation, select *Buckets*.
+. From the menu in the *Actions* column, select *Edit*.
 . Change any information other than the bucket type.
 +
 TIP: You can't modify the bucket type.
 
 . Select *Update*.
+
+== Set the default bucket
+When you perform a clone across clusters, Astra Control requires a default bucket. Follow these steps to set a default bucket for all clusters.
+
+.Steps
+
+. Go to *Cloud instances*.
+. Select the menu in the *Actions* column for the cloud instance in the list.
+. Select *Edit*.
+. In the *Bucket* list, select the bucket you want to be the default.
+. Select *Save*.
 
 == Rotate or remove bucket credentials
 Astra Control uses bucket credentials to gain access and provide secret keys for an S3 bucket so that Astra Control Center can communicate with the bucket.
