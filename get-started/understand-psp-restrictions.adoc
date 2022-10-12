@@ -15,45 +15,7 @@ Astra Control Center supports privilege limitation through pod security policies
 Some Kubernetes distributions, such as RKE2, have a default pod security policy that is too restrictive, and causes problems when installing Astra Control Center.
 
 You can use the information and examples included here to understand the pod security policies that Astra Control Center creates, and configure pod security policies that provide the protection you need without interfering with Astra Control Center functions.
-////
-== Default policy for installation of Astra Control Center
-You can use the following resource file to create a default pod security policy that provides protection, but does not impede the installation of Astra Control Center.
 
-[source, yaml]
-----
-apiVersion: policy/v1beta1
-kind: PodSecurityPolicy
-metadata:
-  name: privileged
-spec:
-  allowPrivilegeEscalation: true
-  allowedCapabilities:
-  - SYS_ADMIN
-  fsGroup:
-    rule: RunAsAny
-  hostIPC: true
-  hostNetwork: true
-  hostPID: true
-  privileged: true
-  runAsUser:
-    rule: RunAsAny
-  seLinux:
-    rule: RunAsAny
-  supplementalGroups:
-    rule: RunAsAny
-  volumes:
-  - '*'
-----
-
-This configures a pod security policy with the following attributes:
-----
-NAME          PRIV   CAPS        SELINUX    RUNASUSER          FSGROUP    SUPGROUP   READONLYROOTFS   VOLUMES
-privileged    false              RunAsAny   MustRunAsNonRoot   RunAsAny   RunAsAny   false            *
-----
-
-After you install this default pod security policy, you can proceed with the normal Astra Control Center link:install_overview.html[installation instructions].
-
-////
 
 == PSPs installed by Astra Control Center
 Astra Control Center creates several pod security policies during installation. Some of these are permanent, and some of them are created during certain operations and are removed once the operation is complete.
@@ -123,6 +85,13 @@ kubectl get rolebinding
 
 NAME                                                  ROLE                                                AGE
 netapp-monitoring-role-binding-privileged             Role/netapp-monitoring-role-privileged              2m5s
+----
+
+== PSAs enforced by Astra Control Center
+During installation, Astra Control Center enables the enforcement of a pod security admission policy by adding the following label to the `pcloud` namespace:
+
+----
+pod-security.kubernetes.io/enforce: privileged
 ----
 
 == Enable network communication between namespaces
