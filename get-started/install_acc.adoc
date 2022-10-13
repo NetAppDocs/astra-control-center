@@ -823,4 +823,5 @@ kubectl logs --follow -n netapp-acc-operator $(kubectl get pods -n netapp-acc-op
 
 == What's next
 
-Complete the deployment by performing link:setup_overview.html[setup tasks].
+* (Optional) Depending on your environment, complete post-installation link:configure-after-install.html[configuration steps].
+* Complete the deployment by performing link:setup_overview.html[setup tasks].

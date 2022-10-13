@@ -33,7 +33,7 @@ Learn more about link:../get-started/requirements.html[Astra Control Center requ
 +
 Optionally, install Astra Control Center using Red Hat OperatorHub.
 Optionally, install Astra Control Center with a Cloud Volumes ONTAP storage backend. 
-
+* Optionally, depending on your environment, complete post-installation link:configure-after-install.html[configuration steps].
 [role="quick-margin-para"]
 Learn more about link:../get-started/install_overview.html[installing Astra Control Center].
 
