@@ -1,24 +1,24 @@
 ---
 sidebar: sidebar
-permalink: get-started/understand-psp-restrictions.html
+permalink: get-started/understand-pod-security.html
 keywords: login, Astra Control Center, web ui, tls, certificate
-summary: You need to understand how pod security policies work before installing Astra Control Center.
+summary: You need to understand how pod security works before installing Astra Control Center.
 ---
 
-= Understand pod security policy restrictions
+= Understand pod security
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/get-started/
 
-Astra Control Center supports privilege limitation through pod security policies (PSPs). Pod security policies enable you to limit what users or groups are able to run containers and what privileges those containers can have.
+Astra Control Center supports privilege limitation through pod security policies (PSPs) and pod security admission (PSA). These frameworks enable you to limit what users or groups are able to run containers and what privileges those containers can have.
 
-Some Kubernetes distributions, such as RKE2, have a default pod security policy that is too restrictive, and causes problems when installing Astra Control Center.
+Some Kubernetes distributions might have a default pod security configuration that is too restrictive, and causes problems when installing Astra Control Center.
 
-You can use the information and examples included here to understand the pod security policies that Astra Control Center creates, and configure pod security policies that provide the protection you need without interfering with Astra Control Center functions.
+You can use the information and examples included here to understand the pod security changes that Astra Control Center makes, and use a pod security approach that provides the protection you need without interfering with Astra Control Center functions.
 
 
 == PSPs installed by Astra Control Center
-Astra Control Center creates several pod security policies during installation. Some of these are permanent, and some of them are created during certain operations and are removed once the operation is complete.
+When you install Astra Control Center on Kubernetes 1.23 or 1.24, several pod security policies are created during installation. Some of these are permanent, and some of them are created during certain operations and are removed once the operation is complete. Pod security policies are not installed on Kubernetes 1.25 and newer.
 
 === PSPs created during installation
 During Astra Control Center installation, the Astra Control Center operator installs a custom pod security policy, a Role object, and a RoleBinding object to support the deployment of Astra Control Center services in the Astra Control Center namespace.
@@ -88,7 +88,7 @@ netapp-monitoring-role-binding-privileged             Role/netapp-monitoring-rol
 ----
 
 == PSAs enforced by Astra Control Center
-During installation, Astra Control Center enables the enforcement of a pod security admission policy by adding the following label to the `pcloud` namespace:
+During installation, Astra Control Center enables the enforcement of a pod security admission by adding the following label to the `pcloud` namespace:
 
 ----
 pod-security.kubernetes.io/enforce: privileged
