@@ -58,7 +58,7 @@ After you finish setting up Astra Control Center, here's what you might do next:
 [role="quick-margin-list"]
 * Manage an app. Learn more about link:../use/manage-apps.html[how to manage apps].
 * Protect apps by configuring protection policies for apps, replicating apps to remote systems, and cloning and migrating apps. Learn more about link:../use/protection-overview.html[how to protect apps].
-* Manage accounts (including users, roles, LDAP for user authentication, credentials, repository connections, and more). Learn more about link:../use/manage-users.html[how to manage users].
+* Manage accounts (including users, roles, LDAP for user authentication, credentials, and more). Learn more about link:../use/manage-local-users-and-roles.html[how to manage local users, roles, and LDAP].
 
 * Optionally, connect to NetApp Cloud Insights to display metrics on the health of your system, capacity, and throughput inside the Astra Control Center UI. Learn more about link:../use/monitor-protect.html[connecting to Cloud Insights].
 
