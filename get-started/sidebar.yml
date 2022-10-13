@@ -23,6 +23,8 @@ entries:
       url: /get-started/acc_operatorhub_install.html
     - title: Install Astra Control Center with a Cloud Volumes ONTAP storage backend
       url: /get-started/install_acc-cvo.html
+    - title: Configure Astra Control Center after installation
+      url: /get-started/configure-after-install.html
   - title: Set up Astra Control Center
     url: /get-started/setup_overview.html
     entries:
