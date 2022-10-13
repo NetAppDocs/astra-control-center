@@ -67,7 +67,7 @@ homepage:
           url: /use/clone-apps.html
         - title: Replicate apps to a remote system
           url: /use/replicate_snapmirror.html
-    - title: Use Astra Control API
+    - title: Use Astra Control REST API
       links:
         - title: Get started with the Astra Control API
           url: https://docs.netapp.com/us-en/astra-automation/get-started/before_get_started.html
