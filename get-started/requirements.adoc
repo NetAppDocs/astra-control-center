@@ -49,6 +49,9 @@ Ensure that the operating environment you choose to host Astra Control Center me
 |===
 |Component |Requirement
 
+|CPU extensions
+|The CPUs in all nodes of the hosting environment using the x86 instruction set must have AVX extensions enabled.
+
 |Storage backend capacity
 |At least 500GB available
 
