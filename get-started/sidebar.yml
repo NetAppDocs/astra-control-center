@@ -30,8 +30,8 @@ entries:
     entries:
       - title: Prerequisites for adding a cluster
         url: /get-started/add-cluster-reqs.html
-      - title: Add a custom TLS certificate
-        url: /get-started/add-custom-tls-certificate.html
+      #- title: Add a custom TLS certificate
+       # url: /get-started/add-custom-tls-certificate.html
      # - title: Create a custom pod security policy
       #  url: /get-started/acc-create-podsecuritypolicy.html
   - title: FAQ
