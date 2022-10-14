@@ -12,7 +12,13 @@ summary: To install Astra Control Center after addressing some environmental pre
 
 To install Astra Control Center, download the installation bundle from the NetApp Support Site and perform the following steps to install Astra Control Center Operator and Astra Control Center in your environment. You can use this procedure to install Astra Control Center in internet-connected or air-gapped environments.
 
-For Red Hat OpenShift environments, you can use an link:../get-started/acc_operatorhub_install.html[alternative procedure] to install Astra Control Center using OpenShift OperatorHub.
+.Other installation procedures
+[%collapsible]
+====
+* *With Red Hat OpenShift*: For Red Hat OpenShift environments, you can use an link:../get-started/acc_operatorhub_install.html[alternative procedure] to install Astra Control Center using OpenShift OperatorHub.
+* *With Cloud Volumes ONTAP*: To install Astra Control Center in Amazon Web Services (AWS), Google Cloud Platform (GCP) and Microsoft Azure with a Cloud Volumes ONTAP storage backend, link:../get-started/install_acc-cvo.html[use these procedures].
+====
+// End snippet
 
 .What you'll need
 * link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
@@ -295,6 +301,8 @@ spec:
   selector:
     matchLabels:
       control-plane: controller-manager
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -315,14 +323,39 @@ spec:
         - --health-probe-bind-address=:8081
         - --metrics-bind-address=127.0.0.1:8080
         - --leader-elect
-        command:
-        - /manager
         env:
         - name: ACCOP_LOG_LEVEL
           value: "2"
+        - name: ACCOP_HELM_INSTALLTIMEOUT
+          value: 5m
         *image: [your_registry_path]/acc-operator:[version x.y.z]*
         imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8081
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        name: manager
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8081
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        resources:
+          limits:
+            cpu: 300m
+            memory: 750Mi
+          requests:
+            cpu: 100m
+            memory: 75Mi
+        securityContext:
+          allowPrivilegeEscalation: false
       *imagePullSecrets: []*
+      securityContext:
+        runAsUser: 65532
+      terminationGracePeriodSeconds: 10
 ----
 
 . Install the Astra Control Center operator:
@@ -386,7 +419,7 @@ spec:
 
 .. (Optional) Add a first name `firstName` and last name `lastName` of the user associated with the account. You can perform this step now or later within the UI.
 .. (Optional) Change the `storageClass` value to another Trident storageClass resource if required by your installation.
-.. (Optional) If you want the cluster to be automatically managed by Astra Control Center after installation and you have already <<substep_kubeconfig_secret,created the secret containing the kubeconfig for this cluster>>, provide the name of the secret by adding a new field to this YAML file called `astraKubeConfigSecret: "acc-kubeconfig-cred or custom secret name"`
+.. (Optional) If you want the cluster to be automatically managed by Astra Control Center after installation and you have already <<substep_kubeconfig_secret,created the secret containing the kubeconfig for this cluster>>, remove the commenting around `astraKubeConfigSecret: "acc-kubeconfig-cred"` and provide the name of the secret.
 
 .. Complete one of the following steps:
 +
@@ -398,7 +431,7 @@ The default Astra Control Center installation sets up its gateway (`service/trae
 +
 This deploys the Astra Control Center `traefik` gateway as a Kubernetes LoadBalancer type service.
 +
-Astra Control Center uses a service of the type "LoadBalancer" (`svc/traefik` in the Astra Control Center namespace), and requires that it be assigned an accessible external IP address. If load balancers are permitted in your environment and you don’t already have one configured, you can use MetalLB or another external service load balancer to assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
+Astra Control Center uses a service of the type "LoadBalancer" (`svc/traefik` in the Astra Control Center namespace), and requires that it be assigned an accessible external IP address. If load balancers are permitted in your environment and you don't already have one configured, you can use MetalLB or another external service load balancer to assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
 +
 NOTE: For details about the service type of "LoadBalancer" and ingress, see link:../get-started/requirements.html[Requirements].
 
@@ -413,7 +446,7 @@ spec:
   *accountName: "Example"*
   astraVersion: "ASTRA_VERSION"
   *astraAddress: "astra.example.com"*
-  *astraKubeConfigSecret: "acc-kubeconfig-cred or custom secret name"*
+  *astraKubeConfigSecret: "acc-kubeconfig-cred"*
   *ingressType: "Generic"*
   autoSupport:
     *enrolled: true*

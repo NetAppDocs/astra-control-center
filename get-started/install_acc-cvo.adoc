@@ -51,9 +51,9 @@ Astra Control Center requires the following operational environment for AWS:
 
 * Red Hat OpenShift Container Platform 4.8
 
-NOTE: Ensure that the operating environment you choose to host Astra Control Center meets the basic resource requirements outlined in the environment’s official documentation.
+NOTE: Ensure that the operating environment you choose to host Astra Control Center meets the basic resource requirements outlined in the environment's official documentation.
 
-Astra Control Center requires the following resources in addition to the environment’s resource requirements:
+Astra Control Center requires the following resources in addition to the environment's resource requirements:
 
 
 [cols=2*,options="header",cols="1h,2a"]
