@@ -64,7 +64,7 @@ Setting up a replication relationship involves the following that make up the re
 
 . Enter or select the following information:
 +
-* Destination cluster
+* *Destination cluster*: Enter a destination cluster that is different from the source. 
 * *Destination storage class*: Select or enter the storage class that uses the paired SVM on the destination ONTAP cluster.
 * *Replication type*: "Asynchronous" is currently the only replication type available. 
 * *Destination namespace*: Enter a new or existing destination namespace for the destination cluster.
