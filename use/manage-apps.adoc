@@ -107,7 +107,7 @@ You can add the following `apiVersions` (which are the groups combined with the 
 . Choose the cluster on which your application is running in the *Cluster* drop-down list.
 . Choose a namespace for your application from the *Namespace* drop-down list.
 +
-NOTE: Apps can be defined within one or more specified namespaces on a single cluster. Astra Control does not support the ability for apps to span multiple clusters.
+NOTE: Apps can be defined within one or more specified namespaces on a single cluster using Astra Control. An app can contain resources spanning multiple namespaces within the same cluster. Astra Control does not support the ability for apps to be defined across multiple clusters.
 
 . (Optional) Enter a label for the Kubernetes resources in each namespace. You can specify a single label or label selector criteria (query).
 +
