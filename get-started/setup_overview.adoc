@@ -14,7 +14,7 @@ Astra Control Center supports and monitors ONTAP as the storage backend. After y
 
 .Tasks
 * <<Add a license for Astra Control Center>>
-* <<Prepare your environment to add a cluster>>
+* <<Complete prerequisites for cluster management>>
 * <<Add cluster>>
 * <<Add a storage backend>>
 * <<Add a bucket>>
@@ -49,7 +49,7 @@ The *Account* > *License* page displays the license information, expiration date
 
 NOTE: If you have an evaluation license, be sure you store your account ID to avoid data loss in the event of Astra Control Center failure if you are not sending ASUPs.
 
-== Prepare your environment to add a cluster
+== Complete prerequisites for cluster management
 
 You should ensure that the prerequisite conditions are met before you add a cluster. You should also run eligibility checks to ensure that your cluster is ready to be added to Astra Control Center and create roles for cluster management.
 //THIS SECTION REFERENCED IN UI. DO NOT MODIFY WITHOUT NOTIFYING UX.
@@ -104,7 +104,7 @@ ontap-gold (default)   csi.trident.netapp.io          Delete          Immediate 
 thin                   kubernetes.io/vsphere-volume   Delete          Immediate           false                  6d
 ----
 
-== Create an admin-role kubeconfig
+=== Create an admin-role kubeconfig
 
 Ensure that you have the following on your machine before you do the steps:
 
@@ -293,7 +293,7 @@ When Astra Control manages a cluster, it keeps track of the cluster's default st
 
 .What you'll need
 
-* Before you add a cluster, review and perform the necessary <<Prepare your environment to add a cluster,prerequisite tasks>>.
+* Before you add a cluster, review and perform the necessary <<Complete prerequisites for cluster management,prerequisite tasks>>.
 
 .Steps
 . From the *Dashboard* in the Astra Control Center UI, select *Add* in the Clusters section.
