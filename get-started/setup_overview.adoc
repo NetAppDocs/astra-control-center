@@ -14,7 +14,7 @@ Astra Control Center supports and monitors ONTAP as the storage backend. After y
 
 .Tasks
 * <<Add a license for Astra Control Center>>
-* <<Complete prerequisites for cluster management>>
+* <<Prepare your environment for cluster management using Astra Control>>
 * <<Add cluster>>
 * <<Add a storage backend>>
 * <<Add a bucket>>
@@ -49,9 +49,9 @@ The *Account* > *License* page displays the license information, expiration date
 
 NOTE: If you have an evaluation license, be sure you store your account ID to avoid data loss in the event of Astra Control Center failure if you are not sending ASUPs.
 
-== Complete prerequisites for cluster management
+== Prepare your environment for cluster management using Astra Control
 
-You should ensure that the prerequisite conditions are met before you add a cluster. You should also run eligibility checks to ensure that your cluster is ready to be added to Astra Control Center and create roles for cluster management.
+You should ensure that the following prerequisite conditions are met before you add a cluster. You should also run eligibility checks to ensure that your cluster is ready to be added to Astra Control Center and create roles for cluster management.
 //THIS SECTION REFERENCED IN UI. DO NOT MODIFY WITHOUT NOTIFYING UX.
 
 .What you'll need to add and manage a cluster
@@ -293,7 +293,7 @@ When Astra Control manages a cluster, it keeps track of the cluster's default st
 
 .What you'll need
 
-* Before you add a cluster, review and perform the necessary <<Complete prerequisites for cluster management,prerequisite tasks>>.
+* Before you add a cluster, review and perform the necessary <<Prepare your environment for cluster management using Astra Control,prerequisite tasks>>.
 
 .Steps
 . From the *Dashboard* in the Astra Control Center UI, select *Add* in the Clusters section.
