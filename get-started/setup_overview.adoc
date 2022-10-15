@@ -293,7 +293,7 @@ When Astra Control manages a cluster, it keeps track of the cluster's default st
 
 .What you'll need
 
-* Before you add a cluster, review and perform the necessary <<prepare your environment to add a cluster,prerequisite tasks>>.
+* Before you add a cluster, review and perform the necessary <<Prepare your environment to add a cluster,prerequisite tasks>>.
 
 .Steps
 . From the *Dashboard* in the Astra Control Center UI, select *Add* in the Clusters section.
