@@ -27,7 +27,7 @@ entries:
       url: /get-started/configure-after-install.html
   - title: Set up Astra Control Center
     url: /get-started/setup_overview.html
-    entries:
+    # entries:
       #- title: Add a custom TLS certificate
        # url: /get-started/add-custom-tls-certificate.html
      # - title: Create a custom pod security policy
