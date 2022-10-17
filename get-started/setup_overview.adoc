@@ -18,6 +18,7 @@ Astra Control Center supports and monitors ONTAP as the storage backend. After y
 * <<Add cluster>>
 * <<Add a storage backend>>
 * <<Add a bucket>>
+* <<Change the default storage class>>
 
 == Add a license for Astra Control Center
 //REFERENCED IN UI and NSS downloads. DO NOT MODIFY WITHOUT NOTIFYING STAKEHOLDERS.
@@ -96,9 +97,14 @@ NOTE: If Trident is not installed or the installed version is not the latest, yo
 
 . Check if the storage classes are using the supported Trident drivers. The provisioner name should be `csi.trident.netapp.io`. See the following example:
 +
+[source,sh]
 ----
 kubectl get sc
-
+----
++
+Sample response:
++
+----
 NAME                   PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
 ontap-gold (default)   csi.trident.netapp.io          Delete          Immediate           true                   5d23h
 thin                   kubernetes.io/vsphere-volume   Delete          Immediate           false                  6d
@@ -264,9 +270,8 @@ rm ${KUBECONFIG_FILE}.tmp
 ----
 source create-kubeconfig.sh
 ----
-. (*Optional*) Rename the kubeconfig to a meaningful name for your cluster. Protect your cluster credential.
+. (Optional) Rename the kubeconfig to a meaningful name for your cluster. Protect your cluster credential.
 +
-[source,sh]
 ----
 chmod 700 create-kubeconfig.sh
 mv kubeconfig-sa.txt YOUR_CLUSTER_NAME_kubeconfig
@@ -281,11 +286,11 @@ Now that you've verified that the prerequisites are met, you're ready to <<Add c
 //REFERENCED IN UI. DO NOT MODIFY WITHOUT NOTIFYING UX.
 To begin managing your apps, add a Kubernetes cluster and manage it as a compute resource. You have to add a cluster for Astra Control Center to discover your Kubernetes applications.
 
-TIP: We recommend that Astra Control Center manage the cluster it is deployed on first before you add other clusters to Astra Control Center to manage. Having the initial cluster under management is necessary to send Kubemetrics data and cluster-associated data for metrics and troubleshooting. You can use the *Add Cluster* feature to manage a cluster with Astra Control Center.
+TIP: We recommend that Astra Control Center manage the cluster it is deployed on first before you add other clusters to Astra Control Center to manage. Having the initial cluster under management is necessary to send Kubemetrics data and cluster-associated data for metrics and troubleshooting.
 
 [NOTE]
 ======================
-When Astra Control manages a cluster, it keeps track of the cluster's default storage class. If you change the storage class using `kubectl` commands, Astra Control reverts the change. To change the default storage class in a cluster managed by Astra Control, use one of the following methods:
+When Astra Control manages a cluster, it keeps track of the cluster's default storage class. If you change the storage class using kubectl commands, Astra Control reverts the change. To change the default storage class in a cluster managed by Astra Control, use one of the following methods:
 
 * Use the Astra Control API `PUT /managedClusters` endpoint, and assign a different default storage class with the `DefaultStorageClass` parameter.
 * Use the Astra Control web UI to assign a different default storage class. See <<Change the default storage class>>.
