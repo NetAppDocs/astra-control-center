@@ -156,8 +156,8 @@ Astra Control Center supports the following storage backends.
 To use Astra Control Center, include the following ONTAP licenses, depending on what you need to accomplish: 
 
 *	FlexClone
-*	SnapMirror (Optional. Needed only for replication to remote systems using SnapMirror technology)
-*	S3 license (Optional. Needed only for ONTAP S3 buckets)
+*	SnapMirror: Optional. Needed only for replication to remote systems using SnapMirror technology. Refer to  https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html#snapmirror-cloud-license[SnapMirror license information^].
+*	S3 license: Optional. Needed only for ONTAP S3 buckets
 
 You might want to check whether your ONTAP system has the required licenses. Refer to https://docs.netapp.com/us-en/ontap/system-admin/manage-licenses-concept.html[Manage ONTAP licenses^].
 
@@ -277,17 +277,15 @@ If you do have access to the internet, decide which of the following NetApp syst
 
 == License
 
-Astra Control Center requires an Astra Control Center license for full functionality. Obtain an evaluation license or full license from NetApp. Without a license, you can't do any of the following:
+Astra Control Center requires an Astra Control Center license for full functionality. Obtain an evaluation license or full license from NetApp. You need a license to protect your applications and data. Refer to the Astra Control Center link:../get-started/intro.html[features] for details.  
 
-* Define apps
-* Create snapshots or clones of existing apps
-* Configure data protection policies
+You can obtain a NetApp license file (NLF) when you download Astra Control Center from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^]. 
 
 If you want to try Astra Control Center, you can link:setup_overview.html#add-a-full-or-evaluation-license[use a 90-day evaluation license].
 
-For details about licenses needed for ONTAP storage backends, see <<Supported storage backends>>.
+For details about licenses needed for ONTAP storage backends, refer to <<Supported storage backends>>.
 
-To learn more about how licenses work, see link:../concepts/licensing.html[Licensing].
+For details about how licenses work, refer to link:../concepts/licensing.html[Licensing].
 
 == Ingress for on-premises Kubernetes clusters
 
@@ -394,13 +392,11 @@ NOTE: You can deploy Astra Control Center in a dual-stack Kubernetes cluster, an
 |Trident service communication with each managed cluster’s Trident instance
 ////
 
-////
-== Storage backend requirements
-Astra Control Center supports the following storage backends. Some storage backends require specific configuration to work correctly.
 
-* NetApp Cloud Volumes ONTAP
-* SolidFire Element OS
-////
+
+
+
+
 == Supported web browsers
 
 Astra Control Center supports recent versions of Firefox, Safari, and Chrome with a minimum resolution of 1280 x 720.

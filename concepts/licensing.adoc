@@ -13,19 +13,26 @@ summary: Learn about how the actions you can perform with Astra Control Center d
 [.lead]
 Astra Control Center requires a license to be installed for the full app data management functionality to be enabled. When you deploy Astra Control Center without a license, a banner is displayed in the web UI, warning that system functionality is limited.
 
+You need a license to protect your applications and data. Refer to the Astra Control Center link:../get-started/intro.html[features] for details. 
+
+You can obtain a NetApp license file (NLF) when you download Astra Control Center from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^]. 
+
+If you want to try Astra Control Center, you can link:setup_overview.html#add-a-full-or-evaluation-license[use a 90-day evaluation license].
+
+For details about licenses needed for ONTAP storage backends, refer to link:../get-started/requirements.html[Supported storage backends].
 
 //Astra Control Center has full functionality when a license is installed, and reduced functionality without a license. Learn about how the actions you can perform with Astra Control Center differ based on license status, and about how your use of Astra Control Center affects license consumption.
 
 //When no license is installed, the Astra Control Center web UI displays a banner with a message warning that system functionality is limited. In addition to the banner, web UI buttons and API functionality are disabled for the following actions and features:
 
-The following operations require a valid license:
+//The following operations require a valid license:
 
-* Managing new applications
-* Creating snapshots or backups
-* Configuring a protection policy to schedule snapshots or backups
-* Restoring from a snapshot or backup
-* Cloning from a snapshot or current state
-* Replicating applications to a remote system
+//* Managing new applications
+//* Creating snapshots or backups
+//* Configuring a protection policy to schedule snapshots or backups
+//* Restoring from a snapshot or backup
+//* Cloning from a snapshot or current state
+//* Replicating applications to a remote system
 
 //* Applying a new license if the number of CPU cores currently managed by the Astra Control Center instance exceeds the CPU core count in the license being applied
 
