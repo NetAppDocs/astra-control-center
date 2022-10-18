@@ -67,9 +67,11 @@ Setting up a replication relationship involves the following that make up the re
 * *Destination cluster*: Enter a destination cluster that is different from the source.  
 * *Destination storage class*: Select or enter the storage class that uses the paired SVM on the destination ONTAP cluster.
 * *Replication type*: "Asynchronous" is currently the only replication type available. 
-* *Destination namespace*: Enter a new or existing destination namespace for the destination cluster.
+* *Destination namespace*: Enter new or existing destination namespaces for the destination cluster.
 +
-NOTE: Any conflicting resources in the selected namespace will be overwritten. 
+NOTE: You cannot use the same destination namespace for more than one source namespace, for example, ns1 and ns2 can't both replicate to the same ns-dest. Any conflicting resources in the selected namespaces will be overwritten. 
+
+* (Optional) Add additional namespaces by selecting *Add namespace* and choosing the namespace from the drop-down list.
 
 * *Replication frequency*: Set how often you want Astra Control to take a Snapshot and replicate it to its destination.
 * *Offset*: Set the number of minutes from the top of the hour that you want Astra Control to take a Snapshot. You might want to use an offset so that it doesn't coincide with other scheduled operations. For example, if you want to take the Snapshot every 5 minutes starting at 10:02, enter "02" as the offset minutes. The result would be 10:02, 10:07, 10:12, etc.
