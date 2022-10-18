@@ -409,28 +409,22 @@ NOTE: An annotated sample YAML follows these steps.
 .. *email*: Change the `email` string to the default initial administrator address. Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>.
 .. *ingressType*: Add one of the following ingress types:
 +
-.Other ingress controller (`ingressType:Generic`)
-[%collapsible]
-====
-This is the default action with Astra Control Center. After Astra Control Center is deployed, you will need to configure the ingress controller to expose Astra Control Center with a URL.
-
-The default Astra Control Center installation sets up its gateway (`service/traefik`) to be of the type `ClusterIP`. This default installation requires you to additionally set up a Kubernetes IngressController/Ingress to route traffic to it. If you want to use an ingress, see link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[Set up ingress for load balancing].
-====
-// End snippet
+* Other ingress controller (`ingressType:Generic`)
 +
-.Service load balancer (`ingressType:AccTraefik`)
-[%collapsible]
-====
+This is the default action with Astra Control Center. After Astra Control Center is deployed, you will need to configure the ingress controller to expose Astra Control Center with a URL.
++
+The default Astra Control Center installation sets up its gateway (`service/traefik`) to be of the type `ClusterIP`. This default installation requires you to additionally set up a Kubernetes IngressController/Ingress to route traffic to it. If you want to use an ingress, see link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[Set up ingress for load balancing].
+
++
+* Service load balancer (`ingressType:AccTraefik`)
++
 If you don't want to install an IngressController or create an Ingress resource, set `ingressType` to `AccTraefik`.
-
++
 This deploys the Astra Control Center `traefik` gateway as a Kubernetes LoadBalancer type service.
-
++
 Astra Control Center uses a service of the type "LoadBalancer" (`svc/traefik` in the Astra Control Center namespace), and requires that it be assigned an accessible external IP address. If load balancers are permitted in your environment and you don't already have one configured, you can use MetalLB or another external service load balancer to assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
-
++
 NOTE: For details about the service type of "LoadBalancer" and ingress, see link:../get-started/requirements.html[Requirements].
-
-====
-// End snippet
 
 .. *autoSupport*: Change `enrolled` for AutoSupport to `false` for sites without internet connectivity or retain `true` for connected sites.
 .. *(Optional) firstName and LastName*: Add a first name `firstName` and last name `lastName` of the user associated with the account. You can perform this step now or later within the UI.
