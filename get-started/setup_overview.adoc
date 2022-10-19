@@ -134,6 +134,7 @@ Use any of the following bucket types:
 * NetApp StorageGRID S3
 * Microsoft Azure
 * Generic S3
+* Microsoft Azure
 +
 NOTE: Amazon Web Services (AWS) and Google Cloud Platform (GCP) use the Generic S3 bucket type.
 
