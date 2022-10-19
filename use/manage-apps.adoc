@@ -44,7 +44,7 @@ After you've link:../get-started/setup_overview.html#add-cluster[added your clus
 
 == Manage apps
 
-After Astra Control discovers namespaces on your clusters, you can define applications that you want to manage. You can choose to link:../learn/app-management.html[manage an entire namespace as a single application or manage resources of an app in one or more namespaces]. It all comes down to the level of granularity that you need for data protection operations.
+After Astra Control discovers namespaces on your clusters, you can define applications that you want to manage. You can choose to <<Define resources to manage as an app,manage an app spanning one or more namespaces>> or <<Define a namespace to manage as an app,manage an entire namespace as a single application>>. It all comes down to the level of granularity that you need for data protection operations.
 
 Although Astra Control enables you to separately manage both levels of the hierarchy (the namespace and the apps in that namespace or across namespaces), the best practice is to choose one or the other. Actions that you take in Astra Control can fail if the actions take place at the same time at both the namespace and app level.
 
