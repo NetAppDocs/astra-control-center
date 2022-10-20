@@ -54,6 +54,8 @@ entries:
     url: /use/manage-buckets.html
   - title: Manage the storage backend
     url: /use/manage-backend.html
+  - title: Monitor running tasks
+    url: /use/monitor-running-tasks.html
   - title: Monitor infrastructure with Cloud Insights and Fluentd
     url: /use/monitor-protect.html
   - title: Unmanage apps and clusters
