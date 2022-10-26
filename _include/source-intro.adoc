@@ -15,7 +15,6 @@ Astra Control offers critical capabilities for Kubernetes application data lifec
 * Visualize application health and protection status
 * Use a user interface or an API to implement your backup and migration workflows
 
-Astra Control continually watches your compute for state changes, so it’s aware of any new apps that you add along the way.
 
 
 == Deployment models
