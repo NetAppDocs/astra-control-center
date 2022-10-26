@@ -18,29 +18,36 @@ Astra Control Center requires a license to be installed for the full app data ma
 
 //When no license is installed, the Astra Control Center web UI displays a banner with a message warning that system functionality is limited. In addition to the banner, web UI buttons and API functionality are disabled for the following actions and features:
 
-The following operations require a valid license:
+You need a license to protect your applications and data. Refer to Astra Control Center link:../concepts/intro.html[features] for details.
 
-* Managing new applications
-* Creating snapshots or backups
-* Configuring a protection policy to schedule snapshots or backups
-* Restoring from a snapshot or backup
-* Cloning from a snapshot or current state
-* Replicating applications to a remote system
+You can obtain a NetApp license file (NLF) when you download Astra Control Center from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site]. 
+
+If you want to try Astra Control Center, you can use a link:../get-started/setup_overview.html[90-day evaluation license].
+
+For details about licenses needed for ONTAP storage backends, refer to link:../get-started/requirements.html[supported storage backends].
+
+//The following operations require a valid license:
+
+//* Managing new applications
+//* Creating snapshots or backups
+//* Configuring a protection policy to schedule snapshots or backups
+//* Restoring from a snapshot or backup
+//* Cloning from a snapshot or current state
+//* Replicating applications to a remote system
 
 //* Applying a new license if the number of CPU cores currently managed by the Astra Control Center instance exceeds the CPU core count in the license being applied
 
-NOTE: You can add a cluster, add a bucket, and manage an Astra Data Store storage backend without a license. However, you need a valid Astra Control Center license to manage apps using Astra Data Store as a storage backend.
+NOTE: You can add a cluster, add a bucket, and manage a storage backend without a license.
 
 //NOTE: On Astra Control Center systems without a license, you can always add a cluster or add a bucket.
 
 == How license consumption is calculated
 
-When you add a new cluster to Astra Control Center, it doesn't count toward consumed licenses until at least one application running on the cluster is managed by Astra Control Center. You can also add an Astra Data Store storage backend to Astra Control Center without affecting license consumption. This enables you to manage an Astra Data Store backend from an unlicensed Astra Control Center system.
+When you add a new cluster to Astra Control Center, it doesn't count toward consumed licenses until at least one application running on the cluster is managed by Astra Control Center. 
 
 
-When you start managing an app on a cluster, all of that cluster’s CPU units are included in the Astra Control Center license consumption. If the cluster has a licensed deployment of Astra Data Store, those CPU units are excluded from the Astra Control Center license consumption calculation.
+When you start managing an app on a cluster, all of that cluster’s CPU units are included in the Astra Control Center license consumption. 
 
-NOTE: CPU units from Evaluation Deployments of Astra Data Store are not excluded from the Astra Control Center license consumption.
 
 //However, if all of the managed apps on a cluster are Astra Control Center apps, the cluster is ignored in the consumption calculation. This enables you to use an unlicensed Astra Control Center system to manage another Astra Control Center system and back up and restore its Astra Control Center apps.
 
