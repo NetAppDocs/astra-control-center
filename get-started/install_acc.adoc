@@ -23,13 +23,6 @@ To install Astra Control Center, download the installation bundle from the NetAp
 .What you'll need
 * link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
 * If you have configured or want to configure pod security policies in your environment, familiarize yourself with pod security policies and how they affect Astra Control Center installation. See link:understand-psp-restrictions.html[Understand pod security policy restrictions].
-* Ensure all cluster operators are in a healthy state and available.
-+
-[source,sh]
-----
-kubectl get clusteroperators
-----
-
 * Ensure all API services are in a healthy state and available:
 +
 [source,sh]
@@ -53,7 +46,7 @@ The Astra Control Center installation process does the following:
 
 IMPORTANT: Do not execute the following command during the entirety of the installation process to avoid deleting all Astra Control Center pods: `kubectl delete -f astra_control_center_operator_deploy.yaml`
 
-NOTE: If you are using Red Hat’s Podman instead of Docker Engine, Podman commands can be used in place of Docker commands.
+NOTE: If you are using Red Hat's Podman instead of Docker Engine, Podman commands can be used in place of Docker commands.
 
 .Steps
 
@@ -131,7 +124,7 @@ cd acc
 +
 
 * Replace BUNDLE_FILE with the name of the Astra Control bundle file (for example, `acc.manifest.yaml`).
-* Replace MY_REGISTRY with the URL of the Docker repository.
+* Replace MY_REGISTRY with the URL of the Docker repository. The URL must include the exact directory that contains the images.
 * Replace MY_REGISTRY_USER with the user name.
 * Replace MY_REGISTRY_TOKEN with an authorized token for the registry.
 +

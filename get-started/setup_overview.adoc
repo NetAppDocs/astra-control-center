@@ -372,7 +372,7 @@ Use any of the following bucket types:
 NOTE: Amazon Web Services (AWS) and Google Cloud Platform (GCP) use the Generic S3 bucket type.
 
 +
-NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon’s S3 support.
+NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon's S3 support.
 
 For instructions on how to add buckets using the Astra Control API, see link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
 
@@ -421,7 +421,7 @@ You can change the default storage class for a cluster.
 
 == What's next?
 
-Now that you’ve logged in and added clusters to Astra Control Center, you're ready to start using Astra Control Center's application data management features.
+Now that you've logged in and added clusters to Astra Control Center, you're ready to start using Astra Control Center's application data management features.
 
 * link:../use/manage-local-users-and-roles.html[Manage local users and roles]
 * link:../use/manage-apps.html[Start managing apps]

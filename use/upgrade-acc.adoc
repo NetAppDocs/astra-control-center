@@ -13,8 +13,15 @@ summary: To upgrade Astra Control Center, you'll download the bundle and upgrade
 To upgrade Astra Control Center, download the installation bundle from the NetApp Support Site and complete these instructions to upgrade the Astra Control Center components in your environment. You can use this procedure to upgrade Astra Control Center in internet-connected or air-gapped environments.
 
 .What you'll need
-* link:../get-started/requirements.html[Before you begin upgrade, ensure your environment still meets the minimum requirements for Astra Control Center deployment].
-* Ensure all cluster operators are in a healthy state and available.
+* Before you upgrade, refer to link:../get-started/requirements.html#operational-environment-requirements[Operational environment requirements^] to ensure your environment still meets the minimum requirements for Astra Control Center deployment. Your environment should have the following:
+
+** A supported Kubernetes distribution
+** Sufficient cluster resources
+** A supported Astra Trident version
+** A registry you can use to push and upload Astra Control Center images 
+** A default storage class
+
+* If cluster operators are in use, ensure all cluster operators are in a healthy state and available.
 +
 ----
 kubectl get clusteroperators
@@ -27,7 +34,7 @@ kubectl get apiservices
 ----
 
 * If you use or plan to use multiple namespaces with your apps in Astra Control, link:../use/manage-roles.html#add-a-namespace-constraint-to-a-role[modify user roles with namespace constraints] before you upgrade.
-* Log out of your Astra Control Center.
+* Log out of your Astra Control Center before you begin the upgrade.
 
 .About this task
 The Astra Control Center upgrade process guides you through the following high-level steps:
@@ -46,7 +53,7 @@ IMPORTANT: Do not execute the following command during the entirety of the upgra
 
 TIP: Perform upgrades in a maintenance window when schedules, backups, and snapshots are not running.
 
-NOTE: Podman commands can be used in place of Docker commands if you are using Red Hat’s Podman instead of Docker Engine.
+NOTE: Podman commands can be used in place of Docker commands if you are using Red Hat's Podman instead of Docker Engine.
 
 == Download the Astra Control Center bundle
 
@@ -86,7 +93,7 @@ cd acc
 +
 
 * Replace BUNDLE_FILE with the name of the Astra Control bundle file (for example, `acc.manifest.yaml`).
-* Replace MY_REGISTRY with the URL of the Docker repository.
+* Replace MY_REGISTRY with the URL of the Docker repository.  The URL must include the exact directory that contains the images.
 * Replace MY_REGISTRY_USER with the user name.
 * Replace MY_REGISTRY_TOKEN with an authorized token for the registry.
 +

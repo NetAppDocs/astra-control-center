@@ -45,7 +45,7 @@ Each role provides the following permissions:
 For more information on adding constraints, see link:manage-local-users-and-roles.html[Manage local users and roles].
 . Select *Invite users*.
 +
-The user receives an email informing them that they’ve been invited to Astra Control Center. The email includes temporary password, which they'll need to change upon first login.
+The user receives an email informing them that they've been invited to Astra Control Center. The email includes temporary password, which they'll need to change upon first login.
 
 == Add users
 

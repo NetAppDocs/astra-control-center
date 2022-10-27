@@ -105,7 +105,7 @@ cd acc
 +
 
 * Replace BUNDLE_FILE with the name of the Astra Control bundle file (for example, `acc.manifest.yaml`).
-* Replace MY_REGISTRY with the URL of the Docker repository.
+* Replace MY_REGISTRY with the URL of the Docker repository.  The URL must include the exact directory that contains the images.
 * Replace MY_REGISTRY_USER with the user name.
 * Replace MY_REGISTRY_TOKEN with an authorized token for the registry.
 +

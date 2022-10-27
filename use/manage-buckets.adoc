@@ -14,7 +14,7 @@ An object store bucket provider is essential if you want to back up your applica
 
 
 
-You don’t need a bucket if you are cloning your application configuration and persistent storage to the same cluster.
+You don't need a bucket if you are cloning your application configuration and persistent storage to the same cluster.
 
 // Cloning to a different cluster using an existing backup or snapshot  - requires a bucket.
 
@@ -28,7 +28,7 @@ Use one of the following Amazon Simple Storage Service (S3) bucket providers:
 NOTE: Amazon Web Services (AWS) and Google Cloud Platform (GCP) use the Generic S3 bucket type.
 
 +
-NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon’s S3 support.
+NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon's S3 support.
 
 // TIP: Ensure you use a single bucket type; otherwise, mixing bucket types can cause errors.
 

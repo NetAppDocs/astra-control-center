@@ -38,7 +38,7 @@ NOTE: You can add a cluster, add a bucket, and manage a storage backend without 
 When you add a new cluster to Astra Control Center, it doesn't count toward consumed licenses until at least one application running on the cluster is managed by Astra Control Center.
 
 
-When you start managing an app on a cluster, all of that cluster’s CPU units are included in the Astra Control Center license consumption.
+When you start managing an app on a cluster, all of that clusters CPU units are included in the Astra Control Center license consumption.
 
 
 //However, if all of the managed apps on a cluster are Astra Control Center apps, the cluster is ignored in the consumption calculation. This enables you to use an unlicensed Astra Control Center system to manage another Astra Control Center system and back up and restore its Astra Control Center apps.

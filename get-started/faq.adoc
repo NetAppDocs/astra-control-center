@@ -95,7 +95,7 @@ In some situations, Astra Control will automatically create a snapshot as part o
 
 *My application uses several PVs. Will Astra Control take snapshots and backups of all these PVCs?*
 
-Yes. A snapshot operation on an application by Astra Control includes snapshot of all the PVs that are bound to the application’s PVCs.
+Yes. A snapshot operation on an application by Astra Control includes snapshot of all the PVs that are bound to the application's PVCs.
 
 *Can I manage snapshots taken by Astra Control directly through a different interface or object storage?*
 

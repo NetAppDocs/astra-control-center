@@ -189,9 +189,9 @@ Before you deploy Astra Control Center in GCP, you will need the following items
 === Operational environment requirements for GCP
 
 
-NOTE: Ensure that the operating environment you choose to host Astra Control Center meets the basic resource requirements outlined in the environment’s official documentation.
+NOTE: Ensure that the operating environment you choose to host Astra Control Center meets the basic resource requirements outlined in the environment's official documentation.
 
-Astra Control Center requires the following resources in addition to the environment’s resource requirements:
+Astra Control Center requires the following resources in addition to the environment's resource requirements:
 
 
 [cols=2*,options="header",cols="1h,2a"]
@@ -375,9 +375,9 @@ Before you deploy Astra Control Center in Azure, you will need the following ite
 
 === Operational environment requirements for Azure
 
-Ensure that the operating environment you choose to host Astra Control Center meets the basic resource requirements outlined in the environment’s official documentation.
+Ensure that the operating environment you choose to host Astra Control Center meets the basic resource requirements outlined in the environment's official documentation.
 
-Astra Control Center requires the following resources in addition to the environment’s resource requirements:
+Astra Control Center requires the following resources in addition to the environment's resource requirements:
 
 See link:../get-started/requirements.html#operational-environment-requirements[Astra Control Center operational environment requirements].
 
