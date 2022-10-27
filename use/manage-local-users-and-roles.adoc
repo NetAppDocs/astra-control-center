@@ -10,7 +10,7 @@ summary: Manage users and roles on your Astra Control Center system.
 :icons: font
 :imagesdir: ../media/use/
 
-You can invite, add, remove, and edit users of your Astra Control Center installation using the Astra Control UI. You can use the Astra Control UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to manage users.
+You can add, remove, and edit users of your Astra Control Center installation using the Astra Control UI. You can use the Astra Control UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to manage users.
 
 You can also use LDAP to perform authentication for selected users.
 
@@ -21,6 +21,7 @@ LDAP is an industry standard protocol for accessing distributed directory inform
 * link:manage-remote-users-groups.html[Use the Astra Control UI to manage remote users and groups]
 * link:manage-remote-authentication.html[Use the Astra Control UI to manage remote authentication]
 
+////
 == Invite users
 
 Account Owners and Admins can invite new users to Astra Control Center.
@@ -46,6 +47,8 @@ For more information on adding constraints, see link:manage-local-users-and-role
 . Select *Invite users*.
 +
 The user receives an email informing them that they’ve been invited to Astra Control Center. The email includes temporary password, which they'll need to change upon first login.
+
+////
 
 == Add users
 
@@ -127,7 +130,7 @@ You can manage roles by adding namespace constraints and restricting user roles 
 
 === Add a namespace constraint to a role
 
-An Admin or Owner user can add namespace constraints.
+An Admin or Owner user can add namespace constraints to Member or Viewer roles.
 
 .Steps
 
