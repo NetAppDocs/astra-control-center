@@ -159,7 +159,19 @@ kubectl delete cert cert-manager-certificates -n <ACC-deployment-namespace>
 kubectl delete secret secure-testing-cert -n <ACC-deployment-namespace>
 ----
 
-=== Add a new certificate
+=== Add a new certificate using the Astra Control Center UI
+Add a TLS certificate that is signed by a CA using Astra Control Center UI. This method is useful for adding certificates for authentication of remote connections (such as an LDAP server).
+
+.Steps
+
+. Go to *Account*.
+. Select the *Certificates* tab.
+. Select *Add*.
+. Either upload the `.pem` file or paste the contents of the file from your clipboard.
+. Select the *Trusted* check box.
+. Select *Add certificate*.
+
+=== Add a new certificate using the command line
 
 Add a new TLS certificate that is signed by a CA.
 
