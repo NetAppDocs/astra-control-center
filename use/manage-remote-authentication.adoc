@@ -57,6 +57,18 @@ NOTE: When you disable a connection to an LDAP server, all settings are saved, a
 .Result
 The *Remote Authentication* pane status moves to *Disabled*. All remote authentication settings, remote users, and remote groups are preserved, and you can re-enable the connection at any time.
 
+== Edit remote authentication settings
+If you have disabled the connection to the LDAP server or the *Remote Authentication* pane is in a "Connection error" state, you can edit the configuration settings.
+
+NOTE: You cannot edit the LDAP server URL or IP address when the *Remote Authentication* pane is in a "Disabled" state. You need to <<Disconnect remote authentication>> first.
+
+.Steps
+
+. Go to *Account > Connections*.
+. In the *Remote Authentication* pane, select the configuration menu.
+. Select *Edit*.
+. Make the necessary changes, and select *Edit*.
+
 == Disconnect remote authentication
 You can disconnect from an LDAP server and remove the configuration settings from Astra Control.
 
