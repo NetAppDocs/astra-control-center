@@ -19,6 +19,8 @@ Cloning can help if you need to move applications and storage from one Kubernete
 
 To clone apps to a different cluster, you need a default bucket. When you add your first bucket, it becomes the default bucket.
 
+To clone apps to a different cluster, you need to make sure the Astra Control Center cloud instance has a default bucket. You'll need to assign a default bucket for the cloud instance.
+
 .Clone limitations
 
 * *Explicit Storage classes*: If you deploy an app with a StorageClass explicitly set and you need to clone the app, the target cluster must have the originally specified StorageClass. Cloning an application with an explicitly set StorageClass to a cluster that does not have the same StorageClass will fail.
