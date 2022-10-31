@@ -25,9 +25,9 @@ Astra Control Center supports and monitors ONTAP as the storage backend. After y
 //REFERENCED IN UI and NSS downloads. DO NOT MODIFY WITHOUT NOTIFYING STAKEHOLDERS.
 You can add a new license using the UI or https://docs.netapp.com/us-en/astra-automation/index.html[API^] to gain full Astra Control Center functionality. Without a license, your usage of Astra Control Center is limited to managing users and adding new clusters.
 
-For more information on how licenses are calculated, see link:../concepts/licensing.html[Licensing].
+For more information on how licenses are calculated, see link:../concepts/licensing.html[Licensing^].
 
-NOTE: To update an existing evaluation or full license, see link:../use/update-licenses.html[Update an existing license].
+NOTE: To update an existing evaluation or full license, see link:../use/update-licenses.html[Update an existing license^].
 
 Astra Control Center licenses measure CPU resources using Kubernetes CPU units. The license needs to account for the CPU resources assigned to the worker nodes of all the managed Kubernetes clusters. Before you add a license, you need to obtain the license file (NLF) from the link:https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
 
@@ -57,14 +57,19 @@ You should ensure that the following prerequisite conditions are met before you 
 //THIS SECTION REFERENCED IN UI. DO NOT MODIFY WITHOUT NOTIFYING UX.
 
 .What you'll need to add and manage a cluster
-* *A cluster that meets requirements*: Ensure that your cluster meets the requirements outlined in link:requirements.html#application-cluster-requirements[Application cluster requirements].
+* *A cluster that meets requirements*: Ensure that your cluster meets the requirements outlined in link:requirements.html#application-cluster-requirements[Application cluster requirements^].
 +
-NOTE: If you plan to add a second OpenShift 4.6, 4.7, or 4.8 cluster as a managed compute resource, you should ensure that the Astra Trident Volume Snapshot feature is enabled. See the official Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
+NOTE: If you plan to add a second OpenShift 4.8 through 4.11 cluster as a managed compute resource, you should ensure that the Astra Trident Volume Snapshot feature is enabled. See the official Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
 
-* *Trident storage classes*: Ensure that Astra Trident StorageClasses are configured with a link:requirements.html#supported-storage-backends[supported storage backend] (required for any type of cluster)
+* *Trident storage classes*: Ensure that Astra Trident StorageClasses are configured with a link:requirements.html#supported-storage-backends[supported storage backend^] (required for any type of cluster)
 * *Astra Trident volumesnapshotclass*: You have an Astra Trident `volumesnapshotclass` object that has been defined by an administrator. See the Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
 * *ONTAP credentials*: You have a superuser and user ID set on the backing ONTAP system to back up and restore apps with Astra Control Center. Run the following command in the ONTAP command line:
-`export-policy rule modify -vserver <storage virtual machine name> -policyname <policy name>  -ruleindex 1 -superuser sysm --anon 65534`
++
+----
+export-policy rule modify -vserver <storage virtual machine name> -policyname <policy name> -ruleindex 1 -<superuser ID>
+export-policy rule modify -vserver <storage virtual machine name> -policyname <policy name> -ruleindex 1 -<user ID>
+----
+
 * *Kubernetes default storage class*: Ensure that you have only a single default storage class defined for your Kubernetes cluster.
 
 
@@ -85,7 +90,7 @@ If Trident exists, you see output similar to the following:
 +
 ----
 NAME      VERSION
-trident   21.04.0
+trident   22.07.0
 ----
 +
 If Trident does not exist, you see output similar to the following:
@@ -113,9 +118,11 @@ thin                   kubernetes.io/vsphere-volume   Delete          Immediate 
 
 === Create an admin-role kubeconfig
 
+You can optionally create an Admin role. You created a default Owner role when you set up Astra Control Center. 
+
 Ensure that you have the following on your machine before you do the steps:
 
-* kubectl v1.19 or later installed
+* kubectl v1.23 or later installed
 * An active kubeconfig with cluster admin rights for the active context
 
 .Steps
@@ -144,7 +151,7 @@ metadata:
 ----
 kubectl apply -f astracontrol-service-account.yaml
 ----
-. (Optional) If your cluster uses a restrictive pod security policy that doesn't allow privileged pod creation or allow processes within the pod containers to run as the root user, create a custom pod security policy for the cluster that enables Astra Control to create and manage pods. For instructions, see link:acc-create-podsecuritypolicy.html[Create a custom pod security policy].
+
 . Grant cluster admin permissions as follows:
 .. Create a `ClusterRoleBinding` file called `astracontrol-clusterrolebinding.yaml`.
 +
@@ -307,8 +314,6 @@ When Astra Control manages a cluster, it keeps track of the cluster's default st
 +
 NOTE: The `kubeconfig.yaml` file should include *only the cluster credential for one cluster*.
 +
-image:cluster-creds.png[Shows the screen to upload kubeconfig.yaml for cluster.]
-+
 IMPORTANT: If you create your own `kubeconfig` file, you should define only *one* context element in it. See https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[Kubernetes documentation^] for information about creating `kubeconfig` files.
 
 . Provide a credential name. By default, the credential name is auto-populated as the name of the cluster.
@@ -316,13 +321,12 @@ IMPORTANT: If you create your own `kubeconfig` file, you should define only *one
 . Select the storage class to be used for this Kubernetes cluster, and select *Review*.
 +
 NOTE: You should select a Trident storage class backed by ONTAP storage.
-+
-image:cluster-storage.png[Shows the storage class to be used for the cluster.]
+
 . Review the information, and if everything looks good, select *Add cluster*.
 
 .Result
 
-The cluster enters the *Discovering* status and then changes to *Running*. You have successfully added a Kubernetes cluster and are now managing it in Astra Control Center.
+The cluster enters the *Discovering* status and then changes to *Healthy*. You have successfully added a Kubernetes cluster and are now managing it in Astra Control Center.
 
 IMPORTANT: After you add a cluster to be managed in Astra Control Center, it might take a few minutes to deploy the monitoring operator. Until then, the Notification icon turns red and logs a *Monitoring Agent Status Check Failed* event. You can ignore this, because the issue resolves when Astra Control Center obtains the correct status. If the issue does not resolve in a few minutes, go to the cluster, and run `oc get pods -n netapp-monitoring` as the starting point. You will need to look into the monitoring operator logs to debug the problem.
 
