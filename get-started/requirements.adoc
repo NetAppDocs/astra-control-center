@@ -148,7 +148,7 @@ Astra Control Center supports the following storage backends.
 * NetApp Cloud Volumes ONTAP
 //* Google Cloud Platform
 
-To use Astra Control Center, verify you have the following ONTAP licenses, depending on what you need to accomplish:
+To use Astra Control Center, verify that you have the following ONTAP licenses, depending on what you need to accomplish:
 
 * FlexClone
 * SnapMirror: Optional. Needed only for replication to remote systems using SnapMirror technology. Refer to https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html[SnapMirror license information^].
@@ -280,7 +280,7 @@ Astra Control Center requires an Astra Control Center license for full functiona
 //* Create snapshots or clones of existing apps
 //* Configure data protection policies
 
-If you want to try Astra Control Center, you can link:setup_overview.html#add-a-full-or-evaluation-license[use a 90-day evaluation license].
+You can also try Astra Control Center with an evaluation license, which lets you use Astra Control Center for 90 days from the date you download the license. You can sign up for a free trial by registering link:https://cloud.netapp.com/astra-register[here^].
 
 For details about licenses needed for ONTAP storage backends, refer to link:../get-started/requirements.html[Supported storage backends].
 

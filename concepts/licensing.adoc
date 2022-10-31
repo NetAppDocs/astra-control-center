@@ -20,9 +20,9 @@ Astra Control Center requires a license to be installed for the full app data ma
 
 You need a license to protect your applications and data. Refer to Astra Control Center link:../concepts/intro.html[features] for details.
 
-You can obtain a NetApp license file (NLF) when you download Astra Control Center from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^]. 
+ After you purchase the product, you receive a serial number and license. You can generate the NetApp license file (NLF) from the https://mysupport.netapp.com[NetApp Support Site^]. 
 
-If you want to try Astra Control Center, you can use a link:../get-started/setup_overview.html[90-day evaluation license].
+You can also try Astra Control Center with an evaluation license, which lets you use Astra Control Center for 90 days from the date you download the license. You can sign up for a free trial by registering link:https://cloud.netapp.com/astra-register[here^].
 
 For details about licenses needed for ONTAP storage backends, refer to link:../get-started/requirements.html[supported storage backends].
 
