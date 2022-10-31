@@ -1,5 +1,5 @@
 
-
+[.lead]
 Here is an overview of the various components of the Astra Control environment.
 
 
