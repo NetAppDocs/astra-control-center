@@ -10,6 +10,7 @@ summary: Remove any apps or compute that you no longer want to manage from Astra
 :icons: font
 :imagesdir: ../media/use/
 
+[.lead]
 Remove any apps or clusters that you no longer want to manage from Astra Control Center.
 
 == Unmanage an app

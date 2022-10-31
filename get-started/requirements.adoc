@@ -10,6 +10,7 @@ summary: Get started with Astra Control Center by verifying support for your Kub
 :icons: font
 :imagesdir: ../media/get-started/
 
+[.lead]
 Get started by verifying the readiness of your operational environment, application clusters, applications, licenses, and web browser.
 
 * <<Operational environment requirements>>

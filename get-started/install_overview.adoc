@@ -10,6 +10,7 @@ summary: You have choices for Astra Control Center installation.
 :icons: font
 :imagesdir: ../media/release-notes/
 
+[.lead]
 Choose and complete one of the following Astra Control Center installation procedures:
 
 * link:../get-started/install_acc.html[Install Astra Control Center using the standard process]

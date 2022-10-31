@@ -10,6 +10,7 @@ summary: To upgrade Astra Control Center, you'll download the bundle and upgrade
 :icons: font
 :imagesdir: ../media/get-started/
 
+[.lead]
 To upgrade Astra Control Center, download the installation bundle from the NetApp Support Site and complete these instructions to upgrade the Astra Control Center components in your environment. You can use this procedure to upgrade Astra Control Center in internet-connected or air-gapped environments.
 
 .What you'll need

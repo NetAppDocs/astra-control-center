@@ -10,6 +10,7 @@ summary: Manage users and roles on your Astra Control Center system.
 :icons: font
 :imagesdir: ../media/use/
 
+[.lead]
 You can add, remove, and edit users of your Astra Control Center installation using the Astra Control UI. You can use the Astra Control UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to manage users.
 
 You can also use LDAP to perform authentication for selected users.

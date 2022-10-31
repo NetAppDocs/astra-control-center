@@ -10,6 +10,7 @@ summary: You can configure several optional settings to enhance your Astra Contr
 :icons: font
 :imagesdir: ../media/use/
 
+[.lead]
 You can configure several optional settings to enhance your Astra Control Center experience. To monitor and gain insight into your complete infrastructure, create a connection to NetApp Cloud Insights. To collect Kubernetes events from systems monitored by Astra Control Center, add a Fluentd connection.
 
 If the network where you're running Astra Control Center requires a proxy for connecting to the Internet (to upload support bundles to NetApp Support Site or establish a connection to Cloud Insights), you should configure a proxy server in Astra Control Center.

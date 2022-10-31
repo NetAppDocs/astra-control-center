@@ -10,6 +10,7 @@ summary: If a cert-manager already exists in the cluster, you need to perform so
 :icons: font
 :imagesdir: ../media/get-started/
 
+[.lead]
 If a cert-manager already exists in your Kubernetes cluster, you need to perform some prerequisite steps so that Astra Control Center does not install its own cert-manager.
 
 .Steps

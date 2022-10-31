@@ -10,6 +10,7 @@ summary: If you use Red Hat OpenShift, you can install the Astra Control Center 
 :icons: font
 :imagesdir: ../media/get-started/
 
+[.lead]
 If you use Red Hat OpenShift, you can install Astra Control Center using the Red Hat certified operator. Use this procedure to install Astra Control Center from the https://catalog.redhat.com/software/operators/explore[Red Hat Ecosystem Catalog^] or using the Red Hat OpenShift Container Platform.
 
 After you complete this procedure, you must return to the installation procedure to complete the link:../get-started/install_acc.html#verify-system-status[remaining steps] to verify installation success and log on.

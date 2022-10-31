@@ -10,6 +10,7 @@ summary: Describes how to remove Astra Control Center and the Astra Control Cent
 :icons: font
 :imagesdir: ../media/get-started/
 
+[.lead]
 You might need to remove Astra Control Center components if you are upgrading from a trial to a full version of the product. To remove Astra Control Center and the Astra Control Center Operator, run the commands described in this procedure in sequence.
 
 If you have any issues with the uninstall, see <<Troubleshooting uninstall issues>>.

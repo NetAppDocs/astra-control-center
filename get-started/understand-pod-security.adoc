@@ -10,6 +10,7 @@ summary: You need to understand how pod security works before installing Astra C
 :icons: font
 :imagesdir: ../media/get-started/
 
+[.lead]
 Astra Control Center supports privilege limitation through pod security policies (PSPs) and pod security admission (PSA). These frameworks enable you to limit what users or groups are able to run containers and what privileges those containers can have.
 
 Some Kubernetes distributions might have a default pod security configuration that is too restrictive, and causes problems when installing Astra Control Center.

@@ -10,6 +10,7 @@ summary: You can upload and install packages to Astra Control Center.
 :icons: font
 :imagesdir: ../media/use/
 
+[.lead]
 NetApp delivers additional capabilities for Astra Control Center with software packages that you can download from the NetApp Support Site. After you connect Docker and artifact repositories, you can upload and import packages to add this functionality to Astra Control Center. You can use the CLI or the Astra Control Center web UI to manage software packages.
 
 .What you'll need

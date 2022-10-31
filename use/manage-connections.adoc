@@ -10,6 +10,7 @@ summary: You can upload and install packages to Astra Control Center.
 :icons: font
 :imagesdir: ../media/use/
 
+[.lead]
 You can connect repositories to Astra Control to use as a reference for software package installation images and artifacts. When you import software packages, Astra Control references installation images in the image repository and binaries and other artifacts in the artifact repository.
 
 .What you'll need

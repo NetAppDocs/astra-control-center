@@ -10,6 +10,7 @@ summary: Depending on your environment, there might be some configuration needed
 :icons: font
 :imagesdir: ../media/get-started/
 
+[.lead]
 Depending on your environment, there might be further configuration needed after you install Astra Control Center.
 
 == Remove resource limitations

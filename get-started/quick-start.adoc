@@ -10,6 +10,7 @@ summary: Get started with Astra Control in a few steps.
 :icons: font
 :imagesdir: ../media/get-started/
 
+[.lead]
 This page provides a high-level overview of the steps needed to get started with Astra Control Center. The links within each step take you to a page that provides more details.
 
 Try it out! If you want to try Astra Control Center, you can use a 90-day evaluation license. Refer to link:../get-started/setup_overview.html#add-a-license-for-astra-control-center[licensing information] for details.

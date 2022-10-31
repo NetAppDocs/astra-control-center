@@ -10,6 +10,7 @@ summary: Understand Astra Control Center cluster CR options for custom configura
 :icons: font
 :imagesdir: ../media/get-started/
 
+[.lead]
 You can use the following Astra Control Center cluster CR options to create custom configurations during deployment.
 
 |===

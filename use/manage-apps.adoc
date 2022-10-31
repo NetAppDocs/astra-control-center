@@ -10,6 +10,7 @@ summary: After you add Kubernetes clusters to Astra Control, you can install app
 :icons: font
 :imagesdir: ../media/use/
 
+[.lead]
 After you link:../get-started/setup_overview.html#add-cluster[add a cluster to Astra Control management], you can install apps on the cluster (outside of Astra Control) and then go to the Applications page in Astra Control to start managing the apps and their resources.
 
 For more information, see link:../get-started/requirements.html#application-management-requirements[App management requirements].

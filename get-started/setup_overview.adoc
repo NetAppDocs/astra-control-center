@@ -10,6 +10,7 @@ summary: After you install Astra Control Center, log in to the UI, and change yo
 :icons: font
 :imagesdir: ../media/get-started/
 
+[.lead]
 Astra Control Center supports and monitors ONTAP as the storage backend. After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up a license, add clusters, manage storage, and add buckets.
 
 .Tasks
