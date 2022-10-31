@@ -88,17 +88,6 @@ NOTE: These requirements assume that Astra Control Center is the only applicatio
 ** ontap-san
 ** ontap-san-economy
 
-[NOTE]
-======================
-During app cloning in OpenShift environments, Astra Control Center needs to allow OpenShift to mount volumes and change the ownership of files. Because of this, you need to configure an ONTAP volume export policy to allow these operations. You can do so with the following commands:
-
-. `export-policy rule modify -vserver <storage virtual machine name> -policyname <policy name> -ruleindex 1 -superuser sys`
-
-. `export-policy rule modify -vserver <storage virtual machine name> -policyname <policy name> -ruleindex 1 -anon 65534`
-======================
-
-NOTE: If you plan to add a second OpenShift operational environment as a managed compute resource, you need to ensure that the Astra Trident Volume Snapshot feature is enabled. To enable and test volume snapshots with Astra Trident, https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[see the official Astra Trident instructions^].
-
 === VMware Tanzu Kubernetes Grid cluster requirements
 When hosting Astra Control Center on a VMware Tanzu Kubernetes Grid (TKG) or Tanzu Kubernetes Grid Integrated Edition (TKGi) cluster, keep in mind the following considerations.
 
