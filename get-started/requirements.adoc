@@ -280,7 +280,7 @@ Astra Control Center requires an Astra Control Center license for full functiona
 //* Create snapshots or clones of existing apps
 //* Configure data protection policies
 
-You can also try Astra Control Center with an evaluation license, which lets you use Astra Control Center for 90 days from the date you download the license. You can sign up for a free trial by registering link:https://cloud.netapp.com/astra-register[here^].
+You can try Astra Control Center with an evaluation license, which lets you use Astra Control Center for 90 days from the date you download the license. You can sign up for a free trial by registering link:https://cloud.netapp.com/astra-register[here^].
 
 For details about licenses needed for ONTAP storage backends, refer to link:../get-started/requirements.html[Supported storage backends].
 
