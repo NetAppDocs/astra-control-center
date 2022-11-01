@@ -60,7 +60,10 @@ Ensure that the operating environment you choose to host Astra Control Center me
 //|3 controller nodes with 4 CPU cores, 16GB RAM, and 120GB of available storage each
 
 |Worker nodes
-|At least 3 worker nodes total, with 4 CPU cores and 12GB RAM each
+a|
+At least 3 worker nodes total, with 4 CPU cores and 32GB RAM each
+NOTE: 32GB of RAM per worker node is required for production use, but you can use as low as 12GB RAM per worker node for temporary, non-production configurations.
+
 
 //|Worker cluster additional resources
 //|Astra Control Center requires that the cluster have an additional 12 CPU cores, 24GB RAM, and 50GB of available storage
