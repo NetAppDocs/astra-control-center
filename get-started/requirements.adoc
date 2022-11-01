@@ -146,6 +146,14 @@ Astra Control Center supports the following storage backends.
 * NetApp Cloud Volumes ONTAP
 //* Google Cloud Platform
 
+To use Astra Control Center, verify that you have the following ONTAP licenses, depending on what you need to accomplish:
+
+* FlexClone
+* SnapMirror: Optional. Needed only for replication to remote systems using SnapMirror technology. Refer to https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html[SnapMirror license information^].
+* S3 license: Optional. Needed only for ONTAP S3 buckets
+
+You might want to check whether your ONTAP system has the required licenses. Refer to https://docs.netapp.com/us-en/ontap/system-admin/manage-licenses-concept.html[Manage ONTAP licenses^].
+
 == Application cluster requirements
 
 Astra Control Center has the following requirements for clusters that you plan to manage from Astra Control Center. These requirements also apply if the cluster you plan to manage is the operational environment cluster that hosts Astra Control Center.
@@ -262,15 +270,15 @@ If you do have access to the internet, decide which of the following NetApp syst
 
 == License
 
-Astra Control Center requires an Astra Control Center license for full functionality. Obtain an evaluation license or full license from NetApp. Without a license, you can't do any of the following:
+Astra Control Center requires an Astra Control Center license for full functionality. Obtain an evaluation license or full license from NetApp. You need a license to protect your applications and data. Refer to link:../concepts/intro.html[Astra Control Center features] for details.
 
-* Define apps
-* Create snapshots or clones of existing apps
-* Configure data protection policies
+You can try Astra Control Center with an evaluation license, which lets you use Astra Control Center for 90 days from the date you download the license. You can sign up for a free trial by registering link:https://cloud.netapp.com/astra-register[here^].
 
-If you want to try Astra Control Center, you can link:setup_overview.html#add-a-full-or-evaluation-license[use a 90-day evaluation license^].
+To set up the license, refer to link:setup_overview.html#add-a-full-or-evaluation-license[use a 90-day evaluation license^]. 
 
 To learn more about how licenses work, see link:../concepts/licensing.html[Licensing^].
+
+For details about licenses needed for ONTAP storage backends, refer to link:../get-started/requirements.html[Supported storage backends].
 
 == Ingress for on-premises Kubernetes clusters
 
