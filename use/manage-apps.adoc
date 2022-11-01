@@ -120,7 +120,9 @@ You can specify the link:../learn/app-management.html[Kubernetes resources that 
 
 Defining an app gives you more granular control over what to include in an Astra Control operation, including clone, snapshot, and backups.
 
-WARNING: When defining apps, ensure that you do not include a Kubernetes resource in multiple apps with protection policies. Overlapping protection policies on a Kubernetes resources can cause data conflicts. <<Example: Separate Protection Policy for different releases, Read more about best practices.>>
+WARNING: When defining apps, ensure that you do not include a Kubernetes resource in multiple apps with protection policies. Overlapping protection policies on Kubernetes resources can cause data conflicts. <<Example: Separate Protection Policy for different releases, Read more about best practices.>>
+
+CAUTION: Performing an in-place restore operation on an app that shares resources with another app can have unintended results.
 
 .*Read more* about adding cluster-scoped resources to your app namespaces.
 [%collapsible]

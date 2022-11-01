@@ -39,6 +39,9 @@ Astra Control can restore your application from a snapshot or backup. Restoring 
 //image:screenshot-restore-app.gif["A screenshot of the app page where you can select the drop-down list in the actions column and select Restore application."]
 . Choose the restore type:
 * *Restore to original namespaces*: Use this procedure to restore the app in-place to the original cluster.
++
+CAUTION: Performing an in-place restore operation on an app that shares resources with another app can have unintended results.
+
 .. Select the snapshot to use to restore the app in-place, which reverts the app to an earlier version of itself.
 .. Select *Next*.
 +
