@@ -148,24 +148,6 @@ You can use the following Astra Control Center cluster CR options to create cust
 | Undefined
 | Determines if CRDs should be upgraded when Astra Control Center is upgraded.
 
-| mtls
-|
-|
-|
-| Options for how Astra Control Center should implement service to service mTLS in the cluster. See <<Configuration combinations and incompatibilities, setting complexities>> to understand how this settings affects others settings
-
-| mtls.enabled
-| Boolean
-| Optional
-| true (this value is the default)
-| By default, Astra Control Center uses mTLS for service-to-service communication. This option should be disabled when using a service mesh to encrypt service-to-service communication instead.
-
-| mtls.certDuration
-| string
-| Optional
-| 2140h (this value is the default duration)
-| The duration of time in hours to use as a certificate lifespan when issuing service TLS certificates. This setting only works when `mtls.enabled` is set to `true`.
-
 |===
 
 == Configuration combinations and incompatibilities
@@ -175,7 +157,7 @@ Some Astra Control Center cluster CR configuration settings greatly affect the w
 === astraResourcesScaler
 By default, Astra Control Center deploys with resource requests set for most of the components within Astra. This configuration allows the Astra Control Center software stack to perform better in environments under increased application load and scale.
 
-However, in scenarios using smaller development or test clusters, the CR field `AstraResourcesScalar` may be set to `Off`. This disables resource requests and allows for deployment on smaller clusters.
+However, in scenarios using smaller development or test clusters, the CR field `AstraResourcesScalar` may be set to `Off`. This disables resource requests and allows for deployment on smaller clusters.
 
 === ingressType
 There are two valid values for ingressType:
@@ -211,20 +193,5 @@ spec:
           pathType: ImplementationSpecific
 ----
 
-WARNING: When mTLS is disabled using the mtls.enabled setting in the CR, you must use `ingressType: Generic`.
-
 .AccTraefik
 When `ingressType` is set to `AccTraefik`, Astra Control Center deploys its Traefik gateway as a Kubernetes LoadBalancer type service. Users need to provide an external Load Balancer (like MetalLB) for Astra Control Center to get an external IP.
-
-=== mtls
-The settings used in the CR determine how intra-application communication is secured. It is very important for the user to know ahead of time whether they will be using a service mesh or not.
-
-* `enabled=true`: When this setting is enabled, Astra will deploy an internal service-to-service communication network that secures all traffic within the application.
-
-WARNING: Do not cover Astra Control Center in a service mesh while this setting is `true`.
-
-* `enabled=false`: When this setting is disabled, Astra Control Center will not secure internal traffic and you must secure Astra namespaces independently with a service mesh.
-
-WARNING: When mTLS is disabled using the mtls.enabled setting in the CR, you must use `ingressType: Generic`.
-
-WARNING: If no service mesh is used and this setting is disabled, internal communication will be unsecure.

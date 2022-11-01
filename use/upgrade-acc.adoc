@@ -306,7 +306,7 @@ watch kubectl get pods -n [netapp-acc or custom namespace]
 . Wait for the Astra status conditions to indicate that the upgrade is complete and ready (`True`):
 +
 ----
-kubectl get -o yaml -n [netapp-acc or custom namespace] acc
+kubectl get acc -n [netapp-acc or custom namespace]
 ----
 +
 Response:
@@ -316,7 +316,7 @@ NAME    UUID                                      VERSION     ADDRESS         RE
 astra   ACC-9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f  22.11.0-24  10.111.111.111  True
 ----
 +
-NOTE: To monitor upgrade status during the operation, use the following command: `k get -o yaml -n <namespace> acc | grep -i upgrading`.
+NOTE: To monitor upgrade status during the operation, use the following command: `kubectl get -o yaml -n [netapp-acc or custom namespace] acc | grep -i upgrading`.
 
 . Log back in to the UI and verify that all managed clusters and apps are still present and protected.
 . If the operator did not update the Cert-manager, upgrade third-party services next.

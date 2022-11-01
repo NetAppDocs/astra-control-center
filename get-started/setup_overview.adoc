@@ -301,20 +301,14 @@ To begin managing your apps, add a Kubernetes cluster and manage it as a compute
 
 TIP: We recommend that Astra Control Center manage the cluster it is deployed on first before you add other clusters to Astra Control Center to manage. Having the initial cluster under management is necessary to send Kubemetrics data and cluster-associated data for metrics and troubleshooting.
 
-[NOTE]
-======================
-When Astra Control manages a cluster, it keeps track of the cluster's default storage class. If you change the storage class using kubectl commands, Astra Control reverts the change. To change the default storage class in a cluster managed by Astra Control, use one of the following methods:
-
-* Use the Astra Control API `PUT /managedClusters` endpoint, and assign a different default storage class with the `DefaultStorageClass` parameter.
-* Use the Astra Control web UI to assign a different default storage class. See <<Change the default storage class>>.
-======================
-
 .What you'll need
 
 * Before you add a cluster, review and perform the necessary <<Prepare your environment for cluster management using Astra Control,prerequisite tasks>>.
 
 .Steps
-. From the *Dashboard* in the Astra Control Center UI, select *Add* in the Clusters section.
+. Navigate from the Dashboard or the Clusters menu:
+* From *Dashboard* in the Resource Summary, select *Add* from the Clusters pane.
+* In the left navigation area, select *Clusters* and then select *Add Cluster* from the Clusters page.
 . In the *Add Cluster* window that opens, upload a `kubeconfig.yaml` file or paste the contents of a `kubeconfig.yaml` file.
 +
 NOTE: The `kubeconfig.yaml` file should include *only the cluster credential for one cluster*.
@@ -322,8 +316,8 @@ NOTE: The `kubeconfig.yaml` file should include *only the cluster credential for
 IMPORTANT: If you create your own `kubeconfig` file, you should define only *one* context element in it. See https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[Kubernetes documentation^] for information about creating `kubeconfig` files.
 
 . Provide a credential name. By default, the credential name is auto-populated as the name of the cluster.
-. Select *Configure storage*.
-. Select the storage class to be used for this Kubernetes cluster, and select *Review*.
+. Select *Next*.
+. Select the default storage class to be used for this Kubernetes cluster, and select *Review*.
 +
 NOTE: You should select a Trident storage class backed by ONTAP storage.
 
@@ -331,7 +325,7 @@ NOTE: You should select a Trident storage class backed by ONTAP storage.
 
 .Result
 
-The cluster enters the *Discovering* status and then changes to *Healthy*. You have successfully added a Kubernetes cluster and are now managing it in Astra Control Center.
+The cluster enters *Discovering* state and then changes to *Healthy*. You have successfully added a Kubernetes cluster and are now managing it in Astra Control Center.
 
 IMPORTANT: After you add a cluster to be managed in Astra Control Center, it might take a few minutes to deploy the monitoring operator. Until then, the Notification icon turns red and logs a *Monitoring Agent Status Check Failed* event. You can ignore this, because the issue resolves when Astra Control Center obtains the correct status. If the issue does not resolve in a few minutes, go to the cluster, and run `oc get pods -n netapp-monitoring` as the starting point. You will need to look into the monitoring operator logs to debug the problem.
 
@@ -368,8 +362,6 @@ NOTE: You might need to refresh the page for the backend to appear.
 
 Adding object store bucket providers is essential if you want to back up your applications and persistent storage or if you want to clone applications across clusters. Astra Control stores those backups or clones in the object store buckets that you define.
 
-When you add a bucket, Astra Control marks one bucket as the default bucket indicator. The first bucket that you create becomes the default bucket.
-
 You don't need a bucket if you are cloning your application configuration and persistent storage to the same cluster.
 
 Use any of the following bucket types:
@@ -402,32 +394,15 @@ TIP: The bucket name and description appear as a backup location that you can ch
 +
 NOTE: This option does not appear for the first bucket you create.
 
-. Continue by adding <<Add S3 access credentials,credential information>>.
-. Select *Add*.
+. Under *Select Credentials*, choose either the *Add* or *Use existing* tab.
+* If you chose *Add*: 
+.. Enter a name for the credential that distinguishes it from other credentials in Astra Control.
+.. Enter the access ID and secret key by pasting the contents from your clipboard.
+* If you chose *Use existing*:
+..  Select the existing credentials you want to use with the bucket.
 
-NOTE: If you want this bucket to be the default bucket for all backups, see link:../use/manage-buckets.html#set-the-default-bucket[Set the default bucket].
+NOTE: When you add a bucket, Astra Control marks one bucket with the default bucket indicator. The first bucket that you create becomes the default bucket. As you add buckets, you can later decide to link:../use/manage-buckets.html#set-the-default-bucket[set another default bucket^].
 
-=== Add S3 access credentials
-
-Add S3 access credentials at any time.
-
-.Steps
-
-. From the Buckets dialog, select either the *Add* or *Use existing* tab.
-. Enter a name for the credential that distinguishes it from other credentials in Astra Control.
-. Enter the access ID and secret key by pasting the contents from your clipboard.
-
-== Change the default storage class
-You can change the default storage class for a cluster.
-
-.Steps
-
-. In the Astra Control Center web UI, select *Clusters*.
-. On the *Clusters* page, select the cluster that you want to change.
-. Select the *Storage* tab.
-. Select the *Storage classes* category.
-. Select the *Actions* menu for the storage class that you want to set as default.
-. Select *Set as default*.
 
 == What's next?
 
@@ -435,11 +410,11 @@ Now that you've logged in and added clusters to Astra Control Center, you're rea
 
 * link:../use/manage-local-users-and-roles.html[Manage local users and roles]
 * link:../use/manage-apps.html[Start managing apps]
-* link:../use/protect-apps.html[Protect apps]
-* link:../use/clone-apps.html[Clone apps]
+* link:../use/protection-overview.html[Protect apps]
 * link:../use/manage-notifications.html[Manage notifications]
 * link:../use/monitor-protect.html#connect-to-cloud-insights[Connect to Cloud Insights]
 * link:../get-started/add-custom-tls-certificate.html[Add a custom TLS certificate]
+* link:../use/view-clusters.html#change-the-default-storage-class[Change the default storage class]
 
 [discrete]
 == Find more information
