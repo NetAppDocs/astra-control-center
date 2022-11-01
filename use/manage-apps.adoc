@@ -13,7 +13,52 @@ summary: After you add Kubernetes clusters to Astra Control, you can install app
 [.lead]
 After you link:../get-started/setup_overview.html#add-cluster[add a cluster to Astra Control management], you can install apps on the cluster (outside of Astra Control) and then go to the Applications page in Astra Control to start managing the apps and their resources.
 
-For more information, see link:../get-started/requirements.html#application-management-requirements[App management requirements].
+== Application management requirements
+Astra Control has the following application management requirements:
+
+* *Licensing*: To manage applications using Astra Control Center, you need an Astra Control Center license.
+* *Namespaces*: Apps can be defined within one or more specified namespaces on a single cluster using Astra Control. An app can contain resources spanning multiple namespaces within the same cluster. Astra Control does not support the ability for apps to be defined across multiple clusters.
+* *StorageClass*: If you install an application with a StorageClass explicitly set and you need to clone the app, the target cluster for the clone operation must have the originally specified StorageClass. Cloning an application with an explicitly set StorageClass to a cluster that does not have the same StorageClass will fail.
+* *Kubernetes resources*: Applications that use Kubernetes resources not collected by Astra Control might not have full app data management capabilities. Astra Control collects the following Kubernetes resources:
++
+[cols="1,1,1"]
+|===
+|ClusterRole
+|ClusterRoleBinding
+|ConfigMap
+
+|CronJob
+|CustomResourceDefinition
+|CustomResource
+
+|DaemonSet
+|DeploymentConfig
+|HorizontalPodAutoscaler
+
+|Ingress
+|MutatingWebhook
+|NetworkPolicy
+
+|PersistentVolumeClaim
+|Pod
+|PodDisruptionBudget
+
+|PodTemplate
+|ReplicaSet
+|Role
+
+|RoleBinding
+|Route
+|Secret
+
+|Service
+|ServiceAccount
+|StatefulSet
+
+|ValidatingWebhook
+|
+|
+|===
 
 == Supported app installation methods
 Astra Control supports the following application installation methods:

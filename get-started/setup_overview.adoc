@@ -57,10 +57,8 @@ You should ensure that the following prerequisite conditions are met before you 
 //THIS SECTION REFERENCED IN UI. DO NOT MODIFY WITHOUT NOTIFYING UX.
 
 .What you'll need to add and manage a cluster
-* *A cluster that meets requirements*: Ensure that your cluster meets the requirements outlined in link:requirements.html#application-cluster-requirements[Application cluster requirements^].
-+
-NOTE: If you plan to add a second OpenShift 4.8 through 4.11 cluster as a managed compute resource, you should ensure that the Astra Trident Volume Snapshot feature is enabled. See the official Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
 
+* Ensure that the most recent version of the Kubernetes https://kubernetes-csi.github.io/docs/snapshot-controller.html[snapshot-controller component^] is installed on the cluster
 * *Trident storage classes*: Ensure that Astra Trident StorageClasses are configured with a link:requirements.html#supported-storage-backends[supported storage backend^] (required for any type of cluster)
 * *Astra Trident volumesnapshotclass*: You have an Astra Trident `volumesnapshotclass` object that has been defined by an administrator. See the Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
 * *ONTAP credentials*: You have a superuser and user ID set on the backing ONTAP system to back up and restore apps with Astra Control Center. Run the following command in the ONTAP command line:
@@ -71,7 +69,14 @@ export-policy rule modify -vserver <storage virtual machine name> -policyname <p
 ----
 
 * *Kubernetes default storage class*: Ensure that you have only a single default storage class defined for your Kubernetes cluster.
++
+NOTE: Your application cluster should have a `kubeconfig.yaml` file that defines only one _context_ element. Visit the Kubernetes documentation for https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[information about creating kubeconfig files^].
 
++
+NOTE: When managing application clusters in a Rancher environment, modify the application cluster's default context in the `kubeconfig` file provided by Rancher to use a control plane context instead of the Rancher API server context. This reduces load on the Rancher API server and improves performance.
+
++
+NOTE: If you plan to add a second OpenShift 4.8 through 4.11 cluster as a managed compute resource, you should ensure that the Astra Trident Volume Snapshot feature is enabled. See the official Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
 
 === Run eligibility checks
 

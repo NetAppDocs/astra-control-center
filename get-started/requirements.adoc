@@ -15,7 +15,6 @@ Get started by verifying the readiness of your operational environment, applicat
 
 * <<Operational environment requirements>>
 * <<Supported storage backends>>
-* <<Application cluster requirements>>
 * <<Application management requirements>>
 * <<Replication prerequisites>>
 * <<Access to the internet>>
@@ -121,34 +120,12 @@ NOTE: The default VMware TKG and TKGi configuration file token expires ten hours
 === Google Anthos cluster requirements
 When hosting Astra Control Center on a Google Anthos cluster, note that Google Anthos includes the MetalLB load balancer and the Istio ingress gateway service by default, enabling you to simply use the generic ingress capabilities of Astra Control Center during installation. See link:install_acc.html#configure-astra-control-center[Configure Astra Control Center^] for details.
 
-//* A method for pointing the FQDN of Astra Control Center to the external IP address of the Astra Control Center service
-
-//Make sure that your cluster meets the minimum requirements and that you follow Kubernetes best practices so that Astra Control Center is highly available in your Kubernetes cluster.
-
-
-
-////
-=== Non-OpenShift Kubernetes clusters
-The Kubernetes cluster you use for Astra Control Center should already be deployed in your environment and you should have permissions to manage the cluster. This cluster should be preconfigured with the following:
-
-* A load balancer with a static IP address or IP address range
-* An internal domain name that is routed from an internal DNS server and points to the static IP address or IP address range of the cluster (the DNS name should point to the load-balanced IP address or addresses using the internal DNS server)
-* A default storage provider in the Kubernetes cluster that is backed by a Trident storage class to work with ONTAP
-* A single Trident StorageClass configured as the default
-* Kubernetes version 1.18, 1.19, or 1.20
-* At least 3 worker nodes
-////
-
-//=== VMWare Tanzu Kubernetes Grid considerations
-//Consider the following points if you host Astra Control Center on a VMware Tanzu Kubernetes Grid cluster.
-
 == Supported storage backends
 Astra Control Center supports the following storage backends.
 
 * NetApp ONTAP 9.5 or newer AFF and FAS systems
 * NetApp ONTAP 9.8 or newer AFF and FAS systems for SnapMirror-based application replication
 * NetApp Cloud Volumes ONTAP
-//* Google Cloud Platform
 
 To use Astra Control Center, verify that you have the following ONTAP licenses, depending on what you need to accomplish:
 
@@ -157,68 +134,6 @@ To use Astra Control Center, verify that you have the following ONTAP licenses, 
 * S3 license: Optional. Needed only for ONTAP S3 buckets
 
 You might want to check whether your ONTAP system has the required licenses. Refer to https://docs.netapp.com/us-en/ontap/system-admin/manage-licenses-concept.html[Manage ONTAP licenses^].
-
-== Application cluster requirements
-
-Astra Control Center has the following requirements for clusters that you plan to manage from Astra Control Center. These requirements also apply if the cluster you plan to manage is the operational environment cluster that hosts Astra Control Center.
-// Astra Control Center management functions require a small amount of memory and CPU resources from each managed cluster.
-
-//* An additional 1.5Gib memory and 0.25 CPU cores to support Astra Control Center management functions
-* The most recent version of the Kubernetes https://kubernetes-csi.github.io/docs/snapshot-controller.html[snapshot-controller component^] is installed
-* An Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[volumesnapshotclass object^] has been defined by an administrator
-* A default Kubernetes storage class exists on the cluster
-* At least one storage class is configured to use Astra Trident
-
-NOTE: Your application cluster should have a `kubeconfig.yaml` file that defines only one _context_ element. Visit the Kubernetes documentation for https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[information about creating kubeconfig files^].
-
-NOTE: When managing application clusters in a Rancher environment, modify the application cluster's default context in the `kubeconfig` file provided by Rancher to use a control plane context instead of the Rancher API server context. This reduces load on the Rancher API server and improves performance.
-
-== Application management requirements
-Astra Control has the following application management requirements:
-
-* *Licensing*: To manage applications using Astra Control Center, you need an Astra Control Center license.
-* *Namespaces*: Apps can be defined within one or more specified namespaces on a single cluster using Astra Control. An app can contain resources spanning multiple namespaces within the same cluster. Astra Control does not support the ability for apps to be defined across multiple clusters.
-* *StorageClass*: If you install an application with a StorageClass explicitly set and you need to clone the app, the target cluster for the clone operation must have the originally specified StorageClass. Cloning an application with an explicitly set StorageClass to a cluster that does not have the same StorageClass will fail.
-* *Kubernetes resources*: Applications that use Kubernetes resources not collected by Astra Control might not have full app data management capabilities. Astra Control collects the following Kubernetes resources:
-+
-[cols="1,1,1"]
-|===
-|ClusterRole
-|ClusterRoleBinding
-|ConfigMap
-
-|CronJob
-|CustomResourceDefinition
-|CustomResource
-
-|DaemonSet
-|DeploymentConfig
-|HorizontalPodAutoscaler
-
-|Ingress
-|MutatingWebhook
-|NetworkPolicy
-
-|PersistentVolumeClaim
-|Pod
-|PodDisruptionBudget
-
-|PodTemplate
-|ReplicaSet
-|Role
-
-|RoleBinding
-|Route
-|Secret
-
-|Service
-|ServiceAccount
-|StatefulSet
-
-|ValidatingWebhook
-|
-|
-|===
 
 == Replication prerequisites
 
@@ -230,13 +145,6 @@ Astra Control application replication requires that the following prerequisites 
 * The paired remote SVM must be available to Astra Trident on the destination cluster.
 * Astra Trident version 22.07 or greater must exist on both the source and destination ONTAP clusters.
 * ONTAP SnapMirror asynchronous licenses using the Data Protection bundle must be enabled on both the source and destination ONTAP clusters. See https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html[SnapMirror licensing overview in ONTAP^].
-//* The Astra Trident backend configuration file must contain the following line:
-//+
-//----
-//"replicationPolicy": "MirrorAllSnapshots"
-//----
-//+
-//See https://docs.netapp.com/us-en/trident/trident-use/backends.html[Configure backends^] for more information.
 * When you add an ONTAP storage backend to Astra Control Center, apply user credentials with the  "admin" role, which has access methods `http` and `ontapi` enabled on both ONTAP clusters. See https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts^] for more information.
 * Both source and destination Kubernetes clusters and ONTAP clusters must be managed by Astra Control.
 +
