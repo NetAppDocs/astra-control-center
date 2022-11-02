@@ -39,7 +39,7 @@ The Astra Control Center installation process does the following:
 
 * Installs the Astra components into the `netapp-acc` (or custom-named) namespace.
 * Creates a default account.
-* Establishes a default administrative user email address and default one-time password. This user is assigned the Owner role in the system that is needed for first time login to the UI.
+* Establishes a default administrative user email address and default initial setup password. This user is assigned the Owner role in the system that is needed for first time login to the UI.
 * Helps you determine that all Astra Control Center pods are running.
 * Installs the Astra Control Center UI.
 //VMware ADS EAP review
@@ -588,7 +588,7 @@ kubectl logs deploy/acc-operator-controller-manager -n netapp-acc-operator -c ma
 +
 NOTE: `accHost` cluster registration is one of the last operations, and if it fails it will not cause deployment to fail. In the event of a cluster registration failure indicated in the logs, you can attempt registration again through the add cluster workflow link:../get-started/setup_overview.html#add-cluster[in the UI] or API.
 
-. When all the pods are running, verify that the installation was successful (`READY` is `True`) and get the one-time password you will use when you log in to Astra Control Center:
+. When all the pods are running, verify that the installation was successful (`READY` is `True`) and get the initial setup password you will use when you log in to Astra Control Center:
 +
 [source,sh]
 ----
@@ -638,8 +638,7 @@ Sample command:
 +
 [source,sh]
 ----
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 
--keyout tls.key -out tls.crt
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt
 ----
 
 . Create a secret `tls secret name` of type `kubernetes.io/tls` for a TLS private key and certificate in the `istio-system namespace` as described in TLS secrets.
@@ -648,9 +647,7 @@ Sample command:
 +
 [source,sh]
 ----
-kubectl create secret tls [tls secret name] 
---key="tls.key"
---cert="tls.crt" -n istio-system
+kubectl create secret tls [tls secret name] --key="tls.key" --cert="tls.crt" -n istio-system
 ----
 +
 TIP: The name of the secret should match the `spec.tls.secretName` provided in `istio-ingress.yaml` file.
@@ -814,10 +811,7 @@ spec:
 +
 [source,sh]
 ----
-oc create route edge --service=traefik
---port=web -n [netapp-acc or custom namespace]
---insecure-policy=Redirect --hostname=<ACC address>
---cert=cert.pem --key=key.pem
+oc create route edge --service=traefik --port=web -n [netapp-acc or custom namespace] --insecure-policy=Redirect --hostname=<ACC address> --cert=cert.pem --key=key.pem
 ----
 
 
@@ -831,7 +825,7 @@ After installing Astra Control Center, you will change the password for the defa
 +
 NOTE: You can create a custom certificate after login.
 
-. At the Astra Control Center login page, enter the value you used for `email` in `astra_control_center_min.yaml` CR when <<Install Astra Control Center,you installed Astra Control Center>>, followed by the one-time password (`ACC-[UUID]`).
+. At the Astra Control Center login page, enter the value you used for `email` in `astra_control_center_min.yaml` CR when <<Install Astra Control Center,you installed Astra Control Center>>, followed by the initial setup password (`ACC-[UUID]`).
 +
 NOTE: If you enter an incorrect password three times, the admin account will be locked for 15 minutes.
 
