@@ -18,7 +18,7 @@ At a high level, the configuration involves integrating Astra with LDAP and defi
 Astra control supports up to 5,000 remote groups and 10,000 remote users.
 
 == Add a certificate for LDAPS authentication
-Add the private TLS certificate for the LDAP server so that Astra Control Center can authenticate with it. 
+Add the private TLS certificate for the LDAP server so that Astra Control Center can authenticate with it. You only need to do this once, or when the certificate you have installed expires.
 
 .Steps
 
