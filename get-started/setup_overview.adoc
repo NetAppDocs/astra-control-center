@@ -19,15 +19,14 @@ Astra Control Center supports and monitors ONTAP as the storage backend. After y
 * <<Add cluster>>
 * <<Add a storage backend>>
 * <<Add a bucket>>
-* <<Change the default storage class>>
 
 == Add a license for Astra Control Center
 //REFERENCED IN UI and NSS downloads. DO NOT MODIFY WITHOUT NOTIFYING STAKEHOLDERS.
 You can add a new license using the UI or https://docs.netapp.com/us-en/astra-automation/index.html[API^] to gain full Astra Control Center functionality. Without a license, your usage of Astra Control Center is limited to managing users and adding new clusters.
 
-For more information on how licenses are calculated, see link:../concepts/licensing.html[Licensing^].
+For more information on how licenses are calculated, refer to link:../concepts/licensing.html[Licensing^].
 
-NOTE: To update an existing evaluation or full license, see link:../use/update-licenses.html[Update an existing license^].
+NOTE: To update an existing evaluation or full license, refer to link:../use/update-licenses.html[Update an existing license^].
 
 Astra Control Center licenses measure CPU resources using Kubernetes CPU units. The license needs to account for the CPU resources assigned to the worker nodes of all the managed Kubernetes clusters. Before you add a license, you need to obtain the license file (NLF) from the link:https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
 
@@ -58,9 +57,9 @@ You should ensure that the following prerequisite conditions are met before you 
 
 .What you'll need to add and manage a cluster
 
-* Ensure that the most recent version of the Kubernetes https://kubernetes-csi.github.io/docs/snapshot-controller.html[snapshot-controller component^] is installed on the cluster
+* *Snapshot controller*: Ensure that the Kubernetes https://kubernetes-csi.github.io/docs/snapshot-controller.html[snapshot-controller component^] is installed on the cluster
 * *Trident storage classes*: Ensure that Astra Trident StorageClasses are configured with a link:requirements.html#supported-storage-backends[supported storage backend^] (required for any type of cluster)
-* *Astra Trident volumesnapshotclass*: You have an Astra Trident `volumesnapshotclass` object that has been defined by an administrator. See the Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
+* *Astra Trident volumesnapshotclass*: You have an Astra Trident `volumesnapshotclass` object that has been defined by an administrator. Refer to the Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
 * *ONTAP credentials*: You have a superuser and user ID set on the backing ONTAP system to back up and restore apps with Astra Control Center. Run the following command in the ONTAP command line:
 +
 ----
@@ -70,13 +69,10 @@ export-policy rule modify -vserver <storage virtual machine name> -policyname <p
 
 * *Kubernetes default storage class*: Ensure that you have only a single default storage class defined for your Kubernetes cluster.
 +
-NOTE: Your application cluster should have a `kubeconfig.yaml` file that defines only one _context_ element. Visit the Kubernetes documentation for https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[information about creating kubeconfig files^].
-
-+
-NOTE: When managing application clusters in a Rancher environment, modify the application cluster's default context in the `kubeconfig` file provided by Rancher to use a control plane context instead of the Rancher API server context. This reduces load on the Rancher API server and improves performance.
-
-+
-NOTE: If you plan to add a second OpenShift 4.8 through 4.11 cluster as a managed compute resource, you should ensure that the Astra Trident Volume Snapshot feature is enabled. See the official Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
+* *For application clusters*:
+** *Context elements*: Your application cluster should have a `kubeconfig.yaml` file that defines only one _context_ element. Refer to the Kubernetes documentation for https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[information about creating kubeconfig files^].
+** *Rancher only*: When managing application clusters in a Rancher environment, modify the application cluster's default context in the `kubeconfig` file provided by Rancher to use a control plane context instead of the Rancher API server context. This reduces load on the Rancher API server and improves performance.
+** *OpenShift only*: If you plan to add a second OpenShift cluster as a managed compute resource, you should ensure that the Astra Trident Volume Snapshot feature is enabled. Refer to the official Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
 
 === Run eligibility checks
 
@@ -95,7 +91,7 @@ If Trident exists, you see output similar to the following:
 +
 ----
 NAME      VERSION
-trident   22.07.0
+trident   22.10.0
 ----
 +
 If Trident does not exist, you see output similar to the following:
@@ -104,7 +100,7 @@ If Trident does not exist, you see output similar to the following:
 error: the server doesn't have a resource type "tridentversions"
 ----
 +
-NOTE: If Trident is not installed or the installed version is not the latest, you need to install the latest version of Trident before proceeding. See the https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html[Trident documentation^] for instructions.
+NOTE: If Trident is not installed or the installed version is not the latest, you need to install the latest version of Trident before proceeding. Refer to the https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html[Trident documentation^] for instructions.
 
 . Check if the storage classes are using the supported Trident drivers. The provisioner name should be `csi.trident.netapp.io`. See the following example:
 +
@@ -313,7 +309,7 @@ TIP: We recommend that Astra Control Center manage the cluster it is deployed on
 +
 NOTE: The `kubeconfig.yaml` file should include *only the cluster credential for one cluster*.
 +
-IMPORTANT: If you create your own `kubeconfig` file, you should define only *one* context element in it. See https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[Kubernetes documentation^] for information about creating `kubeconfig` files.
+IMPORTANT: If you create your own `kubeconfig` file, you should define only *one* context element in it. Refer to https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[Kubernetes documentation^] for information about creating `kubeconfig` files.
 
 . Provide a credential name. By default, the credential name is auto-populated as the name of the cluster.
 . Select *Next*.
@@ -347,7 +343,7 @@ Managing storage clusters in Astra Control as a storage backend enables you to g
 .. Select *ONTAP* and select *Next*.
 .. Enter the ONTAP cluster management IP address and admin credentials. The credentials must be cluster-wide credentials. 
 +
-NOTE: The user whose credentials you enter here must have the `ontapi` user login access method enabled within ONTAP System Manager on the ONTAP cluster. If you plan to use SnapMirror replication, apply user credentials with the "admin" role, which has the access methods `ontapi` and `http`, on both ONTAP clusters. See https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts^] for more information.
+NOTE: The user whose credentials you enter here must have the `ontapi` user login access method enabled within ONTAP System Manager on the ONTAP cluster. If you plan to use SnapMirror replication, apply user credentials with the "admin" role, which has the access methods `ontapi` and `http`, on both ONTAP clusters. Refer to https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts^] for more information.
 
 . Select *Next*.
 . Confirm the backend details and select *Manage*.
@@ -376,7 +372,7 @@ NOTE: Amazon Web Services (AWS) and Google Cloud Platform (GCP) use the Generic 
 +
 NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon's S3 support.
 
-For instructions on how to add buckets using the Astra Control API, see link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
+For instructions on how to add buckets using the Astra Control API, refer to link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
 
 .Steps
 

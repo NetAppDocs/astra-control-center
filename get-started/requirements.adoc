@@ -15,7 +15,6 @@ Get started by verifying the readiness of your operational environment, applicat
 
 * <<Operational environment requirements>>
 * <<Supported storage backends>>
-* <<Application management requirements>>
 * <<Replication prerequisites>>
 * <<Access to the internet>>
 * <<License>>
