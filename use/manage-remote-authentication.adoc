@@ -45,7 +45,7 @@ If you plan to use LDAPS, ensure that the private TLS certificate for the LDAP s
 +
 NOTE: As a best practice, use LDAPS when connecting with the LDAP server. You need to install the LDAP server's private TLS certificate in Astra Control Center before you connect with LDAPS.
 
-. Enter the service account credentials. Astra Control will use these credentials when connecting with the LDAP server.
+. Enter the service account credentials in email format (administrator@example.com). Astra Control will use these credentials when connecting with the LDAP server.
 . In the *User Match* section, enter the base DN and an appropriate user search filter to use when retrieving user information from the LDAP server.
 . In the *Group Match* section, enter the group search base DN and an appropriate custom group search filter. 
 +
