@@ -133,7 +133,7 @@ To use Astra Control Center, verify that you have the following ONTAP licenses, 
 * SnapMirror: Optional. Needed only for replication to remote systems using SnapMirror technology. Refer to https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html[SnapMirror license information^].
 * S3 license: Optional. Needed only for ONTAP S3 buckets
 
-You might want to check whether your ONTAP system has the required licenses. Refer to https://docs.netapp.com/us-en/ontap/system-admin/manage-licenses-concept.html[Manage ONTAP licenses^].
+To check whether your ONTAP system has the required licenses, refer to https://docs.netapp.com/us-en/ontap/system-admin/manage-licenses-concept.html[Manage ONTAP licenses^].
 
 == Replication prerequisites
 
