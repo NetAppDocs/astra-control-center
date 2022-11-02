@@ -133,7 +133,12 @@ spec:
 
 == Add a custom TLS certificate
 
-You can remove the existing self-signed TLS certificate and replace it with a TLS certificate signed by a Certificate Authority (CA).
+Astra Control Center uses a self-signed TLS certificate by default for ingress controller traffic (only in certain configurations) and web UI authentication with web browsers. You can remove the existing self-signed TLS certificate and replace it with a TLS certificate signed by a Certificate Authority (CA).
+
+NOTE: The default, self-signed certificate is used for two types of connections: 
+* HTTPS connections to the Astra Control Center web UI
+* Ingress controller traffic if the `ingressType: "AccTraefik"` property was set in the 'astra_control_center_min.yaml' file during Astra Control Center installation
+Replacing the default TLS certificate replaces the certificate used for authentication for these two types of connections.
 
 .What you'll need
 
@@ -159,18 +164,6 @@ kubectl get certificate -n <ACC-deployment-namespace>
 kubectl delete cert cert-manager-certificates -n <ACC-deployment-namespace>
 kubectl delete secret secure-testing-cert -n <ACC-deployment-namespace>
 ----
-
-=== Add a new certificate using the Astra Control Center UI
-Add a TLS certificate that is signed by a CA using Astra Control Center UI. This method is useful for adding certificates for authentication of remote connections (such as an LDAP server).
-
-.Steps
-
-. Go to *Account*.
-. Select the *Certificates* tab.
-. Select *Add*.
-. Either upload the `.pem` file or paste the contents of the file from your clipboard.
-. Select the *Trusted* check box.
-. Select *Add certificate*.
 
 === Add a new certificate using the command line
 
