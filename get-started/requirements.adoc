@@ -145,29 +145,12 @@ Astra Control application replication requires that the following prerequisites 
 * Astra Trident version 22.07 or greater must exist on both the source and destination ONTAP clusters.
 * The Astra Trident mirror relationship CRD must have the `replicationPolicy` field set.
 * ONTAP SnapMirror asynchronous licenses using the Data Protection bundle must be enabled on both the source and destination ONTAP clusters. See https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html[SnapMirror licensing overview in ONTAP^].
-* When you add an ONTAP storage backend to Astra Control Center, apply user credentials with the  "admin" role, which has access methods `http` and `ontapi` enabled on both ONTAP clusters. See https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts^] for more information.
+* When you add an ONTAP storage backend to Astra Control Center, apply user credentials with the "admin" role, which has access methods `http` and `ontapi` enabled on both ONTAP source and destination clusters. See https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts in ONTAP documentation^] for more information.
 * Both source and destination Kubernetes clusters and ONTAP clusters must be managed by Astra Control.
 +
 NOTE: You can simultaneously replicate a different app (running on the other cluster or site) in the opposite direction. For example, Apps A, B, C can be replicated from Datacenter 1 to Datacenter 2; and Apps X, Y, Z can be replicated from Datacenter 2 to Datacenter 1.
 
 Learn how to link:../use/replicate_snapmirror.html[replicate apps to a remote system using SnapMirror technology^].
-
-== Supported application installation methods
-Astra Control supports the following application installation methods:
-
-* *Manifest file*: Astra Control supports apps installed from a manifest file using kubectl. For example:
-+
-----
-kubectl apply -f myapp.yaml
-----
-* *Helm 3*: If you use Helm to install apps, Astra Control requires Helm version 3. Managing and cloning apps installed with Helm 3 (or upgraded from Helm 2 to Helm 3) is fully supported. Managing apps installed with Helm 2 is not supported.
-//* *Operator management*: Astra Control Center does not support apps that are deployed with Operator Lifecycle Manager (OLM)-enabled operators or cluster-scoped operators.
-* *Operator-deployed apps*: Astra Control supports apps installed with namespace-scoped operators. The following are some apps that have been validated for this installation model:
-** https://github.com/k8ssandra/cass-operator/tree/v1.7.1[Apache K8ssandra^]
-** https://github.com/jenkinsci/kubernetes-operator[Jenkins CI^]
-** https://github.com/percona/percona-xtradb-cluster-operator[Percona XtraDB Cluster^]
-
-NOTE: An operator and the app it installs must use the same namespace; you might need to modify the deployment .yaml file for the operator to ensure this is the case.
 
 == Access to the internet
 

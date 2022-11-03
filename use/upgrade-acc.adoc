@@ -353,10 +353,6 @@ crds:
     shouldUpgrade: false
 ----
 
-
-
-
-
 == Verify system status
 
 . Log in to Astra Control Center.
@@ -451,10 +447,7 @@ spec:
 . Create the OpenShift route:
 +
 ----
-oc create route edge --service=traefik
---port=web -n [netapp-acc or custom namespace]
---insecure-policy=Redirect --hostname=<ACC address>
---cert=cert.pem --key=key.pem
+oc create route edge --service=traefik --port=web -n [netapp-acc or custom namespace] --insecure-policy=Redirect --hostname=<ACC address> --cert=cert.pem --key=key.pem
 ----
 
 === Verify ingress set up

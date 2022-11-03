@@ -13,7 +13,7 @@ entries:
     - title: Install Astra Control Center
       url: /get-started/install_acc.html
       entries:
-        - title: Understand Astra Control Center cluster CR options
+        - title: Astra Control Center cluster custom resource options
           url: /get-started/acc_cluster_cr_options.html
         - title: Understand pod security policy restrictions
           url: /get-started/understand-pod-security.html

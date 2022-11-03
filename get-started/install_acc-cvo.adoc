@@ -348,11 +348,7 @@ NOTE: GCP uses the Generic S3 bucket type.
 . Generate the Docker Secret to pull images for the Astra Control Center installation:
 +
 ----
-kubectl create secret docker-registry <secret name>
---docker-server=<Registry location>
---docker-username=_json_key
---docker-password="$(cat <GCP Service Account JSON file>)"
---namespace=pcloud
+kubectl create secret docker-registry <secret name> --docker-server=<Registry location> --docker-username=_json_key --docker-password="$(cat <GCP Service Account JSON file>)" --namespace=pcloud
 ----
 
 

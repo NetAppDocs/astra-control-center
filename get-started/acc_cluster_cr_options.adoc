@@ -2,16 +2,16 @@
 sidebar: sidebar
 permalink: get-started/acc_cluster_cr_options.html
 keywords: astra cr, cluster cr, astra control center, how to configure, deploy
-summary: Understand Astra Control Center cluster CR options for custom configurations during deployment.
+summary: Refer to Astra Control Center cluster CR options for custom configurations during deployment.
 ---
 
-= Understand Astra Control Center cluster CR options
+= Astra Control Center cluster custom resource options
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/get-started/
 
 [.lead]
-You can use the following Astra Control Center cluster CR options to create custom configurations during deployment.
+You can use the following Astra Control Center cluster custom resource (CR) options to create custom configurations during deployment.
 
 |===
 |Setting |Type |Use |Value Example |Description

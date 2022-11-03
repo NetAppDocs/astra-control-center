@@ -63,16 +63,14 @@ You should ensure that the following prerequisite conditions are met before you 
 * *ONTAP credentials*: You have a superuser and user ID set on the backing ONTAP system to back up and restore apps with Astra Control Center. Run the following command in the ONTAP command line:
 +
 ----
-export-policy rule modify -vserver <storage virtual machine name> -policyname <policy name> -ruleindex 1 -<superuser ID>
-export-policy rule modify -vserver <storage virtual machine name> -policyname <policy name> -ruleindex 1 -<user ID>
+export-policy rule modify -vserver <storage virtual machine name> -policyname <policy name> -ruleindex 1 -superuser sys
+export-policy rule modify -vserver <storage virtual machine name> -policyname <policy name> -ruleindex 1 -anon 65534
 ----
 
 * *Kubernetes default storage class*: Ensure that you have only a single default storage class defined for your Kubernetes cluster.
-+
-* *For application clusters*:
-** *Context elements*: Your application cluster should have a `kubeconfig.yaml` file that defines only one _context_ element. Refer to the Kubernetes documentation for https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[information about creating kubeconfig files^].
-** *Rancher only*: When managing application clusters in a Rancher environment, modify the application cluster's default context in the `kubeconfig` file provided by Rancher to use a control plane context instead of the Rancher API server context. This reduces load on the Rancher API server and improves performance.
-** *OpenShift only*: If you plan to add a second OpenShift cluster as a managed compute resource, you should ensure that the Astra Trident Volume Snapshot feature is enabled. Refer to the official Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
+* *Context elements*: Your application cluster should have a `kubeconfig.yaml` file that defines only one _context_ element. Refer to the Kubernetes documentation for https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[information about creating kubeconfig files^].
+* *Rancher only*: When managing application clusters in a Rancher environment, modify the application cluster's default context in the `kubeconfig` file provided by Rancher to use a control plane context instead of the Rancher API server context. This reduces load on the Rancher API server and improves performance.
+* *OpenShift only*: If you plan to add a second OpenShift cluster as a managed compute resource, you should ensure that the Astra Trident Volume Snapshot feature is enabled. Refer to the official Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
 
 === Run eligibility checks
 
@@ -343,7 +341,7 @@ Managing storage clusters in Astra Control as a storage backend enables you to g
 .. Select *ONTAP* and select *Next*.
 .. Enter the ONTAP cluster management IP address and admin credentials. The credentials must be cluster-wide credentials. 
 +
-NOTE: The user whose credentials you enter here must have the `ontapi` user login access method enabled within ONTAP System Manager on the ONTAP cluster. If you plan to use SnapMirror replication, apply user credentials with the "admin" role, which has the access methods `ontapi` and `http`, on both ONTAP clusters. Refer to https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts^] for more information.
+NOTE: The user whose credentials you enter here must have the `ontapi` user login access method enabled within ONTAP System Manager on the ONTAP cluster. If you plan to use SnapMirror replication, apply user credentials with the "admin" role, which has the access methods `ontapi` and `http`, on both source and destination ONTAP clusters. Refer to https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts in ONTAP documentation^] for more information.
 
 . Select *Next*.
 . Confirm the backend details and select *Manage*.
