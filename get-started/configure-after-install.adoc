@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: get-started/configure-after-install.html
 keywords: configure, installation, install, after, Astra Control Center, 
-summary: Depending on your environment, there might be some configuration needed after you install Astra Control Center.
+summary: Depending on your environment, there might be additional configuration needed after you install Astra Control Center.
 ---
 
 = Configure Astra Control Center after installation
@@ -11,7 +11,7 @@ summary: Depending on your environment, there might be some configuration needed
 :imagesdir: ../media/get-started/
 
 [.lead]
-Depending on your environment, there might be further configuration needed after you install Astra Control Center.
+Depending on your environment, there might be additional configuration needed after you install Astra Control Center.
 
 == Remove resource limitations
 Some environments use the ResourceQuotas and LimitRanges objects to prevent the resources in a namespace from consuming all available CPU and memory on the cluster. Astra Control Center does not set maximum limits, so it will not be in compliance with those resources. You need to remove them from the namespaces where you plan to install Astra Control Center.
