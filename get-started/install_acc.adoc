@@ -386,14 +386,14 @@ kubectl get pods -n netapp-acc-operator
 
 == Configure Astra Control Center
 
-. Edit the Astra Control Center custom resource (CR) file (`astra_control_center_min.yaml`) to make account, autoSupport, registry, and other necessary configurations:
+. Edit the Astra Control Center custom resource (CR) file (`astra_control_center.yaml`) to make account, autoSupport, registry, and other necessary configurations:
 +
-NOTE: `astra_control_center_min.yaml` is the default CR and is suitable for most installations. Familiarize yourself with all link:../get-started/acc_cluster_cr_options.html[CR options and their potential values^] to ensure you deploy Astra Control Center correctly for your environment. If additional customizations are required for your environment, you can use `astra_control_center.yaml` as an alternative CR.
+NOTE: For additional customizations, familiarize yourself with all link:../get-started/acc_cluster_cr_options.html[CR options and their potential values^] to ensure you deploy Astra Control Center correctly for your environment.
 
 +
 [source,sh]
 ----
-vim astra_control_center_min.yaml
+vim astra_control_center.yaml
 ----
 +
 NOTE: An annotated sample YAML follows these steps.
@@ -401,16 +401,21 @@ NOTE: An annotated sample YAML follows these steps.
 .. *accountName*: Change the `accountName` string to the name you want to associate with the account.
 .. *astraAddress*: Change the `astraAddress` string to the FQDN you want to use in your browser to access Astra. Do not use `http://` or `https://` in the address. Copy this FQDN for use in a <<Log in to the Astra Control Center UI,later step>>.
 .. *(Optional) astraKubeConfigSecret*: If you want the cluster to be automatically managed by Astra Control Center after installation and you have already <<substep_kubeconfig_secret,created the secret containing the kubeconfig for this cluster>>, remove the commenting around `astraKubeConfigSecret: "acc-kubeconfig-cred"` and provide the name of the secret.
+.. *autoSupport*: Change `enrolled` for AutoSupport to `false` for sites without internet connectivity or retain `true` for connected sites.
 .. *email*: Change the `email` string to the default initial administrator address. Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>.
-.. *ingressType*: Add one of the following ingress types:
+.. *(Optional) firstName and LastName*: Add a first name `firstName` and last name `lastName` of the user associated with the account. You can perform this step now or later within the UI.
+.. *imageRegistry*: Change `[your_registry_path]` to the registry path where you pushed the images in the <<Install the Astra Control Center operator,previous step>>.
++
+IMPORTANT: If you are using a registry that does not require authorization, you must delete the `secret` line within `imageRegistry` or the installation will fail.
+
+.. *(Optional) storageClass*: Change the `storageClass` value to another Trident storageClass resource as required by your installation. Run the command `kubectl get sc` to determine your existing storage class.
+.. *ingressType*: Use one of the following ingress types:
 +
 * Other ingress controller (`ingressType:Generic`)
 +
 This is the default action with Astra Control Center. After Astra Control Center is deployed, you will need to configure the ingress controller to expose Astra Control Center with a URL.
 +
 The default Astra Control Center installation sets up its gateway (`service/traefik`) to be of the type `ClusterIP`. This default installation requires you to additionally set up a Kubernetes IngressController/Ingress to route traffic to it. If you want to use an ingress, see link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[Set up ingress for load balancing].
-
-+
 * Service load balancer (`ingressType:AccTraefik`)
 +
 If you don't want to install an IngressController or create an Ingress resource, set `ingressType` to `AccTraefik`.
@@ -421,21 +426,7 @@ Astra Control Center uses a service of the type "LoadBalancer" (`svc/traefik` in
 +
 NOTE: For details about the service type of "LoadBalancer" and ingress, see link:../get-started/requirements.html[Requirements].
 
-.. *autoSupport*: Change `enrolled` for AutoSupport to `false` for sites without internet connectivity or retain `true` for connected sites.
-.. *(Optional) firstName and LastName*: Add a first name `firstName` and last name `lastName` of the user associated with the account. You can perform this step now or later within the UI.
-.. *imageRegistry*: Change `[your_registry_path]` to the registry path where you pushed the images in the <<Install the Astra Control Center operator,previous step>>.
-+
-IMPORTANT: If you are using a registry that does not require authorization, you must delete the `secret` line within `imageRegistry` or the installation will fail.
-
-.. *(Optional) storageClass*: Change the `storageClass` value to another Trident storageClass resource if required by your installation.
-.. If you use an external cert-manager, add the following lines to `spec`:
-+
-[source,sh]
-----
-spec:
-  crds:
-    externalCertManager: true
-----
+.. *crds*: If you use an external cert-manager, change `externalCertManager` to `true`. The default `false` causes Astra Control Center to install its own cert-manager during installation.
 
 +
 [subs=+quotes]
@@ -449,7 +440,6 @@ spec:
   astraVersion: "ASTRA_VERSION"
   *astraAddress: "astra.example.com"*
   *astraKubeConfigSecret: "acc-kubeconfig-cred"*
-  *ingressType: "Generic"*
   autoSupport:
     *enrolled: true*
   *email: "[admin@example.com]"*
@@ -459,9 +449,14 @@ spec:
     *name: "[your_registry_path]"*
     *secret: "astra-registry-cred"*
   *storageClass: "ontap-gold"*
+  volumeReclaimPolicy: "Retain"
+  *ingressType: "Generic"*
+  astraResourcesScaler: "Default"
+  additionalValues: {}
+  crds:
+    externalTraefik: false
+    *externalCertManager: false*
 ----
-
-
 
 == Complete Astra Control Center and operator installation
 
