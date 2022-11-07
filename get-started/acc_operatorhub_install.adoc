@@ -19,14 +19,14 @@ After you complete this procedure, you must return to the installation procedure
 * link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
 * From your OpenShift cluster, ensure all cluster operators are in a healthy state (`available` is `true`):
 +
-[source,sh]
+[source,console]
 ----
 oc get clusteroperators
 ----
 
 * From your OpenShift cluster, ensure all API services are in a healthy state (`available` is `true`):
 +
-[source,sh]
+[source,console]
 ----
 oc get apiservices
 ----
@@ -50,13 +50,13 @@ oc get apiservices
 . Download the zip of Astra Control Center certificates and keys from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
 . (Optional) Use the following command to verify the signature of the bundle:
 +
-[source,sh]
+[source,console]
 ----
 openssl dgst -sha256 -verify AstraControlCenter-public.pub -signature astra-control-center-[version].tar.gz.sig astra-control-center-[version].tar.gz
 ----
 . Extract the images:
 +
-[source,sh]
+[source,console]
 ----
 tar -vxzf astra-control-center-[version].tar.gz
 ----
@@ -73,13 +73,13 @@ NetApp provides binaries for the plugin for different CPU architectures and oper
 
 . List the available NetApp Astra `kubectl` plugin binaries, and note the name of the file you need for your operating system and CPU architecture:
 +
-[source,sh]
+[source,console]
 ----
 ls kubectl-astra/
 ----
 . Copy the file to the same location as the standard `kubectl` utility. In this example, the `kubectl` utility is located in the `/usr/local/bin` directory. Replace `<binary-name>` with the name of the file you need:
 +
-[source,sh]
+[source,console]
 ----
 cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 ----
@@ -98,7 +98,7 @@ cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 --
 . Change to the Astra directory:
 +
-[source,sh]
+[source,console]
 ----
 cd acc
 ----
@@ -110,7 +110,7 @@ cd acc
 * Replace MY_REGISTRY_USER with the user name.
 * Replace MY_REGISTRY_TOKEN with an authorized token for the registry.
 +
-[source,sh]
+[source,console]
 ----
 kubectl astra packages push-images -m BUNDLE_FILE -r MY_FULL_REGISTRY_PATH -u MY_REGISTRY_USER -p MY_REGISTRY_TOKEN
 ----
@@ -120,13 +120,13 @@ kubectl astra packages push-images -m BUNDLE_FILE -r MY_FULL_REGISTRY_PATH -u MY
 --
 . Log in to your registry:
 +
-[source,sh]
+[source,console]
 ----
 podman login [your_registry_path]
 ----
 . Run the following script, making the <YOUR_REGISTRY> substitution as noted in the comments:
 +
-[source,sh]
+[source,console]
 ----
 # You need to be at the root of the tarball.
 # You should see these files to confirm correct location:

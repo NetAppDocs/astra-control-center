@@ -17,7 +17,7 @@ If a cert-manager already exists in your Kubernetes cluster, you need to perform
 
 . Confirm that you have a cert-manager installed:
 +
-[source,sh]
+[source,console]
 ----
 kubectl get pods -A | grep 'cert-manager'
 ----
@@ -32,7 +32,7 @@ cert-manager   essential-cert-manager-webhook-56b76db9cc-fjqrq      1/1     Runn
 
 . Create a certificate/key pair for the astraAddress FQDN:
 +
-[source,sh]
+[source,console]
 ----
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt
 ----
@@ -48,7 +48,7 @@ writing new private key to 'tls.key'
 
 . Create a secret with previously generated files:
 +
-[source,sh]
+[source,console]
 ----
 kubectl create secret tls selfsigned-tls --key tls.key --cert tls.crt -n <cert-manager-namespace>
 ----
@@ -73,7 +73,7 @@ spec:
     secretName: selfsigned-tls
 ----
 +
-[source,sh]
+[source,console]
 ----
 kubectl apply -f ClusterIssuer.yaml
 ----
@@ -86,7 +86,7 @@ clusterissuer.cert-manager.io/astra-ca-clusterissuer created
 
 . Verify that the ClusterIssuer has come up correctly. `Ready` must be `True` before you can proceed:
 +
-[source,sh]
+[source,console]
 ----
 kubectl get ClusterIssuer
 ----

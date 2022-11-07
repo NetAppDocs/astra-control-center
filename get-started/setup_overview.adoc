@@ -80,7 +80,7 @@ Run the following eligibility checks to ensure that your cluster is ready to be 
 
 . Check the Trident version.
 +
-[source,sh]
+[source,console]
 ----
 kubectl get tridentversions -n trident
 ----
@@ -102,7 +102,7 @@ NOTE: If Trident is not installed or the installed version is not the latest, yo
 
 . Check if the storage classes are using the supported Trident drivers. The provisioner name should be `csi.trident.netapp.io`. See the following example:
 +
-[source,sh]
+[source,console]
 ----
 kubectl get sc
 ----
@@ -146,7 +146,7 @@ metadata:
 ----
 .. Apply the service account:
 +
-[source,sh]
+[source,console]
 ----
 kubectl apply -f astracontrol-service-account.yaml
 ----
@@ -179,13 +179,13 @@ subjects:
 ----
 .. Apply the cluster role binding:
 +
-[source,sh]
+[source,console]
 ----
 kubectl apply -f astracontrol-clusterrolebinding.yaml
 ----
 . List the service account secrets, replacing `<context>` with the correct context for your installation:
 +
-[source,sh]
+[source,console]
 ----
 kubectl get serviceaccount astracontrol-service-account --context <context> --namespace default -o json
 ----
@@ -209,7 +209,7 @@ The indices for each element in the `secrets` array begin with 0. In the above e
 *create-kubeconfig.sh*
 ----
 +
-[source,sh]
+[source,console]
 ----
 # Update these to match your environment.
 # Replace TOKEN_INDEX with the correct value
@@ -273,7 +273,7 @@ rm ${KUBECONFIG_FILE}.tmp
 ----
 .. Source the commands to apply them to your Kubernetes cluster.
 +
-[source,sh]
+[source,console]
 ----
 source create-kubeconfig.sh
 ----
