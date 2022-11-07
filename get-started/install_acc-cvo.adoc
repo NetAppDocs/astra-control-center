@@ -419,7 +419,7 @@ The first step is to install a RedHat OpenShift cluster on Azure.
 
 For installation instructions, see the following:
 
-* https://docs.openshift.com/container-platform/4.8/installing/installing_aws/installing-azure-default.html[Installing OpenShift cluster on Azure^].
+* https://docs.openshift.com/container-platform/4.8/installing/installing_azure/preparing-to-install-on-azure.html[Installing OpenShift cluster on Azure^].
 
 * https://docs.openshift.com/container-platform/4.8/installing/installing_azure/installing-azure-account.html#installing-azure-account[Installing an Azure account^].
 
@@ -440,7 +440,7 @@ See https://docs.netapp.com/us-en/cloud-manager-setup-admin/concept-accounts-azu
 === Configure Azure
 Next, configure Azure to create a virtual network, set up compute instances, create an Azure Blob container, create an Azure Container Register (ACR) to host the Astra Control Center images, and push the images to this registry.
 
-Follow the Azure documentation to complete the following steps. See https://docs.openshift.com/container-platform/4.8/installing/installing_aws/installing-azure-default.html[Installing OpenShift cluster on Azure^].
+Follow the Azure documentation to complete the following steps. See https://docs.openshift.com/container-platform/4.8/installing/installing_azure/preparing-to-install-on-azure.html[Installing OpenShift cluster on Azure^].
 
 . Create an Azure virtual network.
 . Review the compute instances. This can be a bare metal server or VMs in Azure.

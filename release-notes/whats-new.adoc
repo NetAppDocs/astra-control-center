@@ -13,11 +13,37 @@ summary: NetApp periodically updates Astra Control Center to bring you new featu
 [.lead]
 We're pleased to announce the latest release of Astra Control Center.
 
+== 17 November 2022 (22.11.0)
+
+.New features and support
+
+* Added support for Kubernetes v1.25. 
+* Added role-based access (RBAC) for apps across multiple namespaces. 
+* Enhanced replication protection to a remote system using SnapMirror Disaster Recovery technology.  
+* Added support for Pod Security Admission (PSA) to replace Pod Security Policies (PSPs). With Kubernetes v1.25, PSPs are deprecated.  
+* Enhanced data protection that now supports adding cluster-scoped resources to your app namespaces. You can import cluster resources that are associated with namespaced resources in addition to those that Astra Control includes automatically. 
+* Added the ability to dynamically preview your app.   
+* Added support for LDAP authentication in the Astra Control UI in addition to the Astra Control API. 
+* Implemented a new Task service that helps you monitor backup, restore, and clone operations.  
+* Enhanced third-party service upgrades. 
+* For Astra Control Service, added support for any Kubernetes clusters with the generic K8s ingest feature. 
+* For Astra Control Service, added support for multiple hyperscaler projects or subscriptions per account. 
+* For Astra Control Service, added support for managed namespaces as the metering unit instead of apps. 
+* For Astra Control Service, developed the ability to use term-based subscriptions using AWS Marketplace. 
+
+.Known issues and limitations
+* link:../release-notes/known-issues.html[Known issues for this release]
+* link:../release-notes/known-limitations.html[Known limitations for this release]
+
 == 8 September 2022 (22.08.1)
 
 This patch release (22.08.1) for Astra Control Center (22.08.0) fixes minor bugs in app replication using NetApp SnapMirror.
 
 == 10 August 2022 (22.08.0)
+// Start snippet: collapsible block (open on page load)
+.Details
+[%collapsible]
+====
 
 .New features and support
 
@@ -34,6 +60,9 @@ NOTE: The NetApp provided default pre- and post-snapshot execution hooks for spe
 .Known issues and limitations
 * link:../release-notes/known-issues.html[Known issues for this release]
 * link:../release-notes/known-limitations.html[Known limitations for this release]
+
+====
+// End snippet
 
 == 26 April 2022 (22.04.0)
 // Start snippet: collapsible block (open on page load)
