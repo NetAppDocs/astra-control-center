@@ -115,14 +115,14 @@ cd acc
 . [[substep_image_local_registry_push]]Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
 +
 
-* Replace BUNDLE_FILE with the name of the Astra Control bundle file (`acc.manifest.yaml`).
-* Replace MY_FULL_REGISTRY_PATH with the URL of the Docker repository.  The URL must include the exact directory that contains the images.
-* Replace MY_REGISTRY_USER with the user name.
-* Replace MY_REGISTRY_TOKEN with an authorized token for the registry.
+* Replace <BUNDLE_FILE> with the name of the Astra Control bundle file (`acc.manifest.yaml`).
+* Replace <MY_FULL_REGISTRY_PATH> with the URL of the Docker repository.  The URL must include the exact directory that contains the images.
+* Replace <MY_REGISTRY_USER> with the user name.
+* Replace <MY_REGISTRY_TOKEN> with an authorized token for the registry.
 +
 [source,console]
 ----
-kubectl astra packages push-images -m BUNDLE_FILE -r MY_FULL_REGISTRY_PATH -u MY_REGISTRY_USER -p MY_REGISTRY_TOKEN
+kubectl astra packages push-images -m <BUNDLE_FILE> -r <MY_FULL_REGISTRY_PATH> -u <MY_REGISTRY_USER> -p <MY_REGISTRY_TOKEN>
 ----
 --
 
@@ -313,7 +313,7 @@ Response:
 +
 ----
 NAME    UUID                                      VERSION     ADDRESS         READY
-astra   ACC-9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f  22.11.0-24  10.111.111.111  True
+astra   9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f  22.11.0-24  10.111.111.111  True
 ----
 +
 NOTE: To monitor upgrade status during the operation, use the following command: `kubectl get -o yaml -n [netapp-acc or custom namespace] acc | grep -i upgrading`.

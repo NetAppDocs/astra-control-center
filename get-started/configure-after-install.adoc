@@ -140,7 +140,7 @@ Astra Control Center uses a self-signed TLS certificate by default for ingress c
 The default, self-signed certificate is used for two types of connections: 
 
 * HTTPS connections to the Astra Control Center web UI
-* Ingress controller traffic (only if the `ingressType: "AccTraefik"` property was set in the `astra_control_center_min.yaml` file during Astra Control Center installation)
+* Ingress controller traffic (only if the `ingressType: "AccTraefik"` property was set in the `astra_control_center.yaml` file during Astra Control Center installation)
 
 Replacing the default TLS certificate replaces the certificate used for authentication for these connections.
 ===============================

@@ -87,7 +87,7 @@ The NetApp Astra `kubectl` command line plugin saves time when performing common
 
 .What you'll need
 
-NetApp provides binaries for the plugin for different CPU architectures and operating systems. You need to know which CPU and operating system you have before you perform this task. On Linux and Mac operating systems, you can use the `uname -a` command to gather this information.
+NetApp provides plugin binaries for different CPU architectures and operating systems. You need to know which CPU and operating system you have before you perform this task. On Linux and Mac operating systems, you can use the `uname -a` command to gather this information.
 
 .Steps
 
@@ -124,14 +124,14 @@ cd acc
 . [[substep_image_local_registry_push]]Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
 +
 
-* Replace BUNDLE_FILE with the name of the Astra Control bundle file (`acc.manifest.yaml`).
-* Replace MY_FULL_REGISTRY_PATH with the URL of the Docker repository. The URL must include the exact directory that contains the images.
-* Replace MY_REGISTRY_USER with the user name.
-* Replace MY_REGISTRY_TOKEN with an authorized token for the registry.
+* Replace <BUNDLE_FILE> with the name of the Astra Control bundle file (`acc.manifest.yaml`).
+* Replace <MY_FULL_REGISTRY_PATH> with the URL of the Docker repository. The URL must include the exact directory that contains the images.
+* Replace <MY_REGISTRY_USER> with the user name.
+* Replace <MY_REGISTRY_TOKEN> with an authorized token for the registry.
 +
 [source,console]
 ----
-kubectl astra packages push-images -m BUNDLE_FILE -r MY_FULL_REGISTRY_PATH -u MY_REGISTRY_USER -p MY_REGISTRY_TOKEN
+kubectl astra packages push-images -m <BUNDLE_FILE> -r <MY_FULL_REGISTRY_PATH> -u <MY_REGISTRY_USER> -p <MY_REGISTRY_TOKEN>
 ----
 --
 
@@ -276,7 +276,7 @@ NOTE: An annotated sample YAML follows these steps.
 [source,console]
 ----
 imagePullSecrets:
-- name: <astra-registry-cred>
+- name: astra-registry-cred
 ----
 
 .. Change `[your_registry_path]` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<substep_image_local_registry_push,previous step>>.
@@ -408,14 +408,13 @@ NOTE: An annotated sample YAML follows these steps.
 +
 IMPORTANT: If you are using a registry that does not require authorization, you must delete the `secret` line within `imageRegistry` or the installation will fail.
 
-.. *(Optional) storageClass*: Change the `storageClass` value to another Trident storageClass resource as required by your installation. Run the command `kubectl get sc` to determine your existing storage class.
+.. *(Optional) storageClass*: Change the `storageClass` value to another Trident storageClass resource as required by your installation. Run the command `kubectl get sc` to determine your existing configured storage classes.
 .. *ingressType*: Use one of the following ingress types:
 +
 * Other ingress controller (`ingressType:Generic`)
 +
-This is the default action with Astra Control Center. After Astra Control Center is deployed, you will need to configure the ingress controller to expose Astra Control Center with a URL.
-+
-The default Astra Control Center installation sets up its gateway (`service/traefik`) to be of the type `ClusterIP`. This default installation requires you to additionally set up a Kubernetes IngressController/Ingress to route traffic to it. If you want to use an ingress, see link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[Set up ingress for load balancing].
+This is the default action with Astra Control Center. After Astra Control Center is deployed, you will need to configure the link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller] to expose Astra Control Center with a URL.
+
 * Service load balancer (`ingressType:AccTraefik`)
 +
 If you don't want to install an IngressController or create an Ingress resource, set `ingressType` to `AccTraefik`.
@@ -477,7 +476,7 @@ namespace/netapp-acc created
 +
 [source,console]
 ----
-kubectl apply -f astra_control_center_min.yaml -n [netapp-acc or custom namespace]
+kubectl apply -f astra_control_center.yaml -n [netapp-acc or custom namespace]
 ----
 +
 Sample response:
@@ -588,14 +587,14 @@ NOTE: `accHost` cluster registration is one of the last operations, and if it fa
 +
 [source,console]
 ----
-kubectl get AstraControlCenter -n netapp-acc
+kubectl get AstraControlCenter -n [netapp-acc or custom namespace]
 ----
 +
 Response:
 +
 ----
 NAME    UUID                                      VERSION     ADDRESS         READY
-astra   ACC-9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f  22.08.1-26  10.111.111.111  True
+astra   9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f  22.08.1-26  10.111.111.111  True
 ----
 +
 IMPORTANT: Copy the UUID value. The password is `ACC-` followed by the UUID value (`ACC-[UUID]` or, in this example, `ACC-9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f`).
@@ -649,49 +648,14 @@ kubectl create secret tls [tls secret name] --key="tls.key" --cert="tls.crt" -n 
 TIP: The name of the secret should match the `spec.tls.secretName` provided in `istio-ingress.yaml` file.
 
 
-. Deploy an ingress resource in `netapp-acc` (or custom-named) namespace using either the v1beta1 (deprecated in Kubernetes version less than or 1.22) or v1 resource type for either a deprecated or a new schema:
-+
-Output:
-+
-----
-apiVersion: networking.k8s.io/v1beta1
-kind: IngressClass
-metadata:
-  name: istio
-spec:
-  controller: istio.io/ingress-controller
----
-apiVersion: networking.k8s.io/v1beta1
-kind: Ingress
-metadata:
-  name: ingress
-  namespace: istio-system
-spec:
-  ingressClassName: istio
-  tls:
-  - hosts:
-    - <ACC addess>
-    secretName: [tls secret name]
-  rules:
-  - host: [ACC addess]
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          serviceName: traefik
-          servicePort: 80
-----
-
-+
-For the v1 new schema, follow this sample:
+. Deploy an ingress resource in `netapp-acc` (or custom-named) namespace using the v1 resource type for a new schema:
 +
 [source,console]
 ----
 kubectl apply -f istio-Ingress.yaml
 ----
 +
-Output:
+v1 output:
 +
 ----
 apiVersion: networking.k8s.io/v1
@@ -816,12 +780,12 @@ oc create route edge --service=traefik --port=web -n [netapp-acc or custom names
 After installing Astra Control Center, you will change the password for the default administrator and log in to the Astra Control Center UI dashboard.
 
 .Steps
-. In a browser, enter the FQDN you used in the `astraAddress` in the `astra_control_center_min.yaml` CR when <<Install Astra Control Center,you installed Astra Control Center>>.
+. In a browser, enter the FQDN you used in the `astraAddress` in the `astra_control_center.yaml` CR when <<Install Astra Control Center,you installed Astra Control Center>>.
 . Accept the self-signed certificates when prompted.
 +
 NOTE: You can create a custom certificate after login.
 
-. At the Astra Control Center login page, enter the value you used for `email` in `astra_control_center_min.yaml` CR when <<Install Astra Control Center,you installed Astra Control Center>>, followed by the initial setup password (`ACC-[UUID]`).
+. At the Astra Control Center login page, enter the value you used for `email` in `astra_control_center.yaml` CR when <<Install Astra Control Center,you installed Astra Control Center>>, followed by the initial setup password (`ACC-[UUID]`).
 +
 NOTE: If you enter an incorrect password three times, the admin account will be locked for 15 minutes.
 
