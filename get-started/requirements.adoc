@@ -15,7 +15,6 @@ Get started by verifying the readiness of your operational environment, applicat
 
 * <<Operational environment requirements>>
 * <<Supported storage backends>>
-* <<Replication prerequisites>>
 * <<Access to the internet>>
 * <<License>>
 * <<Ingress for on-premises Kubernetes clusters>>
@@ -133,24 +132,6 @@ To use Astra Control Center, verify that you have the following ONTAP licenses, 
 * S3 license: Optional. Needed only for ONTAP S3 buckets
 
 To check whether your ONTAP system has the required licenses, refer to https://docs.netapp.com/us-en/ontap/system-admin/manage-licenses-concept.html[Manage ONTAP licenses^].
-
-== Replication prerequisites
-
-Astra Control application replication requires that the following prerequisites must be met before you begin:
-
-* To achieve seamless disaster recovery, we recommend that you deploy Astra Control Center in a third fault domain or secondary site.
-* The app's host Kubernetes cluster and a destination Kubernetes cluster must be available and connected to two ONTAP clusters, ideally at different failure domains or sites.
-* ONTAP clusters and the host SVM must be paired. See https://docs.netapp.com/us-en/ontap-sm-classic/peering/index.html[Cluster and SVM peering overview^].
-* The paired remote SVM must be available to Astra Trident on the destination cluster.
-* Astra Trident version 22.07 or greater must exist on both the source and destination ONTAP clusters.
-* The `replicationPolicy:` key must exist in the Astra Trident mirror relationship CRD.
-* ONTAP SnapMirror asynchronous licenses using the Data Protection bundle must be enabled on both the source and destination ONTAP clusters. See https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html[SnapMirror licensing overview in ONTAP^].
-* When you add an ONTAP storage backend to Astra Control Center, apply user credentials with the "admin" role, which has access methods `http` and `ontapi` enabled on both ONTAP source and destination clusters. See https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts in ONTAP documentation^] for more information.
-* Both source and destination Kubernetes clusters and ONTAP clusters must be managed by Astra Control.
-+
-NOTE: You can simultaneously replicate a different app (running on the other cluster or site) in the opposite direction. For example, Apps A, B, C can be replicated from Datacenter 1 to Datacenter 2; and Apps X, Y, Z can be replicated from Datacenter 2 to Datacenter 1.
-
-Learn how to link:../use/replicate_snapmirror.html[replicate apps to a remote system using SnapMirror technology^].
 
 == Access to the internet
 
@@ -304,6 +285,14 @@ If you want to integrate these options, you should obtain the following:
 * SSO integration confirmation details
 * SMTP server configuration details
 ////
+
+== Feature-specific requirements
+Keep in mind these requirements if you plan to use these Astra Control Center features:
+
+* link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[Cluster management requirements^]
+* link:../use/manage-apps.html#application-management-requirements[Application management requirements^]
+* link:../use/replicate_snapmirror.html[Replication prerequisites^]
+
 == What's next
 
 View the link:quick-start.html[quick start^] overview.
