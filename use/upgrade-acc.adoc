@@ -11,7 +11,7 @@ summary: To upgrade Astra Control Center, you'll download the bundle and upgrade
 :imagesdir: ../media/get-started/
 
 [.lead]
-To upgrade Astra Control Center, download the installation bundle from the NetApp Support Site and complete these instructions to upgrade the Astra Control Center components in your environment. You can use this procedure to upgrade Astra Control Center in internet-connected or air-gapped environments.
+To upgrade Astra Control Center, download the installation bundle from the NetApp Support Site and complete these instructions. You can use this procedure to upgrade Astra Control Center in internet-connected or air-gapped environments.
 
 .What you'll need
 * Before you upgrade, refer to link:../get-started/requirements.html#operational-environment-requirements[Operational environment requirements^] to ensure your environment still meets the minimum requirements for Astra Control Center deployment. Your environment should have the following:
@@ -60,7 +60,7 @@ The Astra Control Center upgrade process guides you through the following high-l
 * <<Set up ingress for load balancing>>
 
 
-IMPORTANT: Do not execute the following command during the entirety of the upgrade process to avoid deleting all Astra Control Center pods: `kubectl delete -f astra_control_center_operator_deploy.yaml`
+IMPORTANT: Do not delete the Astra Control Center operator (for example, `kubectl delete -f astra_control_center_operator_deploy.yaml`) at any time during Astra Control Center installation to avoid deleting pods.
 
 TIP: Perform upgrades in a maintenance window when schedules, backups, and snapshots are not running.
 
