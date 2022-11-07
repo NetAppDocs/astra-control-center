@@ -385,7 +385,7 @@ The steps differ depending on the type of ingress controller you use:
 
 .Steps for Nginx ingress controller
 
-. Use the existing secret `secure-testing-cert` or create a secret of type http://kubernetes.io/tls[`kubernetes.io/tls`] for a TLS private key and certificate in `netapp-acc` (or custom-named) namespace as described in https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets[TLS secrets].
+. Use the existing secret `secure-testing-cert` or create a secret of type `kubernetes.io/tls` for a TLS private key and certificate in `netapp-acc` (or custom-named) namespace as described in https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets[TLS secrets].
 . Deploy an ingress resource in `netapp-acc` (or custom-named) namespace for either a deprecated or a new schema:
 .. For a deprecated schema, follow this sample:
 

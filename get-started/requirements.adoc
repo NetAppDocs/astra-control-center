@@ -169,7 +169,7 @@ Astra Control Center requires an Astra Control Center license for full functiona
 
 You can try Astra Control Center with an evaluation license, which lets you use Astra Control Center for 90 days from the date you download the license. You can sign up for a free trial by registering link:https://cloud.netapp.com/astra-register[here^].
 
-To set up the license, refer to link:setup_overview.html#add-a-full-or-evaluation-license[use a 90-day evaluation license^]. 
+To set up the license, refer to link:setup_overview.html[use a 90-day evaluation license^]. 
 
 To learn more about how licenses work, see link:../concepts/licensing.html[Licensing^].
 
@@ -213,7 +213,7 @@ NOTE: You can deploy Astra Control Center in a dual-stack Kubernetes cluster, an
 |Metrics data communication - ensure each managed cluster can access this port on the cluster hosting Astra Control Center (two-way communication required)
 
 |Astra Control Center
-|Hosted Cloud Insights service (https://cloudinsights.netapp.com)
+|Hosted Cloud Insights service (https://www.netapp.com/cloud-services/cloud-insights/)
 |443
 |HTTPS
 |Cloud Insights communication
