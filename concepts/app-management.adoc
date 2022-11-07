@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: learn/app-management.html
+permalink: concepts/app-management.html
 keywords: app, labels, kubernetes labels, kubernetes resources, pods, define app
 summary: Describes the type of managed apps in Astra Control.
 ---
