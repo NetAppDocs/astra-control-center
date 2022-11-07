@@ -289,9 +289,9 @@ If you want to integrate these options, you should obtain the following:
 == Feature-specific requirements
 Keep in mind these requirements if you plan to use these Astra Control Center features:
 
-* link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[Cluster management requirements^]
-* link:../use/manage-apps.html#application-management-requirements[Application management requirements^]
-* link:../use/replicate_snapmirror.html[Replication prerequisites^]
+* *Manage clusters*: link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[Cluster management requirements^]
+* *Manage applications*: link:../use/manage-apps.html#application-management-requirements[Application management requirements^]
+* *SnapMirror Disaster Recovery replication*: link:../use/replicate_snapmirror.html[Replication prerequisites^]
 
 == What's next
 
