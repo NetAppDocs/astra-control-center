@@ -62,11 +62,13 @@ When Astra Control Center connects to NetApp Cloud Insights through a proxy, man
 
 [source,console]
 ----
-kubectl get cm telegraf-conf -o yaml -n netapp-monitoring | sed '/\[\[outputs.http\]\]/c\    [[outputs.http]]\n    use_system_proxy = true' | kubectl replace -f -
+kubectl get cm telegraf-conf -o yaml -n netapp-monitoring | sed '/\[\[outputs.http\]\]/c\
+[[outputs.http]]\n use_system_proxy = true' | kubectl replace -f -
 ----
 [source,console]
 ----
-kubectl get cm telegraf-conf-rs -o yaml -n netapp-monitoring | sed '/\[\[outputs.http\]\]/c\    [[outputs.http]]\n    use_system_proxy = true' | kubectl replace -f -
+kubectl get cm telegraf-conf-rs -o yaml -n netapp-monitoring | sed '/\[\[outputs.http\]\]/c\
+[[outputs.http]]\n use_system_proxy = true' | kubectl replace -f -
 ----
 [source,console]
 ----
