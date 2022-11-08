@@ -111,7 +111,7 @@ The Data Protection page shows the replication relationship state and status:
 For example:
 Normal | Established
 
-Learn more about replication states and status below.
+Learn more about replication states and status at the end of this topic.
 
 == Bring a replicated app online on the destination cluster (fail over)
 
