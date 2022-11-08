@@ -18,9 +18,9 @@ Try it out! If you want to try Astra Control Center, you can use a 90-day evalua
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png[One] Review Kubernetes cluster requirements
 
 [role="quick-margin-list"]
-* Astra works with Kubernetes clusters with a Trident-configured ONTAP storage backend.
+* Astra works with Kubernetes clusters using a Trident-based storage class with an ONTAP storage backend.
 * Clusters must be running in a healthy state, with at least three online worker nodes.
-* The cluster must be running Kubernetes.
+
 
 
 [role="quick-margin-para"]
@@ -34,7 +34,7 @@ Learn more about link:../get-started/requirements.html[Astra Control Center requ
 +
 Optionally, install Astra Control Center using Red Hat OperatorHub.
 Optionally, install Astra Control Center with a Cloud Volumes ONTAP storage backend. 
-* Optionally, depending on your environment, complete post-installation link:configure-after-install.html[configuration steps].
+* Optionally, depending on your environment, complete additional link:configure-after-install.html[configuration steps].
 [role="quick-margin-para"]
 Learn more about link:../get-started/install_overview.html[installing Astra Control Center].
 
