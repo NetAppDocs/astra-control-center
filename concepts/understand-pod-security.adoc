@@ -1,14 +1,14 @@
 ---
 sidebar: sidebar
-permalink: get-started/understand-pod-security.html
+permalink: concepts/understand-pod-security.html
 keywords: login, Astra Control Center, web ui, tls, certificate
 summary: You need to understand how pod security works before installing Astra Control Center.
 ---
 
-= Understand pod security
+= Pod security
 :hardbreaks:
 :icons: font
-:imagesdir: ../media/get-started/
+:imagesdir: ../media/concepts/
 
 [.lead]
 Astra Control Center supports privilege limitation through pod security policies (PSPs) and pod security admission (PSA). These frameworks enable you to limit what users or groups are able to run containers and what privileges those containers can have.
