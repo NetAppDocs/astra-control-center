@@ -33,7 +33,7 @@ Learn more about link:../get-started/requirements.html[Astra Control Center requ
 * Install Astra Control Center in your local environment.
 +
 Optionally, install Astra Control Center using Red Hat OperatorHub.
-Optionally, install Astra Control Center with a Cloud Volumes ONTAP storage backend. 
+Optionally, install Astra Control Center on a supported public cloud platform, such as with a Cloud Volumes ONTAP storage backend. 
 * Optionally, depending on your environment, complete additional link:configure-after-install.html[configuration steps].
 [role="quick-margin-para"]
 Learn more about link:../get-started/install_overview.html[installing Astra Control Center].
@@ -43,7 +43,7 @@ Learn more about link:../get-started/install_overview.html[installing Astra Cont
 [role="quick-margin-list"]
 
 * Add an Astra Control license and any supporting ONTAP licenses.
-* Add a Kubernetes cluster and Astra Control Center discovers details.
+* Add a Kubernetes cluster.
 * Add an ONTAP storage backend.
 * Optionally, add an object store bucket that will store your app backups.
 
