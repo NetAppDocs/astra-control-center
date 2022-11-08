@@ -17,9 +17,15 @@ Some Kubernetes distributions might have a default pod security configuration th
 
 You can use the information and examples included here to understand the pod security changes that Astra Control Center makes, and use a pod security approach that provides the protection you need without interfering with Astra Control Center functions.
 
+== PSAs enforced by Astra Control Center
+During installation, Astra Control Center enables the enforcement of a pod security admission by adding the following label to the `netapp-acc` or a custom namespace:
+
+----
+pod-security.kubernetes.io/enforce: privileged
+----
 
 == PSPs installed by Astra Control Center
-When you install Astra Control Center on Kubernetes 1.23 or 1.24, several pod security policies are created during installation. Some of these are permanent, and some of them are created during certain operations and are removed once the operation is complete. Pod security policies are not installed on Kubernetes 1.25 and newer.
+When you install Astra Control Center on Kubernetes 1.23 or 1.24, several pod security policies are created during installation. Some of these are permanent, and some of them are created during certain operations and are removed once the operation is complete. Astra Control Center does not attempt to install PSPs when the host cluster is running Kubernetes 1.25 or later, as they are not supported on these versions.
 
 === PSPs created during installation
 During Astra Control Center installation, the Astra Control Center operator installs a custom pod security policy, a Role object, and a RoleBinding object to support the deployment of Astra Control Center services in the Astra Control Center namespace.
@@ -27,18 +33,18 @@ During Astra Control Center installation, the Astra Control Center operator inst
 The new policy and objects have the following attributes:
 
 ----
-kubectl get psp
+$ kubectl get psp
 
 NAME                           PRIV    CAPS          SELINUX    RUNASUSER          FSGROUP     SUPGROUP    READONLYROOTFS   VOLUMES
 avp-psp                        false                 RunAsAny   RunAsAny           RunAsAny    RunAsAny    false            *
 netapp-astra-deployment-psp    false                 RunAsAny   RunAsAny           RunAsAny    RunAsAny    false            *
 
-kubectl get role
+$ kubectl get role -n <namespace_name>
 
 NAME                                     CREATED AT
 netapp-astra-deployment-role             2022-06-27T19:34:58Z
 
-kubectl get rolebinding
+$ kubectl get rolebinding -n <namespace_name>
 
 NAME                                     ROLE                                          AGE
 netapp-astra-deployment-rb               Role/netapp-astra-deployment-role             32m
@@ -50,17 +56,17 @@ During backup operations, Astra Control Center creates a dynamic pod security po
 The new policy and objects have the following attributes:
 
 ----
-kubectl get psp
+$ kubectl get psp
 
 NAME                           PRIV    CAPS                            SELINUX    RUNASUSER          FSGROUP     SUPGROUP    READONLYROOTFS   VOLUMES
 netapp-astra-backup            false   DAC_READ_SEARCH                 RunAsAny   RunAsAny           RunAsAny    RunAsAny    false            *
 
-kubectl get role
+$ kubectl get role -n <namespace_name>
 
 NAME                  CREATED AT
 netapp-astra-backup   2022-07-21T00:00:00Z
 
-kubectl get rolebinding
+$ kubectl get rolebinding -n <namespace_name>
 
 NAME                  ROLE                       AGE
 netapp-astra-backup   Role/netapp-astra-backup   62s
@@ -72,25 +78,18 @@ When you manage a cluster, Astra Control Center installs the netapp-monitoring o
 The new policy and objects have the following attributes:
 
 ----
-kubectl get psp
+$ kubectl get psp
 
 NAME                           PRIV    CAPS                            SELINUX    RUNASUSER          FSGROUP     SUPGROUP    READONLYROOTFS   VOLUMES
 netapp-monitoring-psp-nkmo     true    AUDIT_WRITE,NET_ADMIN,NET_RAW   RunAsAny   RunAsAny           RunAsAny    RunAsAny    false            *
 
-kubectl get role
+$ kubectl get role -n <namespace_name>
 
 NAME                                           CREATED AT
 netapp-monitoring-role-privileged              2022-07-21T00:00:00Z
 
-kubectl get rolebinding
+$ kubectl get rolebinding -n <namespace_name>
 
 NAME                                                  ROLE                                                AGE
 netapp-monitoring-role-binding-privileged             Role/netapp-monitoring-role-privileged              2m5s
-----
-
-== PSAs enforced by Astra Control Center
-During installation, Astra Control Center enables the enforcement of a pod security admission by adding the following label to the `pcloud` namespace:
-
-----
-pod-security.kubernetes.io/enforce: privileged
 ----
