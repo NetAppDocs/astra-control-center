@@ -85,16 +85,6 @@ kubectl get pods -n netapp-monitoring --no-headers=true | grep 'telegraf-ds\|tel
 //DOC-3903/ASTRA-13162/PI4/PI5
 If Astra Trident on an app cluster goes offline (and is brought back online) and 500 internal service errors are encountered when attempting app data management, restart all of the Kubernetes nodes in the app cluster to restore functionality.
 
-== Snapshots might fail with snapshot controller version 4.2.0
-//DOC-3891 and ASTRACTL-12523/PI5
-When you use Kubernetes snapshot-controller (also known as external-snapshotter) version 4.2.0 with Kubernetes 1.20 or 1.21, snapshots can eventually begin to fail. To prevent this, use a different https://kubernetes-csi.github.io/docs/snapshot-controller.html[supported version^] of external-snapshotter, such as version 4.2.1, with Kubernetes versions 1.20 or 1.21.
-
-. Run a POST call to add an updated kubeconfig file to the `/credentials` endpoint and retrieve the assigned `id` from the response body.
-
-. Run a PUT call from the `/clusters` endpoint using the appropriate cluster ID and set the `credentialID` to the `id` value from the previous step.
-
-After you complete these steps, the credential associated with the cluster is updated and the cluster should reconnect and update its state to `available`.
-
 == Find more information
 
 * link:../release-notes/known-limitations.html[Known limitations]
