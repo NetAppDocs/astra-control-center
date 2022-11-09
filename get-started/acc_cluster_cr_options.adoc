@@ -133,7 +133,7 @@ You can use the following Astra Control Center cluster custom resource (CR) opti
 
 | imageRegistry.secret
 | string
-| Required if you are using imageRegistry
+| Required if you are using imageRegistry that requires a secret
 | astra-registry-cred
 | The name of the Kubernetes secret used to authenticate with the image registry.
 

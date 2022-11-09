@@ -38,14 +38,14 @@ kubectl get apiservices
 The Astra Control Center installation process does the following:
 
 * Installs the Astra components into the `netapp-acc` (or custom-named) namespace.
-* Creates a default account.
+* Creates a default Astra Control Owner admin account.
 * Establishes an administrative user email address and default initial setup password. This user is assigned the Owner role in the system that is needed for first time login to the UI.
 * Helps you determine that all Astra Control Center pods are running.
 * Installs the Astra Control Center UI.
 //VMware ADS EAP review
 
 
-IMPORTANT: Do not delete the Astra Control Center operator (for example, `kubectl delete -f astra_control_center_operator_deploy.yaml`) at any time during the entire Astra Control Center installation to avoid deleting pods.
+IMPORTANT: Do not delete the Astra Control Center operator (for example, `kubectl delete -f astra_control_center_operator_deploy.yaml`) at any time during Astra Control Center installation or operation to avoid deleting pods.
 
 .Steps
 
@@ -85,7 +85,7 @@ The NetApp Astra kubectl command line plugin saves time when performing common t
 
 .What you'll need
 
-NetApp provides plugin binaries for different CPU architectures and operating systems. You need to know which CPU and operating system you have before you perform this task. On Linux and Mac operating systems, you can use the `uname -a` command to gather this information.
+NetApp provides plugin binaries for different CPU architectures and operating systems. You need to know which CPU and operating system you have before you perform this task.
 
 .Steps
 
@@ -97,7 +97,7 @@ NOTE: The kubectl plugin library is part of the tar bundle and is extracted into
 ----
 ls kubectl-astra/
 ----
-. Copy the correct binary and rename it to `kubectl-astra`. Copy the binary to the same location as the standard kubectl utility. In this example, the kubectl utility is located in the `/usr/local/bin` directory. Replace `<binary-name>` with the name of the file you need:
+. Move the correct binary into the current path and rename it to `kubectl-astra`:
 +
 [source,console]
 ----
@@ -115,17 +115,17 @@ cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 
 .Docker
 --
-. Change to the Astra directory:
+. Change to the `acc` directory extracted from the tar bundle:
 +
-[source,console]
+Example:
 ----
-cd acc
+cd ../acc
 ----
 . [[substep_image_local_registry_push]]Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
 +
 
 * Replace <BUNDLE_FILE> with the name of the Astra Control bundle file (`acc.manifest.yaml`).
-* Replace <MY_FULL_REGISTRY_PATH> with the URL of the Docker repository. The URL must include the exact directory that contains the images.
+* Replace <MY_FULL_REGISTRY_PATH> with the URL of the Docker repository; for example, https://exampledownloads.jfrog.io/docker-astra-control/v1/.
 * Replace <MY_REGISTRY_USER> with the user name.
 * Replace <MY_REGISTRY_TOKEN> with an authorized token for the registry.
 +
@@ -141,7 +141,7 @@ kubectl astra packages push-images -m <BUNDLE_FILE> -r <MY_FULL_REGISTRY_PATH> -
 +
 [source,console]
 ----
-podman login [file_path]
+podman login <MY_FULL_REGISTRY_PATH>
 ----
 
 . Run the following script, making the <YOUR_REGISTRY> substitution as noted in the comments:
@@ -189,7 +189,7 @@ done
 export KUBECONFIG=[file path]
 ----
 +
-NOTE: Before you complete installation, be sure your KUBECONFIG is pointing to the cluster where you want to install Astra Control Center. Only one context is permitted for the KUBECONFIG.
+NOTE: Before you complete installation, be sure your KUBECONFIG is pointing to the cluster where you want to install Astra Control Center. The KUBECONFIG can contain only one context.
 
 
 .  If you use a registry that requires authentication, you need to do the following:
@@ -406,12 +406,12 @@ NOTE: Do not use `http://` or `https://` in the address. Copy this FQDN for use 
 +
 IMPORTANT: If you are using a registry that does not require authorization, you must delete the `secret` line within `imageRegistry` or the installation will fail.
 
-.. *(Optional) storageClass*: Change the `storageClass` value to another Trident storageClass resource as required by your installation. Run the command `kubectl get sc` to determine your existing configured storage classes.
+.. *(Optional) storageClass*: Change the `storageClass` value from 'ontap-gold' to another Trident storageClass resource as required by your installation. Run the command `kubectl get sc` to determine your existing configured storage classes.
 .. *ingressType*: Use one of the following ingress types:
 +
-* *Generic* (`ingressType:Generic`)
+* *Generic* (`ingressType:Generic`) (Default)
 +
-Use this option when you have another ingress controller in use or would prefer to use your own ingress controller. This is the default action with Astra Control Center. After Astra Control Center is deployed, you will need to configure the link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller] to expose Astra Control Center with a URL.
+Use this option when you have another ingress controller in use or would prefer to use your own ingress controller. After Astra Control Center is deployed, you will need to configure the link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller] to expose Astra Control Center with a URL.
 
 * *AccTraefik* (`ingressType:AccTraefik`)
 +
@@ -602,7 +602,7 @@ IMPORTANT: Copy the UUID value. The password is `ACC-` followed by the UUID valu
 
 == Set up ingress for load balancing
 
-You can set up a Kubernetes ingress controller that manages external access to services, such as load balancing in a cluster. These procedures give setup examples for an ingress controller if you used the default of `ingressType:Generic` in the Astra Control Center custom resource (`astra_control_center.yaml`). You do not need to use this procedure if you specified `ingressType: AccTraefik` in the Astra Control Center custom resource (`astra_control_center.yaml`).
+You can set up a Kubernetes ingress controller that manages external access to services. These procedures give setup examples for an ingress controller if you used the default of `ingressType:Generic` in the Astra Control Center custom resource (`astra_control_center.yaml`). You do not need to use this procedure if you specified `ingressType: AccTraefik` in the Astra Control Center custom resource (`astra_control_center.yaml`).
 
 After Astra Control Center is deployed, you will need to configure the ingress controller to expose Astra Control Center with a URL.
 
@@ -631,7 +631,7 @@ Sample command:
 +
 [source,console]
 ----
-openssl req -x509 -nodes -days 7 -newkey rsa:2048 -keyout tls.key -out tls.crt
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt
 ----
 
 . Create a secret `tls secret name` of type `kubernetes.io/tls` for a TLS private key and certificate in the `istio-system namespace` as described in TLS secrets.
@@ -646,7 +646,7 @@ kubectl create secret tls [tls secret name] --key="tls.key" --cert="tls.crt" -n 
 TIP: The name of the secret should match the `spec.tls.secretName` provided in `istio-ingress.yaml` file.
 
 
-. Deploy an ingress resource in the `netapp-acc` (or custom-named) namespace using the v1 resource type for a schema:
+. Deploy an ingress resource in the `netapp-acc` (or custom-named) namespace using the v1 resource type for a schema (`istio-Ingress.yaml` is used in this example):
 +
 ----
 apiVersion: networking.k8s.io/v1
@@ -660,7 +660,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress
-  namespace: netapp-acc
+  namespace: [netapp-acc or custom namespace]
 spec:
   ingressClassName: istio
   tls:
@@ -687,8 +687,6 @@ spec:
 kubectl apply -f istio-Ingress.yaml
 ----
 
-. <<Configure Astra Control Center,Finish Astra Control Center installation>>.
-
 . Check the status of the ingress:
 +
 [source,console]
@@ -703,11 +701,13 @@ NAME    CLASS HOSTS             ADDRESS         PORTS   AGE
 ingress istio astra.example.com 172.16.103.248  80, 443 1h
 ----
 
+. <<Configure Astra Control Center,Finish Astra Control Center installation>>.
+
 
 .Steps for Nginx ingress controller
 
 . Create a secret of type `kubernetes.io/tls` for a TLS private key and certificate in `netapp-acc` (or custom-named) namespace as described in https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets[TLS secrets].
-. Deploy an ingress resource in `netapp-acc` (or custom-named) namespace using the v1 resource type for a schema:
+. Deploy an ingress resource in `netapp-acc` (or custom-named) namespace using the v1 resource type for a schema (`nginx-Ingress.yaml` is used in this example):
 +
 [source,yaml]
 ----
@@ -742,6 +742,8 @@ spec:
 kubectl apply -f nginx-Ingress.yaml
 ----
 
+WARNING: NetApp recommends installing the nginx controller as a deployment rather than a daemonSet.
+
 .Steps for OpenShift ingress controller
 
 . Procure your certificate and get the key, certificate, and CA files ready for use by the OpenShift route.
@@ -758,8 +760,8 @@ oc create route edge --service=traefik --port=web -n [netapp-acc or custom names
 After installing Astra Control Center, you will change the password for the default administrator and log in to the Astra Control Center UI dashboard.
 
 .Steps
-. In a browser, enter the FQDN you used in the `astraAddress` in the `astra_control_center.yaml` CR when <<Configure Astra Control Center,you installed Astra Control Center>>.
-. Accept the self-signed certificates when prompted.
+. In a browser, enter the FQDN (`https://<FQDN>`) you used in the `astraAddress` in the `astra_control_center.yaml` CR when <<Configure Astra Control Center,you installed Astra Control Center>>.
+. Accept the self-signed certificates if prompted.
 +
 NOTE: You can create a custom certificate after login.
 
