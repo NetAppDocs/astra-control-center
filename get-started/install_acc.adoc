@@ -47,8 +47,6 @@ The Astra Control Center installation process does the following:
 
 IMPORTANT: Do not delete the Astra Control Center operator (for example, `kubectl delete -f astra_control_center_operator_deploy.yaml`) at any time during Astra Control Center installation to avoid deleting pods.
 
-NOTE: If you are using Red Hat's Podman instead of Docker Engine, Podman commands can be used in place of Docker commands.
-
 .Steps
 
 To install Astra Control Center, do the following steps:
@@ -606,13 +604,11 @@ IMPORTANT: Copy the UUID value. The password is `ACC-` followed by the UUID valu
 
 == Set up ingress for load balancing
 
-You can set up a Kubernetes ingress controller that manages external access to services, such as load balancing in a cluster.
+You can set up a Kubernetes ingress controller that manages external access to services, such as load balancing in a cluster. This procedure explains how to set up an ingress controller if you used the default of `ingressType:Generic` in the Astra Control Center custom resource (`astra_control_center.yaml`). You do not need to use this procedure if you specified `ingressType: AccTraefik` in the Astra Control Center custom resource (`astra_control_center.yaml`).
 
-This procedure explains how to set up an ingress controller (`ingressType:Generic`). This is the default action with Astra Control Center. After Astra Control Center is deployed, you will need to configure the ingress controller to expose Astra Control Center with a URL.
+After Astra Control Center is deployed, you will need to configure the ingress controller to expose Astra Control Center with a URL.
 
-NOTE: If you don't want to set up an ingress controller, you can set `ingressType:AccTraefik`. Astra Control Center uses a service of the type "LoadBalancer" (`svc/traefik` in the Astra Control Center namespace), and requires that it be assigned an accessible external IP address. If load balancers are permitted in your environment and you don't already have one configured, you can use MetalLB or another external service load balancer to assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address. For details about the service type of "LoadBalancer" and ingress, see link:../get-started/requirements.html[Requirements].
-
-The steps differ depending on the type of ingress controller you use:
+Setup steps differ depending on the type of ingress controller you use. Astra Control Center supports many ingress controller types. These setup procedures provide example steps for the following ingress controller types:
 
 * Istio ingress
 * Nginx ingress controller

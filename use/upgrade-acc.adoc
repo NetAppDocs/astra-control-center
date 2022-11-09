@@ -64,8 +64,6 @@ IMPORTANT: Do not delete the Astra Control Center operator (for example, `kubect
 
 TIP: Perform upgrades in a maintenance window when schedules, backups, and snapshots are not running.
 
-NOTE: Podman commands can be used in place of Docker commands if you are using Red Hat's Podman instead of Docker Engine.
-
 == Download the Astra Control Center bundle
 
 . Download the Astra Control Center bundle from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^]. The file name is similar to the following: `astra-control-center-[version].tar.gz`.
