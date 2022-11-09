@@ -17,13 +17,13 @@ To install Astra Control Center, download the installation bundle from the NetAp
 [%collapsible]
 ====
 * *Install with RedHat Openshift OperatorHub*: Use this link:../get-started/acc_operatorhub_install.html[alternative procedure] to install Astra Control Center on Openshift using OperatorHub.
-* *Install in the public cloud with Cloud Volumes ONTAP Backend*: Use link:../get-started/install_acc-cvo.html[these procedures] to install Astra Control Center in Amazon Web Services (AWS), Google Cloud Platform (GCP), or Microsoft Azure with a Cloud Volumes ONTAP storage backend.
+* *Install in the public cloud with Cloud Volumes ONTAP backend*: Use link:../get-started/install_acc-cvo.html[these procedures] to install Astra Control Center in Amazon Web Services (AWS), Google Cloud Platform (GCP), or Microsoft Azure with a Cloud Volumes ONTAP storage backend.
 ====
 // End snippet
 
 .What you'll need
 * link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
-* If you have configured or want to configure pod security policies in your environment, familiarize yourself with pod security policies and how they affect Astra Control Center installation. See link:understand-psp-restrictions.html[Understand pod security policy restrictions].
+* If you have configured or want to configure pod security policies in your environment, familiarize yourself with pod security policies and how they affect Astra Control Center instasllation. See link:../concepts/understand-pod-security.html[Understand pod security policy restrictions].
 * Ensure all API services are in a healthy state and available:
 +
 [source,console]
@@ -35,13 +35,13 @@ kubectl get apiservices
 * If a cert-manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps] so that Astra Control Center does not attempt to install its own cert-manager. By default, Astra Control Center installs its own cert-manager during installation.
 
 .About this task
-The Astra Control Center installation process does the following:
+The Astra Control Center installation process helps you to do the following:
 
-* Installs the Astra components into the `netapp-acc` (or custom-named) namespace.
-* Creates a default Astra Control Owner admin account.
-* Establishes an administrative user email address and default initial setup password. This user is assigned the Owner role in the system that is needed for first time login to the UI.
-* Helps you determine that all Astra Control Center pods are running.
-* Installs the Astra Control Center UI.
+* Install the Astra components into the `netapp-acc` (or custom-named) namespace.
+* Create a default Astra Control Owner admin account.
+* Establish an administrative user email address and default initial setup password. This user is assigned the Owner role in the system that is needed for first time login to the UI.
+* Determine that all Astra Control Center pods are running.
+* Install the Astra Control Center UI.
 //VMware ADS EAP review
 
 
@@ -66,7 +66,7 @@ To install Astra Control Center, do the following steps:
 
 . Download the Astra Control Center bundle (`astra-control-center-[version].tar.gz`) from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
 . Download the zip of Astra Control Center certificates and keys from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
-. (Optional) Use the following command to verify the signature of the bundle:
+. (Optional) Verify the signature of the bundle:
 +
 [source,console]
 ----
@@ -115,13 +115,13 @@ cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 
 .Docker
 --
-. Change to the `acc` directory extracted from the tar bundle:
+.. Change to the `acc` directory extracted from the tar bundle:
 +
 Example:
 ----
 cd ../acc
 ----
-. [[substep_image_local_registry_push]]Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
+.. [[substep_image_local_registry_push]]Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
 +
 
 * Replace <BUNDLE_FILE> with the name of the Astra Control bundle file (`acc.manifest.yaml`).
@@ -137,14 +137,14 @@ kubectl astra packages push-images -m <BUNDLE_FILE> -r <MY_FULL_REGISTRY_PATH> -
 
 .Podman
 --
-. Log in to your registry:
+.. Log in to your registry:
 +
 [source,console]
 ----
 podman login <MY_FULL_REGISTRY_PATH>
 ----
 
-. Run the following script, making the <YOUR_REGISTRY> substitution as noted in the comments:
+.. Run the following script, making the <YOUR_REGISTRY> substitution as noted in the comments:
 +
 [source,console]
 ----
@@ -189,7 +189,7 @@ done
 export KUBECONFIG=[file path]
 ----
 +
-NOTE: Before you complete installation, be sure your KUBECONFIG is pointing to the cluster where you want to install Astra Control Center. The KUBECONFIG can contain only one context.
+NOTE: Before you complete the installation, be sure your KUBECONFIG is pointing to the cluster where you want to install Astra Control Center. The KUBECONFIG can contain only one context.
 
 
 .  If you use a registry that requires authentication, you need to do the following:
@@ -221,7 +221,7 @@ Sample response:
 secret/astra-registry-cred created
 ----
 +
-NOTE: If you delete the namespace after the secret is generated, you need to regenerate the secret for the namespace after the namespace is recreated.
+NOTE: If you delete the namespace after the secret is generated, recreate the namespace and then regenerate the secret for the namespace.
 
 .. Create the `netapp-acc` (or custom named) namespace.
 +

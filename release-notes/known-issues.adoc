@@ -29,7 +29,6 @@ The following known issues affect the current release:
 .Other issues
 * <<Managed clusters do not appear in NetApp Cloud Insights when connecting through a proxy>>
 * <<App data management operations fail with Internal Service Error (500) when Astra Trident is offline>>
-* <<Snapshots might fail with snapshot controller version 4.2.0>>
 
 == Restore of an app results in PV size larger than original PV
 //DOC-3562/ASTRACTL-9560/Q2 and PI4/PI5
