@@ -16,17 +16,6 @@ You can use the following Astra Control Center cluster custom resource (CR) opti
 |===
 |Setting |Type |Use |Value Example |Description
 
-| astraVersion
-| string
-| Required
-| 1.5.2
-| Version of AstraControlCenter to deploy. You are provided a Helm repository with a corresponding version.
-
-| astraAddress
-| string
-| Required
-| astra.example.com
-| Defines how Astra will be found in the data center. This IP address and/or DNS A record must be created prior to provisioning Astra Control Center.
 
 | accountName
 | string
@@ -34,41 +23,12 @@ You can use the following Astra Control Center cluster custom resource (CR) opti
 | Example
 | Astra Control Center account name. There can be only one.
 
-| email
+| astraAddress
 | string
 | Required
-| admin@example.com
-| The username of the administrator to be added as the first user of Astra. This email address will be notified by Astra Control as events warrant.
+| astra.example.com
+| Defines how Astra will be found in the data center. This IP address and/or DNS A record must be created prior to provisioning Astra Control Center.
 
-| firstName
-| string
-| Required
-| SRE
-| The first name of the administrator supporting Astra.
-
-| lastName
-| string
-| Required
-| Admin
-| The last name of the administrator supporting Astra.
-
-| storageClass
-| string
-| Optional (this is the default value)
-| ontap-gold
-| The storage class to be used for PVCs. If not set, the default storage class will be used.
-
-| volumeReclaimPolicy
-| Undefined
-| Optional
-| Retain
-| Reclaim policy to be set for persistent volumes.
-
-| astraResourcesScaler
-| string
-| Required
-| Default
-| Scaling options for AstraControlCenter Resource limits. See <<Configuration combinations and incompatibilities, setting complexities>> to understand how this settings affects others settings.
 
 | astraKubeConfigSecret
 | string
@@ -76,35 +36,20 @@ You can use the following Astra Control Center cluster custom resource (CR) opti
 | acc-kubeconfig-cred
 | If this value is present and a secret exists, the operator will attempt to add that KubeConfig to become the first managed cluster.
 
-| ingressType
+| astraResourcesScaler
 | string
-| Optional
-| Generic (this is the default value)
-| The type of ingress Astra Control Center should be configured for. Valid values are `Generic` and `AccTraefik`. See <<Configuration combinations and incompatibilities, setting complexities>> to understand how this settings affects others settings.
+| Required
+| Default
+| Scaling options for AstraControlCenter Resource limits. See <<Configuration combinations and incompatibilities, setting complexities>> to understand how this settings affects others settings.
 
-| avpDeploy
-| Boolean
-| Optional
-| true (this is the default value)
-| Option that allows a user to disable deployment of a plugin operator.
 
-| imageRegistry
-| Undefined
-| Optional
-|
-| The container image registry that is hosting the Astra application images, Astra Control Center Operator, and Astra Control Center Helm Repository.
-
-| imageRegistry.name
+| astraVersion
 | string
-| Required if you are using imageRegistry
-| example.registry.com/astra
-| The name of the image registry. Do not prefix with protocol.
+| Required
+| 1.5.2
+| Version of AstraControlCenter to deploy. You are provided a Helm repository with a corresponding version.
 
-| imageRegistry.secret
-| string
-| Required if you are using imageRegistry
-| astra-registry-cred
-| The name of the Kubernetes secret used to authenticate with the image registry.
+
 
 | autoSupport
 | Undefined
@@ -124,17 +69,20 @@ You can use the following Astra Control Center cluster custom resource (CR) opti
 | https://support.netapp.com/asupprod/post/1.0/postAsup
 | URL determines where the anonymous data will be sent.
 
+| avpDeploy
+| Boolean
+| Optional
+| true (this is the default value)
+| Option that allows a user to disable deployment of a plugin operator.
+
+
+
 | crds
 | Undefined
 | Undefined
 |
 | Options for how Astra Control Center should handle CRDs.
 
-| crds.externalTraefik
-| Boolean
-| Optional
-| True (this value is the default)
-| By default, Astra Control Center will install the required Traefik CRDs. CRDs are cluster-wide objects and installing them may have an impact on other parts of the cluster. You can use this flag to signal to Astra Control Center that these CRDs will be installed and managed by the cluster administrator outside of Astra Control Center.
 
 | crds.externalCertManager
 | Boolean
@@ -142,11 +90,84 @@ You can use the following Astra Control Center cluster custom resource (CR) opti
 | True (this value is the default)
 | By default, Astra Control Center will install the required cert-manager CRDs. CRDs are cluster-wide objects and installing them may have an impact on other parts of the cluster. You can use this flag to signal to Astra Control Center that these CRDs will be installed and managed by the cluster administrator outside of Astra Control Center.
 
+| crds.externalTraefik
+| Boolean
+| Optional
+| True (this value is the default)
+| By default, Astra Control Center will install the required Traefik CRDs. CRDs are cluster-wide objects and installing them may have an impact on other parts of the cluster. You can use this flag to signal to Astra Control Center that these CRDs will be installed and managed by the cluster administrator outside of Astra Control Center.
+
+
 | crds.shouldUpgrade
 | Boolean
 | Optional
 | Undefined
 | Determines if CRDs should be upgraded when Astra Control Center is upgraded.
+
+
+| email
+| string
+| Required
+| admin@example.com
+| The username of the administrator to be added as the first user of Astra. This email address will be notified by Astra Control as events warrant.
+
+| firstName
+| string
+| Required
+| SRE
+| The first name of the administrator supporting Astra.
+
+
+
+
+| imageRegistry
+| Undefined
+| Optional
+|
+| The container image registry that is hosting the Astra application images, Astra Control Center Operator, and Astra Control Center Helm Repository.
+
+| imageRegistry.name
+| string
+| Required if you are using imageRegistry
+| example.registry.com/astra
+| The name of the image registry. Do not prefix with protocol.
+
+| imageRegistry.secret
+| string
+| Required if you are using imageRegistry
+| astra-registry-cred
+| The name of the Kubernetes secret used to authenticate with the image registry.
+
+
+| ingressType
+| string
+| Optional
+| Generic (this is the default value)
+| The type of ingress Astra Control Center should be configured for. Valid values are `Generic` and `AccTraefik`. See <<Configuration combinations and incompatibilities, setting complexities>> to understand how this settings affects others settings.
+
+
+
+| lastName
+| string
+| Required
+| Admin
+| The last name of the administrator supporting Astra.
+
+
+
+
+| storageClass
+| string
+| Optional (this is the default value)
+| ontap-gold
+| The storage class to be used for PVCs. If not set, the default storage class will be used.
+
+
+| volumeReclaimPolicy
+| Undefined
+| Optional
+| Retain
+| Reclaim policy to be set for persistent volumes.
+
 
 |===
 

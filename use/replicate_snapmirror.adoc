@@ -77,8 +77,7 @@ Setting up a replication relationship involves the following that make up the re
 * *Destination storage class*: Select or enter the storage class that uses the paired SVM on the destination ONTAP cluster.
 * *Replication type*: "Asynchronous" is currently the only replication type available. 
 * *Destination namespace*: Enter new or existing destination namespaces for the destination cluster.
-+
-NOTE: You cannot use the same destination namespace for more than one source namespace, for example, ns1 and ns2 can't both replicate to the same ns-dest. Any conflicting resources in the selected namespaces will be overwritten. 
+
 
 * (Optional) Add additional namespaces by selecting *Add namespace* and choosing the namespace from the drop-down list.
 
@@ -112,7 +111,7 @@ The Data Protection page shows the replication relationship state and status:
 For example:
 Normal | Established
 
-Learn more about replication states and status below.
+Learn more about replication states and status at the end of this topic.
 
 == Bring a replicated app online on the destination cluster (fail over)
 

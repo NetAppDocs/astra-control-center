@@ -87,7 +87,7 @@ You can create an on-demand snapshot at any time.
 
 .Result
 
-The snapshot process begins. A snapshot is successful when the status is *Available* in the *Actions* column on the *Data protection* > *Snapshots* page.
+The snapshot process begins. A snapshot is successful when the status is *Healthy* in the *State* column on the *Data protection* > *Snapshots* page.
 
 == Create a backup
 
