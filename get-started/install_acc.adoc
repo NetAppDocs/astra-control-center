@@ -45,7 +45,7 @@ The Astra Control Center installation process does the following:
 //VMware ADS EAP review
 
 
-IMPORTANT: Do not delete the Astra Control Center operator (for example, `kubectl delete -f astra_control_center_operator_deploy.yaml`) at any time during Astra Control Center installation to avoid deleting pods.
+IMPORTANT: Do not delete the Astra Control Center operator (for example, `kubectl delete -f astra_control_center_operator_deploy.yaml`) at any time during the entire Astra Control Center installation to avoid deleting pods.
 
 .Steps
 
@@ -97,7 +97,7 @@ NOTE: The kubectl plugin library is part of the tar bundle and is extracted into
 ----
 ls kubectl-astra/
 ----
-. Copy the file to the same location as the standard kubectl utility. In this example, the kubectl utility is located in the `/usr/local/bin` directory. Replace `<binary-name>` with the name of the file you need:
+. Copy the correct binary and rename it to `kubectl-astra`. Copy the binary to the same location as the standard kubectl utility. In this example, the kubectl utility is located in the `/usr/local/bin` directory. Replace `<binary-name>` with the name of the file you need:
 +
 [source,console]
 ----
@@ -188,6 +188,9 @@ done
 ----
 export KUBECONFIG=[file path]
 ----
++
+NOTE: Before you complete installation, be sure your KUBECONFIG is pointing to the cluster where you want to install Astra Control Center. Only one context is permitted for the KUBECONFIG.
+
 
 .  If you use a registry that requires authentication, you need to do the following:
 .. Create the `netapp-acc-operator` namespace:
@@ -244,13 +247,6 @@ Response
 +
 ----
 secret/astra-registry-cred created
-----
-
-.. [[substep_kubeconfig_secret]](Optional) If you want the cluster to be automatically managed by Astra Control Center after installation, make sure that you provide the kubeconfig as a secret within the Astra Control Center namespace you intend to deploy into using this command:
-+
-[source,console]
-----
-kubectl create secret generic [acc-kubeconfig-cred or custom secret name] --from-file=<path-to-your-kubeconfig> -n [netapp-acc or custom namespace]
 ----
 
 == Install the Astra Control Center operator
@@ -403,7 +399,6 @@ NOTE: An annotated sample YAML follows these steps.
 +
 NOTE: Do not use `http://` or `https://` in the address. Copy this FQDN for use in a <<Log in to the Astra Control Center UI,later step>>.
 
-.. *(Optional) astraKubeConfigSecret*: If you want the cluster to be automatically managed by Astra Control Center after installation and you have already <<substep_kubeconfig_secret,created the secret containing the kubeconfig for this cluster>>, remove the commenting around `astraKubeConfigSecret: "acc-kubeconfig-cred"` and provide the name of the secret.
 .. *autoSupport*: Change `enrolled` for AutoSupport to `false` for sites without internet connectivity or retain `true` for connected sites.
 .. *email*: Change the `email` string to the default initial administrator address. Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>.
 .. *(Optional) firstName and LastName*: Add a first name `firstName` and last name `lastName` of the user associated with the account. You can perform this step now or later within the UI.
@@ -414,15 +409,13 @@ IMPORTANT: If you are using a registry that does not require authorization, you 
 .. *(Optional) storageClass*: Change the `storageClass` value to another Trident storageClass resource as required by your installation. Run the command `kubectl get sc` to determine your existing configured storage classes.
 .. *ingressType*: Use one of the following ingress types:
 +
-* Other ingress controller (`ingressType:Generic`)
+* *Generic* (`ingressType:Generic`)
 +
-This is the default action with Astra Control Center. After Astra Control Center is deployed, you will need to configure the link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller] to expose Astra Control Center with a URL.
+Use this option when you have another ingress controller in use or would prefer to use your own ingress controller. This is the default action with Astra Control Center. After Astra Control Center is deployed, you will need to configure the link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller] to expose Astra Control Center with a URL.
 
-* Service load balancer (`ingressType:AccTraefik`)
+* *AccTraefik* (`ingressType:AccTraefik`)
 +
-If you don't want to install an IngressController or create an Ingress resource, set `ingressType` to `AccTraefik`.
-+
-This deploys the Astra Control Center `traefik` gateway as a Kubernetes LoadBalancer type service.
+Use this option when you would prefer to not configure an ingress controller. This deploys the Astra Control Center `traefik` gateway as a Kubernetes LoadBalancer type service.
 +
 Astra Control Center uses a service of the type "LoadBalancer" (`svc/traefik` in the Astra Control Center namespace), and requires that it be assigned an accessible external IP address. If load balancers are permitted in your environment and you don't already have one configured, you can use MetalLB or another external service load balancer to assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
 +
@@ -441,7 +434,6 @@ spec:
   *accountName: "Example"*
   astraVersion: "ASTRA_VERSION"
   *astraAddress: "astra.example.com"*
-  *astraKubeConfigSecret: "acc-kubeconfig-cred"*
   autoSupport:
     *enrolled: true*
   *email: "[admin@example.com]"*
@@ -506,74 +498,80 @@ Each pod should have a status of `Running`. It may take several minutes before t
 ====
 [subs=+quotes]
 ----
-NAME                                     READY  STATUS   RESTARTS AGE
-acc-helm-repo-6b44d68d94-d8m55           1/1    Running  0        13m
-activity-78f99ddf8-hltct                 1/1    Running  0        10m
-api-token-authentication-457nl           1/1    Running  0        9m28s
-api-token-authentication-dgwsz           1/1    Running  0        9m28s
-api-token-authentication-hmqqc           1/1    Running  0        9m28s
-asup-75fd554dc6-m6qzh                    1/1    Running  0        9m38s
-authentication-6779b4c85d-92gds          1/1    Running  0        8m11s
-bucketservice-7cc767f8f8-lqwr8           1/1    Running  0        9m31s
-certificates-549fd5d6cb-5kmd6            1/1    Running  0        9m56s
-certificates-549fd5d6cb-bkjh9            1/1    Running  0        9m56s
-cloud-extension-7bcb7948b-hn8h2          1/1    Running  0        10m
-cloud-insights-service-56ccf86647-fgg69  1/1    Running  0        9m46s
-composite-compute-677685b9bb-7vgsf       1/1    Running  0        10m
-composite-volume-657d6c5585-dnq79        1/1    Running  0        9m49s
-credentials-755fd867c8-vrlmt             1/1    Running  0        11m
-entitlement-86495cdf5b-nwhh2             1/1    Running  2        10m
-features-5684fb8b56-8d6s8                1/1    Running  0        10m
-fluent-bit-ds-rhx7v                      1/1    Running  0        7m48s
-fluent-bit-ds-rjms4                      1/1    Running  0        7m48s
-fluent-bit-ds-zf5ph                      1/1    Running  0        7m48s
-graphql-server-66d895f544-w6hjd          1/1    Running  0        3m29s
-identity-744df448d5-rlcmm                1/1    Running  0        10m
-influxdb2-0                              1/1    Running  0        13m
-keycloak-operator-75c965cc54-z7csw       1/1    Running  0        8m16s
-krakend-798d6df96f-9z2sk                 1/1    Running  0        3m26s
-license-5fb7d75765-f8mjg                 1/1    Running  0        9m50s
-login-ui-7d5b7df85d-l2s7s                1/1    Running  0        3m20s
-loki-0                                   1/1    Running  0        13m
-metrics-facade-599b9d7fcc-gtmgl          1/1    Running  0        9m40s
-monitoring-operator-67cc74f844-cdplp     2/2    Running  0        8m11s
-nats-0                                   1/1    Running  0        13m
-nats-1                                   1/1    Running  0        13m
-nats-2                                   1/1    Running  0        12m
-nautilus-769f5b74cd-k5jxm                1/1    Running  0        9m42s
-nautilus-769f5b74cd-kd9gd                1/1    Running  0        8m59s
-openapi-84f6ccd8ff-76kvp                 1/1    Running  0        9m34s
-packages-6f59fc67dc-4g2f5                1/1    Running  0        9m52s
-polaris-consul-consul-server-0           1/1    Running  0        13m
-polaris-consul-consul-server-1           1/1    Running  0        13m
-polaris-consul-consul-server-2           1/1    Running  0        13m
-polaris-keycloak-0                       1/1    Running  0        8m7s
-polaris-keycloak-1                       1/1    Running  0        5m49s
-polaris-keycloak-2                       1/1    Running  0        5m15s
-polaris-keycloak-db-0                    1/1    Running  0        8m6s
-polaris-keycloak-db-1                    1/1    Running  0        5m49s
-polaris-keycloak-db-2                    1/1    Running  0        4m57s
-polaris-mongodb-0                        2/2    Running  0        13m
-polaris-mongodb-1                        2/2    Running  0        12m
-polaris-mongodb-2                        2/2    Running  0        12m
-polaris-ui-565f56bf7b-zwr8b              1/1    Running  0        3m19s
-polaris-vault-0                          1/1    Running  0        13m
-polaris-vault-1                          1/1    Running  0        13m
-polaris-vault-2                          1/1    Running  0        13m
-public-metrics-6d86d66444-2wbzl          1/1    Running  0        9m30s
-storage-backend-metrics-77c5d98dcd-dbhg5 1/1    Running  0        9m44s
-storage-provider-78c885f57c-6zcv4        1/1    Running  0        9m36s
-telegraf-ds-2l2m9                        1/1    Running  0        7m48s
-telegraf-ds-qfzgh                        1/1    Running  0        7m48s
-telegraf-ds-shrms                        1/1    Running  0        7m48s
-telegraf-rs-bjpkt                        1/1    Running  0        7m48s
-telemetry-service-6684696c64-qzfdf       1/1    Running  0        10m
-tenancy-6596b6c54d-vmpsm                 1/1    Running  0        10m
-traefik-7489dc59f9-6mnst                 1/1    Running  0        3m19s
-traefik-7489dc59f9-xrkgg                 1/1    Running  0        3m4s
-trident-svc-6c8dc458f5-jswcl             1/1    Running  0        10m
-vault-controller-6b954f9b76-gz9nm        1/1    Running  0        11m
-----
+NAME                                       READY   STATUS    RESTARTS        AGE
+acc-helm-repo-76d8d845c9-ggds2             1/1     Running   0               14m
+activity-6cc67ff9f4-z48mr                  1/1     Running   2 (8m32s ago)   9m
+api-token-authentication-7s67v             1/1     Running   0               8m56s
+api-token-authentication-bplb4             1/1     Running   0               8m56s
+api-token-authentication-p2c9z             1/1     Running   0               8m56s
+asup-6cdfbc6795-md8vn                      1/1     Running   0               9m14s
+authentication-9477567db-8hnc9             1/1     Running   0               7m4s
+bucketservice-f4dbdfcd6-wqzkw              1/1     Running   0               8m48s
+cert-manager-bb756c7c4-wm2cv               1/1     Running   0               14m
+cert-manager-cainjector-c9bb86786-8wrf5    1/1     Running   0               14m
+cert-manager-webhook-dd465db99-j2w4x       1/1     Running   0               14m
+certificates-68dff9cdd6-kcvml              1/1     Running   2 (8m43s ago)   9m2s
+certificates-68dff9cdd6-rsnsb              1/1     Running   0               9m2s
+cloud-extension-69d48c956c-2s8dt           1/1     Running   3 (8m43s ago)   9m24s
+cloud-insights-service-7c4f48b978-7gvlh    1/1     Running   3 (8m50s ago)   9m28s
+composite-compute-7d9ff5f68-nxbhl          1/1     Running   0               8m51s
+composite-volume-57b4756d64-nl66d          1/1     Running   0               9m13s
+credentials-6dbc55f89f-qpzff               1/1     Running   0               11m
+entitlement-67bfb6d7-gl6kp                 1/1     Running   4 (8m33s ago)   9m38s
+features-856cc4dccc-mxbdb                  1/1     Running   0               9m20s
+fluent-bit-ds-4rtsp                        1/1     Running   0               6m54s
+fluent-bit-ds-9rqll                        1/1     Running   0               6m54s
+fluent-bit-ds-w5mp7                        1/1     Running   0               6m54s
+graphql-server-7c7cc49776-jz2kn            1/1     Running   0               2m29s
+identity-87c59c975-9jpnf                   1/1     Running   0               9m6s
+influxdb2-0                                1/1     Running   0               13m
+keycloak-operator-84ff6d59d4-qcnmc         1/1     Running   0               7m1s
+krakend-cbf6c7df9-mdtzv                    1/1     Running   0               2m30s
+license-5b888b78bf-plj6j                   1/1     Running   0               9m32s
+login-ui-846b4664dd-fz8hv                  1/1     Running   0               2m24s
+loki-0                                     1/1     Running   0               13m
+metrics-facade-779cc9774-n26rw             1/1     Running   0               9m18s
+monitoring-operator-974db78f-pkspq         2/2     Running   0               6m58s
+nats-0                                     1/1     Running   0               13m
+nats-1                                     1/1     Running   0               13m
+nats-2                                     1/1     Running   0               13m
+nautilus-7bdc7ddc54-49tfn                  1/1     Running   0               7m50s
+nautilus-7bdc7ddc54-cwc79                  1/1     Running   0               9m36s
+openapi-5584ff9f46-gbrdj                   1/1     Running   0               9m17s
+openapi-5584ff9f46-z9mzk                   1/1     Running   0               9m17s
+packages-bfc58cc98-lpxq9                   1/1     Running   0               8m58s
+polaris-consul-consul-server-0             1/1     Running   0               13m
+polaris-consul-consul-server-1             1/1     Running   0               13m
+polaris-consul-consul-server-2             1/1     Running   0               13m
+polaris-keycloak-0                         1/1     Running   3 (6m15s ago)   6m56s
+polaris-keycloak-1                         1/1     Running   0               4m22s
+polaris-keycloak-2                         1/1     Running   0               3m41s
+polaris-keycloak-db-0                      1/1     Running   0               6m56s
+polaris-keycloak-db-1                      1/1     Running   0               4m23s
+polaris-keycloak-db-2                      1/1     Running   0               3m36s
+polaris-mongodb-0                          2/2     Running   0               13m
+polaris-mongodb-1                          2/2     Running   0               13m
+polaris-mongodb-2                          2/2     Running   0               12m
+polaris-ui-5ccff47897-8rzgh                1/1     Running   0               2m33s
+polaris-vault-0                            1/1     Running   0               13m
+polaris-vault-1                            1/1     Running   0               13m
+polaris-vault-2                            1/1     Running   0               13m
+public-metrics-6cb7bfc49b-p54xm            1/1     Running   1 (8m29s ago)   9m31s
+storage-backend-metrics-5c77994586-kjn48   1/1     Running   0               8m52s
+storage-provider-769fdc858c-62w54          1/1     Running   0               8m54s
+task-service-9ffc484c5-kx9f4               1/1     Running   3 (8m44s ago)   9m34s
+telegraf-ds-bphb9                          1/1     Running   0               6m54s
+telegraf-ds-rtsm2                          1/1     Running   0               6m54s
+telegraf-ds-s9h5h                          1/1     Running   0               6m54s
+telegraf-rs-lbpv7                          1/1     Running   0               6m54s
+telemetry-service-57cfb998db-zjx78         1/1     Running   1 (8m40s ago)   9m26s
+tenancy-5d5dfbcf9f-vmbxh                   1/1     Running   0               9m5s
+traefik-7b87c4c474-jmgp2                   1/1     Running   0               2m24s
+traefik-7b87c4c474-t9k8x                   1/1     Running   0               2m24s
+trident-svc-c78f5b6bd-nwdsq                1/1     Running   0               9m22s
+vault-controller-55bbc96668-c6425          1/1     Running   0               11m
+vault-controller-55bbc96668-lq9n9          1/1     Running   0               11m
+vault-controller-55bbc96668-rfkgg          1/1     Running   0               11m
 ====
 // End snippet
 
@@ -604,7 +602,7 @@ IMPORTANT: Copy the UUID value. The password is `ACC-` followed by the UUID valu
 
 == Set up ingress for load balancing
 
-You can set up a Kubernetes ingress controller that manages external access to services, such as load balancing in a cluster. This procedure explains how to set up an ingress controller if you used the default of `ingressType:Generic` in the Astra Control Center custom resource (`astra_control_center.yaml`). You do not need to use this procedure if you specified `ingressType: AccTraefik` in the Astra Control Center custom resource (`astra_control_center.yaml`).
+You can set up a Kubernetes ingress controller that manages external access to services, such as load balancing in a cluster. These procedures give setup examples for an ingress controller if you used the default of `ingressType:Generic` in the Astra Control Center custom resource (`astra_control_center.yaml`). You do not need to use this procedure if you specified `ingressType: AccTraefik` in the Astra Control Center custom resource (`astra_control_center.yaml`).
 
 After Astra Control Center is deployed, you will need to configure the ingress controller to expose Astra Control Center with a URL.
 
@@ -633,7 +631,7 @@ Sample command:
 +
 [source,console]
 ----
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt
+openssl req -x509 -nodes -days 7 -newkey rsa:2048 -keyout tls.key -out tls.crt
 ----
 
 . Create a secret `tls secret name` of type `kubernetes.io/tls` for a TLS private key and certificate in the `istio-system namespace` as described in TLS secrets.
@@ -662,7 +660,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress
-  namespace: istio-system
+  namespace: netapp-acc
 spec:
   ingressClassName: istio
   tls:
@@ -786,7 +784,7 @@ If any of the services are in `Error` status, you can inspect the logs. Look for
 +
 [source,console]
 ----
-kubectl logs --follow -n netapp-acc-operator $(kubectl get pods -n netapp-acc-operator -o name) -c manager
+kubectl logs deploy/acc-operator-controller-manager -n netapp-acc-operator -c manager -f
 ----
 
 == What's next
