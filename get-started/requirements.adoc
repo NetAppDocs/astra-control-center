@@ -200,7 +200,7 @@ NOTE: You can deploy Astra Control Center in a dual-stack Kubernetes cluster, an
 |Cloud Insights communication
 
 |Astra Control Center
-|Amazon S3 storage bucket provider (https://my-bucket.s3.us-west-2.amazonaws.com/)
+|Amazon S3 storage bucket provider 
 |443
 |HTTPS
 |Amazon S3 storage communication
@@ -212,6 +212,9 @@ NOTE: You can deploy Astra Control Center in a dual-stack Kubernetes cluster, an
 |NetApp AutoSupport communication
 
 |===
+
+// (https://my-bucket.s3.us-west-2.amazonaws.com/) Link from above table for S3
+
 
 ////
 // Removed at request of Pat Nanto
