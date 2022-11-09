@@ -20,14 +20,15 @@ Get started by verifying the readiness of your operational environment, applicat
 * <<Ingress for on-premises Kubernetes clusters>>
 * <<Networking requirements>>
 * <<Supported web browsers>>
+* <<Feature-specific requirements>>
 
 
 == Operational environment requirements
 
 Astra Control Center has been validated on the following types of operational environments:
 
-* Google Anthos 1.11 or 1.12
 * Cisco IKS with Kubernetes 1.22
+* Google Anthos 1.11 or 1.12
 * Kubernetes 1.23 to 1.25
 * Rancher Kubernetes Engine (RKE):
 ** RKE 1.3.12 with Rancher 2.6.5
