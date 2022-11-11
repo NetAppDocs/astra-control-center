@@ -11,4 +11,7 @@ summary: Astra Control is a Kubernetes application data lifecycle management ser
 :icons: font
 :imagesdir: ../media/concepts/
 
+[.lead]
+Astra Control is a Kubernetes application data lifecycle management solution that simplifies operations for stateful applications. Easily protect, back up, replicate, and migrate Kubernetes workloads, and instantly create working application clones.
+
 include::../_include/source-intro.adoc[]
