@@ -90,11 +90,8 @@ If a managed app has pods in an unhealthy state, Astra Control can't create new 
 
 == Data management operations
 
-*There are snapshots in my account that I didn't create. Where did they come from?*
 
-In some situations, Astra Control will automatically create a snapshot as part of a backup, clone or restore process.
-
-*My application uses several PVs. Will Astra Control take snapshots and backups of all these PVCs?*
+*My application uses several PVs. Will Astra Control take snapshots and backups of these PVs?*
 
 Yes. A snapshot operation on an application by Astra Control includes snapshot of all the PVs that are bound to the application's PVCs.
 
