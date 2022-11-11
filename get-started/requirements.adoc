@@ -30,7 +30,7 @@ Astra Control Center has been validated on the following types of operational en
 
 * Cisco IKS with Kubernetes 1.22
 * Google Anthos 1.11 or 1.12 (See <<Google Anthos cluster requirements>>)
-* Kubernetes 1.23 to 1.25
+* Upstream Kubernetes 1.23 to 1.25 (Astra Trident 22.10 or newer required for Kubernetes 1.25)
 * Rancher Kubernetes Engine (RKE):
 ** RKE 1.3.12 with Rancher 2.6.5 and 2.6.6
 ** RKE 1.3.13 with Rancher 2.6.8
@@ -75,6 +75,7 @@ At least 3 worker nodes total, with 4 CPU cores and 12GB RAM each
 a|
 Astra Trident 22.01 or newer installed and configured
 Astra Trident 22.07 or newer installed for SnapMirror-based application replication
+Astra Trident 22.10 or newer installed for Kubernetes 1.25 clusters
 
 |===
 
@@ -107,13 +108,7 @@ To check whether your ONTAP system has the required licenses, refer to https://d
 == Access to the internet
 
 You should determine whether you have outside access to the internet. If you do not, some functionality might be limited, such as receiving monitoring and metrics data from NetApp Cloud Insights, or sending support bundles to the https://mysupport.netapp.com/site/[NetApp Support Site^].
-////
-If you do have access to the internet, decide which of the following NetApp systems you will authorize Astra Control Center to integrate with:
 
-* Cloud Insights for monitoring and metrics
-* NetApp Support Site for Active IQ and SmartSolve processing
-//* IPA for license automation
-////
 
 == License
 
@@ -129,8 +124,6 @@ For details about licenses needed for ONTAP storage backends, refer to link:../g
 
 == Ingress for on-premises Kubernetes clusters
 
-//Astra Control Center uses a service of the type "LoadBalancer" (svc/traefik in the Astra Control Center namespace), and requires that it be assigned an accessible external IP address. If load balancers are permitted in your environment and you don't already have one configured, you can use https://docs.netapp.com/us-en/netapp-solutions/containers/rh-os-n_LB_MetalLB.html#installing-the-metallb-load-balancer[MetalLB^] to automatically assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
-
 You can choose the type of network ingress Astra Control Center uses. By default, Astra Control Center deploys the Astra Control Center gateway (service/traefik) as a cluster-wide resource. Astra Control Center also supports using a service load balancer, if they are permitted in your environment. If you would rather use a service load balancer and you don't already have one configured, you can use the MetalLB load balancer to automatically assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
 
 NOTE: The load balancer should use an IP address located in the same subnet as the Astra Control Center worker node IP addresses.
@@ -138,12 +131,6 @@ NOTE: The load balancer should use an IP address located in the same subnet as t
 NOTE: If you are hosting Astra Control Center on a Tanzu Kubernetes Grid cluster, use the `kubectl get nsxlbmonitors -A` command to see if you already have a service monitor configured to accept ingress traffic. If one exists, you should not install MetalLB, because the existing service monitor will override any new load balancer configuration.
 
 For more information, see link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[Set up ingress for load balancing^].
-
-//NOTE: MetalLB version 0.11.0 is not supported.
-
-////
-Astra Control Center uses a service of the type "LoadBalancer" and requires the Kubernetes cluster to expose that service on an external IP address. For on-premises OpenShift clusters, NetApp has internally validated https://docs.netapp.com/us-en/netapp-solutions/containers/rh-os-n_LB_MetalLB.html#installing-the-metallb-load-balancer[MetalLB^] for use with Astra Control Center. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the external IP address assigned to the service for Astra Control Center.
-////
 
 == Networking requirements
 
@@ -189,78 +176,9 @@ NOTE: You can deploy Astra Control Center in a dual-stack Kubernetes cluster, an
 // (https://my-bucket.s3.us-west-2.amazonaws.com/) Link from above table for S3
 
 
-////
-// Removed at request of Pat Nanto
-|n/a
-|HTTPS
-|Egress
-|Data to Cloud Insights
-
-|n/a
-|HTTPS
-|Egress
-|Log processing data to logs consumer
-
-|n/a
-|HTTPS
-|Egress
-|NetApp AutoSupport messages to NetApp Active IQ
-
-|n/a
-|HTTPS
-|Egress
-|Bucket service communication with bucket provider
-
-|n/a
-|HTTPS
-|Egress
-|Metrics flow from ONTAP
-
-|n/a
-|HTTPS
-|Egress
-|Storage Backend service communication with ONTAP
-
-|n/a
-|HTTPS
-|Egress
-|Cloud extension communication with managed cluster
-
-|n/a
-|HTTPS
-|Egress
-|Nautilus communication with managed cluster - ensure the corresponding Nautilus port is open for each managed cluster
-
-|n/a
-|HTTPS
-|Egress
-|Trident service communication with each managed cluster's Trident instance
-////
-
-////
-== Storage backend requirements
-Astra Control Center supports the following storage backends. Some storage backends require specific configuration to work correctly.
-
-* NetApp Cloud Volumes ONTAP
-* SolidFire Element OS
-////
 == Supported web browsers
 
 Astra Control Center supports recent versions of Firefox, Safari, and Chrome with a minimum resolution of 1280 x 720.
-
-////
-== Integration with your organization
-
-Before you deploy Astra Control Center, you should determine which internal integrations should occur, including the following:
-
-* Single sign on
-* SMTP server for email notifications
-
-If you want to integrate these options, you should obtain the following:
-
-* SSO integration confirmation details
-* SMTP server configuration details
-////
 
 == Feature-specific requirements
 Keep in mind these requirements if you plan to use these Astra Control Center features:
