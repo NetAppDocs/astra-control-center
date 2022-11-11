@@ -16,10 +16,6 @@ To upgrade Astra Control Center, download the installation bundle from the NetAp
 .What you'll need
 * Before you upgrade, refer to link:../get-started/requirements.html#operational-environment-requirements[Operational environment requirements^] to ensure your environment still meets the minimum requirements for Astra Control Center deployment. Your environment should have the following:
 
-** A supported Kubernetes distribution
-To determine the version you are running, run the following command in your existing Astra Control Center container: `kubectl get nodes o -wide`
-** Sufficient cluster resources
-To determine cluster resources, run the following command in your existing Astra Control Center cluster: `kubectl describe node <node name>`
 ** A supported Astra Trident version
 To determine the version you are running, run the following command in your existing Astra Control Center container:
 +
@@ -27,7 +23,13 @@ To determine the version you are running, run the following command in your exis
 ../../trident-installer/tridentctl -n trident version
 ----
 Refer to https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html#determine-the-version-to-upgrade-to[Astra Trident documentation] to upgrade from an older version.
++
+WARNING: You must upgrade to Astra Trident 22.10 *PRIOR* to upgrading to Kubernetes 1.25.
 
+** A supported Kubernetes distribution
+To determine the version you are running, run the following command in your existing Astra Control Center container: `kubectl get nodes o -wide`
+** Sufficient cluster resources
+To determine cluster resources, run the following command in your existing Astra Control Center cluster: `kubectl describe node <node name>`
 ** A registry you can use to push and upload Astra Control Center images 
 ** A default storage class
 To determine your default storage class, run the following command in your existing Astra Control Center container: `kubectl get storageclass`
