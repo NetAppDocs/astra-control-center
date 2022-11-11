@@ -20,7 +20,7 @@ Get started by verifying the readiness of your operational environment, applicat
 * <<Ingress for on-premises Kubernetes clusters>>
 * <<Networking requirements>>
 * <<Supported web browsers>>
-* <<Feature-specific requirements>>
+* <<Additional requirements for application clusters>>
 * <<Google Anthos cluster requirements>>
 * <<VMware Tanzu Kubernetes Grid cluster requirements>>
 
@@ -180,12 +180,12 @@ NOTE: You can deploy Astra Control Center in a dual-stack Kubernetes cluster, an
 
 Astra Control Center supports recent versions of Firefox, Safari, and Chrome with a minimum resolution of 1280 x 720.
 
-== Feature-specific requirements
+== Additional requirements for application clusters
 Keep in mind these requirements if you plan to use these Astra Control Center features:
 
-* *Manage clusters*: link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[Cluster management requirements^]
-* *Manage applications*: link:../use/manage-apps.html#application-management-requirements[Application management requirements^]
-* *SnapMirror Disaster Recovery replication*: link:../use/replicate_snapmirror.html#replication-prerequisites[Replication prerequisites^]
+* *Application cluster requirements*: link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[Cluster management requirements^]
+** *Managed application requirements*: link:../use/manage-apps.html#application-management-requirements[Application management requirements^]
+** *Additional requirements for app replication*: link:../use/replicate_snapmirror.html#replication-prerequisites[Replication prerequisites^]
 
 == Google Anthos cluster requirements
 When hosting Astra Control Center on a Google Anthos cluster, note that Google Anthos includes the MetalLB load balancer and the Istio ingress gateway service by default, enabling you to simply use the generic ingress capabilities of Astra Control Center during installation. See link:install_acc.html#configure-astra-control-center[Configure Astra Control Center^] for details.
