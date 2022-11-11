@@ -33,18 +33,18 @@ During Astra Control Center installation, the Astra Control Center operator inst
 The new policy and objects have the following attributes:
 
 ----
-$ kubectl get psp
+kubectl get psp
 
 NAME                           PRIV    CAPS          SELINUX    RUNASUSER          FSGROUP     SUPGROUP    READONLYROOTFS   VOLUMES
 avp-psp                        false                 RunAsAny   RunAsAny           RunAsAny    RunAsAny    false            *
 netapp-astra-deployment-psp    false                 RunAsAny   RunAsAny           RunAsAny    RunAsAny    false            *
 
-$ kubectl get role -n <namespace_name>
+kubectl get role -n <namespace_name>
 
 NAME                                     CREATED AT
 netapp-astra-deployment-role             2022-06-27T19:34:58Z
 
-$ kubectl get rolebinding -n <namespace_name>
+kubectl get rolebinding -n <namespace_name>
 
 NAME                                     ROLE                                          AGE
 netapp-astra-deployment-rb               Role/netapp-astra-deployment-role             32m
@@ -56,17 +56,17 @@ During backup operations, Astra Control Center creates a dynamic pod security po
 The new policy and objects have the following attributes:
 
 ----
-$ kubectl get psp
+kubectl get psp
 
 NAME                           PRIV    CAPS                            SELINUX    RUNASUSER          FSGROUP     SUPGROUP    READONLYROOTFS   VOLUMES
 netapp-astra-backup            false   DAC_READ_SEARCH                 RunAsAny   RunAsAny           RunAsAny    RunAsAny    false            *
 
-$ kubectl get role -n <namespace_name>
+kubectl get role -n <namespace_name>
 
 NAME                  CREATED AT
 netapp-astra-backup   2022-07-21T00:00:00Z
 
-$ kubectl get rolebinding -n <namespace_name>
+kubectl get rolebinding -n <namespace_name>
 
 NAME                  ROLE                       AGE
 netapp-astra-backup   Role/netapp-astra-backup   62s
@@ -78,17 +78,17 @@ When you manage a cluster, Astra Control Center installs the netapp-monitoring o
 The new policy and objects have the following attributes:
 
 ----
-$ kubectl get psp
+kubectl get psp
 
 NAME                           PRIV    CAPS                            SELINUX    RUNASUSER          FSGROUP     SUPGROUP    READONLYROOTFS   VOLUMES
 netapp-monitoring-psp-nkmo     true    AUDIT_WRITE,NET_ADMIN,NET_RAW   RunAsAny   RunAsAny           RunAsAny    RunAsAny    false            *
 
-$ kubectl get role -n <namespace_name>
+kubectl get role -n <namespace_name>
 
 NAME                                           CREATED AT
 netapp-monitoring-role-privileged              2022-07-21T00:00:00Z
 
-$ kubectl get rolebinding -n <namespace_name>
+kubectl get rolebinding -n <namespace_name>
 
 NAME                                                  ROLE                                                AGE
 netapp-monitoring-role-binding-privileged             Role/netapp-monitoring-role-privileged              2m5s
