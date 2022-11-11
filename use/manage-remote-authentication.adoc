@@ -15,8 +15,6 @@ LDAP is an industry standard protocol for accessing distributed directory inform
 
 At a high level, the configuration involves integrating Astra with LDAP and defining the Astra Control users and groups corresponding to the LDAP definitions. You can use the Astra Control API or web UI to configure LDAP authentication and LDAP users and groups.
 
-Astra control supports up to 5,000 remote groups and 10,000 remote users.
-
 == Add a certificate for LDAPS authentication
 Add the private TLS certificate for the LDAP server so that Astra Control Center can authenticate with the LDAP server when you use an LDAPS connection. You only need to do this once, or when the certificate you have installed expires.
 

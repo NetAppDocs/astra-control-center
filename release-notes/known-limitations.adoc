@@ -32,6 +32,7 @@ Known limitations identify platforms, devices, or functions that are not support
 * <<Astra Control Center does not validate the details you enter for your proxy server>>
 * <<Existing connections to a Postgres pod causes failures>>
 * <<Backups and snapshots might not be retained during removal of an Astra Control Center instance>>
+* <<LDAP user and group limitations>>
 
 == The same cluster cannot be managed by two Astra Control Center instances
 //DOC-3600/Q2/PI4/PI5
@@ -126,6 +127,10 @@ When you perform operations on Postgres pods, you shouldn't connect directly wit
 == Backups and snapshots might not be retained during removal of an Astra Control Center instance
 //AD AH review
 If you have an evaluation license, be sure you store your account ID to avoid data loss in the event of Astra Control Center failure if you are not sending ASUPs.
+
+== LDAP user and group limitations
+Astra Control Center supports up to 5,000 remote groups and 10,000 remote users.
+
 
 == Find more information
 
