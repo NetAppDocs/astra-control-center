@@ -48,7 +48,7 @@ oc get apiservices
 
 . Download the Astra Control Center bundle (`astra-control-center-[version].tar.gz`) from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
 . Download the zip of Astra Control Center certificates and keys from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
-. (Optional) Use the following command to verify the signature of the bundle:
+. (Optional) Verify the signature of the bundle:
 +
 [source,console]
 ----
@@ -96,13 +96,13 @@ cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 
 .Docker
 --
-. Change to the Astra directory:
+.. Change to the Astra directory:
 +
 [source,console]
 ----
 cd acc
 ----
-. [[substep_image_local_registry_push]]Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
+.. [[substep_image_local_registry_push]]Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
 +
 
 * Replace <BUNDLE_FILE> with the name of the Astra Control bundle file (`acc.manifest.yaml`).
@@ -118,13 +118,13 @@ kubectl astra packages push-images -m <BUNDLE_FILE> -r <MY_FULL_REGISTRY_PATH> -
 
 .Podman
 --
-. Log in to your registry:
+.. Log in to your registry:
 +
 [source,console]
 ----
-podman login [your_registry_path]
+podman login <MY_FULL_REGISTRY_PATH>
 ----
-. Run the following script, making the <YOUR_REGISTRY> substitution as noted in the comments:
+.. Run the following script, making the <YOUR_REGISTRY> substitution as noted in the comments:
 +
 [source,console]
 ----

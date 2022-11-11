@@ -11,7 +11,7 @@ summary: After you install Astra Control Center, log in to the UI, and change yo
 :imagesdir: ../media/get-started/
 
 [.lead]
-Astra Control Center supports and monitors ONTAP as the storage backend. After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up a license, add clusters, manage storage, and add buckets.
+After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up a license, add clusters, manage storage, and add buckets.
 
 .Tasks
 * <<Add a license for Astra Control Center>>
@@ -24,18 +24,19 @@ Astra Control Center supports and monitors ONTAP as the storage backend. After y
 //REFERENCED IN UI and NSS downloads. DO NOT MODIFY WITHOUT NOTIFYING STAKEHOLDERS.
 You can add a new license using the UI or https://docs.netapp.com/us-en/astra-automation/index.html[API^] to gain full Astra Control Center functionality. Without a license, your usage of Astra Control Center is limited to managing users and adding new clusters.
 
-For more information on how licenses are calculated, refer to link:../concepts/licensing.html[Licensing^].
+Astra Control Center licenses measure CPU resources using Kubernetes CPU units and account for the CPU resources assigned to the worker nodes of all the managed Kubernetes clusters. Licenses are based on vCPU usage. For more information on how licenses are calculated, refer to link:../concepts/licensing.html[Licensing^].
+
+NOTE: If your installation grows to exceed the licensed number of CPU units, Astra Control Center prevents you from managing new applications. An alert is displayed when capacity is exceeded.
 
 NOTE: To update an existing evaluation or full license, refer to link:../use/update-licenses.html[Update an existing license^].
 
-Astra Control Center licenses measure CPU resources using Kubernetes CPU units. The license needs to account for the CPU resources assigned to the worker nodes of all the managed Kubernetes clusters. Before you add a license, you need to obtain the license file (NLF) from the link:https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
-
-You can also try Astra Control Center with an evaluation license, which lets you use Astra Control Center for 90 days from the date you download the license. You can sign up for a free trial by registering link:https://cloud.netapp.com/astra-register[here^].
-
-NOTE:  If your installation grows to exceed the licensed number of CPU units, Astra Control Center prevents you from managing new applications. An alert is displayed when capacity is exceeded.
-
 .What you'll need
-When you downloaded Astra Control Center from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^], you also downloaded the NetApp license file (NLF). Ensure you have access to this license file.
+
+* Access to a newly installed Astra Control Center instance.
+
+* Administrator role permissions.
+
+* A link:../concepts/licensing.html[NetApp License File] (NLF).  
 
 .Steps
 . Log in to the Astra Control Center UI.
@@ -53,23 +54,25 @@ NOTE: If you have an evaluation license, be sure you store your account ID to av
 == Prepare your environment for cluster management using Astra Control
 
 You should ensure that the following prerequisite conditions are met before you add a cluster. You should also run eligibility checks to ensure that your cluster is ready to be added to Astra Control Center and create roles for cluster management.
-//THIS SECTION REFERENCED IN UI. DO NOT MODIFY WITHOUT NOTIFYING UX.
+//THIS SECTION REFERENCED IN UI. DO NOT MODIFY TITLE OR URL WITHOUT NOTIFYING UX.
 
-.What you'll need to add and manage a cluster
+.What you'll need
 
-* *Snapshot controller*: Ensure that the Kubernetes https://kubernetes-csi.github.io/docs/snapshot-controller.html[snapshot-controller component^] is installed on the cluster
-* *Trident storage classes*: Ensure that Astra Trident StorageClasses are configured with a link:requirements.html#supported-storage-backends[supported storage backend^] (required for any type of cluster)
-* *Astra Trident volumesnapshotclass*: You have an Astra Trident `volumesnapshotclass` object that has been defined by an administrator. Refer to the Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
-* *ONTAP credentials*: You have a superuser and user ID set on the backing ONTAP system to back up and restore apps with Astra Control Center. Run the following command in the ONTAP command line:
+* *Trident CSI provisioner installed and running*: https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy-tridentctl.html[Install the Trident CSI provisioner] on your Kubernetes cluster. https://docs.netapp.com/us-en/trident/trident-use/backends.html[Add a Trident backend] to point to an ONTAP cluster.
+* *Trident storage classes configured*: At least one Astra Trident StorageClass must be https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[configured] on the cluster. If a default storage class is configured, ensure that only one storageClass has that annotation.
+* *Volume snapshot controller installed and configured*: The VolumeSnapshot controller must be https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[installed]. 
+* *Astra Trident Volume Snapshot Class configured*: At least one Astra Trident `VolumeSnapshotClass` has been https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[set up] by an administrator.
+* *Kubeconfig accessible*: You have access to the https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[cluster kubeconfig] that includes only one context.
+* *ONTAP credentials*: You need ONTAP credentials and a superuser and user ID set on the backing ONTAP system to back up and restore apps with Astra Control Center. 
++
+Run the following commands in the ONTAP command line:
 +
 ----
 export-policy rule modify -vserver <storage virtual machine name> -policyname <policy name> -ruleindex 1 -superuser sys
 export-policy rule modify -vserver <storage virtual machine name> -policyname <policy name> -ruleindex 1 -anon 65534
 ----
 
-* *Kubernetes default storage class*: Ensure that you have only a single default storage class defined for your Kubernetes cluster.
-* *Context elements*: Your application cluster should have a `kubeconfig.yaml` file that defines only one _context_ element. Refer to the Kubernetes documentation for https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[information about creating kubeconfig files^].
-* *Rancher only*: When managing application clusters in a Rancher environment, modify the application cluster's default context in the `kubeconfig` file provided by Rancher to use a control plane context instead of the Rancher API server context. This reduces load on the Rancher API server and improves performance.
+* *Rancher only*: When managing application clusters in a Rancher environment, modify the application cluster's default context in the kubeconfig file provided by Rancher to use a control plane context instead of the Rancher API server context. This reduces load on the Rancher API server and improves performance.
 * *OpenShift only*: If you plan to add a second OpenShift cluster as a managed compute resource, you should ensure that the Astra Trident Volume Snapshot feature is enabled. Refer to the official Astra Trident https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[instructions^] to enable and test Volume Snapshots with Astra Trident.
 
 === Run eligibility checks
@@ -325,7 +328,7 @@ IMPORTANT: After you add a cluster to be managed in Astra Control Center, it mig
 
 == Add a storage backend
 
-You can use an existing ONTAP storage backend so that Astra Control can manage its resources.
+You can add an existing ONTAP storage backend to Astra Control Center to manage its resources.
 
 Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend as well as additional storage metrics.
 
