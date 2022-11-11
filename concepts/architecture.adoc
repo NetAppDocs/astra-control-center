@@ -10,4 +10,7 @@ summary: Here is an overview of the various components of the Astra Control envi
 :icons: font
 :imagesdir: ../media/concepts/
 
+[.lead]
+Here is an overview of the various components of the Astra Control environment.
+
 include::../_include/source-architecture.adoc[]
