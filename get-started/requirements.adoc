@@ -21,27 +21,25 @@ Get started by verifying the readiness of your operational environment, applicat
 * <<Networking requirements>>
 * <<Supported web browsers>>
 * <<Feature-specific requirements>>
-
+* <<Google Anthos cluster requirements>>
+* <<VMware Tanzu Kubernetes Grid cluster requirements>>
 
 == Operational environment requirements
 
 Astra Control Center has been validated on the following types of operational environments:
 
 * Cisco IKS with Kubernetes 1.22
-* Google Anthos 1.11 or 1.12
+* Google Anthos 1.11 or 1.12 (See <<Google Anthos cluster requirements>>)
 * Kubernetes 1.23 to 1.25
 * Rancher Kubernetes Engine (RKE):
-** RKE 1.3.12 with Rancher 2.6.5
-** RKE 1.3.12 with Rancher 2.6.6
+** RKE 1.3.12 with Rancher 2.6.5 and 2.6.6
 ** RKE 1.3.13 with Rancher 2.6.8
-** RKE 2 (v1.23.6+rke2r1) with Rancher 2.6.5
-** RKE 2 (v1.23.6+rke2r1) with Rancher 2.6.6
+** RKE 2 (v1.23.6+rke2r1) with Rancher 2.6.5 and 2.6.6
 ** RKE 2 (v1.24.x) with Rancher 2.6.8
 * Red Hat OpenShift Container Platform 4.8 through 4.11
-* VMware Tanzu Kubernetes Grid:
+* VMware Tanzu Kubernetes Grid: (See <<VMware Tanzu Kubernetes Grid cluster requirements>>)
 ** VMware Tanzu Kubernetes Grid 1.5
-** VMware Tanzu Kubernetes Grid Integrated Edition 1.13
-** VMware Tanzu Kubernetes Grid Integrated Edition 1.14
+** VMware Tanzu Kubernetes Grid Integrated Edition 1.13 and 1.14
 
 Ensure that the operating environment you choose to host Astra Control Center meets the basic resource requirements outlined in the environment's official documentation. Astra Control Center requires the following resources in addition to the environment's resource requirements:
 
@@ -90,34 +88,6 @@ NOTE: These requirements assume that Astra Control Center is the only applicatio
 ** ontap-san
 ** ontap-san-economy
 
-=== VMware Tanzu Kubernetes Grid cluster requirements
-When hosting Astra Control Center on a VMware Tanzu Kubernetes Grid (TKG) or Tanzu Kubernetes Grid Integrated Edition (TKGi) cluster, keep in mind the following considerations.
-
-//* Configuration with Trident
-//DOC-4056
-* Disable the TKG or TKGi default storage class enforcement on any application clusters intended to be managed by Astra Control. You can do this by editing the `TanzuKubernetesCluster` resource on the namespace cluster.
-//DOC-4067
-* As part of Astra Control Center installation, the following resources are created in a pod security policy (PSP) restricted environment:
-** pod security policy
-** RBAC Role
-** RBAC RoleBinding
-The RBAC Role and RoleBinding resources are created in the `netapp-acc` namespace.
-////
-* You need to create a pod security policy that allows Astra Control Center to create pods within the cluster. You can do this using the following commands:
-+
-----
-kubectl config use-context <context-of-workload-cluster>
-kubectl create clusterrolebinding default-tkg-admin-privileged-binding --clusterrole=psp:vmware-system-privileged --group=system:authenticated
-----
-+
-See link:understand-psp-restrictions.html[Understand pod security policy restrictions] for more information about pod security policies and Astra Control Center.
-////
-* Be aware of specific requirements for Astra Trident when you deploy Astra Control Center in a TKG or TKGi environment. For more information, see the https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html#other-known-configuration-options[Astra Trident documentation^].
-
-NOTE: The default VMware TKG and TKGi configuration file token expires ten hours after deployment. If you use Tanzu portfolio products, you must generate a Tanzu Kubernetes Cluster configuration file with a non-expiring token to prevent connection issues between Astra Control Center and managed application clusters. For instructions, visit https://docs.vmware.com/en/VMware-NSX-T-Data-Center/3.2/nsx-application-platform/GUID-52A52C0B-9575-43B6-ADE2-E8640E22C29F.html[the VMware NSX-T Data Center Product Documentation.^]
-
-=== Google Anthos cluster requirements
-When hosting Astra Control Center on a Google Anthos cluster, note that Google Anthos includes the MetalLB load balancer and the Istio ingress gateway service by default, enabling you to simply use the generic ingress capabilities of Astra Control Center during installation. See link:install_acc.html#configure-astra-control-center[Configure Astra Control Center^] for details.
 
 == Supported storage backends
 Astra Control Center supports the following storage backends.
@@ -298,6 +268,36 @@ Keep in mind these requirements if you plan to use these Astra Control Center fe
 * *Manage clusters*: link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[Cluster management requirements^]
 * *Manage applications*: link:../use/manage-apps.html#application-management-requirements[Application management requirements^]
 * *SnapMirror Disaster Recovery replication*: link:../use/replicate_snapmirror.html#replication-prerequisites[Replication prerequisites^]
+
+== Google Anthos cluster requirements
+When hosting Astra Control Center on a Google Anthos cluster, note that Google Anthos includes the MetalLB load balancer and the Istio ingress gateway service by default, enabling you to simply use the generic ingress capabilities of Astra Control Center during installation. See link:install_acc.html#configure-astra-control-center[Configure Astra Control Center^] for details.
+
+== VMware Tanzu Kubernetes Grid cluster requirements
+When hosting Astra Control Center on a VMware Tanzu Kubernetes Grid (TKG) or Tanzu Kubernetes Grid Integrated Edition (TKGi) cluster, keep in mind the following considerations.
+
+//* Configuration with Trident
+//DOC-4056
+* Disable the TKG or TKGi default storage class enforcement on any application clusters intended to be managed by Astra Control. You can do this by editing the `TanzuKubernetesCluster` resource on the namespace cluster.
+//DOC-4067
+* As part of Astra Control Center installation, the following resources are created in a pod security policy (PSP) restricted environment:
+** pod security policy
+** RBAC Role
+** RBAC RoleBinding
+The RBAC Role and RoleBinding resources are created in the `netapp-acc` namespace.
+////
+* You need to create a pod security policy that allows Astra Control Center to create pods within the cluster. You can do this using the following commands:
++
+----
+kubectl config use-context <context-of-workload-cluster>
+kubectl create clusterrolebinding default-tkg-admin-privileged-binding --clusterrole=psp:vmware-system-privileged --group=system:authenticated
+----
++
+See link:understand-psp-restrictions.html[Understand pod security policy restrictions] for more information about pod security policies and Astra Control Center.
+////
+* Be aware of specific requirements for Astra Trident when you deploy Astra Control Center in a TKG or TKGi environment. For more information, see the https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html#other-known-configuration-options[Astra Trident documentation^].
+
+NOTE: The default VMware TKG and TKGi configuration file token expires ten hours after deployment. If you use Tanzu portfolio products, you must generate a Tanzu Kubernetes Cluster configuration file with a non-expiring token to prevent connection issues between Astra Control Center and managed application clusters. For instructions, visit https://docs.vmware.com/en/VMware-NSX-T-Data-Center/3.2/nsx-application-platform/GUID-52A52C0B-9575-43B6-ADE2-E8640E22C29F.html[the VMware NSX-T Data Center Product Documentation.^]
+
 
 == What's next
 
