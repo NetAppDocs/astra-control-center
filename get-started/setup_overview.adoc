@@ -36,7 +36,7 @@ NOTE: To update an existing evaluation or full license, refer to link:../use/upd
 
 * Administrator role permissions.
 
-* A link:../concepts/licensing.html[NetApp License File] (NLF).  
+* A link:../concepts/licensing.html[NetApp License File^] (NLF).  
 
 .Steps
 . Log in to the Astra Control Center UI.
@@ -58,11 +58,11 @@ You should ensure that the following prerequisite conditions are met before you 
 
 .What you'll need
 
-* *Trident CSI provisioner installed and running*: https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy-tridentctl.html[Install the Trident CSI provisioner] on your Kubernetes cluster. https://docs.netapp.com/us-en/trident/trident-use/backends.html[Add a Trident backend] to point to an ONTAP cluster.
-* *Trident storage classes configured*: At least one Astra Trident StorageClass must be https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[configured] on the cluster. If a default storage class is configured, ensure that only one storageClass has that annotation.
-* *Volume snapshot controller installed and configured*: The VolumeSnapshot controller must be https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[installed]. 
-* *Astra Trident Volume Snapshot Class configured*: At least one Astra Trident `VolumeSnapshotClass` has been https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[set up] by an administrator.
-* *Kubeconfig accessible*: You have access to the https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[cluster kubeconfig] that includes only one context.
+* *Trident CSI provisioner installed and running*: https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy-tridentctl.html[Install the Trident Container Storage Interface (CSI) provisioner^] on your Kubernetes cluster. https://docs.netapp.com/us-en/trident/trident-use/backends.html[Add a Trident backend^] to point to an ONTAP cluster.
+* *Trident storage classes configured*: At least one Astra Trident StorageClass must be https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[configured^] on the cluster. If a default storage class is configured, ensure that only one storageClass has that annotation.
+* *Volume snapshot controller installed and configured*: The VolumeSnapshot controller must be https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[installed^]. 
+* *Astra Trident Volume Snapshot Class configured*: At least one Astra Trident `VolumeSnapshotClass` has been https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[set up^] by an administrator.
+* *Kubeconfig accessible*: You have access to the https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[cluster kubeconfig^] that includes only one context.
 * *ONTAP credentials*: You need ONTAP credentials and a superuser and user ID set on the backing ONTAP system to back up and restore apps with Astra Control Center. 
 +
 Run the following commands in the ONTAP command line:
