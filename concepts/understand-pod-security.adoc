@@ -36,7 +36,6 @@ The new policy and objects have the following attributes:
 kubectl get psp
 
 NAME                           PRIV    CAPS          SELINUX    RUNASUSER          FSGROUP     SUPGROUP    READONLYROOTFS   VOLUMES
-avp-psp                        false                 RunAsAny   RunAsAny           RunAsAny    RunAsAny    false            *
 netapp-astra-deployment-psp    false                 RunAsAny   RunAsAny           RunAsAny    RunAsAny    false            *
 
 kubectl get role -n <namespace_name>

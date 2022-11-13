@@ -22,7 +22,7 @@ After you install Astra Control Center, log in to the UI, and change your passwo
 
 == Add a license for Astra Control Center
 //REFERENCED IN UI and NSS downloads. DO NOT MODIFY WITHOUT NOTIFYING STAKEHOLDERS.
-You can add a new license using the UI or https://docs.netapp.com/us-en/astra-automation/index.html[API^] to gain full Astra Control Center functionality. Without a license, your usage of Astra Control Center is limited to managing users and adding new clusters.
+You can add a new license using the Astra Control UI or https://docs.netapp.com/us-en/astra-automation/index.html[API^] to gain full Astra Control Center functionality. Without a license, your usage of Astra Control Center is limited to managing users and adding new clusters.
 
 Astra Control Center licenses measure CPU resources using Kubernetes CPU units and account for the CPU resources assigned to the worker nodes of all the managed Kubernetes clusters. Licenses are based on vCPU usage. For more information on how licenses are calculated, refer to link:../concepts/licensing.html[Licensing^].
 
@@ -115,7 +115,6 @@ Sample response:
 ----
 NAME                   PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
 ontap-gold (default)   csi.trident.netapp.io          Delete          Immediate           true                   5d23h
-thin                   kubernetes.io/vsphere-volume   Delete          Immediate           false                  6d
 ----
 
 === Create an admin-role kubeconfig
@@ -357,23 +356,25 @@ NOTE: You might need to refresh the page for the backend to appear.
 
 == Add a bucket
 
-Adding object store bucket providers is essential if you want to back up your applications and persistent storage or if you want to clone applications across clusters. Astra Control stores those backups or clones in the object store buckets that you define.
+You can add a bucket using the Astra Control UI or https://docs.netapp.com/us-en/astra-automation/index.html[API^]. Adding object store bucket providers is essential if you want to back up your applications and persistent storage or if you want to clone applications across clusters. Astra Control stores those backups or clones in the object store buckets that you define.
 
-You don't need a bucket if you are cloning your application configuration and persistent storage to the same cluster.
+You don't need a bucket in Astra Control if you are cloning your application configuration and persistent storage to the same cluster. Application snapshots functionality does not require a bucket.
 
-Use any of the following bucket types:
+.What you'll need
 
-* NetApp ONTAP S3
-* NetApp StorageGRID S3
-* Microsoft Azure
-* Generic S3
+* A bucket that is reachable from your clusters managed by Astra Control Center.
+* Credentials for the bucket.
+* A bucket of the following types:
+
+** NetApp ONTAP S3
+** NetApp StorageGRID S3
+** Microsoft Azure
+** Generic S3
 +
 NOTE: Amazon Web Services (AWS) and Google Cloud Platform (GCP) use the Generic S3 bucket type.
 
 +
 NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon's S3 support.
-
-For instructions on how to add buckets using the Astra Control API, refer to link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
 
 .Steps
 
@@ -383,13 +384,11 @@ For instructions on how to add buckets using the Astra Control API, refer to lin
 +
 NOTE: When you add a bucket, select the correct bucket provider and provide the right credentials for that provider. For example, the UI accepts NetApp ONTAP S3 as the type and accepts StorageGRID credentials; however, this will cause all future app backups and restores using this bucket to fail.
 
-. Create a new bucket name or enter an existing bucket name and optional description.
+. Enter an existing bucket name and optional description.
 +
 TIP: The bucket name and description appear as a backup location that you can choose later when you're creating a backup. The name also appears during protection policy configuration.
 
 . Enter the name or IP address of the S3 endpoint. 
-+
-NOTE: This option does not appear for the first bucket you create.
 
 . Under *Select Credentials*, choose either the *Add* or *Use existing* tab.
 * If you chose *Add*: 

@@ -62,7 +62,7 @@ The Astra Control Center upgrade process guides you through the following high-l
 * <<Set up ingress for load balancing>>
 
 
-IMPORTANT: Do not delete the Astra Control Center operator (for example, `kubectl delete -f astra_control_center_operator_deploy.yaml`) at any time during Astra Control Center installation to avoid deleting pods.
+IMPORTANT: Do not delete the Astra Control Center operator (for example, `kubectl delete -f astra_control_center_operator_deploy.yaml`) at any time during the Astra Control Center upgrade or operation to avoid deleting pods.
 
 TIP: Perform upgrades in a maintenance window when schedules, backups, and snapshots are not running.
 
