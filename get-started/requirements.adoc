@@ -87,7 +87,7 @@ NOTE: These requirements assume that Astra Control Center is the only applicatio
 ** ontap-nas
 ** ontap-nas-flexgroup
 ** ontap-san
-** ontap-san-economy
+** ontap-san-economy (not supported for app replication)
 
 
 == Supported storage backends
