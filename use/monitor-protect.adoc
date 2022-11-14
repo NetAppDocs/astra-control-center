@@ -18,7 +18,7 @@ If the network where you're running Astra Control Center requires a proxy for co
 
 
 
-== Add a proxy server for connections to Cloud Insight or to NetApp Support Site
+== Add a proxy server for connections to Cloud Insights or to NetApp Support Site
 
 If the network where you're running Astra Control Center requires a proxy for connecting to the Internet (to upload support bundles to NetApp Support Site or establish a connection to Cloud Insights), you should configure a proxy server in Astra Control Center.
 
