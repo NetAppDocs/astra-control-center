@@ -19,7 +19,7 @@ We're pleased to announce the latest release of Astra Control Center.
 
 * Added support for Kubernetes 1.25 and Pod Security Admission (PSA).  
 * Enhanced replication protection to a remote system using SnapMirror technology.  
-* Enhanced data protection that now supports managing applications that are defined across multiple namespaces and adding cluster resources that are associated with namespaced resources in addition to those that Astra Control includes automatically. 
+* Support for apps that span across multiple namespaces and support for cluster resources that are associated with namespaced resources in addition to those that Astra Control includes automatically. 
 * Enhanced LDAP authentication with role-based access control (RBAC) integrations. 
 * Enhanced progress reporting for your backup, restore, and clone operations.  
 
