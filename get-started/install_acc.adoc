@@ -121,7 +121,7 @@ Example:
 ----
 cd ../acc
 ----
-.. [[substep_image_local_registry_push]]Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
+.. Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
 +
 
 * Replace <BUNDLE_FILE> with the name of the Astra Control bundle file (`acc.manifest.yaml`).
@@ -275,8 +275,8 @@ imagePullSecrets:
 - name: astra-registry-cred
 ----
 
-.. Change `[your_registry_path]` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<substep_image_local_registry_push,previous step>>.
-.. Change `[your_registry_path]` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in a <<substep_image_local_registry_push,previous step>>.
+.. Change `[your_registry_path]` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<Add the images to your local registry,previous step>>.
+.. Change `[your_registry_path]` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in a <<Add the images to your local registry,previous step>>.
 +
 [subs=+quotes]
 ----
@@ -409,11 +409,11 @@ IMPORTANT: If you are using a registry that does not require authorization, you 
 .. *(Optional) storageClass*: Change the `storageClass` value from 'ontap-gold' to another Trident storageClass resource as required by your installation. Run the command `kubectl get sc` to determine your existing configured storage classes.
 .. *ingressType*: Use one of the following ingress types:
 +
-* *Generic* (`ingressType:Generic`) (Default)
+* *Generic* (`ingressType: "Generic"`) (Default)
 +
 Use this option when you have another ingress controller in use or would prefer to use your own ingress controller. After Astra Control Center is deployed, you will need to configure the link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller] to expose Astra Control Center with a URL.
 
-* *AccTraefik* (`ingressType:AccTraefik`)
+* *AccTraefik* (`ingressType: "AccTraefik"`)
 +
 Use this option when you would prefer to not configure an ingress controller. This deploys the Astra Control Center `traefik` gateway as a Kubernetes LoadBalancer type service.
 +
@@ -602,7 +602,7 @@ IMPORTANT: Copy the UUID value. The password is `ACC-` followed by the UUID valu
 
 == Set up ingress for load balancing
 
-You can set up a Kubernetes ingress controller that manages external access to services. These procedures give setup examples for an ingress controller if you used the default of `ingressType:Generic` in the Astra Control Center custom resource (`astra_control_center.yaml`). You do not need to use this procedure if you specified `ingressType: AccTraefik` in the Astra Control Center custom resource (`astra_control_center.yaml`).
+You can set up a Kubernetes ingress controller that manages external access to services. These procedures give setup examples for an ingress controller if you used the default of `ingressType: "Generic"` in the Astra Control Center custom resource (`astra_control_center.yaml`). You do not need to use this procedure if you specified `ingressType: "AccTraefik"` in the Astra Control Center custom resource (`astra_control_center.yaml`).
 
 After Astra Control Center is deployed, you will need to configure the ingress controller to expose Astra Control Center with a URL.
 

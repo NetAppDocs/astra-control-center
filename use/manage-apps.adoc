@@ -109,6 +109,9 @@ TIP: A label is a key/value pair you can assign to Kubernetes objects for identi
 
 .About this task
 * Before you begin, you should also understand link:../use/manage-apps.html#what-about-system-namespaces[managing standard and system namespaces].
+
+* If you plan to use multiple namespaces with your apps in Astra Control, link:../use/manage-roles.html#add-a-namespace-constraint-to-a-role[modify user roles with namespace constraints] after you upgrade to an Astra Control Center version with multiple namespace support.
+
 * For instructions on how to manage apps using the Astra Control API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
 
 .App management options
