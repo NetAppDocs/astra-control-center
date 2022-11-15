@@ -57,8 +57,6 @@ The Astra Control Center upgrade process guides you through the following high-l
 * <<Install the updated Astra Control Center operator>>
 * <<Upgrade Astra Control Center>>
 * <<Verify system status>>
-* <<Set up ingress for load balancing>>
-
 
 IMPORTANT: Do not delete the Astra Control Center operator (for example, `kubectl delete -f astra_control_center_operator_deploy.yaml`) at any time during the Astra Control Center upgrade or operation to avoid deleting pods.
 
@@ -365,7 +363,10 @@ NAME    UUID                                      VERSION     ADDRESS         RE
 astra   9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f  22.11.0-24  10.111.111.111  True
 ----
 +
-NOTE: To monitor upgrade status during the operation, use the following command: `kubectl get -o yaml -n [netapp-acc or custom namespace] acc`. To inspect the Astra Control Center operator logs, enter the following:
+NOTE: To monitor upgrade status during the operation, run the following command: `kubectl get -o yaml -n [netapp-acc or custom namespace] acc`
+
++
+NOTE: To inspect the Astra Control Center operator logs, run the following command:
 `kubectl logs deploy/acc-operator-controller-manager -n netapp-acc-operator -c manager -f`
 
 == Verify system status
