@@ -5,7 +5,7 @@ keywords: how to manage apps with astra control, discover app, how to define kub
 summary: After you add Kubernetes clusters to Astra Control, you can install apps on that cluster (outside of Astra Control), and then go to the Applications page in Astra Control to start managing the apps.
 ---
 
-= Define apps
+= Start managing apps
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/use/
@@ -90,11 +90,11 @@ NOTE: During clone operations, apps that need an IngressClass resource or webhoo
 
 After you've link:../get-started/setup_overview.html#add-cluster[added your cluster] to Astra Control, you can install apps or manage existing apps on the cluster. Any app that is scoped to one or more namespaces can be managed.
 
-== Manage apps
+== Define apps
 
 After Astra Control discovers namespaces on your clusters, you can define applications that you want to manage. You can choose to <<Define resources to manage as an app,manage an app spanning one or more namespaces>> or <<Define a namespace to manage as an app,manage an entire namespace as a single application>>. It all comes down to the level of granularity that you need for data protection operations.
 
-Although Astra Control enables you to separately manage both levels of the hierarchy (the namespace and the apps in that namespace or across namespaces), the best practice is to choose one or the other. Actions that you take in Astra Control can fail if the actions take place at the same time at both the namespace and app level.
+Although Astra Control enables you to separately manage both levels of the hierarchy (the namespace and the apps in that namespace or spanning namespaces), the best practice is to choose one or the other. Actions that you take in Astra Control can fail if the actions take place at the same time at both the namespace and app level.
 
 TIP: As an example, you might want to set a backup policy for "maria" that has a weekly cadence, but you might need to back up "mariadb" (which is in the same namespace) more frequently than that. Based on those needs, you would need to manage the apps separately and not as a single-namespace app.
 

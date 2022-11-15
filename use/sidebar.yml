@@ -1,7 +1,7 @@
 section: use
 title: Use Astra Control Center
 entries:
-  - title: Define apps
+  - title: Start managing apps
     url: /use/manage-apps.html
   - title: Protect apps
     entries:
