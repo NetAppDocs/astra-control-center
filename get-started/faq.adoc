@@ -34,9 +34,9 @@ You can easily change to a full license by obtaining the NetApp license file (NL
 
 *Steps*
 
-* From the left navigation, select *Account* > *License*.
-* Select *Add license*.
-* Browse to the license file you downloaded and select *Add*.
+. From the left navigation, select *Account* > *License*.
+. Select *Add license*.
+. Browse to the license file you downloaded and select *Add*.
 
 *I am using the Evaluation license. Can I still manage apps?*
 
