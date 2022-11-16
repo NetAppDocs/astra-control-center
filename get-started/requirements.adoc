@@ -75,7 +75,7 @@ At least 3 worker nodes total, with 4 CPU cores and 12GB RAM each
 a|
 Astra Trident 22.01 or newer installed and configured
 Astra Trident 22.07 or newer installed for SnapMirror-based application replication
-Astra Trident 22.10 or newer installed for Kubernetes 1.25 clusters
+Astra Trident 22.10 or newer installed for Kubernetes 1.25 clusters (you must upgrade to Astra Trident 22.10 prior to upgrading to Kubernetes 1.25)
 
 |===
 

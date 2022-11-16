@@ -42,7 +42,7 @@ This patch release (22.08.1) for Astra Control Center (22.08.0) fixes minor bugs
 .New features and support
 
 * link:../use/replicate_snapmirror.html[App replication using NetApp SnapMirror technology]
-* link:../use/manage-apps.html#manage-apps[Improved app management workflow]
+* link:../use/manage-apps.html#define-apps[Improved app management workflow]
 * link:../use/execution-hooks.html[Enhanced provide-your-own execution hooks functionality]
 +
 NOTE: The NetApp provided default pre- and post-snapshot execution hooks for specific applications have been removed in this release. If you upgrade to this release and do not provide your own execution hooks for snapshots, Astra Control will take crash-consistent snapshots only. Visit the https://github.com/NetApp/Verda[NetApp Verda] GitHub repository for sample execution hook scripts that you can modify to fit your environment.
