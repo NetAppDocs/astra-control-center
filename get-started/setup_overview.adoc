@@ -106,6 +106,13 @@ error: the server doesn't have a resource type "tridentversions"
 +
 NOTE: If Trident is not installed or the installed version is not the latest, you need to install the latest version of Trident before proceeding. Refer to the https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html[Trident documentation^] for instructions.
 
+. Ensure that the pods are running:
++
+[source,console]
+----
+kubectl get pods -n trident
+----
+
 . Check if the storage classes are using the supported Trident drivers. The provisioner name should be `csi.trident.netapp.io`. See the following example:
 +
 [source,console]
