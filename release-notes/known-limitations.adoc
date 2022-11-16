@@ -87,7 +87,7 @@ A user with namespace RBAC constraints should not be allowed to add or unmanage 
 Any `member` user with RBAC constraints by namespace name/ID can clone or restore an app to a new namespace on the same cluster or to any other cluster in their organization's account. However, the same user cannot access the cloned or restored app in the new namespace. After a new namespace is created by a clone or restore operation, the account admin/owner can edit the `member` user account and update role constraints for the affected user to grant access to the new namespace.
 
 == Astra Control does not automatically assign default buckets for cloud instances
-Astra Control does not automatically assign a default bucket for any cloud instance. You need to manually set a default bucket for a cloud instance before performing app clone operations between two clusters.
+Astra Control does not automatically assign a default bucket for any cloud instance. You need to manually set a default bucket for a cloud instance. If a default bucket is not set, you won't be able to perform app clone operations between two clusters. 
 
 == Clones of apps installed using pass-by-reference operators can fail
 //DOC-4008/DOC-4010/PI5
