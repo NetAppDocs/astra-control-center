@@ -320,16 +320,14 @@ spec:
     name: "[your_registry_path]"
 ----
 
-. Verify your `CRDs` configuration inside of `Spec`:
+. Add the following to your `CRDs` configuration inside of `Spec` if you are using your own ingress controller (`ingressType: "Generic"` in the Astra Control Center CR):
 +
 ----
 crds:
-    externalTraefik: true
-    externalCertManager: true
-    shouldUpgrade: false
+  shouldUpgrade: false
 ----
 +
-If you have your own Traefik deployment and `externalTraefik` is set to `true`, you maintain your own deployment and Astra Control Center will not automatically upgrade the CRDs. In this case, `shouldUpgrade` must also be set to `false`.
+NOTE: `shouldUpgrade` must be set to `true` only if you used `ingressType: "AccTraefik"` during Astra Control Center installation.
 
 . Add the following lines within `additionalValues` inside of `Spec` in the Astra Control Center CR:
 +
