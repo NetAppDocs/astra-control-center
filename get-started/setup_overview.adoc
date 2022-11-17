@@ -127,7 +127,7 @@ NAME                   PROVISIONER                    RECLAIMPOLICY   VOLUMEBIND
 ontap-gold (default)   csi.trident.netapp.io          Delete          Immediate           true                   5d23h
 ----
 
-=== Create an admin-role kubeconfig
+=== Create a limited cluster role kubeconfig
 
 You can optionally create a limited administrator role for Astra Control Center. This is not a required procedure for Astra Control Center setup. This procedure helps create a separate kubeconfig that limits Astra Control permissions on the clusters it manages. 
 
@@ -167,14 +167,14 @@ kubectl apply -f astracontrol-service-account.yaml
 ----
 
 . Create a limited cluster role with the minimum permissions necessary for a cluster to be managed by Astra Control:
-.. Create a `ClusterRole` file called `astracontrol-clusterrole.yaml`.
+.. Create a `ClusterRole` file called `astra-admin-account.yaml`.
 +
 Adjust the name and namespace as needed. If changes are made here, you should apply the same changes in the following steps.
 +
 [source]
 [subs="specialcharacters,quotes"]
 ----
-*astracontrol-clusterrole.yaml*
+*astra-admin-account.yaml*
 ----
 +
 [source,yaml]
@@ -282,7 +282,7 @@ rules:
 +
 [source,console]
 ----
-kubectl apply -f astracontrol-clusterrole.yaml
+kubectl apply -f astra-admin-account.yaml
 ----
 
 . Create the cluster role binding for the cluster role to the service account:
@@ -442,7 +442,7 @@ TIP: We recommend that Astra Control Center manage the cluster it is deployed on
 +
 NOTE: The `kubeconfig.yaml` file should include *only the cluster credential for one cluster*.
 +
-IMPORTANT: If you create your own `kubeconfig` file, you should define only *one* context element in it. Refer to https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[Kubernetes documentation^] for information about creating `kubeconfig` files. If you created a kubeconfig for a limited cluster role using <<Create an admin-role kubeconfig,the process above>>, be sure to upload or paste that kubeconfig in this step.
+IMPORTANT: If you create your own `kubeconfig` file, you should define only *one* context element in it. Refer to https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[Kubernetes documentation^] for information about creating `kubeconfig` files. If you created a kubeconfig for a limited cluster role using <<Create a limited cluster role kubeconfig,the process above>>, be sure to upload or paste that kubeconfig in this step.
 
 . Provide a credential name. By default, the credential name is auto-populated as the name of the cluster.
 . Select *Next*.
