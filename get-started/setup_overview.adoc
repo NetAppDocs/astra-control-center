@@ -59,14 +59,13 @@ You should ensure that the following prerequisite conditions are met before you 
 .What you'll need
 
 * Your environment meets the link:../get-started/requirements.html#operational-environment-requirements[operational environment requirements^] for Astra Trident and Astra Control Center. 
-*	A version of Astra Trident that is link:../get-started/requirements.html#operational-environment-requirements[supported by Astra Control Center] is installed:
+*	A version of Astra Trident that is link:../get-started/requirements.html#operational-environment-requirements[supported by Astra Control Center^] is installed:
 +
 NOTE: You can https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html#choose-the-deployment-method[deploy Astra Trident^] using either Trident operator (manually or using Helm chart) or `tridentctl`. Prior to installing or upgrading Astra Trident, review the https://docs.netapp.com/us-en/trident/trident-get-started/requirements.html[supported frontends, backends, and host configurations^].
 
 ** *Trident storage backend configured*: At least one Astra Trident storage backend must be https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend[configured^] on the cluster.
 ** *Trident storage classes configured*: At least one Astra Trident storage class must be https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[configured^] on the cluster. If a default storage class is configured, ensure that only one storage class has that annotation.
-** *Astra Trident volume snapshot controller and volume snapshot class installed and configured*: The volume snapshot controller must be https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[installed^] so that snapshots can be created in Astra Control. At least one Astra Trident `VolumeSnapshotClass` has been https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#step-1-set-up-a-volumesnapshotclass
-[set up^] by an administrator.
+** *Astra Trident volume snapshot controller and volume snapshot class installed and configured*: The volume snapshot controller must be https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[installed^] so that snapshots can be created in Astra Control. At least one Astra Trident `VolumeSnapshotClass` has been https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#step-1-set-up-a-volumesnapshotclass[set up^] by an administrator.
 * *Kubeconfig accessible*: You have access to the https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[cluster kubeconfig^] that includes only one context element.
 * *ONTAP credentials*: You need ONTAP credentials and a superuser and user ID set on the backing ONTAP system to back up and restore apps with Astra Control Center. 
 +
@@ -106,6 +105,13 @@ error: the server doesn't have a resource type "tridentversions"
 ----
 +
 NOTE: If Trident is not installed or the installed version is not the latest, you need to install the latest version of Trident before proceeding. Refer to the https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html[Trident documentation^] for instructions.
+
+. Ensure that the pods are running:
++
+[source,console]
+----
+kubectl get pods -n trident
+----
 
 . Check if the storage classes are using the supported Trident drivers. The provisioner name should be `csi.trident.netapp.io`. See the following example:
 +
@@ -342,7 +348,7 @@ Managing storage clusters in Astra Control as a storage backend enables you to g
 . Do one of the following:
 ** *New backends*: Select *Add* to manage an existing backend, select *ONTAP*, and select *Next*.
 ** *Discovered backends*: From the Actions menu, select *Manage* on a discovered backend from the managed cluster.
-.. Enter the ONTAP cluster management IP address and admin credentials. The credentials must be cluster-wide credentials. 
+. Enter the ONTAP cluster management IP address and admin credentials. The credentials must be cluster-wide credentials. 
 +
 NOTE: The user whose credentials you enter here must have the `ontapi` user login access method enabled within ONTAP System Manager on the ONTAP cluster. If you plan to use SnapMirror replication, apply user credentials with the "admin" role, which has the access methods `ontapi` and `http`, on both source and destination ONTAP clusters. Refer to https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts in ONTAP documentation^] for more information.
 
