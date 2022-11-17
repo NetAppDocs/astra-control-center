@@ -10,6 +10,7 @@ summary: NetApp provides support for Astra Control in a variety of ways. Extensi
 :icons: font
 :imagesdir: ../media/support/
 
+[.lead]
 NetApp provides support for Astra Control in a variety of ways. Extensive free self-support options are available 24x7, such as knowledgebase (KB) articles and a Discord channel. Your Astra Control account includes remote technical support via web ticketing.
 
 IMPORTANT: If you have an evaluation license for Astra Control Center, you can get technical support. However, case creation via NetApp Support Site (NSS) is not available. You can get in touch with Support via the feedback option or use the Discord channel for self service.
@@ -34,7 +35,7 @@ These options are available for free, 24x7:
 
 == Enable daily scheduled support bundle upload to NetApp Support
 
-During Astra Control Center installation, if you specify `enrolled: true` for `autoSupport` in the Astra Control Center Custom Resource Definition (CRD) file (`astra_control_center_min.yaml`), daily support bundles are automatically uploaded to the https://mysupport.netapp.com/site/[NetApp Support Site^].
+During Astra Control Center installation, if you specify `enrolled: true` for `autoSupport` in the Astra Control Center Custom Resource (CR) file (`astra_control_center.yaml`), daily support bundles are automatically uploaded to the https://mysupport.netapp.com/site/[NetApp Support Site^].
 
 == Generate support bundle to provide to NetApp Support
 

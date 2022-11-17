@@ -10,6 +10,7 @@ summary: If you use Red Hat OpenShift, you can install the Astra Control Center 
 :icons: font
 :imagesdir: ../media/get-started/
 
+[.lead]
 If you use Red Hat OpenShift, you can install Astra Control Center using the Red Hat certified operator. Use this procedure to install Astra Control Center from the https://catalog.redhat.com/software/operators/explore[Red Hat Ecosystem Catalog^] or using the Red Hat OpenShift Container Platform.
 
 After you complete this procedure, you must return to the installation procedure to complete the link:../get-started/install_acc.html#verify-system-status[remaining steps] to verify installation success and log on.
@@ -20,12 +21,14 @@ After you complete this procedure, you must return to the installation procedure
 From your OpenShift cluster, do the following:
 ** Ensure all cluster operators are in a healthy state (`available` is `true`):
 +
+[source,console]
 ----
 oc get clusteroperators
 ----
 
 ** Ensure all API services are in a healthy state (`available` is `true`):
 +
+[source,console]
 ----
 oc get apiservices
 ----
@@ -56,13 +59,15 @@ oc create namespace netapp-acc
 
 . Download the Astra Control Center bundle (`astra-control-center-[version].tar.gz`) from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
 . Download the zip of Astra Control Center certificates and keys from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
-. (Optional) Use the following command to verify the signature of the bundle:
+. (Optional) Verify the signature of the bundle:
 +
+[source,console]
 ----
 openssl dgst -sha256 -verify AstraControlCenter-public.pub -signature astra-control-center-[version].tar.gz.sig astra-control-center-[version].tar.gz
 ----
 . Extract the images:
 +
+[source,console]
 ----
 tar -vxzf astra-control-center-[version].tar.gz
 ----
@@ -73,17 +78,19 @@ The NetApp Astra `kubectl` command line plugin saves time when performing common
 
 .What you'll need
 
-NetApp provides binaries for the plugin for different CPU architectures and operating systems. You need to know which CPU and operating system you have before you perform this task. On Linux and Mac operating systems, you can use the `uname -a` command to gather this information.
+NetApp provides plugin binaries for different CPU architectures and operating systems. You need to know which CPU and operating system you have before you perform this task. On Linux and Mac operating systems, you can use the `uname -a` command to gather this information.
 
 .Steps
 
 . List the available NetApp Astra `kubectl` plugin binaries, and note the name of the file you need for your operating system and CPU architecture:
 +
+[source,console]
 ----
 ls kubectl-astra/
 ----
 . Copy the file to the same location as the standard `kubectl` utility. In this example, the `kubectl` utility is located in the `/usr/local/bin` directory. Replace `<binary-name>` with the name of the file you need:
 +
+[source,console]
 ----
 cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 ----
@@ -100,37 +107,37 @@ cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 
 .Docker
 --
-. Change to the Astra directory:
+.. Change to the Astra directory:
 +
-[source,sh]
+[source,console]
 ----
 cd acc
 ----
-. [[substep_image_local_registry_push]]Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
+.. [[substep_image_local_registry_push]]Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
 +
 
-* Replace BUNDLE_FILE with the name of the Astra Control bundle file (for example, `acc.manifest.yaml`).
-* Replace MY_REGISTRY with the URL of the Docker repository.
-* Replace MY_REGISTRY_USER with the user name.
-* Replace MY_REGISTRY_TOKEN with an authorized token for the registry.
+* Replace <BUNDLE_FILE> with the name of the Astra Control bundle file (`acc.manifest.yaml`).
+* Replace <MY_FULL_REGISTRY_PATH> with the URL of the Docker repository.  The URL must include the exact directory that contains the images.
+* Replace <MY_REGISTRY_USER> with the user name.
+* Replace <MY_REGISTRY_TOKEN> with an authorized token for the registry.
 +
-[source,sh]
+[source,console]
 ----
-kubectl astra packages push-images -m BUNDLE_FILE -r MY_REGISTRY -u MY_REGISTRY_USER -p MY_REGISTRY_TOKEN
+kubectl astra packages push-images -m <BUNDLE_FILE> -r <MY_FULL_REGISTRY_PATH> -u <MY_REGISTRY_USER> -p <MY_REGISTRY_TOKEN>
 ----
 --
 
 .Podman
 --
-. Log in to your registry:
+.. Log in to your registry:
 +
-[source,sh]
+[source,console]
 ----
-podman login [your_registry_path]
+podman login <MY_FULL_REGISTRY_PATH>
 ----
-. Run the following script, making the <YOUR_REGISTRY> substitution as noted in the comments:
+.. Run the following script, making the <YOUR_REGISTRY> substitution as noted in the comments:
 +
-[source,sh]
+[source,console]
 ----
 # You need to be at the root of the tarball.
 # You should see these files to confirm correct location:
@@ -144,7 +151,7 @@ export PACKAGEVERSION=22.08.1-26
 export DIRECTORYNAME=acc
 for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do
   # Load to local cache
-  astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image: //')
+  astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image(s): //')
  
   # Remove path and keep imageName.
   astraImageNoPath=$(echo ${astraImage} | sed 's:.*/::')

@@ -6,8 +6,5 @@ entries:
     url: /release-notes/whats-new.html
   - title: Known issues
     url: /release-notes/known-issues.html
-    entries:
-      - title: Known issues with Astra Data Store and this Astra Control Center release
-        url: /release-notes/known-issues-ads.html
   - title: Known limitations
     url: /release-notes/known-limitations.html
