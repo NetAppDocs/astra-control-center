@@ -277,14 +277,12 @@ imagePullSecrets:
 
 .. Change `[your_registry_path]` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<Add the images to your local registry,previous step>>.
 .. Change `[your_registry_path]` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in a <<Add the images to your local registry,previous step>>.
-
 +
 [source]
 [subs="specialcharacters,quotes"]
 ----
 *astra_control_center_operator_deploy.yaml*
 ----
-
 +
 [subs=+quotes]
 ----
@@ -430,14 +428,12 @@ Astra Control Center uses a service of the type "LoadBalancer" (`svc/traefik` in
 NOTE: For details about the service type of "LoadBalancer" and ingress, see link:../get-started/requirements.html[Requirements].
 
 .. *crds*: If you use an external cert-manager, change `externalCertManager` to `true`. The default `false` causes Astra Control Center to install its own cert-manager during installation.
-
 +
 [source]
 [subs="specialcharacters,quotes"]
 ----
 *astra_control_center.yaml*
 ----
-
 +
 [subs=+quotes]
 ----
