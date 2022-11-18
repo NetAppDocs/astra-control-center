@@ -49,7 +49,7 @@ The *Account* > *License* page displays the license information, expiration date
 
 //AD AH review q2
 
-NOTE: If you have an evaluation license, be sure you store your account ID to avoid data loss in the event of Astra Control Center failure if you are not sending ASUPs.
+NOTE: If you have an evaluation license and are not sending data to AutoSupport, be sure that you store your account ID to avoid data loss in the event of Astra Control Center failure.
 
 == Prepare your environment for cluster management using Astra Control
 
@@ -113,7 +113,7 @@ NOTE: If Trident is not installed or the installed version is not the latest, yo
 kubectl get pods -n trident
 ----
 
-. Check if the storage classes are using the supported Trident drivers. The provisioner name should be `csi.trident.netapp.io`. See the following example:
+. Determine if the storage classes are using the supported Trident drivers. The provisioner name should be `csi.trident.netapp.io`. See the following example:
 +
 [source,console]
 ----
@@ -123,8 +123,8 @@ kubectl get sc
 Sample response:
 +
 ----
-NAME                   PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
-ontap-gold (default)   csi.trident.netapp.io          Delete          Immediate           true                   5d23h
+NAME                  PROVISIONER            RECLAIMPOLICY  VOLUMEBINDINGMODE  ALLOWVOLUMEEXPANSION  AGE
+ontap-gold (default)  csi.trident.netapp.io  Delete         Immediate          true                  5d23h
 ----
 
 === Create a limited cluster role kubeconfig
@@ -440,7 +440,7 @@ TIP: We recommend that Astra Control Center manage the cluster it is deployed on
 * Before you add a cluster, review and perform the necessary <<Prepare your environment for cluster management using Astra Control,prerequisite tasks>>.
 
 .Steps
-. Navigate from the Dashboard or the Clusters menu:
+. Navigate from either the Dashboard or the Clusters menu:
 * From *Dashboard* in the Resource Summary, select *Add* from the Clusters pane.
 * In the left navigation area, select *Clusters* and then select *Add Cluster* from the Clusters page.
 . In the *Add Cluster* window that opens, upload a `kubeconfig.yaml` file or paste the contents of a `kubeconfig.yaml` file.
@@ -459,7 +459,7 @@ NOTE: You should select a Trident storage class backed by ONTAP storage.
 
 .Result
 
-The cluster enters *Discovering* state and then changes to *Healthy*. You have successfully added a Kubernetes cluster and are now managing it in Astra Control Center.
+The cluster enters *Discovering* state and then changes to *Healthy*. You are now managing the cluster with Astra Control Center.
 
 IMPORTANT: After you add a cluster to be managed in Astra Control Center, it might take a few minutes to deploy the monitoring operator. Until then, the Notification icon turns red and logs a *Monitoring Agent Status Check Failed* event. You can ignore this, because the issue resolves when Astra Control Center obtains the correct status. If the issue does not resolve in a few minutes, go to the cluster, and run `oc get pods -n netapp-monitoring` as the starting point. You will need to look into the monitoring operator logs to debug the problem.
 
