@@ -39,7 +39,7 @@ The Astra Control Center installation process helps you to do the following:
 
 * Install the Astra components into the `netapp-acc` (or custom-named) namespace.
 * Create a default Astra Control Owner admin account.
-* Establish an administrative user email address and default initial setup password. This user is assigned the Owner role in the system that is needed for first time login to the UI.
+* Establish an administrative user email address and default initial setup password. This user is assigned the Owner role that is needed for first time login to the UI.
 * Determine that all Astra Control Center pods are running.
 * Install the Astra Control Center UI.
 //VMware ADS EAP review
@@ -223,7 +223,7 @@ secret/astra-registry-cred created
 +
 NOTE: If you delete the namespace after the secret is generated, recreate the namespace and then regenerate the secret for the namespace.
 
-.. Create the `netapp-acc` (or custom named) namespace.
+.. Create the `netapp-acc` (or custom-named) namespace.
 +
 [source,console]
 ----
@@ -236,7 +236,7 @@ Sample response:
 namespace/netapp-acc created
 ----
 
-.. Create a secret for the `netapp-acc` (or custom named) namespace. Add Docker information and run the following command:
+.. Create a secret for the `netapp-acc` (or custom-named) namespace. Add Docker information and run the following command:
 +
 [source,console]
 ----
@@ -388,7 +388,7 @@ kubectl get pods -n netapp-acc-operator
 
 == Configure Astra Control Center
 
-. Edit the Astra Control Center custom resource (CR) file (`astra_control_center.yaml`) to make account, autoSupport, registry, and other necessary configurations:
+. Edit the Astra Control Center custom resource (CR) file (`astra_control_center.yaml`) to make account, AutoSupport, registry, and other necessary configurations:
 +
 NOTE: For additional customizations, familiarize yourself with all link:../get-started/acc_cluster_cr_options.html[CR options and their potential values^] to ensure you deploy Astra Control Center correctly for your environment.
 
@@ -421,20 +421,20 @@ Use this option when you have another ingress controller in use or would prefer 
 
 * *AccTraefik* (`ingressType: "AccTraefik"`)
 +
-Use this option when you would prefer to not configure an ingress controller. This deploys the Astra Control Center `traefik` gateway as a Kubernetes LoadBalancer type service.
+Use this option when you would prefer not to configure an ingress controller. This deploys the Astra Control Center `traefik` gateway as a Kubernetes LoadBalancer type service.
 +
 Astra Control Center uses a service of the type "LoadBalancer" (`svc/traefik` in the Astra Control Center namespace), and requires that it be assigned an accessible external IP address. If load balancers are permitted in your environment and you don't already have one configured, you can use MetalLB or another external service load balancer to assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
 +
 NOTE: For details about the service type of "LoadBalancer" and ingress, see link:../get-started/requirements.html[Requirements].
 
 .. *crds*: If you use an external cert-manager, change `externalCertManager` to `true`. The default `false` causes Astra Control Center to install its own cert-manager during installation.
-+
+
 [source]
 [subs="specialcharacters,quotes"]
 ----
 *astra_control_center.yaml*
 ----
-+
+
 [subs=+quotes]
 ----
 apiVersion: astra.netapp.io/v1
@@ -493,7 +493,9 @@ astracontrolcenter.astra.netapp.io/astra created
 
 == Verify system status
 
-NOTE: If you prefer to use OpenShift, you can use comparable oc commands for verification steps.
+You can verify system status using kubectl commands. If you prefer to use OpenShift, you can use comparable oc commands for verification steps.
+
+.Steps
 
 . Verify that all system components installed successfully.
 +
@@ -593,7 +595,7 @@ vault-controller-55bbc96668-rfkgg          1/1     Running   0               11m
 kubectl logs deploy/acc-operator-controller-manager -n netapp-acc-operator -c manager -f
 ----
 +
-NOTE: `accHost` cluster registration is one of the last operations, and if it fails it will not cause deployment to fail. In the event of a cluster registration failure indicated in the logs, you can attempt registration again through the add cluster workflow link:../get-started/setup_overview.html#add-cluster[in the UI] or API.
+NOTE: `accHost` cluster registration is one of the last operations, and if it fails it will not cause deployment to fail. In the event of a cluster registration failure indicated in the logs, you can attempt registration again through the link:../get-started/setup_overview.html#add-cluster[Add cluster workflow in the UI] or API.
 
 . When all the pods are running, verify that the installation was successful (`READY` is `True`) and get the initial setup password you will use when you log in to Astra Control Center:
 +
@@ -605,7 +607,7 @@ kubectl get AstraControlCenter -n [netapp-acc or custom namespace]
 Response:
 +
 ----
-NAME    UUID                                      VERSION     ADDRESS         READY
+NAME    UUID                                  VERSION     ADDRESS         READY
 astra   9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f  22.08.1-26  10.111.111.111  True
 ----
 +
@@ -783,7 +785,7 @@ NOTE: If you enter an incorrect password three times, the admin account will be 
 . Select *Login*.
 . Change the password when prompted.
 +
-NOTE: If this is your first login and you forget the password and no other administrative user accounts have yet been created, contact NetApp Support for password recovery assistance.
+NOTE: If this is your first login and you forget the password and no other administrative user accounts have yet been created, contact https://mysupport.netapp.com/site/[NetApp Support] for password recovery assistance.
 
 . (Optional) Remove the existing self-signed TLS certificate and replace it with a link:../get-started/add-custom-tls-certificate.html[custom TLS certificate signed by a Certificate Authority (CA)].
 

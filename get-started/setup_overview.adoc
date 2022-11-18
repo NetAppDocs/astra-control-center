@@ -132,10 +132,15 @@ ontap-gold (default)   csi.trident.netapp.io          Delete          Immediate 
 You can optionally create a limited administrator role for Astra Control Center. This is not a required procedure for Astra Control Center setup. This procedure helps create a separate kubeconfig that limits Astra Control permissions on the clusters it manages. 
 
 .What you'll need
-Ensure that you have the following on your machine before you do the steps:
+
+Ensure that you have the following for the cluster you intend to manage before completing the procedure steps:
 
 * kubectl v1.23 or later installed
-* An active kubeconfig with cluster admin rights for the active context
+* kubectl access to the cluster that you intend to add and manage with Astra Control Center
++
+NOTE: For this procedure, you do not need kubectl access to the cluster that is running Astra Control Center.
+
+* An active kubeconfig for the cluster you intend to manage with cluster admin rights for the active context
 
 .Steps
 [%collapsible]
