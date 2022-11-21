@@ -17,8 +17,8 @@ We're pleased to announce the latest release of Astra Control Center.
 
 .New features and support
 
-* link:../use/define-custom-app.html[Support for apps that span across multiple namespaces]
-* link:../use/define-custom-app.html[Support for including cluster resources in an app definition]
+* link:../use/manage-apps.html#define-apps[Support for apps that span across multiple namespaces]
+* link:../use/manage-apps.html#define-apps[Support for including cluster resources in an app definition]
 * link:../use/manage-remote-authentication.html[Enhanced LDAP authentication with role-based access control (RBAC) integration]
 * link:../get-started/requirements.html[Added support for Kubernetes 1.25 and Pod Security Admission (PSA)]
 * link:../use/monitor-running-tasks.html[Enhanced progress reporting for your backup, restore, and clone operations]
