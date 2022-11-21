@@ -17,14 +17,14 @@ After you complete this procedure, you must return to the installation procedure
 
 .What you'll need
 * link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
-* From your OpenShift cluster, ensure all cluster operators are in a healthy state (`available` is `true`):
+* From your OpenShift cluster, ensure all cluster operators are in a healthy state:
 +
 [source,console]
 ----
 oc get clusteroperators
 ----
 
-* From your OpenShift cluster, ensure all API services are in a healthy state (`available` is `true`):
+* From your OpenShift cluster, ensure all API services are in a healthy state:
 +
 [source,console]
 ----
@@ -33,7 +33,7 @@ oc get apiservices
 
 * Create an FQDN address for Astra Control Center in your data center.
 * Obtain the necessary permissions and access to the Red Hat OpenShift Container Platform to perform the installation steps described.
-* If a cert-manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps] so that Astra Control Center does not install its own cert-manager.
+* If a cert-manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps] so that Astra Control Center does not install its own cert-manager. By default, Astra Control Center installs its own cert-manager during installation.
 
 .Steps
 
@@ -63,27 +63,29 @@ tar -vxzf astra-control-center-[version].tar.gz
 
 == Install the NetApp Astra kubectl plugin
 
-The NetApp Astra `kubectl` command line plugin saves time when performing common tasks associated with deploying and upgrading Astra Control Center.
+The NetApp Astra kubectl command line plugin saves time when performing common tasks associated with deploying and upgrading Astra Control Center.
 
 .What you'll need
 
-NetApp provides plugin binaries for different CPU architectures and operating systems. You need to know which CPU and operating system you have before you perform this task. On Linux and Mac operating systems, you can use the `uname -a` command to gather this information.
+NetApp provides plugin binaries for different CPU architectures and operating systems. You need to know which CPU and operating system you have before you perform this task.
 
 .Steps
 
-. List the available NetApp Astra `kubectl` plugin binaries, and note the name of the file you need for your operating system and CPU architecture:
+. List the available NetApp Astra kubectl plugin binaries, and note the name of the file you need for your operating system and CPU architecture:
++
+NOTE: The kubectl plugin library is part of the tar bundle and is extracted into the folder `kubectl-astra`.
 +
 [source,console]
 ----
 ls kubectl-astra/
 ----
-. Copy the file to the same location as the standard `kubectl` utility. In this example, the `kubectl` utility is located in the `/usr/local/bin` directory. Replace `<binary-name>` with the name of the file you need:
+
+. Move the correct binary into the current path and rename it to `kubectl-astra`:
 +
 [source,console]
 ----
 cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 ----
-
 
 == Add the images to your local registry
 
@@ -96,17 +98,17 @@ cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 
 .Docker
 --
-.. Change to the Astra directory:
+.. Change to the `acc` directory extracted from the tar bundle:
 +
-[source,console]
+Example:
 ----
-cd acc
+cd ../acc
 ----
 .. [[substep_image_local_registry_push]]Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
 +
 
 * Replace <BUNDLE_FILE> with the name of the Astra Control bundle file (`acc.manifest.yaml`).
-* Replace <MY_FULL_REGISTRY_PATH> with the URL of the Docker repository.  The URL must include the exact directory that contains the images.
+* Replace <MY_FULL_REGISTRY_PATH> with the URL of the Docker repository; for example, https://exampledownloads.jfrog.io/docker-astra-control/v1/.
 * Replace <MY_REGISTRY_USER> with the user name.
 * Replace <MY_REGISTRY_TOKEN> with an authorized token for the registry.
 +

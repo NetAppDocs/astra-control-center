@@ -34,10 +34,10 @@ During app cloning in OpenShift environments, Astra Control Center needs to allo
 
 * *Explicit Storage classes*: If you deploy an app with a StorageClass explicitly set and you need to clone the app, the target cluster must have the originally specified StorageClass. Cloning an application with an explicitly set StorageClass to a cluster that does not have the same StorageClass will fail.
 * *Clones and user constraints*: Any member user with namespace constraints by namespace name/ID or by namespace labels can clone or restore an app to a new namespace on the same cluster or to any other cluster in their organization's account. However, the same user cannot access the cloned or restored app in the new namespace. After a new namespace is created by a clone or restore operation, the account admin/owner can edit the member user account and update role constraints for the affected user to grant access to the new namespace.
-* *With Jenkins CI*: If you clone an operator-deployed instance of Jenkins CI, you need to manually restore the persistent data. This is a limitation of the app's deployment model.
-* *With S3 buckets*: S3 buckets in Astra Control Center do not report available capacity. Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
 //DOC-3595/ASTRACTL-10071/Q2 and PI4
 * *Clones use default buckets*: During an app backup or app restore, you can optionally specify a bucket ID. An app clone operation, however, always uses the default bucket that has been defined. There is no option to change buckets for a clone. If you want control over which bucket is used, you can either link:../use/manage-buckets.html#edit-a-bucket[change the bucket default] or do a link:../use/protect-apps.html#create-a-backup[backup] followed by a link:../use/restore-apps.html[restore] separately.
+* *With Jenkins CI*: If you clone an operator-deployed instance of Jenkins CI, you need to manually restore the persistent data. This is a limitation of the app's deployment model.
+* *With S3 buckets*: S3 buckets in Astra Control Center do not report available capacity. Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
 
 .OpenShift considerations
 
@@ -76,7 +76,7 @@ NOTE: Astra Control creates new destination namespaces as part of the clone oper
 
 .Result
 
-Astra Control clones that app based on the information that you provided. The clone operation is successful when the new app clone is in `Healthy` state on the *Applications* page.
+Astra Control clones the app based on the information that you provided. The clone operation is successful when the new app clone is in `Healthy` state on the *Applications* page.
 
 After a new namespace is created by a clone or restore operation, the account admin/owner can edit the member user account and update role constraints for the affected user to grant access to the new namespace.
 
