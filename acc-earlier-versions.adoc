@@ -14,6 +14,7 @@ summary: Documentation for previous releases is available in case you're not run
 [.lead]
 Documentation for previous releases is available.
 
+* https://docs.netapp.com/us-en/astra-control-center-2208/index.html[Astra Control Center 22.08 documentation^]
 * https://docs.netapp.com/us-en/astra-control-center-2204/index.html[Astra Control Center 22.04 documentation^]
 * https://docs.netapp.com/us-en/astra-control-center-2112/index.html[Astra Control Center 21.12 documentation^]
 * https://docs.netapp.com/us-en/astra-control-center-2108/index.html[Astra Control Center 21.08 documentation^]
