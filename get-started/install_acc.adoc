@@ -704,7 +704,7 @@ kubectl apply -f istio-Ingress.yaml
 +
 [source,console]
 ----
-kubectl get ingress -n netapp-acc
+kubectl get ingress -n [netapp-acc or custom namespace]
 ----
 +
 Response:
