@@ -10,18 +10,39 @@ summary: NetApp periodically updates Astra Control Center to bring you new featu
 :icons: font
 :imagesdir: ../media/release-notes/
 
+[.lead]
 We're pleased to announce the latest release of Astra Control Center.
+
+== 22 November 2022 (22.11.0)
+
+.New features and support
+
+* link:../use/manage-apps.html#define-apps[Support for applications that span across multiple namespaces]
+* link:../use/manage-apps.html#define-apps[Support for including cluster resources in an application definition]
+* link:../use/manage-remote-authentication.html[Enhanced LDAP authentication with role-based access control (RBAC) integration]
+* link:../get-started/requirements.html[Added support for Kubernetes 1.25 and Pod Security Admission (PSA)]
+* link:../use/monitor-running-tasks.html[Enhanced progress reporting for your backup, restore, and clone operations]
+
+
+
+.Known issues and limitations
+* link:../release-notes/known-issues.html[Known issues for this release]
+* link:../release-notes/known-limitations.html[Known limitations for this release]
 
 == 8 September 2022 (22.08.1)
 
 This patch release (22.08.1) for Astra Control Center (22.08.0) fixes minor bugs in app replication using NetApp SnapMirror.
 
 == 10 August 2022 (22.08.0)
+// Start snippet: collapsible block (open on page load)
+.Details
+[%collapsible]
+====
 
 .New features and support
 
 * link:../use/replicate_snapmirror.html[App replication using NetApp SnapMirror technology]
-* link:../use/manage-apps.html#manage-apps[Improved app management workflow]
+* link:../use/manage-apps.html#define-apps[Improved app management workflow]
 * link:../use/execution-hooks.html[Enhanced provide-your-own execution hooks functionality]
 +
 NOTE: The NetApp provided default pre- and post-snapshot execution hooks for specific applications have been removed in this release. If you upgrade to this release and do not provide your own execution hooks for snapshots, Astra Control will take crash-consistent snapshots only. Visit the https://github.com/NetApp/Verda[NetApp Verda] GitHub repository for sample execution hook scripts that you can modify to fit your environment.
@@ -32,8 +53,10 @@ NOTE: The NetApp provided default pre- and post-snapshot execution hooks for spe
 
 .Known issues and limitations
 * link:../release-notes/known-issues.html[Known issues for this release]
-* link:../release-notes/known-issues-ads.html[Known issues with Astra Data Store and this Astra Control Center release]
 * link:../release-notes/known-limitations.html[Known limitations for this release]
+
+====
+// End snippet
 
 == 26 April 2022 (22.04.0)
 // Start snippet: collapsible block (open on page load)
@@ -43,7 +66,7 @@ NOTE: The NetApp provided default pre- and post-snapshot execution hooks for spe
 
 .New features and support
 
-* https://docs.netapp.com/us-en/astra-control-center-2204/get-started/setup_overview.html#add-a-storage-backend[Astra Data Store deployment from Astra Control Center]
+
 * https://docs.netapp.com/us-en/astra-control-center-2204/concepts/user-roles-namespaces.html[Namespace role-based access control (RBAC)]
 * https://docs.netapp.com/us-en/astra-control-center-2204/get-started/install_acc-cvo.html[Support for Cloud Volumes ONTAP]
 * https://docs.netapp.com/us-en/astra-control-center-2204/get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Generic ingress enablement for Astra Control Center]
@@ -52,7 +75,6 @@ NOTE: The NetApp provided default pre- and post-snapshot execution hooks for spe
 
 .Known issues and limitations
 * https://docs.netapp.com/us-en/astra-control-center-2204/release-notes/known-issues.html[Known issues for this release]
-* https://docs.netapp.com/us-en/astra-control-center-2204/release-notes/known-issues-ads.html[Known issues with Astra Data Store and this Astra Control Center release]
 * https://docs.netapp.com/us-en/astra-control-center-2204/release-notes/known-limitations.html[Known limitations for this release]
 
 ====
@@ -70,7 +92,6 @@ NOTE: The NetApp provided default pre- and post-snapshot execution hooks for spe
 * https://docs.netapp.com/us-en/astra-control-center-2112/use/execution-hooks.html[Execution hooks^]
 * https://docs.netapp.com/us-en/astra-control-center-2112/get-started/requirements.html#supported-app-installation-methods[Support for applications deployed with namespace-scoped operators^]
 * https://docs.netapp.com/us-en/astra-control-center-2112/get-started/requirements.html[Additional support for upstream Kubernetes and Rancher^]
-* https://docs.netapp.com/us-en/astra-control-center-2112/get-started/setup_overview.html#add-a-storage-backend[Astra Data Store preview backend management and monitoring^]
 * https://docs.netapp.com/us-en/astra-control-center-2112/use/upgrade-acc.html[Astra Control Center upgrades^]
 * https://docs.netapp.com/us-en/astra-control-center-2112/get-started/acc_operatorhub_install.html[Red Hat OperatorHub option for installation^]
 
@@ -79,7 +100,6 @@ NOTE: The NetApp provided default pre- and post-snapshot execution hooks for spe
 
 .Known issues and limitations
 * https://docs.netapp.com/us-en/astra-control-center-2112/release-notes/known-issues.html[Known issues for this release^]
-* https://docs.netapp.com/us-en/astra-control-center-2112/release-notes/known-issues-ads.html[Known issues with Astra Data Store preview and this Astra Control Center release^]
 * https://docs.netapp.com/us-en/astra-control-center-2112/release-notes/known-limitations.html[Known limitations for this release^]
 
 ====
@@ -109,5 +129,4 @@ Initial release of Astra Control Center.
 
 * link:../release-notes/known-issues.html[Known issues for this release]
 * link:../release-notes/known-limitations.html[Known limitations for this release]
-* https://docs.netapp.com/us-en/astra-data-store/index.html[Astra Data Store documentation]
 * link:../acc-earlier-versions.html[Earlier versions of Astra Control Center documentation]

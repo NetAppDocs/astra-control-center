@@ -10,12 +10,15 @@ summary: Protect your apps by taking snapshots and backups using an automated pr
 :icons: font
 :imagesdir: ../media/use/
 
-Protect all apps by taking snapshots and backups using an automated protection policy or on an ad-hoc basis. You can use the Astra UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to protect apps.
+[.lead]
+Protect all apps by taking snapshots and backups using an automated protection policy or on an ad-hoc basis. You can use the Astra Control Center UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to protect apps.
 
-If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
+.About this task
 
-When you create a project for hosting an app on an OpenShift cluster, the project (or Kubernetes namespace) is assigned a SecurityContext UID. To enable Astra Control Center to protect your app and move the app to another cluster or project in OpenShift, you need to add policies that enable the app to run as any UID. As an example, the following OpenShift CLI commands grant the appropriate policies to a WordPress app.
+* *Helm deployed apps*: If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
 
+* *(Openshift clusters only) Add policies*: When you create a project for hosting an app on an OpenShift cluster, the project (or Kubernetes namespace) is assigned a SecurityContext UID. To enable Astra Control Center to protect your app and move the app to another cluster or project in OpenShift, you need to add policies that enable the app to run as any UID. As an example, the following OpenShift CLI commands grant the appropriate policies to a WordPress app.
++
 `oc new-project wordpress`
 `oc adm policy add-scc-to-group anyuid system:serviceaccounts:wordpress`
 `oc adm policy add-scc-to-user privileged -z default -n wordpress`
@@ -36,7 +39,9 @@ You can do the following tasks related to protecting your app data:
 
 == Configure a protection policy
 
-A protection policy protects an app by creating snapshots, backups, or both at a defined schedule. You can choose to create snapshots and backups hourly, daily, weekly, and monthly, and you can specify the number of copies to retain. As an example, a protection policy might create weekly backups and daily snapshots, and retain the backups and snapshots for one month. How often you create snapshots and backups and how long you retain them depends on the needs of your organization.
+A protection policy protects an app by creating snapshots, backups, or both at a defined schedule. You can choose to create snapshots and backups hourly, daily, weekly, and monthly, and you can specify the number of copies to retain.
+
+If you need backups or snapshots to run more frequently than once per hour, you can https://docs.netapp.com/us-en/astra-automation/workflows/workflows_before.html[use the Astra Control REST API to create snapshots and backups^].
 
 .Steps
 
@@ -49,6 +54,8 @@ A protection policy protects an app by creating snapshots, backups, or both at a
 . Define a protection schedule by choosing the number of snapshots and backups to keep hourly, daily, weekly, and monthly.
 +
 You can define the hourly, daily, weekly, and monthly schedules concurrently. A schedule won't turn active until you set a retention level.
++
+When you set a retention level for backups, you can choose the bucket where you'd like to store the backups.
 +
 The following example sets four protection schedules: hourly, daily, weekly, and monthly for snapshots and backups.
 +
@@ -63,7 +70,7 @@ image:screenshot-config-protection-policy.png[A screenshot of a sample configura
 
 .Result
 
-Astra Control Center implements the data protection policy by creating and retaining snapshots and backups using the schedule and retention policy that you defined.
+Astra Control implements the data protection policy by creating and retaining snapshots and backups using the schedule and retention policy that you defined.
 
 == Create a snapshot
 
@@ -75,12 +82,12 @@ You can create an on-demand snapshot at any time.
 . From the Options menu in the *Actions* column for the desired app, select *Snapshot*.
 //+
 //image:screenshot-create-snapshot.gif["A screenshot of the app page where you can select the drop-down list in the actions column and select Snapshot."]
-. Customize the name of the snapshot and then select *Review*.
+. Customize the name of the snapshot and then select *Next*.
 . Review the snapshot summary and select *Snapshot*.
 
 .Result
 
-The snapshot process begins. A snapshot is successful when the status is *Available* in the *Actions* column on the *Data protection* > *Snapshots* page.
+The snapshot process begins. A snapshot is successful when the status is *Healthy* in the *State* column on the *Data protection* > *Snapshots* page.
 
 == Create a backup
 
@@ -91,22 +98,22 @@ NOTE: S3 buckets in Astra Control Center do not report available capacity. Befor
 .Steps
 
 . Select *Applications*.
-. From the Options menu in the *Actions* column for the desired app, select *Backup*.
+. From the Options menu in the *Actions* column for the desired app, select *Back up*.
 //+
 //image:screenshot-create-backup.gif["A screenshot of the app page where you can select the drop-down list in the actions column and select Backup."]
 . Customize the name of the backup.
 . Choose whether to back up the app from an existing snapshot. If you select this option, you can choose from a list of existing snapshots.
-. Choose a destination for the backup by selecting from the list of storage buckets.
-. Select *Review*.
-. Review the backup summary and select *Backup*.
+. Choose a destination bucket for the backup from the list of storage buckets.
+. Select *Next*.
+. Review the backup summary and select *Back up*.
 
 .Result
 
-Astra Control Center creates a backup of the app.
+Astra Control creates a backup of the app.
 
 NOTE: If your network has an outage or is abnormally slow, a backup operation might time out. This causes the backup to fail.
 
-NOTE: There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use the instructions in <<Delete backups>>. To delete a failed backup, https://docs.netapp.com/us-en/astra-automation/index.html[use the Astra Control API^].
+NOTE: If you need to cancel a running backup, use the instructions in <<Cancel backups>>. To delete the backup, wait until it has completed and then use the instructions in <<Delete backups>>.
 
 NOTE: After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
 
@@ -129,11 +136,11 @@ The snapshots display by default.
 
 Delete the scheduled or on-demand snapshots that you no longer need.
 
-NOTE: You cannot delete a Snapshot copy that is currently being replicated.
+NOTE: You cannot delete a snapshot that currently is being replicated.
 
 .Steps
 
-. Select *Applications* and then select the name of an app.
+. Select *Applications* and then select the name of a managed app.
 . Select *Data Protection*.
 . From the Options menu in the *Actions* column for the desired snapshot, select *Delete snapshot*.
 //+
@@ -143,13 +150,13 @@ NOTE: You cannot delete a Snapshot copy that is currently being replicated.
 
 .Result
 
-Astra Control Center deletes the snapshot.
+Astra Control deletes the snapshot.
 
 == Cancel backups
 
 You can cancel a backup that is in progress.
 
-TIP: To cancel a backup, the backup must be in a Running state. You cannot cancel a backup that is in a Pending state.
+TIP: To cancel a backup, the backup must be in `Running` state. You cannot cancel a backup that is in `Pending` state.
 
 .Steps
 
@@ -160,14 +167,14 @@ TIP: To cancel a backup, the backup must be in a Running state. You cannot cance
 //image:screenshot-data-protection-backups.gif[A screenshot of the Backups option that's available in the far right of the data protection tab.]
 
 . From the Options menu in the *Actions* column for the desired backup, select *Cancel*.
-. Type the word "cancel" to confirm deletion and then select *Yes, cancel backup*.
+. Type the word "cancel" to confirm the operation and then select *Yes, cancel backup*.
 
 
 == Delete backups
 
 Delete the scheduled or on-demand backups that you no longer need.
 
-NOTE: There is no way to stop a running backup. If you need to delete the backup, wait until it has completed and then use these instructions. To delete a failed backup, https://docs.netapp.com/us-en/astra-automation/index.html[use the Astra Control API^].
+NOTE: If you need to cancel a running backup, use the instructions in <<Cancel backups>>. To delete the backup, wait until it has completed and then use these instructions.
 
 .Steps
 
@@ -185,4 +192,4 @@ NOTE: There is no way to stop a running backup. If you need to delete the backup
 
 .Result
 
-Astra Control Center deletes the backup.
+Astra Control deletes the backup.
