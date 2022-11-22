@@ -27,7 +27,7 @@ Refer to https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trid
 WARNING: You must upgrade to Astra Trident 22.10 *PRIOR* to upgrading to Kubernetes 1.25.
 
 ** A supported Kubernetes distribution
-To determine the version you are running, run the following command against your existing Astra Control Center: `kubectl get nodes -o -wide`
+To determine the version you are running, run the following command against your existing Astra Control Center: `kubectl get nodes -o wide`
 ** Sufficient cluster resources
 To determine cluster resources, run the following command in your existing Astra Control Center cluster: `kubectl describe node <node name>`
 ** A registry you can use to push and upload Astra Control Center images 
@@ -52,7 +52,7 @@ kubectl get apiservices
 The Astra Control Center upgrade process guides you through the following high-level steps:
 
 * <<Download the Astra Control Center bundle>>
-* <<Unpack the bundle and change directory>>
+* <<Unpack the bundle>>
 * <<Add the images to your local registry>>
 * <<Install the updated Astra Control Center operator>>
 * <<Upgrade Astra Control Center>>
@@ -72,7 +72,7 @@ TIP: Perform upgrades in a maintenance window when schedules, backups, and snaps
 openssl dgst -sha256 -verify AstraControlCenter-public.pub -signature astra-control-center-[version].tar.gz.sig astra-control-center-[version].tar.gz
 ----
 
-== Unpack the bundle and change directory
+== Unpack the bundle
 
 . Extract the images:
 +
@@ -81,7 +81,7 @@ tar -vxzf astra-control-center-[version].tar.gz
 ----
 
 == Verify that you have the NetApp Astra kubectl plugin installed
-The NetApp Astra `kubectl` command line plugin saves time when performing common tasks associated with deploying and upgrading Astra Control Center.
+The NetApp Astra kubectl command line plugin saves time when performing common tasks associated with deploying and upgrading Astra Control Center.
 
 . Use the following command to determine if you have the plug-in installed:
 +
@@ -93,7 +93,7 @@ This command should provide the kubectl plugin help. If the command returns an e
 
 == Add the images to your local registry
 
-. Complete the appropriate step sequence for your container engine: 
+. Complete the appropriate step sequence for your container engine:
 
 // start tabbed block for docker and podman approaches
 
@@ -102,18 +102,17 @@ This command should provide the kubectl plugin help. If the command returns an e
 
 .Docker
 --
-.. Change to the Astra directory:
+.. Change to the `acc` directory extracted from the tar bundle:
 +
-[source,console]
+Example:
 ----
-cd acc
+cd ../acc
 ----
-
 .. Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
 +
 
 * Replace <BUNDLE_FILE> with the name of the Astra Control bundle file (`acc.manifest.yaml`).
-* Replace <MY_FULL_REGISTRY_PATH> with the URL of the Docker repository.  The URL must include the exact directory that contains the images.
+* Replace <MY_FULL_REGISTRY_PATH> with the URL of the Docker repository; for example, https://exampledownloads.jfrog.io/docker-astra-control/v1/.
 * Replace <MY_REGISTRY_USER> with the user name.
 * Replace <MY_REGISTRY_TOKEN> with an authorized token for the registry.
 +
@@ -131,6 +130,7 @@ kubectl astra packages push-images -m <BUNDLE_FILE> -r <MY_FULL_REGISTRY_PATH> -
 ----
 podman login <MY_FULL_REGISTRY_PATH>
 ----
+
 .. Run the following script, making the <YOUR_REGISTRY> substitution as noted in the comments:
 +
 [source,console]
@@ -143,18 +143,18 @@ podman login <MY_FULL_REGISTRY_PATH>
 # Replace <YOUR_REGISTRY> with your own registry (e.g registry.customer.com or registry.customer.com/testing, etc..)
 export REGISTRY=<YOUR_REGISTRY>
 export PACKAGENAME=acc
-export PACKAGEVERSION=22.08.1-26
+export PACKAGEVERSION=22.11.0-82
 export DIRECTORYNAME=acc
 for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do
   # Load to local cache
   astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image(s): //')
- 
+  
   # Remove path and keep imageName.
   astraImageNoPath=$(echo ${astraImage} | sed 's:.*/::')
- 
+
   # Tag with local image repo.
   podman tag ${astraImage} ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
- 
+
   # Push to the local repo.
   podman push ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
 done
@@ -320,14 +320,12 @@ spec:
     name: "[your_registry_path]"
 ----
 
-. Add the following to your `CRDs` configuration inside of `Spec` if you are using your own ingress controller (`ingressType: "Generic"` in the Astra Control Center CR):
+. Add the following to your `CRDs` configuration inside of `Spec`:
 +
 ----
 crds:
-  shouldUpgrade: false
+  shouldUpgrade: true
 ----
-+
-NOTE: `shouldUpgrade` must be set to `true` only if you used `ingressType: "AccTraefik"` during Astra Control Center installation.
 
 . Add the following lines within `additionalValues` inside of `Spec` in the Astra Control Center CR:
 +
@@ -351,7 +349,7 @@ watch kubectl get pods -n [netapp-acc or custom namespace]
 . Wait for the Astra status conditions to indicate that the upgrade is complete and ready (`True`):
 +
 ----
-kubectl get acc -n [netapp-acc or custom namespace]
+kubectl get AstraControlCenter -n [netapp-acc or custom namespace]
 ----
 +
 Response:
@@ -361,7 +359,7 @@ NAME    UUID                                      VERSION     ADDRESS         RE
 astra   9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f  22.11.0-24  10.111.111.111  True
 ----
 +
-NOTE: To monitor upgrade status during the operation, run the following command: `kubectl get -o yaml -n [netapp-acc or custom namespace] acc`
+NOTE: To monitor upgrade status during the operation, run the following command: `kubectl get AstraControlCenter -o yaml -n [netapp-acc or custom namespace]`
 
 +
 NOTE: To inspect the Astra Control Center operator logs, run the following command:

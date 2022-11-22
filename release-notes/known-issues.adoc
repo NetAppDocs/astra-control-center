@@ -28,7 +28,7 @@ The following known issues affect the current release:
 
 .Other issues
 * <<Managed clusters do not appear in NetApp Cloud Insights when connecting through a proxy>>
-* <<Cloud Insights integration fails after you upgrade Astra Control Center>>
+//* <<Cloud Insights integration fails after you upgrade Astra Control Center>>
 * <<App data management operations fail with Internal Service Error (500) when Astra Trident is offline>>
 
 == Restore of an app results in PV size larger than original PV
@@ -73,8 +73,11 @@ kubectl get cm telegraf-conf-rs -o yaml -n netapp-monitoring | sed '/\[\[outputs
 kubectl get pods -n netapp-monitoring --no-headers=true | grep 'telegraf-ds\|telegraf-rs' | awk '{print $1}' | xargs kubectl delete -n netapp-monitoring pod
 ----
 
+////
 == Cloud Insights integration fails after you upgrade Astra Control Center
 When you upgrade an Astra Control Center system to version 22.11.0, if it is connected to Cloud Insights, Cloud Insights functionality might stop working. As a workaround, disconnect Astra Control Center from Cloud Insights and then re-connect. For instructions, see link:../use/monitor-protect.html#connect-to-cloud-insights[Connect to Cloud Insights^].
+
+////
 
 == App data management operations fail with Internal Service Error (500) when Astra Trident is offline
 //DOC-3903/ASTRA-13162/PI4/PI5

@@ -49,7 +49,7 @@ The *Account* > *License* page displays the license information, expiration date
 
 //AD AH review q2
 
-NOTE: If you have an evaluation license, be sure you store your account ID to avoid data loss in the event of Astra Control Center failure if you are not sending ASUPs.
+NOTE: If you have an evaluation license and are not sending data to AutoSupport, be sure that you store your account ID to avoid data loss in the event of Astra Control Center failure.
 
 == Prepare your environment for cluster management using Astra Control
 
@@ -64,7 +64,7 @@ You should ensure that the following prerequisite conditions are met before you 
 NOTE: You can https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html#choose-the-deployment-method[deploy Astra Trident^] using either Trident operator (manually or using Helm chart) or `tridentctl`. Prior to installing or upgrading Astra Trident, review the https://docs.netapp.com/us-en/trident/trident-get-started/requirements.html[supported frontends, backends, and host configurations^].
 
 ** *Trident storage backend configured*: At least one Astra Trident storage backend must be https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend[configured^] on the cluster.
-** *Trident storage classes configured*: At least one Astra Trident storage class must be https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[configured^] on the cluster. If a default storage class is configured, ensure that only one storage class has that annotation.
+** *Trident storage classes configured*: At least one Astra Trident storage class must be https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[configured^] on the cluster. If a default storage class is configured, ensure that it is the only storage class that has the default annotation.
 ** *Astra Trident volume snapshot controller and volume snapshot class installed and configured*: The volume snapshot controller must be https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[installed^] so that snapshots can be created in Astra Control. At least one Astra Trident `VolumeSnapshotClass` has been https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#step-1-set-up-a-volumesnapshotclass[set up^] by an administrator.
 * *Kubeconfig accessible*: You have access to the https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[cluster kubeconfig^] that includes only one context element.
 * *ONTAP credentials*: You need ONTAP credentials and a superuser and user ID set on the backing ONTAP system to back up and restore apps with Astra Control Center. 
@@ -113,7 +113,7 @@ NOTE: If Trident is not installed or the installed version is not the latest, yo
 kubectl get pods -n trident
 ----
 
-. Check if the storage classes are using the supported Trident drivers. The provisioner name should be `csi.trident.netapp.io`. See the following example:
+. Determine if the storage classes are using the supported Trident drivers. The provisioner name should be `csi.trident.netapp.io`. See the following example:
 +
 [source,console]
 ----
@@ -123,21 +123,29 @@ kubectl get sc
 Sample response:
 +
 ----
-NAME                   PROVISIONER                    RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
-ontap-gold (default)   csi.trident.netapp.io          Delete          Immediate           true                   5d23h
+NAME                  PROVISIONER            RECLAIMPOLICY  VOLUMEBINDINGMODE  ALLOWVOLUMEEXPANSION  AGE
+ontap-gold (default)  csi.trident.netapp.io  Delete         Immediate          true                  5d23h
 ----
 
-=== Create an admin-role kubeconfig
+=== Create a limited cluster role kubeconfig
 
-You can optionally create an Admin role. You created a default Owner role when you set up Astra Control Center. 
+You can optionally create a limited administrator role for Astra Control Center. This is not a required procedure for Astra Control Center setup. This procedure helps create a separate kubeconfig that limits Astra Control permissions on the clusters it manages. 
 
-Ensure that you have the following on your machine before you do the steps:
+.What you'll need
+
+Ensure that you have the following for the cluster you intend to manage before completing the procedure steps:
 
 * kubectl v1.23 or later installed
-* An active kubeconfig with cluster admin rights for the active context
+* kubectl access to the cluster that you intend to add and manage with Astra Control Center
++
+NOTE: For this procedure, you do not need kubectl access to the cluster that is running Astra Control Center.
+
+* An active kubeconfig for the cluster you intend to manage with cluster admin rights for the active context
 
 .Steps
-. Create a service account as follows:
+[%collapsible]
+====
+. Create a service account:
 .. Create a service account file called `astracontrol-service-account.yaml`.
 +
 Adjust the name and namespace as needed. If changes are made here, you should apply the same changes in the following steps.
@@ -163,7 +171,126 @@ metadata:
 kubectl apply -f astracontrol-service-account.yaml
 ----
 
-. Grant cluster admin permissions as follows:
+. Create a limited cluster role with the minimum permissions necessary for a cluster to be managed by Astra Control:
+.. Create a `ClusterRole` file called `astra-admin-account.yaml`.
++
+Adjust the name and namespace as needed. If changes are made here, you should apply the same changes in the following steps.
++
+[source]
+[subs="specialcharacters,quotes"]
+----
+*astra-admin-account.yaml*
+----
++
+[source,yaml]
+----
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: astra-admin-account
+rules:
+ 
+# Get, List, Create, and Update all resources
+# Necessary to backup and restore all resources in an app
+- apiGroups:
+  - '*'
+  resources:
+  - '*'
+  verbs:
+  - get
+  - list
+  - create
+  - patch
+ 
+# Delete Resources
+# Necessary for in-place restore and AppMirror failover
+- apiGroups:
+  - ""
+  - apps
+  - autoscaling
+  - batch
+  - crd.projectcalico.org
+  - extensions
+  - networking.k8s.io
+  - policy
+  - rbac.authorization.k8s.io
+  - snapshot.storage.k8s.io
+  - trident.netapp.io
+  resources:
+  - configmaps
+  - cronjobs
+  - daemonsets
+  - deployments
+  - horizontalpodautoscalers
+  - ingresses
+  - jobs
+  - namespaces
+  - networkpolicies
+  - persistentvolumeclaims
+  - poddisruptionbudgets
+  - pods
+  - podtemplates
+  - podsecuritypolicies
+  - replicasets
+  - replicationcontrollers
+  - replicationcontrollers/scale
+  - rolebindings
+  - roles
+  - secrets
+  - serviceaccounts
+  - services
+  - statefulsets
+  - tridentmirrorrelationships
+  - tridentsnapshotinfos
+  - volumesnapshots
+  - volumesnapshotcontents
+  verbs:
+  - delete
+ 
+# Watch resources
+# Necessary to monitor progress
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - replicationcontrollers
+  - replicationcontrollers/scale
+  verbs:
+  - watch
+ 
+# Update resources
+- apiGroups:
+  - ""
+  - build.openshift.io
+  - image.openshift.io
+  resources:
+  - builds/details
+  - replicationcontrollers
+  - replicationcontrollers/scale
+  - imagestreams/layers
+  - imagestreamtags
+  - imagetags
+  verbs:
+  - update
+ 
+# Use PodSecurityPolicies
+- apiGroups:
+  - extensions
+  - policy
+  resources:
+  - podsecuritypolicies
+  verbs:
+  - use
+----
+
+.. Apply the cluster role:
++
+[source,console]
+----
+kubectl apply -f astra-admin-account.yaml
+----
+
+. Create the cluster role binding for the cluster role to the service account:
 .. Create a `ClusterRoleBinding` file called `astracontrol-clusterrolebinding.yaml`.
 +
 Adjust any names and namespaces modified when creating the service account as needed.
@@ -183,7 +310,7 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: cluster-admin
+  name: astra-admin-account
 subjects:
 - kind: ServiceAccount
   name: astracontrol-service-account
@@ -289,12 +416,13 @@ rm ${KUBECONFIG_FILE}.tmp
 ----
 source create-kubeconfig.sh
 ----
-. (Optional) Rename the kubeconfig to a meaningful name for your cluster. Protect your cluster credential.
+. (Optional) Rename the kubeconfig to a meaningful name for your cluster.
 +
 ----
-chmod 700 create-kubeconfig.sh
-mv kubeconfig-sa.txt YOUR_CLUSTER_NAME_kubeconfig
+mv kubeconfig-sa YOUR_CLUSTER_NAME_kubeconfig
 ----
+====
+// End snippet
 
 === What's next?
 
@@ -312,26 +440,26 @@ TIP: We recommend that Astra Control Center manage the cluster it is deployed on
 * Before you add a cluster, review and perform the necessary <<Prepare your environment for cluster management using Astra Control,prerequisite tasks>>.
 
 .Steps
-. Navigate from the Dashboard or the Clusters menu:
+. Navigate from either the Dashboard or the Clusters menu:
 * From *Dashboard* in the Resource Summary, select *Add* from the Clusters pane.
 * In the left navigation area, select *Clusters* and then select *Add Cluster* from the Clusters page.
 . In the *Add Cluster* window that opens, upload a `kubeconfig.yaml` file or paste the contents of a `kubeconfig.yaml` file.
 +
 NOTE: The `kubeconfig.yaml` file should include *only the cluster credential for one cluster*.
 +
-IMPORTANT: If you create your own `kubeconfig` file, you should define only *one* context element in it. Refer to https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[Kubernetes documentation^] for information about creating `kubeconfig` files.
+IMPORTANT: If you create your own `kubeconfig` file, you should define only *one* context element in it. Refer to https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[Kubernetes documentation^] for information about creating `kubeconfig` files. If you created a kubeconfig for a limited cluster role using <<Create a limited cluster role kubeconfig,the process above>>, be sure to upload or paste that kubeconfig in this step.
 
 . Provide a credential name. By default, the credential name is auto-populated as the name of the cluster.
 . Select *Next*.
-. Select the default storage class to be used for this Kubernetes cluster, and select *Review*.
+. Select the default storage class to be used for this Kubernetes cluster, and select *Next*.
 +
 NOTE: You should select a Trident storage class backed by ONTAP storage.
 
-. Review the information, and if everything looks good, select *Add cluster*.
+. Review the information, and if everything looks good, select *Add*.
 
 .Result
 
-The cluster enters *Discovering* state and then changes to *Healthy*. You have successfully added a Kubernetes cluster and are now managing it in Astra Control Center.
+The cluster enters *Discovering* state and then changes to *Healthy*. You are now managing the cluster with Astra Control Center.
 
 IMPORTANT: After you add a cluster to be managed in Astra Control Center, it might take a few minutes to deploy the monitoring operator. Until then, the Notification icon turns red and logs a *Monitoring Agent Status Check Failed* event. You can ignore this, because the issue resolves when Astra Control Center obtains the correct status. If the issue does not resolve in a few minutes, go to the cluster, and run `oc get pods -n netapp-monitoring` as the starting point. You will need to look into the monitoring operator logs to debug the problem.
 
@@ -357,7 +485,7 @@ NOTE: The user whose credentials you enter here must have the `ontapi` user logi
 
 
 .Result
-The backend appears in the `available` state in the list with summary information.
+The backend appears in the `Healthy` state in the list with summary information.
 
 NOTE: You might need to refresh the page for the backend to appear.
 
@@ -377,10 +505,10 @@ You don't need a bucket in Astra Control if you are cloning your application con
 ** NetApp StorageGRID S3
 ** Microsoft Azure
 ** Generic S3
-+
+
+
 NOTE: Amazon Web Services (AWS) and Google Cloud Platform (GCP) use the Generic S3 bucket type.
 
-+
 NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon's S3 support.
 
 .Steps
@@ -404,6 +532,8 @@ TIP: The bucket name and description appear as a backup location that you can ch
 * If you chose *Use existing*:
 ..  Select the existing credentials you want to use with the bucket.
 
+. Select `Add`.
++
 NOTE: When you add a bucket, Astra Control marks one bucket with the default bucket indicator. The first bucket that you create becomes the default bucket. As you add buckets, you can later decide to link:../use/manage-buckets.html#set-the-default-bucket[set another default bucket^].
 
 

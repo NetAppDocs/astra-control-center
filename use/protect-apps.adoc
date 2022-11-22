@@ -23,8 +23,6 @@ Protect all apps by taking snapshots and backups using an automated protection p
 `oc adm policy add-scc-to-group anyuid system:serviceaccounts:wordpress`
 `oc adm policy add-scc-to-user privileged -z default -n wordpress`
 
-NOTE: If you plan to add a second OpenShift operational environment as a managed compute resource, you need to ensure that the Astra Trident volume snapshot feature is enabled. To enable and test volume snapshots with Astra Trident, https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[see the official Astra Trident instructions^].
-
 You can do the following tasks related to protecting your app data:
 
 * <<Configure a protection policy>>
@@ -41,7 +39,7 @@ You can do the following tasks related to protecting your app data:
 
 == Configure a protection policy
 
-A protection policy protects an app by creating snapshots, backups, or both at a defined schedule. You can choose to create snapshots and backups hourly, daily, weekly, and monthly, and you can specify the number of copies to retain. As an example, a protection policy might create weekly backups and daily snapshots, and retain the backups and snapshots for one month. How often you create snapshots and backups and how long you retain them depends on the needs of your organization.
+A protection policy protects an app by creating snapshots, backups, or both at a defined schedule. You can choose to create snapshots and backups hourly, daily, weekly, and monthly, and you can specify the number of copies to retain.
 
 If you need backups or snapshots to run more frequently than once per hour, you can https://docs.netapp.com/us-en/astra-automation/workflows/workflows_before.html[use the Astra Control REST API to create snapshots and backups^].
 
@@ -56,6 +54,8 @@ If you need backups or snapshots to run more frequently than once per hour, you 
 . Define a protection schedule by choosing the number of snapshots and backups to keep hourly, daily, weekly, and monthly.
 +
 You can define the hourly, daily, weekly, and monthly schedules concurrently. A schedule won't turn active until you set a retention level.
++
+When you set a retention level for backups, you can choose the bucket where you'd like to store the backups.
 +
 The following example sets four protection schedules: hourly, daily, weekly, and monthly for snapshots and backups.
 +
