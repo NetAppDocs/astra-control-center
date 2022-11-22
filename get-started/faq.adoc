@@ -10,6 +10,7 @@ summary: This FAQ can help if you're just looking for a quick answer to a questi
 :icons: font
 :imagesdir: ../media/
 
+[.lead]
 This FAQ can help if you're just looking for a quick answer to a question.
 
 == Overview
@@ -23,7 +24,7 @@ The following sections provide answers to some additional questions that you mig
 
 Astra Control Center uses local authentication and a URL specific to each environment.
 
-For the URL, in a browser, enter the Fully Qualified Domain Name (FQDN) you set in the spec.astraAddress field in the astra_control_center_min.yaml custom resource definition (CRD) file when you installed Astra Control Center. The email is the value that you set in the spec.email field in the astra_control_center_min.yaml CRD.
+For the URL, in a browser, enter the Fully Qualified Domain Name (FQDN) you set in the spec.astraAddress field in the astra_control_center.yaml custom resource (CR) file when you installed Astra Control Center. The email is the value that you set in the spec.email field in the astra_control_center.yaml CR.
 
 == Licensing
 
@@ -33,27 +34,14 @@ You can easily change to a full license by obtaining the NetApp license file (NL
 
 *Steps*
 
-* From the left navigation, select *Account* > *License*.
-* Select *Add license*.
-* Browse to the license file you downloaded and select *Add*.
+. From the left navigation, select *Account* > *License*.
+. Select *Add license*.
+. Browse to the license file you downloaded and select *Add*.
 
 *I am using the Evaluation license. Can I still manage apps?*
 
 Yes, you can test out the managing apps functionality with the Evaluation license.
 
-// *How is the core consumption impacted with Astra Data Store clusters?*
-
-//When you start managing an app on a cluster, all of that cluster’s CPU units are included in the Astra Control Center license consumption. If the cluster has a licensed deployment of Astra Data Store, those CPU units are excluded from the Astra Control Center license consumption calculation.
-
-//NOTE: CPU units from Evaluation Deployments of Astra Data Store are not excluded from the Astra Control Center license consumption.
-
-//Consider the following example:
-
-//** *Configuration Example*: The example uses an Astra Control Center license of 100 cores and an Astra Data Store license of 100 cores. There is an Astra Data Store cluster consisting of 1 master and 7 worker nodes with only 4 worker nodes used for the Astra Data Store cluster. Each worker has 12 CPUs but only 9 are used for Astra Data Store cluster.
-
-//** Core deduction from the Astra Control Center license will be 48 cores when apps are managed.
-//** 2 x worker nodes did not count towards the Astra Data Store license. (12 x 3 = 36) 36 cores are deducted from the Astra Control Center license.
-//** 4 x worker nodes had 3 remaining cores that do not count towards the Astra Data Store license. ((12 - 9) * 4 = 12) 12 cores are deducted from the Astra Control Center license.
 
 
 == Registering Kubernetes clusters
@@ -102,13 +90,10 @@ If a managed app has pods in an unhealthy state, Astra Control can't create new 
 
 == Data management operations
 
-*There are snapshots in my account that I didn't create. Where did they come from?*
 
-In some situations, Astra Control will automatically create a snapshot as part of a backup, clone or restore process.
+*My application uses several PVs. Will Astra Control take snapshots and backups of these PVs?*
 
-*My application uses several PVs. Will Astra Control take snapshots and backups of all these PVCs?*
-
-Yes. A snapshot operation on an application by Astra Control includes snapshot of all the PVs that are bound to the application’s PVCs.
+Yes. A snapshot operation on an application by Astra Control includes snapshot of all the PVs that are bound to the application's PVCs.
 
 *Can I manage snapshots taken by Astra Control directly through a different interface or object storage?*
 

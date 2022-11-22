@@ -10,11 +10,31 @@ summary: To upgrade Astra Control Center, you'll download the bundle and upgrade
 :icons: font
 :imagesdir: ../media/get-started/
 
-To upgrade Astra Control Center, download the installation bundle from the NetApp Support Site and complete these instructions to upgrade the Astra Control Center components in your environment. You can use this procedure to upgrade Astra Control Center in internet-connected or air-gapped environments.
+[.lead]
+To upgrade Astra Control Center, download the installation bundle from the NetApp Support Site and complete these instructions. You can use this procedure to upgrade Astra Control Center in internet-connected or air-gapped environments.
 
 .What you'll need
-* link:../get-started/requirements.html[Before you begin upgrade, ensure your environment still meets the minimum requirements for Astra Control Center deployment].
-* Ensure all cluster operators are in a healthy state and available.
+* Before you upgrade, refer to link:../get-started/requirements.html#operational-environment-requirements[Operational environment requirements^] to ensure your environment still meets the minimum requirements for Astra Control Center deployment. Your environment should have the following:
+
+** A supported Astra Trident version
+To determine the version you are running, run the following command against your existing Astra Control Center:
++
+----
+../../trident-installer/tridentctl -n trident version
+----
+Refer to https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html#determine-the-version-to-upgrade-to[Astra Trident documentation] to upgrade from an older version.
++
+WARNING: You must upgrade to Astra Trident 22.10 *PRIOR* to upgrading to Kubernetes 1.25.
+
+** A supported Kubernetes distribution
+To determine the version you are running, run the following command against your existing Astra Control Center: `kubectl get nodes -o wide`
+** Sufficient cluster resources
+To determine cluster resources, run the following command in your existing Astra Control Center cluster: `kubectl describe node <node name>`
+** A registry you can use to push and upload Astra Control Center images 
+** A default storage class
+To determine your default storage class, run the following command against your existing Astra Control Center: `kubectl get storageclass`
+
+* (OpenShift only) Ensure all cluster operators are in a healthy state and available.
 +
 ----
 kubectl get clusteroperators
@@ -26,37 +46,33 @@ kubectl get clusteroperators
 kubectl get apiservices
 ----
 
-* Log out of your Astra Control Center.
+* Log out of your Astra Control Center UI before you begin the upgrade.
 
 .About this task
 The Astra Control Center upgrade process guides you through the following high-level steps:
 
 * <<Download the Astra Control Center bundle>>
-* <<Unpack the bundle and change directory>>
+* <<Unpack the bundle>>
 * <<Add the images to your local registry>>
 * <<Install the updated Astra Control Center operator>>
 * <<Upgrade Astra Control Center>>
-* <<Upgrade third-party services (Optional)>>
 * <<Verify system status>>
-* <<Set up ingress for load balancing>>
 
-
-IMPORTANT: Do not execute the following command during the entirety of the upgrade process to avoid deleting all Astra Control Center pods: `kubectl delete -f astra_control_center_operator_deploy.yaml`
+IMPORTANT: Do not delete the Astra Control Center operator (for example, `kubectl delete -f astra_control_center_operator_deploy.yaml`) at any time during the Astra Control Center upgrade or operation to avoid deleting pods.
 
 TIP: Perform upgrades in a maintenance window when schedules, backups, and snapshots are not running.
 
-NOTE: Podman commands can be used in place of Docker commands if you are using Red Hat’s Podman instead of Docker Engine.
-
 == Download the Astra Control Center bundle
 
-. Download the Astra Control Center upgrade bundle (`astra-control-center-[version].tar.gz`) from the https:mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
-. (Optional) Use the following command to verify the signature of the bundle:
+. Download the Astra Control Center bundle from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^]. The file name is similar to the following: `astra-control-center-[version].tar.gz`.
+
+. (Optional) Verify the signature of the bundle:
 +
 ----
 openssl dgst -sha256 -verify AstraControlCenter-public.pub -signature astra-control-center-[version].tar.gz.sig astra-control-center-[version].tar.gz
 ----
 
-== Unpack the bundle and change directory
+== Unpack the bundle
 
 . Extract the images:
 +
@@ -64,9 +80,20 @@ openssl dgst -sha256 -verify AstraControlCenter-public.pub -signature astra-cont
 tar -vxzf astra-control-center-[version].tar.gz
 ----
 
+== Verify that you have the NetApp Astra kubectl plugin installed
+The NetApp Astra kubectl command line plugin saves time when performing common tasks associated with deploying and upgrading Astra Control Center.
+
+. Use the following command to determine if you have the plug-in installed:
++
+----
+kubectl astra
+----
+
+This command should provide the kubectl plugin help. If the command returns an error, install the plugin using these link:../get-started/install_acc.html#install-the-netapp-astra-kubectl-plugin[instructions].
+
 == Add the images to your local registry
 
-. Complete the appropriate step sequence for your container engine: 
+. Complete the appropriate step sequence for your container engine:
 
 // start tabbed block for docker and podman approaches
 
@@ -75,37 +102,38 @@ tar -vxzf astra-control-center-[version].tar.gz
 
 .Docker
 --
-. Change to the Astra directory:
+.. Change to the `acc` directory extracted from the tar bundle:
 +
-[source,sh]
+Example:
 ----
-cd acc
+cd ../acc
 ----
-. [[substep_image_local_registry_push]]Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
+.. Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
 +
 
-* Replace BUNDLE_FILE with the name of the Astra Control bundle file (for example, `acc.manifest.yaml`).
-* Replace MY_REGISTRY with the URL of the Docker repository.
-* Replace MY_REGISTRY_USER with the user name.
-* Replace MY_REGISTRY_TOKEN with an authorized token for the registry.
+* Replace <BUNDLE_FILE> with the name of the Astra Control bundle file (`acc.manifest.yaml`).
+* Replace <MY_FULL_REGISTRY_PATH> with the URL of the Docker repository; for example, https://exampledownloads.jfrog.io/docker-astra-control/v1/.
+* Replace <MY_REGISTRY_USER> with the user name.
+* Replace <MY_REGISTRY_TOKEN> with an authorized token for the registry.
 +
-[source,sh]
+[source,console]
 ----
-kubectl astra packages push-images -m BUNDLE_FILE -r MY_REGISTRY -u MY_REGISTRY_USER -p MY_REGISTRY_TOKEN
+kubectl astra packages push-images -m <BUNDLE_FILE> -r <MY_FULL_REGISTRY_PATH> -u <MY_REGISTRY_USER> -p <MY_REGISTRY_TOKEN>
 ----
 --
 
 .Podman
 --
-. Log in to your registry:
+.. Log in to your registry:
 +
-[source,sh]
+[source,console]
 ----
-podman login [your_registry_path]
+podman login <MY_FULL_REGISTRY_PATH>
 ----
-. Run the following script, making the <YOUR_REGISTRY> substitution as noted in the comments:
+
+.. Run the following script, making the <YOUR_REGISTRY> substitution as noted in the comments:
 +
-[source,sh]
+[source,console]
 ----
 # You need to be at the root of the tarball.
 # You should see these files to confirm correct location:
@@ -115,18 +143,18 @@ podman login [your_registry_path]
 # Replace <YOUR_REGISTRY> with your own registry (e.g registry.customer.com or registry.customer.com/testing, etc..)
 export REGISTRY=<YOUR_REGISTRY>
 export PACKAGENAME=acc
-export PACKAGEVERSION=22.08.1-26
+export PACKAGEVERSION=22.11.0-82
 export DIRECTORYNAME=acc
 for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do
   # Load to local cache
   astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image(s): //')
- 
+  
   # Remove path and keep imageName.
   astraImageNoPath=$(echo ${astraImage} | sed 's:.*/::')
- 
+
   # Tag with local image repo.
   podman tag ${astraImage} ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
- 
+
   # Push to the local repo.
   podman push ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
 done
@@ -151,15 +179,15 @@ cd manifests
 vim astra_control_center_operator_deploy.yaml
 ----
 
-.. If you use a registry that requires authentication, replace the default line of `imagePullSecrets: []` with the following:
+.. If you use a registry that requires authentication, replace or edit the default line of `imagePullSecrets: []` with the following:
 +
 ----
 imagePullSecrets:
-- name: <name_of_secret_with_creds_to_local_registry>
+- name: <astra-registry-cred_or_custom_name_of_secret>
 ----
 
-.. Change `[your_registry_path]` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<substep_image_local_registry_push,previous step>>.
-.. Change `[your_registry_path]` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in a <<substep_image_local_registry_push,previous step>>.
+.. Change `[your_registry_path]` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<Add the images to your local registry,previous step>>.
+.. Change `[your_registry_path]` for the `acc-operator` image to the registry path where you pushed the images in a <<Add the images to your local registry,previous step>>.
 //DOC-4167/ASTRACTL-16917/PI5
 .. Add the following values to the `env` section:
 +
@@ -182,6 +210,8 @@ spec:
   selector:
     matchLabels:
       control-plane: controller-manager
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -202,8 +232,6 @@ spec:
         - --health-probe-bind-address=:8081
         - --metrics-bind-address=127.0.0.1:8080
         - --leader-elect
-        command:
-        - /manager
         env:
         - name: ACCOP_LOG_LEVEL
           value: "2"
@@ -211,7 +239,32 @@ spec:
           *value: 300m*
         *image: [your_registry_path]/acc-operator:[version x.y.z]*
         imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8081
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        name: manager
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 8081
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        resources:
+          limits:
+            cpu: 300m
+            memory: 750Mi
+          requests:
+            cpu: 100m
+            memory: 75Mi
+        securityContext:
+          allowPrivilegeEscalation: false
       *imagePullSecrets: []*
+      securityContext:
+        runAsUser: 65532
+      terminationGracePeriodSeconds: 10
 ----
 
 . Install the updated Astra Control Center operator:
@@ -245,13 +298,34 @@ kubectl get pods -n netapp-acc-operator
 
 == Upgrade Astra Control Center
 
-. Edit the Astra Control Center custom resource (CR) (`astra_control_center_min.yaml`) and change the Astra version (`astraVersion` inside of `Spec`) number to the latest:
+. Edit the Astra Control Center custom resource (CR):
 +
 ----
-kubectl edit acc -n [netapp-acc or custom namespace]
+kubectl edit AstraControlCenter -n [netapp-acc or custom namespace]
 ----
+
+. Change the Astra version number (`astraVersion` inside of `Spec`) to the version you are upgrading to:
 +
-NOTE: Your registry path must match the registry path where you pushed the images in a <<substep_image_local_registry_push,previous step>>.
+[subs=+quotes]
+----
+spec:
+  accountName: "Example"
+  *astraVersion: "[Version number]"*
+----
+
+. Verify that your image registry path matches the registry path you pushed the images to in a <<Add the images to your local registry,previous step>>. Update `imageRegistry` inside of `Spec` if the registry has changed since your last installation.
++
+----
+  imageRegistry:
+    name: "[your_registry_path]"
+----
+
+. Add the following to your `CRDs` configuration inside of `Spec`:
++
+----
+crds:
+  shouldUpgrade: true
+----
 
 . Add the following lines within `additionalValues` inside of `Spec` in the Astra Control Center CR:
 +
@@ -263,202 +337,37 @@ additionalValues:
         failureThreshold: 600
 ----
 
-. Do one of the following:
-.. If you don't have your own IngressController or ingress and have been using the Astra Control Center with its Traefik gateway as a LoadBalancer type service and would like to continue with that setup, specify another field `ingressType` (if not already present) and set it to `AccTraefik`.
 +
-----
-ingressType: AccTraefik
-----
-.. If you want to switch to the default Astra Control Center generic ingress deployment, provide your own IngressController/Ingress setup (with TLS termination, etc.), open up a route to Astra Control Center, and set `ingressType` to `Generic`.
-+
-----
-ingressType: Generic
-----
-+
-TIP: If you omit the field, the process becomes the generic deployment. If you don't want the generic deployment, be sure to add the field.
+After you save and exit the file editor, the changes will be applied and the upgrade will begin.
 
 . (Optional) Verify that the pods terminate and become available again:
 +
 ----
-watch kubectl get po -n [netapp-acc or custom namespace]
+watch kubectl get pods -n [netapp-acc or custom namespace]
 ----
 
-. Wait for the Astra status conditions to indicate that the upgrade is complete and ready:
+. Wait for the Astra status conditions to indicate that the upgrade is complete and ready (`True`):
 +
 ----
-kubectl get -o yaml -n [netapp-acc or custom namespace] astracontrolcenters.astra.netapp.io astra
+kubectl get AstraControlCenter -n [netapp-acc or custom namespace]
 ----
 +
 Response:
 +
 ----
-conditions:
-  - lastTransitionTime: "2021-10-25T18:49:26Z"
-    message: Astra is deployed
-    reason: Complete
-    status: "True"
-    type: Ready
-  - lastTransitionTime: "2021-10-25T18:49:26Z"
-    message: Upgrading succeeded.
-    reason: Complete
-    status: "False"
-    type: Upgrading
+NAME    UUID                                      VERSION     ADDRESS         READY
+astra   9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f  22.11.0-24  10.111.111.111  True
 ----
-
-. Log back in and verify that all managed clusters and apps are still present and protected.
-. If the operator did not update the Cert-manager, upgrade third-party services, next.
-
-
-== Upgrade third-party services (Optional)
-The third-party services Traefik and Cert-manager are not upgraded during earlier upgrade steps. You can optionally upgrade them using the procedure described here or retain existing service versions if your system requires it.
-
-* *Traefik*: By default, Astra Control Center manages the lifecycle of the Traefik deployment.  Setting `externalTraefik` to `false` (default) indicates that no external Traefik exists in the system and and Traefik is being installed and managed by Astra Control Center. In this case,  `externalTraefik` is set to `false`.
 +
-On the other hand, if you have your own Traefik deployment, set `externalTraefik` to `true`. In this case, you maintain the deployment and Astra Control Center will not upgrade the CRDs, unless `shouldUpgrade` is set to `true`.
+NOTE: To monitor upgrade status during the operation, run the following command: `kubectl get AstraControlCenter -o yaml -n [netapp-acc or custom namespace]`
 
-* *Cert-manager*: By default, Astra Control Center installs the cert-manager (and CRDs) unless you set `externalCertManager` to `true`. Set `shouldUpgrade` to `true` to have Astra Control Center upgrade the CRDs.
-
-Traefik is upgraded if any of the following conditions are met:
-
-* externalTraefik: false
-* externalTraefik: true AND shouldUpgrade: true.
-
-.Steps
-
-. Edit the `acc` CR:
 +
-----
-kubectl edit acc -n [netapp-acc or custom namespace]
-----
-
-. Change the `externalTraefik` field and the `shouldUpgrade` field to either `true` or `false` as needed.
-+
-----
-crds:
-    externalTraefik: false
-    externalCertManager: false
-    shouldUpgrade: false
-----
-
-
-
-
+NOTE: To inspect the Astra Control Center operator logs, run the following command:
+`kubectl logs deploy/acc-operator-controller-manager -n netapp-acc-operator -c manager -f`
 
 == Verify system status
 
 . Log in to Astra Control Center.
+. Verify that the version has been upgraded. See the *Support* page in the UI.
 . Verify that all your managed clusters and apps are still present and protected.
 
-== Set up ingress for load balancing
-
-You can set up a Kubernetes ingress object that manages external access to the services, such as load balancing in a cluster.
-
-* Default upgrade uses the generic ingress deployment. In this case, you will also need to set up an ingress controller or ingress resource.
-
-* If you don't want an ingress controller and want to retain what you already have, set `ingressType` to `AccTraefik`.
-
-NOTE: For additional details about the service type of "LoadBalancer" and ingress, see link:../get-started/requirements.html[Requirements].
-
-The steps differ depending on the type of ingress controller you use:
-
-* Nginx ingress controller
-* OpenShift ingress controller
-
-.What you'll need
-
-* In the CR spec,
-** If `crd.externalTraefik` is present, it should be set to `false` OR
-** If `crd.externalTraefik` is `true`, `crd.shouldUpgrade` should also be `true`.
-
-* The required https://kubernetes.io/docs/concepts/services-networking/ingress-controllers[ingress controller] should already be deployed.
-* The https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class[ingress class] corresponding to the ingress controller should already be created.
-* You are using Kubernetes versions between and including v1.19 and v1.21.
-
-.Steps for Nginx ingress controller
-
-. Use the existing secret `secure-testing-cert` or create a secret of type http://kubernetes.io/tls[`kubernetes.io/tls`] for a TLS private key and certificate in `netapp-acc` (or custom-named) namespace as described in https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets[TLS secrets].
-. Deploy an ingress resource in `netapp-acc` (or custom-named) namespace for either a deprecated or a new schema:
-.. For a deprecated schema, follow this sample:
-
-+
-----
-apiVersion: extensions/v1beta1
-kind: IngressClass
-metadata:
-  name: ingress-acc
-  namespace: [netapp-acc or custom namespace]
-  annotations:
-    kubernetes.io/ingress.class: nginx
-spec:
-  tls:
-  - hosts:
-    - <ACC address>
-    secretName: [tls secret name]
-  rules:
-  - host: [ACC address]
-    http:
-      paths:
-      - backend:
-        serviceName: traefik
-        servicePort: 80
-        pathType: ImplementationSpecific
-----
-
-.. For a new schema, follow this example:
-
-+
-----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: netapp-acc-ingress
-  namespace: [netapp-acc or custom namespace]
-spec:
-  ingressClassName: [class name for nginx controller]
-  tls:
-  - hosts:
-    - <ACC address>
-    secretName: [tls secret name]
-  rules:
-  - host: <ACC address>
-    http:
-      paths:
-        - path:
-          backend:
-            service:
-              name: traefik
-              port:
-                number: 80
-          pathType: ImplementationSpecific
-----
-
-.Steps for OpenShift ingress controller
-
-. Procure your certificate and get the key, certificate, and CA files ready for use by the OpenShift route.
-. Create the OpenShift route:
-+
-----
-oc create route edge --service=traefik
---port=web -n [netapp-acc or custom namespace]
---insecure-policy=Redirect --hostname=<ACC address>
---cert=cert.pem --key=key.pem
-----
-
-=== Verify ingress set up
-
-You can verify the ingress set up before you continue.
-
-. Ensure that Traefik has changed to `clusterIP` from Loadbalancer:
-+
-----
-kubectl get service traefik -n [netapp-acc or custom namespace]
-----
-
-. Verify routes in Traefik:
-+
-----
-Kubectl get ingressroute ingressroutetls -n [netapp-acc or custom namespace]
--o yaml | grep "Host("
-----
-+
-NOTE: The result should be empty.

@@ -37,14 +37,30 @@ Using Astra Control, you can do the following tasks related to replicating appli
 * <<Fail back applications to the original source cluster>>
 * <<Delete an application replication relationship>>
 
-
 == Replication prerequisites
 
-See the link:../get-started/requirements.html#replication-prerequisites[replication prerequisites] before you begin.
+Astra Control application replication requires that the following prerequisites must be met before you begin:
+
+* To achieve seamless disaster recovery, we recommend that you deploy Astra Control Center in a third fault domain or secondary site.
+* The app's host Kubernetes cluster and a destination Kubernetes cluster must be managed along with their ONTAP clusters, ideally at different failure domains or sites.
+* ONTAP clusters and the host SVM must be paired. See https://docs.netapp.com/us-en/ontap-sm-classic/peering/index.html[Cluster and SVM peering overview^].
+* The paired remote SVM must be available to Astra Trident on the destination cluster.
+* Astra Trident version 22.07 or greater must exist on both the source and destination ONTAP clusters.
+//* The `replicationPolicy:` key must exist in the Astra Trident mirror relationship CRD on Astra Control 22.07.
+* ONTAP SnapMirror asynchronous licenses using the Data Protection bundle must be enabled on both the source and destination ONTAP clusters. See https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html[SnapMirror licensing overview in ONTAP^].
+* When you add an ONTAP storage backend to Astra Control Center, apply user credentials with the "admin" role, which has access methods `http` and `ontapi` enabled on both ONTAP source and destination clusters. See https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts in ONTAP documentation^] for more information.
+* Both source and destination Kubernetes clusters and ONTAP clusters must be managed by Astra Control.
++
+NOTE: You can simultaneously replicate a different app (running on the other cluster or site) in the opposite direction. For example, Apps A, B, C can be replicated from Datacenter 1 to Datacenter 2; and Apps X, Y, Z can be replicated from Datacenter 2 to Datacenter 1.
+
+* *Astra Trident / ONTAP configuration*: Astra Control Center requires that a storage class be created and set as the default storage class. Astra Control Center supports the following ONTAP drivers provided by Astra Trident for replication:
+** ontap-nas
+** ontap-nas-flexgroup
+** ontap-san
 
 
 
-
+Learn how to link:../use/replicate_snapmirror.html[replicate apps to a remote system using SnapMirror technology^].
 
 == Set up a replication relationship
 
@@ -64,12 +80,13 @@ Setting up a replication relationship involves the following that make up the re
 
 . Enter or select the following information:
 +
-* Destination cluster
+* *Destination cluster*: Enter a destination cluster that is different from the source.  
 * *Destination storage class*: Select or enter the storage class that uses the paired SVM on the destination ONTAP cluster.
 * *Replication type*: "Asynchronous" is currently the only replication type available. 
-* *Destination namespace*: Enter a new or existing destination namespace for the destination cluster.
-+
-NOTE: Any conflicting resources in the selected namespace will be overwritten. 
+* *Destination namespace*: Enter new or existing destination namespaces for the destination cluster.
+
+
+* (Optional) Add additional namespaces by selecting *Add namespace* and choosing the namespace from the drop-down list.
 
 * *Replication frequency*: Set how often you want Astra Control to take a Snapshot and replicate it to its destination.
 * *Offset*: Set the number of minutes from the top of the hour that you want Astra Control to take a Snapshot. You might want to use an offset so that it doesn't coincide with other scheduled operations. For example, if you want to take the Snapshot every 5 minutes starting at 10:02, enter "02" as the offset minutes. The result would be 10:02, 10:07, 10:12, etc.
@@ -101,7 +118,7 @@ The Data Protection page shows the replication relationship state and status:
 For example:
 Normal | Established
 
-Learn more about replication states and status below.
+Learn more about replication states and status at the end of this topic.
 
 == Bring a replicated app online on the destination cluster (fail over)
 

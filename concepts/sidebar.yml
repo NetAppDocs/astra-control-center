@@ -1,8 +1,6 @@
 section: concepts
 title: Concepts
 entries:
-  - title: Learn about Astra Control
-    url: /concepts/intro.html
   - title: Architecture and components
     url: /concepts/architecture.html
   - title: Data protection
@@ -17,3 +15,5 @@ entries:
     url: /concepts/choose-class-and-size.html
   - title: User roles and namespaces
     url: /concepts/user-roles-namespaces.html
+  - title: Pod security
+    url: /concepts/understand-pod-security.html

@@ -1,5 +1,5 @@
 section: use
-title: Use Astra
+title: Use Astra Control Center
 entries:
   - title: Start managing apps
     url: /use/manage-apps.html
@@ -30,10 +30,14 @@ entries:
         url: /use/view-apps.html
   - title: Manage your account
     entries:
-      - title: Manage users
-        url: /use/manage-users.html
-      - title: Manage roles
-        url: /use/manage-roles.html
+      - title: Manage local users and roles
+        url: /use/manage-local-users-and-roles.html
+      - title: Manage remote authentication
+        url: /use/manage-remote-authentication.html
+      - title: Manage remote users and groups
+        url: /use/manage-remote-users-groups.html
+  #    - title: Manage roles
+   #     url: /use/manage-roles.html
       - title: Manage notifications
         url: /use/manage-notifications.html
       - title: Manage credentials
@@ -42,14 +46,16 @@ entries:
         url: /use/view-account-activity.html
       - title: Update an existing license
         url: /use/update-licenses.html
-      - title: Manage repository connections
-        url: /use/manage-connections.html
-      - title: Manage software packages
-        url: /use/manage-packages-acc.html
+  #    - title: Manage repository connections
+  #     url: /use/manage-connections.html
+  #   - title: Manage software packages
+  #     url: /use/manage-packages-acc.html
   - title: Manage buckets
     url: /use/manage-buckets.html
   - title: Manage the storage backend
     url: /use/manage-backend.html
+  - title: Monitor running tasks
+    url: /use/monitor-running-tasks.html
   - title: Monitor infrastructure with Cloud Insights and Fluentd
     url: /use/monitor-protect.html
   - title: Unmanage apps and clusters

@@ -10,6 +10,7 @@ summary: Learn about the available types of data protection in Astra Control Cen
 :icons: font
 :imagesdir: ../media/use/
 
+[.lead]
 You can create backups, clones, snapshots, and protection policies for your apps using Astra Control Center. Backing up your apps helps your services and associated data be as available as possible; during a disaster scenario, restoring from backup can ensure full recovery of an app and its associated data with minimal disruption. Backups, clones, and snapshots can help protect against common threats such as ransomware, accidental data loss, and environmental disasters. link:../concepts/data-protection.html[Learn about the available types of data protection in Astra Control Center, and when to use them].
 
 Additionally, you can replicate applications to a remote cluster in preparation for disaster recovery.

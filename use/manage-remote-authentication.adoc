@@ -1,0 +1,98 @@
+---
+sidebar: sidebar
+permalink: use/manage-remote-authentication.html
+keywords: enable ldap authentication, disable, ldap, authentication, configure, manage
+summary: Manage LDAP authentication on your Astra Control system.
+---
+
+= Manage remote authentication
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/use/
+
+[.lead]
+LDAP is an industry standard protocol for accessing distributed directory information and a popular choice for enterprise authentication. You can connect Astra Control Center to an LDAP server to perform authentication for selected Astra Control users.
+
+At a high level, the configuration involves integrating Astra with LDAP and defining the Astra Control users and groups corresponding to the LDAP definitions. You can use the Astra Control API or web UI to configure LDAP authentication and LDAP users and groups.
+
+== Add a certificate for LDAPS authentication
+Add the private TLS certificate for the LDAP server so that Astra Control Center can authenticate with the LDAP server when you use an LDAPS connection. You only need to do this once, or when the certificate you have installed expires.
+
+.Steps
+
+. Go to *Account*.
+. Select the *Certificates* tab.
+. Select *Add*.
+. Either upload the `.pem` file or paste the contents of the file from your clipboard.
+. Select the *Trusted* check box.
+. Select *Add certificate*.
+
+== Enable remote authentication
+You can enable LDAP authentication and configure the connection between Astra Control and the remote LDAP server.
+
+.What you'll need
+
+If you plan to use LDAPS, ensure that the private TLS certificate for the LDAP server is installed in Astra Control Center so that Astra Control Center can authenticate with the LDAP server. See <<Add a certificate for LDAPS authentication>> for instructions.
+
+.Steps
+
+. Go to *Account > Connections*.
+. In the *Remote Authentication* pane, select the configuration menu.
+. Select *Connect*.
+. Enter the server IP address, port, and preferred connection protocol (LDAP or LDAPS).
++
+NOTE: As a best practice, use LDAPS when connecting with the LDAP server. You need to install the LDAP server's private TLS certificate in Astra Control Center before you connect with LDAPS.
+
+. Enter the service account credentials in email format (administrator@example.com). Astra Control will use these credentials when connecting with the LDAP server.
+. In the *User Match* section, enter the base DN and an appropriate user search filter to use when retrieving user information from the LDAP server.
+. In the *Group Match* section, enter the group search base DN and an appropriate custom group search filter. 
++
+NOTE: Be sure to use the correct base Distinguished Name (DN) and an appropriate search filter for *User Match* and *Group Match*. The base DN tells Astra Control at what level of the directory tree to start the search, and the search filter limits the parts of the directory tree Astra Control searches from.
+
+. Select *Submit*.
+
+.Result
+The *Remote Authentication* pane status moves to *Pending*, and then to *Connected* when the connection to the LDAP server is established.
+
+== Disable remote authentication
+You can temporarily disable an active connection to the LDAP server.
+
+NOTE: When you disable a connection to an LDAP server, all settings are saved, and all remote users and groups that were added to Astra Control from that LDAP server are retained. You can reconnect to this LDAP server at any time.
+
+.Steps
+
+. Go to *Account > Connections*.
+. In the *Remote Authentication* pane, select the configuration menu.
+. Select *Disable*.
+
+.Result
+The *Remote Authentication* pane status moves to *Disabled*. All remote authentication settings, remote users, and remote groups are preserved, and you can re-enable the connection at any time.
+
+== Edit remote authentication settings
+If you have disabled the connection to the LDAP server or the *Remote Authentication* pane is in a "Connection error" state, you can edit the configuration settings.
+
+NOTE: You cannot edit the LDAP server URL or IP address when the *Remote Authentication* pane is in a "Disabled" state. You need to <<Disconnect remote authentication>> first.
+
+.Steps
+
+. Go to *Account > Connections*.
+. In the *Remote Authentication* pane, select the configuration menu.
+. Select *Edit*.
+. Make the necessary changes, and select *Edit*.
+
+== Disconnect remote authentication
+You can disconnect from an LDAP server and remove the configuration settings from Astra Control.
+
+CAUTION: When you disconnect from the LDAP server, all configuration settings for that LDAP server are removed from Astra Control, as well as any remote users and groups that were added from that LDAP server.
+
+.Steps
+
+. Go to *Account > Connections*.
+. In the *Remote Authentication* pane, select the configuration menu.
+. Select *Disconnect*.
+
+.Result
+The *Remote Authentication* pane status moves to *Disconnected*. Remote authentication settings, remote users, and remote groups are removed from Astra Control.
+
+
+
