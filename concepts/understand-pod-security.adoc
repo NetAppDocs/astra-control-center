@@ -28,7 +28,7 @@ pod-security.kubernetes.io/enforce: privileged
 When you install Astra Control Center on Kubernetes 1.23 or 1.24, several pod security policies are created during installation. Some of these are permanent, and some of them are created during certain operations and are removed once the operation is complete. Astra Control Center does not attempt to install PSPs when the host cluster is running Kubernetes 1.25 or later, as they are not supported on these versions.
 
 === PSPs created during installation
-During Astra Control Center installation, the Astra Control Center operator installs a custom pod security policy, a Role object, and a RoleBinding object to support the deployment of Astra Control Center services in the Astra Control Center namespace.
+During Astra Control Center installation, the Astra Control Center operator installs a custom pod security policy, a `Role` object, and a `RoleBinding` object to support the deployment of Astra Control Center services in the Astra Control Center namespace.
 
 The new policy and objects have the following attributes:
 
@@ -50,7 +50,7 @@ netapp-astra-deployment-rb               Role/netapp-astra-deployment-role      
 ----
 
 === PSPs created during backup operations
-During backup operations, Astra Control Center creates a dynamic pod security policy, a ClusterRole object, and a RoleBinding object. These support the backup process, which happens in a separate namespace.
+During backup operations, Astra Control Center creates a dynamic pod security policy, a `ClusterRole` object, and a `RoleBinding` object. These support the backup process, which happens in a separate namespace.
 
 The new policy and objects have the following attributes:
 
@@ -72,7 +72,7 @@ netapp-astra-backup   Role/netapp-astra-backup   62s
 ----
 
 === PSPs created during cluster management
-When you manage a cluster, Astra Control Center installs the netapp-monitoring operator in the managed cluster. This operator creates a pod security policy, a ClusterRole object, and a RoleBinding object to deploy telemetry services in the Astra Control Center namespace.
+When you manage a cluster, Astra Control Center installs the netapp-monitoring operator in the managed cluster. This operator creates a pod security policy, a `ClusterRole` object, and a `RoleBinding` object to deploy telemetry services in the Astra Control Center namespace.
 
 The new policy and objects have the following attributes:
 
