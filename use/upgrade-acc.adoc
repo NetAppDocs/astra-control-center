@@ -105,6 +105,7 @@ This command should provide the kubectl plugin help. If the command returns an e
 .. Change to the `acc` directory extracted from the tar bundle:
 +
 Example:
++
 ----
 cd ../acc
 ----
@@ -124,6 +125,11 @@ kubectl astra packages push-images -m <BUNDLE_FILE> -r <MY_FULL_REGISTRY_PATH> -
 
 .Podman
 --
+.. Change to the root directory of the tarball. You should see this file and directory:
++
+acc.manifest.bundle.yaml
+acc/
+
 .. Log in to your registry:
 +
 [source,console]
@@ -135,12 +141,6 @@ podman login <MY_FULL_REGISTRY_PATH>
 +
 [source,console]
 ----
-# You need to be at the root of the tarball.
-# You should see these files to confirm correct location:
-#   acc.manifest.yaml
-#   acc/
-
-# Replace <YOUR_REGISTRY> with your own registry (e.g registry.customer.com or registry.customer.com/testing, etc..)
 export REGISTRY=<YOUR_REGISTRY>
 export PACKAGENAME=acc
 export PACKAGEVERSION=22.11.0-82

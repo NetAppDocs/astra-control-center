@@ -32,7 +32,7 @@ oc get clusteroperators
 oc get apiservices
 ----
 
-* *FQDN address*: Create an FQDN address for Astra Control Center in your data center.
+* *FQDN address*: Obtain an FQDN address for Astra Control Center in your data center.
 * *Openshift Permissions*: Obtain the necessary permissions and access to the Red Hat OpenShift Container Platform to perform the installation steps described.
 * *cert-manager configured*: If a cert-manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps] so that Astra Control Center does not install its own cert-manager. By default, Astra Control Center installs its own cert-manager during installation.
 
@@ -112,6 +112,7 @@ cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 .. Change to the `acc` directory extracted from the tar bundle:
 +
 Example:
++
 ----
 cd ../acc
 ----
@@ -131,6 +132,11 @@ kubectl astra packages push-images -m <BUNDLE_FILE> -r <MY_FULL_REGISTRY_PATH> -
 
 .Podman
 --
+.. Change to the root directory of the tarball. You should see this file and directory:
++
+acc.manifest.bundle.yaml
+acc/
+
 .. Log in to your registry:
 +
 [source,console]
@@ -141,12 +147,6 @@ podman login <MY_FULL_REGISTRY_PATH>
 +
 [source,console]
 ----
-# You need to be at the root of the tarball.
-# You should see these files to confirm correct location:
-#   acc.manifest.yaml
-#   acc/
-
-# Replace <YOUR_REGISTRY> with your own registry (e.g registry.customer.com or registry.customer.com/testing, etc..)
 export REGISTRY=<YOUR_REGISTRY>
 export PACKAGENAME=acc
 export PACKAGEVERSION=22.11.0-82
@@ -178,8 +178,7 @@ done
 image:openshift_operatorhub.png[Astra Control Center install page]
 .. Log in to the OpenShift Container Platform UI.
 .. From the side menu, select *Operators > OperatorHub*.
-.. Select the NetApp Astra Control Center operator.
-.. Select *Install*.
+.. Search for and select the NetApp Astra Control Center operator.
 
 * From Red Hat Ecosystem Catalog:
 image:red_hat_catalog.png[Astra Control Center overview page]
@@ -205,24 +204,40 @@ NOTE: If you selected a manual approval strategy, you will be prompted to approv
 
 == Install Astra Control Center
 
-. From the console within the details view of the Astra Control Center operator, select `Create instance` in the Provided APIs section.
+. From the console within the *Astra Control Center* tab of the Astra Control Center operator, select *Create AstraControlCenter*.
 . Complete the `Create AstraControlCenter` form field:
 .. Keep or adjust the Astra Control Center name.
 .. Add labels for the Astra Control Center.
 .. Enable or disable Auto Support. Retaining Auto Support functionality is recommended.
-.. Enter the Astra Control Center address. Do not enter `http://` or `https://` in the address field.
+.. Enter the Astra Control Center FQDN or IP address. Do not enter `http://` or `https://` in the address field.
 .. Enter the Astra Control Center version; for example, 22.04.1.
 .. Enter an account name, email address, and admin last name.
 .. Choose a volume reclaim policy of `Retain`, `Recycle`, or `Delete`. The default value is `Retain`.
-.. Select the ingress type.
-.. If you use a registry that requires authentication, enter the secret.
+.. Select the ingress type:
++
+* *Generic* (`ingressType: "Generic"`) (Default)
++
+Use this option when you have another ingress controller in use or would prefer to use your own ingress controller. After Astra Control Center is deployed, you will need to configure the link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller] to expose Astra Control Center with a URL.
+
+* *AccTraefik* (`ingressType: "AccTraefik"`)
++
+Use this option when you would prefer not to configure an ingress controller. This deploys the Astra Control Center `traefik` gateway as a Kubernetes LoadBalancer type service.
++
+Astra Control Center uses a service of the type "LoadBalancer" (`svc/traefik` in the Astra Control Center namespace), and requires that it be assigned an accessible external IP address. If load balancers are permitted in your environment and you don't already have one configured, you can use MetalLB or another external service load balancer to assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
++
+NOTE: For details about the service type of "LoadBalancer" and ingress, see link:../get-started/requirements.html[Requirements].
+
+.. In *Image Registry*, enter your local container image registry path. Do not enter `http://` or `https://` in the address field.
+.. If you use an image registry that requires authentication, enter the image secret.
 +
 NOTE: If you use a registry that requires authentication, <<Create a registry secret,create a secret on the cluster>>.
 
-.. In *Image Registry*, enter your local container image registry path. Do not enter `http://` or `https://` in the address field.
 .. Enter the admin first name.
 .. Configure resources scaling.
-.. Retain the default storage class.
+.. Provide the default storage class.
++
+NOTE: If a default storage class is configured, ensure that it is the only storage class that has the default annotation.
+
 .. Define CRD handling preferences.
 +
 NOTE: For more information on CRD options, refer to https://docs.netapp.com/us-en/astra-control-center/get-started/acc_cluster_cr_options.html[this section].
@@ -245,6 +260,8 @@ oc create ns [netapp-acc-operator or custom namespace]
 ----
 oc create secret docker-registry astra-registry-cred n [netapp-acc-operator or custom namespace] --docker-server=[your_registry_path] --docker username=[username] --docker-password=[token]
 ----
++
+NOTE: Astra Control supports Docker registry secrets only.
 
 . Complete the remaining fields in <<Install Astra Control Center,the Create AstraControlCenter form field>>.
 
