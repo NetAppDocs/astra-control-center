@@ -20,7 +20,7 @@ To upgrade Astra Control Center, download the installation bundle from the NetAp
 To determine the version you are running, run the following command against your existing Astra Control Center:
 +
 ----
-../../trident-installer/tridentctl -n trident version
+kubectl get tridentversion -n trident
 ----
 Refer to https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html#determine-the-version-to-upgrade-to[Astra Trident documentation] to upgrade from an older version.
 +
@@ -356,7 +356,7 @@ Response:
 +
 ----
 NAME    UUID                                      VERSION     ADDRESS         READY
-astra   9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f  22.11.0-24  10.111.111.111  True
+astra   9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f      22.11.0-82  10.111.111.111  True
 ----
 +
 NOTE: To monitor upgrade status during the operation, run the following command: `kubectl get AstraControlCenter -o yaml -n [netapp-acc or custom namespace]`
