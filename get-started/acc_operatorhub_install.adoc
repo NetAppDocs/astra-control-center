@@ -246,7 +246,7 @@ oc create ns [netapp-acc-operator or custom namespace]
 oc create secret docker-registry astra-registry-cred n [netapp-acc-operator or custom namespace] --docker-server=[your_registry_path] --docker username=[username] --docker-password=[token]
 ----
 
-. Complete the remaining fields in <<Install Astra Control Center,the `Create AstraControlCenter` form field>>.
+. Complete the remaining fields in <<Install Astra Control Center,the Create AstraControlCenter form field>>.
 
 
 == What's next
