@@ -89,7 +89,7 @@ The NetApp Astra kubectl command line plugin saves time when performing common t
 kubectl astra
 ----
 
-This command should provide the kubectl plugin help. If the command returns an error, install the plugin using these link:../get-started/install_acc.html#install-the-netapp-astra-kubectl-plugin[instructions].
+This command should provide the kubectl plugin help. If the command returns an error, install the plugin using these link:../get-started/install_acc.html#install-the-netapp-astra-kubectl-plugin[instructions^].
 
 == Add the images to your local registry
 
@@ -127,8 +127,8 @@ kubectl astra packages push-images -m <BUNDLE_FILE> -r <MY_FULL_REGISTRY_PATH> -
 --
 .. Change to the root directory of the tarball. You should see this file and directory:
 +
-acc.manifest.bundle.yaml
-acc/
+`acc.manifest.bundle.yaml`
+`acc/`
 
 .. Log in to your registry:
 +
