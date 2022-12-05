@@ -20,23 +20,57 @@ Try it out! If you want to try Astra Control Center, you can use a 90-day evalua
 [role="quick-margin-list"]
 * Astra works with Kubernetes clusters using a Trident-based storage class with an ONTAP storage backend.
 * Clusters must be running in a healthy state, with at least three online worker nodes.
-
-
+* Ensure that your environment meets these requirements:
 
 [role="quick-margin-para"]
-Learn more about link:../get-started/requirements.html[Astra Control Center requirements].
+[cols=3*,options="header",cols="1h,2d,3a"]
+|===
+| Step
+| Component
+| Link
+| 1 | Operational environment | link:../get-started/requirements.html#operational-environment-requirements[Operational environment requirements^]
+| 2 | Astra Trident supported version | link:../get-started/requirements.html#operational-environment-requirements[Supported by Astra Control Center^]
+| 3 | Ingress for load balancing | link:../get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Ingress for on-premises Kubernetes clusters^]
+| 4 | Trident storage backend | https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend[Trident storage backend configuration^]
+| 5 | Trident storage classes | https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Trident storage classes configuration^]
+| 6 | Trident volume snapshot controller and volume snapshot class installation | https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[Trident volume snapshot controller installation^]
+| 7 | Trident volume snapshot controller and volume snapshot class setup | https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Trident storage volume snapshot controller set up^]
+| 8 | Cluster access with kubeconfig | https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[Cluster access with kubeconfig^]
+| 9 | ONTAP credentials | link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[ONTAP credentials^]
+
+|===
+
+
+//[role="quick-margin-para"]
+//Learn more about link:../get-started/requirements.html[Astra Control Center requirements].
+
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png[Two] Download and install Astra Control Center
 
-[role="quick-margin-list"]
-* Download Astra Control Center from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site Astra Control Center Downloads page^].
-* Install Astra Control Center in your local environment.
-+
-Optionally, install Astra Control Center using Red Hat OperatorHub.
-Optionally, install Astra Control Center on a supported public cloud platform, such as with a Cloud Volumes ONTAP storage backend. 
-* Optionally, depending on your environment, complete additional link:configure-after-install.html[configuration steps].
+//[role="quick-margin-list"]
+//* Download Astra Control Center from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site Astra Control Center Downloads page^].
+//* Install Astra Control Center in your local environment.
+//+
+//Optionally, install Astra Control Center using Red Hat OperatorHub.
+//Optionally, install Astra Control Center on a supported public cloud platform, such as with a Cloud Volumes ONTAP storage backend. 
+//* Optionally, depending on your environment, complete additional link:configure-after-install.html[configuration steps].
+//[role="quick-margin-para"]
+//Learn more about link:../get-started/install_overview.html[installing Astra Control Center].
+
 [role="quick-margin-para"]
-Learn more about link:../get-started/install_overview.html[installing Astra Control Center].
+[cols=3*,options="header",cols="1h,2d,3a"]
+|===
+| Step
+| Component
+| Link
+| 1 | Download Astra Control Center | https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site - Astra Control Center Download page^]
+| 2 | Install Astra Control Center | link:../get-started/install_overview.html[Install Astra Control Center^]
+| 3 | Optional configuration | link:../get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Perform additional configuration steps^]
+
+
+
+|===
+
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png[Three] Complete some initial setup tasks
 
