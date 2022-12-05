@@ -23,7 +23,7 @@ Try it out! If you want to try Astra Control Center, you can use a 90-day evalua
 * Ensure that your environment meets these requirements:
 
 [role="quick-margin-para"]
-[cols=3*,options="header",cols="1h,2d,3a"]
+[cols=3*,options="header",cols="1,20%,25%"]
 |===
 | Step
 | Component
@@ -61,7 +61,7 @@ Try it out! If you want to try Astra Control Center, you can use a 90-day evalua
 [role="quick-margin-para"]
 Perform these installation tasks: 
 
-[cols=3*,options="header",cols="1h,2d,3a"]
+[cols=3*,options="header",cols="1,2d,3a"]
 |===
 | Step
 | Component
@@ -88,11 +88,12 @@ Perform these installation tasks:
 [role="quick-margin-para"]
 Perform these setup tasks. 
 
+[role="quick-margin-para"]
 You can use the Astra Control user interface (UI) or the https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^].
 
 
 [role="quick-margin-para"]
-[cols=3*,options="header",cols="1h,2d,3a"]
+[cols=3*,options="header",cols="1,2d,3a"]
 |===
 | Step
 | Component
@@ -115,6 +116,7 @@ You can use the Astra Control user interface (UI) or the https://docs.netapp.com
 [role="quick-margin-para"]
 After you finish setting up Astra Control Center, here's what you might do next. 
 
+[role="quick-margin-para"]
 You can use the Astra Control user interface (UI) or the https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^].
 
 //[role="quick-margin-list"]
