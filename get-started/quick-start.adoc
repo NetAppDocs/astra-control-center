@@ -28,15 +28,15 @@ Try it out! If you want to try Astra Control Center, you can use a 90-day evalua
 | Step
 | Component
 | Link
-| 1 | Operational environment | link:../get-started/requirements.html#operational-environment-requirements[Operational environment requirements^]
-| 2 | Astra Trident supported version | link:../get-started/requirements.html#operational-environment-requirements[Supported by Astra Control Center^]
-| 3 | Ingress for load balancing | link:../get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Configure ingress for on-premises Kubernetes clusters^]
-| 4 | Trident storage backend | https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend[Configure Trident storage backend^]
-| 5 | Trident storage classes | https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Trident storage classes^]
-| 6 | Trident volume snapshot controller and volume snapshot class installation | https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[Install Trident volume snapshot controller^]
-| 7 | Trident volume snapshot controller and volume snapshot class setup | https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Trident storage volume snapshot controller^]
-| 8 | Cluster access with kubeconfig | https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[Configure cluster access with kubeconfig^]
-| 9 | ONTAP credentials | link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[Configure ONTAP credentials^]
+| 1.1 | Operational environment | link:../get-started/requirements.html#operational-environment-requirements[Operational environment requirements^]
+| 1.2 | Astra Trident supported version | link:../get-started/requirements.html#operational-environment-requirements[Supported by Astra Control Center^]
+| 1.3 | Ingress for load balancing | link:../get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Configure ingress for on-premises Kubernetes clusters^]
+| 1.4 | Trident storage backend | https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend[Configure Trident storage backend^]
+| 1.5 | Trident storage classes | https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Trident storage classes^]
+| 1.6 | Trident volume snapshot controller and volume snapshot class installation | https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[Install Trident volume snapshot controller^]
+| 1.7 | Trident volume snapshot controller and volume snapshot class setup | https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Trident storage volume snapshot controller^]
+| 1.8 | Cluster access with kubeconfig | https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[Configure cluster access with kubeconfig^]
+| 1.9 | ONTAP credentials | link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[Configure ONTAP credentials^]
 
 |===
 
@@ -66,9 +66,9 @@ Perform these installation tasks:
 | Step
 | Component
 | Link
-| 1 | Download Astra Control Center | https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site - Astra Control Center Download page^]
-| 2 | Install Astra Control Center | link:../get-started/install_overview.html[Install Astra Control Center^]
-| 3 | Optional configuration | link:../get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Perform additional configuration steps^]
+| A | Download Astra Control Center | https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site - Astra Control Center Download page^]
+| B | Install Astra Control Center | link:../get-started/install_overview.html[Install Astra Control Center^]
+| C | Optional configuration | link:../get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Perform additional configuration steps^]
 
 
 
