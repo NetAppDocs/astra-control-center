@@ -30,19 +30,20 @@ Try it out! If you want to try Astra Control Center, you can use a 90-day evalua
 | Link
 | 1 | Operational environment | link:../get-started/requirements.html#operational-environment-requirements[Operational environment requirements^]
 | 2 | Astra Trident supported version | link:../get-started/requirements.html#operational-environment-requirements[Supported by Astra Control Center^]
-| 3 | Ingress for load balancing | link:../get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Ingress for on-premises Kubernetes clusters^]
-| 4 | Trident storage backend | https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend[Trident storage backend configuration^]
-| 5 | Trident storage classes | https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Trident storage classes configuration^]
-| 6 | Trident volume snapshot controller and volume snapshot class installation | https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[Trident volume snapshot controller installation^]
-| 7 | Trident volume snapshot controller and volume snapshot class setup | https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Trident storage volume snapshot controller set up^]
-| 8 | Cluster access with kubeconfig | https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[Cluster access with kubeconfig^]
-| 9 | ONTAP credentials | link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[ONTAP credentials^]
+| 3 | Ingress for load balancing | link:../get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Configure ingress for on-premises Kubernetes clusters^]
+| 4 | Trident storage backend | https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend[Configure Trident storage backend^]
+| 5 | Trident storage classes | https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Trident storage classes^]
+| 6 | Trident volume snapshot controller and volume snapshot class installation | https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[Install Trident volume snapshot controller^]
+| 7 | Trident volume snapshot controller and volume snapshot class setup | https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Trident storage volume snapshot controller^]
+| 8 | Cluster access with kubeconfig | https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[Configure cluster access with kubeconfig^]
+| 9 | ONTAP credentials | link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[Configure ONTAP credentials^]
 
 |===
 
 
 //[role="quick-margin-para"]
 //Learn more about link:../get-started/requirements.html[Astra Control Center requirements].
+
 
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png[Two] Download and install Astra Control Center
@@ -58,6 +59,8 @@ Try it out! If you want to try Astra Control Center, you can use a 90-day evalua
 //Learn more about link:../get-started/install_overview.html[installing Astra Control Center].
 
 [role="quick-margin-para"]
+Perform these installation tasks: 
+
 [cols=3*,options="header",cols="1h,2d,3a"]
 |===
 | Step
@@ -74,28 +77,67 @@ Try it out! If you want to try Astra Control Center, you can use a 90-day evalua
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png[Three] Complete some initial setup tasks
 
-[role="quick-margin-list"]
+//[role="quick-margin-list"]
 
-* Add an Astra Control license and any supporting ONTAP licenses.
-* Add a Kubernetes cluster.
-* Add an ONTAP storage backend.
-* Optionally, add an object store bucket that will store your app backups.
+//* Add an Astra Control license and any supporting ONTAP licenses.
+//* Add a Kubernetes cluster.
+//* Add an ONTAP storage backend.
+//* Optionally, add an object store bucket that will store your app backups.
 
 
 [role="quick-margin-para"]
-Learn more about the link:../get-started/setup_overview.html[initial setup process].
+Perform these setup tasks. 
+
+You can use the Astra Control user interface (UI) or the https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^].
+
+
+[role="quick-margin-para"]
+[cols=3*,options="header",cols="1h,2d,3a"]
+|===
+| Step
+| Component
+| Link
+| 1 | Set up a license | link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control#add-a-license-for-astra-control-center[Add a license^]
+| 2 | Set up the environment  | link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control#prepare-your-environment-for-cluster-management-using-astra-control[Prepare your environment for cluster management using Astra Control^]
+| 3 | Add a cluster | link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control#add-cluster[Add a cluster^]
+| 4 | Add a storage backend | link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control#add-a-storage-backend[Add a storage backend^]
+| 5 | Add a bucket | link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control#add-a-bucket[Add a bucket^]
+
+
+|===
+
+
+//[role="quick-margin-para"]
+//Learn more about the link:../get-started/setup_overview.html[initial setup process].
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png[Four] Use Astra Control Center
 
-[role="quick-margin-list"]
-After you finish setting up Astra Control Center, here's what you might do next:
+[role="quick-margin-para"]
+After you finish setting up Astra Control Center, here's what you might do next. 
 
-[role="quick-margin-list"]
-* Manage an app. Learn more about link:../use/manage-apps.html[how to manage apps].
-* Protect apps by configuring protection policies for apps, replicating apps to remote systems, cloning apps, and migrating apps. Learn more about link:../use/protection-overview.html[how to protect apps].
-* Manage accounts (including users, roles, LDAP for user authentication, credentials, and more). Learn more about link:../use/manage-local-users-and-roles.html[how to manage local users, roles, and LDAP].
+You can use the Astra Control user interface (UI) or the https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^].
 
-* Optionally, connect to NetApp Cloud Insights to display metrics on the health of your system, capacity, and throughput inside the Astra Control Center UI. Learn more about link:../use/monitor-protect.html[how to connect to Cloud Insights].
+//[role="quick-margin-list"]
+//* Manage an app. Learn more about link:../use/manage-apps.html[how to manage apps].
+//* Protect apps by configuring protection policies for apps, replicating apps to remote systems, cloning apps, and migrating apps. Learn more about link:../use/protection-overview.html[how to protect apps].
+//* Manage accounts (including users, roles, LDAP for user authentication, credentials, and more). Learn more about link:../use/manage-local-users-and-roles.html[how to manage local users, roles, and LDAP].
+
+//* Optionally, connect to NetApp Cloud Insights to display metrics on the health of your system, capacity, and throughput inside the Astra Control Center UI. Learn more about link:../use/monitor-protect.html[how to connect to Cloud Insights].
+
+[role="quick-margin-para"]
+[cols=3*,options="header",cols="1h,2d,3a"]
+|===
+| Step
+| Component
+| Link
+| 1 | Manage an app | link:../use/manage-apps.html[Manage apps^]
+| 2 | Protect apps by configuring protection policies for apps, replicating apps to remote systems, cloning apps, and migrating apps.   | link:../use/protection-overview.html[Protect apps^]
+| 3 | Manage accounts (including users, roles, LDAP for user authentication, credentials, and more).  | link:../use/manage-local-users-and-roles.html[Manage local users, roles, and LDAP^]
+| 4 | Optionally, connect to NetApp Cloud Insights to display metrics on the health of your system, capacity, and throughput inside the Astra Control Center UI.  | link:../use/monitor-protect#connect-to-cloud-insights[Connect to Cloud Insights^]
+
+
+
+|===
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-5.png[Five] Continue from this Quick Start
 
@@ -103,6 +145,4 @@ After you finish setting up Astra Control Center, here's what you might do next:
 link:../get-started/install_overview.html[Install Astra Control Center].
 
 
-== Find more information
 
-* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra Control API^]
