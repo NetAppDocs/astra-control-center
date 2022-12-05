@@ -23,7 +23,7 @@ Try it out! If you want to try Astra Control Center, you can use a 90-day evalua
 * Ensure that your environment meets these requirements:
 
 [role="quick-margin-para"]
-[cols=3*,options="header",cols="1,20%,25%"]
+[cols=3*,options="header",cols="5%,35%,60%"]
 |===
 | Step
 | Component
