@@ -17,18 +17,17 @@ Try it out! If you want to try Astra Control Center, you can use a 90-day evalua
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png[One] Review Kubernetes cluster requirements
 
-[role="quick-margin-list"]
-* Astra works with Kubernetes clusters using a Trident-based storage class with an ONTAP storage backend.
-* Clusters must be running in a healthy state, with at least three online worker nodes.
-* Ensure that your environment meets these requirements:
+[role="quick-margin-para"]
+
+Ensure that your environment meets these requirements.
 
 [role="quick-margin-para"]
 [cols=2*,options="header",cols="10%,90%"]
 |===
 | Step
 | Item
-| 1 | link:../get-started/requirements.html#operational-environment-requirements[Operational environment requirements^]
-| 2 | link:../get-started/requirements.html#operational-environment-requirements[Astra Trident supported version^]
+| 1 | Ensure your environment meets link:../get-started/requirements.html#operational-environment-requirements[operational environment requirements^]
+| 2 | Ensure your environment includes the link:../get-started/requirements.html#operational-environment-requirements[Astra Trident supported version^]
 | 3 | link:../get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Configure ingress for load balancing on-premises Kubernetes clusters^]
 | 4 | https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend[Configure Trident storage backend^]
 | 5 | https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Trident storage classes^]
@@ -58,7 +57,7 @@ Try it out! If you want to try Astra Control Center, you can use a 90-day evalua
 //Learn more about link:../get-started/install_overview.html[installing Astra Control Center].
 
 [role="quick-margin-para"]
-Perform these installation tasks: 
+Complete these installation tasks. 
 
 [cols=2*,options="header",cols="10%,90%"]
 |===
@@ -83,8 +82,6 @@ Perform these installation tasks:
 //* Optionally, add an object store bucket that will store your app backups.
 
 
-[role="quick-margin-para"]
-Perform these setup tasks. 
 
 [role="quick-margin-para"]
 You can use the Astra Control user interface (UI) or the https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^].
@@ -138,10 +135,6 @@ You can use the Astra Control user interface (UI) or the https://docs.netapp.com
 
 |===
 
-.image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-5.png[Five] Continue from this Quick Start
-
-[role="quick-margin-para"]
-link:../get-started/install_overview.html[Install Astra Control Center].
 
 
 
