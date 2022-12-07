@@ -102,17 +102,15 @@ This command should provide the kubectl plugin help. If the command returns an e
 
 .Docker
 --
-.. Change to the `acc` directory extracted from the tar bundle:
+.. Change to the root directory of the tarball. You should see this file and directory:
 +
-Example:
-+
-----
-cd ../acc
-----
-.. Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
+`acc.manifest.bundle.yaml`
+`acc/`
+
+.. Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the `push-images` command:
 +
 
-* Replace <BUNDLE_FILE> with the name of the Astra Control bundle file (`acc.manifest.yaml`).
+* Replace <BUNDLE_FILE> with the name of the Astra Control bundle file (`acc.manifest.bundle.yaml`).
 * Replace <MY_FULL_REGISTRY_PATH> with the URL of the Docker repository; for example, https://exampledownloads.jfrog.io/docker-astra-control/v1/.
 * Replace <MY_REGISTRY_USER> with the user name.
 * Replace <MY_REGISTRY_TOKEN> with an authorized token for the registry.

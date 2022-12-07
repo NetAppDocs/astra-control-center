@@ -109,17 +109,15 @@ cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 
 .Docker
 --
-.. Change to the `acc` directory extracted from the tar bundle:
+.. Change to the root directory of the tarball. You should see this file and directory:
 +
-Example:
-+
-----
-cd ../acc
-----
-.. [[substep_image_local_registry_push]]Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
+`acc.manifest.bundle.yaml`
+`acc/`
+
+.. [[substep_image_local_registry_push]]Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the `push-images` command:
 +
 
-* Replace <BUNDLE_FILE> with the name of the Astra Control bundle file (`acc.manifest.yaml`).
+* Replace <BUNDLE_FILE> with the name of the Astra Control bundle file (`acc.manifest.bundle.yaml`).
 * Replace <MY_FULL_REGISTRY_PATH> with the URL of the Docker repository; for example, https://exampledownloads.jfrog.io/docker-astra-control/v1/.
 * Replace <MY_REGISTRY_USER> with the user name.
 * Replace <MY_REGISTRY_TOKEN> with an authorized token for the registry.
@@ -175,15 +173,19 @@ done
 
 . Complete one of the following procedures to access the operator install page:
 * From Red Hat Openshift web console:
-image:openshift_operatorhub.png[Astra Control Center install page]
 .. Log in to the OpenShift Container Platform UI.
 .. From the side menu, select *Operators > OperatorHub*.
 .. Search for and select the NetApp Astra Control Center operator.
 
++
+image:openshift_operatorhub.png[Astra Control Center install page]
+
 * From Red Hat Ecosystem Catalog:
-image:red_hat_catalog.png[Astra Control Center overview page]
 .. Select the NetApp Astra Control Center https://catalog.redhat.com/software/operators/detail/611fd22aaf489b8bb1d0f274[operator^].
 .. Select *Deploy and Use*.
+
++
+image:red_hat_catalog.png[Astra Control Center overview page]
 
 == Install the operator
 
@@ -205,6 +207,8 @@ NOTE: If you selected a manual approval strategy, you will be prompted to approv
 == Install Astra Control Center
 
 . From the console within the *Astra Control Center* tab of the Astra Control Center operator, select *Create AstraControlCenter*.
+image:openshift_acc-operator_details.png[Astra Control Center operator page]
+
 . Complete the `Create AstraControlCenter` form field:
 .. Keep or adjust the Astra Control Center name.
 .. Add labels for the Astra Control Center.
