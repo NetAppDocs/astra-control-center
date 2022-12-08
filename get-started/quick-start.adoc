@@ -34,7 +34,7 @@ USING AN INTERACTIVE CHECKLIST
 * [ ] https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend[Configure Trident storage backend^]
 * [ ] https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Trident storage classes^]
 * [ ] https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[Install Trident volume snapshot controller and snapshot class^]
-* [ ] https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Trident storage volume snapshot controller and snapshot class^]
+* [ ] https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[Configure Trident storage volume snapshot controller and snapshot class^]
 
 *ONTAP credentials*
 [%interactive]
@@ -52,7 +52,7 @@ ALTERNATE  LOOK in a table:
 | 4 | https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend[Configure Trident storage backend^]
 | 5 | https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Trident storage classes^]
 | 6 | https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[Install Trident volume snapshot controller and snapshot class^]
-| 7 | https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Trident storage volume snapshot controller and snapshot class^]
+| 7 | https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[Configure Trident storage volume snapshot controller and snapshot class^]
 | 8 | https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[Configure cluster access with kubeconfig^]
 | 9 | link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[Configure ONTAP credentials^]
 
