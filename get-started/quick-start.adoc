@@ -13,7 +13,7 @@ summary: Get started with Astra Control in a few steps.
 [.lead]
 This page provides a high-level overview of the steps needed to get started with Astra Control Center. The links within each step take you to a page that provides more details.
 
-Try it out! If you want to try Astra Control Center, you can use a 90-day evaluation license. Refer to link:../get-started/setup_overview.html#add-a-license-for-astra-control-center[licensing information] for details.
+Try it out! If you want to try Astra Control Center, you can use a 90-day evaluation license. Refer to link:../concepts/licensing[licensing information] for details.
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png[One] Review Kubernetes cluster requirements
 
@@ -21,13 +21,33 @@ Try it out! If you want to try Astra Control Center, you can use a 90-day evalua
 
 Ensure that your environment meets these requirements.
 
+USING AN INTERACTIVE CHECKLIST
+
+*Kubernetes cluster* 
+[%interactive]
+* [ ] Ensure your environment meets link:../get-started/requirements.html#operational-environment-requirements[operational environment requirements^]
+ * [ ] Ensure your environment includes the link:../get-started/requirements.html#operational-environment-requirements[Astra Trident supported version^]
+ * [ ] link:../get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Configure ingress for load balancing on-premises Kubernetes clusters^]
+ 
+*Storage integration*
+[%interactive]
+* [ ] https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend[Configure Trident storage backend^]
+* [ ] https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Trident storage classes^]
+* [ ] https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[Install Trident volume snapshot controller and snapshot class^]
+* [ ] https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Trident storage volume snapshot controller and snapshot class^]
+
+*ONTAP credentials*
+[%interactive]
+* [ ] link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[Configure ONTAP credentials^]
+
+ALTERNATE  LOOK in a table: 
 [role="quick-margin-para"]
 [cols=2*,options="header",cols="10%,90%"]
 |===
 | Step
 | Item
-| 1 | Ensure your environment meets link:../get-started/requirements.html#operational-environment-requirements[operational environment requirements^]
-| 2 | Ensure your environment includes the link:../get-started/requirements.html#operational-environment-requirements[Astra Trident supported version^]
+| 1 | [%interactive] * [ ] Ensure your environment meets link:../get-started/requirements.html#operational-environment-requirements[operational environment requirements^]
+| 2 | [%interactive] * [ ] Ensure your environment includes the link:../get-started/requirements.html#operational-environment-requirements[Astra Trident supported version^]
 | 3 | link:../get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Configure ingress for load balancing on-premises Kubernetes clusters^]
 | 4 | https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend[Configure Trident storage backend^]
 | 5 | https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Trident storage classes^]
@@ -84,7 +104,7 @@ Complete these installation tasks.
 
 
 [role="quick-margin-para"]
-You can use the Astra Control user interface (UI) or the https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^].
+Complete some basic tasks to get started.
 
 
 [role="quick-margin-para"]
@@ -109,9 +129,7 @@ You can use the Astra Control user interface (UI) or the https://docs.netapp.com
 
 
 [role="quick-margin-para"]
-//After you finish setting up Astra Control Center, here's what you might do next. 
-
-[role="quick-margin-para"]
+After you finish setting up Astra Control Center, here's what you might do next. 
 You can use the Astra Control user interface (UI) or the https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^].
 
 //[role="quick-margin-list"]
@@ -121,6 +139,12 @@ You can use the Astra Control user interface (UI) or the https://docs.netapp.com
 
 //* Optionally, connect to NetApp Cloud Insights to display metrics on the health of your system, capacity, and throughput inside the Astra Control Center UI. Learn more about link:../use/monitor-protect.html[how to connect to Cloud Insights].
 
+[%interactive]
+* [ ] link:../use/manage-apps.html[Manage apps^]
+* [ ] link:../use/protection-overview.html[Protect apps^]: Configure protection policies for apps, replicate apps to remote systems, clone apps, and migrate apps.  
+* [ ] link:../use/manage-local-users-and-roles.html[Manage accounts^] (including users, roles, LDAP for user authentication, credentials, and more)
+* [ ] link:../use/monitor-protect#connect-to-cloud-insights[Optionally, connect to Cloud Insights^]: Display metrics on the health of your system within Astra Control Center.
+
 [role="quick-margin-para"]
 [cols=2*,options="header",cols="10%,90%"]
 |===
@@ -129,7 +153,7 @@ You can use the Astra Control user interface (UI) or the https://docs.netapp.com
 | 1 | link:../use/manage-apps.html[Manage apps^]
 | 2 | link:../use/protection-overview.html[Protect apps^] by configuring protection policies for apps, replicating apps to remote systems, cloning apps, and migrating apps.  
 | 3 | link:../use/manage-local-users-and-roles.html[Manage accounts^] (including users, roles, LDAP for user authentication, credentials, and more)
-| 4 | link:../use/monitor-protect#connect-to-cloud-insights[Connect to Cloud Insights^]. Optionally, connect to NetApp Cloud Insights to display metrics on the health of your system, capacity, and throughput inside the Astra Control Center UI. 
+| 4 | link:../use/monitor-protect#connect-to-cloud-insights[Optionally, connect to Cloud Insights^] to display metrics on the health of your system, capacity, and throughput inside the Astra Control Center UI. 
 
 
 
