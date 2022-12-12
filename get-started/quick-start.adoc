@@ -159,6 +159,9 @@ You can use the Astra Control user interface (UI) or the https://docs.netapp.com
 
 |===
 
+== For more information 
 
+* https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^]
+* https://review.docs.netapp.com/us-en/astra-control-center_acc-pi7-review/use/upgrade-acc.html[Upgrade Astra Control Center^]
 
 
