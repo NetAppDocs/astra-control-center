@@ -23,12 +23,12 @@ Ensure that your environment meets these requirements.
 
 *Kubernetes cluster* 
 [%interactive]
-* [ ] Ensure your environment meets link:../get-started/requirements.html#operational-environment-requirements[operational environment requirements^]
+* [ ] link:../get-started/requirements.html#operational-environment-requirements[Ensure your environment meets operational environment requirements^]
  * [ ] link:../get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Configure ingress for load balancing on-premises Kubernetes clusters^]
  
 *Storage integration*
 [%interactive]
- * [ ] Ensure your environment includes the link:../get-started/requirements.html#operational-environment-requirements[Astra Trident supported version^]
+ * [ ] link:../get-started/requirements.html#operational-environment-requirements[Ensure your environment includes the Astra Trident supported version^]
 * [ ] https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend[Configure Trident storage backend^]
 * [ ] https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Trident storage classes^]
 * [ ] https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[Install Trident volume snapshot controller and snapshot class^]
@@ -94,7 +94,7 @@ Complete these installation tasks.
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-3.png[Three] Complete some initial setup tasks
 
 
-[role="quick-margin-para"]
+//[role="quick-margin-para"]
 Complete some basic tasks to get started.
 
 [%interactive]
@@ -124,7 +124,7 @@ Complete some basic tasks to get started.
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-4.png[Four] Use Astra Control Center
 
 
-[role="quick-margin-para"]
+//[role="quick-margin-para"]
 After you finish setting up Astra Control Center, here's what you might do next. 
 You can use the Astra Control user interface (UI) or the https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^].
 
