@@ -29,10 +29,10 @@ Ensure that your environment meets these requirements.
 *Storage integration*
 [%interactive]
  * [ ] link:../get-started/requirements.html#operational-environment-requirements[Ensure your environment includes the Astra Trident supported version^]
-* [ ] https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend[Configure Trident storage backend^]
-* [ ] https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Trident storage classes^]
-* [ ] https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[Install Trident volume snapshot controller and snapshot class^]
-* [ ] https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[Configure Trident storage volume snapshot controller and snapshot class^]
+* [ ] https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend[Configure Astra Trident storage backend^]
+* [ ] https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Astra Trident storage classes^]
+* [ ] https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[Install Astra Trident volume snapshot controller and snapshot class^]
+* [ ] https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[Configure Astra Trident storage volume snapshot controller and snapshot class^]
 
 *ONTAP credentials*
 [%interactive]
@@ -78,6 +78,8 @@ Complete these installation tasks.
 
 [%interactive]
 * [ ] https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[Download Astra Control Center from the NetApp Support Site Download page^]
+* [ ] link:https://mysupport.netapp.com/site/downloads/evaluation/astra-control-center[If you are evaluating Astra Control Center, download the evaluation license file^]
+* [ ] link:../concepts/licensing.html[If you already purchased Astra Control Center, generate your license file^]
 * [ ] link:../get-started/install_overview.html[Install Astra Control Center^]
 * [ ] link:../get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Perform additional optional configuration steps^]
 
@@ -139,7 +141,7 @@ You can use the Astra Control user interface (UI) or the https://docs.netapp.com
 * [ ] link:../use/manage-apps.html[Manage apps^]
 * [ ] link:../use/protection-overview.html[Protect apps^]: Configure protection policies and replicate, clone, and migrate apps.  
 * [ ] link:../use/manage-local-users-and-roles.html[Manage accounts^]: Users, roles, LDAP, credentials, and more
-* [ ] link:../use/monitor-protect#connect-to-cloud-insights[Optionally, connect to Cloud Insights^]: View metrics on the health of your system.
+* [ ] link:../use/monitor-protect.html#connect-to-cloud-insights[Optionally, connect to Cloud Insights^]: View metrics on the health of your system.
 
 //[role="quick-margin-para"]
 //[cols=2*,options="header",cols="10%,90%"]
