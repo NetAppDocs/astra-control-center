@@ -13,27 +13,38 @@ summary: If you use Red Hat OpenShift, you can install the Astra Control Center 
 [.lead]
 If you use Red Hat OpenShift, you can install Astra Control Center using the Red Hat certified operator. Use this procedure to install Astra Control Center from the https://catalog.redhat.com/software/operators/explore[Red Hat Ecosystem Catalog^] or using the Red Hat OpenShift Container Platform.
 
-After you complete this procedure, you must return to the installation procedure to complete the link:../get-started/install_acc.html#verify-system-status[remaining steps] to verify installation success and log on.
+After you complete this procedure, you must return to the installation procedure to complete the link:../get-started/install_acc.html#verify-system-status[remaining steps^] to verify installation success and log on.
 
 .What you'll need
-* link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
-* From your OpenShift cluster, ensure all cluster operators are in a healthy state:
+* *Environmental prerequisites met*: link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment^].
+* *Healthy cluster operators and API services*: 
+** From your OpenShift cluster, ensure all cluster operators are in a healthy state:
 +
 [source,console]
 ----
 oc get clusteroperators
 ----
 
-* From your OpenShift cluster, ensure all API services are in a healthy state:
+** From your OpenShift cluster, ensure all API services are in a healthy state:
 +
 [source,console]
 ----
 oc get apiservices
 ----
 
-* Create an FQDN address for Astra Control Center in your data center.
-* Obtain the necessary permissions and access to the Red Hat OpenShift Container Platform to perform the installation steps described.
-* If a cert-manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps] so that Astra Control Center does not install its own cert-manager. By default, Astra Control Center installs its own cert-manager during installation.
+* *FQDN address*: Obtain an FQDN address for Astra Control Center in your data center.
+* *Openshift Permissions*: Obtain the necessary permissions and access to the Red Hat OpenShift Container Platform to perform the installation steps described.
+* *cert-manager configured*: If a cert-manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps^] so that Astra Control Center does not install its own cert-manager. By default, Astra Control Center installs its own cert-manager during installation.
+
+* *Kubernetes ingress controller*: If you have a Kubernetes ingress controller that manages external access to services, such as load balancing in a cluster, you need to set it up for use with Astra Control Center:
+
+.. Create the operator namespace:
++
+----
+oc create namespace netapp-acc-operator
+----
+
+.. link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[Complete setup^] for your ingress controller type.
 
 .Steps
 
@@ -98,16 +109,15 @@ cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 
 .Docker
 --
-.. Change to the `acc` directory extracted from the tar bundle:
+.. Change to the root directory of the tarball. You should see this file and directory:
 +
-Example:
-----
-cd ../acc
-----
-.. [[substep_image_local_registry_push]]Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the command:
+`acc.manifest.bundle.yaml`
+`acc/`
+
+.. [[substep_image_local_registry_push]]Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the `push-images` command:
 +
 
-* Replace <BUNDLE_FILE> with the name of the Astra Control bundle file (`acc.manifest.yaml`).
+* Replace <BUNDLE_FILE> with the name of the Astra Control bundle file (`acc.manifest.bundle.yaml`).
 * Replace <MY_FULL_REGISTRY_PATH> with the URL of the Docker repository; for example, https://exampledownloads.jfrog.io/docker-astra-control/v1/.
 * Replace <MY_REGISTRY_USER> with the user name.
 * Replace <MY_REGISTRY_TOKEN> with an authorized token for the registry.
@@ -120,6 +130,11 @@ kubectl astra packages push-images -m <BUNDLE_FILE> -r <MY_FULL_REGISTRY_PATH> -
 
 .Podman
 --
+.. Change to the root directory of the tarball. You should see this file and directory:
++
+`acc.manifest.bundle.yaml`
+`acc/`
+
 .. Log in to your registry:
 +
 [source,console]
@@ -130,12 +145,6 @@ podman login <MY_FULL_REGISTRY_PATH>
 +
 [source,console]
 ----
-# You need to be at the root of the tarball.
-# You should see these files to confirm correct location:
-#   acc.manifest.yaml
-#   acc/
-
-# Replace <YOUR_REGISTRY> with your own registry (e.g registry.customer.com or registry.customer.com/testing, etc..)
 export REGISTRY=<YOUR_REGISTRY>
 export PACKAGENAME=acc
 export PACKAGEVERSION=22.11.0-82
@@ -164,16 +173,19 @@ done
 
 . Complete one of the following procedures to access the operator install page:
 * From Red Hat Openshift web console:
-image:openshift_operatorhub.png[Astra Control Center install page]
 .. Log in to the OpenShift Container Platform UI.
 .. From the side menu, select *Operators > OperatorHub*.
-.. Select the NetApp Astra Control Center operator.
-.. Select *Install*.
+.. Search for and select the NetApp Astra Control Center operator.
+
++
+image:openshift_operatorhub.png[Astra Control Center install page]
 
 * From Red Hat Ecosystem Catalog:
-image:red_hat_catalog.png[Astra Control Center overview page]
-.. Select the NetApp Astra Control Center https://catalog.redhat.com/software/operators/detail/611fd22aaf489b8bb1d0f274[operator].
+.. Select the NetApp Astra Control Center https://catalog.redhat.com/software/operators/detail/611fd22aaf489b8bb1d0f274[operator^].
 .. Select *Deploy and Use*.
+
++
+image:red_hat_catalog.png[Astra Control Center overview page]
 
 == Install the operator
 
@@ -194,22 +206,70 @@ NOTE: If you selected a manual approval strategy, you will be prompted to approv
 
 == Install Astra Control Center
 
-. From the console within the details view of the Astra Control Center operator, select `Create instance` in the Provided APIs section.
+. From the console within the *Astra Control Center* tab of the Astra Control Center operator, select *Create AstraControlCenter*.
+image:openshift_acc-operator_details.png[Astra Control Center operator page]
+
 . Complete the `Create AstraControlCenter` form field:
 .. Keep or adjust the Astra Control Center name.
-.. (Optional) Enable or disable Auto Support. Retaining Auto Support functionality is recommended.
-.. Enter the Astra Control Center address. Do not enter `http://` or `https://` in the address.
-.. Enter the Astra Control Center version; for example, 21.12.60.
+.. Add labels for the Astra Control Center.
+.. Enable or disable Auto Support. Retaining Auto Support functionality is recommended.
+.. Enter the Astra Control Center FQDN or IP address. Do not enter `http://` or `https://` in the address field.
+.. Enter the Astra Control Center version; for example, 22.04.1.
 .. Enter an account name, email address, and admin last name.
-.. Retain the default volume reclaim policy.
-.. In *Image Registry*, enter your local container image registry path. Do not enter `http://` or `https://` in the address.
-.. If you use a registry that requires authentication, enter the secret.
+.. Choose a volume reclaim policy of `Retain`, `Recycle`, or `Delete`. The default value is `Retain`.
+.. Select the ingress type:
++
+* *Generic* (`ingressType: "Generic"`) (Default)
++
+Use this option when you have another ingress controller in use or would prefer to use your own ingress controller. After Astra Control Center is deployed, you will need to configure the link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller^] to expose Astra Control Center with a URL.
+
+* *AccTraefik* (`ingressType: "AccTraefik"`)
++
+Use this option when you would prefer not to configure an ingress controller. This deploys the Astra Control Center `traefik` gateway as a Kubernetes LoadBalancer type service.
++
+Astra Control Center uses a service of the type "LoadBalancer" (`svc/traefik` in the Astra Control Center namespace), and requires that it be assigned an accessible external IP address. If load balancers are permitted in your environment and you don't already have one configured, you can use MetalLB or another external service load balancer to assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
++
+NOTE: For details about the service type of "LoadBalancer" and ingress, see link:../get-started/requirements.html[Requirements^].
+
+.. In *Image Registry*, enter your local container image registry path. Do not enter `http://` or `https://` in the address field.
+.. If you use an image registry that requires authentication, enter the image secret.
++
+NOTE: If you use a registry that requires authentication, <<Create a registry secret,create a secret on the cluster>>.
+
 .. Enter the admin first name.
 .. Configure resources scaling.
-.. Retain the default storage class.
+.. Provide the default storage class.
++
+NOTE: If a default storage class is configured, ensure that it is the only storage class that has the default annotation.
+
 .. Define CRD handling preferences.
++
+NOTE: For more information on CRD options, refer to https://docs.netapp.com/us-en/astra-control-center/get-started/acc_cluster_cr_options.html[this section^].
+
+. Select the YAML view to review the settings you have selected.
 . Select `Create`.
+
+== Create a registry secret
+
+If you use a registry that requires authentication, create a secret on the Openshift cluster and enter the secret name in the `Create AstraControlCenter` form field.
+
+. Create a namespace for the Astra Control Center operator:
++
+----
+oc create ns [netapp-acc-operator or custom namespace]
+----
+
+. Create a secret in this namespace:
++
+----
+oc create secret docker-registry astra-registry-cred n [netapp-acc-operator or custom namespace] --docker-server=[your_registry_path] --docker username=[username] --docker-password=[token]
+----
++
+NOTE: Astra Control supports Docker registry secrets only.
+
+. Complete the remaining fields in <<Install Astra Control Center,the Create AstraControlCenter form field>>.
+
 
 == What's next
 
-Verify the successful installation of Astra Control Center and complete the link:../get-started/install_acc.html#verify-system-status[remaining steps] to log in. Additionally, you will complete the deployment by also performing link:setup_overview.html[setup tasks].
+Complete the link:../get-started/install_acc.html#verify-system-status[remaining steps^] to verify that Astra Control Center installed successfully, set up an ingress controller (optional), and log in to the UI. Additionally, you will need to perform link:setup_overview.html[setup tasks^] after completing installation.
