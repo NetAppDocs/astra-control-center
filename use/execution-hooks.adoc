@@ -56,8 +56,9 @@ Consider the following when planning execution hooks for your apps.
 
 [NOTE]
 ====
-Since execution hooks often reduce or completely disable the functionality of the application they are running against, you should always try to minimize the time your custom execution hooks take to run.
-If you start a backup or snapshot operation with associated execution hooks but then cancel it, the hooks are still allowed to run if the backup or snapshot operation has already begun. This means that a post-backup execution hook cannot assume that the backup was completed.
+* If you create an execution hook for an application that participates in an Istio service mesh, make sure the hook runs against the original application container, and not the service mesh container. You can exclude Istio service mesh containers by applying a filter regex to every execution hook that runs for applications that use an Istio service mesh.
+* Since execution hooks often reduce or completely disable the functionality of the application they are running against, you should always try to minimize the time your custom execution hooks take to run.
+* If you start a backup or snapshot operation with associated execution hooks but then cancel it, the hooks are still allowed to run if the backup or snapshot operation has already begun. This means that a post-backup execution hook cannot assume that the backup was completed.
 ====
 
 //=== Execution hook interaction with canceled backups
