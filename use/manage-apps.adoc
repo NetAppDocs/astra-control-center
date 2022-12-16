@@ -129,11 +129,11 @@ WARNING: When defining apps, ensure that you do not include a Kubernetes resourc
 ====
 Performing an in-place restore operation on an app that shares resources with another app can have unintended results. Any resources that are shared between the apps are replaced when an in-place restore is performed on one of the apps. For example, the following scenario creates an undesirable situation when using NetApp SnapMirror replication:
 
-. You define the application "app1" using the namespace "ns1".
-. You configure a replication relationship for "app1".
-. You define the application "app2" (on the same cluster) using the namespaces "ns1" and "ns2".
-. You configure a replication relationship for "app2".
-. You reverse replication for "app2". This causes the "app1" app on the source cluster to be deactivated.
+. You define the application `app1` using the namespace `ns1`.
+. You configure a replication relationship for `app1`.
+. You define the application `app2` (on the same cluster) using the namespaces `ns1` and `ns2`.
+. You configure a replication relationship for `app2`.
+. You reverse replication for `app2`. This causes the `app1` app on the source cluster to be deactivated.
 ====
 
 .*Read more* about adding cluster-scoped resources to your app namespaces.
