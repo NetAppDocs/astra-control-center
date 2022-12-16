@@ -13,7 +13,7 @@ summary: Get started with Astra Control in a few steps.
 [.lead]
 This page provides a high-level overview of the steps needed to get started with Astra Control Center. The links within each step take you to a page that provides more details.
 
-Try it out! If you want to try Astra Control Center, you can use a 90-day evaluation license. Refer to link:../concepts/licensing.html[licensing information] for details.
+Try it out! If you want to try Astra Control Center, you can use a 90-day evaluation license. Refer to link:../concepts/licensing.html[licensing information^] for details.
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png[One] Review Kubernetes cluster requirements
 
@@ -81,7 +81,7 @@ Complete these installation tasks.
 * [ ] link:https://mysupport.netapp.com/site/downloads/evaluation/astra-control-center[If you are evaluating Astra Control Center, download the evaluation license file^]
 * [ ] link:../concepts/licensing.html[If you already purchased Astra Control Center, generate your license file^]
 * [ ] link:../get-started/install_overview.html[Install Astra Control Center^]
-* [ ] link:../get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Perform additional optional configuration steps^]
+* [ ] link:../get-started/configure-after-install.html[Perform additional optional configuration steps^]
 
 //[cols=2*,options="header",cols="10%,90%"]
 //|===
@@ -100,7 +100,7 @@ Complete these installation tasks.
 Complete some basic tasks to get started.
 
 [%interactive]
-* [ ] link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control#add-a-license-for-astra-control-center[Add a license^]
+* [ ] link:../get-started/setup_overview.html#add-a-license-for-astra-control-center[Add a license^]
 * [ ] link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[Prepare your environment for cluster management^]
 * [ ] link:../get-started/setup_overview.html#add-cluster[Add a cluster^]
 * [ ] link:../get-started/setup_overview.html#add-a-storage-backend[Add a storage backend^]
