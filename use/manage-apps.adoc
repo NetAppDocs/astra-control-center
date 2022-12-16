@@ -133,7 +133,7 @@ Performing an in-place restore operation on an app that shares resources with an
 . You configure a replication relationship for the source cluster containing "app1".
 . You define the application "app2" in the namespaces "ns1" and "ns2".
 . You configure a replication relationship for the destination cluster containing "app2".
-. You reverse replication for application2. This causes application1 source cluster apps to be deactivated.
+. You reverse replication for "app2". This causes the "app1" app on the source cluster to be deactivated.
 ====
 
 .*Read more* about adding cluster-scoped resources to your app namespaces.
