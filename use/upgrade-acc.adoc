@@ -135,7 +135,11 @@ kubectl astra packages push-images -m <BUNDLE_FILE> -r <MY_FULL_REGISTRY_PATH> -
 podman login <MY_FULL_REGISTRY_PATH>
 ----
 
-.. Run the following script, making the <YOUR_REGISTRY> substitution as noted in the comments:
+.. Prepare and run the following script:
+
+... Substitute <YOUR_REGISTRY> with the URL of the repository.
+... For `Load to local cache`, remove the comment format "# " from the appropriate command for the Podman version you are using.
+... Run the script.
 +
 [source,console]
 ----
@@ -145,7 +149,10 @@ export PACKAGEVERSION=22.11.0-82
 export DIRECTORYNAME=acc
 for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do
   # Load to local cache
-  astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image(s): //')
+  # For Podman 3 releases, use this: 
+  # astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image(s): //')
+  # For Podman 4 releases, use this: 
+  # astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image: //')
   
   # Remove path and keep imageName.
   astraImageNoPath=$(echo ${astraImage} | sed 's:.*/::')
