@@ -125,7 +125,16 @@ Defining an app gives you more granular control over what to include in an Astra
 
 WARNING: When defining apps, ensure that you do not include a Kubernetes resource in multiple apps with protection policies. Overlapping protection policies on Kubernetes resources can cause data conflicts. <<Example: Separate Protection Policy for different releases, Read more in an example.>>
 
-CAUTION: Performing an in-place restore operation on an app that shares resources with another app can have unintended results.
+[CAUTION]
+====
+Performing an in-place restore operation on an app that shares resources with another app can have unintended results. Any resources that are shared between the apps are replaced when an in-place restore is performed on one of the apps. For example, the following scenario creates an undesirable situation when using NetApp SnapMirror replication:
+
+. You define the application "app1" in the namespace "ns1".
+. You configure a replication relationship for the source cluster containing "app1".
+. You define the application "app2" in the namespaces "ns1" and "ns2".
+. You configure a replication relationship for the destination cluster containing "app2".
+. You reverse replication for application2. This causes application1 source cluster apps to be deactivated.
+====
 
 .*Read more* about adding cluster-scoped resources to your app namespaces.
 [%collapsible]
