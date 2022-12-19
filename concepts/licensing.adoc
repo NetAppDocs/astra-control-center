@@ -14,15 +14,17 @@ summary: Learn about how the actions you can perform with Astra Control Center d
 Astra Control Center requires a license to be installed for the full app data management functionality to be enabled. When you deploy Astra Control Center without a license, a banner is displayed in the web UI, warning that system functionality is limited.
 
 
-//Astra Control Center has full functionality when a license is installed, and reduced functionality without a license. Learn about how the actions you can perform with Astra Control Center differ based on license status, and about how your use of Astra Control Center affects license consumption.
+//Astra Control Center has full functionality when a license is installed, and reduced functionality without a license. Learn about how the actions you can perform with Astra Control Center differ based on license status, and about how your use of Astra Control Center affects license consumption. You need a license to protect your applications and data. 
 
 //When no license is installed, the Astra Control Center web UI displays a banner with a message warning that system functionality is limited. In addition to the banner, web UI buttons and API functionality are disabled for the following actions and features:
 
-You need a license to protect your applications and data. Refer to Astra Control Center link:../concepts/intro.html[features] for details.
+You obtain a license in one of the following ways: 
 
-After you purchase the product, you receive a serial number and license. You can generate the NetApp license file (NLF) from the https://mysupport.netapp.com[NetApp Support Site^]. 
+* link:https://mysupport.netapp.com/site/downloads/evaluation/astra-control-center[If you are evaluating Astra Control Center, download the evaluation license file^]. An evaluation license lets you use Astra Control Center for 90 days from the date you download the license. 
 
-You can also try Astra Control Center with an evaluation license, which lets you use Astra Control Center for 90 days from the date you download the license. For details, refer to link:../get-started/requirements.html[Requirements].
+* link:../concepts/licensing.html[If you already purchased Astra Control Center, generate your NetApp license file (NLF)^] from the NetApp Support Site. After you purchase the product, you receive a serial number and license,  which you use on the Support Site.  
+
+
 
 For details about licenses needed for ONTAP storage backends, refer to link:../get-started/requirements.html[supported storage backends].
 
@@ -44,4 +46,5 @@ When you start managing an app on a cluster, all of that cluster's CPU units are
 
 
 == Find more information
+* link:../get-started/setup_overview.html#add-a-license-for-astra-control-center[Add a license when you first set up Astra Control Center]
 * link:../use/update-licenses.html[Update an existing license]

@@ -13,7 +13,7 @@ summary: Get started with Astra Control in a few steps.
 [.lead]
 This page provides a high-level overview of the steps needed to get started with Astra Control Center. The links within each step take you to a page that provides more details.
 
-Try it out! If you want to try Astra Control Center, you can use a 90-day evaluation license. Refer to link:../concepts/licensing.html[licensing information^] for details.
+k:../concepts/licensing.html[licensing information^] for details.
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png[One] Review Kubernetes cluster requirements
 
@@ -63,23 +63,17 @@ Ensure that your environment meets these requirements.
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png[Two] Download and install Astra Control Center
 
-//[role="quick-margin-list"]
-//* Download Astra Control Center from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site Downloads page^].
-//* Install Astra Control Center in your local environment.
-//+
-//Optionally, install Astra Control Center using Red Hat OperatorHub.
-//Optionally, install Astra Control Center on a supported public cloud platform, such as with a Cloud Volumes ONTAP storage backend. 
-//* Optionally, depending on your environment, complete additional link:configure-after-install.html[configuration steps].
-//[role="quick-margin-para"]
-//Learn more about link:../get-started/install_overview.html[installing Astra Control Center].
 
 //[role="quick-margin-para"]
 Complete these installation tasks. 
 
 [%interactive]
 * [ ] https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[Download Astra Control Center from the NetApp Support Site Download page^]
-* [ ] link:https://mysupport.netapp.com/site/downloads/evaluation/astra-control-center[If you are evaluating Astra Control Center, download the evaluation license file^]
-* [ ] link:../concepts/licensing.html[If you already purchased Astra Control Center, generate your license file^]
+* [ ] Obtain the NetApp license file:
+
+** link:https://mysupport.netapp.com/site/downloads/evaluation/astra-control-center[If you are evaluating Astra Control Center, download the evaluation license file^]
+
+** link:../concepts/licensing.html[If you already purchased Astra Control Center, generate your license file^]
 * [ ] link:../get-started/install_overview.html[Install Astra Control Center^]
 * [ ] link:../get-started/configure-after-install.html[Perform additional optional configuration steps^]
 
