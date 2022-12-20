@@ -162,6 +162,81 @@ You can disable the Cloud Insights connection for a Kubernetes cluster managed b
 . In the dialog box that opens, confirm the operation.
 After you confirm the operation, on the *Account* > *Connections* page, the Cloud Insights status changes to *Pending*. It take a few minutes for the status to change to *Disconnected*.
 
+
+== Connect to Prometheus 
+
+You can monitor Astra Control Center data with Prometheus. You can configure Prometheus to gather metrics from the Kubernetes cluster metrics endpoint, and you can use Prometheus also to visualize the metrics data.
+
+For details about using Prometheus, refer to their documentation at https://prometheus.io/docs/prometheus/latest/getting_started/[Getting started with Prometheus].
+
+.What you’ll need
+Make sure that you have downloaded and installed the Prometheus package on the Astra Control Center cluster or a different cluster that can communicate with the Astra Control Center cluster. Follow the instructions in the official documentation to install Prometheus:
+
+* https://prometheus.io/docs/prometheus/latest/installation/[Install Prometheus]
+
+
+Prometheus needs to be able to communicate with the Astra Control Center Kubernetes cluster. If Prometheus is not installed on the Astra Control Center cluster, you need to make sure they can communicate with the metrics service running on the Astra Control Center cluster.
+
+=== Configure Prometheus 
+Astra Control Center exposes a metrics service on TCP port 9090 in the Kubernetes cluster. You need to configure Prometheus to collect metrics from this service.
+
+.Steps 
+
+. Log into the Prometheus server and add your cluster entry into the `prometheus.yml`` file.
+
+. In the `yml`` file, add an entry similar to the following for your cluster in the `scrape_configs section`
++
+----
+job_name: '<Add your cluster name here. You can abbreviate. It just needs to be a unique name>'
+  metrics_path: /accounts/<replace with your account ID>/metrics
+  authorization:
+     credentials: <replace with your API token>
+  tls_config:
+     insecure_skip_verify: true
+  static_configs:
+    - targets: ['<replace with your astraAddress. If using FQDN, the prometheus server has to be able to resolve it>']
+----
+
+. Restart the Prometheus service: 
++
+----
+sudo systemctl restart prometheus
+----
+
+=== Access Prometheus
+Access the Prometheus URL. 
+
+
+.Steps
+
+. In a browser, enter the Prometheus URL with port 9090: 
++
+----
+<sample URL>
+----
+
+. Verify your connection by selecting *Status* > * Targets*. 
+
+=== View data in Prometheus 
+
+You can use Prometheus to view Astra Control Center data. 
+
+.Steps
+. In a browser, enter the Prometheus URL. 
+. From the Prometheus menu, select *Graph*. 
+. To use the Metrics Explorer, select the icon next to *Execute*.
+. Select `scrape_samples_scraped` and select *Execute*. 
+. To see sample scraping over time, select *Graph*. 
++
+NOTE: If multiple cluster data was collected, each cluster's metrics appear in a different color. 
+
+
+
+
+
+
+
+
 == Connect to Fluentd
 
 You can send logs (Kubernetes events) from Astra Control Center to your Fluentd endpoint. The Fluentd connection is disabled by default.
