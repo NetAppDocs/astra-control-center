@@ -32,7 +32,7 @@ Ensure that your environment meets these requirements.
 * [ ] https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend[Configure Astra Trident storage backend^]
 * [ ] https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Astra Trident storage classes^]
 * [ ] https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[Install Astra Trident volume snapshot controller and snapshot class^]
-* [ ] https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[Configure Astra Trident storage volume snapshot controller and snapshot class^]
+* [ ] https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[Configure volume snapshot class^]
 
 *ONTAP credentials*
 [%interactive]
@@ -73,7 +73,9 @@ Complete these installation tasks.
 
 ** link:https://mysupport.netapp.com/site/downloads/evaluation/astra-control-center[If you are evaluating Astra Control Center, download the evaluation license file^]
 
+
 ** link:../concepts/licensing.html[If you already purchased Astra Control Center, generate your license file^]
+
 * [ ] link:../get-started/install_overview.html[Install Astra Control Center^]
 * [ ] link:../get-started/configure-after-install.html[Perform additional optional configuration steps^]
 
