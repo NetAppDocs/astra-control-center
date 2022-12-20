@@ -11,7 +11,7 @@ summary: You can configure several optional settings to enhance your Astra Contr
 :imagesdir: ../media/use/
 
 [.lead]
-You can configure several optional settings to enhance your Astra Control Center experience. To monitor and gain insight into your complete infrastructure, create a connection to NetApp Cloud Insights. To collect Kubernetes events from systems monitored by Astra Control Center, add a Fluentd connection.
+You can configure several optional settings to enhance your Astra Control Center experience. To monitor and gain insight into your complete infrastructure, create a connection to NetApp Cloud Insights, configure Prometheus, or add a Fluentd connection
 
 If the network where you're running Astra Control Center requires a proxy for connecting to the Internet (to upload support bundles to NetApp Support Site or establish a connection to Cloud Insights), you should configure a proxy server in Astra Control Center.
 
@@ -233,13 +233,9 @@ NOTE: If multiple cluster data was collected, each cluster's metrics appear in a
 
 
 
-
-
-
-
 == Connect to Fluentd
 
-You can send logs (Kubernetes events) from Astra Control Center to your Fluentd endpoint. The Fluentd connection is disabled by default.
+You can send logs (Kubernetes events) from system monitored by Astra Control Center to your Fluentd endpoint. The Fluentd connection is disabled by default.
 
 image:fluentbit.png[Shows a conceptual diagram of event logs going from Astra to Fluentd.]
 
