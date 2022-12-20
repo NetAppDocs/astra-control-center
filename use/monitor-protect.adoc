@@ -2,16 +2,17 @@
 sidebar: sidebar
 permalink: use/monitor-protect.html
 keywords: proxy, cloud insights, connections, fluent bit, accounts, protect, security
-summary: You can configure several optional settings to enhance your Astra Control Centre experience. If the network where you're running Astra Control Center requires a proxy for connecting to the Internet, configure that proxy server in Astra Control Center. You can use NetApp Cloud Insights to monitor and gain insight into your complete infrastructure. You can add a Fluent Bit connection to collect data and logs from your containers.
+summary: You can configure several optional settings to enhance your Astra Control Centre experience. If the network where you're running Astra Control Center requires a proxy for connecting to the Internet, configure that proxy server in Astra Control Center. You can use NetApp Cloud Insights to monitor and gain insight into your complete infrastructure. You can configure several optional settings to enhance your Astra Control Center experience. To monitor and gain insight into your complete infrastructure, create a connection to NetApp Cloud Insights, configure Prometheus, or add a Fluentd connection.
+
 ---
 
-= Monitor infrastructure with Cloud Insights and Fluentd connections
+= Monitor infrastructure with Cloud Insights, Prometheus, or Fluentd connections
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/use/
 
 [.lead]
-You can configure several optional settings to enhance your Astra Control Center experience. To monitor and gain insight into your complete infrastructure, create a connection to NetApp Cloud Insights, configure Prometheus, or add a Fluentd connection
+You can configure several optional settings to enhance your Astra Control Center experience. To monitor and gain insight into your complete infrastructure, create a connection to NetApp Cloud Insights, configure Prometheus, or add a Fluentd connection.
 
 If the network where you're running Astra Control Center requires a proxy for connecting to the Internet (to upload support bundles to NetApp Support Site or establish a connection to Cloud Insights), you should configure a proxy server in Astra Control Center.
 
@@ -184,7 +185,7 @@ Astra Control Center exposes a metrics service on TCP port 9090 in the Kubernete
 
 . Log into the Prometheus server and add your cluster entry into the `prometheus.yml` file.
 
-. In the `yml` file, add an entry similar to the following for your cluster in the `scrape_configs section`
+. In the `yml` file, add an entry similar to the following for your cluster in the `scrape_configs section`:
 +
 ----
 job_name: '<Add your cluster name here. You can abbreviate. It just needs to be a unique name>'
