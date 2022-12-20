@@ -170,9 +170,9 @@ You can monitor Astra Control Center data with Prometheus. You can configure Pro
 For details about using Prometheus, refer to their documentation at https://prometheus.io/docs/prometheus/latest/getting_started/[Getting started with Prometheus].
 
 .What you’ll need
-Make sure that you have downloaded and installed the Prometheus package on the Astra Control Center cluster or a different cluster that can communicate with the Astra Control Center cluster. Follow the instructions in the official documentation to install Prometheus:
+Make sure that you have downloaded and installed the Prometheus package on the Astra Control Center cluster or a different cluster that can communicate with the Astra Control Center cluster. 
 
-* https://prometheus.io/docs/prometheus/latest/installation/[Install Prometheus]
+Follow the instructions in the official documentation to https://prometheus.io/docs/prometheus/latest/installation/[Install Prometheus].
 
 
 Prometheus needs to be able to communicate with the Astra Control Center Kubernetes cluster. If Prometheus is not installed on the Astra Control Center cluster, you need to make sure they can communicate with the metrics service running on the Astra Control Center cluster.
@@ -182,9 +182,9 @@ Astra Control Center exposes a metrics service on TCP port 9090 in the Kubernete
 
 .Steps 
 
-. Log into the Prometheus server and add your cluster entry into the `prometheus.yml`` file.
+. Log into the Prometheus server and add your cluster entry into the `prometheus.yml` file.
 
-. In the `yml`` file, add an entry similar to the following for your cluster in the `scrape_configs section`
+. In the `yml` file, add an entry similar to the following for your cluster in the `scrape_configs section`
 +
 ----
 job_name: '<Add your cluster name here. You can abbreviate. It just needs to be a unique name>'
@@ -215,7 +215,7 @@ Access the Prometheus URL.
 <sample URL>
 ----
 
-. Verify your connection by selecting *Status* > * Targets*. 
+. Verify your connection by selecting *Status* > *Targets*. 
 
 === View data in Prometheus 
 
