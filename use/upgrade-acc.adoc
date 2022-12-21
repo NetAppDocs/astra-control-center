@@ -62,7 +62,6 @@ IMPORTANT: Do not delete the Astra Control Center operator (for example, `kubect
 TIP: Perform upgrades in a maintenance window when schedules, backups, and snapshots are not running.
 
 include::../_include/download-extract-acc.adoc[lines="1..2"]
-// Replace the first actual step and replace them with better URL
 . Go to the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[Astra Control Center product downloads page^] on the NetApp Support Site. You can select the latest version or another version you want from the drop-down menu.
 include::../_include/download-extract-acc.adoc[lines="4..-1"]
 
