@@ -68,11 +68,10 @@ Ensure that your environment meets these requirements.
 Complete these installation tasks. 
 
 [%interactive]
-* [ ] https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[Download Astra Control Center from the NetApp Support Site Download page^]
+* [ ] https://mysupport.netapp.com/site/downloads/evaluation/astra-control-center[Download Astra Control Center  from the NetApp Support Site Evaluation downloads page^]
 * [ ] Obtain the NetApp license file:
 
 ** link:https://mysupport.netapp.com/site/downloads/evaluation/astra-control-center[If you are evaluating Astra Control Center, download the evaluation license file^]
-
 
 ** link:../concepts/licensing.html[If you already purchased Astra Control Center, generate your license file^]
 
