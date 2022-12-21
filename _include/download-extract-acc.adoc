@@ -1,0 +1,18 @@
+== Download and extract Astra Control Center
+
+. Go to the https://mysupport.netapp.com/site/downloads/evaluation/astra-control-center[Astra Control Center Evaluation downloads page^] on the NetApp Support Site.
+. Download the bundle containing Astra Control Center (`astra-control-center-[version].tar.gz`).
+. (Recommended, but optional) Download the certificates and signatures bundle for Astra Control Center (`astra-control-center-certs-[version].tar.gz`) to verify the signature of the bundle:
++
+[source,console]
+----
+tar -vxzf astra-control-center-certs-[version].tar.gz
+openssl dgst -sha256 -verify certs/AstraControlCenter-public.pub -signature certs/astra-control-center-[version].tar.gz.sig astra-control-center-[version].tar.gz
+----
+The output will show `Verified OK` after successful verification.
+. Extract the images from the Astra Control Center bundle:
++
+[source,console]
+----
+tar -vxzf astra-control-center-[version].tar.gz
+----

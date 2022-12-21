@@ -51,8 +51,7 @@ kubectl get apiservices
 .About this task
 The Astra Control Center upgrade process guides you through the following high-level steps:
 
-* <<Download the Astra Control Center bundle>>
-* <<Unpack the bundle>>
+* <<Download and extract Astra Control Center>>
 * <<Add the images to your local registry>>
 * <<Install the updated Astra Control Center operator>>
 * <<Upgrade Astra Control Center>>
@@ -62,23 +61,10 @@ IMPORTANT: Do not delete the Astra Control Center operator (for example, `kubect
 
 TIP: Perform upgrades in a maintenance window when schedules, backups, and snapshots are not running.
 
-== Download the Astra Control Center bundle
-
-. Download the Astra Control Center bundle from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^]. The file name is similar to the following: `astra-control-center-[version].tar.gz`.
-
-. (Optional) Verify the signature of the bundle:
-+
-----
-openssl dgst -sha256 -verify AstraControlCenter-public.pub -signature astra-control-center-[version].tar.gz.sig astra-control-center-[version].tar.gz
-----
-
-== Unpack the bundle
-
-. Extract the images:
-+
-----
-tar -vxzf astra-control-center-[version].tar.gz
-----
+include::../_include/download-extract-acc.adoc[lines="1..2"]
+// Replace the first actual step and replace them with better URL
+. Go to the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[Astra Control Center product downloads page^] on the NetApp Support Site. You can select the latest version or another version you want from the drop-down menu.
+include::../_include/download-extract-acc.adoc[lines="4..-1"]
 
 == Verify that you have the NetApp Astra kubectl plugin installed
 The NetApp Astra kubectl command line plugin saves time when performing common tasks associated with deploying and upgrading Astra Control Center.
