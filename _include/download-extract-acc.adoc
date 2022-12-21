@@ -7,6 +7,10 @@
 [source,console]
 ----
 tar -vxzf astra-control-center-certs-[version].tar.gz
+----
++
+[source,console]
+----
 openssl dgst -sha256 -verify certs/AstraControlCenter-public.pub -signature certs/astra-control-center-[version].tar.gz.sig astra-control-center-[version].tar.gz
 ----
 The output will show `Verified OK` after successful verification.
