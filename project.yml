@@ -52,7 +52,7 @@ homepage:
         - title: Release notes
           url: /release-notes/rn_overview.html
         - title: Try it out
-          url: /get-started/setup_overview.html#add-a-license-for-astra-control-center
+          url: /get-started/quick-start.html
         - title: Install Astra Control Center
           url: /get-started/install_acc.html
     - title: Use Astra Control Center
