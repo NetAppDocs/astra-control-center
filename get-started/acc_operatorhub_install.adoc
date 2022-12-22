@@ -48,29 +48,14 @@ oc create namespace netapp-acc-operator
 
 .Steps
 
-* <<Download and unpack the Astra Control Center bundle>>
+* <<Download and extract Astra Control Center>>
 * <<Install the NetApp Astra kubectl plugin>>
 * <<Add the images to your local registry>>
 * <<Find the operator install page>>
 * <<Install the operator>>
 * <<Install Astra Control Center>>
 
-== Download and unpack the Astra Control Center bundle
-
-. Download the Astra Control Center bundle (`astra-control-center-[version].tar.gz`) from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
-. Download the zip of Astra Control Center certificates and keys from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[NetApp Support Site^].
-. (Optional) Verify the signature of the bundle:
-+
-[source,console]
-----
-openssl dgst -sha256 -verify AstraControlCenter-public.pub -signature astra-control-center-[version].tar.gz.sig astra-control-center-[version].tar.gz
-----
-. Extract the images:
-+
-[source,console]
-----
-tar -vxzf astra-control-center-[version].tar.gz
-----
+include::../_include/download-extract-acc.adoc[]
 
 == Install the NetApp Astra kubectl plugin
 
