@@ -83,76 +83,8 @@ ls kubectl-astra/
 cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 ----
 
-== Add the images to your local registry
+include::../_include/docker-podman-add-images.adoc[]
 
-. Complete the appropriate step sequence for your container engine: 
-
-// start tabbed block for docker and podman approaches
-
-[role="tabbed-block"]
-====
-
-.Docker
---
-.. Change to the root directory of the tarball. You should see this file and directory:
-+
-`acc.manifest.bundle.yaml`
-`acc/`
-
-.. [[substep_image_local_registry_push]]Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the `push-images` command:
-+
-
-* Replace <BUNDLE_FILE> with the name of the Astra Control bundle file (`acc.manifest.bundle.yaml`).
-* Replace <MY_FULL_REGISTRY_PATH> with the URL of the Docker repository; for example, https://exampledownloads.jfrog.io/docker-astra-control/v1/.
-* Replace <MY_REGISTRY_USER> with the user name.
-* Replace <MY_REGISTRY_TOKEN> with an authorized token for the registry.
-+
-[source,console]
-----
-kubectl astra packages push-images -m <BUNDLE_FILE> -r <MY_FULL_REGISTRY_PATH> -u <MY_REGISTRY_USER> -p <MY_REGISTRY_TOKEN>
-----
---
-
-.Podman
---
-.. Change to the root directory of the tarball. You should see this file and directory:
-+
-`acc.manifest.bundle.yaml`
-`acc/`
-
-.. Log in to your registry:
-+
-[source,console]
-----
-podman login <MY_FULL_REGISTRY_PATH>
-----
-.. Run the following script, making the <YOUR_REGISTRY> substitution as noted in the comments:
-+
-[source,console]
-----
-export REGISTRY=<YOUR_REGISTRY>
-export PACKAGENAME=acc
-export PACKAGEVERSION=22.11.0-82
-export DIRECTORYNAME=acc
-for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do
-  # Load to local cache
-  astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image(s): //')
- 
-  # Remove path and keep imageName.
-  astraImageNoPath=$(echo ${astraImage} | sed 's:.*/::')
- 
-  # Tag with local image repo.
-  podman tag ${astraImage} ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
- 
-  # Push to the local repo.
-  podman push ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
-done
-----
---
-
-====
-
-// end tabbed block
 
 == Find the operator install page
 

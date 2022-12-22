@@ -52,6 +52,7 @@ kubectl get apiservices
 The Astra Control Center upgrade process guides you through the following high-level steps:
 
 * <<Download and extract Astra Control Center>>
+* <<Remove the NetApp Astra kubectl plugin and install it again>>
 * <<Add the images to your local registry>>
 * <<Install the updated Astra Control Center operator>>
 * <<Upgrade Astra Control Center>>
@@ -65,88 +66,37 @@ include::../_include/download-extract-acc.adoc[lines="1..2"]
 . Go to the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[Astra Control Center product downloads page^] on the NetApp Support Site. You can select the latest version or another version you want from the drop-down menu.
 include::../_include/download-extract-acc.adoc[lines="4..-1"]
 
-== Verify that you have the NetApp Astra kubectl plugin installed
+== Remove the NetApp Astra kubectl plugin and install it again
+
 The NetApp Astra kubectl command line plugin saves time when performing common tasks associated with deploying and upgrading Astra Control Center.
 
-. Use the following command to determine if you have the plug-in installed:
+. Determine if you have the plug-in installed:
 +
 ----
 kubectl astra
 ----
 
-This command should provide the kubectl plugin help. If the command returns an error, install the plugin using these link:../get-started/install_acc.html#install-the-netapp-astra-kubectl-plugin[instructions^].
+. Take one of these actions:
+** If the plugin is installed, the command should return the kubectl plugin help. To remove an existing version of kubectl-astra, run this command: `delete /usr/local/bin/kubectl-astra`. 
+** If the command returns an error, the plugin is not installed and you can proceed to the next step to install it.
 
-== Add the images to your local registry
-
-. Complete the appropriate step sequence for your container engine:
-
-// start tabbed block for docker and podman approaches
-
-[role="tabbed-block"]
-====
-
-.Docker
---
-.. Change to the root directory of the tarball. You should see this file and directory:
+. Install the plugin:
+.. List the available NetApp Astra kubectl plugin binaries, and note the name of the file you need for your operating system and CPU architecture: 
 +
-`acc.manifest.bundle.yaml`
-`acc/`
-
-.. Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the `push-images` command:
-+
-
-* Replace <BUNDLE_FILE> with the name of the Astra Control bundle file (`acc.manifest.bundle.yaml`).
-* Replace <MY_FULL_REGISTRY_PATH> with the URL of the Docker repository; for example, https://exampledownloads.jfrog.io/docker-astra-control/v1/.
-* Replace <MY_REGISTRY_USER> with the user name.
-* Replace <MY_REGISTRY_TOKEN> with an authorized token for the registry.
+NOTE: The kubectl plugin library is part of the tar bundle and is extracted into the folder `kubectl-astra`.
 +
 [source,console]
 ----
-kubectl astra packages push-images -m <BUNDLE_FILE> -r <MY_FULL_REGISTRY_PATH> -u <MY_REGISTRY_USER> -p <MY_REGISTRY_TOKEN>
+ls kubectl-astra/
 ----
---
-
-.Podman
---
-.. Change to the root directory of the tarball. You should see this file and directory:
-+
-`acc.manifest.bundle.yaml`
-`acc/`
-
-.. Log in to your registry:
+.. Move the correct binary into the current path and rename it to `kubectl-astra`:
 +
 [source,console]
 ----
-podman login <MY_FULL_REGISTRY_PATH>
+cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 ----
 
-.. Run the following script, making the <YOUR_REGISTRY> substitution as noted in the comments:
-+
-[source,console]
-----
-export REGISTRY=<YOUR_REGISTRY>
-export PACKAGENAME=acc
-export PACKAGEVERSION=22.11.0-82
-export DIRECTORYNAME=acc
-for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do
-  # Load to local cache
-  astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image(s): //')
-  
-  # Remove path and keep imageName.
-  astraImageNoPath=$(echo ${astraImage} | sed 's:.*/::')
-
-  # Tag with local image repo.
-  podman tag ${astraImage} ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
-
-  # Push to the local repo.
-  podman push ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
-done
-----
---
-
-====
-
-// end tabbed block
+include::../_include/docker-podman-add-images.adoc[]
 
 == Install the updated Astra Control Center operator
 
