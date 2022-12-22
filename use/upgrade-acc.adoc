@@ -53,6 +53,7 @@ The Astra Control Center upgrade process guides you through the following high-l
 
 * <<Download the Astra Control Center bundle>>
 * <<Unpack the bundle>>
+* <<Remove the NetApp Astra kubectl plugin and install it again>>
 * <<Add the images to your local registry>>
 * <<Install the updated Astra Control Center operator>>
 * <<Upgrade Astra Control Center>>
@@ -80,16 +81,35 @@ openssl dgst -sha256 -verify AstraControlCenter-public.pub -signature astra-cont
 tar -vxzf astra-control-center-[version].tar.gz
 ----
 
-== Verify that you have the NetApp Astra kubectl plugin installed
+== Remove the NetApp Astra kubectl plugin and install it again
+
 The NetApp Astra kubectl command line plugin saves time when performing common tasks associated with deploying and upgrading Astra Control Center.
 
-. Use the following command to determine if you have the plug-in installed:
+. Determine if you have the plug-in installed:
 +
 ----
 kubectl astra
 ----
 
-This command should provide the kubectl plugin help. If the command returns an error, install the plugin using these link:../get-started/install_acc.html#install-the-netapp-astra-kubectl-plugin[instructions^].
+. Take one of these actions:
+** If the plugin is installed, the command should return the kubectl plugin help. To remove an existing version of kubectl-astra, run this command: `delete /usr/local/bin/kubectl-astra`. 
+** If the command returns an error, the plugin is not installed and you can proceed to the next step to install it.
+
+. Install the plugin:
+.. List the available NetApp Astra kubectl plugin binaries, and note the name of the file you need for your operating system and CPU architecture: 
++
+NOTE: The kubectl plugin library is part of the tar bundle and is extracted into the folder `kubectl-astra`.
++
+[source,console]
+----
+ls kubectl-astra/
+----
+.. Move the correct binary into the current path and rename it to `kubectl-astra`:
++
+[source,console]
+----
+cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
+----
 
 == Add the images to your local registry
 
@@ -111,7 +131,7 @@ This command should provide the kubectl plugin help. If the command returns an e
 +
 
 * Replace <BUNDLE_FILE> with the name of the Astra Control bundle file (`acc.manifest.bundle.yaml`).
-* Replace <MY_FULL_REGISTRY_PATH> with the URL of the Docker repository; for example, https://exampledownloads.jfrog.io/docker-astra-control/v1/.
+* Replace <MY_FULL_REGISTRY_PATH> with the URL of the Docker repository; for example, https://docker-registry.
 * Replace <MY_REGISTRY_USER> with the user name.
 * Replace <MY_REGISTRY_TOKEN> with an authorized token for the registry.
 +
@@ -132,38 +152,56 @@ kubectl astra packages push-images -m <BUNDLE_FILE> -r <MY_FULL_REGISTRY_PATH> -
 +
 [source,console]
 ----
-podman login <MY_FULL_REGISTRY_PATH>
+podman login <YOUR_REGISTRY>
 ----
 
 .. Prepare and run the following script:
 
-... Substitute <YOUR_REGISTRY> with the URL of the repository.
-... For `Load to local cache`, remove the comment format "# " from the appropriate command for the Podman version you are using.
-... Run the script.
+... Substitute <MY_FULL_REGISTRY_PATH> with the URL of the repository that includes any sub-directories.
+... Run one of the following scripts that is customized for the version of Podman you use.
++
+[source]
+[subs="specialcharacters,quotes"]
+----
+*Podman 4*
+----
 +
 [source,console]
 ----
-export REGISTRY=<YOUR_REGISTRY>
+export REGISTRY=<MY_FULL_REGISTRY_PATH>
 export PACKAGENAME=acc
 export PACKAGEVERSION=22.11.0-82
 export DIRECTORYNAME=acc
-for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do
-  # Load to local cache
-  # For Podman 3 releases, use this: 
-  # astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image(s): //')
-  # For Podman 4 releases, use this: 
-  # astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image: //')
-  
-  # Remove path and keep imageName.
-  astraImageNoPath=$(echo ${astraImage} | sed 's:.*/::')
-
-  # Tag with local image repo.
-  podman tag ${astraImage} ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
-
-  # Push to the local repo.
-  podman push ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
+for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do 
+astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image: //')
+astraImageNoPath=$(echo ${astraImage} | sed 's:.*/::')
+podman tag ${astraImage} ${REGISTRY}/${PACKAGEVERSION}/${astraImageNoPath}
+podman push ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
 done
 ----
++
+[source]
+[subs="specialcharacters,quotes"]
+----
+*Podman 3*
+----
++
+[source,console]
+----
+export REGISTRY=<MY_FULL_REGISTRY_PATH>
+export PACKAGENAME=acc
+export PACKAGEVERSION=22.11.0-82
+export DIRECTORYNAME=acc
+for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do 
+astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image(s): //')
+astraImageNoPath=$(echo ${astraImage} | sed 's:.*/::')
+podman tag ${astraImage} ${REGISTRY}/${PACKAGEVERSION}/${astraImageNoPath}
+podman push ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
+done
+----
+
++
+NOTE: The image path the script creates should resemble the following, depending on your registry configuration: `https://netappdownloads.jfrog.io/docker-astra-control-staging/v5/netapp/astra/acc/1067-integration/acc-operator:138-integration`
 --
 
 ====
