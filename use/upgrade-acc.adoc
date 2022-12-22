@@ -155,10 +155,7 @@ kubectl astra packages push-images -m <BUNDLE_FILE> -r <MY_FULL_REGISTRY_PATH> -
 podman login <YOUR_REGISTRY>
 ----
 
-.. Prepare and run the following script:
-
-... Substitute <MY_FULL_REGISTRY_PATH> with the URL of the repository that includes any sub-directories.
-... Run one of the following scripts that is customized for the version of Podman you use.
+.. Prepare and run one of the following scripts that is customized for the version of Podman you use. Substitute <MY_FULL_REGISTRY_PATH> with the URL of your repository that includes any sub-directories.
 +
 [source]
 [subs="specialcharacters,quotes"]
