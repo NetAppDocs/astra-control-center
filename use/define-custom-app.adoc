@@ -1,4 +1,4 @@
 ---
-permalink: use/define-custom-app.html
-redirect: use/manage-apps.html
+permalink: ../use/define-custom-app.html
+redirect: ../use/manage-apps.html
 ---

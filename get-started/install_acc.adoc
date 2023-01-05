@@ -317,8 +317,8 @@ NOTE: An annotated sample YAML follows these steps.
 NOTE: Do not use `http://` or `https://` in the address. Copy this FQDN for use in a <<Log in to the Astra Control Center UI,later step>>.
 
 .. *autoSupport*: Change `enrolled` for AutoSupport to `false` for sites without internet connectivity or retain `true` for connected sites.
-.. *email*: Change the `email` string to the default initial administrator address. Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>.
-.. *(Optional) firstName and LastName*: Add a first name `firstName` and last name `lastName` of the user associated with the account. You can perform this step now or later within the UI.
+.. *email*: Change the `email` string to the default initial administrator address. Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>. This email address will be used for the initial account to log in to the UI.
+.. *(Optional) firstName and LastName*: Add a first name `firstName` and last name `lastName` of the default initial administrator associated with the account. You can perform this step now or later within the UI. The names used here will be visible in a heading in the UI after your first login.
 .. *imageRegistry*: Change `[your_registry_path]` to the registry path where you pushed the images in the <<Install the Astra Control Center operator,previous step>>.
 +
 IMPORTANT: If you are using a registry that does not require authorization, you must delete the `secret` line within `imageRegistry` or the installation will fail.
