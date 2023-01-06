@@ -308,7 +308,7 @@ vim astra_control_center.yaml
 +
 NOTE: An annotated sample YAML follows these steps.
 
-.. Modify the following required settings:
+. Modify the following required settings:
 +
 .accountName
 [%collapsible]
@@ -333,7 +333,7 @@ NOTE: An annotated sample YAML follows these steps.
 |Setting |Guidance |Type |Example
 
 | astraAddress
-| Change the `astraAddress` string to the FQDN (recommended) or IP address you want to use in your browser to access Astra Control Center. This address defines how Astra Control Center will be found in your data center and is the same FQDN or IP address you provisioned from your load balancer when you completed link:requirements.html[Astra Control Center requirements].
+| Change the `astraAddress` string to the FQDN (recommended) or IP address you want to use in your browser to access Astra Control Center. This address defines how Astra Control Center will be found in your data center and is the same FQDN or IP address you provisioned from your load balancer when you completed link:requirements.html[Astra Control Center requirements^].
 
 NOTE: Do not use `http://` or `https://` in the address. Copy this FQDN for use in a <<Log in to the Astra Control Center UI,later step>>.
 | string
@@ -410,7 +410,7 @@ Your selections in this section define the container image registry that is host
 |Setting |Use |Guidance |Type |Example
 
 | imageRegistry.name
-| Required if you are using imageRegistry
+| Required
 | The name of the image registry where you pushed the images in the <<Install the Astra Control Center operator,previous step>>. Do not use `http://` or `https://` in the registry name.
 | string
 | example.registry.com/astra
@@ -434,7 +434,7 @@ IMPORTANT: If you are using a registry that does not require authorization, you 
 |Setting |Guidance |Type |Example
 
 | storageClass
-| Change the `storageClass` value from the default value of 'ontap-gold' to another Trident storageClass resource as required by your installation. Run the command `kubectl get sc` to determine your existing configured storage classes. This is the storage class that will be used for PVCs. If it is not set, the default storage class will be used.
+| Change the `storageClass` value from the default value of `ontap-gold` to another Trident storageClass resource as required by your installation. Run the command `kubectl get sc` to determine your existing configured storage classes. This is the storage class that will be used for PVCs. If it is not set, the default storage class will be used.
 | string
 | ontap-gold (this is the default value)
 
@@ -452,14 +452,14 @@ IMPORTANT: If you are using a registry that does not require authorization, you 
 | Use one of the following ingress types:
 
 *Generic* (`ingressType: "Generic"`) (Default)
-Use this option when you have another ingress controller in use or would prefer to use your own ingress controller. After Astra Control Center is deployed, you will need to configure the link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller] to expose Astra Control Center with a URL.
+Use this option when you have another ingress controller in use or would prefer to use your own ingress controller. After Astra Control Center is deployed, you will need to configure the link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller^] to expose Astra Control Center with a URL.
 
 *AccTraefik* (`ingressType: "AccTraefik"`)
 Use this option when you would prefer not to configure an ingress controller. This deploys the Astra Control Center `traefik` gateway as a Kubernetes LoadBalancer type service.
 
 Astra Control Center uses a service of the type "LoadBalancer" (`svc/traefik` in the Astra Control Center namespace), and requires that it be assigned an accessible external IP address. If load balancers are permitted in your environment and you don't already have one configured, you can use MetalLB or another external service load balancer to assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
 
-NOTE: For details about the service type of "LoadBalancer" and ingress, see link:../get-started/requirements.html[Requirements].
+NOTE: For details about the service type of "LoadBalancer" and ingress, see link:../get-started/requirements.html[Requirements^].
 
 | string
 | Generic (this is the default value)
@@ -521,7 +521,7 @@ spec:
   astraResourcesScaler: "Default"
   additionalValues: {}
   crds:
-    externalTraefik: false
+    *externalTraefik: false*
     *externalCertManager: false*
 ----
 

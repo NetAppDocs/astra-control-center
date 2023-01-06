@@ -160,8 +160,6 @@ NOTE: If you use a registry that requires authentication, <<Create a registry se
 NOTE: If a default storage class is configured, ensure that it is the only storage class that has the default annotation.
 
 .. Define CRD handling preferences.
-+
-NOTE: For more information on CRD options, refer to https://docs.netapp.com/us-en/astra-control-center/get-started/acc_cluster_cr_options.html[this section^].
 
 . Select the YAML view to review the settings you have selected.
 . Select `Create`.
