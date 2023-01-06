@@ -301,9 +301,6 @@ kubectl get pods -n netapp-acc-operator
 
 . Edit the Astra Control Center custom resource (CR) file (`astra_control_center.yaml`) to make account, AutoSupport, registry, and other necessary configurations:
 +
-NOTE: For additional customizations, familiarize yourself with all link:../get-started/acc_cluster_cr_options.html[CR options and their potential values^] to ensure you deploy Astra Control Center correctly for your environment.
-
-+
 [source,console]
 ----
 vim astra_control_center.yaml
@@ -311,20 +308,164 @@ vim astra_control_center.yaml
 +
 NOTE: An annotated sample YAML follows these steps.
 
-.. *accountName*: Change the `accountName` string to the name you want to associate with the account.
-.. *astraAddress*: Change the `astraAddress` string to the FQDN (recommended) or IP address you want to use in your browser to access Astra Control Center. This is the same FQDN or IP address you provisioned from your load balancer when you completed link:requirements.html[Astra Control Center requirements]. 
+.. Modify the following required settings:
 +
+.accountName
+[%collapsible]
+====
+|===
+|Setting |Use |Description |Type |Example
+
+
+| accountName
+| Required
+| Change the `accountName` string to the name you want to associate with the Astra Control Center account. There can be only one accountName.
+| string
+| Example
+
+|===
+====
+// End snippet
++
+.astraAddress
+[%collapsible]
+====
+|===
+|Setting |Use |Description |Type |Example
+
+| astraAddress
+| Required
+| Change the `astraAddress` string to the FQDN (recommended) or IP address you want to use in your browser to access Astra Control Center. This address defines how Astra Control Center will be found in your data center and is the same FQDN or IP address you provisioned from your load balancer when you completed link:requirements.html[Astra Control Center requirements].
+
 NOTE: Do not use `http://` or `https://` in the address. Copy this FQDN for use in a <<Log in to the Astra Control Center UI,later step>>.
+| string
+| astra.example.com
 
-.. *autoSupport*: Change `enrolled` for AutoSupport to `false` for sites without internet connectivity or retain `true` for connected sites.
-.. *email*: Change the `email` string to the default initial administrator address. Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>. This email address will be used for the initial account to log in to the UI.
-.. *(Optional) firstName and LastName*: Add a first name `firstName` and last name `lastName` of the default initial administrator associated with the account. You can perform this step now or later within the UI. The names used here will be visible in a heading in the UI after your first login.
-.. *imageRegistry*: Change `[your_registry_path]` to the registry path where you pushed the images in the <<Install the Astra Control Center operator,previous step>>.
+|===
+====
+// End snippet
 +
-IMPORTANT: If you are using a registry that does not require authorization, you must delete the `secret` line within `imageRegistry` or the installation will fail.
+.autoSupport
+[%collapsible]
+====
+|===
+|Setting |Use |Description |Type |Example
 
-.. *(Optional) storageClass*: Change the `storageClass` value from 'ontap-gold' to another Trident storageClass resource as required by your installation. Run the command `kubectl get sc` to determine your existing configured storage classes.
-.. *ingressType*: Use one of the following ingress types:
+| autoSupport
+| Required
+| Your selections in this section determine whether you will participate in NetApp's pro-active support application, NetApp Active IQ., and where data is sent. An internet connection is required (port 442), and all support data is anonymized.
+| Undefined
+|
+
+| autoSupport.enrolled
+| Optional, but either `enrolled` or `url` fields must be selected
+| Change `enrolled` for AutoSupport to `false` for sites without internet connectivity or retain `true` for connected sites. A setting of `true` enables  anonymous data to be sent to NetApp for support purposes. The default election is `false` and indicates no support data will be sent to NetApp.
+| Boolean
+| false (this value is the default)
+
+| autoSupport.url
+| Optional, but either `enrolled` or `url` fields must be selected
+| This URL determines where the anonymous data will be sent.
+| string
+| https://support.netapp.com/asupprod/post/1.0/postAsup
+
+|===
+====
+// End snippet
++
+.email
+[%collapsible]
+====
+|===
+|Setting |Use |Description |Type |Example
+
+| email
+| Required
+| Change the `email` string to the default initial administrator address. Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>. This email address will be used as the username for the initial account to log in to the UI and will be notified of events in Astra Control.
+| string
+| admin@example.com
+
+|===
+====
+// End snippet
++
+.(Optional) firstName and LastName
+[%collapsible]
+====
+|===
+|Setting |Use |Description |Type |Example
+
+| firstName
+| Required
+| The first name of the default initial administrator associated with the Astra account. The name used here will be visible in a heading in the UI after your first login.
+| string
+| SRE
+
+| lastName
+| Required
+| The last name of the default initial administrator associated with the Astra account. The name used here will be visible in a heading in the UI after your first login.
+| string
+| Admin
+
+|===
+====
+// End snippet
++
+.imageRegistry
+[%collapsible]
+====
+|===
+|Setting |Use |Description |Type |Example
+
+| imageRegistry
+| Optional
+| Your selections in this section define container image registry that is hosting the Astra application images, Astra Control Center Operator, and Astra Control Center Helm Repository.
+| Undefined
+|
+
+| imageRegistry.name
+| Required if you are using imageRegistry
+| The name of the image registry where you pushed the images in the <<Install the Astra Control Center operator,previous step>>. Do not use `http://` or `https://` in the registry name.
+| string
+| example.registry.com/astra
+
+| imageRegistry.secret
+| Required if you are using imageRegistry that requires a secret
+| The name of the Kubernetes secret used to authenticate with the image registry.
+
+IMPORTANT: If you are using a registry that does not require authorization, you must delete this `secret` line within `imageRegistry` or the installation will fail.
+| string
+| astra-registry-cred
+
+|===
+====
+// End snippet
++
+.(Optional) storageClass
+[%collapsible]
+====
+|===
+|Setting |Use |Description |Type |Example
+
+| storageClass
+| Optional (this is the default value)
+| Change the `storageClass` value from the default value of 'ontap-gold' to another Trident storageClass resource as required by your installation. Run the command `kubectl get sc` to determine your existing configured storage classes. This is the storage class that will be used for PVCs. If it is not set, the default storage class will be used.
+| string
+| ontap-gold
+
+|===
+====
+// End snippet
++
+.ingressType
+[%collapsible]
+====
+|===
+|Setting |Use |Description |Type |Example
+
+| ingressType
+| Optional
+| Use one of the following ingress types:
 +
 * *Generic* (`ingressType: "Generic"`) (Default)
 +
@@ -338,7 +479,42 @@ Astra Control Center uses a service of the type "LoadBalancer" (`svc/traefik` in
 +
 NOTE: For details about the service type of "LoadBalancer" and ingress, see link:../get-started/requirements.html[Requirements].
 
-.. *crds*: If you use an external cert-manager, change `externalCertManager` to `true`. The default `false` causes Astra Control Center to install its own cert-manager during installation.
+| string
+| Generic (this is the default value)
+
+|===
+====
+// End snippet
++
+.crds
+[%collapsible]
+====
+|===
+|Setting |Use |Description |Type |Example
+
+| crds
+| Undefined
+| Your selections in this section determine how Astra Control Center should handle CRDs.
+| Undefined
+|
+
+| crds.externalCertManager
+| Optional
+| If you use an external cert-manager, change `externalCertManager` to `true`. The default `false` causes Astra Control Center to install its own cert-manager CRDs during installation. 
+
+CRDs are cluster-wide objects and installing them might have an impact on other parts of the cluster. You can use this flag to signal to Astra Control Center that these CRDs will be installed and managed by the cluster administrator outside of Astra Control Center.
+| Boolean
+| False (this value is the default)
+
+| crds.externalTraefik
+| Optional
+| By default, Astra Control Center will install required Traefik CRDs. CRDs are cluster-wide objects and installing them might have an impact on other parts of the cluster. You can use this flag to signal to Astra Control Center that these CRDs will be installed and managed by the cluster administrator outside of Astra Control Center.
+| Boolean
+| False (this value is the default)
+
+|===
+====
+// End snippet
 
 [source]
 [subs="specialcharacters,quotes"]
