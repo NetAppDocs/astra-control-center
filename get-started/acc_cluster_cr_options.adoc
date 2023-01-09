@@ -1,0 +1,4 @@
+---
+permalink: get-started/acc_cluster_cr_options.html
+redirect: astra-control-center/get-started/install_acc.html#configure-astra-control-center
+---
