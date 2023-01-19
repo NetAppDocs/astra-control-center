@@ -491,9 +491,9 @@ CRDs are cluster-wide objects and installing them might have an impact on other 
 ====
 // End snippet
 
-. Modify or understand additional settings:
+. Modify or understand additional optional settings:
 +
-.Optional settings
+.astraVersion
 [%collapsible]
 ====
 |===
@@ -503,11 +503,29 @@ CRDs are cluster-wide objects and installing them might have an impact on other 
 | The version of Astra Control Center to deploy. No action is needed for this setting as the value will be pre-populated.
 | string
 | 22.11.0-82
+|===
+====
+// End snippet
++
+.volumeReclaimPolicy
+[%collapsible]
+====
+|===
+|Setting |Guidance |Type |Example
 
 | volumeReclaimPolicy
 | Reclaim policy to be set for persistent volumes.
 | string
 | Retain (This is the default value)
+|===
+====
+// End snippet
++
+.astraResourcesScaler
+[%collapsible]
+====
+|===
+|Setting |Guidance |Type |Example
 
 | astraResourcesScaler
 | Scaling options for AstraControlCenter Resource limits. By default, Astra Control Center deploys with resource requests set for most of the components within Astra. This configuration allows the Astra Control Center software stack to perform better in environments under increased application load and scale.
@@ -518,7 +536,6 @@ However, in scenarios using smaller development or test clusters, the CR field A
 |===
 ====
 // End snippet
-
 
 
 [source]
