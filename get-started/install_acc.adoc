@@ -507,7 +507,7 @@ a| * Generic (this is the default value)
 | astraResourcesScaler
 | Scaling options for AstraControlCenter Resource limits. By default, Astra Control Center deploys with resource requests set for most of the components within Astra. This configuration allows the Astra Control Center software stack to perform better in environments under increased application load and scale.
 
-However, in scenarios using smaller development or test clusters, the CR field AstraResourcesScalar may be set to `Off`. This disables resource requests and allows for deployment on smaller clusters.
+However, in scenarios using smaller development or test clusters, the CR field `astraResourcesScalar` may be set to `Off`. This disables resource requests and allows for deployment on smaller clusters.
 | string
 a| * Default (This is the default value)
 * Off
