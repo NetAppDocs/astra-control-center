@@ -308,7 +308,7 @@ vim astra_control_center.yaml
 +
 NOTE: An annotated sample YAML follows these steps.
 
-. Modify or confirm the following required settings:
+. Modify or confirm the following settings:
 +
 .accountName
 [%collapsible]
@@ -322,6 +322,20 @@ NOTE: An annotated sample YAML follows these steps.
 | string
 | Example
 
+|===
+====
+// End snippet
++
+.astraVersion
+[%collapsible]
+====
+|===
+|Setting |Guidance |Type |Example
+
+| astraVersion
+| The version of Astra Control Center to deploy. No action is needed for this setting as the value will be pre-populated.
+| string
+| 22.11.0-82
 |===
 ====
 // End snippet
@@ -346,7 +360,7 @@ NOTE: Do not use `http://` or `https://` in the address. Copy this FQDN for use 
 .autoSupport
 [%collapsible]
 ====
-Your selections in this section determine whether you will participate in NetApp's pro-active support application, NetApp Active IQ., and where data is sent. An internet connection is required (port 442), and all support data is anonymized.
+Your selections in this section determine whether you will participate in NetApp's pro-active support application, NetApp Active IQ, and where data is sent. An internet connection is required (port 442), and all support data is anonymized.
 |===
 |Setting |Use |Guidance |Type |Example
 
@@ -443,6 +457,21 @@ NOTE: If a default storage class is configured, ensure that it is the only stora
 ====
 // End snippet
 +
+.volumeReclaimPolicy
+[%collapsible]
+====
+|===
+|Setting |Guidance |Type |Options
+
+| volumeReclaimPolicy
+| This sets the reclaim policy for Astra's PVs. Setting this policy to `Retain` retains persistent volumes after Astra is deleted. Setting this policy to `Delete` deletes persistent volumes after astra is deleted. If this value is not set, the PVs are retained. 
+| string
+a| * Retain (This is the default value)
+* Delete
+|===
+====
+// End snippet
++
 .ingressType
 [%collapsible]
 ====
@@ -465,6 +494,23 @@ NOTE: For details about the service type of "LoadBalancer" and ingress, see link
 | string
 a| * Generic (this is the default value)
 * AccTraefik
+|===
+====
+// End snippet
++
+.astraResourcesScaler
+[%collapsible]
+====
+|===
+|Setting |Guidance |Type |Options
+
+| astraResourcesScaler
+| Scaling options for AstraControlCenter Resource limits. By default, Astra Control Center deploys with resource requests set for most of the components within Astra. This configuration allows the Astra Control Center software stack to perform better in environments under increased application load and scale.
+
+However, in scenarios using smaller development or test clusters, the CR field AstraResourcesScalar may be set to `Off`. This disables resource requests and allows for deployment on smaller clusters.
+| string
+a| * Default (This is the default value)
+* Off
 |===
 ====
 // End snippet
@@ -492,54 +538,6 @@ CRDs are cluster-wide objects and installing them might have an impact on other 
 ====
 // End snippet
 
-. Modify or understand additional optional settings:
-+
-.astraVersion
-[%collapsible]
-====
-|===
-|Setting |Guidance |Type |Example
-
-| astraVersion
-| The version of Astra Control Center to deploy. No action is needed for this setting as the value will be pre-populated.
-| string
-| 22.11.0-82
-|===
-====
-// End snippet
-+
-.volumeReclaimPolicy
-[%collapsible]
-====
-|===
-|Setting |Guidance |Type |Options
-
-| volumeReclaimPolicy
-| This sets the reclaim policy for Astra's PVs. Setting this policy to `Retain` retains persistent volumes after Astra is deleted. Setting this policy to `Delete` deletes persistent volumes after astra is deleted. If this value is not set, the PVs are retained. 
-| string
-a| * Retain (This is the default value)
-* Delete
-|===
-====
-// End snippet
-+
-.astraResourcesScaler
-[%collapsible]
-====
-|===
-|Setting |Guidance |Type |Example
-
-| astraResourcesScaler
-| Scaling options for AstraControlCenter Resource limits. By default, Astra Control Center deploys with resource requests set for most of the components within Astra. This configuration allows the Astra Control Center software stack to perform better in environments under increased application load and scale.
-
-However, in scenarios using smaller development or test clusters, the CR field AstraResourcesScalar may be set to Off. This disables resource requests and allows for deployment on smaller clusters.
-| string
-| Default (This is the default value)
-|===
-====
-// End snippet
-
-
 [source]
 [subs="specialcharacters,quotes"]
 ----
@@ -553,25 +551,25 @@ kind: AstraControlCenter
 metadata:
   name: astra
 spec:
-  *accountName: "Example"*
+  accountName: "Example"
   astraVersion: "ASTRA_VERSION"
-  *astraAddress: "astra.example.com"*
+  astraAddress: "astra.example.com"
   autoSupport:
-    *enrolled: true*
-  *email: "[admin@example.com]"*
-  *firstName: "SRE"*
-  *lastName: "Admin"*
+    enrolled: true
+  email: "[admin@example.com]"
+  firstName: "SRE"
+  lastName: "Admin"
   imageRegistry:
-    *name: "[your_registry_path]"*
-    *secret: "astra-registry-cred"*
-  *storageClass: "ontap-gold"*
+    name: "[your_registry_path]"
+    secret: "astra-registry-cred"
+  storageClass: "ontap-gold"
   volumeReclaimPolicy: "Retain"
-  *ingressType: "Generic"*
+  ingressType: "Generic"*
   astraResourcesScaler: "Default"
   additionalValues: {}
   crds:
-    *externalTraefik: false*
-    *externalCertManager: false*
+    externalTraefik: false
+    externalCertManager: false
 ----
 
 == Complete Astra Control Center and operator installation
