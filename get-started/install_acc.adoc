@@ -434,9 +434,10 @@ IMPORTANT: If you are using a registry that does not require authorization, you 
 |Setting |Guidance |Type |Example
 
 | storageClass
-| Change the `storageClass` value from the default value of `ontap-gold` to another Trident storageClass resource as required by your installation. Run the command `kubectl get sc` to determine your existing configured storage classes. This is the storage class that will be used for PVCs. If it is not set, the default storage class will be used.
+| Change the `storageClass` value from `ontap-gold` to another Trident storageClass resource as required by your installation. Run the command `kubectl get sc` to determine your existing configured storage classes. One of the Trident-based storage classes must be entered in the manifest file (astra-control-center-<version>.manifest) and will be used for Astra PVs. If it is not set, the default storage class will be used.
+NOTE: If a default storage class is configured, ensure that it is the only storage class that has the default annotation.
 | string
-| ontap-gold (this is the default value)
+| ontap-gold
 
 |===
 ====
@@ -446,7 +447,7 @@ IMPORTANT: If you are using a registry that does not require authorization, you 
 [%collapsible]
 ====
 |===
-|Setting |Guidance |Type |Example
+|Setting |Guidance |Type |Options
 
 | ingressType
 | Use one of the following ingress types:
@@ -462,8 +463,8 @@ Astra Control Center uses a service of the type "LoadBalancer" (`svc/traefik` in
 NOTE: For details about the service type of "LoadBalancer" and ingress, see link:../get-started/requirements.html[Requirements^].
 
 | string
-| Generic (this is the default value)
-
+a| * Generic (this is the default value)
+* AccTraefik
 |===
 ====
 // End snippet
@@ -511,12 +512,13 @@ CRDs are cluster-wide objects and installing them might have an impact on other 
 [%collapsible]
 ====
 |===
-|Setting |Guidance |Type |Example
+|Setting |Guidance |Type |Options
 
 | volumeReclaimPolicy
-| Reclaim policy to be set for persistent volumes.
+| This sets the reclaim policy for Astra's PVs. Setting this policy to `Retain` retains persistent volumes after Astra is deleted. Setting this policy to `Delete` deletes persistent volumes after astra is deleted. If this value is not set, the PVs are retained. 
 | string
-| Retain (This is the default value)
+a| * Retain (This is the default value)
+* Delete
 |===
 ====
 // End snippet
