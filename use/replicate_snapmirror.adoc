@@ -41,7 +41,7 @@ Using Astra Control, you can do the following tasks related to replicating appli
 
 Astra Control application replication requires that the following prerequisites be met before you begin:
 
-TIP: link:../get-started/install_acc.html[Deploy Astra Control Center] in a third fault domain or secondary site for seamless disaster recovery.
+TIP: link:../get-started/install_acc.html[Deploy Astra Control Center^] in a third fault domain or secondary site for seamless disaster recovery.
 
 * *ONTAP clusters*: 
 ** *Trident*: Astra Trident version 22.07 or later must exist on both the source and destination ONTAP clusters.
