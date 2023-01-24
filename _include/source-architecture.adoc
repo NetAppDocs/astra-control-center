@@ -1,7 +1,7 @@
 
 
 
-image:astra-architecture-diagram-v5.png[Astra Control architecture diagram and components]
+image:astra-architecture-diagram-v5.png["Astra Control architecture diagram and components"]
 
 
 == Astra Control components

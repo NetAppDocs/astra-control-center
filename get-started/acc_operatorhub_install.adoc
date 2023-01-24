@@ -95,14 +95,14 @@ include::../_include/docker-podman-add-images.adoc[]
 .. Search for and select the NetApp Astra Control Center operator.
 
 +
-image:openshift_operatorhub.png[Astra Control Center install page]
+image:openshift_operatorhub.png["Image shows the Astra Control Center install page from the OpenShift Container Platform UI"]
 
 * From Red Hat Ecosystem Catalog:
 .. Select the NetApp Astra Control Center https://catalog.redhat.com/software/operators/detail/611fd22aaf489b8bb1d0f274[operator^].
 .. Select *Deploy and Use*.
 
 +
-image:red_hat_catalog.png[Astra Control Center overview page]
+image:red_hat_catalog.png["Image shows the Astra Control Center overview page that is available from the RedHat Ecosystem Catalog"]
 
 == Install the operator
 
@@ -124,7 +124,7 @@ NOTE: If you selected a manual approval strategy, you will be prompted to approv
 == Install Astra Control Center
 
 . From the console within the *Astra Control Center* tab of the Astra Control Center operator, select *Create AstraControlCenter*.
-image:openshift_acc-operator_details.png[Astra Control Center operator page]
+image:openshift_acc-operator_details.png["Astra Control Center operator page that has the Astra Control Center tab selected"]
 
 . Complete the `Create AstraControlCenter` form field:
 .. Keep or adjust the Astra Control Center name.
