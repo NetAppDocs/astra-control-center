@@ -28,7 +28,7 @@ For the URL, in a browser, enter the Fully Qualified Domain Name (FQDN) you set 
 
 == Licensing
 
-*I am using the Evaluation license. How to I change to the full license?*
+*I am using the Evaluation license. How do I change to the full license?*
 
 You can easily change to a full license by obtaining the NetApp license file (NLF).
 

@@ -22,7 +22,7 @@ After you install Astra Control Center, log in to the UI, and change your passwo
 
 == Add a license for Astra Control Center
 //REFERENCED IN UI and NSS downloads. DO NOT MODIFY WITHOUT NOTIFYING STAKEHOLDERS.
-You can add a new license using the Astra Control UI or https://docs.netapp.com/us-en/astra-automation/index.html[API^] to gain full Astra Control Center functionality. Without a license, your usage of Astra Control Center is limited to managing users and adding new clusters.
+You can add a new license using the Astra Control UI or https://docs.netapp.com/us-en/astra-automation/index.html[API^] to gain full Astra Control Center functionality. 
 
 Astra Control Center licenses measure CPU resources using Kubernetes CPU units and account for the CPU resources assigned to the worker nodes of all the managed Kubernetes clusters. Licenses are based on vCPU usage. For more information on how licenses are calculated, refer to link:../concepts/licensing.html[Licensing^].
 

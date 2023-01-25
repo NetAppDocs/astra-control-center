@@ -15,13 +15,11 @@ When you deploy Astra Control Center, it is installed with a default evaluation 
 
 You obtain a license in one of the following ways: 
 
-* link:https://mysupport.netapp.com/site/downloads/evaluation/astra-control-center[If you are evaluating Astra Control Center and need different evaluation terms, download a different evaluation license file^]. An evaluation license lets you use Astra Control Center for 90 days from the date you download the license. 
+* If you are evaluating Astra Control Center and need different evaluation terms than what is included in the default license, contact NetApp to request a different evaluation license file. An evaluation license lets you use Astra Control Center for 90 days from the date you download the license. 
 
 * link:../concepts/licensing.html[If you already purchased Astra Control Center, generate your NetApp license file (NLF)^] from the NetApp Support Site. After you purchase the product, you receive a serial number and license,  which you use on the Support Site.  
 
 For details about licenses needed for ONTAP storage backends, refer to link:../get-started/requirements.html[supported storage backends].
-
-//NOTE: You can add a cluster, add a bucket, and manage a storage backend without a license.
 
 == How license consumption is calculated
 
