@@ -46,8 +46,8 @@ The following images show the scheduled backup and restore process compared to t
 
 The backup process copies data to S3 buckets and restores from S3 buckets:
 
-image:acc-backup_4in.png["Image shows a scheduled backup and restore between two K8s clusters using S3 bucket"]
+image:acc-backup_4in.png["This image shows a scheduled backup and restore between two Kubernetes clusters using S3 bucket"]
 
 On the other hand, replication is done by replicating to ONTAP and then a fail over creates the Kubernetes resources:
 
-image:acc-replication_4in.png["Image shows replication and fail over between two K8s clusters and two ONTAP clusters "]
+image:acc-replication_4in.png["This image shows replication and fail over between two Kubernetes clusters and two ONTAP clusters "]

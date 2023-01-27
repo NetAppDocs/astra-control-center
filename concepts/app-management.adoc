@@ -15,12 +15,12 @@ When Astra Control discovers your clusters, the apps on those clusters are unman
 
 * A namespace, including all resources in that namespace
 +
-image:diagram-managed-app1.png["A conceptual image that shows Astra managing all of the resources in a namespace."]
+image:diagram-managed-app1.png["A conceptual image that shows Astra Control managing all of the resources in a namespace."]
 
 * An individual application deployed within one or more namespaces (helm3 is used in this example)
 +
-image:diagram-managed-app2.png["A conceptual image that shows Astra managing an individual application deployed in a namespace that includes other applications."]
+image:diagram-managed-app2.png["A conceptual image that shows Astra Control managing an individual application deployed in a namespace that includes other applications."]
 
 * A group of resources that are identified by a Kubernetes label within one or more namespaces
 +
-image:diagram-managed-app3.png["A conceptual image that shows Astra managing an app based on a Kubernetes label."]
+image:diagram-managed-app3.png["A conceptual image that shows Astra Control managing an app based on a Kubernetes label."]
