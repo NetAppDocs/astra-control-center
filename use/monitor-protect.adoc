@@ -30,7 +30,7 @@ IMPORTANT: Astra Control Center does not validate the details you enter for your
 . Select *Account* > *Connections*.
 . Select *Connect* from the drop-down list to add a proxy server.
 +
-image:proxy-connect.png[Shows the Connect option to enable proxy connection.]
+image:proxy-connect.png[This image shows the Connect option to enable proxy connection.]
 . Enter the proxy server name or IP address and the proxy port number.
 . If your proxy server requires authentication, select the check box, and enter the username and password.
 . Select *Connect*.
@@ -39,7 +39,7 @@ image:proxy-connect.png[Shows the Connect option to enable proxy connection.]
 
 If the proxy information you entered was saved, the *HTTP Proxy* section of the *Account* > *Connections* page indicates that it is connected, and displays the server name.
 
-image:proxy-new.png[Shows the proxy server successfully connected.]
+image:proxy-new.png[This image shows that the proxy server successfully connected.]
 
 === Edit proxy server settings
 
@@ -88,7 +88,7 @@ TIP: If you are new to Cloud Insights, familiarize yourself with the features an
 . Select *Account* > *Connections*.
 . Select *Connect* where it shows *Disconnected* in the drop-down list to add the connection.
 +
-image:ci-connect.png[Shows the Connect option from the drop-down list to enable Cloud Insights connection.]
+image:ci-connect.png[This image shows the Connect option from the drop-down list to enable Cloud Insights connection.]
 . Enter the Cloud Insights API tokens and the tenant URL. The tenant URL has the following format, as an example:
 +
 ----
@@ -100,7 +100,7 @@ You get the tenant URL when you get the Cloud Insights license. If you do not ha
 .. To get the link:https://docs.netapp.com/us-en/cloudinsights/API_Overview.html#api-access-tokens[API token^], log in to your Cloud Insights tenant URL.
 .. In Cloud Insights, generate both a *Read/Write* and a *Read only* API Access token by clicking *Admin* > *API Access*.
 +
-image:cloud-insights-api.png[Shows the Cloud Insights API token generation page.]
+image:cloud-insights-api.png[This image shows the Cloud Insights API token generation page.]
 .. Copy the *Read only* key. You will need to paste it into the Astra Control Center window for enabling the Cloud Insights connection. For the Read API Access Token key permissions, select: Assets, Alerts, Acquisition Unit, and Data Collection.
 .. Copy the *Read/Write* key. You will need to paste it into the Astra Control Center *Connect Cloud Insights* window. For the Read/Write API Access Token key permissions, select: Data Ingestion, Log Ingestion, Acquisition Unit, and Data Collection.
 +
@@ -117,22 +117,22 @@ NOTE: To go back and forth easily between the Astra Control Center and Cloud Ins
 
 If the connection was successful, the *Cloud Insights* section of the *Account* > *Connections* page indicates that it is connected, and displays the tenant URL. You can visit Cloud Insights to see data being successfully received and displayed.
 
-image:cloud-insights.png[Shows the Cloud Insights connection enabled in the Astra Control Center UI.]
+image:cloud-insights.png[This image shows the Cloud Insights connection enabled in the Astra Control Center UI.]
 
 If the connection failed for some reason, the status shows *Failed*. You can find the reason for failure under *Notifications* at the top-right side of the UI.
 
-image:cloud-insights-notifications.png[Shows the error message when Cloud Insights connection fails.]
+image:cloud-insights-notifications.png[This image shows the error message when Cloud Insights connection fails.]
 
 You can also find the same information under *Account* > *Notifications*.
 
 From Astra Control Center, you can view throughput information on the *Backends* page as well as connect to Cloud Insights from here after selecting a storage backend.
-image:throughput.png[Shows the throughput information on the Backends page in Astra Control Center.]
+image:throughput.png[This image shows the throughput information on the Backends page in Astra Control Center.]
 
 To go directly to Cloud Insights, select the *Cloud Insights* icon next to the metrics image.
 
 You can also find the information on the *Dashboard*.
 
-image:dashboard-ci.png[Shows the Cloud Insights icon on the Dashboard.]
+image:dashboard-ci.png[This image shows the Cloud Insights icon on the Dashboard.]
 
 IMPORTANT: After enabling the Cloud Insights connection, if you remove the backends that you added in Astra Control Center, the backends stop reporting to Cloud Insights.
 
@@ -166,7 +166,7 @@ After you confirm the operation, on the *Account* > *Connections* page, the Clou
 
 You can send logs (Kubernetes events) from Astra Control Center to your Fluentd endpoint. The Fluentd connection is disabled by default.
 
-image:fluentbit.png[Shows a conceptual diagram of event logs going from Astra to Fluentd.]
+image:fluentbit.png[This is a conceptual diagram of event logs going from Astra to Fluentd.]
 
 NOTE: Only the event logs from managed clusters are forwarded to Fluentd.
 
@@ -183,7 +183,7 @@ IMPORTANT: Astra Control Center does not validate the details you enter for your
 . Select *Account* > *Connections*.
 . Select *Connect* from the drop-down list where it shows *Disconnected* to add the connection.
 +
-image:connect-fluentd.png[Shows the UI screen for enabling connection to Fluentd.]
+image:connect-fluentd.png[This image shows the UI screen for enabling connection to Fluentd.]
 . Enter the host IP address, the port number, and shared key for your Fluentd server.
 . Select *Connect*.
 
