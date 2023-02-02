@@ -13,21 +13,33 @@ summary: NetApp periodically updates Astra Control Center to bring you new featu
 [.lead]
 We're pleased to announce the latest release of Astra Control Center.
 
+== XX March 2023 (23.03.0)
+
+.New features and support
+
+* Enhanced execution hooks functionality with additional filtering options
++
+link:../use/execution-hooks.html[Manage app execution hooks]
+
+//* Support for NetApp Cloud Volumes ONTAP as a storage backend (officially supported on Microsoft Azure and Google Cloud platforms)
+//+
+//link:../concepts/architecture.html#astra-control-components[Architecture and components]
+
 == 22 November 2022 (22.11.0)
 
 .New features and support
 
-* link:../use/manage-apps.html#define-apps[Support for applications that span across multiple namespaces]
-* link:../use/manage-apps.html#define-apps[Support for including cluster resources in an application definition]
-* link:../use/manage-remote-authentication.html[Enhanced LDAP authentication with role-based access control (RBAC) integration]
-* link:../get-started/requirements.html[Added support for Kubernetes 1.25 and Pod Security Admission (PSA)]
-* link:../use/monitor-running-tasks.html[Enhanced progress reporting for your backup, restore, and clone operations]
+* https://docs.netapp.com/us-en/astra-control-center-2211/use/manage-apps.html#define-apps[Support for applications that span across multiple namespaces]
+* https://docs.netapp.com/us-en/astra-control-center-2211/use/manage-apps.html#define-apps[Support for including cluster resources in an application definition]
+* https://docs.netapp.com/us-en/astra-control-center-2211/use/manage-remote-authentication.html[Enhanced LDAP authentication with role-based access control (RBAC) integration]
+* https://docs.netapp.com/us-en/astra-control-center-2211/get-started/requirements.html[Added support for Kubernetes 1.25 and Pod Security Admission (PSA)]
+* https://docs.netapp.com/us-en/astra-control-center-2211/use/monitor-running-tasks.html[Enhanced progress reporting for your backup, restore, and clone operations]
 
 
 
 .Known issues and limitations
-* link:../release-notes/known-issues.html[Known issues for this release]
-* link:../release-notes/known-limitations.html[Known limitations for this release]
+* https://docs.netapp.com/us-en/astra-control-center-2211/release-notes/known-issues.html[Known issues for this release]
+* https://docs.netapp.com/us-en/astra-control-center-2211/release-notes/known-limitations.html[Known limitations for this release]
 
 == 8 September 2022 (22.08.1)
 
@@ -41,19 +53,19 @@ This patch release (22.08.1) for Astra Control Center (22.08.0) fixes minor bugs
 
 .New features and support
 
-* link:../use/replicate_snapmirror.html[App replication using NetApp SnapMirror technology]
-* link:../use/manage-apps.html#define-apps[Improved app management workflow]
-* link:../use/execution-hooks.html[Enhanced provide-your-own execution hooks functionality]
+* https://docs.netapp.com/us-en/astra-control-center-2208/use/replicate_snapmirror.html[App replication using NetApp SnapMirror technology]
+* https://docs.netapp.com/us-en/astra-control-center-2208/use/manage-apps.html#define-apps[Improved app management workflow]
+* https://docs.netapp.com/us-en/astra-control-center-2208/use/execution-hooks.html[Enhanced provide-your-own execution hooks functionality]
 +
 NOTE: The NetApp provided default pre- and post-snapshot execution hooks for specific applications have been removed in this release. If you upgrade to this release and do not provide your own execution hooks for snapshots, Astra Control will take crash-consistent snapshots only. Visit the https://github.com/NetApp/Verda[NetApp Verda] GitHub repository for sample execution hook scripts that you can modify to fit your environment.
 
-* link:../get-started/requirements.html[Support for VMware Tanzu Kubernetes Grid Integrated Edition (TKGI)]
-* link:../get-started/requirements.html#operational-environment-requirements[Support for Google Anthos]
+* https://docs.netapp.com/us-en/astra-control-center-2208/get-started/requirements.html[Support for VMware Tanzu Kubernetes Grid Integrated Edition (TKGI)]
+* https://docs.netapp.com/us-en/astra-control-center-2208/get-started/requirements.html#operational-environment-requirements[Support for Google Anthos]
 * https://docs.netapp.com/us-en/astra-automation/workflows_infra/ldap_prepare.html[LDAP configuration (via Astra Control API)^]
 
 .Known issues and limitations
-* link:../release-notes/known-issues.html[Known issues for this release]
-* link:../release-notes/known-limitations.html[Known limitations for this release]
+* https://docs.netapp.com/us-en/astra-control-center-2208/release-notes/known-issues.html[Known issues for this release]
+* https://docs.netapp.com/us-en/astra-control-center-2208/release-notes/known-limitations.html[Known limitations for this release]
 
 ====
 // End snippet
