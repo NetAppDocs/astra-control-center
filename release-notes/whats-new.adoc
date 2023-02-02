@@ -17,6 +17,8 @@ We're pleased to announce the latest release of Astra Control Center.
 
 .New features and support
 
+* Support for app backups using nas-economy volumes that allows a different target storage class to be selected.
+
 * Enhanced execution hooks functionality with additional filtering options
 +
 link:../use/execution-hooks.html[Manage app execution hooks]
