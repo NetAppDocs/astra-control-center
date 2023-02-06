@@ -32,7 +32,7 @@ kubectl get apiservices
 ----
 
 * Ensure the Astra FQDN you plan to use is routable to this cluster. This means that you either have a DNS entry in your internal DNS server or you are using a core URL route that is already registered.
-* If a cert-manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps] so that Astra Control Center does not attempt to install its own cert-manager. By default, Astra Control Center installs its own cert-manager during installation.
+* If a cert manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps] so that Astra Control Center does not attempt to install its own cert manager. By default, Astra Control Center installs its own cert manager during installation.
 
 .About this task
 The Astra Control Center installation process helps you to do the following:
@@ -395,7 +395,7 @@ Your selections in this section determine whether you will participate in NetApp
 ====
 // End snippet
 +
-.`firstName` and `LastName`
+.`firstName`
 [%collapsible]
 ====
 |===
@@ -405,6 +405,16 @@ Your selections in this section determine whether you will participate in NetApp
 | The first name of the default initial administrator associated with the Astra account. The name used here will be visible in a heading in the UI after your first login.
 | string
 | `SRE`
+
+|===
+====
+// End snippet
++
+.`LastName`
+[%collapsible]
+====
+|===
+|Setting |Guidance |Type |Example
 
 | `lastName`
 | The last name of the default initial administrator associated with the Astra account. The name used here will be visible in a heading in the UI after your first login.
@@ -418,7 +428,7 @@ Your selections in this section determine whether you will participate in NetApp
 .`imageRegistry`
 [%collapsible]
 ====
-Your selections in this section define the container image registry that is hosting the Astra application images, Astra Control Center Operator, and Astra Control Center Helm Repository.
+Your selections in this section define the container image registry that is hosting the Astra application images, Astra Control Center Operator, and Astra Control Center Helm repository.
 
 |===
 |Setting |Use |Guidance |Type |Example
@@ -430,7 +440,7 @@ Your selections in this section define the container image registry that is host
 | `example.registry.com/astra`
 
 | `imageRegistry.secret`
-| Required if you are using imageRegistry that requires a secret.
+| Required if the string you entered for `imageRegistry.name' requires a secret.
 
 IMPORTANT: If you are using a registry that does not require authorization, you must delete this `secret` line within `imageRegistry` or the installation will fail.
 | The name of the Kubernetes secret used to authenticate with the image registry.
@@ -448,7 +458,8 @@ IMPORTANT: If you are using a registry that does not require authorization, you 
 |Setting |Guidance |Type |Example
 
 | `storageClass`
-| Change the `storageClass` value from `ontap-gold` to another Trident storageClass resource as required by your installation. Run the command `kubectl get sc` to determine your existing configured storage classes. One of the Trident-based storage classes must be entered in the manifest file (astra-control-center-<version>.manifest) and will be used for Astra PVs. If it is not set, the default storage class will be used.
+| Change the `storageClass` value from `ontap-gold` to another Trident storageClass resource as required by your installation. Run the command `kubectl get sc` to determine your existing configured storage classes. One of the Trident-based storage classes must be entered in the manifest file (`astra-control-center-<version>.manifest`) and will be used for Astra PVs. If it is not set, the default storage class will be used.
+
 NOTE: If a default storage class is configured, ensure that it is the only storage class that has the default annotation.
 | string
 | `ontap-gold`
@@ -523,7 +534,7 @@ Your selections in this section determine how Astra Control Center should handle
 |Setting |Guidance |Type |Example
 
 | `crds.externalCertManager`
-| If you use an external cert-manager, change `externalCertManager` to `true`. The default `false` causes Astra Control Center to install its own cert-manager CRDs during installation. 
+| If you use an external cert manager, change `externalCertManager` to `true`. The default `false` causes Astra Control Center to install its own cert manager CRDs during installation. 
 
 CRDs are cluster-wide objects and installing them might have an impact on other parts of the cluster. You can use this flag to signal to Astra Control Center that these CRDs will be installed and managed by the cluster administrator outside of Astra Control Center.
 | Boolean
