@@ -172,12 +172,6 @@ NOTE: You can deploy Astra Control Center in a dual-stack Kubernetes cluster, an
 |HTTPS
 |NetApp AutoSupport communication
 
-|Astra Control Center
-|NetApp Active IQ
-|442
-|HTTPS
-|NetApp metrics information
-
 |===
 
 // (https://my-bucket.s3.us-west-2.amazonaws.com/) Link from above table for S3
