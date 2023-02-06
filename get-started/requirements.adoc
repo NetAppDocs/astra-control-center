@@ -114,7 +114,7 @@ You should determine whether you have outside access to the internet. If you do 
 
 == License
 
-Astra Control Center requires an Astra Control Center license for full functionality. When you install Astra Control Center, a 90-day evaluation license for 4,800 CPU units is already activated. If you need more capacity or different evaluation terms, or want to upgrade to a full license, you can obtain a different evaluation license or full license from NetApp. You need a license to protect your applications and data. Refer to link:../concepts/intro.html[Astra Control Center features] for details.
+Astra Control Center requires an Astra Control Center license. When you install Astra Control Center, a 90-day evaluation license for 4,800 CPU units is already activated. If you need more capacity or different evaluation terms, or want to upgrade to a full license, you can obtain a different evaluation license or full license from NetApp. You need a license to protect your applications and data. Refer to link:../concepts/intro.html[Astra Control Center features] for details.
 
 You can try Astra Control Center by signing up for a free trial. You can sign up by registering link:https://cloud.netapp.com/astra-register[here^].
 
