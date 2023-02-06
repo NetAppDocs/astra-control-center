@@ -310,112 +310,112 @@ NOTE: An annotated sample YAML follows these steps.
 
 . Modify or confirm the following settings:
 +
-.accountName
+.`accountName`
 [%collapsible]
 ====
 |===
 |Setting |Guidance |Type |Example
 
 
-| accountName
+| `accountName`
 | Change the `accountName` string to the name you want to associate with the Astra Control Center account. There can be only one accountName.
 | string
-| Example
+| `Example`
 
 |===
 ====
 // End snippet
 +
-.astraVersion
+.`astraVersion`
 [%collapsible]
 ====
 |===
 |Setting |Guidance |Type |Example
 
-| astraVersion
+| `astraVersion`
 | The version of Astra Control Center to deploy. No action is needed for this setting as the value will be pre-populated.
 | string
-| 22.11.0-82
+| `22.11.0-82`
 |===
 ====
 // End snippet
 +
-.astraAddress
+.`astraAddress`
 [%collapsible]
 ====
 |===
 |Setting |Guidance |Type |Example
 
-| astraAddress
+| `astraAddress`
 | Change the `astraAddress` string to the FQDN (recommended) or IP address you want to use in your browser to access Astra Control Center. This address defines how Astra Control Center will be found in your data center and is the same FQDN or IP address you provisioned from your load balancer when you completed link:requirements.html[Astra Control Center requirements^].
 
 NOTE: Do not use `http://` or `https://` in the address. Copy this FQDN for use in a <<Log in to the Astra Control Center UI,later step>>.
 | string
-| astra.example.com
+| `astra.example.com`
 
 |===
 ====
 // End snippet
 +
-.autoSupport
+.`autoSupport`
 [%collapsible]
 ====
 Your selections in this section determine whether you will participate in NetApp's pro-active support application, NetApp Active IQ, and where data is sent. An internet connection is required (port 442), and all support data is anonymized.
 |===
 |Setting |Use |Guidance |Type |Example
 
-| autoSupport.enrolled
+| `autoSupport.enrolled`
 | Either `enrolled` or `url` fields must be selected
 | Change `enrolled` for AutoSupport to `false` for sites without internet connectivity or retain `true` for connected sites. A setting of `true` enables  anonymous data to be sent to NetApp for support purposes. The default election is `false` and indicates no support data will be sent to NetApp.
 | Boolean
-| false (this value is the default)
+| `false` (this value is the default)
 
-| autoSupport.url
+| `autoSupport.url`
 | Either `enrolled` or `url` fields must be selected
 | This URL determines where the anonymous data will be sent.
 | string
-| https://support.netapp.com/asupprod/post/1.0/postAsup
+| `https://support.netapp.com/asupprod/post/1.0/postAsup`
 
 |===
 ====
 // End snippet
 +
-.email
+.`email`
 [%collapsible]
 ====
 |===
 |Setting |Guidance |Type |Example
 
-| email
+| `email`
 | Change the `email` string to the default initial administrator address. Copy this email address for use in a <<Log in to the Astra Control Center UI,later step>>. This email address will be used as the username for the initial account to log in to the UI and will be notified of events in Astra Control.
 | string
-| admin@example.com
+| `admin@example.com`
 
 |===
 ====
 // End snippet
 +
-.firstName and LastName
+.`firstName` and `LastName`
 [%collapsible]
 ====
 |===
 |Setting |Guidance |Type |Example
 
-| firstName
+| `firstName`
 | The first name of the default initial administrator associated with the Astra account. The name used here will be visible in a heading in the UI after your first login.
 | string
-| SRE
+| `SRE`
 
-| lastName
+| `lastName`
 | The last name of the default initial administrator associated with the Astra account. The name used here will be visible in a heading in the UI after your first login.
 | string
-| Admin
+| `Admin`
 
 |===
 ====
 // End snippet
 +
-.imageRegistry
+.`imageRegistry`
 [%collapsible]
 ====
 Your selections in this section define the container image registry that is hosting the Astra application images, Astra Control Center Operator, and Astra Control Center Helm Repository.
@@ -423,68 +423,68 @@ Your selections in this section define the container image registry that is host
 |===
 |Setting |Use |Guidance |Type |Example
 
-| imageRegistry.name
+| `imageRegistry.name`
 | Required
 | The name of the image registry where you pushed the images in the <<Install the Astra Control Center operator,previous step>>. Do not use `http://` or `https://` in the registry name.
 | string
-| example.registry.com/astra
+| `example.registry.com/astra`
 
-| imageRegistry.secret
+| `imageRegistry.secret`
 | Required if you are using imageRegistry that requires a secret.
 
 IMPORTANT: If you are using a registry that does not require authorization, you must delete this `secret` line within `imageRegistry` or the installation will fail.
 | The name of the Kubernetes secret used to authenticate with the image registry.
 | string
-| astra-registry-cred
+| `astra-registry-cred`
 
 |===
 ====
 // End snippet
 +
-.storageClass
+.`storageClass`
 [%collapsible]
 ====
 |===
 |Setting |Guidance |Type |Example
 
-| storageClass
+| `storageClass`
 | Change the `storageClass` value from `ontap-gold` to another Trident storageClass resource as required by your installation. Run the command `kubectl get sc` to determine your existing configured storage classes. One of the Trident-based storage classes must be entered in the manifest file (astra-control-center-<version>.manifest) and will be used for Astra PVs. If it is not set, the default storage class will be used.
 NOTE: If a default storage class is configured, ensure that it is the only storage class that has the default annotation.
 | string
-| ontap-gold
+| `ontap-gold`
 
 |===
 ====
 // End snippet
 +
-.volumeReclaimPolicy
+.`volumeReclaimPolicy`
 [%collapsible]
 ====
 |===
 |Setting |Guidance |Type |Options
 
-| volumeReclaimPolicy
+| `volumeReclaimPolicy`
 | This sets the reclaim policy for Astra's PVs. Setting this policy to `Retain` retains persistent volumes after Astra is deleted. Setting this policy to `Delete` deletes persistent volumes after astra is deleted. If this value is not set, the PVs are retained. 
 | string
-a| * Retain (This is the default value)
-* Delete
+a| * `Retain` (This is the default value)
+* `Delete`
 |===
 ====
 // End snippet
 +
-.ingressType
+.`ingressType`
 [%collapsible]
 ====
 |===
 |Setting |Guidance |Type |Options
 
-| ingressType
+| `ingressType`
 | Use one of the following ingress types:
 
-*Generic* (`ingressType: "Generic"`) (Default)
+*`Generic`* (`ingressType: "Generic"`) (Default)
 Use this option when you have another ingress controller in use or would prefer to use your own ingress controller. After Astra Control Center is deployed, you will need to configure the link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller^] to expose Astra Control Center with a URL.
 
-*AccTraefik* (`ingressType: "AccTraefik"`)
+*`AccTraefik`* (`ingressType: "AccTraefik"`)
 Use this option when you would prefer not to configure an ingress controller. This deploys the Astra Control Center `traefik` gateway as a Kubernetes LoadBalancer type service.
 
 Astra Control Center uses a service of the type "LoadBalancer" (`svc/traefik` in the Astra Control Center namespace), and requires that it be assigned an accessible external IP address. If load balancers are permitted in your environment and you don't already have one configured, you can use MetalLB or another external service load balancer to assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
@@ -492,47 +492,47 @@ Astra Control Center uses a service of the type "LoadBalancer" (`svc/traefik` in
 NOTE: For details about the service type of "LoadBalancer" and ingress, see link:../get-started/requirements.html[Requirements^].
 
 | string
-a| * Generic (this is the default value)
-* AccTraefik
+a| * `Generic` (this is the default value)
+* `AccTraefik`
 |===
 ====
 // End snippet
 +
-.astraResourcesScaler
+.`astraResourcesScaler`
 [%collapsible]
 ====
 |===
 |Setting |Guidance |Type |Options
 
-| astraResourcesScaler
+| `astraResourcesScaler`
 | Scaling options for AstraControlCenter Resource limits. By default, Astra Control Center deploys with resource requests set for most of the components within Astra. This configuration allows the Astra Control Center software stack to perform better in environments under increased application load and scale.
 
 However, in scenarios using smaller development or test clusters, the CR field `astraResourcesScalar` may be set to `Off`. This disables resource requests and allows for deployment on smaller clusters.
 | string
-a| * Default (This is the default value)
-* Off
+a| * `Default` (This is the default value)
+* `Off`
 |===
 ====
 // End snippet
 +
-.crds
+.`crds`
 [%collapsible]
 ====
 Your selections in this section determine how Astra Control Center should handle CRDs.
 |===
 |Setting |Guidance |Type |Example
 
-| crds.externalCertManager
+| `crds.externalCertManager`
 | If you use an external cert-manager, change `externalCertManager` to `true`. The default `false` causes Astra Control Center to install its own cert-manager CRDs during installation. 
 
 CRDs are cluster-wide objects and installing them might have an impact on other parts of the cluster. You can use this flag to signal to Astra Control Center that these CRDs will be installed and managed by the cluster administrator outside of Astra Control Center.
 | Boolean
-| False (this value is the default)
+| `False` (this value is the default)
 
-| crds.externalTraefik
+| `crds.externalTraefik`
 | By default, Astra Control Center will install required Traefik CRDs. CRDs are cluster-wide objects and installing them might have an impact on other parts of the cluster. You can use this flag to signal to Astra Control Center that these CRDs will be installed and managed by the cluster administrator outside of Astra Control Center.
 | Boolean
-| False (this value is the default)
+| `False` (this value is the default)
 
 |===
 ====
