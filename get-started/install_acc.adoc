@@ -299,7 +299,7 @@ kubectl get pods -n netapp-acc-operator
 
 == Configure Astra Control Center
 
-. Edit the Astra Control Center custom resource (CR) file (`astra_control_center.yaml`) to make account, AutoSupport, registry, and other necessary configurations:
+. Edit the Astra Control Center custom resource (CR) file (`astra_control_center.yaml`) to make account, support, registry, and other necessary configurations:
 +
 [source,console]
 ----
@@ -875,7 +875,7 @@ spec:
 kubectl apply -f nginx-Ingress.yaml
 ----
 
-WARNING: NetApp recommends installing the nginx controller as a deployment rather than a daemonSet.
+WARNING: NetApp recommends installing the nginx controller as a deployment rather than a `daemonSet`.
 
 .Steps for OpenShift ingress controller
 
