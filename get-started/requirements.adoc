@@ -84,7 +84,7 @@ NOTE: These requirements assume that Astra Control Center is the only applicatio
 * *Image registry*: You must have an existing private Docker image registry to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
 
 * *Astra Trident / ONTAP configuration*: 
-** Astra Control Center requires that a storage class be created and set as the default storage class.
+** You need to configure at least one Astra Trident storage class on the cluster. If a default storage class is configured, ensure that it is the only storage class with the default designation.
 ** Ensure that the worker nodes in your cluster are configured with the appropriate storage drivers so that the pods can interact with the backend storage. Astra Control Center supports the following ONTAP drivers provided by Astra Trident:
 *** ontap-nas
 *** ontap-san
