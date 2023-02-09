@@ -139,7 +139,7 @@ Performing an in-place restore operation on an app that shares resources with an
 .*Read more* about adding cluster-scoped resources to your app namespaces.
 [%collapsible]
 ====
-You can import cluster resources that are associated with the namespaced resources in addition to those Astra Control included automatically. You can add a rule that will include resources of a specific group, kind, version and optionally, label. You might want to do this if there are resources that Astra Control does not include automatically. 
+You can import cluster resources that are associated with the namespace resources in addition to those Astra Control included automatically. You can add a rule that will include resources of a specific group, kind, version and optionally, label. You might want to do this if there are resources that Astra Control does not include automatically. 
 
 You cannot exclude any of the cluster-scoped resources that are automatically included by Astra Control.
 
