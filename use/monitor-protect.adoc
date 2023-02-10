@@ -25,7 +25,7 @@ If the network where you're running Astra Control Center requires a proxy for co
 
 If the network where you're running Astra Control Center requires a proxy for connecting to the Internet (to upload support bundles to NetApp Support Site or establish a connection to Cloud Insights), you should configure a proxy server in Astra Control Center.
 
-IMPORTANT: Astra Control Center does not validate the details you enter for your proxy server. Ensure that you enter the correct values.
+IMPORTANT: Astra Control Center does not validate the details you enter for your proxy server. Ensure that you enter correct values.
 
 .Steps
 
