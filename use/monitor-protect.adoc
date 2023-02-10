@@ -185,9 +185,8 @@ Astra Control Center exposes a metrics service on TCP port 9090 in the Kubernete
 
 .Steps 
 
-. Log into the Prometheus server and add your cluster entry into the `prometheus.yml` file.
-
-. In the `yml` file, add an entry similar to the following for your cluster in the `scrape_configs section`:
+. Log into the Prometheus server.
+. Add your cluster entry into the `prometheus.yml` file. In the `yml` file, add an entry similar to the following for your cluster in the `scrape_configs section`:
 +
 ----
 job_name: '<Add your cluster name here. You can abbreviate. It just needs to be a unique name>'
@@ -199,6 +198,8 @@ job_name: '<Add your cluster name here. You can abbreviate. It just needs to be 
   static_configs:
     - targets: ['<replace with your astraAddress. If using FQDN, the prometheus server has to be able to resolve it>']
 ----
++
+NOTE: If you set the `tls_config insecure_skip_verify` to `true`, the TLS encryption protocol is not required. 
 
 . Restart the Prometheus service: 
 +
@@ -212,11 +213,7 @@ Access the Prometheus URL.
 
 .Steps
 
-. In a browser, enter the Prometheus URL with port 9090: 
-+
-----
-<sample URL>
-----
+. In a browser, enter the Prometheus URL with port 9090. 
 
 . Verify your connection by selecting *Status* > *Targets*. 
 
