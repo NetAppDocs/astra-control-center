@@ -59,7 +59,7 @@ export DIRECTORYNAME=acc
 for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do 
 astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image: //')
 astraImageNoPath=$(echo ${astraImage} | sed 's:.*/::')
-podman tag ${astraImage} ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
+podman tag ${astraImageNoPath} ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
 podman push ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
 done
 ----
@@ -77,9 +77,9 @@ export PACKAGENAME=acc
 export PACKAGEVERSION=22.11.0-82
 export DIRECTORYNAME=acc
 for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do 
-astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image(s): //')
+astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image: //')
 astraImageNoPath=$(echo ${astraImage} | sed 's:.*/::')
-podman tag ${astraImage} ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
+podman tag ${astraImageNoPath} ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
 podman push ${REGISTRY}/netapp/astra/${PACKAGENAME}/${PACKAGEVERSION}/${astraImageNoPath}
 done
 ----
