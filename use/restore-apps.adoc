@@ -40,9 +40,12 @@ Astra Control can restore your application from a snapshot or backup. Restoring 
 . Choose the restore type:
 * *Restore to original namespaces*: Use this procedure to restore the app in-place to the original cluster.
 +
-[CAUTION]
+CAUTION: Performing an in-place restore operation on an app that shares resources with another app can have unintended results. Any resources that are shared between the apps are replaced when an in-place restore is performed on one of the apps.
++
+.Example of unintended restore results
+[%collapsible]
 ====
-Performing an in-place restore operation on an app that shares resources with another app can have unintended results. Any resources that are shared between the apps are replaced when an in-place restore is performed on one of the apps. For example, the following scenario creates an undesirable situation when using NetApp SnapMirror replication:
+The following scenario creates an undesirable situation when using NetApp SnapMirror replication:
 
 . You define the application `app1` using the namespace `ns1`.
 . You configure a replication relationship for `app1`.
@@ -50,6 +53,7 @@ Performing an in-place restore operation on an app that shares resources with an
 . You configure a replication relationship for `app2`.
 . You reverse replication for `app2`. This causes the `app1` app on the source cluster to be deactivated.
 ====
+// End snippet
 
 .. Select the snapshot to use to restore the app in-place, which reverts the app to an earlier version of itself.
 .. Select *Next*.
