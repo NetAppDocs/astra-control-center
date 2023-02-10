@@ -17,7 +17,7 @@ Astra Control can restore your application from a snapshot or backup. Restoring 
 .About this task
 //ASTRACTL-12847/DOC-4147
 * *Protect your apps first*: It is strongly recommended to take a snapshot of or back up your application before restoring it. This will enable you to clone from the snapshot or backup in the event that the restore is unsuccessful.
-* *Check destination volumes*: If you restore to a different cluster, ensure that the cluster is using the same persistent volume access mode (for example, ReadWriteMany). The restore operation will fail if the destination persistent volume access mode is different.
+* *Check destination volumes*: If you restore to a different cluster, ensure that the cluster is using the same persistent volume access mode (for example, `ReadWriteMany`). The restore operation will fail if the destination persistent volume access mode is different.
 * *(Openshift clusters only) Add policies*: When you create a project for hosting an app on an OpenShift cluster, the project (or Kubernetes namespace) is assigned a SecurityContext UID. To enable Astra Control Center to protect your app and move the app to another cluster or project in OpenShift, you need to add policies that enable the app to run as any UID. As an example, the following OpenShift CLI commands grant the appropriate policies to a WordPress app.
 +
 `oc new-project wordpress`
