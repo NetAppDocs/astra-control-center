@@ -98,8 +98,7 @@ You can update existing backends to move from credential-based to certificate-ba
 . From the left navigation, select *Backends*.
 . Select the storage backend.
 . At the Authentication field, select the *Edit* option. 
-. In the Edit Authentication page, select one of the following: 
-. Select one of the following. If the certificate is already enabled, you can only edit the certificate information. 
+. In the Edit Authentication page, select one of the following. If the certificate is already enabled, you can only edit the certificate information. 
 
 +
 * *Update administrator credentials*: Enter the ONTAP cluster management IP address and admin credentials. The credentials must be cluster-wide credentials. 
