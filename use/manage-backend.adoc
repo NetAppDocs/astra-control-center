@@ -20,6 +20,7 @@ You can complete the following tasks related to managing a storage backend:
 
 * link:../get-started/setup_overview.html#add-a-storage-backend[Add a storage backend]
 * <<View storage backend details>>
+* <<Edit storage backend authentication details>>
 * <<Unmanage a storage backend>>
 * <<Remove a storage backend>>
 
@@ -83,6 +84,31 @@ image:../use/acc_backends_ci_connection2.png[A screenshot of the Backends page]
 
 . To go directly to Cloud Insights, select the *Cloud Insights* icon next to the metrics image.
 
+== Edit storage backend authentication details
+Astra Control Center offers two modes of authenticating an ONTAP backend.
+
+* *Credential-based*: The username and password to an ONTAP user with the required permissions. You should use a pre-defined security login role, such as admin or vsadmin to ensure maximum compatibility with ONTAP versions.
+
+* *Certificate-based*: Astra Control Center can also communicate with an ONTAP cluster using a certificate installed on the backend. Here, the backend definition must contain Base64-encoded values of the client certificate, key, and the trusted CA certificate if used (recommended).
+
+You can update existing backends to move from credential-based to certificate-based methods. However, only one authentication method is supported at a time. 
+
+.Steps 
+
+. From the left navigation, select *Backends*.
+. Select the storage backend.
+. At the Authentication field, select the *Edit* option. 
+. In the Edit Authentication page, select one of the following: 
+. Select one of the following. If the certificate is already enabled, you can only edit the certificate information. 
+
++
+* *Update administrator credentials*: Enter the ONTAP cluster management IP address and admin credentials. The credentials must be cluster-wide credentials. 
++
+NOTE: The user whose credentials you enter here must have the `ontapi` user login access method enabled within ONTAP System Manager on the ONTAP cluster. If you plan to use SnapMirror replication, apply user credentials with the "admin" role, which has the access methods `ontapi` and `http`, on both source and destination ONTAP clusters. Refer to https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts in ONTAP documentation^] for more information.
+
+* *Change to certificate authentication*: Upload the certificate `.pem` file, the certificate key `.key` file, and optionally the certificate authority  `.pem` file.
+
+. Select *Save*.
 
 == Unmanage a storage backend
 
