@@ -72,7 +72,7 @@ Complete these installation tasks.
 * [ ] https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[Download Astra Control Center from the NetApp Support Site downloads page^]
 * [ ] Obtain the NetApp license file:
 
-** If you are evaluating Astra Control Center, a default evaluation license is already included.
+** If you are evaluating Astra Control Center, an embedded evaluation license is already included.
 
 ** link:../concepts/licensing.html[If you already purchased Astra Control Center, generate your license file^]
 

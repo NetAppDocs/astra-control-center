@@ -11,7 +11,7 @@ summary: Learn about how the actions you can perform with Astra Control Center d
 :imagesdir: ../media/concepts/
 
 [.lead]
-When you deploy Astra Control Center, it is installed with a default evaluation license. If you need more capacity or a longer evaluation period, or want to upgrade to a full license, you can obtain a different evaluation license or full license from NetApp.
+When you deploy Astra Control Center, it is installed with an embedded evaluation license. If you need more capacity or a longer evaluation period, or want to upgrade to a full license, you can obtain a different evaluation license or full license from NetApp.
 
 You obtain a license in one of the following ways: 
 
@@ -20,6 +20,9 @@ You obtain a license in one of the following ways:
 * link:../concepts/licensing.html[If you already purchased Astra Control Center, generate your NetApp license file (NLF)^] from the NetApp Support Site. After you purchase the product, you receive a serial number and license,  which you use on the Support Site.  
 
 For details about licenses needed for ONTAP storage backends, refer to link:../get-started/requirements.html[supported storage backends].
+
+== Evaluation license vs. full license
+An evaluation license, including the embedded evaluation license that is installed by default with Astra Control Center, enable the same capabilities and features as a full license does. An evaluation license has a shorter lifespan than a full license. 
 
 == How license consumption is calculated
 
