@@ -116,6 +116,7 @@ Astra Trident 22.01 or newer installed and configured
 |
 |ONTAP configuration with Trident
 a|* You need to configure at least one Astra Trident storage class on the cluster. If a default storage class is configured, ensure that it is the only storage class with the default designation.
+
 *Ensure that the worker nodes in your cluster are configured with the appropriate storage drivers so that the pods can interact with the backend storage. Astra Control Center supports the following ONTAP drivers provided by Astra Trident:
 
 ** `ontap-nas`
@@ -123,6 +124,36 @@ a|* You need to configure at least one Astra Trident storage class on the cluste
 ** `ontap-san-economy` (not supported for app replication)
 
 |===
+
+
+==== CPU extensions
+The CPUs in all nodes of the hosting environment must have AVX extensions enabled.
+
+==== Storage backend capacity
+At least 500GB available
+
+==== Worker nodes
+At least 3 worker nodes total, with 4 CPU cores and 12GB RAM each
+
+==== FQDN address
+An FQDN address for Astra Control Center
+
+==== Image registry
+You must have an existing private Docker image registry to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
+
+==== Astra Trident
+Meet the following Trident requirements according to the needs of your environment:
+
+* *Minimum version for use with Astra Control Center*: Astra Trident 22.01 or newer installed and configured.
+* *SnapMirror replication*: Astra Trident 22.07 or newer installed for SnapMirror-based application replication.
+* *For Kubernetes 1.25 support only*: Astra Trident 22.10 or newer installed for Kubernetes 1.25 clusters (you must upgrade to Astra Trident 22.10 prior to upgrading to Kubernetes 1.25)
+* *ONTAP configuration with Trident*: 
+** *Storage class*: Configure at least one Astra Trident storage class on the cluster. If a default storage class is configured, ensure that it is the only storage class with the default designation.
+** *Storage drivers and worker nodes*: Ensure that the worker nodes in your cluster are configured with the appropriate storage drivers so that the pods can interact with the backend storage. Astra Control Center supports the following ONTAP drivers provided by Astra Trident:
+
+*** `ontap-nas`
+*** `ontap-san`
+*** `ontap-san-economy` (not supported for app replication)
 
 == Supported storage backends
 Astra Control Center supports the following storage backends.
