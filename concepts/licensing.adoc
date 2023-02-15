@@ -15,14 +15,25 @@ When you deploy Astra Control Center, it is installed with an embedded 90-day ev
 
 You obtain a license in one of the following ways: 
 
-* If you are evaluating Astra Control Center and need different evaluation terms than what is included in the default license, contact NetApp to request a different evaluation license file. An evaluation license lets you use Astra Control Center for 90 days from the date you download the license. 
+* If you are evaluating Astra Control Center and need different evaluation terms than what is included in the embedded evaluation license, contact NetApp to request a different evaluation license file. An evaluation license lets you use Astra Control Center for 90 days from the date you download the license. 
 
 * link:../concepts/licensing.html[If you already purchased Astra Control Center, generate your NetApp license file (NLF)^] from the NetApp Support Site. After you purchase the product, you receive a serial number and license,  which you use on the Support Site.  
 
 For details about licenses needed for ONTAP storage backends, refer to link:../get-started/requirements.html[supported storage backends].
 
 == Evaluation license vs. full license
-An evaluation license, including the embedded evaluation license that is installed by default with Astra Control Center, enable the same capabilities and features as a full license does. An evaluation license has a shorter lifespan than a full license. 
+An embedded evaluation license is provided with a new Astra Control Center installation. An evaluation license enables the same capabilities and features as a full license for a limited (90 day) period. After the evaluation period, a full license is required to continue with full functionality. 
+
+== Expired license
+If the active Astra Control Center license expires, UI functionality and API calls for the following functionality are unavailable:
+
+* Manual local snapshots and backups
+* Scheduled local snapshots and backups
+* Restoring from a snapshot or backup
+* Cloning from a snapshot or current state
+* Managing new applications
+* Applying a new license if the number of CPU units currently managed by Astra Control Center exceeds the available CPU units in the license being applied
+
 
 == How license consumption is calculated
 
