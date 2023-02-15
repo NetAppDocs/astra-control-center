@@ -35,6 +35,7 @@ You can easily change to a full license by obtaining the NetApp license file (NL
 *Steps*
 
 . From the left navigation, select *Account* > *License*.
+. In the license overview, to the right of the license information, select the Options menu.
 . Select *Replace*.
 . Browse to the license file you downloaded and select *Add*.
 
