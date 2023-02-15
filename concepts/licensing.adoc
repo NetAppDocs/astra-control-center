@@ -34,7 +34,6 @@ If the active Astra Control Center license expires, UI and API functionality for
 * Managing new applications
 * Applying a new license if the number of CPU units currently managed by Astra Control Center exceeds the available CPU units in the license being applied
 
-
 == How license consumption is calculated
 
 When you add a new cluster to Astra Control Center, it doesn't count toward consumed licenses until at least one application running on the cluster is managed by Astra Control Center.
