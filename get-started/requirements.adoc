@@ -32,7 +32,7 @@ Astra Control Center has been validated with the following operational environme
 NOTE: Ensure that the operating environment you choose to host Astra Control Center meets the basic resource requirements outlined in the environment's official documentation.
 
 |===
-|Distribution on host cluster |Supported versions
+|Kubernetes distribution on host cluster |Supported versions
 
 |Cisco IKS with Kubernetes
 |1.22
@@ -65,24 +65,17 @@ Astra Control Center requires the following resources in addition to the environ
 
 NOTE: These requirements assume that Astra Control Center is the only application running in the operational environment. If the environment is running additional applications, adjust these minimum requirements accordingly.
 
-=== CPU extensions
-The CPUs in all nodes of the hosting environment must have AVX extensions enabled.
-
-=== Worker nodes
-At least 3 worker nodes total, with 4 CPU cores and 12GB RAM each
-
-=== VMware Tanzu Kubernetes Grid cluster requirements
-When hosting Astra Control Center on a VMware Tanzu Kubernetes Grid (TKG) or Tanzu Kubernetes Grid Integrated Edition (TKGi) cluster, keep in mind the following considerations.
-
-//* Configuration with Trident
-//DOC-4056
-* Disable the TKG or TKGi default storage class enforcement on any application clusters intended to be managed by Astra Control. You can do this by editing the `TanzuKubernetesCluster` resource on the namespace cluster.
-* Be aware of specific requirements for Astra Trident when you deploy Astra Control Center in a TKG or TKGi environment. For more information, see the https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html#other-known-configuration-options[Astra Trident documentation^].
-
+* *CPU extensions*: The CPUs in all nodes of the hosting environment must have AVX extensions enabled.
+* *Worker nodes*: At least 3 worker nodes total, with 4 CPU cores and 12GB RAM each
+* *VMware Tanzu Kubernetes Grid cluster requirements*: When hosting Astra Control Center on a VMware Tanzu Kubernetes Grid (TKG) or Tanzu Kubernetes Grid Integrated Edition (TKGi) cluster, keep in mind the following considerations.
+** Use the `kubectl get nsxlbmonitors -A` command to see if you already have a service monitor configured to accept ingress traffic. If one exists, you should not install MetalLB, because the existing service monitor will override any new load balancer configuration.
+** Disable the TKG or TKGi default storage class enforcement on any application clusters intended to be managed by Astra Control. You can do this by editing the `TanzuKubernetesCluster` resource on the namespace cluster.
+** Be aware of specific requirements for Astra Trident when you deploy Astra Control Center in a TKG or TKGi environment. For more information, see the https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html#other-known-configuration-options[Astra Trident documentation^].
++
 NOTE: The default VMware TKG and TKGi configuration file token expires ten hours after deployment. If you use Tanzu portfolio products, you must generate a Tanzu Kubernetes Cluster configuration file with a non-expiring token to prevent connection issues between Astra Control Center and managed application clusters. For instructions, visit https://docs.vmware.com/en/VMware-NSX-T-Data-Center/3.2/nsx-application-platform/GUID-52A52C0B-9575-43B6-ADE2-E8640E22C29F.html[the VMware NSX-T Data Center Product Documentation.^]
 
 == Astra Trident requirements
-Ensure that you meet the following Trident requirements specific to the needs of your environment:
+Ensure that you meet the following Astra Trident requirements specific to the needs of your environment:
 
 * *Minimum version for use with Astra Control Center*: Astra Trident 22.01 or newer installed and configured.
 * *SnapMirror replication*: Astra Trident 22.07 or newer installed for SnapMirror-based application replication.
@@ -109,7 +102,7 @@ Ensure that you have a supported backend with sufficient capacity.
 == Image registry
 You must have an existing private Docker image registry to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
 
-== Astra license
+== Astra Control Center license
 
 Astra Control Center requires an Astra Control Center license for full functionality. Obtain an evaluation license or full license from NetApp. You need a license to protect your applications and data. Refer to link:../concepts/intro.html[Astra Control Center features] for details.
 
@@ -132,7 +125,7 @@ To check whether your ONTAP system has the required licenses, refer to https://d
 == Networking requirements
 Configure your operational environment to ensure Astra Control Center can communicate properly. The following networking configurations are required:
 
-* *FQDN address*: An FQDN address for Astra Control Center
+* *FQDN address*: You must have an FQDN address for Astra Control Center.
 * *Access to the internet*: You should determine whether you have outside access to the internet. If you do not, some functionality might be limited, such as receiving monitoring and metrics data from NetApp Cloud Insights, or sending support bundles to the https://mysupport.netapp.com/site/[NetApp Support Site^].
 * *Port access*: The operational environment that hosts Astra Control Center communicates using the following TCP ports. You should ensure that these ports are allowed through any firewalls, and configure firewalls to allow any HTTPS egress traffic originating from the Astra network. Some ports require connectivity both ways between the environment hosting Astra Control Center and each managed cluster (noted where applicable).
 
@@ -183,9 +176,6 @@ NOTE: The load balancer should use an IP address located in the same subnet as t
 
 For more information, see link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[Set up ingress for load balancing^].
 
-=== Tanzu Kubernetes Grid cluster
-If you are hosting Astra Control Center on a Tanzu Kubernetes Grid cluster, use the `kubectl get nsxlbmonitors -A` command to see if you already have a service monitor configured to accept ingress traffic. If one exists, you should not install MetalLB, because the existing service monitor will override any new load balancer configuration.
-
 === Google Anthos cluster requirements
 When hosting Astra Control Center on a Google Anthos cluster, note that Google Anthos includes the MetalLB load balancer and the Istio ingress gateway service by default, enabling you to simply use the generic ingress capabilities of Astra Control Center during installation. See link:install_acc.html#configure-astra-control-center[Configure Astra Control Center^] for details.
 
@@ -199,7 +189,6 @@ Keep in mind these requirements if you plan to use these Astra Control Center fe
 * *Application cluster requirements*: link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[Cluster management requirements^]
 ** *Managed application requirements*: link:../use/manage-apps.html#application-management-requirements[Application management requirements^]
 ** *Additional requirements for app replication*: link:../use/replicate_snapmirror.html#replication-prerequisites[Replication prerequisites^]
-
 
 == What's next
 
