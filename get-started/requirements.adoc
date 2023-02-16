@@ -18,7 +18,7 @@ Get started by verifying the readiness of your operational environment, applicat
 * <<Astra Trident requirements>>
 * <<Storage backends>>
 * <<Image registry>>
-* <<Astra license>>
+* <<Astra Control Center license>>
 * <<ONTAP licenses>>
 * <<Networking requirements>>
 * <<Ingress for on-premises Kubernetes clusters>>
@@ -38,7 +38,7 @@ NOTE: Ensure that the operating environment you choose to host Astra Control Cen
 |1.22
 
 |Google Anthos
-|1.11 or 1.12 (See <<Google Anthos cluster requirements>>)
+|1.11 or 1.12 (See <<Google Anthos ingress requirements>>)
 
 |Kubernetes (Upstream)
 |1.23 to 1.25 (Astra Trident 22.10 or newer is required for Kubernetes 1.25)
@@ -53,10 +53,10 @@ RKE 2 (v1.24.x) with Rancher 2.6.8
 |4.8 through 4.11
 
 |VMware Tanzu Kubernetes Grid
-|1.5  (See <<VMware Tanzu Kubernetes Grid cluster requirements>>)
+|1.5  (See <<Host cluster resource requirements>>)
 
 |VMware Tanzu Kubernetes Grid Integrated Edition
-|1.13 and 1.14  (See <<VMware Tanzu Kubernetes Grid cluster requirements>>)
+|1.13 and 1.14  (See <<Host cluster resource requirements>>)
 |===
 
 == Host cluster resource requirements
