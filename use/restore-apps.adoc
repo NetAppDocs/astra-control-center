@@ -54,6 +54,8 @@ The following scenario creates an undesirable situation when using NetApp SnapMi
 . You reverse replication for `app2`. This causes the `app1` app on the source cluster to be deactivated.
 ====
 // End snippet
+//astradoc-91 limitation
+NOTE: If your app uses the `ontap-nas-economy` storage class, you cannot specify a different storage class if you are restoring the app to the same namespace.
 
 .. Select the snapshot to use to restore the app in-place, which reverts the app to an earlier version of itself.
 .. Select *Next*.

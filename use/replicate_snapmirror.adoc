@@ -55,8 +55,7 @@ NOTE: You can simultaneously replicate a different app (running on the other clu
 
 * *Astra Trident / ONTAP configuration*: Astra Control Center requires that a storage class be created and set as the default storage class. Astra Control Center supports the following ONTAP drivers provided by Astra Trident for replication:
 ** ontap-nas
-** ontap-nas-economy (protection and replication policies with Astra Control are not available for this storage class)
-** ontap-nas-flexgroup
+** ontap-nas-economy (SnapMirror replication functionality with Astra Control is not available for this storage class)
 ** ontap-san
 
 
