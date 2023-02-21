@@ -25,11 +25,11 @@ Get started by verifying the readiness of your operational environment, applicat
 * <<Supported web browsers>>
 * <<Additional requirements for application clusters>>
 
-== Supported operational environments
+== Supported host cluster Kubernetes environments
 
-Astra Control Center has been validated with the following operational environments:
+Astra Control Center has been validated with the following Kubernetes host environments:
 
-NOTE: Ensure that the operating environment you choose to host Astra Control Center meets the basic resource requirements outlined in the environment's official documentation.
+NOTE: Ensure that the Kubernetes environment you choose to host Astra Control Center meets the basic resource requirements outlined in the environment's official documentation.
 
 |===
 |Kubernetes distribution on host cluster |Supported versions
@@ -98,6 +98,16 @@ Ensure that you have a supported backend with sufficient capacity.
 
 * *Required storage backend capacity*: At least 500GB available
 
+=== ONTAP licenses
+
+To use Astra Control Center, verify that you have the following ONTAP licenses, depending on what you need to accomplish:
+
+* FlexClone
+* SnapMirror: Optional. Needed only for replication to remote systems using SnapMirror technology. Refer to https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html[SnapMirror license information^].
+* S3 license: Optional. Needed only for ONTAP S3 buckets
+
+To check whether your ONTAP system has the required licenses, refer to https://docs.netapp.com/us-en/ontap/system-admin/manage-licenses-concept.html[Manage ONTAP licenses^].
+
 == Image registry
 You must have an existing private Docker image registry to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
 
@@ -110,16 +120,6 @@ You can try Astra Control Center with an evaluation license, which lets you use 
 To set up the license, refer to link:setup_overview.html[use a 90-day evaluation license^]. 
 
 To learn more about how licenses work, see link:../concepts/licensing.html[Licensing^].
-
-== ONTAP licenses
-
-To use Astra Control Center, verify that you have the following ONTAP licenses, depending on what you need to accomplish:
-
-* FlexClone
-* SnapMirror: Optional. Needed only for replication to remote systems using SnapMirror technology. Refer to https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html[SnapMirror license information^].
-* S3 license: Optional. Needed only for ONTAP S3 buckets
-
-To check whether your ONTAP system has the required licenses, refer to https://docs.netapp.com/us-en/ontap/system-admin/manage-licenses-concept.html[Manage ONTAP licenses^].
 
 == Networking requirements
 Configure your operational environment to ensure Astra Control Center can communicate properly. The following networking configurations are required:
