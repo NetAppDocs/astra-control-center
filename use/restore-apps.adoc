@@ -24,7 +24,7 @@ Astra Control can restore your application from a snapshot or backup. Restoring 
 `oc adm policy add-scc-to-group anyuid system:serviceaccounts:wordpress`
 `oc adm policy add-scc-to-user privileged -z default -n wordpress`
 
-* *Helm deployed apps*: Cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) is fully supported. Apps deployed with Helm 2 are not supported.
+* *Helm deployed apps*: Apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
 //DOC-3556
 
 .Steps
@@ -34,7 +34,7 @@ Astra Control can restore your application from a snapshot or backup. Restoring 
 . If you want to restore from a snapshot, keep the *Snapshots* icon selected. Otherwise, select the *Backups* icon to restore from a backup.
 //+
 //image:screenshot-restore-snapshot-or-backup.gif[A screenshot of the Data protection tab where you can view Snapshots or Backups.]
-. From the Options menu in the *Actions* column for the snapshot or backup from which you want to restore, select *Restore application*.
+. From the Options menu in the *Actions* column for the snapshot or backup from which you want to restore, select *Restore*.
 //+
 //image:screenshot-restore-app.gif["A screenshot of the app page where you can select the drop-down list in the actions column and select Restore application."]
 . Choose the restore type:
@@ -55,7 +55,7 @@ The following scenario creates an undesirable situation when using NetApp SnapMi
 ====
 // End snippet
 //astradoc-91 limitation
-NOTE: If your app uses the `ontap-nas-economy` storage class, you cannot specify a different storage class if you are restoring the app to the same namespace.
+NOTE: (For `ontap-nas-economy` only) If your app uses the `ontap-nas-economy` storage class, you must restore the app using the original storage classes. You cannot specify a different storage class if you are restoring the app to the same namespace.
 
 .. Select the snapshot to use to restore the app in-place, which reverts the app to an earlier version of itself.
 .. Select *Next*.
@@ -65,6 +65,8 @@ NOTE: If you restore to a namespace that was previously deleted, a new namespace
 .. Review details about the restore action, type "restore", and select *Restore*.
 
 * *Restore to new namespaces*: Use this procedure to restore the app to another cluster or with different namespaces from the source.
++
+NOTE: (For `ontap-nas-economy` only) You can use this procedure to either migrate an app from an `ontap-nas-economy` storage class to an `ontap nas` storage class on the same cluster OR copy the app to another cluster backed by the `ontap-nas-economy` storage class. 
 
 .. Choose the destination cluster for the app you intend to restore.
 .. Enter a destination namespace for each source namespace associated with the app.
