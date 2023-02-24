@@ -88,7 +88,8 @@ NOTE: These requirements assume that Astra Control Center is the only applicatio
 ** Ensure that the worker nodes in your cluster are configured with the appropriate storage drivers so that the pods can interact with the backend storage. Astra Control Center supports the following ONTAP drivers provided by Astra Trident:
 *** ontap-nas
 *** ontap-san
-*** ontap-san-economy (not supported for app replication)
+*** ontap-san-economy (app replication is not available with this storage class type)
+*** ontap-nas-economy (snapshots, replication policies, and protection policies are not available with this storage class type)
 
 
 == Supported storage backends
