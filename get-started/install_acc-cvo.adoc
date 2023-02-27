@@ -376,7 +376,7 @@ Ensure that the operating environment you choose to host Astra Control Center me
 
 Astra Control Center requires the following resources in addition to the environment's resource requirements:
 
-See link:../get-started/requirements.html#operational-environment-requirements[Astra Control Center operational environment requirements].
+See link:../get-started/requirements.html[Astra Control Center operational environment requirements].
 
 [cols=2*,options="header",cols="1h,2a"]
 |===

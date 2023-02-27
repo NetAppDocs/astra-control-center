@@ -14,7 +14,7 @@ summary: To upgrade Astra Control Center, you'll download the bundle and upgrade
 To upgrade Astra Control Center, download the installation bundle from the NetApp Support Site and complete these instructions. You can use this procedure to upgrade Astra Control Center in internet-connected or air-gapped environments.
 
 .What you'll need
-* Before you upgrade, refer to link:../get-started/requirements.html#operational-environment-requirements[Operational environment requirements^] to ensure your environment still meets the minimum requirements for Astra Control Center deployment. Your environment should have the following:
+* Before you upgrade, refer to link:../get-started/requirements.html[operational environment requirements^] to ensure your environment still meets the minimum requirements for Astra Control Center deployment. Your environment should have the following:
 
 ** A supported Astra Trident version
 To determine the version you are running, run the following command against your existing Astra Control Center:
