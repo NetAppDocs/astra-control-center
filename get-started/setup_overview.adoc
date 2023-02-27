@@ -476,11 +476,11 @@ Astra Control Center offers two modes of authenticating an ONTAP backend.
 
 * *Certificate-based*: Astra Control Center can also communicate with an ONTAP cluster using a certificate installed on the backend. Here, the backend definition must contain Base64-encoded values of the client certificate, key, and the trusted CA certificate if used (recommended).
 
-You can update existing backends to move from credential-based to certificate-based methods. However, only one authentication method is supported at a time. 
+You can update existing backends to move from credential-based to certificate-based methods. However, you cannot change from certificate-based authentication to credentials-based authentication. Only one authentication method is supported at a time. 
 
 === Enable credential-based authentication
 
-Astra Control Center requires the credentials to an SVM-scoped/cluster-scoped `admin` to communicate with the ONTAP backend. You should use standard, pre-defined roles such as `admin` or `vsadmin`. This ensures forward compatibility with future ONTAP releases that might expose feature APIs to be used by future Astra Control Center releases. 
+Astra Control Center requires the credentials to a cluster-scoped `admin` to communicate with the ONTAP backend. You should use standard, pre-defined roles such as `admin`. This ensures forward compatibility with future ONTAP releases that might expose feature APIs to be used by future Astra Control Center releases. 
 
 NOTE: A custom security login role can be created and used with Astra Control Center, but is not recommended.
 
@@ -494,12 +494,12 @@ A sample backend definition looks like this:
   "managementLIF": "10.0.0.1",
   "dataLIF": "10.0.0.2",
   "svm": "svm_nfs",
-  "username": "vsadmin",
+  "username": "admin",
   "password": "secret"
 }
 ----
 
-Keep in mind that the backend definition is the only place the credentials are stored in plain text. After the backend is created, usernames and passwords are encoded with Base64 and stored as Kubernetes secrets. The creation or update of a backend is the only step that requires knowledge of the credentials. As such, it is an admin-only operation, to be performed by the Kubernetes or storage administrator.
+The backend definition is the only place the credentials are stored in plain text. After the backend is created, usernames and passwords are encoded with Base64 and stored as Kubernetes secrets. The creation or update of a backend is the only step that requires knowledge of the credentials. As such, it is an admin-only operation, to be performed by the Kubernetes or storage administrator.
 
 === Enable certificate-based authentication 
 
@@ -515,14 +515,14 @@ A typical workflow involves the following steps.
 
 .Steps
 
-. Generate a client certificate and key. When generating, set Common Name (CN) to the ONTAP user to authenticate as.
+. Generate a client certificate and key. When generating, set the Common Name (CN) to the ONTAP user to authenticate as.
 
 +
 ----
 openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -keyout k8senv.key -out k8senv.pem -subj "/C=US/ST=NC/L=RTP/O=NetApp/CN=vsadmin"
 ----
 
-. Add trusted CA certificate to the ONTAP cluster. This might be already handled by the storage administrator. Ignore if no trusted CA is used.
+. Add a trusted CA certificate to the ONTAP cluster. This might be already handled by the storage administrator. Ignore if no trusted CA is used.
 
 +
 ----
@@ -538,7 +538,7 @@ security certificate install -type client-ca -cert-name <certificate-name> -vser
 security ssl modify -vserver <vserver-name> -client-enabled true
 ----
 
-. Confirm the ONTAP security login role supports cert authentication method.
+. Confirm that the ONTAP security login role supports cert authentication method.
 
 +
 ----
@@ -546,7 +546,7 @@ security login create -user-or-group-name vsadmin -application ontapi -authentic
 security login create -user-or-group-name vsadmin -application http -authentication-method cert -vserver <vserver-name>
 ----
 
-. Test authentication using certificate generated. Replace <ONTAP Management LIF> and <vserver name> with Management LIF IP and SVM name. You must ensure the LIF has its service policy set to default-data-management.
+. Test authentication using certificate generated. Replace <ONTAP Management LIF> and <vserver name> with the Management LIF IP and SVM name. You must ensure the LIF has its service policy set to default-data-management.
 
 +
 ----
