@@ -57,6 +57,46 @@ Performing an in-place restore operation on an app that shares resources with an
 +
 NOTE: If you restore to a namespace that was previously deleted, a new namespace with the same name is created as part of the restore process. Any users that had rights to manage apps in the previously deleted namespace need to manually restore rights to the newly re-created namespace.
 
+.. Select one of the following:
+* *Restore all resources*: Restore all resources associated with the original app.
+* *Filter resources*: Specify rules to restore only a sub-set of the original application resources.
+... Choose to include or exclude resources from the restored application.
+... START HERE!!!  Set the rule:
+
+You can add a rule that will include resources of a specific group, kind, version and optionally, label. You might want to do this if there are resources that Astra Control does not include automatically. 
+
+You cannot exclude any of the cluster-scoped resources that are automatically included by Astra Control.
+
+You can add the following `apiVersions` (which are the groups combined with the API version): 
+
+[cols=2*,options="header",cols="1h,2d"]
+|===
+| Resource kind
+| apiVersions (group + version)
+| `ClusterRole` | rbac.authorization.k8s.io/v1
+| `ClusterRoleBinding` | rbac.authorization.k8s.io/v1
+| `CustomResource` | apiextensions.k8s.io/v1, apiextensions.k8s.io/v1beta1
+| `CustomResourceDefinition` | apiextensions.k8s.io/v1, apiextensions.k8s.io/v1beta1
+| `MutatingWebhookConfiguration` | admissionregistration.k8s.io/v1
+| `ValidatingWebhookConfiguration` | admissionregistration.k8s.io/v1
+
+|===
+====
+// End snippet
+
+To include cluster-scoped resources in addition to those that Astra Control automatically includes, check *Include additional cluster-scoped resources* and complete the following: 
+
+.. Select *Add include rule*. 
+.. *Group*: From the drop-down list, select the API group of resources. 
+.. *Kind*: From the drop-down list, select the name of the object schema.
+.. *Version*: Enter the API version. 
+.. *Label selector*: Optionally, include a label to add to the rule. This label is used to retrieve only those resources matching this label. If you don't provide a label, Astra Control collects all instances of the resource kind specified for that cluster.  
+.. Review the rule that is created based on your entries. 
+.. Select *Add*. 
++
+TIP: You can create as many cluster-scoped resource rules as you want. The rules appear in the Define application Summary. 
+
+.. Select *Next*.
 .. Review details about the restore action, type "restore", and select *Restore*.
 
 * *Restore to new namespaces*: Use this procedure to restore the app to another cluster or with different namespaces from the source.
