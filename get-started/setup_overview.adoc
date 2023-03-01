@@ -472,11 +472,13 @@ Managing storage clusters in Astra Control as a storage backend enables you to g
 
 Astra Control Center offers two modes of authenticating an ONTAP backend.
 
-* *Credential-based*: The username and password to an ONTAP user with the required permissions. You should use a pre-defined security login role, such as admin or vsadmin to ensure maximum compatibility with ONTAP versions.
+* *Credential-based authentication*: The username and password to an ONTAP user with the required permissions. You should use a pre-defined security login role, such as admin or vsadmin to ensure maximum compatibility with ONTAP versions.
 
-* *Certificate-based*: Astra Control Center can also communicate with an ONTAP cluster using a certificate installed on the backend. Here, the backend definition must contain Base64-encoded values of the client certificate, key, and the trusted CA certificate if used (recommended).
+* *Certificate-based authentication*: Astra Control Center can also communicate with an ONTAP cluster using a certificate installed on the backend. Here, the backend definition must contain Base64-encoded values of the client certificate, key, and the trusted CA certificate if used (recommended).
 
-You can update existing backends to move from credential-based to certificate-based methods. However, you cannot change from certificate-based authentication to credentials-based authentication. Only one authentication method is supported at a time. 
+You can later update existing backends to move from one type of authentication to another method. Only one authentication method is supported at a time. 
+
+// However, you cannot change from certificate-based authentication to credentials-based authentication.
 
 === Enable credential-based authentication
 
@@ -574,7 +576,8 @@ After you set up the credentials or certificate information, you can add an exis
 //** *New backends*: Select *Add* to manage an existing backend, select *ONTAP*, and select *Next*.
 //** *Discovered backends*: From the Actions menu, select *Manage* on a discovered backend from the managed cluster.
 
-. Select *Use existing* and select *ONTAP*. 
+. Select *Add*.
+. In the Use Existing section of the Add storage backend page, select *ONTAP*. 
 
 . Select one of the following: 
 
@@ -583,10 +586,10 @@ After you set up the credentials or certificate information, you can add an exis
 +
 NOTE: The user whose credentials you enter here must have the `ontapi` user login access method enabled within ONTAP System Manager on the ONTAP cluster. If you plan to use SnapMirror replication, apply user credentials with the "admin" role, which has the access methods `ontapi` and `http`, on both source and destination ONTAP clusters. Refer to https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts in ONTAP documentation^] for more information.
 
-* *Use a certificate*: Upload the certificate `.pem` file, the certificate key `.key` file, and optionally the certificate authority  `.pem` file.
+* *Use a certificate*: Upload the certificate `.pem` file, the certificate key `.key` file, and optionally the certificate authority file.
 
 . Select *Next*.
-. Confirm the backend details and select *Add storage backend*.
+. Confirm the backend details and select *Manage*.
 
 
 .Result
