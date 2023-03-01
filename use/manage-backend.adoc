@@ -21,6 +21,7 @@ You can complete the following tasks related to managing a storage backend:
 * link:../get-started/setup_overview.html#add-a-storage-backend[Add a storage backend]
 * <<View storage backend details>>
 * <<Edit storage backend authentication details>>
+* <<Manage a discovered storage backend>>
 * <<Unmanage a storage backend>>
 * <<Remove a storage backend>>
 
@@ -101,9 +102,6 @@ You can update existing backends to move from one type of authentication to anot
 . Select the storage backend.
 . At the Credentials field, select the *Edit* option. 
 . In the Edit page, select one of the following. 
-
-//If the certificate is already enabled, you can only edit the certificate information. You cannot change from certificate-based to credentials-based authentication. 
-
 +
 * *Update administrator credentials*: Enter the ONTAP cluster management IP address and admin credentials. The credentials must be cluster-wide credentials. 
 +
@@ -112,6 +110,18 @@ NOTE: The user whose credentials you enter here must have the `ontapi` user logi
 * *Change to certificate authentication*: Upload the certificate `.pem` file, the certificate key `.key` file, and optionally the certificate authority file.
 
 . Select *Save*.
+
+== Manage a discovered storage backend
+
+You can manage a discovered storage backend.
+
+.Steps
+.	From the left navigation, select *Backends*.
+. Select the storage backend.
+. From the Options menu in the *Actions* column, select *Manage*.
+. Make the changes. 
+. Select *Save*.
+
 
 == Unmanage a storage backend
 
