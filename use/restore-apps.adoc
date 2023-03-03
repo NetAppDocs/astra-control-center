@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: use/restore-apps.html
-keywords: restore app, restoring an app, restore an app, restore
+keywords: restore app, restoring an app, restore, migrate nas-economy
 summary: Astra can restore your application configuration and persistent storage from a snapshot or backup. Persistent storage backups are transferred from your object store, so restoring from an existing backup will complete the fastest.
 ---
 
@@ -56,7 +56,7 @@ The following scenario creates an undesirable situation when using NetApp SnapMi
 ====
 // End snippet
 //astradoc-91 limitation
-NOTE: (For `ontap-nas-economy` only) If your app uses the `ontap-nas-economy` storage class, you must restore the app using the original storage classes. You cannot specify a different storage class if you are restoring the app to the same namespace.
+NOTE: If your app uses the `ontap-nas-economy` storage class, you must restore the app using the original storage classes. You cannot specify a different storage class if you are restoring the app to the same namespace.
 
 .. Select the snapshot to use to restore the app in-place, which reverts the app to an earlier version of itself.
 .. Select *Next*.
@@ -67,7 +67,7 @@ NOTE: If you restore to a namespace that was previously deleted, a new namespace
 
 * *Restore to new namespaces*: Use this procedure to restore the app to another cluster or with different namespaces from the source.
 +
-NOTE: (For `ontap-nas-economy` only) You can use this procedure to either migrate an app from an `ontap-nas-economy` storage class to an `ontap nas` storage class on the same cluster OR copy the app to another cluster backed by the `ontap-nas-economy` storage class. 
+NOTE: You can use this procedure to either <<Migrate from ontap-nas-economy storage to ontap-nas storage,migrate an app from an `ontap-nas-economy` storage class>> to an `ontap nas` storage class on the same cluster *OR* copy the app to another cluster backed by the `ontap-nas-economy` storage class. 
 
 .. Choose the destination cluster for the app you intend to restore.
 .. Enter a destination namespace for each source namespace associated with the app.
@@ -89,3 +89,7 @@ Astra Control restores the app based on the information that you provided. If yo
 NOTE: After a data protection operation (clone, backup, or restore) and subsequent persistent volume resize, there is a delay of up to twenty minutes before the new volume size is shown in the web UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
 
 IMPORTANT: Any member user with namespace constraints by namespace name/ID or by namespace labels can clone or restore an app to a new namespace on the same cluster or to any other cluster in their organization's account. However, the same user cannot access the cloned or restored app in the new namespace. After a new namespace is created by a clone or restore operation, the account admin/owner can edit the member user account and update role constraints for the affected user to grant access to the new namespace.
+
+== Migrate from ontap-nas-economy storage to ontap-nas storage
+
+You can use an Astra Control <<Restore apps,application restore>> operation to migrate application volumes from an `ontap-nas-economy` storage class, which permits limited application protection options, to the `ontap nas` storage class with its full range of Astra Control protection options. The restore operation migrates Qtree-based volumes that use an `ontap-nas-economy` backend to standard volumes backed by `ontap-nas`. Volumes, regardless of whether they are `ontap-nas-economy` backed only or mixed, will be migrated to the target storage class. After the migration is complete, protection options are no longer limited.

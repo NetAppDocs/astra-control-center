@@ -78,7 +78,7 @@ Astra Control implements the data protection policy by creating and retaining sn
 
 You can create an on-demand snapshot at any time.
 
-NOTE: If your app uses the `ontap-nas-economy` storage class, snapshots cannot be used. Use an alternate storage class for snapshots. 
+IMPORTANT: If your app uses the `ontap-nas-economy` storage class, snapshots cannot be used. Use an alternate storage class for snapshots. 
 
 .Steps
 
@@ -99,7 +99,7 @@ You can also back up an app at any time.
 
 NOTE: S3 buckets in Astra Control Center do not report available capacity. Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
 
-NOTE: If your app uses the `ontap-nas-economy` storage class, backups are disruptive and the app will be unavailable until the backup operation has completed. 
+IMPORTANT: If your app uses the `ontap-nas-economy` storage class, backups are disruptive and the app will be unavailable until the backup operation has completed. 
 
 .Steps
 
