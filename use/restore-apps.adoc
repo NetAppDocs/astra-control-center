@@ -13,12 +13,11 @@ summary: Astra can restore your application configuration and persistent storage
 [.lead]
 Astra Control can restore your application from a snapshot or backup. Restoring from an existing snapshot will be faster when restoring the application to the same cluster. You can use the Astra Control UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to restore apps.
 
-NOTE: When you perform an in-place restore of an application that uses NetApp ONTAP storage, the space used by the restored app can double. After performing an in-place restore, remove any unwanted snapshots from the restored application to free up storage space.
-
 .About this task
 //ASTRACTL-12847/DOC-4147
 * *Protect your apps first*: It is strongly recommended to take a snapshot of or back up your application before restoring it. This will enable you to clone from the snapshot or backup in the event that the restore is unsuccessful.
 * *Check destination volumes*: If you restore to a different cluster, ensure that the cluster is using the same persistent volume access mode (for example, `ReadWriteMany`). The restore operation will fail if the destination persistent volume access mode is different.
+* *Plan for space needs*: When you perform an in-place restore of an application that uses NetApp ONTAP storage, the space used by the restored app can double. After performing an in-place restore, remove any unwanted snapshots from the restored application to free up storage space.
 * *(Openshift clusters only) Add policies*: When you create a project for hosting an app on an OpenShift cluster, the project (or Kubernetes namespace) is assigned a SecurityContext UID. To enable Astra Control Center to protect your app and move the app to another cluster or project in OpenShift, you need to add policies that enable the app to run as any UID. As an example, the following OpenShift CLI commands grant the appropriate policies to a WordPress app.
 +
 `oc new-project wordpress`
@@ -27,6 +26,11 @@ NOTE: When you perform an in-place restore of an application that uses NetApp ON
 
 * *Helm deployed apps*: Apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
 //DOC-3556
+
+[CAUTION]
+====
+Performing an in-place restore operation on an app that shares resources with another app can have unintended results. Any resources that are shared between the apps are replaced when an in-place restore is performed on one of the apps. For more information, see <<In-place restore complications for an app that shares resources with another app,this example>>. 
+====
 
 .Steps
 
@@ -41,43 +45,28 @@ NOTE: When you perform an in-place restore of an application that uses NetApp ON
 . Choose the restore type:
 * *Restore to original namespaces*: Use this procedure to restore the app in-place to the original cluster.
 +
-CAUTION: Performing an in-place restore operation on an app that shares resources with another app can have unintended results. Any resources that are shared between the apps are replaced when an in-place restore is performed on one of the apps.
-+
-.Example of unintended restore results
-[%collapsible]
-====
-The following scenario creates an undesirable situation when using NetApp SnapMirror replication:
-
-. You define the application `app1` using the namespace `ns1`.
-. You configure a replication relationship for `app1`.
-. You define the application `app2` (on the same cluster) using the namespaces `ns1` and `ns2`.
-. You configure a replication relationship for `app2`.
-. You reverse replication for `app2`. This causes the `app1` app on the source cluster to be deactivated.
-====
-// End snippet
 //astradoc-91 limitation
 NOTE: If your app uses the `ontap-nas-economy` storage class, you must restore the app using the original storage classes. You cannot specify a different storage class if you are restoring the app to the same namespace.
 
-.. Select the snapshot to use to restore the app in-place, which reverts the app to an earlier version of itself.
+.. Select the snapshot or backup to use to restore the app in-place, which reverts the app to an earlier version of itself.
 .. Select *Next*.
 +
 NOTE: If you restore to a namespace that was previously deleted, a new namespace with the same name is created as part of the restore process. Any users that had rights to manage apps in the previously deleted namespace need to manually restore rights to the newly re-created namespace.
-
-.. Review details about the restore action, type "restore", and select *Restore*.
 
 * *Restore to new namespaces*: Use this procedure to restore the app to another cluster or with different namespaces from the source.
 +
 NOTE: You can use this procedure to either <<Migrate from ontap-nas-economy storage to ontap-nas storage,migrate an app from an `ontap-nas-economy` storage class>> to an `ontap nas` storage class on the same cluster *OR* copy the app to another cluster backed by the `ontap-nas-economy` storage class. 
 
+.. Specify the name for the restored app.
 .. Choose the destination cluster for the app you intend to restore.
 .. Enter a destination namespace for each source namespace associated with the app.
 +
 NOTE: Astra Control creates new destination namespaces as part of this restore option. Destination namespaces that you specify must not be already present on the destination cluster.
 
 .. Select *Next*.
-.. Select the snapshot to use to restore the app.
-.. Select *Next*.
-.. Review details about the restore action and select *Restore*.
+.. Select the snapshot or backup to use to restore the app.
+. Select *Next*.
+. Review details about the restore action carefully, type "restore" (if prompted), and select *Restore*.
 
 //+
 //image:screenshot-restore-summary.gif[]
