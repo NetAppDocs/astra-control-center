@@ -52,7 +52,7 @@ If you try to add a cluster with the same name of a cluster that already exists,
 
 As a workaround, do the following:
 
-. Edit your kubeadm-config ConfigMap:
+. Edit your `kubeadm-config` ConfigMap:
 +
 ----
 kubectl edit configmaps -n kube-system kubeadm-config

@@ -279,7 +279,7 @@ After you save and exit the file editor, the changes will be applied and the upg
 watch kubectl get pods -n [netapp-acc or custom namespace]
 ----
 
-. Wait for the Astra status conditions to indicate that the upgrade is complete and ready (`True`):
+. Wait for the Astra Control status conditions to indicate that the upgrade is complete and ready (`True`):
 +
 ----
 kubectl get AstraControlCenter -n [netapp-acc or custom namespace]
