@@ -509,6 +509,25 @@ a| * `Generic` (this is the default value)
 ====
 // End snippet
 +
+.`scaleSize`
+[%collapsible]
+====
+|===
+|Setting |Guidance |Type |Options
+
+| `scaleSize`
+| The size of the deployment that determines the number of replicas deployed with each service. Use `Small` when certain services will be deployed with a single replica each. Use `Medium` for two replicas deployed with each service. Large is XXXX.
+
+NOTE: Core services are always deployed with two replicas each irrespective of the value of `scaleSize`.
+| string
+a|* `Small` (This is the default value)
+* `Medium`
+* `Large`
+
+|===
+====
+// End snippet
++
 .`astraResourcesScaler`
 [%collapsible]
 ====
@@ -576,6 +595,7 @@ spec:
   storageClass: "ontap-gold"
   volumeReclaimPolicy: "Retain"
   ingressType: "Generic"
+  scaleSize: "Small"
   astraResourcesScaler: "Default"
   additionalValues: {}
   crds:
