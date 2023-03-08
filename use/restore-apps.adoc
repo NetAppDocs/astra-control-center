@@ -46,7 +46,7 @@ Performing an in-place restore operation on an app that shares resources with an
 * *Restore to original namespaces*: Use this procedure to restore the app in-place to the original cluster.
 +
 //astradoc-91 limitation
-NOTE: If your app uses the `ontap-nas-economy` storage class, you must restore the app using the original storage classes. You cannot specify a different storage class if you are restoring the app to the same namespace.
+NOTE: If your app uses a storage class backed by the `ontap-nas-economy` driver, you must restore the app using the original storage classes. You cannot specify a different storage class if you are restoring the app to the same namespace.
 
 .. Select the snapshot or backup to use to restore the app in-place, which reverts the app to an earlier version of itself.
 .. Select *Next*.
@@ -55,7 +55,7 @@ NOTE: If you restore to a namespace that was previously deleted, a new namespace
 
 * *Restore to new namespaces*: Use this procedure to restore the app to another cluster or with different namespaces from the source.
 +
-NOTE: You can use this procedure to either <<Migrate from ontap-nas-economy storage to ontap-nas storage,migrate an app from an `ontap-nas-economy` storage class>> to an `ontap nas` storage class on the same cluster *OR* copy the app to another cluster backed by the `ontap-nas-economy` storage class. 
+NOTE: You can use this procedure to either <<Migrate from ontap-nas-economy storage to ontap-nas storage,migrate an app from a storage class backed by `ontap-nas-economy`>> to a storage class backed by `ontap-nas` on the same cluster *OR* copy the app to another cluster with a storage class backed by the `ontap-nas-economy` driver. 
 
 .. Specify the name for the restored app.
 .. Choose the destination cluster for the app you intend to restore.
@@ -81,4 +81,4 @@ IMPORTANT: Any member user with namespace constraints by namespace name/ID or by
 
 == Migrate from ontap-nas-economy storage to ontap-nas storage
 
-You can use an Astra Control link:../use/restore-apps.html[application restore] operation to migrate application volumes from an `ontap-nas-economy` storage class, which permits limited application protection options, to the `ontap nas` storage class with its full range of Astra Control protection options. The restore operation migrates Qtree-based volumes that use an `ontap-nas-economy` backend to standard volumes backed by `ontap-nas`. Volumes, regardless of whether they are `ontap-nas-economy` backed only or mixed, will be migrated to the target storage class. After the migration is complete, protection options are no longer limited.
+You can use an Astra Control link:../use/restore-apps.html[application restore] operation to migrate application volumes from a storage class backed by `ontap-nas-economy`, which permits limited application protection options, to a storage class backed by `ontap nas` with its full range of Astra Control protection options. The restore operation migrates Qtree-based volumes that use an `ontap-nas-economy` backend to standard volumes backed by `ontap-nas`. Volumes, regardless of whether they are `ontap-nas-economy` backed only or mixed, will be migrated to the target storage class. After the migration is complete, protection options are no longer limited.
