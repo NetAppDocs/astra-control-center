@@ -15,7 +15,7 @@ Astra Control can restore your application from a snapshot or backup. Restoring 
 
 .About this task
 //ASTRACTL-12847/DOC-4147
-* *Protect your apps first*: It is strongly recommended to take a snapshot of or back up your application before restoring it. This will enable you to clone from the snapshot or backup in the event that the restore is unsuccessful.
+* *Protect your apps first*: It is strongly recommended that you take a snapshot or backup of your application before restoring it. This will enable you to clone from the snapshot or backup in the event that the restore is unsuccessful.
 * *Check destination volumes*: If you restore to a different cluster, ensure that the cluster is using the same persistent volume access mode (for example, `ReadWriteMany`). The restore operation will fail if the destination persistent volume access mode is different.
 * *Plan for space needs*: When you perform an in-place restore of an application that uses NetApp ONTAP storage, the space used by the restored app can double. After performing an in-place restore, remove any unwanted snapshots from the restored application to free up storage space.
 * *(Openshift clusters only) Add policies*: When you create a project for hosting an app on an OpenShift cluster, the project (or Kubernetes namespace) is assigned a SecurityContext UID. To enable Astra Control Center to protect your app and move the app to another cluster or project in OpenShift, you need to add policies that enable the app to run as any UID. As an example, the following OpenShift CLI commands grant the appropriate policies to a WordPress app.
@@ -81,4 +81,16 @@ IMPORTANT: Any member user with namespace constraints by namespace name/ID or by
 
 == Migrate from ontap-nas-economy storage to ontap-nas storage
 
-You can use an Astra Control link:../use/restore-apps.html[application restore] operation to migrate application volumes from a storage class backed by `ontap-nas-economy`, which permits limited application protection options, to a storage class backed by `ontap nas` with its full range of Astra Control protection options. The restore operation migrates Qtree-based volumes that use an `ontap-nas-economy` backend to standard volumes backed by `ontap-nas`. Volumes, regardless of whether they are `ontap-nas-economy` backed only or mixed, will be migrated to the target storage class. After the migration is complete, protection options are no longer limited.
+You can use an Astra Control link:../use/restore-apps.html[application restore] operation to migrate application volumes from a storage class backed by `ontap-nas-economy`, which permits limited application protection options, to a storage class backed by `ontap-nas` with its full range of Astra Control protection options. The restore operation migrates Qtree-based volumes that use an `ontap-nas-economy` backend to standard volumes backed by `ontap-nas`. Volumes, regardless of whether they are `ontap-nas-economy` backed only or mixed, will be migrated to the target storage class. After the migration is complete, protection options are no longer limited.
+
+== In-place restore complications for an app that shares resources with another app
+
+You can perform an in-place restore operation on an app that shares resources with another app and produce unintended results. Any resources that are shared between the apps are replaced when an in-place restore is performed on one of the apps. 
+
+The following is an example scenario that creates an undesirable situation when using NetApp SnapMirror replication for a restore:
+
+. You define the application `app1` using the namespace `ns1`.
+. You configure a replication relationship for `app1`.
+. You define the application `app2` (on the same cluster) using the namespaces `ns1` and `ns2`.
+. You configure a replication relationship for `app2`.
+. You reverse replication for `app2`. This causes the `app1` app on the source cluster to be deactivated.
