@@ -88,9 +88,9 @@ IMPORTANT: Any member user with namespace constraints by namespace name/ID or by
 
 You can add a rule to a <<Restore apps,restore>> operation that will include or exclude resources based on a specified namespace, label, group, version, or kind.
 
-If you select an include rule, existing application resources that you define in the rule will be deleted and replaced by those from the selected snapshot or backup you are using for the restore. All data on persistent volumes will be deleted and recreated. External resources with dependencies on the application might be impacted. If you use an include rule, any resources that you do not specify in the include rule will be removed from the restored app. 
+If you select an include rule, existing application resources that you define in the rule will be deleted and replaced by those from the selected snapshot or backup you are using for the restore. If you use an include rule, any resources that you do not specify in the include rule will remain unchanged. 
 
-If you select an exclude rule, the resources you specify from the existing application will not be included in the restored application and are effectively deleted from the application. Those resources that you do not specify to exclude will be restored. All data on persistent volumes will be deleted and recreated.
+If you select an exclude rule, the resources you specify to be excluded will not be restored and remain unchanged. Those resources that you do not specify to exclude will be restored. All data on persistent volumes will be deleted and recreated if the corresponding StatefulSet is part of the filtered resources.
 
 .Steps
 
