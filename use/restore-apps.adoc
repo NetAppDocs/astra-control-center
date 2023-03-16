@@ -82,9 +82,18 @@ IMPORTANT: Any member user with namespace constraints by namespace name/ID or by
 
 You can add a filter rule to a link:../use/restore-apps.html[restore] operation that will specify existing application resources to be included or excluded from the restored application. You can include or exclude resources based on a specified namespace, label, or GVK (GroupVersionKind). 
 
-If you select an include rule, existing application resources that you define in the rule will be deleted and replaced by those from the selected snapshot or backup you are using for the restore. If you use an include rule, any resources that you do not specify in the include rule will remain unchanged. 
+.Read more about include and exclude scenarios
+[%collapsible]
+====
+* *You select an include rule with original namespaces (in-place restore)*: Existing application resources that you define in the rule will be deleted and replaced by those from the selected snapshot or backup you are using for the restore. Any resources that you do not specify in the include rule will remain unchanged.
 
-If you select an exclude rule, the resources you specify to be excluded will not be restored and remain unchanged. Resources that you do not specify to exclude will be restored from the snapshot or backup. All data on persistent volumes will be deleted and recreated if the corresponding StatefulSet is part of the filtered resources.
+* *You select an include rule with new namespaces*: Use the rule to select the specific resources you want in the restored application. Any resources that you do not specify in the include rule will not be included in the restored application.
+
+* *You select an exclude rule with original namespaces (in-place restore)*: The resources you specify to be excluded will not be restored and remain unchanged. Resources that you do not specify to exclude will be restored from the snapshot or backup. All data on persistent volumes will be deleted and recreated if the corresponding StatefulSet is part of the filtered resources.
+
+* *You select an exclude rule with new namespaces*: Use the rule to select the specific resources you want to remove from the restored application. Resources that you do not specify to exclude will be restored from the snapshot or backup.
+====
+// End snippet
 
 Rules are either include or exclude types. Rules combining resource inclusion and exclusion are not available.
 
@@ -99,15 +108,18 @@ NOTE: You cannot exclude any cluster-scoped resources that are automatically inc
 NOTE: You must specify at least one namespace, label, or GVK.
 
 .. Select a specific namespace for the rule. If you don't make a selection, all namespaces will be used in the filter.
++
+NOTE: If your application originally contained multiple namespaces and you restore it to new namespaces, all namespaces will be created even if they don't contain resources.
+
 .. (Optional) Enter a resource name.
-.. (Optional) *Label selector*: Include a https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors[label selector^] to add to the rule. The label selected is used to filter only those resources matching this label.
+.. (Optional) *Label selector*: Include a https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors[label selector^] to add to the rule. The label  selector is used to filter only those resources matching the selected label.
 .. (Optional) Select *Use GVK (GroupVersionKind) set to filter resources* for additional filtering options.
 +
 NOTE: If you use a GVK filter, you must specify Version and Kind.
 
 ... (Optional) *Group*: From the drop-down list, select the Kubernetes API group. 
 ... *Kind*: From the drop-down list, select the object schema for the Kubernetes resource type to use in the filter.
-... *Version*: Enter the Kubernetes API version.
+... *Version*: Select the Kubernetes API version.
 . Review the rule that is created based on your entries. 
 . Select *Add*. 
 +
