@@ -105,9 +105,9 @@ NOTE: You must specify at least one namespace, label, or GVK.
 +
 NOTE: If you use a GVK filter, you must specify Version and Kind.
 
-.. (Optional) *Group*: From the drop-down list, select the Kubernetes API group. 
-.. *Kind*: From the drop-down list, select the object schema for the Kubernetes resource type to use in the filter.
-.. *Version*: Enter the Kubernetes API version.
+... (Optional) *Group*: From the drop-down list, select the Kubernetes API group. 
+... *Kind*: From the drop-down list, select the object schema for the Kubernetes resource type to use in the filter.
+... *Version*: Enter the Kubernetes API version.
 . Review the rule that is created based on your entries. 
 . Select *Add*. 
 +
