@@ -80,11 +80,13 @@ IMPORTANT: Any member user with namespace constraints by namespace name/ID or by
 
 == Filter resources during an application restore
 
-You can add a rule to a <<Restore apps,restore>> operation that will include or exclude resources based on a specified namespace, label, group, version, or kind.
+You can add a filter rule to a link:../use/restore-apps.html[restore] operation that will specify existing application resources to be included or excluded from the restored application. You can include or exclude resources based on a specified namespace, label, or GVK (GroupVersionKind). 
 
 If you select an include rule, existing application resources that you define in the rule will be deleted and replaced by those from the selected snapshot or backup you are using for the restore. If you use an include rule, any resources that you do not specify in the include rule will remain unchanged. 
 
 If you select an exclude rule, the resources you specify to be excluded will not be restored and remain unchanged. Those resources that you do not specify to exclude will be restored from the snapshot or backup. All data on persistent volumes will be deleted and recreated if the corresponding StatefulSet is part of the filtered resources.
+
+Rules are either include or exclude types. Rules combining resource inclusion and exclusion are not available.
 
 .Steps
 
@@ -92,53 +94,19 @@ If you select an exclude rule, the resources you specify to be excluded will not
 +
 NOTE: You cannot exclude any cluster-scoped resources that are automatically included by Astra Control.
 
-. Configure the rule:
-.. Select a namespace for the rule. You must select a minimum of one namespace.
-.. (Optional) Enter a resource name.
-.. (Optional) *Label selector*: Include a label selector to add to the rule. The label selected is used to filter only those resources matching this label.
-.. (Optional) Select *Use GVK (GroupVersionKind) set to filter resources* for additional filtering options.
-.. *Group*: From the drop-down list, select the Kubernetes API group. 
-.. *Kind*: From the drop-down list, select the object schema for the Kubernetes resource type to use in the filter:
+. Configure the filter rule:
 +
-[cols="1,1,1"]
-|===
-|`ClusterRole`
-|`ClusterRoleBinding`
-|`ConfigMap`
+NOTE: You must specify at least one namespace, label, or GVK.
 
-|`CronJob`
-|`CustomResourceDefinition`
-|`CustomResource`
+.. Select a specific namespace for the rule. If you don't make a selection, all namespaces will be used in the filter.
+.. (Optional) Enter a resource name.
+.. (Optional) *Label selector*: Include a https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors[label selector] to add to the rule. The label selected is used to filter only those resources matching this label.
+.. (Optional) Select *Use GVK (GroupVersionKind) set to filter resources* for additional filtering options.
++
+NOTE: If you use a GVK filter, you must specify Version and Kind.
 
-|`DaemonSet`
-|`DeploymentConfig`
-|`HorizontalPodAutoscaler`
-
-|`Ingress`
-|`MutatingWebhook`
-|`NetworkPolicy`
-
-|`PersistentVolumeClaim`
-|`Pod`
-|`PodDisruptionBudget`
-
-|`PodTemplate`
-|`ReplicaSet`
-|`Role`
-
-|`RoleBinding`
-|`Route`
-|`Secret`
-
-|`Service`
-|`ServiceAccount`
-|`StatefulSet`
-
-|`ValidatingWebhook`
-|
-|
-|===
-
+.. (Optional) *Group*: From the drop-down list, select the Kubernetes API group. 
+.. *Kind*: From the drop-down list, select the object schema for the Kubernetes resource type to use in the filter.
 .. *Version*: Enter the Kubernetes API version.
 . Review the rule that is created based on your entries. 
 . Select *Add*. 
