@@ -105,7 +105,7 @@ NOTE: You cannot exclude any cluster-scoped resources that are automatically inc
 
 . Configure the filter rule:
 +
-NOTE: You must specify at least one namespace, label, or GVK.
+NOTE: You must specify at least one namespace, label, or GVK. Ensure that any resources you retain after the filter rules are applied are sufficient to keep the restored application in a healthy state.
 
 .. Select a specific namespace for the rule. If you don't make a selection, all namespaces will be used in the filter.
 +
