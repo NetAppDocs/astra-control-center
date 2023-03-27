@@ -600,7 +600,7 @@ Sample response:
 astracontrolcenter.astra.netapp.io/astra created
 ----
 
-IMPORTANT: The Astra Control Center operator will run an automatic check for  environment requirements. Missing requirements can cause your installation to fail or Astra Control Center to not operate properly. See the <<Verify system status,next section>> to check for warning messages related to the automatic system check.  
+IMPORTANT: The Astra Control Center operator will run an automatic check for  environment requirements. Missing link:../get-started/requirements.html[requirements] can cause your installation to fail or Astra Control Center to not operate properly. See the <<Verify system status,next section>> to check for warning messages related to the automatic system check.  
 
 == Verify system status
 
@@ -614,10 +614,12 @@ You can verify system status using kubectl commands. If you prefer to use OpenSh
 ----
 kubectl get acc [astra or custom Astra Control Center CR name] -n [netapp-acc or custom namespace] -o yaml
 ----
++
+NOTE: Additional warning messages are also reported in the Astra Control Center operator logs.
 
 . Correct any issues with your environment that were reported by the automated requirements checks. 
 +
-NOTE: Additional warning messages are also reported in the Astra Control Center operator logs.
+NOTE: You can correct issues by ensuring that your environment meets the link:../get-started/requirements.html[requirements] for Astra Control Center.
 
 . Verify that all system components installed successfully.
 +
