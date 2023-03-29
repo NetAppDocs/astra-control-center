@@ -28,21 +28,20 @@ For the URL, in a browser, enter the Fully Qualified Domain Name (FQDN) you set 
 
 == Licensing
 
-*I am using the Evaluation license. How to I change to the full license?*
+*I am using an evaluation license. How do I change to the full license?*
 
-You can easily change to a full license by obtaining the NetApp license file (NLF).
+You can easily change to a full license by obtaining the NetApp license file (NLF) from NetApp.
 
 *Steps*
 
 . From the left navigation, select *Account* > *License*.
-. Select *Add license*.
+. In the license overview, to the right of the license information, select the Options menu.
+. Select *Replace*.
 . Browse to the license file you downloaded and select *Add*.
 
-*I am using the Evaluation license. Can I still manage apps?*
+*I am using an evaluation license. Can I still manage apps?*
 
-Yes, you can test out the managing apps functionality with the Evaluation license.
-
-
+Yes, you can test out the managing apps functionality with an evaluation license (including the embedded evaluation license that is installed by default). There is no difference in capabilities or features between an evaluation license and a full license; the evaluation license simply has a shorter lifespan. Refer to link:../concepts/licensing.html[Licensing^] for more information.
 
 == Registering Kubernetes clusters
 
@@ -82,13 +81,12 @@ Any existing backups or snapshots will be deleted. Applications and data remain 
 No. While Astra Control can discover applications that are using non-NetApp storage, it can't manage an application that's using non-NetApp storage.
 
 *Should I manage Astra Control itself?*
-No, you should not manage Astra Control itself because it is a "system app."
+No, you should not manage Astra Control itself because it is a "system application."
 
 *Do unhealthy pods affect app management?*
 No, the health of pods doesn't affect app management.
 
 == Data management operations
-
 
 *My application uses several PVs. Will Astra Control take snapshots and backups of these PVs?*
 
