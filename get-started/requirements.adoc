@@ -91,11 +91,13 @@ Ensure that you meet the following Astra Trident requirements specific to the ne
 == Storage backends
 Ensure that you have a supported backend with sufficient capacity.
 
-* *Supported backends*: Astra Control Center supports the following storage backends.
+* *Supported backends*: Astra Control Center supports the following storage backends:
 
-** NetApp ONTAP 9.5 or newer AFF and FAS systems
-** NetApp ONTAP 9.8 or newer AFF and FAS systems for SnapMirror-based application replication
-** NetApp Cloud Volumes ONTAP
+** NetApp ONTAP 9.5 or newer AFF, FAS, and ASA systems
+** NetApp ONTAP 9.8 or newer AFF, FAS, and ASA systems for SnapMirror-based application replication
+** NetApp ONTAP Select 9.5 or newer
+** NetApp ONTAP Select 9.8 or newer for SnapMirror-based application replication
+** NetApp Cloud Volumes ONTAP 9.5 or newer
 
 * *Required storage backend capacity*: At least 500GB available
 
@@ -113,7 +115,6 @@ To check whether your ONTAP system has the required licenses, refer to https://d
 You must have an existing private Docker image registry to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
 
 == Astra Control Center license
-
 Astra Control Center requires an Astra Control Center license. When you install Astra Control Center, an embedded 90-day evaluation license for 4,800 CPU units is already activated. If you need more capacity or different evaluation terms, or want to upgrade to a full license, you can obtain a different evaluation license or full license from NetApp. You need a license to protect your applications and data. Refer to link:../concepts/intro.html[Astra Control Center features] for details.
 
 You can try Astra Control Center by signing up for a free trial. You can sign up by registering link:https://cloud.netapp.com/astra-register[here^].
