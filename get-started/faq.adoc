@@ -85,8 +85,7 @@ No. While Astra Control can discover applications that are using non-NetApp stor
 No, you should not manage Astra Control itself because it is a "system app."
 
 *Do unhealthy pods affect app management?*
-//From PI5 ACC RN review/originally from ACS RN
-If a managed app has pods in an unhealthy state, Astra Control can't create new backups and clones.
+No, the health of pods doesn't affect app management.
 
 == Data management operations
 
