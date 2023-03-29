@@ -92,11 +92,11 @@ Ensure that you have a supported backend with sufficient capacity.
 
 * *Supported backends*: Astra Control Center supports the following storage backends:
 
-* NetApp ONTAP 9.5 or newer AFF, FAS, and ASA systems
-* NetApp ONTAP 9.8 or newer AFF, FAS, and ASA systems for SnapMirror-based application replication
-* NetApp ONTAP Select 9.5 or newer
-* NetApp ONTAP Select 9.8 or newer for SnapMirror-based application replication
-* NetApp Cloud Volumes ONTAP 9.5 or newer
+** NetApp ONTAP 9.5 or newer AFF, FAS, and ASA systems
+** NetApp ONTAP 9.8 or newer AFF, FAS, and ASA systems for SnapMirror-based application replication
+** NetApp ONTAP Select 9.5 or newer
+** NetApp ONTAP Select 9.8 or newer for SnapMirror-based application replication
+** NetApp Cloud Volumes ONTAP 9.5 or newer
 
 * *Required storage backend capacity*: At least 500GB available
 
