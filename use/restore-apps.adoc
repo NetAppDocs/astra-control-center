@@ -63,6 +63,11 @@ NOTE: Astra Control creates new destination namespaces as part of this restore o
 .. Select *Next*.
 .. Select the snapshot or backup to use to restore the app.
 .. Select *Next*.
+.. Choose one of the following:
+*** *Restore using original storage classes*: The application uses the originally associated storage class unless it does not exist on the target cluster. In this case, the default storage class for the cluster will be used.
+*** *Restore using a different storage class*: Select a storage class that exists on the target cluster. All application volumes, regardless of their originally associated storage classes, will be migrated to this different storage class as part of the restore.
+.. Select *Next*. 
+
 . Choose any resources to filter:
 ** *Restore all resources*: Restore all resources associated with the original app.
 ** *Filter resources*: Specify rules to restore a sub-set of the original application resources:
