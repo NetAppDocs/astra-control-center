@@ -55,7 +55,7 @@ NOTE: You can simultaneously replicate a different app (running on the other clu
 
 * *Astra Trident / ONTAP configuration*: Astra Control Center requires that a storage class be created and set as the default storage class. Astra Control Center supports the following ONTAP drivers provided by Astra Trident for replication:
 ** ontap-nas
-** ontap-nas-flexgroup
+** ontap-nas-economy (SnapMirror replication functionality with Astra Control is not available for this storage class)
 ** ontap-san
 
 
@@ -139,11 +139,13 @@ The following actions occur as a result of the fail over procedure:
 
 //* On the destination cluster, an app is started based on the latest replicated state from the source app and continues to run based on the latest replicated state from the source app.
 
-* On the destination cluster, the app is started based on the latest replicated Snapshot.
+* On the destination cluster, the app is started based on the latest replicated snapshot.
 * The source cluster and app (if operational) are not stopped and will continue to run.
 * The replication state changes to "Failing over" and then to "Failed over" when it has completed.
 * The source app's protection policy is copied to the destination app based on the schedules present on the source app at the time of the fail over.
+* If the source app has one or more post-restore execution hooks enabled, those execution hooks are run for the destination app.
 * Astra Control shows the app both on the source and destination clusters and its respective health.
+
 
 //* The source and destination apps will diverge with updates occurring to either app.
 
