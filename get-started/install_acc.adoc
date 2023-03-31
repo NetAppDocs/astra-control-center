@@ -21,6 +21,8 @@ To install Astra Control Center, download the installation bundle from the NetAp
 ====
 // End snippet
 
+For a demonstration of the Astra Control Center installation process, see https://www.youtube.com/watch?v=eurMV80b0Ks&list=PLdXI3bZJEw7mJz13z7YdiGCS6gNQgV_aN&index=5[this video^]. 
+
 .What you'll need
 * link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
 * If you have configured or want to configure pod security policies in your environment, familiarize yourself with pod security policies and how they affect Astra Control Center installation. See link:../concepts/understand-pod-security.html[Understand pod security policy restrictions].
