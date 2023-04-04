@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: get-started/setup_overview.html
 keywords: set up astra control, astra control license, add cluster, add storage backend, import storage, add bucket
-summary: After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up a license, add clusters, manage storage, and add buckets.
+summary: After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up a license, add clusters, enable authentication, manage storage, and add buckets.
 ---
 
 = Set up Astra Control Center
@@ -11,12 +11,13 @@ summary: After you install Astra Control Center, log in to the UI, and change yo
 :imagesdir: ../media/get-started/
 
 [.lead]
-After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up a license, add clusters, manage storage, and add buckets.
+After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up a license, add clusters, enable authentication, manage storage, and add buckets.
 
 .Tasks
 * <<Add a license for Astra Control Center>>
 * <<Prepare your environment for cluster management using Astra Control>>
 * <<Add cluster>>
+* <<Enable authentication on the ONTAP storage backend>>
 * <<Add a storage backend>>
 * <<Add a bucket>>
 
@@ -464,11 +465,7 @@ The cluster enters *Discovering* state and then changes to *Healthy*. You are no
 
 IMPORTANT: After you add a cluster to be managed in Astra Control Center, it might take a few minutes to deploy the monitoring operator. Until then, the Notification icon turns red and logs a *Monitoring Agent Status Check Failed* event. You can ignore this, because the issue resolves when Astra Control Center obtains the correct status. If the issue does not resolve in a few minutes, go to the cluster, and run `oc get pods -n netapp-monitoring` as the starting point. You will need to look into the monitoring operator logs to debug the problem.
 
-== Add a storage backend
-
-You can add an existing ONTAP storage backend to Astra Control Center to manage its resources.
-
-Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend as well as additional storage metrics.
+== Enable authentication on the ONTAP storage backend
 
 Astra Control Center offers two modes of authenticating an ONTAP backend.
 
@@ -479,6 +476,7 @@ Astra Control Center offers two modes of authenticating an ONTAP backend.
 You can later update existing backends to move from one type of authentication to another method. Only one authentication method is supported at a time. 
 
 // However, you cannot change from certificate-based authentication to credentials-based authentication.
+
 
 === Enable credential-based authentication
 
@@ -563,10 +561,15 @@ base64 -w 0 k8senv.key >> key_base64
 base64 -w 0 trustedca.pem >> trustedca_base64
 ----
 
-. Add the storage backend using the values obtained from the previous step in the Astra Control Center UI.
+. Using the values obtained from the previous step, add the storage backend in the Astra Control Center UI.
 
-=== Add the storage backend in the Astra Control Center UI
-After you set up the credentials or certificate information, you can add an existing ONTAP storage backend to Astra Control Center to manage its resources.
+== Add a storage backend
+
+You can add an existing ONTAP storage backend to Astra Control Center to manage its resources.
+
+Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend as well as additional storage metrics.
+
+After you set up the credentials or certificate authentication information, you can add an existing ONTAP storage backend to Astra Control Center to manage its resources.
 
 .Steps
 
