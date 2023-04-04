@@ -549,7 +549,7 @@ a| * `Default` (This is the default value)
 .`additionalValues`
 [%collapsible]
 ====
-* For Astral Control Center and Cloud Insights communication, TLS certificate verification is disabled by default. You can enable communication between Cloud Insights and both the Astra Control Center host cluster and managed cluster by adding the following section in `additionalValues`.
+* For Astral Control Center and Cloud Insights communication, TLS certificate verification is disabled by default. You can enable TLS certification verification for communication between Cloud Insights and both the Astra Control Center host cluster and managed cluster by adding the following section in `additionalValues`.
 
 ----
   additionalValues:
