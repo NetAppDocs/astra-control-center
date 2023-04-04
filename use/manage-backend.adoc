@@ -72,7 +72,7 @@ You can view storage backend information from the Dashboard or from the Backends
 
 View information about the backend health, capacity, and performance (IOPS throughput and/or latency).
 
-You can see the volumes that the Kubernetes apps are using, which are stored on a selected storage backend. With Cloud Insights, you can see additional information. See https://docs.netapp.com/us-en/cloudinsights/[Cloud Insights documentation].
+You can see the volumes that the Kubernetes apps are using, which are stored on a selected storage backend. With Cloud Insights, you can see additional information. See https://docs.netapp.com/us-en/cloudinsights/[Cloud Insights documentation^].
 
 .Steps
 . In the left navigation area, select *Backends*.
