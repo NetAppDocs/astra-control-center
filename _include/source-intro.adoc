@@ -98,7 +98,7 @@ In a cloud connected environment Astra Control Center uses Cloud Insights to pro
 
 Astra Control Center is fully integrated into the AutoSupport and Active IQ ecosystem to provide users and NetApp Support with troubleshooting and usage information.
 
-You can try Astra Control Center out using a 90-day evaluation license. The evaluation version is supported through email and community options. Additionally, you have access to Knowledgebase articles and documentation from the in-product support dashboard.
+You can try Astra Control Center out using a 90-day embedded evaluation license. While you are evaluating Astra Control Center, you can get support through email and community options. Additionally, you have access to Knowledgebase articles and documentation from the in-product support dashboard.
 
 To install and use Astra Control Center, you'll need to meet certain https://docs.netapp.com/us-en/astra-control-center/get-started/requirements.html[requirements^].
 
