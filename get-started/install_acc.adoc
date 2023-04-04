@@ -518,12 +518,12 @@ a| * `Generic` (this is the default value)
 |Setting |Guidance |Type |Options
 
 | `scaleSize`
-| The size of the deployment that determines the number of replicas deployed with each service. Use `Small` when certain services will be deployed with a single replica each. Use `Medium` for two replicas deployed with each service.
+| By default, Astra will use High Availability (HA) `scaleSize` of `Medium`, which deploys most services in HA and deploys multiple replicas for redundancy. With `scaleSize` as `Small`, Astra will reduce replicas for all services except for essential services to reduce consumption.
 
 NOTE: Core services are always deployed with two replicas each irrespective of the value of `scaleSize`.
 | string
-a|* `Small` (This is the default value)
-* `Medium`
+a|* `Small`
+* `Medium` (This is the default value)
 
 |===
 ====
@@ -618,7 +618,7 @@ spec:
   storageClass: "ontap-gold"
   volumeReclaimPolicy: "Retain"
   ingressType: "Generic"
-  scaleSize: "Small"
+  scaleSize: "Medium"
   astraResourcesScaler: "Default"
   additionalValues: {}
   crds:
