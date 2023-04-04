@@ -518,9 +518,10 @@ a| * `Generic` (this is the default value)
 |Setting |Guidance |Type |Options
 
 | `scaleSize`
-| By default, Astra will use High Availability (HA) `scaleSize` of `Medium`, which deploys most services in HA and deploys multiple replicas for redundancy. With `scaleSize` as `Small`, Astra will reduce replicas for all services except for essential services to reduce consumption.
+| By default, Astra will use High Availability (HA) `scaleSize` of `Medium`, which deploys most services in HA and deploys multiple replicas for redundancy. With `scaleSize` as `Small`, Astra will reduce the number of replicas for all services except for essential services to reduce consumption.
 
-NOTE: Core services are always deployed with two replicas each irrespective of the value of `scaleSize`.
+TIP: `Medium` deployments consist of around 110 pods (not including transient workloads). Be aware of per-pod network limit constraints that might be an issue in your environment, especially when considering disaster recovery scenarios.
+
 | string
 a|* `Small`
 * `Medium` (This is the default value)
