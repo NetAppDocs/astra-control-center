@@ -68,7 +68,7 @@ include::../_include/download-extract-acc.adoc[]
 
 == Install the NetApp Astra kubectl plugin
 
-The NetApp Astra kubectl command line plugin saves time when performing common tasks associated with deploying and upgrading Astra Control Center.
+You can use the NetApp Astra kubectl command line plugin to push images to a local Docker repository.
 
 .What you'll need
 
