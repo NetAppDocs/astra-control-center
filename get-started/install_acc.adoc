@@ -72,7 +72,9 @@ You can use the NetApp Astra kubectl command line plugin to push images to a loc
 
 .What you'll need
 
-NetApp provides plugin binaries for different CPU architectures and operating systems. You need to know which CPU and operating system you have before you perform this task.
+NetApp provides plugin binaries for different CPU architectures and operating systems. You need to know which CPU and operating system you have before you perform this task. 
+
+If you already have the plugin installed from a previous installation, link:../use/upgrade-acc.html#remove-the-netapp-astra-kubectl-plugin-and-install-it-again[make sure you have the latest version] before completing these steps.
 
 .Steps
 
@@ -184,8 +186,7 @@ NOTE: An annotated sample YAML follows these steps.
 +
 [source,console]
 ----
-imagePullSecrets:
-- name: astra-registry-cred
+imagePullSecrets: [{name: astra-registry-cred}]
 ----
 
 .. Change `[your_registry_path]` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<Add the images to your local registry,previous step>>.
@@ -238,7 +239,7 @@ spec:
           value: "2"
         - name: ACCOP_HELM_INSTALLTIMEOUT
           value: 5m
-        *image: [your_registry_path]/acc-operator:[version x.y.z]*
+        *image: [your_registry_path]/acc-operator:23.04.3*
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -520,7 +521,7 @@ a| * `Generic` (this is the default value)
 | `scaleSize`
 | By default, Astra will use High Availability (HA) `scaleSize` of `Medium`, which deploys most services in HA and deploys multiple replicas for redundancy. With `scaleSize` as `Small`, Astra will reduce the number of replicas for all services except for essential services to reduce consumption.
 
-TIP: `Medium` deployments consist of around 110 pods (not including transient workloads). Be aware of per-pod network limit constraints that might be an issue in your environment, especially when considering disaster recovery scenarios.
+TIP: `Medium` deployments consist of around 100 pods (not including transient workloads. 100 pods is based on a three master node and three worker node configuration). Be aware of per-pod network limit constraints that might be an issue in your environment, especially when considering disaster recovery scenarios.
 
 | string
 a|* `Small`
@@ -591,6 +592,8 @@ CRDs are cluster-wide objects and installing them might have an impact on other 
 |===
 ====
 // End snippet
+
+IMPORTANT: Be sure that you have selected the correct storage class and ingress type for your configuration before completing installation.
 
 [source]
 [subs="specialcharacters,quotes"]
@@ -968,7 +971,7 @@ oc create route edge --service=traefik --port=web -n [netapp-acc or custom names
 After installing Astra Control Center, you will change the password for the default administrator and log in to the Astra Control Center UI dashboard.
 
 .Steps
-. In a browser, enter the FQDN (`https://<FQDN>`) you used in the `astraAddress` in the `astra_control_center.yaml` CR when <<Configure Astra Control Center,you installed Astra Control Center>>.
+. In a browser, enter the FQDN (`https://[FQDN]`) you used in the `astraAddress` in the `astra_control_center.yaml` CR when <<Configure Astra Control Center,you installed Astra Control Center>>.
 . Accept the self-signed certificates if prompted.
 +
 NOTE: You can create a custom certificate after login.
@@ -982,19 +985,25 @@ NOTE: If you enter an incorrect password three times, the admin account will be 
 +
 NOTE: If this is your first login and you forget the password and no other administrative user accounts have yet been created, contact https://mysupport.netapp.com/site/[NetApp Support] for password recovery assistance.
 
-. (Optional) Remove the existing self-signed TLS certificate and replace it with a link:../get-started/add-custom-tls-certificate.html[custom TLS certificate signed by a Certificate Authority (CA)].
+. (Optional) Remove the existing self-signed TLS certificate and replace it with a link:../get-started/configure-after-install.html#add-a-custom-tls-certificate[custom TLS certificate signed by a Certificate Authority (CA)^].
 
 == Troubleshoot the installation
 
 If any of the services are in `Error` status, you can inspect the logs. Look for API response codes in the 400 to 500 range. Those indicate the place where a failure happened.
 
-.Steps
+.Options
 
-. To inspect the Astra Control Center operator logs, enter the following:
+* To inspect the Astra Control Center operator logs, enter the following:
 +
 [source,console]
 ----
 kubectl logs deploy/acc-operator-controller-manager -n netapp-acc-operator -c manager -f
+----
+
+* To check the output of the Astra Control Center CR:
++
+----
+kubectl get acc -n [netapp-acc or custom namespace] -o yaml
 ----
 
 == What's next

@@ -659,7 +659,7 @@ Now that you've logged in and added clusters to Astra Control Center, you're rea
 * link:../use/protection-overview.html[Protect apps]
 * link:../use/manage-notifications.html[Manage notifications]
 * link:../use/monitor-protect.html#connect-to-cloud-insights[Connect to Cloud Insights]
-* link:../get-started/add-custom-tls-certificate.html[Add a custom TLS certificate]
+* link:../get-started/configure-after-install.html#add-a-custom-tls-certificate[Add a custom TLS certificate]
 * link:../use/view-clusters.html#change-the-default-storage-class[Change the default storage class]
 
 [discrete]

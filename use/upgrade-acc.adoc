@@ -115,8 +115,7 @@ vim astra_control_center_operator_deploy.yaml
 .. If you use a registry that requires authentication, replace or edit the default line of `imagePullSecrets: []` with the following:
 +
 ----
-imagePullSecrets:
-- name: <astra-registry-cred_or_custom_name_of_secret>
+imagePullSecrets: [{name: astra-registry-cred}]
 ----
 
 .. Change `[your_registry_path]` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<Add the images to your local registry,previous step>>.
