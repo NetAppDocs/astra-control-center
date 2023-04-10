@@ -13,19 +13,14 @@ summary: NetApp periodically updates Astra Control Center to bring you new featu
 [.lead]
 We're pleased to announce the latest release of Astra Control Center.
 
-== XX March 2023 (23.03.0)
+== 27 April 2023 (23.04.0)
 
 .New features and support
 
-* Support for app backups using nas-economy volumes that allows a different target storage class to be selected.
-
-* Enhanced execution hooks functionality with additional filtering options
-+
-link:../use/execution-hooks.html[Manage app execution hooks]
-
-//* Support for NetApp Cloud Volumes ONTAP as a storage backend (officially supported on Microsoft Azure and Google Cloud platforms)
-//+
-//link:../concepts/architecture.html#astra-control-components[Architecture and components]
+* link:../concepts/licensing.[90-day evaluation license enabled by default for new Astra Control Center installations^]
+* link:../use/execution-hooks.html[Enhanced execution hooks functionality with additional filtering options^]
+* link:../use/execution-hooks.html[Post-restore execution hooks now run after cluster failover^]
+* link:../get-started/requirements.html[Support for NAS economy as a storage class type^]
 
 == 22 November 2022 (22.11.0)
 
@@ -40,7 +35,7 @@ link:../use/execution-hooks.html[Manage app execution hooks]
 
 .Known issues and limitations
 * https://docs.netapp.com/us-en/astra-control-center-2211/release-notes/known-issues.html[Known issues for this release^]
-* https://docs.netapp.com/us-en/astra-control-center-2211/release-notes/known-limitations.html[Known limitations for this release^
+* https://docs.netapp.com/us-en/astra-control-center-2211/release-notes/known-limitations.html[Known limitations for this release^]
 
 == 8 September 2022 (22.08.1)
 
@@ -62,7 +57,7 @@ NOTE: The NetApp provided default pre- and post-snapshot execution hooks for spe
 
 * https://docs.netapp.com/us-en/astra-control-center-2208/get-started/requirements.html[Support for VMware Tanzu Kubernetes Grid Integrated Edition (TKGI)^]
 * https://docs.netapp.com/us-en/astra-control-center-2208/get-started/requirements.html#operational-environment-requirements[Support for Google Anthos^]
-* https://docs.netapp.com/us-en/astra-automation/workflows_infra/ldap_prepare.html[LDAP configuration (via Astra Control API)^]
+* https://docs.netapp.com/us-en/astra-automation-2208/workflows_infra/ldap_prepare.html[LDAP configuration (via Astra Control API)^]
 
 .Known issues and limitations
 * https://docs.netapp.com/us-en/astra-control-center-2208/release-notes/known-issues.html[Known issues for this release^]

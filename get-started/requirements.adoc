@@ -38,25 +38,25 @@ NOTE: Ensure that the Kubernetes environment you choose to host Astra Control Ce
 |1.22
 
 |Google Anthos
-|1.11 or 1.12 (See <<Google Anthos ingress requirements>>)
+|1.12 through 1.14 (See <<Google Anthos ingress requirements>>)
 
 |Kubernetes (Upstream)
-|1.23 to 1.25 (Astra Trident 22.10 or newer is required for Kubernetes 1.25)
+|1.24 to 1.26 (Astra Trident 22.10 or newer is required for Kubernetes 1.25 or newer)
 
 |Rancher Kubernetes Engine (RKE)
-|RKE 1.3.12 with Rancher 2.6.5 and 2.6.6
-RKE 1.3.13 with Rancher 2.6.8
-RKE 2 (v1.23.6+rke2r1) with Rancher 2.6.5 and 2.6.6
-RKE 2 (v1.24.x) with Rancher 2.6.8
+|RKE 1.3 with Rancher 2.6
+RKE 1.4 with Rancher 2.7
+RKE 2 (v1.23.x) with Rancher 2.6
+RKE 2 (v1.24.x) with Rancher 2.7
 
 |Red Hat OpenShift Container Platform
-|4.8 through 4.11
+|4.10 through 4.12
 
 |VMware Tanzu Kubernetes Grid
-|1.5  (See <<Host cluster resource requirements>>)
+|1.6  (See <<Host cluster resource requirements>>)
 
 |VMware Tanzu Kubernetes Grid Integrated Edition
-|1.13 and 1.14  (See <<Host cluster resource requirements>>)
+|1.14 and 1.15  (See <<Host cluster resource requirements>>)
 |===
 
 == Host cluster resource requirements
@@ -85,12 +85,13 @@ Ensure that you meet the following Astra Trident requirements specific to the ne
 
 *** `ontap-nas`
 *** `ontap-san`
-*** `ontap-san-economy` (not supported for app replication)
+*** `ontap-san-economy` (app replication is not available with this storage class type)
+*** `ontap-nas-economy` (snapshots, replication policies, and protection policies are not available with this storage class type)
 
 == Storage backends
 Ensure that you have a supported backend with sufficient capacity.
 
-* *Supported backends*: Astra Control Center supports the following storage backends.
+* *Supported backends*: Astra Control Center supports the following storage backends:
 
 * NetApp ONTAP 9.5 or newer AFF, FAS, and ASA systems
 * NetApp ONTAP 9.8 or newer AFF, FAS, and ASA systems for SnapMirror-based application replication
@@ -114,10 +115,9 @@ To check whether your ONTAP system has the required licenses, refer to https://d
 You must have an existing private Docker image registry to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
 
 == Astra Control Center license
+Astra Control Center requires an Astra Control Center license. When you install Astra Control Center, an embedded 90-day evaluation license for 4,800 CPU units is already activated. If you need more capacity or different evaluation terms, or want to upgrade to a full license, you can obtain a different evaluation license or full license from NetApp. You need a license to protect your applications and data. Refer to link:../concepts/intro.html[Astra Control Center features] for details.
 
-Astra Control Center requires an Astra Control Center license for full functionality. Obtain an evaluation license or full license from NetApp. You need a license to protect your applications and data. Refer to link:../concepts/intro.html[Astra Control Center features] for details.
-
-You can try Astra Control Center with an evaluation license, which lets you use Astra Control Center for 90 days from the date you download the license. You can sign up for a free trial by registering link:https://cloud.netapp.com/astra-register[here^].
+You can try Astra Control Center by signing up for a free trial. You can sign up by registering link:https://cloud.netapp.com/astra-register[here^].
 
 To set up the license, refer to link:setup_overview.html[use a 90-day evaluation license^]. 
 
