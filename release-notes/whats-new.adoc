@@ -19,8 +19,9 @@ We're pleased to announce the latest release of Astra Control Center.
 
 * link:../concepts/licensing.[90-day evaluation license enabled by default for new Astra Control Center installations^]
 * link:../use/execution-hooks.html[Enhanced execution hooks functionality with additional filtering options^]
-* link:../use/execution-hooks.html[Post-restore execution hooks now run after cluster failover^]
+* link:../use/execution-hooks.html[Execution hooks can now be run after replication failover with Astra Control Center^]
 * link:../get-started/requirements.html[Support for NAS economy as a storage class type^]
+* link:../use/restore-apps.html#filter-resources-during-an-application-restore[Support for including or excluding aplication resources during restore operations^]
 
 == 22 November 2022 (22.11.0)
 
