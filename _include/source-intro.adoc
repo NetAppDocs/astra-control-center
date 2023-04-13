@@ -7,9 +7,9 @@ Astra Control offers critical capabilities for Kubernetes application data lifec
 * Automatically manage persistent storage
 * Create application-aware, on-demand snapshots and backups
 * Automate policy-driven snapshot and backup operations
-* Replicate application to a remote system using NetApp SnapMirror technology
 * Migrate applications and data from one Kubernetes cluster to another
-* Easily clone an application from staging to production
+* Replicate applications to a remote system using NetApp SnapMirror technology (Astra Control Center)
+* Clone applications from staging to production
 * Visualize application health and protection status
 * Work with a web UI or an API to implement your backup and migration workflows
 
@@ -33,6 +33,7 @@ a|
 * Amazon Web Services:
 ** Amazon EBS
 ** Amazon FSx for NetApp ONTAP
+** https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/task-getting-started-gcp.html[Cloud Volumes ONTAP^]
 * Google Cloud:
 ** Google Persistent Disk
 ** NetApp Cloud Volumes Service
@@ -42,7 +43,9 @@ a|
 ** Azure NetApp Files
 ** https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/task-getting-started-azure.html[Cloud Volumes ONTAP^]
 * Self-managed clusters:
-** NetApp ONTAP AFF and FAS systems
+** Amazon EBS
+** Google Persistent Disk
+** Azure Managed Disks
 ** https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/[Cloud Volumes ONTAP^]
 |
 
@@ -91,7 +94,7 @@ Astra Control's Free Plan enables you to manage up to 10 namespaces in your acco
 
 Astra Control Center runs locally in your own private cloud.
 
-Astra Control Center supports Kubernetes clusters with Trident-based storage class with an ONTAP 9.5 and above storage backend.
+Astra Control Center supports Kubernetes clusters with Trident-based storage class with an ONTAP 9.5 and later storage backend.
 
 
 In a cloud connected environment Astra Control Center uses Cloud Insights to provide advanced monitoring and telemetry. In the absence of a Cloud Insights connection, limited (7-days of metrics) monitoring and telemetry is available in Astra Control Center and also exported to Kubernetes native monitoring tools (such as Prometheus and Grafana) through open metrics end points.
