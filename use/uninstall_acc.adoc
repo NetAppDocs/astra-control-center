@@ -33,13 +33,13 @@ Result:
 astracontrolcenter.astra.netapp.io "astra" deleted
 ----
 
-. Use the following command to delete the `netapp-acc` namespace:
+. Use the following command to delete the `netapp-acc` (or custom-named) namespace:
 +
 ----
-kubectl delete ns netapp-acc
+kubectl delete ns [netapp-acc or custom namespace]
 ----
 +
-Result:
+Example result:
 +
 ----
 namespace "netapp-acc" deleted

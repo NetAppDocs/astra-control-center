@@ -169,7 +169,7 @@ spec:
           value: "2"
         *- name: ACCOP_HELM_UPGRADETIMEOUT*
           *value: 300m*
-        *image: [your_registry_path]/acc-operator:[version x.y.z]*
+        *image: [your_registry_path]/acc-operator:23.04.9*
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -245,21 +245,21 @@ spec:
   *astraVersion: "[Version number]"*
 ----
 
-. Verify that your image registry path matches the registry path you pushed the images to in a <<Add the images to your local registry,previous step>>. Update `imageRegistry` inside of `Spec` if the registry has changed since your last installation.
+. Verify that your image registry path matches the registry path you pushed the images to in a <<Add the images to your local registry,previous step>>. Update `imageRegistry` inside of `spec` if the registry has changed since your last installation.
 +
 ----
   imageRegistry:
     name: "[your_registry_path]"
 ----
 
-. Add the following to your `CRDs` configuration inside of `Spec`:
+. Add the following to your `crds` configuration inside of `spec`:
 +
 ----
 crds:
   shouldUpgrade: true
 ----
 
-. Add the following lines within `additionalValues` inside of `Spec` in the Astra Control Center CR:
+. Add the following lines within `additionalValues` inside of `spec` in the Astra Control Center CR:
 +
 ----
 additionalValues:
@@ -269,8 +269,7 @@ additionalValues:
         failureThreshold: 600
 ----
 
-+
-After you save and exit the file editor, the changes will be applied and the upgrade will begin.
+. Save and exit the file editor. The changes will be applied and the upgrade will begin.
 
 . (Optional) Verify that the pods terminate and become available again:
 +
