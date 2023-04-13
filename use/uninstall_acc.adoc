@@ -17,7 +17,8 @@ If you have any issues with the uninstall, see <<Troubleshooting uninstall issue
 
 .What you'll need
 
-* Use Astra Control Center UI to unmanage all link:../use/unmanage.html#stop-managing-compute[clusters].
+. link:../use/unmanage.html#unmanage-an-app[Unmanage all apps^] on the clusters.
+. link:../use/unmanage.html#unmanage-a-cluster[Unmanage all clusters^].
 
 .Steps
 
