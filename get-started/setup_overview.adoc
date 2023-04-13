@@ -503,7 +503,7 @@ The backend definition is the only place the credentials are stored in plain tex
 
 === Enable certificate-based authentication 
 
-New and existing backends can use a certificate and communicate with the ONTAP backend. You should enter the following information in the backend definition.
+Astra Control Center can use certificates to communicate with new and existing ONTAP backends. You should enter the following information in the backend definition.
 
 * clientCertificate: Client certificate.
 
