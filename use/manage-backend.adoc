@@ -90,7 +90,7 @@ Astra Control Center offers two modes of authenticating an ONTAP backend.
 
 * *Credential-based authentication*: The username and password to an ONTAP user with the required permissions. You should use a pre-defined security login role, such as admin to ensure maximum compatibility with ONTAP versions.
 
-* *Certificate-based authentication*: Astra Control Center can also communicate with an ONTAP cluster using a certificate installed on the backend. Here, the backend definition must contain Base64-encoded values of the client certificate, key, and the trusted CA certificate if used (recommended).
+* *Certificate-based authentication*: Astra Control Center can also communicate with an ONTAP cluster using a certificate installed on the backend. You should use the client certificate, key, and the trusted CA certificate if used (recommended).
 
 You can update existing backends to move from one type of authentication to another method. Only one authentication method is supported at a time. 
 

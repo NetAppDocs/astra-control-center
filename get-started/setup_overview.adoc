@@ -471,7 +471,7 @@ Astra Control Center offers two modes of authenticating an ONTAP backend.
 
 * *Credential-based authentication*: The username and password to an ONTAP user with the required permissions. You should use a pre-defined security login role, such as admin or vsadmin to ensure maximum compatibility with ONTAP versions.
 
-* *Certificate-based authentication*: Astra Control Center can also communicate with an ONTAP cluster using a certificate installed on the backend. Here, the backend definition must contain Base64-encoded values of the client certificate, key, and the trusted CA certificate if used (recommended).
+* *Certificate-based authentication*: Astra Control Center can also communicate with an ONTAP cluster using a certificate installed on the backend. You should use the client certificate, key, and the trusted CA certificate if used (recommended).
 
 You can later update existing backends to move from one type of authentication to another method. Only one authentication method is supported at a time. 
 
@@ -499,17 +499,17 @@ A sample backend definition looks like this:
 }
 ----
 
-The backend definition is the only place the credentials are stored in plain text. After the backend is created, usernames and passwords are encoded with Base64 and stored as Kubernetes secrets. The creation or update of a backend is the only step that requires knowledge of the credentials. As such, it is an admin-only operation, to be performed by the Kubernetes or storage administrator.
+The backend definition is the only place the credentials are stored in plain text. The creation or update of a backend is the only step that requires knowledge of the credentials. As such, it is an admin-only operation, to be performed by the Kubernetes or storage administrator.
 
 === Enable certificate-based authentication 
 
-New and existing backends can use a certificate and communicate with the ONTAP backend. Three parameters are required in the backend definition.
+New and existing backends can use a certificate and communicate with the ONTAP backend. You should enter the following information in the backend definition.
 
-* clientCertificate: Base64-encoded value of client certificate.
+* clientCertificate: Client certificate.
 
-* clientPrivateKey: Base64-encoded value of associated private key.
+* clientPrivateKey: Associated private key.
 
-* trustedCACertificate: Base64-encoded value of trusted CA certificate. If using a trusted CA, this parameter must be provided. This can be ignored if no trusted CA is used.
+* trustedCACertificate: Trusted CA certificate. If using a trusted CA, this parameter must be provided. This can be ignored if no trusted CA is used.
 
 A typical workflow involves the following steps.
 
@@ -530,7 +530,7 @@ security certificate install -type server -cert-name <trusted-ca-cert-name> -vse
 ssl modify -vserver <vserver-name> -server-enabled true -client-enabled true -common-name <common-name> -serial <SN-from-trusted-CA-cert> -ca <cert-authority>
 ----
 
-. Install the client certificate and key (from step 1) on the ONTAP cluster.
+. Install the client certificate of type `client-ca` and key (from step 1) on the ONTAP cluster.
 
 +
 ----
