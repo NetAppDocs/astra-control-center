@@ -65,10 +65,10 @@ You should ensure that the following prerequisite conditions are met before you 
 * Your environment meets the link:../get-started/requirements.html[operational environment requirements^] for Astra Trident and Astra Control Center. 
 *	A version of Astra Trident that is link:../get-started/requirements.html#astra-trident-requirements[supported by Astra Control Center^] is installed:
 +
-NOTE: You can https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html#choose-the-deployment-method[deploy Astra Trident^] using either Trident operator (manually or using Helm chart) or `tridentctl`. Prior to installing or upgrading Astra Trident, review the https://docs.netapp.com/us-en/trident/trident-get-started/requirements.html[supported frontends, backends, and host configurations^].
+NOTE: You can https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html#choose-the-deployment-method[deploy Astra Trident^] using either the Astra Trident operator (manually or using Helm chart) or `tridentctl`. Prior to installing or upgrading Astra Trident, review the https://docs.netapp.com/us-en/trident/trident-get-started/requirements.html[supported frontends, backends, and host configurations^].
 
-** *Trident storage backend configured*: At least one Astra Trident storage backend must be https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend[configured^] on the cluster.
-** *Trident storage classes configured*: At least one Astra Trident storage class must be https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[configured^] on the cluster. If a default storage class is configured, ensure that it is the only storage class that has the default annotation.
+** *Astra Trident storage backend configured*: At least one Astra Trident storage backend must be https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend[configured^] on the cluster.
+** *Astra Trident storage classes configured*: At least one Astra Trident storage class must be https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[configured^] on the cluster. If a default storage class is configured, ensure that it is the only storage class that has the default annotation.
 ** *Astra Trident volume snapshot controller and volume snapshot class installed and configured*: The volume snapshot controller must be https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[installed^] so that snapshots can be created in Astra Control. At least one Astra Trident `VolumeSnapshotClass` has been https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#step-1-set-up-a-volumesnapshotclass[set up^] by an administrator.
 * *Kubeconfig accessible*: You have access to the https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[cluster kubeconfig^] that includes only one context element.
 * *ONTAP credentials*: You need ONTAP credentials and a superuser and user ID set on the backing ONTAP system to back up and restore apps with Astra Control Center. 
@@ -88,27 +88,27 @@ Run the following eligibility checks to ensure that your cluster is ready to be 
 
 .Steps
 
-. Check the Trident version.
+. Check the Astra Trident version.
 +
 [source,console]
 ----
 kubectl get tridentversions -n trident
 ----
 +
-If Trident exists, you see output similar to the following:
+If Astra Trident exists, you see output similar to the following:
 +
 ----
 NAME      VERSION
 trident   22.10.0
 ----
 +
-If Trident does not exist, you see output similar to the following:
+If Astra Trident does not exist, you see output similar to the following:
 +
 ----
 error: the server doesn't have a resource type "tridentversions"
 ----
 +
-NOTE: If Trident is not installed or the installed version is not the latest, you need to install the latest version of Trident before proceeding. Refer to the https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html[Trident documentation^] for instructions.
+NOTE: If Astra Trident is not installed or the installed version is not the latest, you need to install the latest version of Astra Trident before proceeding. Refer to the https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html[Astra Trident documentation^] for instructions.
 
 . Ensure that the pods are running:
 +
@@ -117,7 +117,7 @@ NOTE: If Trident is not installed or the installed version is not the latest, yo
 kubectl get pods -n trident
 ----
 
-. Determine if the storage classes are using the supported Trident drivers. The provisioner name should be `csi.trident.netapp.io`. See the following example:
+. Determine if the storage classes are using the supported Astra Trident drivers. The provisioner name should be `csi.trident.netapp.io`. See the following example:
 +
 [source,console]
 ----
@@ -457,7 +457,7 @@ IMPORTANT: If you create your own `kubeconfig` file, you should define only *one
 . Select *Next*.
 . Select the default storage class to be used for this Kubernetes cluster, and select *Next*.
 +
-NOTE: You should select a Trident storage class backed by ONTAP storage.
+NOTE: You should select an Astra Trident storage class backed by ONTAP storage.
 
 . Review the information, and if everything looks good, select *Add*.
 

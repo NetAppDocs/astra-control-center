@@ -76,10 +76,10 @@ NOTE: These requirements assume that Astra Control Center is the only applicatio
 == Astra Trident requirements
 Ensure that you meet the following Astra Trident requirements specific to the needs of your environment:
 
-* *Minimum version for use with Astra Control Center*: Astra Trident 22.01 or newer installed and configured.
+* *Minimum version for use with Astra Control Center*: Astra Trident 22.04 or newer installed and configured.
 * *SnapMirror replication*: Astra Trident 22.07 or newer installed for SnapMirror-based application replication.
-* *For Kubernetes 1.25 support only*: Astra Trident 22.10 or newer installed for Kubernetes 1.25 clusters (you must upgrade to Astra Trident 22.10 prior to upgrading to Kubernetes 1.25)
-* *ONTAP configuration with Trident*: 
+* *For Kubernetes 1.25 or newer support*: Astra Trident 22.10 or newer installed for Kubernetes 1.25 or newer clusters (you must upgrade to Astra Trident 22.10 prior to upgrading to Kubernetes 1.25 or newer)
+* *ONTAP configuration with Astra Trident*: 
 ** *Storage class*: Configure at least one Astra Trident storage class on the cluster. If a default storage class is configured, ensure that it is the only storage class with the default designation.
 ** *Storage drivers and worker nodes*: Ensure that the worker nodes in your cluster are configured with the appropriate storage drivers so that the pods can interact with the backend storage. Astra Control Center supports the following ONTAP drivers provided by Astra Trident:
 

@@ -460,7 +460,7 @@ IMPORTANT: If you are using a registry that does not require authorization, you 
 |Setting |Guidance |Type |Example
 
 | `storageClass`
-| Change the `storageClass` value from `ontap-gold` to another Trident storageClass resource as required by your installation. Run the command `kubectl get sc` to determine your existing configured storage classes. One of the Trident-based storage classes must be entered in the manifest file (`astra-control-center-<version>.manifest`) and will be used for Astra PVs. If it is not set, the default storage class will be used.
+| Change the `storageClass` value from `ontap-gold` to another Astra Trident storageClass resource as required by your installation. Run the command `kubectl get sc` to determine your existing configured storage classes. One of the Astra Trident-based storage classes must be entered in the manifest file (`astra-control-center-<version>.manifest`) and will be used for Astra PVs. If it is not set, the default storage class will be used.
 
 NOTE: If a default storage class is configured, ensure that it is the only storage class that has the default annotation.
 | string
