@@ -37,8 +37,6 @@ If the active Astra Control Center license expires, UI and API functionality for
 * Configuring replication policies
 //* Applying a new license if the number of CPU units currently managed by Astra Control Center exceeds the available CPU units in the license being applied
 
-NOTE: When your license expires, you can add a new application or perform application protection operations (such as snapshots, backups, clones, and restore operations) only if the application you are adding or protecting is another Astra Control Center instance.
-
 == How license consumption is calculated
 
 When you add a new cluster to Astra Control Center, it doesn't count toward consumed licenses until at least one application running on the cluster is managed by Astra Control Center.
