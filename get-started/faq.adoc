@@ -81,9 +81,11 @@ Any existing backups or snapshots will be deleted. Applications and data remain 
 No. While Astra Control can discover applications that are using non-NetApp storage, it can't manage an application that's using non-NetApp storage.
 
 *Should I manage Astra Control itself?*
+
 No, you should not manage Astra Control itself because it is a "system application."
 
 *Do unhealthy pods affect app management?*
+
 No, the health of pods doesn't affect app management.
 
 == Data management operations
