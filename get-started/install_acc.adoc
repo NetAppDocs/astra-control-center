@@ -23,7 +23,7 @@ To install Astra Control Center, download the installation bundle from the NetAp
 
 For a demonstration of the Astra Control Center installation process, see https://www.youtube.com/watch?v=eurMV80b0Ks&list=PLdXI3bZJEw7mJz13z7YdiGCS6gNQgV_aN&index=5[this video^]. 
 
-.What you'll need
+.Before you begin
 * link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
 * If you have configured or want to configure pod security policies in your environment, familiarize yourself with pod security policies and how they affect Astra Control Center installation. See link:../concepts/understand-pod-security.html[Understand pod security policy restrictions].
 * Ensure all API services are in a healthy state and available:
@@ -70,7 +70,7 @@ include::../_include/download-extract-acc.adoc[]
 
 The NetApp Astra kubectl command line plugin saves time when performing common tasks associated with deploying and upgrading Astra Control Center.
 
-.What you'll need
+.Before you begin
 
 NetApp provides plugin binaries for different CPU architectures and operating systems. You need to know which CPU and operating system you have before you perform this task.
 
@@ -762,7 +762,7 @@ Setup steps differ depending on the type of ingress controller you use. Astra Co
 * Nginx ingress controller
 * OpenShift ingress controller
 
-.What you'll need
+.Before you begin
 
 * The required https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/[ingress controller] should already be deployed.
 * The https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class[ingress class] corresponding to the ingress controller should already be created.

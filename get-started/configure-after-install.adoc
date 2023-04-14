@@ -145,7 +145,7 @@ The default, self-signed certificate is used for two types of connections:
 Replacing the default TLS certificate replaces the certificate used for authentication for these connections.
 ===============================
 
-.What you'll need
+.Before you begin
 
 * Kubernetes cluster with Astra Control Center installed
 * Administrative access to a command shell on the cluster to run `kubectl` commands

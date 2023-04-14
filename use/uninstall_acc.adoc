@@ -15,7 +15,7 @@ You might need to remove Astra Control Center components if you are upgrading fr
 
 If you have any issues with the uninstall, see <<Troubleshooting uninstall issues>>.
 
-.What you'll need
+.Before you begin
 
 * Use Astra Control Center UI to unmanage all link:../use/unmanage.html#stop-managing-compute[clusters].
 

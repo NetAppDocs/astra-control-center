@@ -33,7 +33,7 @@ NOTE: If your installation grows to exceed the licensed number of CPU units, Ast
 
 NOTE: To update an existing evaluation or full license, refer to link:../use/update-licenses.html[Update an existing license^].
 
-.What you'll need
+.Before you begin
 
 * Access to a newly installed Astra Control Center instance.
 
@@ -59,7 +59,7 @@ NOTE: If you have an evaluation license and are not sending data to AutoSupport,
 You should ensure that the following prerequisite conditions are met before you add a cluster. You should also run eligibility checks to ensure that your cluster is ready to be added to Astra Control Center and create roles for cluster management.
 //THIS SECTION REFERENCED IN UI. DO NOT MODIFY TITLE OR URL WITHOUT NOTIFYING UX.
 
-.What you'll need
+.Before you begin
 
 * Ensure that the worker nodes in your cluster are configured with the appropriate storage drivers so that the pods can interact with the backend storage.
 * Your environment meets the link:../get-started/requirements.html[operational environment requirements^] for Astra Trident and Astra Control Center. 
@@ -135,7 +135,7 @@ ontap-gold (default)  csi.trident.netapp.io  Delete         Immediate          t
 
 You can optionally create a limited administrator role for Astra Control Center. This is not a required procedure for Astra Control Center setup. This procedure helps create a separate kubeconfig that limits Astra Control permissions on the clusters it manages. 
 
-.What you'll need
+.Before you begin
 
 Ensure that you have the following for the cluster you intend to manage before completing the procedure steps:
 
@@ -439,7 +439,7 @@ To begin managing your apps, add a Kubernetes cluster and manage it as a compute
 
 TIP: We recommend that Astra Control Center manage the cluster it is deployed on first before you add other clusters to Astra Control Center to manage. Having the initial cluster under management is necessary to send Kubemetrics data and cluster-associated data for metrics and troubleshooting.
 
-.What you'll need
+.Before you begin
 
 * Before you add a cluster, review and perform the necessary <<Prepare your environment for cluster management using Astra Control,prerequisite tasks>>.
 
@@ -608,7 +608,7 @@ You can add a bucket using the Astra Control UI or https://docs.netapp.com/us-en
 
 You don't need a bucket in Astra Control if you are cloning your application configuration and persistent storage to the same cluster. Application snapshots functionality does not require a bucket.
 
-.What you'll need
+.Before you begin
 
 * A bucket that is reachable from your clusters managed by Astra Control Center.
 * Credentials for the bucket.

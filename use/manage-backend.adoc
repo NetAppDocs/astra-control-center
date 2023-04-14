@@ -140,7 +140,7 @@ You can unmanage the backend.
 You can remove a storage backend that is no longer in use. You might want to do this to keep your configuration simple and up-to-date.
 
 
-.What you'll need
+.Before you begin
 * Ensure that the storage backend is unmanaged.
 * Ensure that the storage backend does not have any volumes associated with the cluster.
 

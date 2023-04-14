@@ -314,7 +314,7 @@ Using NetApp BlueXP (formerly Cloud Manager), create a workspace, add a connecto
 
 Follow the BlueXP documentation to complete the following steps. See https://docs.netapp.com/us-en/occm/task_getting_started_gcp.html[Getting started with Cloud Volumes ONTAP in GCP^].
 
-.What you'll need
+.Before you begin
 * Access to the GCP Service Account with the required IAM permissions and roles
 
 .Steps
@@ -482,7 +482,7 @@ Using BlueXP (formerly Cloud Manager), create a workspace, add a connector to Az
 Follow the BlueXP documentation to complete the following steps. See https://docs.netapp.com/us-en/occm/task_getting_started_azure.html[Getting started with BlueXP in Azure^].
 
 
-.What you'll need
+.Before you begin
 
 Access to the Azure account with the required IAM permissions and roles
 
