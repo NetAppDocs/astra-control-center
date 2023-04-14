@@ -16,10 +16,10 @@ Astra Control Center supports ONTAP as the storage backend.
 == Overview
 Astra Control Center supports the following:
 
-* *Trident storage classes backed by ONTAP storage*:  If you are using an ONTAP backend, Astra Control Center offers the ability to import the ONTAP backend to report various monitoring information.
+* *Astra Trident storage classes backed by ONTAP storage*:  If you are using an ONTAP backend, Astra Control Center offers the ability to import the ONTAP backend to report various monitoring information.
 
 
-NOTE: Trident storage classes should be preconfigured outside of Astra Control Center.
+NOTE: Astra Trident storage classes should be preconfigured outside of Astra Control Center.
 
 == Storage classes
 

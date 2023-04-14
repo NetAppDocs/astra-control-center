@@ -34,8 +34,8 @@ NOTE: Ensure that the Kubernetes environment you choose to host Astra Control Ce
 |===
 |Kubernetes distribution on host cluster |Supported versions
 
-|Cisco IKS with Kubernetes
-|1.22
+|Azure Kubernetes Service on Azure Stack HCI
+|Azure Stack HCI 21H2 and 22H2 with AKS 1.23 and 1.24
 
 |Google Anthos
 |1.12 through 1.14 (See <<Google Anthos ingress requirements>>)
@@ -76,10 +76,10 @@ NOTE: These requirements assume that Astra Control Center is the only applicatio
 == Astra Trident requirements
 Ensure that you meet the following Astra Trident requirements specific to the needs of your environment:
 
-* *Minimum version for use with Astra Control Center*: Astra Trident 22.01 or newer installed and configured.
+* *Minimum version for use with Astra Control Center*: Astra Trident 22.04 or newer installed and configured.
 * *SnapMirror replication*: Astra Trident 22.07 or newer installed for SnapMirror-based application replication.
-* *For Kubernetes 1.25 support only*: Astra Trident 22.10 or newer installed for Kubernetes 1.25 clusters (you must upgrade to Astra Trident 22.10 prior to upgrading to Kubernetes 1.25)
-* *ONTAP configuration with Trident*: 
+* *For Kubernetes 1.25 or newer support*: Astra Trident 22.10 or newer installed for Kubernetes 1.25 or newer clusters (you must upgrade to Astra Trident 22.10 prior to upgrading to Kubernetes 1.25 or newer)
+* *ONTAP configuration with Astra Trident*: 
 ** *Storage class*: Configure at least one Astra Trident storage class on the cluster. If a default storage class is configured, ensure that it is the only storage class with the default designation.
 ** *Storage drivers and worker nodes*: Ensure that the worker nodes in your cluster are configured with the appropriate storage drivers so that the pods can interact with the backend storage. Astra Control Center supports the following ONTAP drivers provided by Astra Trident:
 
@@ -115,7 +115,7 @@ You must have an existing private Docker image registry to which you can push As
 == Astra Control Center license
 Astra Control Center requires an Astra Control Center license. When you install Astra Control Center, an embedded 90-day evaluation license for 4,800 CPU units is already activated. If you need more capacity or different evaluation terms, or want to upgrade to a full license, you can obtain a different evaluation license or full license from NetApp. You need a license to protect your applications and data. Refer to link:../concepts/intro.html[Astra Control Center features] for details.
 
-You can try Astra Control Center by signing up for a free trial. You can sign up by registering link:https://cloud.netapp.com/astra-register[here^].
+You can try Astra Control Center by signing up for a free trial. You can sign up by registering link:https://bluexp.netapp.com/astra-register[here^].
 
 To set up the license, refer to link:setup_overview.html[use a 90-day evaluation license^]. 
 
@@ -176,7 +176,7 @@ NOTE: The load balancer should use an IP address located in the same subnet as t
 For more information, see link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[Set up ingress for load balancing^].
 
 === Google Anthos ingress requirements
-When hosting Astra Control Center on a Google Anthos cluster, note that Google Anthos includes the MetalLB load balancer and the Istio ingress gateway service by default, enabling you to simply use the generic ingress capabilities of Astra Control Center during installation. See link:install_acc.html#configure-astra-control-center[Configure Astra Control Center^] for details.
+When hosting Astra Control Center on a Google Anthos cluster, note that Google Anthos includes the MetalLB load balancer and the Istio ingress service by default, enabling you to simply use the generic ingress capabilities of Astra Control Center during installation. See link:install_acc.html#configure-astra-control-center[Configure Astra Control Center^] for details.
 
 == Supported web browsers
 
