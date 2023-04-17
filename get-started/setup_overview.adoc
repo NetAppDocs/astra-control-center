@@ -507,11 +507,11 @@ The backend definition is the only place the credentials are stored in plain tex
 
 Astra Control Center can use certificates to communicate with new and existing ONTAP backends. You should enter the following information in the backend definition.
 
-* clientCertificate: Client certificate.
+* `clientCertificate`: Client certificate.
 
-* clientPrivateKey: Associated private key.
+* `clientPrivateKey`: Associated private key.
 
-* trustedCACertificate: Trusted CA certificate. If using a trusted CA, this parameter must be provided. This can be ignored if no trusted CA is used.
+* `trustedCACertificate`: Trusted CA certificate. If using a trusted CA, this parameter must be provided. This can be ignored if no trusted CA is used.
 
 A typical workflow involves the following steps.
 
@@ -569,13 +569,14 @@ openssl req -new -newkey rsa:4096 -nodes -sha256 -subj "/" -outform pem -out aff
 . Export the root certificate from Windows CA (third-party CA). 
 
 . Name this file `ca_root.crt`
-+ You now have the following three files:
++ 
+You now have the following three files:
 +
 * *Private key*: `aff250-astra-01-02.key` (This is the corresponding key for the server certificate in ONTAP. It is needed while installing the server certificate.)
 
 * *Signed certificate*: `aff250-astra-01-02.crt` (This is also called the _server certificate_ in ONTAP.)
 
-* *Root CA certificate*: `ca_root.crt` (This is also called the  _`_server-ca certificate_ in ONTAP.)
+* *Root CA certificate*: `ca_root.crt` (This is also called the  _server-ca certificate_ in ONTAP.)
 
 . Install these certificates in ONTAP. Generate and install `server` and `server-ca certificates` on ONTAP.
 +
@@ -586,13 +587,12 @@ Details in sample.yaml
 ----
 # Copy the contents of ca_root.crt and use it here.
   
-aff250-astra-01-02::> security certificate install -type server-ca
+security certificate install -type server-ca
  
 Please enter Certificate: Press <Enter> when done
+
 -----BEGIN CERTIFICATE-----
-
 <certificate details>
-
 -----END CERTIFICATE-----
  
  
@@ -610,21 +610,19 @@ The certificate's generated name for reference:
  
 # Copy the contents of aff250-astra-01-02.crt and use it here. For key, use the contents of aff250-astra-01-02.key file. 
  
-aff250-astra-01-02::> security certificate install -type server
+security certificate install -type server
  
 Please enter Certificate: Press <Enter> when done
 
 -----BEGIN CERTIFICATE-----
-
 <certificate details> 
-
 -----END CERTIFICATE-----
  
  
 Please enter Private Key: Press <Enter> when done
+
 -----BEGIN PRIVATE KEY-----
 <private key details>
-
 -----END PRIVATE KEY-----
  
  
@@ -645,19 +643,15 @@ serial:
  
 The certificate's generated name for reference: 
  
-aff250-astra-01-02::>
- 
 ==
 # Modify the vserver settings to enable SSL for the installed certificate
  
-aff250-astra-01-02::> ssl modify -vserver aff250-astra-01-02 -ca <CA>  -server-enabled true -serial <serial number>       (security ssl modify)
- 
-aff250-astra-01-02::>
+ssl modify -vserver aff250-astra-01-02 -ca <CA>  -server-enabled true -serial <serial number>       (security ssl modify)
  
 ==
 # Verify if the certificate works fine:
  
-msaravan@msaravan-mac-1 /Users/msaravan/projects/cert/feb14 % openssl s_client -CAfile ca_root.crt -showcerts -servername server -connect aff250-astra-01-02-cm.rtp.openenglab.netapp.com:443
+openssl s_client -CAfile ca_root.crt -showcerts -servername server -connect aff250-astra-01-02-cm.rtp.openenglab.netapp.com:443
 CONNECTED(00000005)
 depth=1 DC = local, DC = umca, CN = <CA>
 verify return:1
@@ -668,10 +662,11 @@ write W BLOCK
 Certificate chain
  0 s:
    i:/DC=local/DC=umca/<CA>
+
 -----BEGIN CERTIFICATE-----
 <Certificate details>
 ----
-#end collapsible 
+
 ====
 
 . Create the client certificate for the same host for passwordless communication. Astra Control Center uses this process to communicate with ONTAP.
@@ -698,12 +693,12 @@ ca_root.crt
 
 Copy the content of <client details>-client.pem  file and use it in the below command:
  
-aff250-astra-01-02::> security certificate install -type client-ca -vserver aff250-astra-01-02
+security certificate install -type client-ca -vserver aff250-astra-01-02
  
 Please enter Certificate: Press <Enter> when done
+
 -----BEGIN CERTIFICATE-----
 <Certificate details>
-
 -----END CERTIFICATE-----
  
  
@@ -729,7 +724,7 @@ security login create -user-or-group-name admin -application http -authenticatio
  
 ==
  
-#Verfiy passwordless communication works fine with the use of only certificates:
+#Verify passwordless communication works fine with the use of only certificates:
  
 curl 
 --<crt details>.crt 
