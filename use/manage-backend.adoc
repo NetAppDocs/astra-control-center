@@ -96,6 +96,8 @@ You can update existing backends to move from one type of authentication to anot
 
 // However, you cannot change from certificate-based authentication to credentials-based authentication.
 
+For details on enabling certificate-based authentication, refer to link:../get-started/setup_overview.html#enable-authentication-on-the-ontap-storage-backend[Enable authentication on the ONTAP storage backend].
+
 .Steps 
 
 . From the left navigation, select *Backends*.
