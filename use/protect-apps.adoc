@@ -43,6 +43,9 @@ A protection policy protects an app by creating snapshots, backups, or both at a
 
 If you need backups or snapshots to run more frequently than once per hour, you can https://docs.netapp.com/us-en/astra-automation/workflows/workflows_before.html[use the Astra Control REST API to create snapshots and backups^].
 
+//ASTRADOC-150
+TIP: Offset backup and replication schedules to avoid schedule overlaps. For example, perform backups at the top of the hour every hour and schedule replication to start with a 5-minute offset and a 10-minute interval.
+
 IMPORTANT: If your app uses a storage class backed by the `ontap-nas-economy` driver, protection policies cannot be used. Use an alternate storage class if you want a protection policy. 
 
 .Steps
