@@ -783,6 +783,7 @@ trident-svc-585c97548c-d25z5                  1/1     Running     0            9
 vault-controller-88484b454-2d6sr              1/1     Running     0            9h
 vault-controller-88484b454-fc5cz              1/1     Running     0            9h
 vault-controller-88484b454-jktld              1/1     Running     0            9h
+----
 ====
 // End snippet
 
