@@ -562,7 +562,7 @@ If you have a third-party certificate, you can set up authentication with these 
 +
 [source,Console]
 ----
-openssl req -new -newkey rsa:4096 -nodes -sha256 -subj "/" -outform pem -out aff250-astra-01-02.csr -keyout aff250-astra-01-02.key -addext "subjectAltName = DNS:aff250-astra-01-02-cm.rtp.openenglab.netapp.com,IP:10.192.96.13,DNS:aff250-astra-01-02"
+openssl req -new -newkey rsa:4096 -nodes -sha256 -subj "/" -outform pem -out aff250-astra-01-02.csr -keyout aff250-astra-01-02.key -addext "subjectAltName = DNS:<Your DNS information>,IP:<Your IP address>,DNS:aff250-astra-01-02"
 ----
 
 . Pass the CSR to the Windows CA (third-party CA) and issue the signed certificate. 
