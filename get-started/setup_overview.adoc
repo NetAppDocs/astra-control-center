@@ -518,6 +518,7 @@ A typical workflow involves the following steps.
 . Generate a client certificate and key. When generating, set the Common Name (CN) to the ONTAP user to authenticate as.
 
 +
+[source,Console]
 ----
 openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -keyout k8senv.key -out k8senv.pem -subj "/C=US/ST=NC/L=RTP/O=NetApp/CN=<common-name>"
 ----
@@ -525,6 +526,7 @@ openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -keyout k8senv.key -out k8s
 . Install the client certificate of type `client-ca` and key on the ONTAP cluster. 
 
 +
+[source,Console]
 ----
 security certificate install -type client-ca -cert-name <certificate-name> -vserver <vserver-name>
 security ssl modify -vserver <vserver-name> -client-enabled true
@@ -534,6 +536,7 @@ security ssl modify -vserver <vserver-name> -client-enabled true
 . Confirm that the ONTAP security login role supports the certificate authentication method.
 
 +
+[source,Console]
 ----
 security login create -user-or-group-name vsadmin -application ontapi -authentication-method cert -vserver <vserver-name>
 security login create -user-or-group-name vsadmin -application http -authentication-method cert -vserver <vserver-name>
@@ -542,6 +545,7 @@ security login create -user-or-group-name vsadmin -application http -authenticat
 . Test authentication using the generated certificate. Replace <ONTAP Management LIF> and <vserver name> with the Management LIF IP and SVM name. You must ensure the LIF has its service policy set to `default-data-management`.
 
 +
+[source,Curl]
 ----
 curl -X POST -Lk https://<ONTAP-Management-LIF>/servlets/netapp.servlets.admin.XMLrequest_filer --key k8senv.key --cert ~/k8senv.pem -d '<?xml version="1.0" encoding="UTF-8"?><netapp xmlns=http://www.netapp.com/filer/admin version="1.21" vfiler="<vserver-name>"><vserver-get></vserver-get></netapp>
 ----
@@ -556,6 +560,7 @@ If you have a third-party certificate, you can set up authentication with these 
 
 . Generate the private key and CSR:
 +
+[source,Console]
 ----
 openssl req -new -newkey rsa:4096 -nodes -sha256 -subj "/" -outform pem -out aff250-astra-01-02.csr -keyout aff250-astra-01-02.key -addext "subjectAltName = DNS:aff250-astra-01-02-cm.rtp.openenglab.netapp.com,IP:10.192.96.13,DNS:aff250-astra-01-02"
 ----
