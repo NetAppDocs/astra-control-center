@@ -788,11 +788,8 @@ After you set up the credentials or certificate authentication information, you 
 .Steps
 
 . From the Dashboard in the left-navigation area, select *Backends*.
-
-
 //** *New backends*: Select *Add* to manage an existing backend, select *ONTAP*, and select *Next*.
 //** *Discovered backends*: From the Actions menu, select *Manage* on a discovered backend from the managed cluster.
-
 . Select *Add*.
 . In the Use Existing section of the Add storage backend page, select *ONTAP*. 
 
@@ -810,7 +807,7 @@ NOTE: The user whose credentials you enter here must have the `ontapi` user logi
 
 
 .Result
-The backend appears in the `Healthy` state in the list with summary information.
+The backend appears in the `online` state in the list with summary information.
 
 NOTE: You might need to refresh the page for the backend to appear.
 
@@ -871,7 +868,7 @@ Now that you've logged in and added clusters to Astra Control Center, you're rea
 * link:../use/protection-overview.html[Protect apps]
 * link:../use/manage-notifications.html[Manage notifications]
 * link:../use/monitor-protect.html#connect-to-cloud-insights[Connect to Cloud Insights]
-* link:../get-started/add-custom-tls-certificate.html[Add a custom TLS certificate]
+* link:../get-started/configure-after-install.html#add-a-custom-tls-certificate[Add a custom TLS certificate]
 * link:../use/view-clusters.html#change-the-default-storage-class[Change the default storage class]
 
 [discrete]
