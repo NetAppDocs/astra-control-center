@@ -564,12 +564,12 @@ If you have a third-party certificate, you can set up authentication with these 
 +
 [source,Console]
 ----
-openssl req -new -newkey rsa:4096 -nodes -sha256 -subj "/" -outform pem -out aff250-astra-01-02.csr -keyout aff250-astra-01-02.key -addext "subjectAltName = DNS:aff250-astra-01-02-cm.rtp.openenglab.netapp.com,IP:10.192.96.13,DNS:aff250-astra-01-02"
+openssl req -new -newkey rsa:4096 -nodes -sha256 -subj "/" -outform pem -out ontap_cert_request.csr -keyout ontap_cert_request.key -addext "subjectAltName = DNS:<ONTAP_CLUSTER_FQDN_NAME>,IP:<ONTAP_MGMT_IP>”
 ----
 
 . Pass the CSR to the Windows CA (third-party CA) and issue the signed certificate. 
 
-. Download the signed certificate and name it `aff250-astra-01-02.pem'
+. Download the signed certificate and name it `ontap_signed_cert.crt'
 
 . Export the root certificate from Windows CA (third-party CA). 
 
@@ -577,13 +577,13 @@ openssl req -new -newkey rsa:4096 -nodes -sha256 -subj "/" -outform pem -out aff
 + 
 You now have the following three files:
 +
-* *Private key*: `aff250-astra-01-02.key` (This is the corresponding key for the server certificate in ONTAP. It is needed while installing the server certificate.)
+* *Private key*: `ontap_signed_request.key` (This is the corresponding key for the server certificate in ONTAP. It is needed while installing the server certificate.)
 
-* *Signed certificate*: `aff250-astra-01-02.crt` (This is also called the _server certificate_ in ONTAP.)
+* *Signed certificate*: `ontap_signed_cert.crt` (This is also called the _server certificate_ in ONTAP.)
 
 * *Root CA certificate*: `ca_root.crt` (This is also called the  _server-ca certificate_ in ONTAP.)
 
-. Install these certificates in ONTAP. Generate and install `server` and `server-ca certificates` on ONTAP.
+. Install these certificates in ONTAP. Generate and install `server` and `server-ca' certificates on ONTAP.
 +
 Details in sample.yaml 
 +
@@ -613,50 +613,42 @@ The certificate's generated name for reference:
 
 ===
  
-# Copy the contents of aff250-astra-01-02.crt and use it here. For key, use the contents of aff250-astra-01-02.key file. 
- 
+# Copy the contents of ontap_signed_cert.crt and use it here. For key, use the contents of ontap_cert_request.key file.
 security certificate install -type server
- 
 Please enter Certificate: Press <Enter> when done
 
 -----BEGIN CERTIFICATE-----
-<certificate details> 
+<certificate details>
 -----END CERTIFICATE-----
- 
- 
+
 Please enter Private Key: Press <Enter> when done
 
 -----BEGIN PRIVATE KEY-----
 <private key details>
 -----END PRIVATE KEY-----
- 
- 
-Enter certificates of certification authorities (CA) which form the certificate chain of the server certificate. This starts with the issuing CA certificate of the server certificate and can range up to the root CA certificate.
- 
-Do you want to continue entering root and/or intermediate certificates {y|n}: n
- 
-The provided certificate does not have a common name in the subject field.
- 
-Enter a valid common name to continue installation of the certificate: aff250-astra-01-02-cm.rtp.openenglab.netapp.com
- 
-You should keep a copy of the private key and the CA-signed digital certificate for future reference.
- 
-The installed certificate's CA and serial number for reference:
 
-CA: 
-serial: 
- 
-The certificate's generated name for reference: 
+Enter certificates of certification authorities (CA) which form the certificate chain of the server certificate. This starts with the issuing CA certificate of the server certificate and can range up to the root CA certificate.
+Do you want to continue entering root and/or intermediate certificates {y|n}: n
+
+The provided certificate does not have a common name in the subject field.
+Enter a valid common name to continue installation of the certificate: <ONTAP_CLUSTER_FQDN_NAME>
+
+You should keep a copy of the private key and the CA-signed digital certificate for future reference.
+The installed certificate's CA and serial number for reference:
+CA:
+serial:
+The certificate's generated name for reference:
+
  
 ==
 # Modify the vserver settings to enable SSL for the installed certificate
  
-ssl modify -vserver aff250-astra-01-02 -ca <CA>  -server-enabled true -serial <serial number>       (security ssl modify)
- 
+ssl modify -vserver <vserver_name> -ca <CA>  -server-enabled true -serial <serial number>       (security ssl modify)
+
 ==
 # Verify if the certificate works fine:
  
-openssl s_client -CAfile ca_root.crt -showcerts -servername server -connect aff250-astra-01-02-cm.rtp.openenglab.netapp.com:443
+openssl s_client -CAfile ca_root.crt -showcerts -servername server -connect <ONTAP_CLUSTER_FQDN_NAME>:443
 CONNECTED(00000005)
 depth=1 DC = local, DC = umca, CN = <CA>
 verify return:1
@@ -665,11 +657,12 @@ verify return:1
 write W BLOCK
 ---
 Certificate chain
- 0 s:
+0 s:
    i:/DC=local/DC=umca/<CA>
 
 -----BEGIN CERTIFICATE-----
 <Certificate details>
+
 ----
 
 ====
@@ -684,87 +677,69 @@ Details in sample.yaml
 ====
 
 # Use /CN=admin or use some other account which has privileges.
- 
-openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -keyout aff250-astra-01-02-client.key -out aff250-astra-01-02-client.pem -subj "/CN=admin"
- 
-ls
+openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -keyout ontap_test_client.key -out ontap_test_client.pem -subj "/CN=admin"
 
-<key numbers>-client.key 
-<CSR name>.csr    
-<CRD details>.crt
-<Client details>-client.pem 
-<key details>.key    
-ca_root.crt
+Copy the content of ontap_test_client.pem file and use it in the below command:
+security certificate install -type client-ca -vserver <vserver_name>
 
-Copy the content of <client details>-client.pem  file and use it in the below command:
- 
-security certificate install -type client-ca -vserver aff250-astra-01-02
- 
 Please enter Certificate: Press <Enter> when done
 
 -----BEGIN CERTIFICATE-----
 <Certificate details>
 -----END CERTIFICATE-----
- 
- 
-You should keep a copy of the CA-signed digital certificate for future reference.
- 
-The installed certificate's CA and serial number for reference:
 
-CA: 
-serial: 
- 
-The certificate's generated name for reference: 
+You should keep a copy of the CA-signed digital certificate for future reference.
+The installed certificate’s CA and serial number for reference:
+
+CA:
+serial:
+The certificate’s generated name for reference:
+
  
 ==
  
-ssl modify -vserver  aff250-astra-01-02 -client-enabled true
-  (security ssl modify)
- 
- 
-# Setting permissions for certificates
-security login create -user-or-group-name admin -application ontapi -authentication-method cert -role admin -vserver aff250-astra-01-02
+ssl modify -vserver <vserver_name> -client-enabled true
+(security ssl modify)
 
-security login create -user-or-group-name admin -application http -authentication-method cert -role admin -vserver aff250-astra-01-02
- 
+# Setting permissions for certificates
+security login create -user-or-group-name admin -application ontapi -authentication-method cert -role admin -vserver <vserver_name>
+
+security login create -user-or-group-name admin -application http -authentication-method cert -role admin -vserver <vserver_name>
+
 ==
  
 #Verify passwordless communication works fine with the use of only certificates:
- 
-curl 
---<crt details>.crt 
---key <key details>-client.key 
---cert <client details>-client.pem 
-<url>
 
+curl --cacert ontap_signed_cert.crt  --key ontap_test_client.key --cert ontap_test_client.pem https://<ONTAP_CLUSTER_FQDN_NAME>/api/storage/aggregates
 {
-  "records": [
-    {
-      "uuid": "f84e0a9b-e72f-4431-88c4-4bf5378b41bd",
-      "name": "aggr1_trident",
-      "node": {
-        "uuid": "7835876c-3484-11ed-97bb-d039ea50375c",
-        "name": "aff250-astra-01",
-        "_links": {
-          "self": {
-            "href": "/api/cluster/nodes/7835876c-3484-11ed-97bb-d039ea50375c"
-          }
-        }
-      },
-      "_links": {
-        "self": {
-          "href": "/api/storage/aggregates/f84e0a9b-e72f-4431-88c4-4bf5378b41bd"
-        }
-      }
-    }
-  ],
-  "num_records": 1,
-  "_links": {
-    "self": {
-      "href": "/api/storage/aggregates"
-    }
-  }
+"records": [
+{
+"uuid": "f84e0a9b-e72f-4431-88c4-4bf5378b41bd",
+"name": "<aggr_name>",
+"node": {
+"uuid": "7835876c-3484-11ed-97bb-d039ea50375c",
+"name": "<node_name>",
+"_links": {
+"self": {
+"href": "/api/cluster/nodes/7835876c-3484-11ed-97bb-d039ea50375c"
+}
+}
+},
+"_links": {
+"self": {
+"href": "/api/storage/aggregates/f84e0a9b-e72f-4431-88c4-4bf5378b41bd"
+}
+}
+}
+],
+"num_records": 1,
+"_links": {
+"self": {
+"href": "/api/storage/aggregates"
+}
+}
 }%
+
 
 
 ----
@@ -772,10 +747,11 @@ curl
 
 
 . Add the storage backend in the Astra Control Center UI and provide the following values: 
++
+* *Client Certificate*: ontap_test_client.pem
+* *Private Key*: ontap_test_client.key
+* *Trusted CA Certificate*: ontap_signed_cert.crt
 
-* *Key*: `aff250-astra-01-02-client.key`
-* *Pem*: `aff250-astra-01-02-client.pem`
-* *Crt*: `aff250-astra-01-02.crt`
 
 == Add a storage backend
 
