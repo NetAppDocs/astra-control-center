@@ -22,7 +22,7 @@ You obtain a license in one of the following ways:
 
 * link:https://mysupport.netapp.com/site/downloads/evaluation/astra-control-center[If you are evaluating Astra Control Center, download the evaluation license file^]. An evaluation license lets you use Astra Control Center for 90 days from the date you download the license. 
 
-* link:../concepts/licensing.html[If you already purchased Astra Control Center, generate your NetApp license file (NLF)^] from the NetApp Support Site. After you purchase the product, you receive a serial number and license,  which you use on the Support Site.  
+* link:https://mysupport.netapp.com/site/[If you already purchased Astra Control Center, generate your NetApp license file (NLF)^] from the NetApp Support Site. After you purchase the product, you receive a serial number and license,  which you use on the Support Site.  
 
 
 
