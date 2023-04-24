@@ -511,6 +511,13 @@ Astra Control Center can use certificates to communicate with new and existing O
 
 * `trustedCACertificate`: Trusted CA certificate. If using a trusted CA, this parameter must be provided. This can be ignored if no trusted CA is used.
 
+You can use one of the following types of certificates: 
+
+* Self-signed certificate
+* Third-party certificate 
+
+==== Enable authentication with a self-signed certificate 
+
 A typical workflow involves the following steps.
 
 .Steps
@@ -552,9 +559,9 @@ curl -X POST -Lk https://<ONTAP-Management-LIF>/servlets/netapp.servlets.admin.X
 
 . Using the values obtained from the previous step, add the storage backend in the Astra Control Center UI.
 
-=== Enable authentication with a third-party certificate
+==== Enable authentication with a third-party certificate
 
-If you have a third-party certificate, you can set up authentication with these steps. 
+If you have a third-party certificate, you can set up certificate-based authentication with these steps. 
 
 .Steps
 
