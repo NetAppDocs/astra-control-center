@@ -123,7 +123,7 @@ namespace/netapp-acc-operator created
 
 .. Create a secret for the `netapp-acc-operator` namespace. Add Docker information and run the following command:
 +
-NOTE: The placeholder `your_registry_path` should match the location of the images that you uploaded earlier (for example, `[Registry_URL]/netapp/astra/astracc/22.11.0-82`).
+NOTE: The placeholder `your_registry_path` should match the location of the images that you uploaded earlier (for example, `[Registry_URL]/netapp/astra/astracc/23.04.0-22`).
 +
 [source,console]
 ----
@@ -239,7 +239,7 @@ spec:
           value: "2"
         - name: ACCOP_HELM_INSTALLTIMEOUT
           value: 5m
-        *image: [your_registry_path]/acc-operator:23.04.9*
+        *image: [your_registry_path]/acc-operator:23.04.21*
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -338,7 +338,7 @@ NOTE: An annotated sample YAML follows these steps.
 | `astraVersion`
 | The version of Astra Control Center to deploy. No action is needed for this setting as the value will be pre-populated.
 | string
-| `22.11.0-82`
+| `23.04.0-22`
 |===
 ====
 // End snippet
@@ -807,7 +807,7 @@ Response:
 +
 ----
 NAME    UUID                                  VERSION     ADDRESS         READY
-astra   9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f  22.11.0-82  10.111.111.111  True
+astra   9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f  23.04.0-22  10.111.111.111  True
 ----
 +
 IMPORTANT: Copy the UUID value. The password is `ACC-` followed by the UUID value (`ACC-[UUID]` or, in this example, `ACC-9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f`).
