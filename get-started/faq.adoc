@@ -28,21 +28,20 @@ For the URL, in a browser, enter the Fully Qualified Domain Name (FQDN) you set 
 
 == Licensing
 
-*I am using the Evaluation license. How to I change to the full license?*
+*I am using an evaluation license. How do I change to the full license?*
 
-You can easily change to a full license by obtaining the NetApp license file (NLF).
+You can easily change to a full license by obtaining the NetApp license file (NLF) from NetApp.
 
 *Steps*
 
 . From the left navigation, select *Account* > *License*.
-. Select *Add license*.
+. In the license overview, to the right of the license information, select the Options menu.
+. Select *Replace*.
 . Browse to the license file you downloaded and select *Add*.
 
-*I am using the Evaluation license. Can I still manage apps?*
+*I am using an evaluation license. Can I still manage apps?*
 
-Yes, you can test out the managing apps functionality with the Evaluation license.
-
-
+Yes, you can test out the managing apps functionality with an evaluation license (including the embedded evaluation license that is installed by default). There is no difference in capabilities or features between an evaluation license and a full license; the evaluation license simply has a shorter lifespan. Refer to link:../concepts/licensing.html[Licensing^] for more information.
 
 == Registering Kubernetes clusters
 
@@ -62,9 +61,9 @@ Removing a cluster from Astra Control will not make any changes to the cluster's
 
 WARNING: Always remove a cluster from Astra Control before you delete it through any other methods. Deleting a cluster using another tool while it's still being managed by Astra Control can cause problems for your Astra Control account.
 
-*Is NetApp Trident automatically uninstalled from a cluster when I unmanage it?*
+*Is NetApp Astra Trident automatically uninstalled from a cluster when I unmanage it?*
 //From PI5 ACC RN review/From ACS RN
-When you unmanage a cluster from Astra Control Center, Trident isn't automatically uninstalled from the cluster. To uninstall Trident, you'll need to https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html[follow these steps in the Trident documentation^].
+When you unmanage a cluster from Astra Control Center, Astra Trident isn't automatically uninstalled from the cluster. To uninstall Astra Trident, you'll need to https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html[follow these steps in the Astra Trident documentation^].
 
 == Managing applications
 
@@ -82,14 +81,14 @@ Any existing backups or snapshots will be deleted. Applications and data remain 
 No. While Astra Control can discover applications that are using non-NetApp storage, it can't manage an application that's using non-NetApp storage.
 
 *Should I manage Astra Control itself?*
-No, you should not manage Astra Control itself because it is a "system app."
+
+No, you should not manage Astra Control itself because it is a "system application."
 
 *Do unhealthy pods affect app management?*
-//From PI5 ACC RN review/originally from ACS RN
-If a managed app has pods in an unhealthy state, Astra Control can't create new backups and clones.
+
+No, the health of pods doesn't affect app management.
 
 == Data management operations
-
 
 *My application uses several PVs. Will Astra Control take snapshots and backups of these PVs?*
 

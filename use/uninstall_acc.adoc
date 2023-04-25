@@ -15,9 +15,10 @@ You might need to remove Astra Control Center components if you are upgrading fr
 
 If you have any issues with the uninstall, see <<Troubleshooting uninstall issues>>.
 
-.What you'll need
+.Before you begin
 
-* Use Astra Control Center UI to unmanage all link:../use/unmanage.html#stop-managing-compute[clusters].
+. link:../use/unmanage.html#unmanage-an-app[Unmanage all apps^] on the clusters.
+. link:../use/unmanage.html#unmanage-a-cluster[Unmanage all clusters^].
 
 .Steps
 
@@ -33,13 +34,13 @@ Result:
 astracontrolcenter.astra.netapp.io "astra" deleted
 ----
 
-. Use the following command to delete the `netapp-acc` namespace:
+. Use the following command to delete the `netapp-acc` (or custom-named) namespace:
 +
 ----
-kubectl delete ns netapp-acc
+kubectl delete ns [netapp-acc or custom namespace]
 ----
 +
-Result:
+Example result:
 +
 ----
 namespace "netapp-acc" deleted

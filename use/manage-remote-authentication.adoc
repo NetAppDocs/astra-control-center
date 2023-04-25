@@ -32,7 +32,7 @@ Add the private TLS certificate for the LDAP server so that Astra Control Center
 == Enable remote authentication
 You can enable LDAP authentication and configure the connection between Astra Control and the remote LDAP server.
 
-.What you'll need
+.Before you begin
 
 If you plan to use LDAPS, ensure that the private TLS certificate for the LDAP server is installed in Astra Control Center so that Astra Control Center can authenticate with the LDAP server. See <<Add a certificate for LDAPS authentication>> for instructions.
 

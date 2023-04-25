@@ -58,3 +58,7 @@ image:acc-backup_4in.png["This image shows a scheduled backup and restore betwee
 On the other hand, replication is done by replicating to ONTAP and then a fail over creates the Kubernetes resources:
 
 image:acc-replication_4in.png["This image shows replication and fail over between two Kubernetes clusters and two ONTAP clusters "]
+
+== Backups, snapshots, and clones with an expired license
+
+If your license expires, you can add a new application or perform application protection operations (such as snapshots, backups, clones, and restore operations) only if the application you are adding or protecting is another Astra Control Center instance.

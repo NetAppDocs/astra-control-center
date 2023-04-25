@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: use/manage-backend.html
 keywords: how to use astra control, what is astra storage, how to set up astra storage backend, ontap storage in astra, backend storage in astra
-summary: Add storage for your on-premises Kubernetes applications. Astra Control discovers and uses the already-deployed resources, including Trident, ONTAP, and associated storage classes.
+summary: Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend as well as additional storage metrics. You can monitor storage capacity and health details, including performance if Astra Control Center is connected to Cloud Insights.
 ---
 
 = Manage the storage backend
@@ -20,6 +20,8 @@ You can complete the following tasks related to managing a storage backend:
 
 * link:../get-started/setup_overview.html#add-a-storage-backend[Add a storage backend]
 * <<View storage backend details>>
+* <<Edit storage backend authentication details>>
+* <<Manage a discovered storage backend>>
 * <<Unmanage a storage backend>>
 * <<Remove a storage backend>>
 
@@ -70,7 +72,7 @@ You can view storage backend information from the Dashboard or from the Backends
 
 View information about the backend health, capacity, and performance (IOPS throughput and/or latency).
 
-You can see the volumes that the Kubernetes apps are using, which are stored on a selected storage backend. With Cloud Insights, you can see additional information. See https://docs.netapp.com/us-en/cloudinsights/[Cloud Insights documentation].
+You can see the volumes that the Kubernetes apps are using, which are stored on a selected storage backend. With Cloud Insights, you can see additional information. See https://docs.netapp.com/us-en/cloudinsights/[Cloud Insights documentation^].
 
 .Steps
 . In the left navigation area, select *Backends*.
@@ -82,6 +84,46 @@ TIP: If you connected to NetApp Cloud Insights, excerpts of data from Cloud Insi
 image:../use/acc_backends_ci_connection2.png[A screenshot of the Backends page]
 
 . To go directly to Cloud Insights, select the *Cloud Insights* icon next to the metrics image.
+
+== Edit storage backend authentication details
+Astra Control Center offers two modes of authenticating an ONTAP backend.
+
+* *Credential-based authentication*: The username and password to an ONTAP user with the required permissions. You should use a pre-defined security login role, such as admin to ensure maximum compatibility with ONTAP versions.
+
+* *Certificate-based authentication*: Astra Control Center can also communicate with an ONTAP cluster using a certificate installed on the backend. You should use the client certificate, key, and the trusted CA certificate if used (recommended).
+
+You can update existing backends to move from one type of authentication to another method. Only one authentication method is supported at a time. 
+
+// However, you cannot change from certificate-based authentication to credentials-based authentication.
+
+For details on enabling certificate-based authentication, refer to link:../get-started/setup_overview.html#enable-authentication-on-the-ontap-storage-backend[Enable authentication on the ONTAP storage backend].
+
+.Steps 
+
+. From the left navigation, select *Backends*.
+. Select the storage backend.
+. At the Credentials field, select the *Edit* icon. 
+. In the Edit page, select one of the following. 
++
+* *Use administrator credentials*: Enter the ONTAP cluster management IP address and admin credentials. The credentials must be cluster-wide credentials. 
++
+NOTE: The user whose credentials you enter here must have the `ontapi` user login access method enabled within ONTAP System Manager on the ONTAP cluster. If you plan to use SnapMirror replication, apply user credentials with the "admin" role, which has the access methods `ontapi` and `http`, on both source and destination ONTAP clusters. Refer to https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts in ONTAP documentation^] for more information.
+
+* *Use a certificate*: Upload the certificate `.pem` file, the certificate key `.key` file, and optionally the certificate authority file.
+
+. Select *Save*.
+
+== Manage a discovered storage backend
+
+You can select to manage an unmanaged, yet discovered storage backend. When you manage a storage backend, Astra Control indicates if a certificate for authentication has expired. 
+
+.Steps
+.	From the left navigation, select *Backends*.
+. Select the *Discovered* option. 
+. Select the storage backend.
+. From the Options menu in the *Actions* column, select *Manage*.
+. Make the changes. 
+. Select *Save*.
 
 
 == Unmanage a storage backend
@@ -100,7 +142,7 @@ You can unmanage the backend.
 You can remove a storage backend that is no longer in use. You might want to do this to keep your configuration simple and up-to-date.
 
 
-.What you'll need
+.Before you begin
 * Ensure that the storage backend is unmanaged.
 * Ensure that the storage backend does not have any volumes associated with the cluster.
 
