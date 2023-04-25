@@ -17,7 +17,7 @@ We're pleased to announce the latest release of Astra Control Center.
 
 .New features and support
 
-* link:../concepts/licensing.[90-day evaluation license enabled by default for new Astra Control Center installations^]
+* link:../concepts/licensing.html[90-day evaluation license enabled by default for new Astra Control Center installations^]
 * link:../use/execution-hooks.html[Enhanced execution hooks functionality with additional filtering options^]
 * link:../use/execution-hooks.html[Execution hooks can now be run after replication failover with Astra Control Center^]
 * link:../get-started/requirements.html[Support for NAS economy as a storage class type^]

@@ -75,7 +75,7 @@ pcloud-astra-control-center-au-pod-0 0/1 CreateContainerConfigError 0 13s
 . Restart each affected pod, replacing <namespace> with the current namespace:
 +
 ----
-kubectl delete pod pcloud-astra-control-center-au-pod-0  -n <namespace>
+kubectl delete pod pcloud-astra-control-center-au-pod-0 -n <namespace>
 ----
 
 == Managed clusters do not appear in NetApp Cloud Insights when connecting through a proxy
