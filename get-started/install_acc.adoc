@@ -25,7 +25,7 @@ For a demonstration of the Astra Control Center installation process, see https:
 
 .Before you begin
 * link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
-* If you have configured or want to configure pod security policies in your environment, familiarize yourself with pod security policies and how they affect Astra Control Center installation. See link:../concepts/understand-pod-security.html[Understand pod security policy restrictions].
+* If you have configured or want to configure pod security policies in your environment, familiarize yourself with pod security policies and how they affect Astra Control Center installation. See link:../concepts/understand-pod-security.html[Understand pod security policy restrictions^].
 * Ensure all API services are in a healthy state and available:
 +
 [source,console]
@@ -34,7 +34,7 @@ kubectl get apiservices
 ----
 
 * Ensure the Astra FQDN you plan to use is routable to this cluster. This means that you either have a DNS entry in your internal DNS server or you are using a core URL route that is already registered.
-* If a cert manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps] so that Astra Control Center does not attempt to install its own cert manager. By default, Astra Control Center installs its own cert manager during installation.
+* If a cert manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps^] so that Astra Control Center does not attempt to install its own cert manager. By default, Astra Control Center installs its own cert manager during installation.
 
 .About this task
 The Astra Control Center installation process helps you to do the following:
@@ -74,7 +74,7 @@ You can use the NetApp Astra kubectl command line plugin to push images to a loc
 
 NetApp provides plugin binaries for different CPU architectures and operating systems. You need to know which CPU and operating system you have before you perform this task. 
 
-If you already have the plugin installed from a previous installation, link:../use/upgrade-acc.html#remove-the-netapp-astra-kubectl-plugin-and-install-it-again[make sure you have the latest version] before completing these steps.
+If you already have the plugin installed from a previous installation, link:../use/upgrade-acc.html#remove-the-netapp-astra-kubectl-plugin-and-install-it-again[make sure you have the latest version^] before completing these steps.
 
 .Steps
 
@@ -794,7 +794,7 @@ vault-controller-88484b454-jktld              1/1     Running     0            9
 kubectl logs deploy/acc-operator-controller-manager -n netapp-acc-operator -c manager -f
 ----
 +
-NOTE: `accHost` cluster registration is one of the last operations, and if it fails it will not cause deployment to fail. In the event of a cluster registration failure indicated in the logs, you can attempt registration again through the link:../get-started/setup_overview.html#add-cluster[Add cluster workflow in the UI] or API.
+NOTE: `accHost` cluster registration is one of the last operations, and if it fails it will not cause deployment to fail. In the event of a cluster registration failure indicated in the logs, you can attempt registration again through the link:../get-started/setup_overview.html#add-cluster[Add cluster workflow in the UI^] or API.
 
 . When all the pods are running, verify that the installation was successful (`READY` is `True`) and get the initial setup password you will use when you log in to Astra Control Center:
 +

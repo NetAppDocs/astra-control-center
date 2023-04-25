@@ -469,7 +469,7 @@ IMPORTANT: After you add a cluster to be managed in Astra Control Center, it mig
 
 == Enable authentication on the ONTAP storage backend
 
-Astra Control Center offers two modes of authenticating an ONTAP backend.
+Astra Control Center offers two modes of authenticating an ONTAP backend:
 
 * *Credential-based authentication*: The username and password to an ONTAP user with the required permissions. You should use a pre-defined security login role, such as admin or vsadmin to ensure maximum compatibility with ONTAP versions.
 
@@ -588,9 +588,9 @@ You now have the following three files:
 
 * *Signed certificate*: `ontap_signed_cert.crt` (This is also called the _server certificate_ in ONTAP.)
 
-* *Root CA certificate*: `ca_root.crt` (This is also called the  _server-ca certificate_ in ONTAP.)
+* *Root CA certificate*: `ca_root.crt` (This is also called the _server-ca certificate_ in ONTAP.)
 
-. Install these certificates in ONTAP. Generate and install `server` and `server-ca' certificates on ONTAP.
+. Install these certificates in ONTAP. Generate and install `server` and `server-ca` certificates on ONTAP.
 +
 Details in sample.yaml 
 +
@@ -682,7 +682,7 @@ Details in sample.yaml
 +
 [%collapsible]
 ====
-
+----
 # Use /CN=admin or use some other account which has privileges.
 openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -keyout ontap_test_client.key -out ontap_test_client.pem -subj "/CN=admin"
 
