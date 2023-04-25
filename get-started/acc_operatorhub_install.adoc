@@ -15,7 +15,7 @@ If you use Red Hat OpenShift, you can install Astra Control Center using the Red
 
 After you complete this procedure, you must return to the installation procedure to complete the link:../get-started/install_acc.html#verify-system-status[remaining steps^] to verify installation success and log on.
 
-.What you'll need
+.Before you begin
 * *Environmental prerequisites met*: link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment^].
 * *Healthy cluster operators and API services*: 
 ** From your OpenShift cluster, ensure all cluster operators are in a healthy state:
@@ -59,9 +59,9 @@ include::../_include/download-extract-acc.adoc[]
 
 == Install the NetApp Astra kubectl plugin
 
-The NetApp Astra kubectl command line plugin saves time when performing common tasks associated with deploying and upgrading Astra Control Center.
+You can use the NetApp Astra kubectl command line plugin to push images to a local Docker repository.
 
-.What you'll need
+.Before you begin
 
 NetApp provides plugin binaries for different CPU architectures and operating systems. You need to know which CPU and operating system you have before you perform this task.
 

@@ -75,9 +75,11 @@ Cloud Insights should be accessible from the network that Astra Control Center u
 
 When Astra Control Center is connected to Cloud Insights, an Acquisition Unit pod gets created. This pod collects data from the storage backends that are managed by Astra Control Center and pushes it to Cloud Insights. This pod requires 8 GB RAM and 2 CPU cores.
 
-NOTE: After you enable the Cloud Insights connection, you can view throughput information on the *Backends* page as well as connect to Cloud Insights from here after selecting a storage backend. You can also find the information on the *Dashboard* in the Cluster section, and also connect to Cloud Insights from there.
+NOTE: When Astra Control Center is paired with Cloud Insights, you should not use the *Modify Deployment* option in Cloud Insights. 
 
-.What you'll need
+NOTE: After you enable the Cloud Insights connection, you can view throughput information on the *Backends* page as well as connect to Cloud Insights after selecting a storage backend. You can also find the information on the *Dashboard* in the Cluster section and connect to Cloud Insights from there.
+
+.Before you begin
 
 * An Astra Control Center account with *admin*/*owner* privileges.
 * A valid Astra Control Center license.
@@ -235,13 +237,13 @@ NOTE: If multiple cluster data was collected, each cluster's metrics appear in a
 
 == Connect to Fluentd
 
-You can send logs (Kubernetes events) from system monitored by Astra Control Center to your Fluentd endpoint. The Fluentd connection is disabled by default.
+You can send logs (Kubernetes events) from a system monitored by Astra Control Center to your Fluentd endpoint. The Fluentd connection is disabled by default.
 
 image:fluentbit.png[This is a conceptual diagram of event logs going from Astra to Fluentd.]
 
 NOTE: Only the event logs from managed clusters are forwarded to Fluentd.
 
-.What you'll need
+.Before you begin
 
 * An Astra Control Center account with *admin*/*owner* privileges.
 * Astra Control Center installed and running on a Kubernetes cluster.
