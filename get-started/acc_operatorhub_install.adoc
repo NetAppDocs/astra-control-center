@@ -134,6 +134,10 @@ image:openshift_acc-operator_details.png["This image shows the Astra Control Cen
 .. Enter the Astra Control Center version; for example, 22.04.1.
 .. Enter an account name, email address, and admin last name.
 .. Choose a volume reclaim policy of `Retain`, `Recycle`, or `Delete`. The default value is `Retain`.
+.. Select the scaleSize of the installation.
++
+NOTE: By default, Astra will use High Availability (HA) `scaleSize` of `Medium`, which deploys most services in HA and deploys multiple replicas for redundancy. With `scaleSize` as `Small`, Astra will reduce the number of replicas for all services except for essential services to reduce consumption.
+
 .. Select the ingress type:
 +
 * *`Generic`* (`ingressType: "Generic"`) (Default)
