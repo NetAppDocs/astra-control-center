@@ -17,7 +17,7 @@ You obtain a license in one of the following ways:
 
 * If you are evaluating Astra Control Center and need different evaluation terms than what is included in the embedded evaluation license, contact NetApp to request a different evaluation license file.  
 
-* link:https://mysupport.netapp.com/site/[If you already purchased Astra Control Center, generate your NetApp license file (NLF)^] from the NetApp Support Site. After you purchase the product, you receive a serial number and license,  which you use on the Support Site.  
+* link:https://mysupport.netapp.com/site/[If you already purchased Astra Control Center, generate your NetApp license file (NLF)^] by logging in to the NetApp Support Site and navigating to your software licenses under the Systems menu.
 
 For details about licenses needed for ONTAP storage backends, refer to link:../get-started/requirements.html[supported storage backends].
 
