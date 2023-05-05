@@ -13,6 +13,12 @@ summary: NetApp periodically updates Astra Control Center to bring you new featu
 [.lead]
 We're pleased to announce the latest release of Astra Control Center.
 
+== 25 May 2023 (23.04.1)
+
+.New features and support
+
+* link:../concepts/licensing.html[90-day evaluation license enabled by default for new Astra Control Center installations^]
+
 == 25 April 2023 (23.04.0)
 
 .New features and support
