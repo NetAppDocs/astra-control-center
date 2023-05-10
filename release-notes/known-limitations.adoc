@@ -155,7 +155,7 @@ As a workaround, do the following:
 . https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html[Install the latest Astra Trident version^].
 . https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#step-1-create-a-volumesnapshotclass[Create a VolumeSnapshotClass^].
 
-.When upgrading an existing EKS 1.25 or later installations
+.When upgrading existing EKS 1.25 or later installations
 
 . Remove any existing Snapshot CRDs and any existing snapshot controller.
 . https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html[Uninstall Astra Trident^].
