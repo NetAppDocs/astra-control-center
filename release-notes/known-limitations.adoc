@@ -36,7 +36,7 @@ Known limitations identify platforms, devices, or functions that are not support
 * <<Backups and snapshots might not be retained during removal of an Astra Control Center instance>>
 * <<LDAP user and group limitations>>
 * <<The Activity page displays up to 100000 events>>
-* <<Snapshots might fail for Amazon EKS 1.25 or newer clusters>>
+* <<Snapshots might fail for Amazon EKS 1.25 or later clusters>>
 
 == The same cluster cannot be managed by two Astra Control Center instances
 //DOC-3600/Q2/PI4/PI5
@@ -144,18 +144,18 @@ Astra Control Center supports up to 5,000 remote groups and 10,000 remote users.
 == The Activity page displays up to 100000 events
 The Astra Control Activity page can display up to 100,000 events. To view all logged events, retrieve the events using the link:../rest-api/api-intro.html[Astra Control REST API^].
 
-== Snapshots might fail for Amazon EKS 1.25 or newer clusters
+== Snapshots might fail for Amazon EKS 1.25 or later clusters
 After installing Astra Control Center 23.04, snapshots in Amazon EKS clusters at version 1.25 or greater can fail because Astra Trident is using the incorrect snapshot controller.  
 
 As a workaround, do the following:
 
-.When setting up new EKS 1.25 or greater installations
+.When setting up new EKS 1.25 or later installations
 
 . https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[Install the snapshot CRDs and the snapshot controller^].
 . https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html[Install the latest Astra Trident version^].
 . https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#step-1-create-a-volumesnapshotclass[Create a VolumeSnapshotClass^].
 
-.When upgrading an existing EKS 1.25 or greater installations
+.When upgrading an existing EKS 1.25 or later installations
 
 . Remove any existing Snapshot CRDs and any existing snapshot controller.
 . https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html[Uninstall Astra Trident^].
