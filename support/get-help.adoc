@@ -23,7 +23,7 @@ You can access support options from the Astra Control Center UI by selecting the
 
 These options are available for free, 24x7:
 
-* https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Astra[*Knowledge base* (login required)^]: Search for articles, FAQs, or Break Fix information related to Astra Control.
+* https://kb.netapp.com/Cloud/Astra/Control[*Knowledge base* (login required)^]: Search for articles, FAQs, or Break Fix information related to Astra Control.
 
 * *Documentation center*: This is the doc site that you're currently viewing.
 
