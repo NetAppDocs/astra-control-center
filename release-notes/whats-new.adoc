@@ -13,9 +13,9 @@ summary: NetApp periodically updates Astra Control Center to bring you new featu
 [.lead]
 We're pleased to announce the latest release of Astra Control Center.
 
-== 18 May 2023 (23.04.1)
+== 18 May 2023 (23.04.2)
 
-This version is primarily a bugfix release.
+This patch release (23.04.2) for Astra Control Center (23.04.0) fixes a bug with in-place application restore using execution hooks.
 
 == 25 April 2023 (23.04.0)
 
