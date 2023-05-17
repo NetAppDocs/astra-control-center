@@ -38,7 +38,7 @@ A bucket can be in one of these states:
 
 * pending: The bucket is scheduled for discovery.
 * available: The bucket is available for use.
-* removed: The bucket is not currently accessible.
+* removed: The bucket is not currently accessible.
 
 For instructions on how to manage buckets using the Astra Control API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
 
@@ -109,7 +109,7 @@ You should remove bucket credentials only if new credentials have been applied t
 
 TIP: The first set of credentials that you add to Astra Control is always in use because Astra Control uses the credentials to authenticate the backup bucket. Do not remove these credentials if the bucket is in active use as this will lead to backup failures and backup unavailability.
 
-NOTE: If you do remove active bucket credentials, see https://kb.netapp.com/Advice_and_Troubleshooting/Cloud_Services/Astra/Deleting_active_S3_bucket_credentials_leads_to_spurious_500_errors_reported_in_the_UI[troubleshooting bucket credential removal].
+NOTE: If you do remove active bucket credentials, see https://kb.netapp.com/Cloud/Astra/Control/Deleting_active_S3_bucket_credentials_leads_to_spurious_500_errors_reported_in_the_UI[troubleshooting bucket credential removal].
 
 For instructions on how to remove S3 credentials using the Astra Control API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
 
