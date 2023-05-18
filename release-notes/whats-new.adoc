@@ -17,7 +17,6 @@ We're pleased to announce the latest release of Astra Control Center.
 
 This patch release (23.04.2) for Astra Control Center (23.04.0) provides support for https://newreleases.io/project/github/kubernetes-csi/external-snapshotter/release/v6.1.0[Kubernetes CSI external snapshotter v6.1.0^] and fixes the following:
 
-* link:../release-notes/known-limitations.html#snapshots-might-fail-for-kubernetes-1-25-or-later-clusters-with-certain-snapshot-controller-versions[A limitation with Kubernetes v1beta1 CSI snapshot controller APIs]
 * A bug with in-place application restore when using execution hooks
 * Connection issues with the bucket service
 
