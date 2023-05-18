@@ -133,7 +133,7 @@ ontap-gold (default)  csi.trident.netapp.io  Delete         Immediate          t
 
 === Create a cluster role kubeconfig
 
-You can optionally create a limited or full administrator role for Astra Control Center. This is not a required procedure for Astra Control Center setup. This procedure helps create a separate kubeconfig that either (1) limits Astra Control permissions on the clusters it manages or (2) handles Astra Control permissions in the event of multiple contexts. 
+You can optionally create a limited permission or full permission administrator role for Astra Control Center. This is not a required procedure for Astra Control Center setup. This procedure helps create a separate kubeconfig that either (1) limits Astra Control permissions on the clusters it manages or (2) handles Astra Control permissions in the event of multiple contexts. 
 
 .Before you begin
 
@@ -300,7 +300,9 @@ kubectl apply -f astra-admin-account.yaml
 ====
 // End snippet
 
-* *Full cluster role*: This role contains the full permissions necessary for a cluster to be managed by Astra Control:
+* *Full cluster role*: This role contains full permissions for a cluster to be managed by Astra Control. You might use this role if you use multiple contexts and cannot use the standard Astra Control kubeconfig or if a limited role won't work in your environment:
++
+NOTE: The following `ClusterRole` steps are a general Kubernetes example. Refer to https://access.redhat.com/solutions/5286371[these instructions for OpenShift^] or to the comparable documentation for your Kubernetes distribution for instruction specific to your environment.
 +
 .Steps
 [%collapsible]
