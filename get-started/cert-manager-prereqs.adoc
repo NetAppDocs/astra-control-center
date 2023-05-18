@@ -1,21 +1,21 @@
 ---
 sidebar: sidebar
 permalink: get-started/cert-manager-prereqs.html
-keywords: astra control center, prereq, requirement, cert-manager, install
-summary: If a cert-manager already exists in the cluster, you need to perform some prerequisite steps so that Astra Control Center does not install its own cert-manager.
+keywords: astra control center, prereq, requirement, cert manager, install
+summary: If a cert manager already exists in the cluster, you need to perform some prerequisite steps so that Astra Control Center does not install its own cert-manager.
 ---
 
-= Configure an external cert-manager
+= Configure an external cert manager
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/get-started/
 
 [.lead]
-If a cert-manager already exists in your Kubernetes cluster, you need to perform some prerequisite steps so that Astra Control Center does not install its own cert-manager.
+If a cert manager already exists in your Kubernetes cluster, you need to perform some prerequisite steps so that Astra Control Center does not install its own cert manager.
 
 .Steps
 
-. Confirm that you have a cert-manager installed:
+. Confirm that you have a cert manager installed:
 +
 [source,console]
 ----
@@ -30,7 +30,7 @@ cert-manager   essential-cert-manager-cainjector-66dc99cc56-9ldmt   1/1     Runn
 cert-manager   essential-cert-manager-webhook-56b76db9cc-fjqrq      1/1     Running    0     6d5h
 ----
 
-. Create a certificate/key pair for the astraAddress FQDN:
+. Create a certificate/key pair for the `astraAddress` FQDN:
 +
 [source,console]
 ----
@@ -59,7 +59,7 @@ Sample response:
 secret/selfsigned-tls created
 ----
 
-. Create a ClusterIssuer file that is *exactly* the following but includes the namespace location where your cert-manager pods are installed:
+. Create a `ClusterIssuer` file that is *exactly* the following but includes the namespace location where your `cert-manager` pods are installed:
 +
 [source,yaml]
 ----
@@ -84,7 +84,7 @@ Sample response:
 clusterissuer.cert-manager.io/astra-ca-clusterissuer created
 ----
 
-. Verify that the ClusterIssuer has come up correctly. `Ready` must be `True` before you can proceed:
+. Verify that the `ClusterIssuer` has come up correctly. `Ready` must be `True` before you can proceed:
 +
 [source,console]
 ----
@@ -98,4 +98,4 @@ NAME                     READY   AGE
 astra-ca-clusterissuer   True    9s
 ----
 
-. Complete the link:../get-started/install_acc.html[Astra Control Center installation process]. There is a link:../get-started/install_acc.html#configure-astra-control-center[required configuration step for the Astra Control Center cluster YAML] in which you change the CRD value to indicate that the cert-manager is externally installed. You must complete this step during installation so that Astra Control Center recognizes the external cert-manager.
+. Complete the link:../get-started/install_acc.html[Astra Control Center installation process]. There is a link:../get-started/install_acc.html#configure-astra-control-center[required configuration step for the Astra Control Center cluster YAML] in which you change the CRD value to indicate that the cert manager is externally installed. You must complete this step during installation so that Astra Control Center recognizes the external cert manager.

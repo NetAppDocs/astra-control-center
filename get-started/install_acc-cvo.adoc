@@ -129,7 +129,7 @@ NOTE: The AWS Elastic Container Registry (ECR) token expires after 12 hours and 
 Here's an example of an AWS deployment:
 
 
-image:acc-cvo-aws2.png[Astra Control Center with Cloud Volumes ONTAP deployment example]
+image:acc-cvo-aws2.png["This image shows an example of Astra Control Center with a Cloud Volumes ONTAP deployment"]
 
 
 === Configure NetApp BlueXP for AWS
@@ -151,11 +151,11 @@ Follow the BlueXP documentation to complete the following steps. See the followi
 
 . Import the OpenShift cluster. The cluster will connect to the working environment you just created.
 .. View the NetApp cluster details by selecting *K8s* > *Cluster list* > *Cluster Details*.
-.. In the upper right corner, note the Trident version.
+.. In the upper right corner, note the Astra Trident version.
 .. Note the Cloud Volumes ONTAP cluster storage classes showing NetApp as the provisioner.
 +
 This imports your Red Hat OpenShift cluster and assigns it a default storage class. You select the storage class.
-Trident is automatically installed as part of the import and discovery process.
+Astra Trident is automatically installed as part of the import and discovery process.
 
 . Note all the persistent volumes and volumes in this Cloud Volumes ONTAP deployment.
 
@@ -314,7 +314,7 @@ Using NetApp BlueXP (formerly Cloud Manager), create a workspace, add a connecto
 
 Follow the BlueXP documentation to complete the following steps. See https://docs.netapp.com/us-en/occm/task_getting_started_gcp.html[Getting started with Cloud Volumes ONTAP in GCP^].
 
-.What you'll need
+.Before you begin
 * Access to the GCP Service Account with the required IAM permissions and roles
 
 .Steps
@@ -333,7 +333,7 @@ Follow the BlueXP documentation to complete the following steps. See https://doc
 .. Note the Cloud Volumes ONTAP cluster storage classes showing "NetApp" as the provisioner.
 +
 This imports your Red Hat OpenShift cluster and assigns it a default storage class. You select the storage class.
-Trident is automatically installed as part of the import and discovery process.
+Astra Trident is automatically installed as part of the import and discovery process.
 
 . Note all the persistent volumes and volumes in this Cloud Volumes ONTAP deployment.
 
@@ -376,7 +376,7 @@ Ensure that the operating environment you choose to host Astra Control Center me
 
 Astra Control Center requires the following resources in addition to the environment's resource requirements:
 
-See link:../get-started/requirements.html#operational-environment-requirements[Astra Control Center operational environment requirements].
+See link:../get-started/requirements.html[Astra Control Center operational environment requirements].
 
 [cols=2*,options="header",cols="1h,2a"]
 |===
@@ -482,7 +482,7 @@ Using BlueXP (formerly Cloud Manager), create a workspace, add a connector to Az
 Follow the BlueXP documentation to complete the following steps. See https://docs.netapp.com/us-en/occm/task_getting_started_azure.html[Getting started with BlueXP in Azure^].
 
 
-.What you'll need
+.Before you begin
 
 Access to the Azure account with the required IAM permissions and roles
 
@@ -497,27 +497,27 @@ See https://docs.netapp.com/us-en/occm/task_creating_connectors_azure.html[Creat
 
 . Ensure that the connector is running and switch to that connector.
 +
-image:acc-cvo-azure-connectors.png[Switching connectors in BlueXP]
+image:acc-cvo-azure-connectors.png["This image shows connectors in BlueXP"]
 
 . Create a working environment for your cloud environment.
 .. Location: "Microsoft Azure".
 .. Type: "Cloud Volumes ONTAP HA".
 
 +
-image:acc-cvo-azure-working-environment.png[Creating a working environment in BlueXP]
+image:acc-cvo-azure-working-environment.png["This image shows working environment locations in BlueXP"]
 
 
 . Import the OpenShift cluster. The cluster will connect to the working environment you just created.
 .. View the NetApp cluster details by selecting *K8s* > *Cluster list* > *Cluster Details*.
 +
-image:acc-cvo-azure-connected.png[Imported cluster in BlueXP]
+image:acc-cvo-azure-connected.png["This image shows an imported cluster in BlueXP"]
 
-.. In the upper right corner, note the Trident version.
+.. In the upper right corner, note the Astra Trident version.
 .. Note the Cloud Volumes ONTAP cluster storage classes showing NetApp as the provisioner.
 
 +
 This imports your Red Hat OpenShift cluster and assigns a default storage class. You select the storage class.
-Trident is automatically installed as part of the import and discovery process.
+Astra Trident is automatically installed as part of the import and discovery process.
 
 . Note all the persistent volumes and volumes in this Cloud Volumes ONTAP deployment.
 . Cloud Volumes ONTAP can operate as a single node or in High Availability. If HA is enabled, note the HA status and node deployment status running in Azure.

@@ -55,6 +55,10 @@ TIP: link:../get-started/install_acc.html[Deploy Astra Control Center^] in a thi
 *** Source Kubernetes cluster
 *** Destination Kubernetes cluster
 *** Associated ONTAP clusters
+* *Astra Trident / ONTAP configuration*: Astra Control Center requires that a storage class be created and set as the default storage class. Astra Control Center supports the following ONTAP drivers provided by Astra Trident for replication:
+** ontap-nas
+** ontap-nas-economy (SnapMirror replication functionality with Astra Control is not available for this storage class)
+** ontap-san
 
 ** *User accounts*: When you add an ONTAP storage backend to Astra Control Center, apply user credentials with the "admin" role, which has access methods `http` and `ontapi` enabled on both ONTAP source and destination clusters. See https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts in ONTAP documentation^] for more information. 
 // This bullet is duplicated in Add backend
@@ -81,14 +85,14 @@ Setting up a replication relationship involves the following that make up the re
 +
 * *Destination cluster*: Enter a destination cluster that is different from the source.  
 * *Destination storage class*: Select or enter the storage class that uses the paired SVM on the destination ONTAP cluster.
-* *Replication type*: "Asynchronous" is currently the only replication type available. 
+* *Replication type*: "Asynchronous" is currently the only replication type available.
 * *Destination namespace*: Enter new or existing destination namespaces for the destination cluster.
-
-
 * (Optional) Add additional namespaces by selecting *Add namespace* and choosing the namespace from the drop-down list.
-
 * *Replication frequency*: Set how often you want Astra Control to take a Snapshot and replicate it to its destination.
-* *Offset*: Set the number of minutes from the top of the hour that you want Astra Control to take a Snapshot. You might want to use an offset so that it doesn't coincide with other scheduled operations. For example, if you want to take the Snapshot every 5 minutes starting at 10:02, enter "02" as the offset minutes. The result would be 10:02, 10:07, 10:12, etc.
+* *Offset*: Set the number of minutes from the top of the hour that you want Astra Control to take a Snapshot. You might want to use an offset so that it doesn't coincide with other scheduled operations.
++
+//ASTRADOC-150
+TIP: Offset backup and replication schedules to avoid schedule overlaps. For example, perform backups at the top of the hour every hour and schedule replication to start with a 5-minute offset and a 10-minute interval.
 
 . Select *Next*, review the summary, and select *Save*.
 +
@@ -138,11 +142,13 @@ The following actions occur as a result of the fail over procedure:
 
 //* On the destination cluster, an app is started based on the latest replicated state from the source app and continues to run based on the latest replicated state from the source app.
 
-* On the destination cluster, the app is started based on the latest replicated Snapshot.
+* On the destination cluster, the app is started based on the latest replicated snapshot.
 * The source cluster and app (if operational) are not stopped and will continue to run.
 * The replication state changes to "Failing over" and then to "Failed over" when it has completed.
 * The source app's protection policy is copied to the destination app based on the schedules present on the source app at the time of the fail over.
+* If the source app has one or more post-restore execution hooks enabled, those execution hooks are run for the destination app.
 * Astra Control shows the app both on the source and destination clusters and its respective health.
+
 
 //* The source and destination apps will diverge with updates occurring to either app.
 

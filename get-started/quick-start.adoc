@@ -23,12 +23,12 @@ Ensure that your environment meets these requirements.
 
 *Kubernetes cluster* 
 [%interactive]
-* [ ] link:../get-started/requirements.html#operational-environment-requirements[Ensure your environment meets operational environment requirements^]
+* [ ] link:../get-started/requirements.html#host-cluster-resource-requirements[Ensure your host cluster meets operational environment requirements^]
  * [ ] link:../get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Configure ingress for load balancing on-premises Kubernetes clusters^]
  
 *Storage integration*
 [%interactive]
-* [ ] link:../get-started/requirements.html#operational-environment-requirements[Ensure your environment includes the Astra Trident supported version^]
+* [ ] link:../get-started/requirements.html#astra-trident-requirements[Ensure your environment includes the Astra Trident supported version^]
 * [ ] https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html[Prepare the worker nodes^]
 * [ ] https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend[Configure Astra Trident storage backend^]
 * [ ] https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Astra Trident storage classes^]
@@ -69,10 +69,10 @@ Ensure that your environment meets these requirements.
 Complete these installation tasks. 
 
 [%interactive]
-* [ ] https://mysupport.netapp.com/site/downloads/evaluation/astra-control-center[Download Astra Control Center  from the NetApp Support Site Evaluation downloads page^]
+* [ ] https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[Download Astra Control Center from the NetApp Support Site downloads page^]
 * [ ] Obtain the NetApp license file:
 
-** link:https://mysupport.netapp.com/site/downloads/evaluation/astra-control-center[If you are evaluating Astra Control Center, download the evaluation license file^]
+** If you are evaluating Astra Control Center, an embedded evaluation license is already included.
 
 ** link:../concepts/licensing.html[If you already purchased Astra Control Center, generate your license file^]
 

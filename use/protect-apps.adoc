@@ -43,6 +43,11 @@ A protection policy protects an app by creating snapshots, backups, or both at a
 
 If you need backups or snapshots to run more frequently than once per hour, you can https://docs.netapp.com/us-en/astra-automation/workflows/workflows_before.html[use the Astra Control REST API to create snapshots and backups^].
 
+//ASTRADOC-150
+TIP: Offset backup and replication schedules to avoid schedule overlaps. For example, perform backups at the top of the hour every hour and schedule replication to start with a 5-minute offset and a 10-minute interval.
+
+IMPORTANT: If your app uses a storage class backed by the `ontap-nas-economy` driver, protection policies cannot be used. Use an alternate storage class if you want a protection policy. 
+
 .Steps
 
 . Select *Applications* and then select the name of an app.
@@ -76,6 +81,8 @@ Astra Control implements the data protection policy by creating and retaining sn
 
 You can create an on-demand snapshot at any time.
 
+IMPORTANT: If your app uses a storage class backed by the `ontap-nas-economy` driver, snapshots cannot be used. Use an alternate storage class for snapshots. 
+
 .Steps
 
 . Select *Applications*.
@@ -94,6 +101,8 @@ The snapshot process begins. A snapshot is successful when the status is *Health
 You can also back up an app at any time.
 
 NOTE: S3 buckets in Astra Control Center do not report available capacity. Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
+
+IMPORTANT: If your app uses a storage class backed by the `ontap-nas-economy` driver, be sure that you have defined a `backendType` parameter in your https://docs.netapp.com/us-en/trident/trident-reference/objects.html#kubernetes-storageclass-objects[Kubernetes storage object^] with a value of `ontap-nas-economy` before performing any protection operations. Backups for apps backed by the `ontap-nas-economy` are disruptive and the app will be unavailable until the backup operation has completed. 
 
 .Steps
 
