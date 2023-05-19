@@ -95,7 +95,7 @@ NAME READY STATUS RESTARTS AGE
 telegraf-rs-fhhrh 1/2 Error 2 (26s ago) 32s
 ----
 
-. Restart the crashed pod:
+. Restart the crashed pod, replacing `<pod_name_from_output>` with the name of the affected pod:
 +
 ----
 kubectl -n netapp-monitoring delete pod <pod_name_from_output>
