@@ -98,7 +98,7 @@ telegraf-rs-fhhrh 1/2 Error 2 (26s ago) 32s
 . Restart the crashed pod:
 +
 ----
-kubectl -n netapp-monitoring delete pod telegraf-rs-fhhrh
+kubectl -n netapp-monitoring delete pod <pod_name_from_output>
 ----
 +
 You should see output similar to the following:
