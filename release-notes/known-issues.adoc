@@ -26,6 +26,7 @@ The following known issues affect the current release:
 .Clusters
 * <<Managing a cluster with Astra Control Center fails when default kubeconfig file contains more than one context>>
 * <<Some pods fail to start after upgrading to Astra Control Center 23.04>>
+* <<A monitoring pod can crash in Istio environments>>
 
 .Other issues
 * <<Managed clusters do not appear in NetApp Cloud Insights when connecting through a proxy>>
@@ -76,6 +77,47 @@ pcloud-astra-control-center-au-pod-0 0/1 CreateContainerConfigError 0 13s
 +
 ----
 kubectl delete pod pcloud-astra-control-center-au-pod-0 -n <namespace>
+----
+
+== A monitoring pod can crash in Istio environments
+If you pair Astra Control Center with Cloud Insights in an Istio environment, the `telegraf-rs` pod can crash. As a workaround, perform the following steps:
+
+. Find the crashed pod:
++
+----
+kubectl -n netapp-monitoring get pod | grep Error
+----
++
+You should see output similar to the following:
++
+----
+NAME READY STATUS RESTARTS AGE
+telegraf-rs-fhhrh 1/2 Error 2 (26s ago) 32s
+----
+
+. Restart the crashed pod, replacing `<pod_name_from_output>` with the name of the affected pod:
++
+----
+kubectl -n netapp-monitoring delete pod <pod_name_from_output>
+----
++
+You should see output similar to the following:
++
+----
+pod "telegraf-rs-fhhrh" deleted
+----
+
+. Verify that the pod has restarted, and is not in an Error state:
++
+----
+kubectl -n netapp-monitoring get pod
+----
++
+You should see output similar to the following:
++
+----
+NAME READY STATUS RESTARTS AGE
+telegraf-rs-rrnsb 2/2 Running 0 11s
 ----
 
 == Managed clusters do not appear in NetApp Cloud Insights when connecting through a proxy
