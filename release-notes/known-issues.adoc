@@ -107,7 +107,7 @@ You should see output similar to the following:
 pod "telegraf-rs-fhhrh" deleted
 ----
 
-. Verify that the pod has restarted:
+. Verify that the pod has restarted, and is not in an Error state:
 +
 ----
 kubectl -n netapp-monitoring get pod
