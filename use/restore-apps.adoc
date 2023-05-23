@@ -139,7 +139,7 @@ TIP: You can create as many resource include and exclude rules as you want. The 
 
 == Migrate from ontap-nas-economy storage to ontap-nas storage
 
-You can use an Astra Control link:../use/restore-apps.html[application restore] operation to migrate application volumes from a storage class backed by `ontap-nas-economy`, which permits limited application protection options, to a storage class backed by `ontap-nas` with its full range of Astra Control protection options. The restore operation migrates Qtree-based volumes that use an `ontap-nas-economy` backend to standard volumes backed by `ontap-nas`. Volumes, regardless of whether they are `ontap-nas-economy` backed only or mixed, will be migrated to the target storage class. After the migration is complete, protection options are no longer limited.
+You can use an Astra Control link:../use/restore-apps.html[application restore] or link:../use/clone-apps.html[application clone^] operation to migrate application volumes from a storage class backed by `ontap-nas-economy`, which permits limited application protection options, to a storage class backed by `ontap-nas` with its full range of Astra Control protection options. The clone or restore operation migrates Qtree-based volumes that use an `ontap-nas-economy` backend to standard volumes backed by `ontap-nas`. Volumes, regardless of whether they are `ontap-nas-economy` backed only or mixed, will be migrated to the target storage class. After the migration is complete, protection options are no longer limited.
 
 == In-place restore complications for an app that shares resources with another app
 
