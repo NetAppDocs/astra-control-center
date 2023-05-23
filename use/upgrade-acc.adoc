@@ -169,7 +169,7 @@ spec:
           value: "2"
         *- name: ACCOP_HELM_UPGRADETIMEOUT*
           *value: 300m*
-        *image: [your_registry_path]/acc-operator:23.04.21*
+        *image: [your_registry_path]/acc-operator:23.04.36*
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
