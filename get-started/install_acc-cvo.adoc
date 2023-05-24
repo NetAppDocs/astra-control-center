@@ -35,8 +35,8 @@ You can deploy Astra Control Center on a self-managed Kubernetes cluster hosted 
 
 Before you deploy Astra Control Center in AWS, you will need the following items:
 
-* Astra Control Center license. See link:../get-started/requirements.html[Astra Control Center licensing requirements].
-* link:../get-started/requirements.html[Meet Astra Control Center requirements].
+* Astra Control Center license. See link:../get-started/requirements.html[Astra Control Center licensing requirements^].
+* link:../get-started/requirements.html[Meet Astra Control Center requirements^].
 * NetApp Cloud Central account
 * If using OCP, Red Hat OpenShift Container Platform (OCP) permissions (on namespace level to create pods)
 * AWS credentials, Access ID and Secret Key with permissions that enable you to create buckets and connectors
@@ -116,7 +116,7 @@ Follow the AWS documentation to complete the following steps. See https://docs.o
 
 . Create an AWS virtual network.
 . Review the EC2 compute instances. This can be a bare metal server or VMs in AWS.
-. If the instance type does not already match the Astra minimum resource requirements for master and worker nodes, change the instance type in AWS to meet the Astra requirements.  See link:../requirements.html[Astra Control Center requirements].
+. If the instance type does not already match the Astra minimum resource requirements for master and worker nodes, change the instance type in AWS to meet the Astra requirements.  See link:../get-started/requirements.html[Astra Control Center requirements^].
 . Create at least one AWS S3 bucket to store your backups.
 . Create an AWS Elastic Container Registry (ECR) to host all the ACC images.
 +
@@ -162,7 +162,7 @@ Astra Trident is automatically installed as part of the import and discovery pro
 TIP: Cloud Volumes ONTAP can operate as a single node or in High Availability. If HA is enabled, note the HA status and node deployment status running in AWS.
 
 === Install Astra Control Center for AWS
-Follow the standard link:../get-started/install_acc.html[Astra Control Center installation instructions].
+Follow the standard link:../get-started/install_acc.html[Astra Control Center installation instructions^].
 
 NOTE: AWS uses the Generic S3 bucket type.
 
@@ -178,8 +178,8 @@ You can deploy Astra Control Center on a self-managed Kubernetes cluster hosted 
 
 Before you deploy Astra Control Center in GCP, you will need the following items:
 
-* Astra Control Center license. See link:../get-started/requirements.html[Astra Control Center licensing requirements].
-* link:../get-started/requirements.html[Meet Astra Control Center requirements].
+* Astra Control Center license. See link:../get-started/requirements.html[Astra Control Center licensing requirements^].
+* link:../get-started/requirements.html[Meet Astra Control Center requirements^].
 * NetApp Cloud Central account
 * If using OCP, Red Hat OpenShift Container Platform (OCP) 4.10
 * If using OCP, Red Hat OpenShift Container Platform (OCP) permissions (on namespace level to create pods)
@@ -268,7 +268,7 @@ Follow the GCP documentation to complete the following steps. See Installing Ope
 . Create a GCP Project and VPC in the GCP that you plan on using for the OCP cluster with CVO backend.
 
 . Review the compute instances. This can be a bare metal server or VMs in GCP.
-. If the instance type does not already match the Astra minimum resource requirements for master and worker nodes, change the instance type in GCP to meet the Astra requirements. See link:../get-started/requirements.html[Astra Control Center requirements].
+. If the instance type does not already match the Astra minimum resource requirements for master and worker nodes, change the instance type in GCP to meet the Astra requirements. See link:../get-started/requirements.html[Astra Control Center requirements^].
 
 . Create at least one GCP Cloud Storage Bucket to store your backups.
 
@@ -340,7 +340,7 @@ Astra Trident is automatically installed as part of the import and discovery pro
 TIP: Cloud Volumes ONTAP can operate as a single node or in High Availability (HA). If HA is enabled, note the HA status and node deployment status running in GCP.
 
 === Install Astra Control Center for GCP
-Follow the standard link:../get-started/install_acc.html[Astra Control Center installation instructions].
+Follow the standard link:../get-started/install_acc.html[Astra Control Center installation instructions^].
 
 NOTE: GCP uses the Generic S3 bucket type.
 
@@ -361,8 +361,8 @@ You can deploy Astra Control Center on a self-managed Kubernetes cluster hosted 
 
 Before you deploy Astra Control Center in Azure, you will need the following items:
 
-* Astra Control Center license. See link:../get-started/requirements.html[Astra Control Center licensing requirements].
-* link:../get-started/requirements.html[Meet Astra Control Center requirements].
+* Astra Control Center license. See link:../get-started/requirements.html[Astra Control Center licensing requirements^].
+* link:../get-started/requirements.html[Meet Astra Control Center requirements^].
 * NetApp Cloud Central account
 * If using OCP, Red Hat OpenShift Container Platform (OCP) 4.8
 * If using OCP, Red Hat OpenShift Container Platform (OCP) permissions (on namespace level to create pods)
@@ -376,7 +376,7 @@ Ensure that the operating environment you choose to host Astra Control Center me
 
 Astra Control Center requires the following resources in addition to the environment's resource requirements:
 
-See link:../get-started/requirements.html[Astra Control Center operational environment requirements].
+See link:../get-started/requirements.html[Astra Control Center operational environment requirements^].
 
 [cols=2*,options="header",cols="1h,2a"]
 |===
@@ -444,7 +444,7 @@ Follow the Azure documentation to complete the following steps. See https://docs
 
 . Create an Azure virtual network.
 . Review the compute instances. This can be a bare metal server or VMs in Azure.
-. If the instance type does not already match the Astra minimum resource requirements for master and worker nodes, change the instance type in Azure to meet the Astra requirements.  See link:../get-started/requirements.html[Astra Control Center  requirements].
+. If the instance type does not already match the Astra minimum resource requirements for master and worker nodes, change the instance type in Azure to meet the Astra requirements.  See link:../get-started/requirements.html[Astra Control Center requirements^].
 . Create at least one Azure Blob container to store your backups.
 . Create a storage account. You will need a storage account to create a container to be used as a bucket in Astra Control Center.
 . Create a secret, which is required for bucket access.
@@ -524,6 +524,6 @@ Astra Trident is automatically installed as part of the import and discovery pro
 
 === Install and configure Astra Control Center for Azure
 
-Install Astra Control Center with the standard link:../get-started/install_acc.html[installation instructions].
+Install Astra Control Center with the standard link:../get-started/install_acc.html[installation instructions^].
 
-Using Astra Control Center, add an Azure bucket. See link:../get-started/setup_overview.html[Set up Astra Control Center and add buckets].
+Using Astra Control Center, add an Azure bucket. See link:../get-started/setup_overview.html[Set up Astra Control Center and add buckets^].
