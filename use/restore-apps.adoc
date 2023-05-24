@@ -79,9 +79,6 @@ NOTE: To learn about configuring include and exclude rules, see <<Filter resourc
 . Select *Next*.
 . Review details about the restore action carefully, type "restore" (if prompted), and select *Restore*.
 
-//+
-//image:screenshot-restore-summary.gif[]
-
 .Result
 
 Astra Control restores the app based on the information that you provided. If you restored the app in-place, the content of existing persistent volumes is replaced with the content of persistent volumes from the restored app.
