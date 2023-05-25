@@ -46,7 +46,7 @@ If you need backups or snapshots to run more frequently than once per hour, you 
 //ASTRADOC-150
 TIP: Offset backup and replication schedules to avoid schedule overlaps. For example, perform backups at the top of the hour every hour and schedule replication to start with a 5-minute offset and a 10-minute interval.
 
-IMPORTANT: If your app uses a storage class backed by the `ontap-nas-economy` driver, protection policies cannot be used. Use an alternate storage class if you want a protection policy. 
+IMPORTANT: If your app uses a storage class backed by the `ontap-nas-economy` driver, protection policies cannot be used. Migrate to a storage class supported by Astra Control if you want to schedule backups and snapshots. 
 
 .Steps
 
@@ -81,7 +81,7 @@ Astra Control implements the data protection policy by creating and retaining sn
 
 You can create an on-demand snapshot at any time.
 
-IMPORTANT: If your app uses a storage class backed by the `ontap-nas-economy` driver, snapshots cannot be used. Use an alternate storage class for snapshots. 
+IMPORTANT: If your app uses a storage class backed by the `ontap-nas-economy` driver, snapshots can't be created. Use an alternate storage class for snapshots. 
 
 .Steps
 
