@@ -38,6 +38,7 @@ Known limitations identify platforms, devices, or functions that are not support
 * <<The Activity page displays up to 100000 events>>
 * <<Snapshots might fail for Kubernetes 1.25 or later clusters with certain snapshot controller versions>>
 
+
 == The same cluster cannot be managed by two Astra Control Center instances
 //DOC-3600/Q2/PI4/PI5
 If you want to manage a cluster on another Astra Control Center instance, you should first link:../use/unmanage.html#stop-managing-compute[unmanage the cluster] from the instance on which it is managed before you manage it on another instance. After you remove the cluster from management, verify that the cluster is unmanaged by executing this command:
