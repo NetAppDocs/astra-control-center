@@ -133,9 +133,12 @@ ontap-gold (default)  csi.trident.netapp.io  Delete         Immediate          t
 
 === Create a cluster role kubeconfig
 
-You can optionally create a limited permission or custom permission administrator role for Astra Control Center. This is not a required procedure for Astra Control Center setup as you already configured a kubeconfig as part of the link:../get-started/install_acc.html#set-up-namespace-and-secret-for-registries-with-auth-requirements[installation process^]. 
+You can optionally create a limited permission or expanded permission administrator role for Astra Control Center. This is not a required procedure for Astra Control Center setup as you already configured a kubeconfig as part of the link:../get-started/install_acc.html#set-up-namespace-and-secret-for-registries-with-auth-requirements[installation process^]. 
 
-This procedure helps create a separate kubeconfig that either (1) limits Astra Control permissions on the clusters it manages or (2) handles Astra Control permissions in the event of multiple contexts. 
+This procedure helps you to create a separate kubeconfig if either of the following scenarios applies to your environment:
+
+* You want to limit Astra Control permissions on the clusters it manages
+* You use multiple contexts and cannot use the default Astra Control kubeconfig configured during installation or a limited role with a single context won't work in your environment
 
 .Before you begin
 
@@ -302,7 +305,7 @@ kubectl apply -f astra-admin-account.yaml
 ====
 // End snippet
 
-* *Custom cluster role*: This role contains custom permissions for a cluster to be managed by Astra Control. You might use this role if you use multiple contexts and cannot use the default Astra Control kubeconfig used during installation or if a limited role with a single context won't work in your environment:
+* *Expanded cluster role*: This role contains expanded permissions for a cluster to be managed by Astra Control. You might use this role if you use multiple contexts and cannot use the default Astra Control kubeconfig configured during installation or a limited role with a single context won't work in your environment:
 +
 NOTE: The following `ClusterRole` steps are a general Kubernetes example. Refer to https://access.redhat.com/solutions/5286371[these instructions for OpenShift^] or to the comparable documentation for your Kubernetes distribution for instructions specific to your environment.
 +
