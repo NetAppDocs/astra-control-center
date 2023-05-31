@@ -52,7 +52,7 @@ You can edit the proxy server settings.
 
 . Log in to Astra Control Center using an account with *admin*/*owner* privilege.
 . Select *Account* > *Connections*.
-. Select *Edit* from the drop-down list to edit the connection.
+. Select *Edit* from the drop-down list to edit the connection.
 . Edit the server details and authentication information.
 . Select *Save*.
 
@@ -151,7 +151,7 @@ NOTE: You can only edit the API keys. To change the Cloud Insights tenant URL, w
 
 . Log in to Astra Control Center using an account with *admin*/*owner* privilege.
 . Select *Account* > *Connections*.
-. Select *Edit* from the drop-down list to edit the connection.
+. Select *Edit* from the drop-down list to edit the connection.
 . Edit the Cloud Insights connection settings.
 . Select *Save*.
 
@@ -278,7 +278,7 @@ You can edit the Fluentd connection to your Astra Control Center instance.
 
 . Log in to Astra Control Center using an account with *admin*/*owner* privilege.
 . Select *Account* > *Connections*.
-. Select *Edit* from the drop-down list to edit the connection.
+. Select *Edit* from the drop-down list to edit the connection.
 . Change the Fluentd endpoint settings.
 . Select *Save*.
 
