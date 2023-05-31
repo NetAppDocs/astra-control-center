@@ -107,7 +107,7 @@ TIP: A label is a key/value pair you can assign to Kubernetes objects for identi
 .About this task
 * Before you begin, you should also understand link:../use/manage-apps.html#what-about-system-namespaces[managing standard and system namespaces].
 
-* If you plan to use multiple namespaces with your apps in Astra Control, link:../use/manage-roles.html#add-a-namespace-constraint-to-a-role[modify user roles with namespace constraints] after you upgrade to an Astra Control Center version with multiple namespace support.
+* If you plan to use multiple namespaces with your apps in Astra Control, link:../use/manage-local-users-and-roles.html#add-a-namespace-constraint-to-a-role[modify user roles with namespace constraints] after you upgrade to an Astra Control Center version with multiple namespace support.
 
 * For instructions on how to manage apps using the Astra Control API, see the link:https://docs.netapp.com/us-en/astra-automation/[Astra Automation and API information^].
 
@@ -118,7 +118,7 @@ TIP: A label is a key/value pair you can assign to Kubernetes objects for identi
 
 === Define resources to manage as an app
 
-You can specify the link:../learn/app-management.html[Kubernetes resources that make up an app] that you want to manage with Astra Control. Defining an app enables you to group elements of your Kubernetes cluster into a single app. This collection of Kubernetes resources is organized by namespace and label selector criteria.
+You can specify the link:../concepts/app-management.html[Kubernetes resources that make up an app] that you want to manage with Astra Control. Defining an app enables you to group elements of your Kubernetes cluster into a single app. This collection of Kubernetes resources is organized by namespace and label selector criteria.
 
 Defining an app gives you more granular control over what to include in an Astra Control operation, including clone, snapshot, and backups.
 
