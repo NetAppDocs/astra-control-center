@@ -25,7 +25,7 @@ For a demonstration of the Astra Control Center installation process, see https:
 
 .Before you begin
 * link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
-* If you have configured or want to configure pod security policies in your environment, familiarize yourself with pod security policies and how they affect Astra Control Center installation. See link:../concepts/understand-pod-security.html[Understand pod security policy restrictions^].
+* If you have configured or want to configure pod security policies in your environment, familiarize yourself with pod security policies and how they affect Astra Control Center installation. Refer to link:../concepts/understand-pod-security.html[Understand pod security policy restrictions^].
 * Ensure all API services are in a healthy state and available:
 +
 [source,console]

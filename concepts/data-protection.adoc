@@ -46,7 +46,7 @@ App replication is different from app backup and restore in the following ways:
 
 * *App backup and restore*: When backing up applications, Astra Control creates a Snapshot of the app data and stores it in an object storage bucket. When a restore is needed, the data in the bucket must be copied to a persistent volume on the ONTAP cluster. The backup/restore operation does not require the secondary Kubernetes/ONTAP cluster to be available and managed, but the additional data copy can result in longer restore times.
 
-To learn how to replicate apps, see link:../use/replicate_snapmirror.html[Replicate apps to a remote system using SnapMirror technology].
+To learn how to replicate apps, refer to link:../use/replicate_snapmirror.html[Replicate apps to a remote system using SnapMirror technology].
 
 The following images show the scheduled backup and restore process compared to the replication process.
 

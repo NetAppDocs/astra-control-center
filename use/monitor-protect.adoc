@@ -85,7 +85,7 @@ NOTE: After you enable the Cloud Insights connection, you can view throughput in
 * A valid Astra Control Center license.
 * A proxy server if the network where you're running Astra Control Center requires a proxy for connecting to the Internet.
 
-TIP: If you are new to Cloud Insights, familiarize yourself with the features and capabilities. See link:https://docs.netapp.com/us-en/cloudinsights/index.html[Cloud Insights documentation^].
+TIP: If you are new to Cloud Insights, familiarize yourself with the features and capabilities. Refer to link:https://docs.netapp.com/us-en/cloudinsights/index.html[Cloud Insights documentation^].
 
 .Steps
 

@@ -176,7 +176,7 @@ NOTE: The load balancer should use an IP address located in the same subnet as t
 For more information, see link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[Set up ingress for load balancing^].
 
 === Google Anthos ingress requirements
-When hosting Astra Control Center on a Google Anthos cluster, note that Google Anthos includes the MetalLB load balancer and the Istio ingress service by default, enabling you to simply use the generic ingress capabilities of Astra Control Center during installation. See link:install_acc.html#configure-astra-control-center[Configure Astra Control Center^] for details.
+When hosting Astra Control Center on a Google Anthos cluster, note that Google Anthos includes the MetalLB load balancer and the Istio ingress service by default, enabling you to simply use the generic ingress capabilities of Astra Control Center during installation. Refer to link:install_acc.html#configure-astra-control-center[Configure Astra Control Center^] for details.
 
 == Supported web browsers
 

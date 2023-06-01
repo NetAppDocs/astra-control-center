@@ -43,9 +43,9 @@ Astra Control application replication requires that the following prerequisites 
 
 * *ONTAP clusters*: 
 ** *Trident*: Astra Trident version 22.07 or later must exist on both the source and destination ONTAP clusters.
-** *Licenses*: ONTAP SnapMirror asynchronous licenses using the Data Protection bundle must be enabled on both the source and destination ONTAP clusters. See https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html[SnapMirror licensing overview in ONTAP^].
+** *Licenses*: ONTAP SnapMirror asynchronous licenses using the Data Protection bundle must be enabled on both the source and destination ONTAP clusters. Refer to https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html[SnapMirror licensing overview in ONTAP^] for more information.
 * *Pairing*: 
-** *Cluster and SVM*: ONTAP clusters and the host SVM must be paired. See https://docs.netapp.com/us-en/ontap-sm-classic/peering/index.html[Cluster and SVM peering overview^].
+** *Cluster and SVM*: ONTAP clusters and the host SVM must be paired. Refer to https://docs.netapp.com/us-en/ontap-sm-classic/peering/index.html[Cluster and SVM peering overview^] for more information.
 ** *Trident and SVM*: The paired remote SVM must be available to Astra Trident on the destination cluster.
 * *Astra Control Center*:
 +
@@ -57,13 +57,12 @@ TIP: link:../get-started/install_acc.html[Deploy Astra Control Center^] in a thi
 *** Associated ONTAP clusters
 * *Astra Trident / ONTAP configuration*: Astra Control Center requires that a storage class be created and set as the default storage class. Astra Control Center supports the following ONTAP drivers provided by Astra Trident for replication:
 ** ontap-nas
-** ontap-nas-economy (SnapMirror replication functionality with Astra Control is not available for this storage class)
 ** ontap-san
 
-** *User accounts*: When you add an ONTAP storage backend to Astra Control Center, apply user credentials with the "admin" role, which has access methods `http` and `ontapi` enabled on both ONTAP source and destination clusters. See https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts in ONTAP documentation^] for more information. 
+** *User accounts*: When you add an ONTAP storage backend to Astra Control Center, apply user credentials with the "admin" role. This role has access methods `http` and `ontapi` enabled on both ONTAP source and destination clusters. Refer to https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts in ONTAP documentation^] for more information. 
 // This bullet is duplicated in Add backend
 
-IMPORTANT: Astra Control replication supports apps that use a single storage class. When you add an app to a namespace, be sure the app has the same storage class as other apps in the namespace When you add a PVC to a replicated app, be sure the new PVC has the same storage class as other PVCs in the namespace.
+IMPORTANT: Astra Control replication supports apps that use a single storage class. When you add an app to a namespace, be sure the app has the same storage class as other apps in the namespace. When you add a PVC to a replicated app, be sure the new PVC has the same storage class as other PVCs in the namespace.
 
 //astradoc-26
 
