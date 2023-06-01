@@ -126,7 +126,7 @@ Astra Control Center does not support application management activities with clu
 
 == Apps deployed with Helm 2 are not supported
 //From requirements section
-If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) is fully supported. For more information, see link:../get-started/requirements.html[Astra Control Center requirements].
+If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) is fully supported. For more information, refer to link:../get-started/requirements.html[Astra Control Center requirements].
 
 == S3 buckets in Astra Control Center do not report available capacity
 //DOC-3561/ASTRACTL-9425/Q2 and PI4

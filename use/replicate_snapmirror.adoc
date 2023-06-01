@@ -13,7 +13,7 @@ summary: Astra can restore your application configuration and persistent storage
 [.lead]
 Using Astra Control, you can build business continuity for your applications with a low-RPO (Recovery Point Objective) and low-RTO (Recovery Time Objective) using asynchronous replication capabilities of NetApp SnapMirror technology. Once configured, this enables your applications to replicate data and application changes from one cluster to another.
 
-For a comparison between backups/restores and replication, see link:../concepts/data-protection.html[Data protection concepts].
+For a comparison between backups/restores and replication, refer to link:../concepts/data-protection.html[Data protection concepts].
 
 
 

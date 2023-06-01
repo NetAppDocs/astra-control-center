@@ -119,7 +119,7 @@ You can try Astra Control Center by signing up for a free trial. You can sign up
 
 To set up the license, refer to link:setup_overview.html[use a 90-day evaluation license^]. 
 
-To learn more about how licenses work, see link:../concepts/licensing.html[Licensing^].
+To learn more about how licenses work, refer to link:../concepts/licensing.html[Licensing^].
 
 == Networking requirements
 Configure your operational environment to ensure Astra Control Center can communicate properly. The following networking configurations are required:
@@ -173,7 +173,7 @@ You can choose the type of network ingress Astra Control Center uses. By default
 
 NOTE: The load balancer should use an IP address located in the same subnet as the Astra Control Center worker node IP addresses.
 
-For more information, see link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[Set up ingress for load balancing^].
+For more information, refer to link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[Set up ingress for load balancing^].
 
 === Google Anthos ingress requirements
 When hosting Astra Control Center on a Google Anthos cluster, note that Google Anthos includes the MetalLB load balancer and the Istio ingress service by default, enabling you to simply use the generic ingress capabilities of Astra Control Center during installation. Refer to link:install_acc.html#configure-astra-control-center[Configure Astra Control Center^] for details.
