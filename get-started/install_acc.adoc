@@ -104,7 +104,9 @@ include::../_include/docker-podman-add-images.adoc[]
 export KUBECONFIG=[file path]
 ----
 +
-IMPORTANT: Before you complete the installation, be sure your kubeconfig is pointing to the cluster where you want to install Astra Control Center. The kubeconfig used for this installation process can contain only one context.
+IMPORTANT: Before you complete the installation, be sure your kubeconfig is pointing to the cluster where you want to install Astra Control Center.
+
+// MW: Removed "The kubeconfig used for this installation process can contain only one context." Due to Hemantha's comments in ASTRADOC-157
 
 
 .  If you use a registry that requires authentication, you need to do the following:
