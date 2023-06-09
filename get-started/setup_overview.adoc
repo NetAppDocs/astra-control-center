@@ -408,6 +408,7 @@ The end of the output should look similar to the following:
 +
 NOTE: Depending on your Kubernetes version, the service account token might not be shown in the response.
 
+// MW: Note added due to Hemantha's comments in ASTRADOC-157
 +
 ----
 "secrets": [
