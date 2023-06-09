@@ -42,11 +42,11 @@ Astra Control asynchronously replicates app Snapshot copies to a remote cluster.
 
 App replication is different from app backup and restore in the following ways:
 
-* *App replication*: Astra Control requires the source and destination Kubernetes clusters to be available and managed with their respective ONTAP storage backends configured to enable NetApp SnapMirror. Astra Control takes the policy-driven application Snapshot and replicates it to the remote cluster. NetApp SnapMirror technology is used to replicate the persistent volume data. To fail over, Astra Control can bring the replicated app online by recreating the app objects on the destination Kubernetes cluster with the replicated volumes on the destination ONTAP cluster. Since the persistent volume data is already present on the destination ONTAP cluster, Astra Control can offer quick recovery times for failover.
+* *App replication*: Astra Control requires the source and destination Kubernetes clusters to be available and managed with their respective ONTAP storage backends configured to enable NetApp SnapMirror. Astra Control takes the policy-driven application Snapshot and replicates it to the remote cluster. NetApp SnapMirror technology is used to replicate the persistent volume data. To fail over, Astra Control can bring the replicated app online by recreating the app objects on the destination Kubernetes cluster with the replicated volumes on the destination ONTAP cluster. Because the persistent volume data is already present on the destination ONTAP cluster, Astra Control can offer quick recovery times for failover.
 
 * *App backup and restore*: When backing up applications, Astra Control creates a Snapshot of the app data and stores it in an object storage bucket. When a restore is needed, the data in the bucket must be copied to a persistent volume on the ONTAP cluster. The backup/restore operation does not require the secondary Kubernetes/ONTAP cluster to be available and managed, but the additional data copy can result in longer restore times.
 
-To learn how to replicate apps, see link:../use/replicate_snapmirror.html[Replicate apps to a remote system using SnapMirror technology].
+To learn how to replicate apps, refer to link:../use/replicate_snapmirror.html[Replicate apps to a remote system using SnapMirror technology].
 
 The following images show the scheduled backup and restore process compared to the replication process.
 
@@ -55,7 +55,7 @@ The backup process copies data to S3 buckets and restores from S3 buckets:
 
 image:acc-backup_4in.png["This image shows a scheduled backup and restore between two Kubernetes clusters using S3 bucket"]
 
-On the other hand, replication is done by replicating to ONTAP and then a fail over creates the Kubernetes resources:
+On the other hand, replication is done by replicating to ONTAP and then a failover creates the Kubernetes resources:
 
 image:acc-replication_4in.png["This image shows replication and fail over between two Kubernetes clusters and two ONTAP clusters "]
 
