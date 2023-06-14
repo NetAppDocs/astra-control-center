@@ -397,6 +397,53 @@ subjects:
 ----
 kubectl apply -f astracontrol-clusterrolebinding.yaml
 ----
+. Create the token secret by creating and applying the `secret-astracontrol-service-account.yaml` file:
++
+[source,console]
+----
+cat <<EOF > secret-astracontrol-service-account.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: secret-astracontrol-service-account
+  annotations:
+    kubernetes.io/service-account.name: "astracontrol-service-account"
+type: kubernetes.io/service-account-token
+EOF
+----
++
+[source,console]
+----
+kubectl apply -f secret-astracontrol-service-account.yaml
+----
+
+. Add the token secret to the Service Account by adding its name to the `secrets` array:
++
+[source,console]
+----
+kubectl edit sa astracontrol-service-account
+----
++
+[source,console]
+----
+apiVersion: v1
+imagePullSecrets:
+- name: astracontrol-service-account-dockercfg-48xhx
+kind: ServiceAccount
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"name":"astracontrol-service-account","namespace":"default"}}
+  creationTimestamp: "2023-06-14T15:25:45Z"
+  name: astracontrol-service-account
+  namespace: default
+  resourceVersion: "2767069"
+  uid: 2ce068c4-810e-4a96-ada3-49cbf9ec3f89
+secrets:
+- name: astracontrol-service-account-dockercfg-48xhx
+*- name: secret-astracontrol-service-account*      <----- Add this line when editing
+----
+
 . List the service account secrets, replacing `<context>` with the correct context for your installation:
 +
 [source,console]
@@ -405,10 +452,6 @@ kubectl get serviceaccount astracontrol-service-account --context <context> --na
 ----
 +
 The end of the output should look similar to the following:
-+
-NOTE: Depending on your Kubernetes version, the service account token might not be shown in the response.
-
-// MW: Note added due to Hemantha's comments in ASTRADOC-157
 +
 ----
 "secrets": [

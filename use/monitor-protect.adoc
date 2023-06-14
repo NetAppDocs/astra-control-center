@@ -174,7 +174,7 @@ You can monitor Astra Control Center data with Prometheus. You can configure Pro
 
 For details about using Prometheus, refer to their documentation at https://prometheus.io/docs/prometheus/latest/getting_started/[Getting started with Prometheus].
 
-.What you’ll need
+.What you'll need
 Make sure that you have downloaded and installed the Prometheus package on the Astra Control Center cluster or a different cluster that can communicate with the Astra Control Center cluster. 
 
 Follow the instructions in the official documentation to https://prometheus.io/docs/prometheus/latest/installation/[Install Prometheus].
