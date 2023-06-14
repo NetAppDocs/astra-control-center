@@ -106,10 +106,7 @@ include::../_include/docker-podman-add-images.adoc[]
 export KUBECONFIG=[file path]
 ----
 +
-IMPORTANT: Before you complete the installation, be sure your kubeconfig is pointing to the cluster where you want to install Astra Control Center.
-
-// MW: Removed "The kubeconfig used for this installation process can contain only one context." Due to Hemantha's comments in ASTRADOC-157
-
+IMPORTANT: Before you complete the installation, be sure your kubeconfig is pointing to the cluster where you want to install Astra Control Center.  If you need multiple contexts, you will need to link:../get-started/setup_overview.html#create-a-cluster-role-kubeconfig[create a cluster role kubeconfig to handle multiple contexts^].
 
 .  If you use a registry that requires authentication, you need to do the following:
 .. Create the `netapp-acc-operator` namespace:
