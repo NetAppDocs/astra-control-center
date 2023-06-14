@@ -397,11 +397,17 @@ subjects:
 ----
 kubectl apply -f astracontrol-clusterrolebinding.yaml
 ----
-. Create the token secret by creating and applying the `secret-astracontrol-service-account.yaml` file:
+. Create and apply the token secret:
+.. Create the `secret-astracontrol-service-account.yaml` file.
 +
-[source,console]
+[source]
+[subs="specialcharacters,quotes"]
 ----
-cat <<EOF > secret-astracontrol-service-account.yaml
+*secret-astracontrol-service-account.yaml*
+----
++
+[source,yaml]
+----
 apiVersion: v1
 kind: Secret
 metadata:
@@ -409,8 +415,8 @@ metadata:
   annotations:
     kubernetes.io/service-account.name: "astracontrol-service-account"
 type: kubernetes.io/service-account-token
-EOF
 ----
+.. Apply the token secret:
 +
 [source,console]
 ----
@@ -425,6 +431,7 @@ kubectl edit sa astracontrol-service-account
 ----
 +
 [source,yaml]
+[subs="specialcharacters,quotes"]
 ----
 apiVersion: v1
 imagePullSecrets:
