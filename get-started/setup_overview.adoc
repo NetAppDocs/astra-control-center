@@ -430,8 +430,7 @@ kubectl apply -f secret-astracontrol-service-account.yaml
 kubectl edit sa astracontrol-service-account
 ----
 +
-[source,yaml]
-[subs="verbatim,quotes"]
+[source,yaml,subs="verbatim,quotes"]
 ----
 apiVersion: v1
 imagePullSecrets:
