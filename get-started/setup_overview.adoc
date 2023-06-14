@@ -448,7 +448,7 @@ metadata:
   uid: 2ce068c4-810e-4a96-ada3-49cbf9ec3f89
 secrets:
 - name: astracontrol-service-account-dockercfg-48xhx
-*- name: secret-astracontrol-service-account* // <1>
+*_- name: secret-astracontrol-service-account_* // <1>
 ----
 <1> Add this line when editing
 
