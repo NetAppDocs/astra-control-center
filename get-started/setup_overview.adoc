@@ -417,14 +417,14 @@ EOF
 kubectl apply -f secret-astracontrol-service-account.yaml
 ----
 
-. Add the token secret to the Service Account by adding its name to the `secrets` array:
+. Add the token secret to the Service Account by adding its name to the `secrets` array (the last line in the following example):
 +
 [source,console]
 ----
 kubectl edit sa astracontrol-service-account
 ----
 +
-[source,console]
+[source,yaml]
 ----
 apiVersion: v1
 imagePullSecrets:
@@ -441,7 +441,7 @@ metadata:
   uid: 2ce068c4-810e-4a96-ada3-49cbf9ec3f89
 secrets:
 - name: astracontrol-service-account-dockercfg-48xhx
-*- name: secret-astracontrol-service-account*      <----- Add this line when editing
+- name: secret-astracontrol-service-account
 ----
 
 . List the service account secrets, replacing `<context>` with the correct context for your installation:
