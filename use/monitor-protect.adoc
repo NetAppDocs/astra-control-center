@@ -52,7 +52,7 @@ You can edit the proxy server settings.
 
 . Log in to Astra Control Center using an account with *admin*/*owner* privilege.
 . Select *Account* > *Connections*.
-. Select *Edit* from the drop-down list to edit the connection.
+. Select *Edit* from the drop-down list to edit the connection.
 . Edit the server details and authentication information.
 . Select *Save*.
 
@@ -85,7 +85,7 @@ NOTE: After you enable the Cloud Insights connection, you can view throughput in
 * A valid Astra Control Center license.
 * A proxy server if the network where you're running Astra Control Center requires a proxy for connecting to the Internet.
 
-TIP: If you are new to Cloud Insights, familiarize yourself with the features and capabilities. See link:https://docs.netapp.com/us-en/cloudinsights/index.html[Cloud Insights documentation^].
+TIP: If you are new to Cloud Insights, familiarize yourself with the features and capabilities. Refer to link:https://docs.netapp.com/us-en/cloudinsights/index.html[Cloud Insights documentation^].
 
 .Steps
 
@@ -151,7 +151,7 @@ NOTE: You can only edit the API keys. To change the Cloud Insights tenant URL, w
 
 . Log in to Astra Control Center using an account with *admin*/*owner* privilege.
 . Select *Account* > *Connections*.
-. Select *Edit* from the drop-down list to edit the connection.
+. Select *Edit* from the drop-down list to edit the connection.
 . Edit the Cloud Insights connection settings.
 . Select *Save*.
 
@@ -278,7 +278,7 @@ You can edit the Fluentd connection to your Astra Control Center instance.
 
 . Log in to Astra Control Center using an account with *admin*/*owner* privilege.
 . Select *Account* > *Connections*.
-. Select *Edit* from the drop-down list to edit the connection.
+. Select *Edit* from the drop-down list to edit the connection.
 . Change the Fluentd endpoint settings.
 . Select *Save*.
 

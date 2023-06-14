@@ -13,7 +13,7 @@ summary: Astra can restore your application configuration and persistent storage
 [.lead]
 Using Astra Control, you can build business continuity for your applications with a low-RPO (Recovery Point Objective) and low-RTO (Recovery Time Objective) using asynchronous replication capabilities of NetApp SnapMirror technology. Once configured, this enables your applications to replicate data and application changes from one cluster to another.
 
-For a comparison between backups/restores and replication, see link:../concepts/data-protection.html[Data protection concepts].
+For a comparison between backups/restores and replication, refer to link:../concepts/data-protection.html[Data protection concepts].
 
 
 
@@ -31,7 +31,7 @@ NOTE: You can simultaneously replicate a different app (running on the other clu
 Using Astra Control, you can do the following tasks related to replicating applications:
 
 * <<Set up a replication relationship>>
-* <<Bring a replicated app online on the destination cluster (fail over)>>
+* <<Bring a replicated app online on the destination cluster (failover)>>
 * <<Resync a failed over replication>>
 * <<Reverse application replication>>
 * <<Fail back applications to the original source cluster>>
@@ -39,32 +39,37 @@ Using Astra Control, you can do the following tasks related to replicating appli
 
 == Replication prerequisites
 
-Astra Control application replication requires that the following prerequisites must be met before you begin:
+Astra Control application replication requires that the following prerequisites be met before you begin:
 
-* To achieve seamless disaster recovery, we recommend that you deploy Astra Control Center in a third fault domain or secondary site.
-* The app's host Kubernetes cluster and a destination Kubernetes cluster must be managed along with their ONTAP clusters, ideally at different failure domains or sites.
-* ONTAP clusters and the host SVM must be paired. See https://docs.netapp.com/us-en/ontap-sm-classic/peering/index.html[Cluster and SVM peering overview^].
-* The paired remote SVM must be available to Astra Trident on the destination cluster.
-* Astra Trident version 22.07 or greater must exist on both the source and destination ONTAP clusters.
-//* The `replicationPolicy:` key must exist in the Astra Trident mirror relationship CRD on Astra Control 22.07.
-* ONTAP SnapMirror asynchronous licenses using the Data Protection bundle must be enabled on both the source and destination ONTAP clusters. See https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html[SnapMirror licensing overview in ONTAP^].
-* When you add an ONTAP storage backend to Astra Control Center, apply user credentials with the "admin" role, which has access methods `http` and `ontapi` enabled on both ONTAP source and destination clusters. See https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts in ONTAP documentation^] for more information.
-* Both source and destination Kubernetes clusters and ONTAP clusters must be managed by Astra Control.
+* *ONTAP clusters*: 
+** *Trident*: Astra Trident version 22.07 or later must exist on both the source and destination Kubernetes clusters that utilize ONTAP as a backend.
+** *Licenses*: ONTAP SnapMirror asynchronous licenses using the Data Protection bundle must be enabled on both the source and destination ONTAP clusters. Refer to https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html[SnapMirror licensing overview in ONTAP^] for more information.
+* *Pairing*: 
+** *Cluster and SVM*: ONTAP clusters and the host SVM must be paired. Refer to https://docs.netapp.com/us-en/ontap-sm-classic/peering/index.html[Cluster and SVM peering overview^] for more information.
+** *Trident and SVM*: The paired remote SVM must be available to Astra Trident on the destination cluster.
+* *Astra Control Center*:
 +
-NOTE: You can simultaneously replicate a different app (running on the other cluster or site) in the opposite direction. For example, Apps A, B, C can be replicated from Datacenter 1 to Datacenter 2; and Apps X, Y, Z can be replicated from Datacenter 2 to Datacenter 1.
+TIP: link:../get-started/install_acc.html[Deploy Astra Control Center^] in a third fault domain or secondary site for seamless disaster recovery.
 
-* *Astra Trident / ONTAP configuration*: Astra Control Center requires that a storage class be created and set as the default storage class. Astra Control Center supports the following ONTAP drivers provided by Astra Trident for replication:
-** ontap-nas
-** ontap-nas-economy (SnapMirror replication functionality with Astra Control is not available for this storage class)
-** ontap-san
+** *Managed clusters*: The following clusters must be added to and managed by Astra Control, ideally at different failure domains or sites:
+*** Source Kubernetes cluster
+*** Destination Kubernetes cluster
+*** Associated ONTAP clusters
+
+** *User accounts*: When you add an ONTAP storage backend to Astra Control Center, apply user credentials with the "admin" role. This role has access methods `http` and `ontapi` enabled on both ONTAP source and destination clusters. Refer to https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts in ONTAP documentation^] for more information. 
+// This bullet is duplicated in Add backend
+
+* *Astra Trident / ONTAP configuration*: Astra Control Center requires that you configure at least one storage class that supports replication for both source and destination clusters.
+
+IMPORTANT: Astra Control replication supports apps that use a single storage class. When you add an app to a namespace, be sure the app has the same storage class as other apps in the namespace. When you add a PVC to a replicated app, be sure the new PVC has the same storage class as other PVCs in the namespace.
+
+//astradoc-26
 
 
-
-Learn how to link:../use/replicate_snapmirror.html[replicate apps to a remote system using SnapMirror technology^].
 
 == Set up a replication relationship
 
-Setting up a replication relationship involves the following that make up the replication policy;
+Setting up a replication relationship involves the following:
 
 * Choosing how frequently you want Astra Control to take an app Snapshot (which includes the app's Kubernetes resources as well as the volume Snapshots for each of the app's volumes)
 * Choosing the replication schedule (included Kubernetes resources as well as persistent volume data)
@@ -99,7 +104,7 @@ Astra Control creates an application Snapshot used for replication.
 
 . To see the application Snapshot status, select the *Applications* > *Snapshots* tab.
 +
-The Snapshot name uses the format of "replication-schedule-<string>". Astra Control retains the last Snapshot that was used for replication. Any older replication Snapshots are deleted after successful completion of replication.
+The Snapshot name uses the format of `replication-schedule-<string>`. Astra Control retains the last Snapshot that was used for replication. Any older replication Snapshots are deleted after successful completion of replication.
 
 .Result
 
@@ -120,11 +125,11 @@ Normal | Established
 
 Learn more about replication states and status at the end of this topic.
 
-== Bring a replicated app online on the destination cluster (fail over)
+== Bring a replicated app online on the destination cluster (failover)
 
-Using Astra Control, you can "fail over" replicated applications to a destination cluster. This procedure stops the replication relationship and brings the app online on the destination cluster. This procedure does not stop the app on the source cluster if it was operational.
+Using Astra Control, you can fail over replicated applications to a destination cluster. This procedure stops the replication relationship and brings the app online on the destination cluster. This procedure does not stop the app on the source cluster if it was operational.
 
-//In the event of a disaster, or if the source cluster became unavailable, or just for periodic testing of your disaster recovery plan, you can use the fail over procedure to bring an application online on the destination cluster. 
+//In the event of a disaster, or if the source cluster became unavailable, or just for periodic testing of your disaster recovery plan, you can use the failover procedure to bring an application online on the destination cluster. 
 
 
 .Steps
@@ -135,14 +140,14 @@ Using Astra Control, you can "fail over" replicated applications to a destinatio
 
 .Result
 
-The following actions occur as a result of the fail over procedure:
+The following actions occur as a result of the failover procedure:
 
 //* On the destination cluster, an app is started based on the latest replicated state from the source app and continues to run based on the latest replicated state from the source app.
 
 * On the destination cluster, the app is started based on the latest replicated snapshot.
 * The source cluster and app (if operational) are not stopped and will continue to run.
 * The replication state changes to "Failing over" and then to "Failed over" when it has completed.
-* The source app's protection policy is copied to the destination app based on the schedules present on the source app at the time of the fail over.
+* The source app's protection policy is copied to the destination app based on the schedules present on the source app at the time of the failover.
 * If the source app has one or more post-restore execution hooks enabled, those execution hooks are run for the destination app.
 * Astra Control shows the app both on the source and destination clusters and its respective health.
 
@@ -227,9 +232,9 @@ The following actions occur as a result of the reverse replication:
 
 == Fail back applications to the original source cluster
 
-Using Astra Control, you can achieve "fail back" after a "fail over" operation by using the following sequence of operations. In this workflow to restore the original replication direction, Astra Control replicates (resyncs) any application changes back to the original source cluster before reversing the replication direction.
+Using Astra Control, you can achieve "fail back" after a failover operation by using the following sequence of operations. In this workflow to restore the original replication direction, Astra Control replicates (resyncs) any application changes back to the original source cluster before reversing the replication direction.
 
-This process starts from a relationship that has completed a fail over to a destination and involves the following steps:
+This process starts from a relationship that has completed a failover to a destination and involves the following steps:
 
 //Using Astra Control, you can "fail back" applications from the original destination cluster back to the original cluster after a "fail over". In this workflow to restore the original replication direction, Astra Control replicates any application changes back to the original source cluster before reversing the replication direction.
 
@@ -243,7 +248,7 @@ This process starts from a relationship that has completed a fail over to a dest
 . From the Astra Control left navigation, select *Applications*.
 . In the Application page, select the *Data Protection* > *Replication* tab.
 . In the Data Protection > Replication tab, from the Actions menu, select *Resync*.
-. For a fail back operation, choose the failed over app as the source of the resync operation (preserving any data written post fail over).
+. For a fail back operation, choose the failed over app as the source of the resync operation (preserving any data written post failover).
 
 . Type "resync" to confirm.
 . Select *Yes, resync* to finish.
