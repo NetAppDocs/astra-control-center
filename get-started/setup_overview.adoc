@@ -441,7 +441,7 @@ metadata:
   uid: 2ce068c4-810e-4a96-ada3-49cbf9ec3f89
 secrets:
 - name: astracontrol-service-account-dockercfg-48xhx
-- name: secret-astracontrol-service-account
+*- name: secret-astracontrol-service-account*
 ----
 
 . List the service account secrets, replacing `<context>` with the correct context for your installation:
