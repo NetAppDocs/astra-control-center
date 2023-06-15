@@ -811,7 +811,6 @@ You don't need a bucket in Astra Control if you are cloning your application con
 ** Microsoft Azure
 ** Generic S3
 
-
 NOTE: Amazon Web Services (AWS) and Google Cloud Platform (GCP) use the Generic S3 bucket type.
 
 NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon's S3 support.
