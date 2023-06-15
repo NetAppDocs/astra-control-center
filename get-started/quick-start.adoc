@@ -18,66 +18,42 @@ Here's an overview of the steps needed to get started with Astra Control Center.
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-1.png[One] Review Kubernetes cluster requirements
 
 //[role="quick-margin-para"]
-Ensure that your environment meets these requirements.
+Ensure that your environment meets these requirements:
 
 
 *Kubernetes cluster* 
-[%interactive]
-* [ ] link:../get-started/requirements.html#host-cluster-resource-requirements[Ensure your host cluster meets operational environment requirements^]
- * [ ] link:../get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Configure ingress for load balancing on-premises Kubernetes clusters^]
+
+* link:../get-started/requirements.html#host-cluster-resource-requirements[Ensure your host cluster meets operational environment requirements^]
+ * link:../get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Configure ingress for load balancing on-premises Kubernetes clusters^]
  
 *Storage integration*
-[%interactive]
-* [ ] link:../get-started/requirements.html#astra-trident-requirements[Ensure your environment includes the Astra Trident supported version^]
-* [ ] https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html[Prepare the worker nodes^]
-* [ ] https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend[Configure Astra Trident storage backend^]
-* [ ] https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Astra Trident storage classes^]
-* [ ] https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[Install Astra Trident volume snapshot controller^]
-* [ ] https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[Create a volume snapshot class^]
+
+* link:../get-started/requirements.html#astra-trident-requirements[Ensure your environment includes the Astra Trident supported version^]
+* https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html[Prepare the worker nodes^]
+* https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend[Configure Astra Trident storage backend^]
+* https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Astra Trident storage classes^]
+* https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[Install Astra Trident volume snapshot controller^]
+* https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[Create a volume snapshot class^]
 
 *ONTAP credentials*
-[%interactive]
-* [ ] link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[Configure ONTAP credentials^]
 
-
-//[role="quick-margin-para"]
-//[cols=2*,options="header",cols="10%,90%"]
-//|===
-//| Step
-//| Item
-//| 1 | Ensure your environment meets link:../get-started/requirements.html#operational-environment-requirements[operational environment requirements^]
-//| 2 | Ensure your environment includes the link:../get-started/requirements.html#operational-environment-requirements[Astra Trident supported version^]
-//| 3 | link:../get-started/requirements.html#ingress-for-on-premises-kubernetes-clusters[Configure ingress for load balancing on-premises Kubernetes clusters^]
-//| 4 | https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend[Configure Trident storage backend^]
-//| 5 | https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Trident storage classes^]
-//| 6 | https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[Install Trident volume snapshot controller and snapshot class^]
-//| 7 | https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[Configure Trident storage volume snapshot controller and snapshot class^]
-//| 8 | https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[Configure cluster access with kubeconfig^]
-//| 9 | link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[Configure ONTAP credentials^]
-//|===
-
-
-//[role="quick-margin-para"]
-//Learn more about link:../get-started/requirements.html[Astra Control Center requirements].
-
+* link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[Configure ONTAP credentials^]
 
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png[Two] Download and install Astra Control Center
 
-
 //[role="quick-margin-para"]
-Complete these installation tasks. 
+Complete these installation tasks:
 
-[%interactive]
-* [ ] https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[Download Astra Control Center from the NetApp Support Site downloads page^]
-* [ ] Obtain the NetApp license file:
+* https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[Download Astra Control Center from the NetApp Support Site downloads page^]
+* Obtain the NetApp license file:
 
 ** If you are evaluating Astra Control Center, an embedded evaluation license is already included.
 
 ** link:../concepts/licensing.html[If you already purchased Astra Control Center, generate your license file^]
 
-* [ ] link:../get-started/install_overview.html[Install Astra Control Center^]
-* [ ] link:../get-started/configure-after-install.html[Perform additional optional configuration steps^]
+* link:../get-started/install_overview.html[Install Astra Control Center^]
+* link:../get-started/configure-after-install.html[Perform additional optional configuration steps^]
 
 
 
@@ -85,14 +61,13 @@ Complete these installation tasks.
 
 
 //[role="quick-margin-para"]
-Complete some basic tasks to get started.
+Complete some basic tasks to get started:
 
-[%interactive]
-* [ ] link:../get-started/setup_overview.html#add-a-license-for-astra-control-center[Add a license^]
-* [ ] link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[Prepare your environment for cluster management^]
-* [ ] link:../get-started/setup_overview.html#add-cluster[Add a cluster^]
-* [ ] link:../get-started/setup_overview.html#add-a-storage-backend[Add a storage backend^]
-* [ ] link:../get-started/setup_overview.html#add-a-bucket[Add a bucket^]
+* link:../get-started/setup_overview.html#add-a-license-for-astra-control-center[Add a license^]
+* link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[Prepare your environment for cluster management^]
+* link:../get-started/setup_overview.html#add-cluster[Add a cluster^]
+* link:../get-started/setup_overview.html#add-a-storage-backend[Add a storage backend^]
+* link:../get-started/setup_overview.html#add-a-bucket[Add a bucket^]
 
 
 
@@ -103,15 +78,13 @@ Complete some basic tasks to get started.
 
 
 //[role="quick-margin-para"]
-After you finish setting up Astra Control Center, here's what you might do next. 
-You can use the Astra Control user interface (UI) or the https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^].
+After you finish setting up Astra Control Center, use the Astra Control UI or the https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^] to begin managing and protecting apps:
 
 
-[%interactive]
-* [ ] link:../use/manage-apps.html[Manage apps^]
-* [ ] link:../use/protection-overview.html[Protect apps^]: Configure protection policies and replicate, clone, and migrate apps.  
-* [ ] link:../use/manage-local-users-and-roles.html[Manage accounts^]: Users, roles, LDAP, credentials, and more
-* [ ] link:../use/monitor-protect.html#connect-to-cloud-insights[Optionally, connect to Cloud Insights^]: View metrics on the health of your system.
+* link:../use/manage-apps.html[Manage apps^]: Define resources to manage.
+* link:../use/protection-overview.html[Protect apps^]: Configure protection policies and replicate, clone, and migrate apps.  
+* link:../use/manage-local-users-and-roles.html[Manage accounts^]: Users, roles, LDAP, credentials, and more
+* link:../use/monitor-protect.html#connect-to-cloud-insights[Optionally, connect to Cloud Insights^]: View metrics on the health of your system.
 
 
 
