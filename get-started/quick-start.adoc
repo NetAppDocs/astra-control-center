@@ -48,7 +48,7 @@ Complete these installation tasks:
 * https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[Download Astra Control Center from the NetApp Support Site downloads page^]
 * Obtain the NetApp license file:
 
-** If you are evaluating Astra Control Center, an embedded evaluation license is already included.
+** If you are evaluating Astra Control Center, an embedded evaluation license is already included
 
 ** link:../concepts/licensing.html[If you already purchased Astra Control Center, generate your license file^]
 
@@ -83,7 +83,7 @@ After you finish setting up Astra Control Center, use the Astra Control UI or th
 
 * link:../use/manage-apps.html[Manage apps^]: Define resources to manage.
 * link:../use/protection-overview.html[Protect apps^]: Configure protection policies and replicate, clone, and migrate apps.  
-* link:../use/manage-local-users-and-roles.html[Manage accounts^]: Users, roles, LDAP, credentials, and more
+* link:../use/manage-local-users-and-roles.html[Manage accounts^]: Users, roles, LDAP, credentials, and more.
 * link:../use/monitor-protect.html#connect-to-cloud-insights[Optionally, connect to Cloud Insights^]: View metrics on the health of your system.
 
 
