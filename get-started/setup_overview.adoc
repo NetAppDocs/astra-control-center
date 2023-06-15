@@ -423,7 +423,7 @@ type: kubernetes.io/service-account-token
 kubectl apply -f secret-astracontrol-service-account.yaml
 ----
 
-. Add the token secret to the Service Account by adding its name to the `secrets` array (the last line in the following example):
+. Add the token secret to the service account by adding its name to the `secrets` array (the last line in the following example):
 +
 [source,console]
 ----
