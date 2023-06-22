@@ -412,6 +412,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: secret-astracontrol-service-account
+  namespace: default
   annotations:
     kubernetes.io/service-account.name: "astracontrol-service-account"
 type: kubernetes.io/service-account-token
@@ -447,6 +448,7 @@ metadata:
   uid: 2ce068c4-810e-4a96-ada3-49cbf9ec3f89
 secrets:
 - name: astracontrol-service-account-dockercfg-48xhx
+- name: astracontrol-service-account-token-qqdpk
 *- name: secret-astracontrol-service-account*
 ----
 
@@ -462,11 +464,12 @@ The end of the output should look similar to the following:
 ----
 "secrets": [
 { "name": "astracontrol-service-account-dockercfg-48xhx"},
+{ "name": "astracontrol-service-account-token-qqdpk"},
 { "name": "secret-astracontrol-service-account"}
 ]
 ----
 +
-The indices for each element in the `secrets` array begin with 0. In the above example, the index for `astracontrol-service-account-dockercfg-vhz87` would be 0 and the index for `astracontrol-service-account-token-r59kr` would be 1. In your output, make note of the index for the service account name that has the word "token" in it.
+The indices for each element in the `secrets` array begin with 0. In the above example, the index for `astracontrol-service-account-dockercfg-48xhx` would be 0 and the index for `astracontrol-service-account-token-qqdpk` would be 1. In your output, make note of the index for the service account name that has the word "token" in it.
 . Generate the kubeconfig as follows:
 .. Create a `create-kubeconfig.sh` file. Replace `TOKEN_INDEX` in the beginning of the following script with the correct value.
 +
