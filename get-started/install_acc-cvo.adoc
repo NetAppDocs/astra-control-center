@@ -450,7 +450,9 @@ Follow the Azure documentation to complete the following steps. See https://docs
 . Create a secret, which is required for bucket access.
 . Create an Azure Container Registry (ACR) to host all the Astra Control Center images.
 . Set up ACR access for Docker push/pull all the Astra Control Center images.
-. Push the ACC images to this registry by entering the following script:
+. Push the Astra Control Center images to this ACR registry. 
++
+Optionally, if you need to push images from an Azure registry rather the default public Astra registry, see the following example script:
 +
 ----
 az acr login -n <AZ ACR URL/Location>
@@ -462,14 +464,14 @@ This script requires ACC manifest file and your Azure ACR location.
 ----
 manifestfile=astra-control-center-<version>.manifest
 AZ_ACR_REGISTRY=<target image repository>
-ASTRA_REGISTRY=<source ACC image repository>
+ASTRA_REGISTRY=<source ACC image Azure repository>
 
 while IFS= read -r image; do
     echo "image: $ASTRA_REGISTRY/$image $AZ_ACR_REGISTRY/$image"
     root_image=${image%:*}
     echo $root_image
     docker pull $ASTRA_REGISTRY/$image
-    docker tag $ASTRA_REGISTRY/$image $AZ_ACR_REGISTRYY/$image
+    docker tag $ASTRA_REGISTRY/$image $AZ_ACR_REGISTRY/$image
     docker push $AZ_ACR_REGISTRY/$image
 done < astra-control-center-22.04.41.manifest
 ----
