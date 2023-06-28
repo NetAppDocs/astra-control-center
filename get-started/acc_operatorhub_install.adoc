@@ -32,6 +32,8 @@ oc get clusteroperators
 oc get apiservices
 ----
 
+//Must be updated every quarterly release
+* *Astra Control Center operator version support*: Beginning with 23.07 release, it's recommended that you install the latest operator (`acc-operator`) if you are upgrading from Astra Control Center 22.08 or later. If you are upgrading from a version earlier than 22.08, use your existing operator to deploy 23.07 and then upgrade your operator to the latest version for all future releases.
 * *FQDN address*: Obtain an FQDN address for Astra Control Center in your data center.
 * *Openshift Permissions*: Obtain the necessary permissions and access to the Red Hat OpenShift Container Platform to perform the installation steps described.
 * *cert manager configured*: If a cert manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps^] so that Astra Control Center does not install its own cert manager. By default, Astra Control Center installs its own cert manager during installation.
@@ -92,6 +94,9 @@ include::../_include/docker-podman-add-images.adoc[]
 * From Red Hat Openshift web console:
 .. Log in to the OpenShift Container Platform UI.
 .. From the side menu, select *Operators > OperatorHub*.
++
+//Must be updated every quarterly release
+NOTE: Beginning with Astra Control Center 23.07 release, it's recommended that you install the latest operator (`acc-operator`) if you are upgrading from Astra Control Center 22.08 or later. If you are upgrading from a version earlier than 22.08, use your existing operator to deploy 23.07 and then upgrade your operator to the latest version for all future releases.
 .. Search for and select the NetApp Astra Control Center operator.
 
 +

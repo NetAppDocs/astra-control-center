@@ -46,6 +46,9 @@ kubectl get clusteroperators
 kubectl get apiservices
 ----
 
+//Must be updated every quarterly release
+* Beginning with 23.07 release, it's recommended that you install and use the latest operator (`acc-operator`) if you are upgrading from Astra Control Center 22.08 or later. If you are upgrading from a version earlier than 22.08, use your existing operator to upgrade to 23.07 and then upgrade your operator to the latest version for all future releases.
+
 * Log out of your Astra Control Center UI before you begin the upgrade.
 
 .About this task
