@@ -19,8 +19,8 @@ NOTE: If you add a namespace filter to an execution hook that runs after a resto
 
 .Before you begin
 
+* *Check destination volumes*: If you clone to a different storage class, ensure that the storage class uses the same persistent volume access mode (for example, ReadWriteMany). The clone operation will fail if the destination persistent volume access mode is different. For example, if your source persistent volume uses the RWX access mode, selecting a destination storage class that is not able to provide RWX, such as Azure Managed Disks, AWS EBS, Google Persistent Disk or `ontap-san`, will cause the clone operation to fail. For more information about persistent volume access modes, refer to https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes[Kubernetes^] documentation.
 * To clone apps to a different cluster, you need to make sure the cloud instances containing the source and destination clusters (if they are not the same) have a default bucket. You'll need to assign a default bucket for each cloud instance.
-
 * During clone operations, apps that need an IngressClass resource or webhooks to function properly must not have those resources already defined on the destination cluster.
 
 [NOTE]
