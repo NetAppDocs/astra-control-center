@@ -48,7 +48,7 @@ NOTE: As a best practice, use LDAPS when connecting with the LDAP server. You ne
 . Enter the service account credentials in email format (administrator@example.com). Astra Control will use these credentials when connecting with the LDAP server.
 . In the *User Match* section, do the following:
 .. Enter the base DN and an appropriate user search filter to use when retrieving user information from the LDAP server.
-.. (Optional) If your directory uses a login attribute that is something other than `mail`, enter the correct attribute in the *User login attribute* field. 
+.. (Optional) If your directory uses the user login attribute `userPrincipalName` instead of `mail`, enter `userPrincipalName` in the the correct attribute in the *User login attribute* field. 
 +
 For example, some Microsoft Active Directory systems might use `userPrincipalName` as the login attribute.
 . In the *Group Match* section, enter the group search base DN and an appropriate custom group search filter. 
