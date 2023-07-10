@@ -46,6 +46,9 @@ kubectl get clusteroperators
 kubectl get apiservices
 ----
 
+//Must be updated every quarterly release
+* Install the latest operator (`acc-operator`) if you are upgrading to the 23.07 Astra Control Center. You cannot upgrade to other versions of Astra Control Center using this operator.
+
 * Log out of your Astra Control Center UI before you begin the upgrade.
 
 .About this task
