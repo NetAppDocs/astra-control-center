@@ -15,7 +15,7 @@ LDAP is an industry standard protocol for accessing distributed directory inform
 
 At a high level, the configuration involves integrating Astra with LDAP and defining the Astra Control users and groups corresponding to the LDAP definitions. You can use the Astra Control API or web UI to configure LDAP authentication and LDAP users and groups.
 
-IMPORTANT: Astra Control Center uses the email address in the LDAP "mail" attribute to search for and keep track of remote users. This attribute might be an optional or empty field in your directory. An email address must exist in this field for any remote users you wish to appear in Astra Control Center. This email address is used as the username in Astra Control Center for authentication.
+IMPORTANT: Astra Control Center uses the email address in either the LDAP `mail` or `userPrincipalName` attributes to search for and keep track of remote users. These attributes might be an optional or empty field in your directory. An email address must exist in one of these fields for any remote users you wish to appear in Astra Control Center. This email address is used as the username in Astra Control Center for authentication.
 
 == Add a certificate for LDAPS authentication
 Add the private TLS certificate for the LDAP server so that Astra Control Center can authenticate with the LDAP server when you use an LDAPS connection. You only need to do this once, or when the certificate you have installed expires.
@@ -46,7 +46,9 @@ If you plan to use LDAPS, ensure that the private TLS certificate for the LDAP s
 NOTE: As a best practice, use LDAPS when connecting with the LDAP server. You need to install the LDAP server's private TLS certificate in Astra Control Center before you connect with LDAPS.
 
 . Enter the service account credentials in email format (administrator@example.com). Astra Control will use these credentials when connecting with the LDAP server.
-. In the *User Match* section, enter the base DN and an appropriate user search filter to use when retrieving user information from the LDAP server.
+. In the *User Match* section, do the following:
+.. Enter the base DN and an appropriate user search filter to use when retrieving user information from the LDAP server.
+.. (Optional) If your directory uses the user login attribute `userPrincipalName` instead of `mail`, enter `userPrincipalName` in the the correct attribute in the *User login attribute* field. 
 . In the *Group Match* section, enter the group search base DN and an appropriate custom group search filter. 
 +
 NOTE: Be sure to use the correct base Distinguished Name (DN) and an appropriate search filter for *User Match* and *Group Match*. The base DN tells Astra Control at what level of the directory tree to start the search, and the search filter limits the parts of the directory tree Astra Control searches from.
