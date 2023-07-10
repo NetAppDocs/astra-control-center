@@ -99,6 +99,8 @@ Ensure that you have a supported backend with sufficient capacity.
 ** NetApp Cloud Volumes ONTAP 9.8 or newer
 ** Longhorn 1.5.0 or newer
 *** Requires the manual creation of a VolumeSnapshotClass object. Refer to the https://longhorn.io/docs/1.5.0/snapshots-and-backups/csi-snapshot-support/csi-volume-snapshot-associated-with-longhorn-snapshot/#create-a-csi-volumesnapshot-associated-with-longhorn-snapshot[Longhorn documentation^] for instructions.
+** NetApp MetroCluster
+*** Must be in a stretch configuration, located in the same datacenter as Astra Control Center
 
 === ONTAP licenses
 
@@ -109,6 +111,13 @@ To use Astra Control Center, verify that you have the following ONTAP licenses, 
 * S3 license: Optional. Needed only for ONTAP S3 buckets
 
 To check whether your ONTAP system has the required licenses, refer to https://docs.netapp.com/us-en/ontap/system-admin/manage-licenses-concept.html[Manage ONTAP licenses^].
+
+=== NetApp MetroCluster
+When you use NetApp MetroCluster as a storage backend, you need to specify an SVM management LIF as a backend option in the Astra Trident driver that you use. Refer to the Astra Trident documentation for more information for each driver:
+
+* SAN: https://docs.netapp.com/us-en/trident/trident-use/ontap-san-examples.html
+* NAS: https://docs.netapp.com/us-en/trident/trident-use/ontap-nas-examples.html
+* FSx: https://docs.netapp.com/us-en/trident/trident-use/trident-fsx-examples.html
 
 == Image registry
 You must have an existing private Docker image registry to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
