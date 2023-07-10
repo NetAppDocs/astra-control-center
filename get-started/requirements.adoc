@@ -96,6 +96,8 @@ Ensure that you have a supported backend with sufficient capacity.
 ** NetApp ONTAP 9.8 or newer AFF, FAS, and ASA systems
 ** NetApp ONTAP Select 9.8 or newer
 ** NetApp Cloud Volumes ONTAP 9.8 or newer
+** Longhorn 1.5.0 or newer
+*** Requires the manual creation of a VolumeSnapshotClass object. Refer to the https://longhorn.io/docs/1.5.0/snapshots-and-backups/csi-snapshot-support/csi-volume-snapshot-associated-with-longhorn-snapshot/#create-a-csi-volumesnapshot-associated-with-longhorn-snapshot[Longhorn documentation^] for instructions.
 
 * *Required storage backend capacity*: At least 500GB available
 
