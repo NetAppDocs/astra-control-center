@@ -5,13 +5,13 @@ keywords: replicate, replication, disaster, recovery
 summary: Astra can restore your application configuration and persistent storage from a snapshot or backup. Persistent storage backups are transferred from your object store, so restoring from an existing backup will complete the fastest.
 ---
 
-= Replicate apps to a remote system using SnapMirror technology
+= Replicate apps between storage backends using SnapMirror technology
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/use/
 
 [.lead]
-Using Astra Control, you can build business continuity for your applications with a low-RPO (Recovery Point Objective) and low-RTO (Recovery Time Objective) using asynchronous replication capabilities of NetApp SnapMirror technology. Once configured, this enables your applications to replicate data and application changes from one cluster to another, or on the same cluster between different storage classes.
+Using Astra Control, you can build business continuity for your applications with a low-RPO (Recovery Point Objective) and low-RTO (Recovery Time Objective) using asynchronous replication capabilities of NetApp SnapMirror technology. Once configured, this enables your applications to replicate data and application changes from one storage backend to another, on the same cluster or between different clusters.
 
 For a comparison between backups/restores and replication, refer to link:../concepts/data-protection.html[Data protection concepts].
 
@@ -58,7 +58,7 @@ TIP: link:../get-started/install_acc.html[Deploy Astra Control Center^] in a thi
 ** *User accounts*: When you add an ONTAP storage backend to Astra Control Center, apply user credentials with the "admin" role. This role has access methods `http` and `ontapi` enabled on both ONTAP source and destination clusters. Refer to https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts in ONTAP documentation^] for more information. 
 // This bullet is duplicated in Add backend
 
-* *Astra Trident / ONTAP configuration*: Astra Control Center requires that you configure at least one storage class that supports replication for both source and destination clusters. If the source and destination clusters are the same, the source application must use a different storage class than the destination application.
+* *Astra Trident / ONTAP configuration*: Astra Control Center requires that you configure at least one storage backend that supports replication for both the source and destination clusters. If the source and destination clusters are the same, the source application should use a different storage backend than the destination application for the best resiliency.
 
 IMPORTANT: Astra Control replication supports apps that use a single storage class. When you add an app to a namespace, be sure the app has the same storage class as other apps in the namespace. When you add a PVC to a replicated app, be sure the new PVC has the same storage class as other PVCs in the namespace.
 
@@ -83,7 +83,7 @@ Setting up a replication relationship involves the following:
 . Enter or select the following information:
 +
 * *Destination cluster*: Enter a destination cluster (this can be the same as the source cluster).  
-* *Destination storage class*: Select or enter the storage class that uses the paired SVM on the destination ONTAP cluster. The destination storage class must be different than the source storage class.
+* *Destination storage class*: Select or enter the storage class that uses the paired SVM on the destination ONTAP cluster. As a best practice, the destination storage class should point to a different storage backend than the source storage class. 
 * *Replication type*: `Asynchronous` is currently the only replication type available.
 * *Destination namespace*: Enter new or existing destination namespaces for the destination cluster.
 * (Optional) Add additional namespaces by selecting *Add namespace* and choosing the namespace from the drop-down list.
@@ -187,9 +187,9 @@ CAUTION: Choose the resync source carefully, as the data on the destination will
 
 == Reverse application replication
 
-This is the planned operation to move the application to the destination cluster while continuing to replicate back to the original source cluster. Astra Control stops the application on the source cluster and replicates the data to the destination before failing over the app to the destination cluster.
+This is the planned operation to move the application to the destination storage backend while continuing to replicate back to the original source storage backend. Astra Control stops the source application and replicates the data to the destination before failing over to the destination app.
 
-In this situation, you are swapping the source and destination. The original source cluster becomes the new destination cluster, and the original destination cluster becomes the new source cluster.
+In this situation, you are swapping the source and destination. 
 
 //With a relationship in an Established state, this process shuts down the app, replicates data written during the shutdown, and then starts the app on the other side, after which replication resumes in the opposite direction.
 
@@ -229,7 +229,7 @@ The following actions occur as a result of the reverse replication:
 
 == Fail back applications to the original source cluster
 
-Using Astra Control, you can achieve "fail back" after a failover operation by using the following sequence of operations. In this workflow to restore the original replication direction, Astra Control replicates (resyncs) any application changes back to the original source cluster before reversing the replication direction.
+Using Astra Control, you can achieve "fail back" after a failover operation by using the following sequence of operations. In this workflow to restore the original replication direction, Astra Control replicates (resyncs) any application changes back to the original source application before reversing the replication direction.
 
 This process starts from a relationship that has completed a failover to a destination and involves the following steps:
 
