@@ -17,7 +17,6 @@ Known issues identify problems that might prevent you from using this release of
 The following known issues affect the current release:
 
 .Apps
-* <<App clones fail when using Service Account level OCP Security Context Constraints (SCC)>>
 * <<App clones fail after an application is deployed with a set storage class>>
 * <<App backups and snapshots fail if the volumesnapshotclass is added after a cluster is managed>>
 
@@ -30,9 +29,6 @@ The following known issues affect the current release:
 //* <<Cloud Insights integration fails after you upgrade Astra Control Center>>
 * <<App data management operations fail with Internal Service Error (500) when Astra Trident is offline>>
 
-== App clones fail when using Service Account level OCP Security Context Constraints (SCC)
-//ASTRACTL-10060/DOC-3594/Q2 and PI4/PI5
-An application clone might fail if the original security context constraints are configured at the service account level within the namespace on the OpenShift Container Platform cluster. When the application clone fails, it appears in the Managed Applications area in Astra Control Center with status `Removed`. See the https://kb.netapp.com/Cloud/Astra/Control/Application_clone_is_failing_for_an_application_in_Astra_Control_Center[knowledgebase article^] for more information.
 
 == App backups and snapshots fail if the volumesnapshotclass is added after a cluster is managed
 //DOC-4419/ASTRACTL-19849
