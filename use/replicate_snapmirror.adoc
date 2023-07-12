@@ -43,9 +43,9 @@ Astra Control application replication requires that the following prerequisites 
 * *ONTAP clusters*: 
 ** *Astra Trident*: Astra Trident version 22.07 or later must exist on both the source and destination Kubernetes clusters that utilize ONTAP as a backend.
 ** *Licenses*: ONTAP SnapMirror asynchronous licenses using the Data Protection bundle must be enabled on both the source and destination ONTAP clusters. Refer to https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html[SnapMirror licensing overview in ONTAP^] for more information.
-* *Pairing*: 
-** *Cluster and SVM*: ONTAP clusters and the host SVM must be paired. Refer to https://docs.netapp.com/us-en/ontap-sm-classic/peering/index.html[Cluster and SVM peering overview^] for more information.
-** *Astra Trident and SVM*: The paired remote SVM must be available to Astra Trident on the destination cluster.
+* *Peering*: 
+** *Cluster and SVM*: ONTAP clusters and the host SVM must be peered. Refer to https://docs.netapp.com/us-en/ontap-sm-classic/peering/index.html[Cluster and SVM peering overview^] for more information.
+** *Astra Trident and SVM*: The peered remote SVM must be available to Astra Trident on the destination cluster.
 * *Astra Control Center*:
 +
 TIP: link:../get-started/install_acc.html[Deploy Astra Control Center^] in a third fault domain or secondary site for seamless disaster recovery.
@@ -83,7 +83,7 @@ Setting up a replication relationship involves the following:
 . Enter or select the following information:
 +
 * *Destination cluster*: Enter a destination cluster (this can be the same as the source cluster).  
-* *Destination storage class*: Select or enter the storage class that uses the paired SVM on the destination ONTAP cluster. As a best practice, the destination storage class should point to a different storage backend than the source storage class. 
+* *Destination storage class*: Select or enter the storage class that uses the peered SVM on the destination ONTAP cluster. As a best practice, the destination storage class should point to a different storage backend than the source storage class. 
 * *Replication type*: `Asynchronous` is currently the only replication type available.
 * *Destination namespace*: Enter new or existing destination namespaces for the destination cluster.
 * (Optional) Add additional namespaces by selecting *Add namespace* and choosing the namespace from the drop-down list.

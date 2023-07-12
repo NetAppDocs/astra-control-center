@@ -38,6 +38,8 @@ A _clone_ is an exact duplicate of an app, its configuration, and its persistent
 
 Using Astra Control, you can build business continuity for your applications with a low-RPO (Recovery Point Objective) and low-RTO (Recovery Time Objective) using asynchronous replication capabilities of NetApp SnapMirror technology. Once configured, this enables your applications to replicate data and application changes from one storage backend to another, on the same cluster or between different clusters.
 
+You can replicate between two ONTAP SVMs on the same ONTAP cluster or on different ONTAP clusters.
+
 Astra Control asynchronously replicates app snapshot copies to a destination cluster. The replication process includes data in the persistent volumes replicated by SnapMirror and the app metadata protected by Astra Control.
 
 App replication is different from app backup and restore in the following ways:
