@@ -34,7 +34,6 @@ Known limitations identify platforms, devices, or functions that are not support
 * <<Astra Control Center does not validate the details you enter for your proxy server>>
 * <<Existing connections to a Postgres pod causes failures>>
 * <<Backups and snapshots might not be retained during removal of an Astra Control Center instance>>
-* <<LDAP user and group limitations>>
 * <<The Activity page displays up to 100000 events>>
 * <<Snapshots might fail for Kubernetes 1.25 or later clusters with certain snapshot controller versions>>
 
@@ -143,7 +142,7 @@ If you have an evaluation license, be sure you store your account ID to avoid da
 The Astra Control Activity page can display up to 100,000 events. To view all logged events, retrieve the events using the link:../rest-api/api-intro.html[Astra Control REST API^].
 
 == Snapshots might fail for Kubernetes 1.25 or later clusters with certain snapshot controller versions
-//ASTRACTL-26731/ASTRADOC-171
+//ASTRACTL-26731/ASTRADOC-171/DOC FIX ONLY
 Snapshots for Kubernetes clusters running version 1.25 or later can fail if version v1beta1 of the  snapshot controller APIs are installed on the cluster.
 
 As a workaround, do the following when upgrading existing Kubernetes 1.25 or later installations:

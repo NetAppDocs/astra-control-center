@@ -17,7 +17,6 @@ Known issues identify problems that might prevent you from using this release of
 The following known issues affect the current release:
 
 .Apps
-* <<Restore of an app results in PV size larger than original PV>>
 * <<App clones fail using a specific version of PostgreSQL>>
 * <<App clones fail when using Service Account level OCP Security Context Constraints (SCC)>>
 * <<App clones fail after an application is deployed with a set storage class>>
@@ -31,10 +30,6 @@ The following known issues affect the current release:
 * <<Managed clusters do not appear in NetApp Cloud Insights when connecting through a proxy>>
 //* <<Cloud Insights integration fails after you upgrade Astra Control Center>>
 * <<App data management operations fail with Internal Service Error (500) when Astra Trident is offline>>
-
-== Restore of an app results in PV size larger than original PV
-//DOC-3562/ASTRACTL-9560/Q2 and PI4/PI5
-If you resize a persistent volume after creating a backup and then restore from that backup, the persistent volume size will match the new size of the PV instead of using the size of the backup.
 
 == App clones fail using a specific version of PostgreSQL
 //DOC-3543/ASTRACTL-9408/Q2 and PI4/PI5
