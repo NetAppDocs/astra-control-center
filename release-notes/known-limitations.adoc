@@ -28,14 +28,14 @@ Known limitations identify platforms, devices, or functions that are not support
 * <<In-place restore operations of apps that use a certificate manager are not supported>>
 * <<OLM-enabled and cluster-scoped operator deployed apps not supported>>
 * <<Apps deployed with Helm 2 are not supported>>
+* <<Snapshots might fail for Kubernetes 1.25 or later clusters with certain snapshot controller versions>>
+* <<Backups and snapshots might not be retained during removal of an Astra Control Center instance>>
 
 .General limitations
 * <<S3 buckets in Astra Control Center do not report available capacity>>
 * <<Astra Control Center does not validate the details you enter for your proxy server>>
 * <<Existing connections to a Postgres pod causes failures>>
-* <<Backups and snapshots might not be retained during removal of an Astra Control Center instance>>
 * <<The Activity page displays up to 100000 events>>
-* <<Snapshots might fail for Kubernetes 1.25 or later clusters with certain snapshot controller versions>>
 
 
 == The same cluster cannot be managed by two Astra Control Center instances
@@ -122,6 +122,22 @@ Astra Control Center does not support application management activities with clu
 //From requirements section
 If you use Helm to deploy apps, Astra Control Center requires Helm version 3. Managing and cloning apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) is fully supported. For more information, refer to link:../get-started/requirements.html[Astra Control Center requirements].
 
+== Snapshots might fail for Kubernetes 1.25 or later clusters with certain snapshot controller versions
+//ASTRACTL-26731/ASTRADOC-171/DOC FIX ONLY
+Snapshots for Kubernetes clusters running version 1.25 or later can fail if version v1beta1 of the  snapshot controller APIs are installed on the cluster.
+
+As a workaround, do the following when upgrading existing Kubernetes 1.25 or later installations:
+
+. Remove any existing Snapshot CRDs and any existing snapshot controller.
+. https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html[Uninstall Astra Trident^].
+. https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[Install the snapshot CRDs and the snapshot controller^].
+. https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html[Install the latest Astra Trident version^].
+. https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#step-1-create-a-volumesnapshotclass[Create a VolumeSnapshotClass^].
+
+== Backups and snapshots might not be retained during removal of an Astra Control Center instance
+//AD AH review
+If you have an evaluation license, be sure you store your account ID to avoid data loss in the event of Astra Control Center failure if you are not sending ASUPs.
+
 == S3 buckets in Astra Control Center do not report available capacity
 //DOC-3561/ASTRACTL-9425/Q2 and PI4
 Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
@@ -134,24 +150,8 @@ Ensure that you link:../use/monitor-protect.html#add-a-proxy-server[enter the co
 //From ACS RN
 When you perform operations on Postgres pods, you shouldn't connect directly within the pod to use the psql command. Astra Control requires psql access to freeze and thaw the databases. If there is a pre-existing connection, the snapshot, backup, or clone will fail.
 
-== Backups and snapshots might not be retained during removal of an Astra Control Center instance
-//AD AH review
-If you have an evaluation license, be sure you store your account ID to avoid data loss in the event of Astra Control Center failure if you are not sending ASUPs.
-
 == The Activity page displays up to 100000 events
 The Astra Control Activity page can display up to 100,000 events. To view all logged events, retrieve the events using the link:../rest-api/api-intro.html[Astra Control REST API^].
-
-== Snapshots might fail for Kubernetes 1.25 or later clusters with certain snapshot controller versions
-//ASTRACTL-26731/ASTRADOC-171/DOC FIX ONLY
-Snapshots for Kubernetes clusters running version 1.25 or later can fail if version v1beta1 of the  snapshot controller APIs are installed on the cluster.
-
-As a workaround, do the following when upgrading existing Kubernetes 1.25 or later installations:
-
-. Remove any existing Snapshot CRDs and any existing snapshot controller.
-. https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html[Uninstall Astra Trident^].
-. https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[Install the snapshot CRDs and the snapshot controller^].
-. https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html[Install the latest Astra Trident version^].
-. https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#step-1-create-a-volumesnapshotclass[Create a VolumeSnapshotClass^].
 
 == Find more information
 
