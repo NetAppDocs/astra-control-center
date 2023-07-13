@@ -5,13 +5,36 @@ keywords: what's new, bugs, bug fixes, new features, enhancements
 summary: NetApp periodically updates Astra Control Center to bring you new features, enhancements, and bug fixes.
 ---
 
-= What's new in this release of Astra Control Center
+= What{rsquo}s new in this release of Astra Control Center
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/release-notes/
 
 [.lead]
 We're pleased to announce the latest release of Astra Control Center.
+
+== 26 July 2023 (23.07.0)
+
+.New features and support
+
+* link:../get-started/requirements.html#storage-backends[Support for using NetApp MetroCluster in a stretch configuration as a storage backend^]
+* link:../get-started/requirements.html#storage-backends[Support for using Longhorn as a storage backend^]
+* link:../use/upgrade-acc.html[Improved 23.07 Astra Control Center operator^]
++
+IMPORTANT: The new operator is required to upgrade to 23.07.
+
+* link:../use/manage-remote-authentication.html[Astra Control Center now supports `userPrincipalName` as an alternative login attribute for remote (LDAP) users^]
+* link:../use/execution-hooks.html[New execution hook type `post-failover` can be run after replication failover with Astra Control Center^]
++
+NOTE: If you have been running post-restore hooks with Astra Control Center 23.04 and upgrade your Astra Control Center to 23.07, post-restore execution hooks will no longer be executed after a failover replication. You need to create new post-failover execution hooks for your apps. Alternatively, you can change the operation type of existing post-restore hooks intended for failovers from "post-restore" to "post-failover". Visit the https://github.com/NetApp/Verda[NetApp Verda^] GitHub repository for sample execution hook scripts that you can modify to fit your environment.
+
+* Backup and restore functionality for Astra Control Center as a managed app
+
+
+.Known issues and limitations
+
+* link:../release-notes/known-issues.html[Known issues for this release^]
+* link:../release-notes/known-limitations.html[Known limitations for this release^]
 
 == 18 May 2023 (23.04.2)
 
