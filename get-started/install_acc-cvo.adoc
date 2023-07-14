@@ -66,7 +66,7 @@ Astra Control Center requires the following resources in addition to the environ
 | Load balancer | Service type "LoadBalancer" available for ingress traffic to be sent to services in the operational environment cluster
 | FQDN | A method for pointing the FQDN of Astra Control Center to the load balanced IP address
 | Astra Trident (installed as part of the Kubernetes cluster discovery in NetApp BlueXP, formerly Cloud Manager) | Astra Trident 22.10 or newer installed and configured and NetApp ONTAP version 9.8 or newer as a storage backend
-| Image registry | NetApp provides a registry that you can use to obtain Astra Control Center build images:
+| Image registry | [[aws-registry]]NetApp provides a registry that you can use to obtain Astra Control Center build images:
 `http://netappdownloads.jfrog.io/docker-astra-control-prod`
 
 If you are unable to access the NetApp image registry, you must have an existing private registry, such as AWS Elastic Container Registry, to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
@@ -111,7 +111,7 @@ Install a RedHat OpenShift Container Platform cluster on AWS.
 For installation instructions, see https://docs.openshift.com/container-platform/4.13/installing/installing_aws/installing-aws-default.html[Installing a cluster on AWS in OpenShift Container Platform^].
 
 === Configure AWS
-Next, configure AWS to create a virtual network, set up EC2 compute instances, create an AWS S3 bucket, create an Elastic Container Register (ECR) to host the Astra Control Center images, and push the images to this registry.
+Next, configure AWS to create a virtual network, set up EC2 compute instances, and create an AWS S3 bucket. If you cannot access the <<aws-registry,NetApp Astra Control Center image registry>>, you will also need to create an Elastic Container Registry (ECR) to host the Astra Control Center images, and push the images to this registry.
 
 Follow the AWS documentation to complete the following steps. See https://docs.openshift.com/container-platform/4.13/installing/installing_aws/installing-aws-default.html[AWS installation documentation^].
 
@@ -121,7 +121,7 @@ Follow the AWS documentation to complete the following steps. See https://docs.o
 . Review the EC2 compute instances. This can be a bare metal server or VMs in AWS.
 . If the instance type does not already match the Astra minimum resource requirements for master and worker nodes, change the instance type in AWS to meet the Astra requirements.  Refer to link:../get-started/requirements.html[Astra Control Center requirements^].
 . Create at least one AWS S3 bucket to store your backups.
-. Create an AWS Elastic Container Registry (ECR) to host all the ACC images.
+. (Optional) If you cannot access the <<aws-registry,NetApp image registry>>, Create an AWS Elastic Container Registry (ECR) to host all the ACC images.
 +
 NOTE: If you do not create the ECR, Astra Control Center cannot access monitoring data from a cluster containing Cloud Volumes ONTAP with an AWS backend. The issue is caused when the cluster you try to discover and manage using Astra Control Center does not have AWS ECR access.
 
