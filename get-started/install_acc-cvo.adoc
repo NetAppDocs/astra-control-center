@@ -68,7 +68,7 @@ Astra Control Center requires the following resources in addition to the environ
 | Astra Trident (installed as part of the Kubernetes cluster discovery in NetApp BlueXP, formerly Cloud Manager) | Astra Trident 22.10 or newer installed and configured and NetApp ONTAP version 9.8 or newer as a storage backend [[aws-registry]]
 | Image registry | NetApp provides a registry that you can use to obtain Astra Control Center build images:
 `http://netappdownloads.jfrog.io/docker-astra-control-prod`
-Contact NetApp Support to obtain instructions on using this image repository during the Astra Control Center installation process.
+Contact NetApp Support to obtain instructions on using this image registry during the Astra Control Center installation process.
 
 If you are unable to access the NetApp image registry, you must have an existing private registry, such as AWS Elastic Container Registry (ECR), to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
 
@@ -204,7 +204,7 @@ Astra Control Center requires the following resources in addition to the environ
 | Astra Trident (installed as part of the Kubernetes cluster discovery in NetApp BlueXP, formerly Cloud Manager) | Astra Trident 22.10 or newer installed and configured and NetApp ONTAP version 9.8 or newer as a storage backend [[gcp-registry]]
 | Image registry | NetApp provides a registry that you can use to obtain Astra Control Center build images:
 `http://netappdownloads.jfrog.io/docker-astra-control-prod`
-Contact NetApp Support to obtain instructions on using this image repository during the Astra Control Center installation process.
+Contact NetApp Support to obtain instructions on using this image registry during the Astra Control Center installation process.
 
 If you are unable to access the NetApp image registry, you must have an existing private registry, such as Google Container Registry, to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
 
@@ -296,8 +296,8 @@ Example:
 +
 ----
 manifestfile=astra-control-center-<version>.manifest
-GCP_CR_REGISTRY=<target image repository>
-ASTRA_REGISTRY=<source Astra Control Center image repository>
+GCP_CR_REGISTRY=<target image registry>
+ASTRA_REGISTRY=<source Astra Control Center image registry>
 
 while IFS= read -r image; do
     echo "image: $ASTRA_REGISTRY/$image $GCP_CR_REGISTRY/$image"
@@ -392,7 +392,7 @@ Refer to link:../get-started/requirements.html[Astra Control Center operational 
 | Astra Trident (installed as part of the Kubernetes cluster discovery in NetApp BlueXP) | Astra Trident 22.10 or newer installed and configured and NetApp ONTAP version 9.8 or newer will be used as a storage backend [[azure-registry]]
 | Image registry | NetApp provides a registry that you can use to obtain Astra Control Center build images:
 `http://netappdownloads.jfrog.io/docker-astra-control-prod`
-Contact NetApp Support to obtain instructions on using this image repository during the Astra Control Center installation process.
+Contact NetApp Support to obtain instructions on using this image registry during the Astra Control Center installation process.
 
 If you are unable to access the NetApp image registry, you must have an existing private registry, such as Azure Container Registry (ACR), to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
 
@@ -469,8 +469,8 @@ This script requires the Astra Control Center manifest file and your Azure ACR l
 +
 ----
 manifestfile=astra-control-center-<version>.manifest
-AZ_ACR_REGISTRY=<target image repository>
-ASTRA_REGISTRY=<source Astra Control Center image repository>
+AZ_ACR_REGISTRY=<target image registry>
+ASTRA_REGISTRY=<source Astra Control Center image registry>
 
 while IFS= read -r image; do
     echo "image: $ASTRA_REGISTRY/$image $AZ_ACR_REGISTRY/$image"
