@@ -123,11 +123,11 @@ Follow the AWS documentation to complete the following steps. See https://docs.o
 . If the instance type does not already match the Astra minimum resource requirements for master and worker nodes, change the instance type in AWS to meet the Astra requirements.  Refer to link:../get-started/requirements.html[Astra Control Center requirements^].
 . Create at least one AWS S3 bucket to store your backups.
 . (Optional) If you cannot access the <<aws-registry,NetApp image registry>>, do the following: 
-.. Create an AWS Elastic Container Registry (ECR) to host all the ACC images.
+.. Create an AWS Elastic Container Registry (ECR) to host all the Astra Control Center images.
 +
 NOTE: If you do not create the ECR, Astra Control Center cannot access monitoring data from a cluster containing Cloud Volumes ONTAP with an AWS backend. The issue is caused when the cluster you try to discover and manage using Astra Control Center does not have AWS ECR access.
 
-.. Push the ACC images to your defined registry.
+.. Push the Astra Control Center images to your defined registry.
 
 NOTE: The AWS Elastic Container Registry (ECR) token expires after 12 hours and causes cross-cluster clone operations to fail. This issue occurs when managing a storage backend from Cloud Volumes ONTAP configured for AWS. To correct this issue, authenticate with the ECR again and generate a new secret for clone operations to resume successfully.
 
@@ -281,7 +281,7 @@ Follow the GCP documentation to complete the following steps. See Installing Ope
 
 .. Set up Google Container Registry access for Docker push/pull for all the Astra Control Center images.
 +
-Example: ACC images can be pushed to this registry by entering the following script:
+Example: Astra Control Center images can be pushed to this registry by entering the following script:
 +
 ----
 gcloud auth activate-service-account <service account email address>
@@ -297,7 +297,7 @@ Example:
 ----
 manifestfile=astra-control-center-<version>.manifest
 GCP_CR_REGISTRY=<target image repository>
-ASTRA_REGISTRY=<source ACC image repository>
+ASTRA_REGISTRY=<source Astra Control Center image repository>
 
 while IFS= read -r image; do
     echo "image: $ASTRA_REGISTRY/$image $GCP_CR_REGISTRY/$image"
@@ -458,11 +458,11 @@ Follow the Azure documentation to complete the following steps. See https://docs
 . (Optional) If you cannot access the <<azure-registry,NetApp image registry>>, do the following:
 .. Create an Azure Container Registry (ACR) to host the Astra Control Center images.
 .. Set up ACR access for Docker push/pull for all the Astra Control Center images.
-.. Push the ACC images to this registry using the following script:
+.. Push the Astra Control Center images to this registry using the following script:
 +
 ----
 az acr login -n <AZ ACR URL/Location>
-This script requires ACC manifest file and your Azure ACR location.
+This script requires the Astra Control Center manifest file and your Azure ACR location.
 ----
 +
 *Example*:
@@ -470,7 +470,7 @@ This script requires ACC manifest file and your Azure ACR location.
 ----
 manifestfile=astra-control-center-<version>.manifest
 AZ_ACR_REGISTRY=<target image repository>
-ASTRA_REGISTRY=<source ACC image repository>
+ASTRA_REGISTRY=<source Astra Control Center image repository>
 
 while IFS= read -r image; do
     echo "image: $ASTRA_REGISTRY/$image $AZ_ACR_REGISTRY/$image"
