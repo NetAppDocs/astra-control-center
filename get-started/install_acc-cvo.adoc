@@ -121,11 +121,12 @@ Follow the AWS documentation to complete the following steps. See https://docs.o
 . Review the EC2 compute instances. This can be a bare metal server or VMs in AWS.
 . If the instance type does not already match the Astra minimum resource requirements for master and worker nodes, change the instance type in AWS to meet the Astra requirements.  Refer to link:../get-started/requirements.html[Astra Control Center requirements^].
 . Create at least one AWS S3 bucket to store your backups.
-. (Optional) If you cannot access the <<aws-registry,NetApp image registry>>, Create an AWS Elastic Container Registry (ECR) to host all the ACC images.
+. (Optional) If you cannot access the <<aws-registry,NetApp image registry>>, do the following: 
+.. Create an AWS Elastic Container Registry (ECR) to host all the ACC images.
 +
 NOTE: If you do not create the ECR, Astra Control Center cannot access monitoring data from a cluster containing Cloud Volumes ONTAP with an AWS backend. The issue is caused when the cluster you try to discover and manage using Astra Control Center does not have AWS ECR access.
 
-. Push the ACC images to your defined registry.
+.. Push the ACC images to your defined registry.
 
 NOTE: The AWS Elastic Container Registry (ECR) token expires after 12 hours and causes cross-cluster clone operations to fail. This issue occurs when managing a storage backend from Cloud Volumes ONTAP configured for AWS. To correct this issue, authenticate with the ECR again and generate a new secret for clone operations to resume successfully.
 
@@ -169,13 +170,9 @@ Follow the standard link:../get-started/install_acc.html[Astra Control Center in
 
 NOTE: AWS uses the Generic S3 bucket type.
 
-
-
-
 == Deploy Astra Control Center in Google Cloud Platform
 
 You can deploy Astra Control Center on a self-managed Kubernetes cluster hosted on a Google Cloud Platform (GCP) public cloud.
-
 
 === What you'll need for GCP
 
@@ -188,15 +185,12 @@ Before you deploy Astra Control Center in GCP, you will need the following items
 * If using OCP, Red Hat OpenShift Container Platform (OCP) permissions (on namespace level to create pods)
 * GCP Service Account with permissions that enable you to create buckets and connectors
 
-
-
 === Operational environment requirements for GCP
 
 
 NOTE: Ensure that the operating environment you choose to host Astra Control Center meets the basic resource requirements outlined in the environment's official documentation.
 
 Astra Control Center requires the following resources in addition to the environment's resource requirements:
-
 
 [cols=2*,options="header",cols="1h,2a"]
 |===
@@ -206,8 +200,11 @@ Astra Control Center requires the following resources in addition to the environ
 | Worker nodes (GCP compute requirement) | At least 3 worker nodes total, with 4 vCPU cores and 12GB RAM each
 | Load balancer | Service type "LoadBalancer" available for ingress traffic to be sent to services in the operational environment cluster
 | FQDN (GCP DNS zone) | A method for pointing the FQDN of Astra Control Center to the load balanced IP address
-| Astra Trident (installed as part of the Kubernetes cluster discovery in NetApp BlueXP, formerly Cloud Manager) | Astra Trident 22.10 or newer installed and configured and NetApp ONTAP version 9.8 or newer as a storage backend
-| Image registry | You must have an existing private registry, such as Google Container Registry, to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
+| Astra Trident (installed as part of the Kubernetes cluster discovery in NetApp BlueXP, formerly Cloud Manager) | Astra Trident 22.10 or newer installed and configured and NetApp ONTAP version 9.8 or newer as a storage backend [[gcp-registry]]
+| Image registry | NetApp provides a registry that you can use to obtain Astra Control Center build images:
+`http://netappdownloads.jfrog.io/docker-astra-control-prod`
+
+If you are unable to access the NetApp image registry, you must have an existing private registry, such as Google Container Registry, to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
 
 NOTE: You need to enable anonymous access to pull Restic images for backups.
 
@@ -264,7 +261,7 @@ Ensure that you have sufficient IAM roles and permissions that enable you to ins
 See https://docs.netapp.com/us-en/cloud-manager-setup-admin/task-creating-connectors-gcp.html#setting-up-permissions[Initial GCP credentials and permissions^].
 
 === Configure GCP
-Next, configure GCP to create a VPC, set up compute instances, create a Google Cloud Object Storage, create an Google Container Register to host the Astra Control Center images, and push the images to this registry.
+Next, configure GCP to create a VPC, set up compute instances, and create a Google Cloud Object Storage. If you cannot access the <<gcp-registry,NetApp Astra Control Center image registry>>, you will also need to create a Google Container Registry to host the Astra Control Center images, and push the images to this registry.
 
 Follow the GCP documentation to complete the following steps. See Installing OpenShift cluster in GCP.
 
@@ -277,9 +274,10 @@ Follow the GCP documentation to complete the following steps. See Installing Ope
 
 . Create a secret, which is required for bucket access.
 
-. Create a Google Container Registry to host all the Astra Control Center images.
+. (Optional) If you cannot access the <<gcp-registry,NetApp image registry>>, do the following:
+.. Create a Google Container Registry to host the Astra Control Center images.
 
-. Set up Google Container Registry access for Docker push/pull for all the Astra Control Center images.
+.. Set up Google Container Registry access for Docker push/pull for all the Astra Control Center images.
 +
 Example: ACC images can be pushed to this registry by entering the following script:
 +
@@ -389,7 +387,7 @@ Refer to link:../get-started/requirements.html[Astra Control Center operational 
 | Worker nodes (Azure compute requirement) | At least 3 worker nodes total, with 4 vCPU cores and 12GB RAM each
 | Load balancer | Service type "LoadBalancer" available for ingress traffic to be sent to services in the operational environment cluster
 | FQDN (Azure DNS zone) | A method for pointing the FQDN of Astra Control Center to the load balanced IP address
-| Astra Trident (installed as part of the Kubernetes cluster discovery in NetApp BlueXP) | Astra Trident 22.10 or newer installed and configured and NetApp ONTAP version 9.8 or newer will be used as a storage backend
+| Astra Trident (installed as part of the Kubernetes cluster discovery in NetApp BlueXP) | Astra Trident 22.10 or newer installed and configured and NetApp ONTAP version 9.8 or newer will be used as a storage backend [[azure-registry]]
 | Image registry | You must have an existing private registry, such as Azure Container Registry (ACR), to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
 
 NOTE: You need to enable anonymous access to pull Restic images for backups.
@@ -441,7 +439,7 @@ Ensure that you have sufficient IAM roles and permissions that enable you to ins
 See https://docs.netapp.com/us-en/cloud-manager-setup-admin/concept-accounts-azure.html[Azure credentials and permissions^].
 
 === Configure Azure
-Next, configure Azure to create a virtual network, set up compute instances, create an Azure Blob container, create an Azure Container Register (ACR) to host the Astra Control Center images, and push the images to this registry.
+Next, configure Azure to create a virtual network, set up compute instances, and create an Azure Blob container. If you cannot access the <<azure-registry,NetApp Astra Control Center image registry>>, you will also need to create an Azure Container Registry (ACR) to host the Astra Control Center images, and push the images to this registry.
 
 Follow the Azure documentation to complete the following steps. See https://docs.openshift.com/container-platform/4.13/installing/installing_azure/preparing-to-install-on-azure.html[Installing OpenShift cluster on Azure^].
 
@@ -451,9 +449,10 @@ Follow the Azure documentation to complete the following steps. See https://docs
 . Create at least one Azure Blob container to store your backups.
 . Create a storage account. You will need a storage account to create a container to be used as a bucket in Astra Control Center.
 . Create a secret, which is required for bucket access.
-. Create an Azure Container Registry (ACR) to host all the Astra Control Center images.
-. Set up ACR access for Docker push/pull all the Astra Control Center images.
-. Push the ACC images to this registry by entering the following script:
+. (Optional) If you cannot access the <<azure-registry,NetApp image registry>>, do the following:
+.. Create an Azure Container Registry (ACR) to host the Astra Control Center images.
+.. Set up ACR access for Docker push/pull for all the Astra Control Center images.
+.. Push the ACC images to this registry using the following script:
 +
 ----
 az acr login -n <AZ ACR URL/Location>
