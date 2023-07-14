@@ -66,7 +66,10 @@ Astra Control Center requires the following resources in addition to the environ
 | Load balancer | Service type "LoadBalancer" available for ingress traffic to be sent to services in the operational environment cluster
 | FQDN | A method for pointing the FQDN of Astra Control Center to the load balanced IP address
 | Astra Trident (installed as part of the Kubernetes cluster discovery in NetApp BlueXP, formerly Cloud Manager) | Astra Trident 22.10 or newer installed and configured and NetApp ONTAP version 9.8 or newer as a storage backend
-| Image registry | You must have an existing private registry, such as AWS Elastic Container Registry, to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
+| Image registry | NetApp provides a registry that you can use to obtain Astra Control Center build images:
+`http://netappdownloads.jfrog.io/docker-astra-control-prod`
+
+If you are unable to access the NetApp image registry, you must have an existing private registry, such as AWS Elastic Container Registry, to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
 
 NOTE: The Astra Control Center hosted cluster and the managed cluster must have access to the same image registry to be able to back up and restore apps using the Restic-based image.
 
