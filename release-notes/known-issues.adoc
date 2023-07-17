@@ -16,86 +16,25 @@ Known issues identify problems that might prevent you from using this release of
 
 The following known issues affect the current release:
 
-.Apps
-* <<Restore of an app results in PV size larger than original PV>>
-* <<App clones fail using a specific version of PostgreSQL>>
-* <<App clones fail when using Service Account level OCP Security Context Constraints (SCC)>>
-* <<App clones fail after an application is deployed with a set storage class>>
 * <<App backups and snapshots fail if the volumesnapshotclass is added after a cluster is managed>>
-
-.Clusters
+* <<App clones fail after an application is deployed with a set storage class>>
 * <<Managing a cluster with Astra Control Center fails when default kubeconfig file contains more than one context>>
-* <<Some pods fail to start after upgrading to Astra Control Center 23.04>>
-* <<Some pods show an error state after the purge stage of upgrade from 23.04 to 23.04.2>>
 * <<A monitoring pod can crash in Istio environments>>
-
-.Other issues
-* <<Managed clusters do not appear in NetApp Cloud Insights when connecting through a proxy>>
-//* <<Cloud Insights integration fails after you upgrade Astra Control Center>>
 * <<App data management operations fail with Internal Service Error (500) when Astra Trident is offline>>
 
-== Restore of an app results in PV size larger than original PV
-//DOC-3562/ASTRACTL-9560/Q2 and PI4/PI5
-If you resize a persistent volume after creating a backup and then restore from that backup, the persistent volume size will match the new size of the PV instead of using the size of the backup.
-
-== App clones fail using a specific version of PostgreSQL
-//DOC-3543/ASTRACTL-9408/Q2 and PI4/PI5
-App clones within the same cluster consistently fail with the Bitnami PostgreSQL 11.5.0 chart. To clone successfully, use an earlier or later version of the chart.
-
-== App clones fail when using Service Account level OCP Security Context Constraints (SCC)
-//ASTRACTL-10060/DOC-3594/Q2 and PI4/PI5
-An application clone might fail if the original security context constraints are configured at the service account level within the namespace on the OpenShift Container Platform cluster. When the application clone fails, it appears in the Managed Applications area in Astra Control Center with status `Removed`. See the https://kb.netapp.com/Cloud/Astra/Control/Application_clone_is_failing_for_an_application_in_Astra_Control_Center[knowledgebase article^] for more information.
 
 == App backups and snapshots fail if the volumesnapshotclass is added after a cluster is managed
 //DOC-4419/ASTRACTL-19849
 Backups and snapshots fail with a `UI 500 error` in this scenario. As a workaround, refresh the app list.
 
 == App clones fail after an application is deployed with a set storage class
-//DOC-3892/ASTRACTL-13183/PI4/PI5
+//DOC-3892/ASTRACTL-13183/ASTRACTL-13184/PI4/PI5/DOC FIX ONLY
 After an application is deployed with a storage class explicitly set (for example, `helm install ...-set global.storageClass=netapp-cvs-perf-extreme`), subsequent attempts to clone the application require that the target cluster have the originally specified storage class.
 Cloning an application with an explicitly set storage class to a cluster that does not have the same storage class will fail. There are no recovery steps in this scenario.
 
 == Managing a cluster with Astra Control Center fails when default kubeconfig file contains more than one context
-//ASTRACTL-8872/DOC-3612/Q2 and PI4/PI5
+//ASTRACTL-8872/DOC-3612/Q2 and PI4/PI5/DOC FIX ONLY
 You cannot use a kubeconfig with more than one cluster and context in it. See the link:https://kb.netapp.com/Cloud/Astra/Control/Managing_cluster_with_Astra_Control_Center_may_fail_when_using_default_kubeconfig_file_contains_more_than_one_context[knowledgebase article^] for more information.
-
-== Some pods fail to start after upgrading to Astra Control Center 23.04
-// ASTRACTL-25583 and ASTRADOC-146
-After you upgrade to Astra Control Center 23.04, some pods might fail to start. As a workaround, manually restart the affected pods using the following steps:
-
-. Find the affected pods, replacing <namespace> with the current namespace:
-+
-----
-kubectl get pods -n <namespace> | grep au-pod
-----
-+
-The affected pods will have results similar to the following:
-+
-----
-pcloud-astra-control-center-au-pod-0 0/1 CreateContainerConfigError 0 13s
-----
-. Restart each affected pod, replacing <namespace> with the current namespace:
-+
-----
-kubectl delete pod pcloud-astra-control-center-au-pod-0 -n <namespace>
-----
-
-== Some pods show an error state after the purge stage of upgrade from 23.04 to 23.04.2
-//ASTRADOC-186/ASTRACTL-27242
-After you upgrade to Astra Control Center 23.04.2, some pods might show an error in 
-logs related to `task-service-task-purge`: 
-
-----
-kubectl get all -n netapp-acc -o wide|grep purge
-
-pod/task-service-task-purge-28282828-ab1cd     0/1     Error       0             48m     10.111.0.111   openshift-clstr-ol-07-zwlj8-worker-jhp2b   <none>           <none>
-----
-
-This error state means that a cleanup step did not properly execute. The overall upgrade to 23.04.2 is successful. Run the following command to clean up the task and remove the error state:
-
-----
-kubectl delete job task-service-task-purge-[system-generated task ID] -n <netapp-acc or custom namespace>
-----
 
 == A monitoring pod can crash in Istio environments
 If you pair Astra Control Center with Cloud Insights in an Istio environment, the `telegraf-rs` pod can crash. As a workaround, perform the following steps:
@@ -137,29 +76,6 @@ You should see output similar to the following:
 NAME READY STATUS RESTARTS AGE
 telegraf-rs-rrnsb 2/2 Running 0 11s
 ----
-
-== Managed clusters do not appear in NetApp Cloud Insights when connecting through a proxy
-//DOC-4592/ASTRACTL-22655
-When Astra Control Center connects to NetApp Cloud Insights through a proxy, managed clusters might not appear in Cloud Insights. As a workaround, run the following commands on each managed cluster:
-
-[source,console]
-----
-kubectl get cm telegraf-conf -o yaml -n netapp-monitoring | sed '/\[\[outputs.http\]\]/c\    [[outputs.http]]\n    use_system_proxy = true' | kubectl replace -f -
-----
-[source,console]
-----
-kubectl get cm telegraf-conf-rs -o yaml -n netapp-monitoring | sed '/\[\[outputs.http\]\]/c\    [[outputs.http]]\n    use_system_proxy = true' | kubectl replace -f -
-----
-[source,console]
-----
-kubectl get pods -n netapp-monitoring --no-headers=true | grep 'telegraf-ds\|telegraf-rs' | awk '{print $1}' | xargs kubectl delete -n netapp-monitoring pod
-----
-
-////
-== Cloud Insights integration fails after you upgrade Astra Control Center
-When you upgrade an Astra Control Center system to version 22.11.0, if it is connected to Cloud Insights, Cloud Insights functionality might stop working. As a workaround, disconnect Astra Control Center from Cloud Insights and then re-connect. For instructions, refer to link:../use/monitor-protect.html#connect-to-cloud-insights[Connect to Cloud Insights^].
-
-////
 
 == App data management operations fail with Internal Service Error (500) when Astra Trident is offline
 //DOC-3903/ASTRA-13162/PI4/PI5

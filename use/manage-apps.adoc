@@ -74,7 +74,7 @@ kubectl apply -f myapp.yaml
 +
 The following are some operator apps that follow these patterns:
 
-** https://github.com/k8ssandra/cass-operator/tree/v1.7.1[Apache K8ssandra^]
+** https://github.com/k8ssandra/cass-operator[Apache K8ssandra^]
 +
 NOTE: For K8ssandra, in-place restore operations are supported. A restore operation to a new namespace or cluster requires that the original instance of the application to be taken down. This is to ensure that the peer group information carried over does not lead to cross-instance communication. Cloning of the app is not supported.
 
@@ -224,7 +224,9 @@ You can display system namespaces from the Namespaces tab for a selected cluster
 
 image:acc_namespace_system.png[A screenshot that shows the *Show system namespaces* option that is available in the Namespaces tab.]
 
-TIP: Astra Control itself is not a standard app; it is a "system app." You should not try to manage Astra Control itself. Astra Control itself isn't shown by default for management.
+//TIP: Astra Control itself is not a standard app; it is a "system app." You should not try to manage Astra Control itself. Astra Control itself isn't shown by default for management.
+
+TIP: Astra Control Center is not shown by default as an application that you can manage, but you can back up and restore an Astra Control Center instance using another Astra Control Center instance.
 
 == Example: Separate Protection Policy for different releases
 

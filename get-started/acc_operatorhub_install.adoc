@@ -92,6 +92,10 @@ include::../_include/docker-podman-add-images.adoc[]
 * From Red Hat Openshift web console:
 .. Log in to the OpenShift Container Platform UI.
 .. From the side menu, select *Operators > OperatorHub*.
++
+//Must be updated every quarterly release
+NOTE: You can upgrade only to the current version of Astra Control Center using this operator.
+
 .. Search for and select the NetApp Astra Control Center operator.
 
 +
