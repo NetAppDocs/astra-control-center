@@ -16,7 +16,7 @@ To upgrade Astra Control Center, download the installation bundle from the NetAp
 .Before you begin
 Before you upgrade, ensure your environment still meets the link:../get-started/requirements.html[minimum requirements for Astra Control Center deployment^]. Your environment should have the following:
 
-* *A supported Astra Trident version* 
+* A supported Astra Trident version 
 +
 [%collapsible]
 ====
@@ -33,7 +33,7 @@ WARNING: You must upgrade to Astra Trident 22.10 *PRIOR* to upgrading to Kuberne
 ====
 // End snippet
 
-* *A supported Kubernetes distribution*
+* A supported Kubernetes distribution
 +
 [%collapsible]
 ====
@@ -46,7 +46,7 @@ kubectl get nodes -o wide
 ====
 // End snippet
 
-* *Sufficient cluster resources*
+* Sufficient cluster resources
 +
 [%collapsible]
 ====
@@ -59,8 +59,8 @@ kubectl describe node <node name>
 ====
 // End snippet
 
-* *A registry you can use to push and upload Astra Control Center images* 
-* *A default storage class*
+* A registry you can use to push and upload Astra Control Center images
+* A default storage class
 +
 [%collapsible]
 ====
@@ -73,7 +73,7 @@ kubectl get storageclass
 ====
 // End snippet
 
-* *Healthy and available API services*
+* Healthy and available API services
 +
 [%collapsible]
 ====
@@ -86,7 +86,7 @@ kubectl get apiservices
 ====
 // End snippet
 
-* *(OpenShift only) Healthy and available cluster operators*
+* (OpenShift only) Healthy and available cluster operators
 +
 [%collapsible]
 ====
@@ -100,11 +100,11 @@ kubectl get clusteroperators
 // End snippet
 
 //Must be updated every quarterly release
-* *The latest Astra Control Center operator*
+* The latest Astra Control Center operator
 +
 [%collapsible]
 ====
-Install the latest operator (`acc-operator`) if you are upgrading to the 23.07 Astra Control Center. You cannot upgrade to other versions of Astra Control Center using this operator.
+Install the latest operator (`acc-operator`) if you are upgrading Astra Control Center. You cannot upgrade to other versions of Astra Control Center using this operator.
 ====
 // End snippet
 

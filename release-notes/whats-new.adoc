@@ -19,17 +19,9 @@ We're pleased to announce the latest release of Astra Control Center.
 
 * link:../get-started/requirements.html#storage-backends[Support for using NetApp MetroCluster in a stretch configuration as a storage backend^]
 * link:../get-started/requirements.html#storage-backends[Support for using Longhorn as a storage backend^]
-* link:../use/upgrade-acc.html[Improved 23.07 Astra Control Center operator^]
-+
-IMPORTANT: The new operator is required to upgrade to 23.07.
-
 * link:../use/manage-remote-authentication.html[Astra Control Center now supports `userPrincipalName` as an alternative login attribute for remote (LDAP) users^]
 * link:../use/execution-hooks.html[New execution hook type `post-failover` can be run after replication failover with Astra Control Center^]
-+
-NOTE: If you have been running post-restore hooks with Astra Control Center 23.04 and upgrade your Astra Control Center to 23.07, post-restore execution hooks will no longer be executed after a failover replication. You need to create new post-failover execution hooks for your apps. Alternatively, you can change the operation type of existing post-restore hooks intended for failovers from "post-restore" to "post-failover". Visit the https://github.com/NetApp/Verda[NetApp Verda^] GitHub repository for sample execution hook scripts that you can modify to fit your environment.
-
-* Backup and restore functionality for Astra Control Center as a managed app
-
+* Clone workflows now support live clones only (the current state of managed application). To clone from a snapshot or backup, use the link:../use/restore-apps.html[restore workflow^].
 
 .Known issues and limitations
 

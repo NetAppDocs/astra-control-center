@@ -100,7 +100,7 @@ Ensure that you have a supported backend with sufficient capacity.
 ** Longhorn 1.5.0 or newer
 *** Requires the manual creation of a VolumeSnapshotClass object. Refer to the https://longhorn.io/docs/1.5.0/snapshots-and-backups/csi-snapshot-support/csi-volume-snapshot-associated-with-longhorn-snapshot/#create-a-csi-volumesnapshot-associated-with-longhorn-snapshot[Longhorn documentation^] for instructions.
 ** NetApp MetroCluster
-*** Must be in a stretch configuration, located in the same datacenter as Astra Control Center
+*** Managed Kubernetes clusters must be in a stretch configuration.
 
 === ONTAP licenses
 
