@@ -100,7 +100,7 @@ If Astra Trident exists, you see output similar to the following:
 +
 ----
 NAME      VERSION
-trident   22.10.0
+trident   23.XX.X
 ----
 +
 If Astra Trident does not exist, you see output similar to the following:
@@ -185,7 +185,7 @@ kubectl apply -f astracontrol-service-account.yaml
 .Steps
 [%collapsible]
 ====
-.. Create a `ClusterRole` file called `astra-admin-account.yaml`.
+.. Create a `ClusterRole` file called, for example, `astra-admin-account.yaml`.
 +
 Adjust the name and namespace as needed. If changes are made here, you should apply the same changes in the following steps.
 +
@@ -321,12 +321,12 @@ kubectl apply -f astra-admin-account.yaml
 
 * *Expanded cluster role*: This role contains expanded permissions for a cluster to be managed by Astra Control. You might use this role if you use multiple contexts and cannot use the default Astra Control kubeconfig configured during installation or a limited role with a single context won't work in your environment:
 +
-NOTE: The following `ClusterRole` steps are a general Kubernetes example. Refer to https://access.redhat.com/solutions/5286371[these instructions for OpenShift^] or to the comparable documentation for your Kubernetes distribution for instructions specific to your environment.
+NOTE: The following `ClusterRole` steps are a general Kubernetes example. Refer to the documentation for your Kubernetes distribution for instructions specific to your environment.
 +
 .Steps
 [%collapsible]
 ====
-.. Create a `ClusterRole` file called `astra-admin-account.yaml`.
+.. Create a `ClusterRole` file called, for example, `astra-admin-account.yaml`.
 +
 Adjust the name and namespace as needed. If changes are made here, you should apply the same changes in the following steps.
 +
@@ -448,7 +448,6 @@ metadata:
   uid: 2ce068c4-810e-4a96-ada3-49cbf9ec3f89
 secrets:
 - name: astracontrol-service-account-dockercfg-48xhx
-- name: astracontrol-service-account-token-qqdpk
 *- name: secret-astracontrol-service-account*
 ----
 
@@ -464,7 +463,6 @@ The end of the output should look similar to the following:
 ----
 "secrets": [
 { "name": "astracontrol-service-account-dockercfg-48xhx"},
-{ "name": "astracontrol-service-account-token-qqdpk"},
 { "name": "secret-astracontrol-service-account"}
 ]
 ----
@@ -717,8 +715,7 @@ You now have the following three files:
 
 . Install these certificates in ONTAP. Generate and install `server` and `server-ca` certificates on ONTAP.
 +
-Details in sample.yaml 
-+
+.Expand for sample.yaml 
 [%collapsible]
 ====
 ----
