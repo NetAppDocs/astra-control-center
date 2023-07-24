@@ -113,7 +113,9 @@ To use Astra Control Center, verify that you have the following ONTAP licenses, 
 To check whether your ONTAP system has the required licenses, refer to https://docs.netapp.com/us-en/ontap/system-admin/manage-licenses-concept.html[Manage ONTAP licenses^].
 
 === NetApp MetroCluster
-When you use NetApp MetroCluster as a storage backend, you need to specify an SVM management LIF as a backend option in the Astra Trident driver that you use. Refer to Astra Trident documentation for more information about each driver:
+When you use NetApp MetroCluster as a storage backend, you need to https://kb.netapp.com/Cloud/Astra/Trident/Trident_backend_definition_update_on_MetroCluster_switchover_and_-back_made_easy[specify an SVM management LIF as a backend option in the Astra Trident driver that you use^]. 
+
+Refer to Astra Trident documentation for more information about each driver:
 
 * https://docs.netapp.com/us-en/trident/trident-use/ontap-san-examples.html[SAN^]
 * https://docs.netapp.com/us-en/trident/trident-use/ontap-nas-examples.html[NAS^]
