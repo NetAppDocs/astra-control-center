@@ -72,7 +72,7 @@ Setting up a replication relationship involves the following:
 * Choosing the replication schedule (included Kubernetes resources as well as persistent volume data)
 * Setting the time for the snapshot to be taken
 
-//TIP: To stop a replication from occurring again, you can change this replication relationship schedule. Alternatively, you can pause the replication using the https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API].
+//TIP: To stop a replication from occurring again, you can change this replication relationship schedule. Alternatively, you can pause the replication using the https://docs.netapp.com/us-en/astra-automation[Astra Control API].
 
 .Steps
 

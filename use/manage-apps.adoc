@@ -240,5 +240,5 @@ In order to avoid possible data conflicts, the admin will create two apps: one f
 
 == Find more information
 
-* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra Control API^]
+* https://docs.netapp.com/us-en/astra-automation[Use the Astra Control API^]
 * link:../use/unmanage.html[Unmanage an app]
