@@ -149,4 +149,4 @@ NOTE: Astra Control ensures first that there are no schedule policies using the 
 
 == Find more information
 
-* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra Control API^]
+* https://docs.netapp.com/us-en/astra-automation[Use the Astra Control API^]

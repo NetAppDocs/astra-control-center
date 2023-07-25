@@ -78,7 +78,7 @@ Complete some basic tasks to get started:
 
 
 //[role="quick-margin-para"]
-After you finish setting up Astra Control Center, use the Astra Control UI or the https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^] to begin managing and protecting apps:
+After you finish setting up Astra Control Center, use the Astra Control UI or the https://docs.netapp.com/us-en/astra-automation[Astra Control API^] to begin managing and protecting apps:
 
 
 * link:../use/manage-apps.html[Manage apps^]: Define resources to manage.
@@ -90,7 +90,7 @@ After you finish setting up Astra Control Center, use the Astra Control UI or th
 
 == For more information 
 
-* https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^]
+* https://docs.netapp.com/us-en/astra-automation[Use the Astra Control API^]
 * link:../use/upgrade-acc.html[Upgrade Astra Control Center^]
 * link:../support/get-help.html[Get help with Astra Control^]
 

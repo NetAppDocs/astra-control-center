@@ -11,7 +11,7 @@ summary: Manage users and roles on your Astra Control Center system.
 :imagesdir: ../media/use/
 
 [.lead]
-You can add, remove, and edit users of your Astra Control Center installation using the Astra Control UI. You can use the Astra Control UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to manage users.
+You can add, remove, and edit users of your Astra Control Center installation using the Astra Control UI. You can use the Astra Control UI or https://docs.netapp.com/us-en/astra-automation[Astra Control API^] to manage users.
 
 You can also use LDAP to perform authentication for selected users.
 
@@ -127,7 +127,7 @@ Astra Control Center removes the user from the account.
 
 == Manage roles
 
-You can manage roles by adding namespace constraints and restricting user roles to those constraints. This enables you to control access to resources within your organization. You can use the Astra Control UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to manage roles.
+You can manage roles by adding namespace constraints and restricting user roles to those constraints. This enables you to control access to resources within your organization. You can use the Astra Control UI or https://docs.netapp.com/us-en/astra-automation[Astra Control API^] to manage roles.
 
 === Add a namespace constraint to a role
 

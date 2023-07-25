@@ -25,7 +25,7 @@ After you install Astra Control Center, log in to the UI, and change your passwo
 //REFERENCED IN UI and NSS downloads. DO NOT MODIFY WITHOUT NOTIFYING STAKEHOLDERS.
 When you install Astra Control Center, an embedded evaluation license is already installed. If you are evaluating Astra Control Center, you can skip this step.
 
-You can add a new license using the Astra Control UI or https://docs.netapp.com/us-en/astra-automation/index.html[API^]. 
+You can add a new license using the Astra Control UI or https://docs.netapp.com/us-en/astra-automation[Astra Control API^]. 
 
 Astra Control Center licenses measure CPU resources using Kubernetes CPU units and account for the CPU resources assigned to the worker nodes of all the managed Kubernetes clusters. Licenses are based on vCPU usage. For more information on how licenses are calculated, refer to link:../concepts/licensing.html[Licensing^].
 
@@ -918,7 +918,7 @@ NOTE: You might need to refresh the page for the backend to appear.
 
 == Add a bucket
 
-You can add a bucket using the Astra Control UI or https://docs.netapp.com/us-en/astra-automation/index.html[API^]. Adding object store bucket providers is essential if you want to back up your applications and persistent storage or if you want to clone applications across clusters. Astra Control stores those backups or clones in the object store buckets that you define.
+You can add a bucket using the Astra Control UI or https://docs.netapp.com/us-en/astra-automation[Astra Control API^]. Adding object store bucket providers is essential if you want to back up your applications and persistent storage or if you want to clone applications across clusters. Astra Control stores those backups or clones in the object store buckets that you define.
 
 You don't need a bucket in Astra Control if you are cloning your application configuration and persistent storage to the same cluster. Application snapshots functionality does not require a bucket.
 
@@ -978,5 +978,5 @@ Now that you've logged in and added clusters to Astra Control Center, you're rea
 
 [discrete]
 == Find more information
-* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra Control API^]
+* https://docs.netapp.com/us-en/astra-automation[Use the Astra Control API^]
 * link:../release-notes/known-issues.html[Known issues]

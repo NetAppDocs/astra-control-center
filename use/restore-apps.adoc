@@ -11,9 +11,7 @@ summary: Astra can restore your application configuration and persistent storage
 :imagesdir: ../media/use/
 
 [.lead]
-Astra Control can restore your application from a snapshot or backup. Restoring from an existing snapshot will be faster when restoring the application to the same cluster. You can use the Astra Control UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to restore apps.
-
-NOTE: If you add a namespace filter to an execution hook that runs after a restore or clone operation and the restore or clone source and destination are in different namespaces, the namespace filter is only applied to the destination namespace.
+Astra Control can restore your application from a snapshot or backup. Restoring from an existing snapshot will be faster when restoring the application to the same cluster. You can use the Astra Control UI or https://docs.netapp.com/us-en/astra-automation[Astra Control API^] to restore apps.
 
 .About this task
 
