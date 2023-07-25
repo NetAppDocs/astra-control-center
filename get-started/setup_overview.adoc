@@ -70,7 +70,8 @@ NOTE: You can https://docs.netapp.com/us-en/trident/trident-get-started/kubernet
 ** *Astra Trident storage backend configured*: At least one Astra Trident storage backend must be https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend[configured^] on the cluster.
 ** *Astra Trident storage classes configured*: At least one Astra Trident storage class must be https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[configured^] on the cluster. If a default storage class is configured, ensure that it is the only storage class that has the default annotation.
 ** *Astra Trident volume snapshot controller and volume snapshot class installed and configured*: The volume snapshot controller must be https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[installed^] so that snapshots can be created in Astra Control. At least one Astra Trident `VolumeSnapshotClass` has been https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#step-1-set-up-a-volumesnapshotclass[set up^] by an administrator.
-* *Kubeconfig accessible*: You have access to the https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[cluster kubeconfig^] that includes only one context element.
+* *Kubeconfig accessible*: You have access to the https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[default cluster kubeconfig^] that link:../get-started/install_acc.html#set-up-namespace-and-secret-for-registries-with-auth-requirements[you configured during installation^].
+// MW: Removed advice about only one context element, since Hemantha says that applies only for clusters we want to manage with ACC (ASTRADOC-157)
 * *ONTAP credentials*: You need ONTAP credentials and a superuser and user ID set on the backing ONTAP system to back up and restore apps with Astra Control Center. 
 +
 Run the following commands in the ONTAP command line:
@@ -99,7 +100,7 @@ If Astra Trident exists, you see output similar to the following:
 +
 ----
 NAME      VERSION
-trident   22.10.0
+trident   23.XX.X
 ----
 +
 If Astra Trident does not exist, you see output similar to the following:
@@ -131,9 +132,14 @@ NAME                  PROVISIONER            RECLAIMPOLICY  VOLUMEBINDINGMODE  A
 ontap-gold (default)  csi.trident.netapp.io  Delete         Immediate          true                  5d23h
 ----
 
-=== Create a limited cluster role kubeconfig
+=== Create a cluster role kubeconfig
 
-You can optionally create a limited administrator role for Astra Control Center. This is not a required procedure for Astra Control Center setup. This procedure helps create a separate kubeconfig that limits Astra Control permissions on the clusters it manages. 
+You can optionally create a limited permission or expanded permission administrator role for Astra Control Center. This is not a required procedure for Astra Control Center setup as you already configured a kubeconfig as part of the link:../get-started/install_acc.html#set-up-namespace-and-secret-for-registries-with-auth-requirements[installation process^]. 
+
+This procedure helps you to create a separate kubeconfig if either of the following scenarios applies to your environment:
+
+* You want to limit Astra Control permissions on the clusters it manages
+* You use multiple contexts and cannot use the default Astra Control kubeconfig configured during installation or a limited role with a single context won't work in your environment
 
 .Before you begin
 
@@ -147,8 +153,6 @@ NOTE: For this procedure, you do not need kubectl access to the cluster that is 
 * An active kubeconfig for the cluster you intend to manage with cluster admin rights for the active context
 
 .Steps
-[%collapsible]
-====
 . Create a service account:
 .. Create a service account file called `astracontrol-service-account.yaml`.
 +
@@ -175,8 +179,13 @@ metadata:
 kubectl apply -f astracontrol-service-account.yaml
 ----
 
-. Create a limited cluster role with the minimum permissions necessary for a cluster to be managed by Astra Control:
-.. Create a `ClusterRole` file called `astra-admin-account.yaml`.
+. Create one of the following cluster roles with sufficient permissions for a cluster to be managed by Astra Control:
+* *Limited cluster role*: This role contains the minimum permissions necessary for a cluster to be managed by Astra Control:
++
+.Steps
+[%collapsible]
+====
+.. Create a `ClusterRole` file called, for example, `astra-admin-account.yaml`.
 +
 Adjust the name and namespace as needed. If changes are made here, you should apply the same changes in the following steps.
 +
@@ -287,12 +296,73 @@ rules:
   - use
 ----
 
+.. (For OpenShift clusters only) Append the following at the end of the `astra-admin-account.yaml` file or after the `# Use PodSecurityPolicies` section:
++
+[source,console]
+----
+# OpenShift security
+- apiGroups:
+  - security.openshift.io
+  resources:
+  - securitycontextconstraints
+  verbs:
+  - use
+----
+
 .. Apply the cluster role:
 +
 [source,console]
 ----
 kubectl apply -f astra-admin-account.yaml
 ----
+
+====
+// End snippet
+
+* *Expanded cluster role*: This role contains expanded permissions for a cluster to be managed by Astra Control. You might use this role if you use multiple contexts and cannot use the default Astra Control kubeconfig configured during installation or a limited role with a single context won't work in your environment:
++
+NOTE: The following `ClusterRole` steps are a general Kubernetes example. Refer to the documentation for your Kubernetes distribution for instructions specific to your environment.
++
+.Steps
+[%collapsible]
+====
+.. Create a `ClusterRole` file called, for example, `astra-admin-account.yaml`.
++
+Adjust the name and namespace as needed. If changes are made here, you should apply the same changes in the following steps.
++
+[source]
+[subs="specialcharacters,quotes"]
+----
+*astra-admin-account.yaml*
+----
++
+[source,yaml]
+----
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: astra-admin-account
+rules:
+- apiGroups:
+  - '*'
+  resources:
+  - '*'
+  verbs:
+  - '*'
+- nonResourceURLs:
+  - '*'
+  verbs:
+  - '*'
+----
+
+.. Apply the cluster role:
++
+[source,console]
+----
+kubectl apply -f astra-admin-account.yaml
+----
+====
+// End snippet
 
 . Create the cluster role binding for the cluster role to the service account:
 .. Create a `ClusterRoleBinding` file called `astracontrol-clusterrolebinding.yaml`.
@@ -320,12 +390,67 @@ subjects:
   name: astracontrol-service-account
   namespace: default
 ----
++
 .. Apply the cluster role binding:
 +
 [source,console]
 ----
 kubectl apply -f astracontrol-clusterrolebinding.yaml
 ----
+. Create and apply the token secret:
+.. Create a token secret file called `secret-astracontrol-service-account.yaml`.
++
+[source]
+[subs="specialcharacters,quotes"]
+----
+*secret-astracontrol-service-account.yaml*
+----
++
+[source,yaml]
+----
+apiVersion: v1
+kind: Secret
+metadata:
+  name: secret-astracontrol-service-account
+  namespace: default
+  annotations:
+    kubernetes.io/service-account.name: "astracontrol-service-account"
+type: kubernetes.io/service-account-token
+----
+.. Apply the token secret:
++
+[source,console]
+----
+kubectl apply -f secret-astracontrol-service-account.yaml
+----
+
+. Add the token secret to the service account by adding its name to the `secrets` array (the last line in the following example):
++
+[source,console]
+----
+kubectl edit sa astracontrol-service-account
+----
++
+[source,subs="verbatim,quotes"]
+----
+apiVersion: v1
+imagePullSecrets:
+- name: astracontrol-service-account-dockercfg-48xhx
+kind: ServiceAccount
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"name":"astracontrol-service-account","namespace":"default"}}
+  creationTimestamp: "2023-06-14T15:25:45Z"
+  name: astracontrol-service-account
+  namespace: default
+  resourceVersion: "2767069"
+  uid: 2ce068c4-810e-4a96-ada3-49cbf9ec3f89
+secrets:
+- name: astracontrol-service-account-dockercfg-48xhx
+*- name: secret-astracontrol-service-account*
+----
+
 . List the service account secrets, replacing `<context>` with the correct context for your installation:
 +
 [source,console]
@@ -337,12 +462,12 @@ The end of the output should look similar to the following:
 +
 ----
 "secrets": [
-{ "name": "astracontrol-service-account-dockercfg-vhz87"},
-{ "name": "astracontrol-service-account-token-r59kr"}
+{ "name": "astracontrol-service-account-dockercfg-48xhx"},
+{ "name": "secret-astracontrol-service-account"}
 ]
 ----
 +
-The indices for each element in the `secrets` array begin with 0. In the above example, the index for `astracontrol-service-account-dockercfg-vhz87` would be 0 and the index for `astracontrol-service-account-token-r59kr` would be 1. In your output, make note of the index for the service account name that has the word "token" in it.
+The indices for each element in the `secrets` array begin with 0. In the above example, the index for `astracontrol-service-account-dockercfg-48xhx` would be 0 and the index for `secret-astracontrol-service-account` would be 1. In your output, make note of the index number for the service account secret. You will need this index number in the next step.
 . Generate the kubeconfig as follows:
 .. Create a `create-kubeconfig.sh` file. Replace `TOKEN_INDEX` in the beginning of the following script with the correct value.
 +
@@ -425,8 +550,6 @@ source create-kubeconfig.sh
 ----
 mv kubeconfig-sa YOUR_CLUSTER_NAME_kubeconfig
 ----
-====
-// End snippet
 
 === What's next?
 
@@ -592,8 +715,7 @@ You now have the following three files:
 
 . Install these certificates in ONTAP. Generate and install `server` and `server-ca` certificates on ONTAP.
 +
-Details in sample.yaml 
-+
+.Expand for sample.yaml 
 [%collapsible]
 ====
 ----

@@ -87,15 +87,14 @@ include::../_include/docker-podman-add-images.adoc[]
 
 == Set up namespace and secret for registries with auth requirements
 
-. Export the KUBECONFIG for the Astra Control Center host cluster:
+. Export the kubeconfig for the Astra Control Center host cluster:
 +
 [source,console]
 ----
 export KUBECONFIG=[file path]
 ----
 +
-NOTE: Before you complete the installation, be sure your KUBECONFIG is pointing to the cluster where you want to install Astra Control Center. The KUBECONFIG can contain only one context.
-
+IMPORTANT: Before you complete the installation, be sure your kubeconfig is pointing to the cluster where you want to install Astra Control Center.
 
 .  If you use a registry that requires authentication, you need to do the following:
 +
