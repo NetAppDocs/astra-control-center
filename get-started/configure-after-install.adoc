@@ -122,12 +122,17 @@ Add a new TLS certificate that is signed by a CA.
 ----
 kubectl create secret tls <secret-name> --key <private-key-filename> --cert <certificate-filename> -n <ACC-deployment-namespace>
 ----
+
 . Use the following command and example to edit the cluster Custom Resource Definition (CRD) file and change the `spec.selfSigned` value to `spec.ca.secretName` to refer to the TLS secret you created earlier:
 +
+[source,console]
 ----
 kubectl edit clusterissuers.cert-manager.io/cert-manager-certificates -n <ACC-deployment-namespace>
-....
-
+----
++
+CRD:
++
+----
 #spec:
 #  selfSigned: {}
 
@@ -135,12 +140,17 @@ spec:
   ca:
     secretName: <secret-name>
 ----
+
 . Use the following command and example output to validate that the changes are correct and the cluster is ready to validate certificates, replacing `<ACC-deployment-namespace>` with the Astra Control Center deployment namespace:
 +
+[source,yaml]
 ----
 kubectl describe clusterissuers.cert-manager.io/cert-manager-certificates -n <ACC-deployment-namespace>
-....
-
+----
++
+Response:
++
+----
 Status:
   Conditions:
     Last Transition Time:  2021-07-01T23:50:27Z
@@ -149,39 +159,47 @@ Status:
     Status:                True
     Type:                  Ready
 Events:                    <none>
-
 ----
+
 . Create the `certificate.yaml` file using the following example, replacing the placeholder values in brackets <> with appropriate information:
 +
 [source,yaml]
+
+[subs=+quotes]
 ----
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: <certificate-name>
+  *name: <certificate-name>*
   namespace: <ACC-deployment-namespace>
 spec:
-  secretName: <certificate-secret-name>
+  *secretName: <certificate-secret-name>*
   duration: 2160h # 90d
   renewBefore: 360h # 15d
   dnsNames:
-  - <astra.dnsname.example.com> #Replace with the correct Astra Control Center DNS address
+  *- <astra.dnsname.example.com>* #Replace with the correct Astra Control Center DNS address
   issuerRef:
     kind: ClusterIssuer
     name: cert-manager-certificates
 ----
+
 . Create the certificate using the following command:
 +
 [source,console]
 ----
 kubectl apply -f certificate.yaml
 ----
+
 . Using the following command and example output, validate that the certificate has been created correctly and with the arguments you specified during creation (such as name, duration, renewal deadline, and DNS names).
 +
+[source,console]
 ----
 kubectl describe certificate -n <ACC-deployment-namespace>
-....
-
+----
++
+Response:
++
+----
 Spec:
   Dns Names:
     astra.example.com
@@ -204,26 +222,36 @@ Status:
   Revision:                1
 Events:                    <none>
 ----
+
+. Edit the TLS stores CRD to point to your new certificate secret name using the following command and example, replacing the placeholder values in brackets <> with appropriate information
++
+----
+kubectl edit tlsstores.traefik.io -n <ACC-deployment-namespace>
+----
++
+CRD:
++
+----
+...
+spec:
+  defaultCertificate:
+    secretName: <certificate-secret-name>
+----
+
 . Edit the ingress CRD TLS option to point to your new certificate secret using the following command and example, replacing the placeholder values in brackets <> with appropriate information:
 +
 ----
-kubectl edit ingressroutes.traefik.containo.us -n <ACC-deployment-namespace>
-....
-
-# tls:
-#    options:
-#      name: default
-#    secretName: secure-testing-cert
-#    store:
-#      name: default
-
- tls:
-    options:
-      name: default
-    secretName: <certificate-secret-name>
-    store:
-      name: default
+kubectl edit ingressroutes.traefik.io -n <ACC-deployment-namespace>
 ----
++
+CRD:
++
+----
+...
+ tls:
+    secretName: <certificate-secret-name>
+----
+
 . Using a web browser, browse to the deployment IP address of Astra Control Center.
 . Verify that the certificate details match the details of the certificate you installed.
 . Export the certificate and import the result into the certificate manager in your web browser.
