@@ -109,6 +109,10 @@ kubectl get certificate -n <ACC-deployment-namespace>
 [source,console]
 ----
 kubectl delete cert cert-manager-certificates -n <ACC-deployment-namespace>
+----
++
+[source,console]
+----
 kubectl delete secret secure-testing-cert -n <ACC-deployment-namespace>
 ----
 
