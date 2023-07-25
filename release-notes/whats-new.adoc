@@ -20,8 +20,8 @@ We're pleased to announce the latest release of Astra Control Center.
 * link:../get-started/requirements.html#storage-backends[Support for using NetApp MetroCluster in a stretch configuration as a storage backend^]
 * link:../get-started/requirements.html#storage-backends[Support for using Longhorn as a storage backend^]
 * link:../use/replicate_snapmirror.html#delete-an-application-replication-relationship[Applications can now be replicated between ONTAP backends from the same Kubernetes cluster]
-* link:../use/manage-remote-authentication.html[Astra Control Center now supports `userPrincipalName` as an alternative login attribute for remote (LDAP) users^]
-* link:../use/execution-hooks.html[New execution hook type `post-failover` can be run after replication failover with Astra Control Center^]
+* link:../use/manage-remote-authentication.html[Astra Control Center now supports 'userPrincipalName' as an alternative login attribute for remote (LDAP) users^]
+* link:../use/execution-hooks.html[New execution hook type 'post-failover' can be run after replication failover with Astra Control Center^]
 * Clone workflows now support live clones only (the current state of managed application). To clone from a snapshot or backup, use the link:../use/restore-apps.html[restore workflow^].
 
 .Known issues and limitations

@@ -13,7 +13,7 @@ summary: To install Astra Control Center after addressing some environmental pre
 [.lead]
 To install Astra Control Center, download the installation bundle from the NetApp Support Site and perform the following steps. You can use this procedure to install Astra Control Center in internet-connected or air-gapped environments.
 
-.Other installation procedures
+.Expand for other installation procedures
 [%collapsible]
 ====
 * *Install with RedHat Openshift OperatorHub*: Use this link:../get-started/acc_operatorhub_install.html[alternative procedure] to install Astra Control Center on Openshift using OperatorHub.
@@ -98,7 +98,7 @@ IMPORTANT: Before you complete the installation, be sure your kubeconfig is poin
 
 .  If you use a registry that requires authentication, you need to do the following:
 +
-.Steps
+.Expand for steps
 [%collapsible]
 ====
 .. Create the `netapp-acc-operator` namespace:
@@ -164,7 +164,7 @@ imagePullSecrets: [{name: astra-registry-cred}]
 .. Change `[your_registry_path]` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in a <<Add the images to your local registry,previous step>>.
 
 +
-.Sample astra_control_center_operator_deploy.yaml
+.Expand for sample astra_control_center_operator_deploy.yaml
 [%collapsible]
 ====
 [subs=+quotes]
@@ -247,7 +247,7 @@ spec:
 kubectl apply -f astra_control_center_operator_deploy.yaml
 ----
 +
-.Sample response:
+.Expand for sample response:
 [%collapsible]
 ====
 ----
@@ -569,7 +569,7 @@ CRDs are cluster-wide objects and installing them might have an impact on other 
 
 IMPORTANT: Be sure that you have selected the correct storage class and ingress type for your configuration before completing installation.
 
-.Sample astra_control_center.yaml
+.Expand for sample astra_control_center.yaml
 [%collapsible]
 ====
 [subs=+quotes]
@@ -649,7 +649,7 @@ kubectl get pods -n [netapp-acc or custom namespace]
 +
 Each pod should have a status of `Running`. It may take several minutes before the system pods are deployed.
 +
-.Sample response
+.Expand for sample response
 [%collapsible]
 ====
 [subs=+quotes]

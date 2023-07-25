@@ -182,7 +182,7 @@ kubectl apply -f astracontrol-service-account.yaml
 . Create one of the following cluster roles with sufficient permissions for a cluster to be managed by Astra Control:
 * *Limited cluster role*: This role contains the minimum permissions necessary for a cluster to be managed by Astra Control:
 +
-.Steps
+.Expand for steps
 [%collapsible]
 ====
 .. Create a `ClusterRole` file called, for example, `astra-admin-account.yaml`.
@@ -323,7 +323,7 @@ kubectl apply -f astra-admin-account.yaml
 +
 NOTE: The following `ClusterRole` steps are a general Kubernetes example. Refer to the documentation for your Kubernetes distribution for instructions specific to your environment.
 +
-.Steps
+.Expand for steps
 [%collapsible]
 ====
 .. Create a `ClusterRole` file called, for example, `astra-admin-account.yaml`.
@@ -800,8 +800,7 @@ Certificate chain
 
 . Generate and install the client certificates on ONTAP:
 +
-Details in sample.yaml 
-+
+.Expand for sample.yaml 
 [%collapsible]
 ====
 ----
