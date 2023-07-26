@@ -110,7 +110,7 @@ kubectl create ns netapp-acc-operator
 
 .. Create a secret for the `netapp-acc-operator` namespace. Add Docker information and run the following command:
 +
-NOTE: The placeholder `your_registry_path` should match the location of the images that you uploaded earlier (for example, `[Registry_URL]/netapp/astra/astracc/23.04.2-7`).
+NOTE: The placeholder `your_registry_path` should match the location of the images that you uploaded earlier (for example, `[Registry_URL]/netapp/astra/astracc/23.07.0-24`).
 +
 [source,console]
 ----
@@ -312,7 +312,7 @@ NOTE: An annotated sample YAML follows these steps.
 | `astraVersion`
 | The version of Astra Control Center to deploy. No action is needed for this setting as the value will be pre-populated.
 | string
-| `23.04.2-7`
+| `23.07.0-24`
 |===
 ====
 // End snippet
@@ -768,7 +768,7 @@ Response:
 +
 ----
 NAME    UUID                                  VERSION     ADDRESS         READY
-astra   9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f  23.04.2-7   10.111.111.111  True
+astra   9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f  23.07.0-24   10.111.111.111  True
 ----
 +
 IMPORTANT: Copy the UUID value. The password is `ACC-` followed by the UUID value (`ACC-[UUID]` or, in this example, `ACC-9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f`).
