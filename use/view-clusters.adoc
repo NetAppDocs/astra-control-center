@@ -23,7 +23,7 @@ You can view details about the cluster, such as its location, the worker nodes, 
 . On the *Clusters* page, select the cluster whose details you want to view.
 //DOC-3613/Q2 and PI4
 +
-NOTE: If a cluster is in `removed` state yet cluster and network connectivity appears healthy (external attempts to access the cluster using Kubernetes APIs are successful), the kubeconfig you provided to Astra Control might no longer be valid. This can be due to certificate rotation or expiration on the cluster. To correct this issue, update the credentials associated with the cluster in Astra Control using the link:https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API].
+NOTE: If a cluster is in `removed` state yet cluster and network connectivity appears healthy (external attempts to access the cluster using Kubernetes APIs are successful), the kubeconfig you provided to Astra Control might no longer be valid. This can be due to certificate rotation or expiration on the cluster. To correct this issue, update the credentials associated with the cluster in Astra Control using the https://docs.netapp.com/us-en/astra-automation[Astra Control API].
 
 . View the information on the *Overview*, *Storage*, and *Activity* tabs to find the information that you're looking for.
 +

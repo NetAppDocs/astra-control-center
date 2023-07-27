@@ -82,7 +82,8 @@ No. While Astra Control can discover applications that are using non-NetApp stor
 
 *Should I manage Astra Control itself?*
 
-No, you should not manage Astra Control itself because it is a "system application."
+//No, you should not manage Astra Control itself because it is a "system application."
+Astra Control Center is not shown by default as an application that you can manage, but you can back up and restore an Astra Control Center instance using another Astra Control Center instance.
 
 *Do unhealthy pods affect app management?*
 

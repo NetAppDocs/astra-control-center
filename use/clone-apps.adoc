@@ -13,9 +13,7 @@ summary: Clone an existing app to create a duplicate app on the same Kubernetes 
 [.lead]
 You can clone an existing app to create a duplicate app on the same Kubernetes cluster or on another cluster. When Astra Control clones an app, it creates a clone of your application configuration and persistent storage.
 
-Cloning can help if you need to move applications and storage from one Kubernetes cluster to another. For example, you might want to move workloads through a CI/CD pipeline and across Kubernetes namespaces. You can use the Astra Control Center UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to clone and migrate apps.
-
-NOTE: If you add a namespace filter to an execution hook that runs after a restore or clone operation and the restore or clone source and destination are in different namespaces, the namespace filter is only applied to the destination namespace.
+Cloning can help if you need to move applications and storage from one Kubernetes cluster to another. For example, you might want to move workloads through a CI/CD pipeline and across Kubernetes namespaces. You can use the Astra Control Center UI or https://docs.netapp.com/us-en/astra-automation[Astra Control API^] to clone and migrate apps.
 
 .Before you begin
 
@@ -41,6 +39,7 @@ During app cloning in OpenShift environments, Astra Control Center needs to allo
 * *Clones use default buckets*: During an app backup or app restore, you can optionally specify a bucket ID. An app clone operation, however, always uses the default bucket that has been defined. There is no option to change buckets for a clone. If you want control over which bucket is used, you can either link:../use/manage-buckets.html#edit-a-bucket[change the bucket default] or do a link:../use/protect-apps.html#create-a-backup[backup] followed by a link:../use/restore-apps.html[restore] separately.
 * *With Jenkins CI*: If you clone an operator-deployed instance of Jenkins CI, you need to manually restore the persistent data. This is a limitation of the app's deployment model.
 * *With S3 buckets*: S3 buckets in Astra Control Center do not report available capacity. Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
+* *With a specific version of PostgreSQL*: App clones within the same cluster consistently fail with the Bitnami PostgreSQL 11.5.0 chart. To clone successfully, use an earlier or later version of the chart.
 
 .OpenShift considerations
 
@@ -71,9 +70,8 @@ During app cloning in OpenShift environments, Astra Control Center needs to allo
 NOTE: Astra Control creates new destination namespaces as part of the clone operation. Destination namespaces that you specify must not be already present on the destination cluster.
 
 * Select *Next*.
-* Choose whether you want to create the clone from an existing snapshot or backup. If you don't select this option, Astra Control Center creates the clone from the app's current state.
-** If you chose to clone from an existing snapshot or backup, choose the snapshot or backup that you'd like to use.
-* Select *Next*.
+// * Choose whether you want to create the clone from an existing snapshot or backup. If you don't select this option, Astra Control Center creates the clone from the app's current state.
+// ** If you chose to clone from an existing snapshot or backup, choose the snapshot or backup that you'd like to use.
 * Choose to keep the original storage class associated with the app or select a different storage class.
 +
 NOTE: You can migrate an app's storage class to a native cloud provider storage class or other supported storage class, link:../use/restore-apps.html#migrate-from-ontap-nas-economy-storage-to-ontap-nas-storage[migrate an app from a storage class backed by `ontap-nas-economy`^] to a storage class backed by `ontap-nas` on the same cluster, or copy the app to another cluster with a storage class backed by the `ontap-nas-economy` driver.

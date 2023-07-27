@@ -166,4 +166,4 @@ You can remove a storage backend that is no longer in use. You might want to do 
 
 == Find more information
 
-* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra Control API^]
+* https://docs.netapp.com/us-en/astra-automation[Use the Astra Control API^]

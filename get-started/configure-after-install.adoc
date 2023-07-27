@@ -73,64 +73,6 @@ cpu-limit-range   2022-06-27T19:01:23Z
 kubectl delete limitrange cpu-limit-range -n [netapp-acc or custom namespace]
 ----
 
-== Enable network communication between namespaces
-Some environments use NetworkPolicy constructs to restrict traffic between namespaces. The Astra Control Center operator and Astra Control Center are in different namespaces. The services in these different namespaces need to be able to communicate with one another. To enable this communication, follow these steps.
-
-.Steps
-
-. Delete any NetworkPolicy resources that exist in the Astra Control Center namespace:
-+
-[source,console]
-----
-kubectl get networkpolicy -n [netapp-acc or custom namespace]
-----
-. For each NetworkPolicy object that is returned by the preceding command, use the following command to delete it. Replace [OBJECT_NAME] with the name of the returned object:
-+
-[source,console]
-----
-kubectl delete networkpolicy [OBJECT_NAME] -n [netapp-acc or custom namespace]
-----
-
-. Apply the following resource file to configure the `acc-avp-network-policy` object to allow  Astra plugin services to make requests to Astra Control Center services. Replace the information in brackets <> with information from your environment:
-+
-[source,yaml]
-----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: acc-avp-network-policy
-  namespace: <ACC_NAMESPACE_NAME> # REPLACE THIS WITH THE ASTRA CONTROL CENTER NAMESPACE NAME
-spec:
-  podSelector: {}
-  policyTypes:
-    - Ingress
-  ingress:
-    - from:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: <PLUGIN_NAMESPACE_NAME> # REPLACE THIS WITH THE ASTRA PLUGIN NAMESPACE NAME
-----
-
-. Apply the following resource file to configure the `acc-operator-network-policy` object to allow the Astra Control Center operator to communicate with Astra Control Center services. Replace the information in brackets <> with information from your environment:
-+
-[source,yaml]
-----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: acc-operator-network-policy
-  namespace: <ACC_NAMESPACE_NAME> # REPLACE THIS WITH THE ASTRA CONTROL CENTER NAMESPACE NAME
-spec:
-  podSelector: {}
-  policyTypes:
-    - Ingress
-  ingress:
-    - from:
-        - namespaceSelector:
-            matchLabels:
-              kubernetes.io/metadata.name: <NETAPP-ACC-OPERATOR> # REPLACE THIS WITH THE OPERATOR NAMESPACE NAME
-----
-
 == Add a custom TLS certificate
 
 Astra Control Center uses a self-signed TLS certificate by default for ingress controller traffic (only in certain configurations) and web UI authentication with web browsers. You can remove the existing self-signed TLS certificate and replace it with a TLS certificate signed by a Certificate Authority (CA).
@@ -167,6 +109,10 @@ kubectl get certificate -n <ACC-deployment-namespace>
 [source,console]
 ----
 kubectl delete cert cert-manager-certificates -n <ACC-deployment-namespace>
+----
++
+[source,console]
+----
 kubectl delete secret secure-testing-cert -n <ACC-deployment-namespace>
 ----
 
@@ -180,12 +126,17 @@ Add a new TLS certificate that is signed by a CA.
 ----
 kubectl create secret tls <secret-name> --key <private-key-filename> --cert <certificate-filename> -n <ACC-deployment-namespace>
 ----
+
 . Use the following command and example to edit the cluster Custom Resource Definition (CRD) file and change the `spec.selfSigned` value to `spec.ca.secretName` to refer to the TLS secret you created earlier:
 +
+[source,console]
 ----
 kubectl edit clusterissuers.cert-manager.io/cert-manager-certificates -n <ACC-deployment-namespace>
-....
-
+----
++
+CRD:
++
+----
 #spec:
 #  selfSigned: {}
 
@@ -193,12 +144,17 @@ spec:
   ca:
     secretName: <secret-name>
 ----
+
 . Use the following command and example output to validate that the changes are correct and the cluster is ready to validate certificates, replacing `<ACC-deployment-namespace>` with the Astra Control Center deployment namespace:
 +
+[source,yaml]
 ----
 kubectl describe clusterissuers.cert-manager.io/cert-manager-certificates -n <ACC-deployment-namespace>
-....
-
+----
++
+Response:
++
+----
 Status:
   Conditions:
     Last Transition Time:  2021-07-01T23:50:27Z
@@ -207,39 +163,47 @@ Status:
     Status:                True
     Type:                  Ready
 Events:                    <none>
-
 ----
+
 . Create the `certificate.yaml` file using the following example, replacing the placeholder values in brackets <> with appropriate information:
 +
 [source,yaml]
+
+[subs=+quotes]
 ----
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: <certificate-name>
+  *name: <certificate-name>*
   namespace: <ACC-deployment-namespace>
 spec:
-  secretName: <certificate-secret-name>
+  *secretName: <certificate-secret-name>*
   duration: 2160h # 90d
   renewBefore: 360h # 15d
   dnsNames:
-  - <astra.dnsname.example.com> #Replace with the correct Astra Control Center DNS address
+  *- <astra.dnsname.example.com>* #Replace with the correct Astra Control Center DNS address
   issuerRef:
     kind: ClusterIssuer
     name: cert-manager-certificates
 ----
+
 . Create the certificate using the following command:
 +
 [source,console]
 ----
 kubectl apply -f certificate.yaml
 ----
+
 . Using the following command and example output, validate that the certificate has been created correctly and with the arguments you specified during creation (such as name, duration, renewal deadline, and DNS names).
 +
+[source,console]
 ----
 kubectl describe certificate -n <ACC-deployment-namespace>
-....
-
+----
++
+Response:
++
+----
 Spec:
   Dns Names:
     astra.example.com
@@ -262,26 +226,36 @@ Status:
   Revision:                1
 Events:                    <none>
 ----
+
+. Edit the TLS stores CRD to point to your new certificate secret name using the following command and example, replacing the placeholder values in brackets <> with appropriate information
++
+----
+kubectl edit tlsstores.traefik.io -n <ACC-deployment-namespace>
+----
++
+CRD:
++
+----
+...
+spec:
+  defaultCertificate:
+    secretName: <certificate-secret-name>
+----
+
 . Edit the ingress CRD TLS option to point to your new certificate secret using the following command and example, replacing the placeholder values in brackets <> with appropriate information:
 +
 ----
-kubectl edit ingressroutes.traefik.containo.us -n <ACC-deployment-namespace>
-....
-
-# tls:
-#    options:
-#      name: default
-#    secretName: secure-testing-cert
-#    store:
-#      name: default
-
- tls:
-    options:
-      name: default
-    secretName: <certificate-secret-name>
-    store:
-      name: default
+kubectl edit ingressroutes.traefik.io -n <ACC-deployment-namespace>
 ----
++
+CRD:
++
+----
+...
+ tls:
+    secretName: <certificate-secret-name>
+----
+
 . Using a web browser, browse to the deployment IP address of Astra Control Center.
 . Verify that the certificate details match the details of the certificate you installed.
 . Export the certificate and import the result into the certificate manager in your web browser.
