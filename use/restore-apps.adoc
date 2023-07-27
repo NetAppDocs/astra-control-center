@@ -11,9 +11,7 @@ summary: Astra can restore your application configuration and persistent storage
 :imagesdir: ../media/use/
 
 [.lead]
-Astra Control can restore your application from a snapshot or backup. Restoring from an existing snapshot will be faster when restoring the application to the same cluster. You can use the Astra Control UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to restore apps.
-
-NOTE: If you add a namespace filter to an execution hook that runs after a restore or clone operation and the restore or clone source and destination are in different namespaces, the namespace filter is only applied to the destination namespace.
+Astra Control can restore your application from a snapshot or backup. Restoring from an existing snapshot will be faster when restoring the application to the same cluster. You can use the Astra Control UI or https://docs.netapp.com/us-en/astra-automation[Astra Control API^] to restore apps.
 
 .About this task
 
@@ -91,7 +89,7 @@ IMPORTANT: Any member user with namespace constraints by namespace name/ID or by
 
 You can add a filter rule to a link:../use/restore-apps.html[restore] operation that will specify existing application resources to be included or excluded from the restored application. You can include or exclude resources based on a specified namespace, label, or GVK (GroupVersionKind). 
 
-.Read more about include and exclude scenarios
+.Expand for more about include and exclude scenarios
 [%collapsible]
 ====
 * *You select an include rule with original namespaces (in-place restore)*: Existing application resources that you define in the rule will be deleted and replaced by those from the selected snapshot or backup you are using for the restore. Any resources that you do not specify in the include rule will remain unchanged.

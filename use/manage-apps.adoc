@@ -74,7 +74,7 @@ kubectl apply -f myapp.yaml
 +
 The following are some operator apps that follow these patterns:
 
-** https://github.com/k8ssandra/cass-operator/tree/v1.7.1[Apache K8ssandra^]
+** https://github.com/k8ssandra/cass-operator[Apache K8ssandra^]
 +
 NOTE: For K8ssandra, in-place restore operations are supported. A restore operation to a new namespace or cluster requires that the original instance of the application to be taken down. This is to ensure that the peer group information carried over does not lead to cross-instance communication. Cloning of the app is not supported.
 
@@ -124,7 +124,7 @@ Defining an app gives you more granular control over what to include in an Astra
 
 WARNING: When defining apps, ensure that you do not include a Kubernetes resource in multiple apps with protection policies. Overlapping protection policies on Kubernetes resources can cause data conflicts. <<Example: Separate Protection Policy for different releases, Read more in an example.>>
 
-.Read more about adding cluster-scoped resources to your app namespaces.
+.Expand for more about adding cluster-scoped resources to your app namespaces.
 [%collapsible]
 ====
 You can import cluster resources that are associated with the namespace resources in addition to those Astra Control included automatically. You can add a rule that will include resources of a specific group, kind, version and optionally, label. You might want to do this if there are resources that Astra Control does not include automatically. 
@@ -224,7 +224,9 @@ You can display system namespaces from the Namespaces tab for a selected cluster
 
 image:acc_namespace_system.png[A screenshot that shows the *Show system namespaces* option that is available in the Namespaces tab.]
 
-TIP: Astra Control itself is not a standard app; it is a "system app." You should not try to manage Astra Control itself. Astra Control itself isn't shown by default for management.
+//TIP: Astra Control itself is not a standard app; it is a "system app." You should not try to manage Astra Control itself. Astra Control itself isn't shown by default for management.
+
+TIP: Astra Control Center is not shown by default as an application that you can manage, but you can back up and restore an Astra Control Center instance using another Astra Control Center instance.
 
 == Example: Separate Protection Policy for different releases
 
@@ -238,5 +240,5 @@ In order to avoid possible data conflicts, the admin will create two apps: one f
 
 == Find more information
 
-* https://docs.netapp.com/us-en/astra-automation/index.html[Use the Astra Control API^]
+* https://docs.netapp.com/us-en/astra-automation[Use the Astra Control API^]
 * link:../use/unmanage.html[Unmanage an app]

@@ -11,7 +11,7 @@ entries:
         url: /use/protect-apps.html
       - title: Restore apps
         url: /use/restore-apps.html
-      - title: Replicate apps to a remote system
+      - title: Replicate apps between storage backends
         url: /use/replicate_snapmirror.html
       - title: Clone and migrate apps
         url: /use/clone-apps.html
