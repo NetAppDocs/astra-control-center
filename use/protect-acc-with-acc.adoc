@@ -11,80 +11,181 @@ summary:
 :imagesdir: ../media/use/
 
 [.lead]
-You can clone an existing app to create a duplicate app on the same Kubernetes cluster or on another cluster. When Astra Control clones an app, it creates a clone of your application configuration and persistent storage.
+Astra Control Center can itself be backed up as protection against a fatal error on a Kubernetes cluster where Astra Control Center is running. In this case, another instance of Astra Control Center  can be deployed and configured in a different fault domain to protect the primary Astra Control Center  instance. The new Astra Control Center  instance should be run on a different Kubernetes cluster than the primary and it is used to back up and potentially restore the primary Astra Control Center  instance. The restored Astra Control Center  instance will continue to provide application data management for the application cluster applications and restore accessibility to previous backups and snapshots of those applications.
 
-Cloning can help if you need to move applications and storage from one Kubernetes cluster to another. For example, you might want to move workloads through a CI/CD pipeline and across Kubernetes namespaces. You can use the Astra Control Center UI or https://docs.netapp.com/us-en/astra-automation[Astra Control API^] to clone and migrate apps.
+This document outlines the procedure used to backup and restore a primary Astra Control Center  instance..
+
+.About this task
+
+Astra Control Center  can be deployed with two methods and both methods are covered in this document:
+•	Deploy the operator in a different namespace than the Astra Custom Resource
+•	Deploy the operator in the same namespace as the Astra Custom Resource
+This procedure uses the example setup depicted below. In this case, the secondary Astra Control Center  instance (app-lb-14.rtp.openenglab.netapp.com) is deployed on the Openshift cluster called ocp-app-qa2 and will be used to provide the application data management for the ocp-app-qa4 cluster. The ocp-app-qa4 cluster is running the primary Astra Control Center  instance (https://app-lb-15.rtp.openenglab.netapp.com/), managing the application clusters. Although not depicted in the diagram, all the clusters have ONTAP backends with Trident installed. The Openshift clusters are using Metallb as the load balancer. The snapshot controller and volumeSnapshotClass is also installed on all the clusters as outlined in the prerequisites. Additionally, ocp-app-qa4 could have applications that are being managed by the primary or secondary Astra Control Center  instance. They are not shown here for brevity. 
+
+This procedure will outline steps necessary to backup and restore Astra Control Center  to a new cluster. 
+The below screenshots are taken from release 23.04.
+The steps in this procedure use the above example setup and backup Astra Control Center  on the ocp-app-qa4 cluster and restore Astra Control Center  onto the ocp-app-qa1cluster. 
+In this example, Astra Control Center  is always installed under the netapp-acc namespace and the operator is installed under the netapp-acc-operator namespace.
+
 
 .Before you begin
 
-* *Check destination volumes*: If you clone to a different storage class, ensure that the storage class uses the same persistent volume access mode (for example, ReadWriteMany). The clone operation will fail if the destination persistent volume access mode is different. For example, if your source persistent volume uses the RWX access mode, selecting a destination storage class that is not able to provide RWX, such as Azure Managed Disks, AWS EBS, Google Persistent Disk or `ontap-san`, will cause the clone operation to fail. For more information about persistent volume access modes, refer to the https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes[Kubernetes^] documentation.
-* To clone apps to a different cluster, you need to make sure the cloud instances containing the source and destination clusters (if they are not the same) have a default bucket. You'll need to assign a default bucket for each cloud instance.
-* During clone operations, apps that need an IngressClass resource or webhooks to function properly must not have those resources already defined on the destination cluster.
+The following is required to backup and restore ACC. All clusters must have the prerequisites as described by the Astra Control documentation. All Astra Control Center  instances must have an accessible S3 compatible object storage bucket.  
 
-[NOTE]
-======================
-During app cloning in OpenShift environments, Astra Control Center needs to allow OpenShift to mount volumes and change the ownership of files. Because of this, you need to configure an ONTAP volume export policy to allow these operations. You can do so with the following commands:
-
-. `export-policy rule modify -vserver <storage virtual machine name> -policyname <policy name> -ruleindex 1 -superuser sys`
-
-. `export-policy rule modify -vserver <storage virtual machine name> -policyname <policy name> -ruleindex 1 -anon 65534`
-======================
-
-.Clone limitations
-
-* *Explicit storage classes*: If you deploy an app with a storage class explicitly set and you need to clone the app, the target cluster must have the originally specified storage class. Cloning an application with an explicitly set storage class to a cluster that does not have the same storage class will fail.
-* *ontap-nas-economy-backed storage class*: If your app uses a storage class backed by the `ontap-nas-economy` driver, the backup portion of a clone operation is disruptive. The source application is not available until the backup is complete. The restore portion of the clone operation is non-disruptive.
-* *Clones and user constraints*: Any member user with namespace constraints by namespace name/ID or by namespace labels can clone or restore an app to a new namespace on the same cluster or to any other cluster in their organization's account. However, the same user cannot access the cloned or restored app in the new namespace. After a new namespace is created by a clone or restore operation, the account admin/owner can edit the member user account and update role constraints for the affected user to grant access to the new namespace.
-//DOC-3595/ASTRACTL-10071/Q2 and PI4
-* *Clones use default buckets*: During an app backup or app restore, you can optionally specify a bucket ID. An app clone operation, however, always uses the default bucket that has been defined. There is no option to change buckets for a clone. If you want control over which bucket is used, you can either link:../use/manage-buckets.html#edit-a-bucket[change the bucket default] or do a link:../use/protect-apps.html#create-a-backup[backup] followed by a link:../use/restore-apps.html[restore] separately.
-* *With Jenkins CI*: If you clone an operator-deployed instance of Jenkins CI, you need to manually restore the persistent data. This is a limitation of the app's deployment model.
-* *With S3 buckets*: S3 buckets in Astra Control Center do not report available capacity. Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
-* *With a specific version of PostgreSQL*: App clones within the same cluster consistently fail with the Bitnami PostgreSQL 11.5.0 chart. To clone successfully, use an earlier or later version of the chart.
-
-.OpenShift considerations
-
-* *Clusters and OpenShift versions*: If you clone an app between clusters, the source and destination clusters must be the same distribution of OpenShift. For example, if you clone an app from an OpenShift 4.7 cluster, use a destination cluster that is also OpenShift 4.7.
-* *Projects and UIDs*: When you create a project for hosting an app on an OpenShift cluster, the project (or Kubernetes namespace) is assigned a SecurityContext UID. To enable Astra Control Center to protect your app and move the app to another cluster or project in OpenShift, you need to add policies that enable the app to run as any UID. As an example, the following OpenShift CLI commands grant the appropriate policies to a WordPress app.
-+
-`oc new-project wordpress`
-`oc adm policy add-scc-to-group anyuid system:serviceaccounts:wordpress`
-`oc adm policy add-scc-to-user privileged -z default -n wordpress`
+* A Kubernetes cluster running the primary Astra Control Center  instance: This cluster hosts the primary Astra Control Center  instance which manages application clusters.
+* A Kubernetes cluster running the secondary Astra Control Center  instance: This cluster hosts the Astra Control Center  instance that manages the primary Astra Control Center  instance.
+* A Kubernetes cluster of the same Kubernetes distribution type as the primary: This cluster will host the restored instance of ACC. It must have the same Astra Control Center  namespace available as currently deployed on the primary. For example, if Astra Control Center  is deployed in namespace netapp-acc on the source cluster, the namespace netapp-acc must be available (not used) on the destination Kubernetes cluster. A load balancer must also be configured to provide an IP address for Astra and must have network connectivity to the application clusters and both S3 buckets.
 
 .Steps
 
-. Select *Applications*.
-. Do one of the following:
-+
-* Select the Options menu in the *Actions* column for the desired app.
-* Select the name of the desired app, and select the status drop-down list at the top right of the page.
-. Select *Clone*.
-//+
-//image:screenshot-create-clone.gif["A screenshot of the app page where you can select the drop-down list in the actions column and select Clone."]
+Step 1: Manage the Primary Astra Control Center  Application and Destination Cluster from Secondary Astra Control Center  instance
+After the primary and secondary Astra Control Center  instances are installed per the documentation, log into the secondary Astra Control Center  instance and manage the primary Astra Control Center  cluster (ocp-app-qa4 in the below image) and the destination cluster (ocp-app-qa1). 
 
-. Specify details for the clone:
-+
-* Enter a name.
-* Choose a destination cluster for the clone.
-* Enter destination namespaces for the clone. Each source namespace associated with the app maps to the destination namespace you define.
-+
-NOTE: Astra Control creates new destination namespaces as part of the clone operation. Destination namespaces that you specify must not be already present on the destination cluster.
+  
 
-* Select *Next*.
-// * Choose whether you want to create the clone from an existing snapshot or backup. If you don't select this option, Astra Control Center creates the clone from the app's current state.
-// ** If you chose to clone from an existing snapshot or backup, choose the snapshot or backup that you'd like to use.
-* Choose to keep the original storage class associated with the app or select a different storage class.
-+
-NOTE: You can migrate an app's storage class to a native cloud provider storage class or other supported storage class, link:../use/restore-apps.html#migrate-from-ontap-nas-economy-storage-to-ontap-nas-storage[migrate an app from a storage class backed by `ontap-nas-economy`^] to a storage class backed by `ontap-nas` on the same cluster, or copy the app to another cluster with a storage class backed by the `ontap-nas-economy` driver.
-+
-NOTE: If you select a different storage class and this storage class doesn't exist at the moment of restore, an error will be returned.
+Step 2: Manage Astra Control Center  and the Astra Control Center  Operator 
+On the secondary ACC:
+•	Click on the “Applications” tab on the left, then click “Define”
+•	Select the cluster that the primary Astra Control Center  is on (e.g. ocp-app-qa4)
+•	Find “netapp-acc” in the dropdown
+•	Click on “Next”
 
-. Select *Next*.
-. Review the information about the clone and select *Clone*.
 
-.Result
+•	On the “Cluster Resources” page, select the “include additional cluster-scoped resources” checkbox, then click on “+ Add include rule”
+•	Select the below entries, click “Add”
 
-Astra Control clones the app based on the information that you provided. The clone operation is successful when the new app clone is in `Healthy` state on the *Applications* page.
+ 
+•	Click “Next”, confirm the “Review Application Information” screen is correct, then click “Define”.
+•	Perform the same steps for the netapp-acc-operator.
 
-After a new namespace is created by a clone or restore operation, the account admin/owner can edit the member user account and update role constraints for the affected user to grant access to the new namespace.
+Step 3: Backup Astra Control Center  and the operator 
 
-NOTE: After a data protection operation (clone, backup, or restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
+On the secondary ACC, navigate to the Applications screen by selecting the Applications tab to the left
+If the user clicks on each application, they can set up a protection policy that includes a backup schedule – which create backups of the Astra Control Center  applications on a regular basis.
+Or the user can create an on-demand backup.  To create an on-demand backup, click on the ellipsis on the right side of the Application screen above, and select “Back up”. 
+Backup Astra Control Center  (netapp-acc in below screenshot) then the netapp-acc-operator.
+
+ 
+Step 4: Configure the Disaster Recovery (DR) scenario
+
+Now that Astra Control Center  and the operator are backed up, to simulate a DR scenario, uninstall the primary Astra Control Center  system.
+Procedure here: https://docs.netapp.com/us-en/astra-control-center/use/uninstall_acc.html
+The reason for doing this is because we are going to restore Astra Control Center  to a new cluster and use the exact same DNS/IP addresses for the newly installed ACC. 
+
+Step 5: Restore Astra Control Center  from Backup 
+
+Using the secondary ACC, restore the primary Astra Control Center  application from the backup as depicted below. The destination namespace must be the same as the source namespace. In the case where Astra Control Center  was deleted from the source cluster, the backups will still exist and perform the same steps.
+
+ 
+
+Choose the destination cluster and change the namespace to be the same namespace as the source.
+ 
+
+Select the backup that was taken earlier:
+ 
+
+
+Select “Restore using original storage classes”
+ 
+
+
+Select “Restore all resources”
+ 
+
+Review then click on “Restore” to start the restore process:
+ 
+
+It will show Astra Control Center  being restored to the destination cluster (ocp-app-qa1) and will eventually become “Available”.
+
+ 
+ 
+
+Step 6: Confirm the Astra Control Center  Restore ran correctly and configure if needed 
+
+1.	Open a terminal and connect to the new cluster that has Astra Control Center  installed.
+2.	Run the following command to confirm the DNS is correct:  kubectl get acc -n netapp-acc:
+ 
+Note how the DNS address is identical to the Astra Control Center  system it was restored from.
+3.	If this isn’t the case, run the following command:  kubectl edit acc -n netapp-acc
+a.	Then change the DNS name under “spec:” to match what the primary system’s DNS name is.
+4.	Run “nslookup <above DNS name> to determine the IP address that the DNS address resolves to
+5.	Configure the load balancer to point to the primary system’s IP address.  
+
+If running metallb as the load balancer:
+a.	Run the following command: “kubectl edit ipaddresspool.metallb.io/first-pool  -n metallb-system”
+b.	Replace the two IP addresses with the IP address that nslookup returned and save the deployment (:wq)
+c.	Run the following command: “kubectl rollout restart deployment controller -n metallb-system”
+6.	Within a minute or two and the DNS address should resolve in the UI.
+
+Step 7: Restore the Astra Control Center  Operator 
+
+Using the secondary ACC, restore the primary Astra Control Center  operator from the backup as depicted below. The destination namespace must be the same as the source namespace. In the case where Astra Control Center  was deleted from the source cluster, the backups will still exist and perform the same steps.
+
+ 
+
+Choose the destination cluster and change the namespace to be the same namespace as the source.
+ 
+
+Select the backup that was taken earlier:
+ 
+
+
+Select “Restore using original storage classes”
+ 
+
+
+Select “Restore all resources”
+ 
+
+Review then click on “Restore” to start the restore process:
+ 
+
+It will show the Astra Control Center  operator being restored to the destination cluster (ocp-app-qa1) and will eventually become “Available”.
+
+Step 8: Confirm the Operator and the Astra Control Center  CR are reconciled. 
+
+Because we can connect to the UI above, most likely the system is up and running.  But it’s good to double-check the following to ensure the system is healthy.
+Run the following command and confirm the operator is running:  “kubectl get pods -A | grep netapp-acc-operator” 
+Then run the following command:  “kubectl describe acc astra -n netapp-acc” and confirm the deployment state is deployed.
+
+----
+[tme@localhost$ kubectl describe acc astra -n netapp-acc
+Name:         astra
+Namespace:    netapp-acc
+Labels:       app.netapp.io/managed-by=astra.netapp.io
+Annotations:  <none>
+API Version:  astra.netapp.io/v1
+Kind:         AstraControlCenter
+…
+Conditions:
+    Last Transition Time:  2022-03-11T19:07:55Z
+    Message:               Astra is deployed
+    Reason:                Complete
+    Status:                True
+    Type:                  Ready
+    Last Transition Time:  2022-03-11T19:07:55Z
+    Message:               Deploying succeeded.
+    Reason:                Complete
+    Status:                False
+    Type:                  Deploying
+    Last Transition Time:  2022-03-11T19:07:53Z
+    Message:               Post Install was successful
+    Observed Generation:   1
+    Reason:                Complete
+    Status:                True
+    Type:                  PostInstallComplete
+    Last Transition Time:  2022-03-11T19:07:55Z
+    Message:               Astra is deployed
+    Reason:                Complete
+    Status:                True
+    Type:                  Deployed
+  Deployment State:        Deployed
+----
+
+
+Potential Issues: 
+If some Astra Control Center  pods are showing CrashLoopBackOff for several minutes, simply delete those pods.  These pods will restart and should transition into the “Running” state.
+
+Conclusion: 
+
+Astra Control Center, its registered clusters and managed applications with their snapshots and backups are now available on the destination cluster. Any protection policies you had on the original is also there on the new instance. You can continue to take scheduled or on-demand backups and snapshots. If the original Astra Control Center  instance is still there on the source cluster, it can be deleted. 
