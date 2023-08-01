@@ -135,7 +135,7 @@ image:openshift_acc-operator_details.png["This image shows the Astra Control Cen
 .. Add labels for the Astra Control Center.
 .. Enable or disable Auto Support. Retaining Auto Support functionality is recommended.
 .. Enter the Astra Control Center FQDN or IP address. Do not enter `http://` or `https://` in the address field.
-.. Enter the Astra Control Center version; for example, 23.07.0-24.
+.. Enter the Astra Control Center version; for example, 23.07.0-25.
 .. Enter an account name, email address, and admin last name.
 .. Choose a volume reclaim policy of `Retain`, `Recycle`, or `Delete`. The default value is `Retain`.
 .. Select the scaleSize of the installation.
