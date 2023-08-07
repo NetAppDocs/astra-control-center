@@ -343,7 +343,13 @@ additionalValues:
       startupProbe:
         periodSeconds: 30
         failureThreshold: 600
+    polaris-keycloak:
+      livenessProbe:
+        initialDelaySeconds: 180
+      readinessProbe:  
+        initialDelaySeconds: 180
 ----
+//astradoc-245/known issue/23.07 only
 
 . Save and exit the file editor. The changes will be applied and the upgrade will begin.
 
