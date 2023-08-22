@@ -13,7 +13,7 @@ summary: To upgrade Astra Control Center, you'll download the bundle and upgrade
 [.lead]
 To upgrade Astra Control Center, download the installation bundle from the NetApp Support Site and complete these instructions. You can use this procedure to upgrade Astra Control Center in internet-connected or air-gapped environments.
 
-You can upgrade Astra Control Center from the second-most recent release to this current version. You cannot upgrade directly from a version that is two or more releases behind the current release. If your installed Astra Control Center version is many versions behind the latest release, you might need to perform chain upgrades to more recent versions until your installed Astra Control Center is only one version behind the latest release.
+These instructions describe the upgrade process for Astra Control Center from the second-most recent release to this current release. You cannot upgrade directly from a version that is two or more releases behind the current release. If your installed Astra Control Center version is many versions behind the latest release, you might need to perform chain upgrades to more recent versions until your installed Astra Control Center is only one version behind the latest release. For a complete list of released versions, see the link:../release-notes/whats-new.html[release notes^].
 
 .Before you begin
 Before you upgrade, ensure your environment still meets the link:../get-started/requirements.html[minimum requirements for Astra Control Center deployment^]. Your environment should have the following:
