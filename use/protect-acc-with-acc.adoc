@@ -15,19 +15,6 @@ You can backup the Astra Control Center application to better ensure resiliency 
 
 In this scenario, a second instance of Astra Control Center is deployed and configured in a different fault domain and runs on a different Kubernetes cluster than the primary Astra Control Center instance. The second Astra Control instance is used to back up and potentially restore the primary Astra Control Center instance. A restored Astra Control Center instance will continue to provide application data management for the application cluster applications and restore accessibility to backups and snapshots of those applications.
 
-.About this task
-
-Astra Control Center can be deployed with two methods:
-•	Deploy the operator in a different namespace than the Astra Custom Resource
-•	Deploy the operator in the same namespace as the Astra Custom Resource
-This procedure uses the example setup depicted below. In this case, the secondary Astra Control Center instance (app-lb-14.rtp.openenglab.netapp.com) is deployed on the Openshift cluster called ocp-app-qa2 and will be used to provide the application data management for the ocp-app-qa4 cluster. The ocp-app-qa4 cluster is running the primary Astra Control Center instance (https://app-lb-15.rtp.openenglab.netapp.com/), managing the application clusters. Although not depicted in the diagram, all the clusters have ONTAP backends with Trident installed. The Openshift clusters are using Metallb as the load balancer. The snapshot controller and volumeSnapshotClass is also installed on all the clusters as outlined in the prerequisites. Additionally, ocp-app-qa4 could have applications that are being managed by the primary or secondary Astra Control Center instance. They are not shown here for brevity. 
-
-This procedure will outline steps necessary to backup and restore Astra Control Center to a new cluster. 
-The below screenshots are taken from release 23.04.
-The steps in this procedure use the above example setup and backup Astra Control Center on the ocp-app-qa4 cluster and restore Astra Control Center onto the ocp-app-qa1cluster. 
-In this example, Astra Control Center is always installed under the netapp-acc namespace and the operator is installed under the netapp-acc-operator namespace.
-
-
 .Before you begin
 
 Ensure that you have the following before setting up protection scenarios for Astra Control Center:
@@ -38,6 +25,29 @@ Ensure that you have the following before setting up protection scenarios for As
 * *S3-compatible buckets*: Each Astra Control Center instance has an accessible S3-compatible object storage bucket.
 * *A configured load balancer*: The load balancer provides an IP address for Astra and must have network connectivity to the application clusters and both S3 buckets.
 * *Clusters meet Astra Control Center requirements*: https://docs.netapp.com/us-en/astra-control-center/get-started/requirements.html#kubernetes-cluster-general-requirements [Each cluster used in Astra Control Center protection meets general Astra Control Center requirements]
+
+.About this task
+
+This procedure describes the necessary steps to restore Astra Control Center to a new cluster using backup and restore or replication.I Steps are based on the example configuration depicted here: 
+
+In this example configuration, 
+
+* *A Kubernetes cluster running the primary Astra Control Center instance*: 
+** OpenShift cluster: ocp-app-qa4
+** Astra Control Center primary instance: https://app-lb-15.rtp.openenglab.netapp.com
+* *The second Kubernetes cluster running the secondary Astra Control Center instance*: 
+** OpenShift cluster: ocp-app-qa2 
+** Astra Control Center secondary instance: app-lb-14.rtp.openenglab.netapp.com
+* *A third Kubernetes cluster of the same Kubernetes distribution type as the primary that will be used for restore*: 
+** OpenShift cluster: ocp-app-qa1cluster 
+
+NOTE: Although not depicted in the diagram, all the clusters have ONTAP backends with Trident installed. The Openshift clusters are using Metallb as the load balancer. The snapshot controller and volumeSnapshotClass is also installed on all the clusters as outlined in the prerequisites. Additionally, ocp-app-qa4 could have applications that are being managed by the primary or secondary Astra Control Center instance. They are not shown here for brevity. 
+
+In this example, Astra Control Center is always installed under the `netapp-acc` namespace and the operator is installed under the `netapp-acc-operator` namespace. 
++
+NOTE: Although not described, Astra Control Center operator can also be deployed in the same namespace as the Astra CR.
+
+The steps in this procedure use the above example setup and backup Astra Control Center on the ocp-app-qa4 cluster and restore Astra Control Center onto the ocp-app-qa1cluster. 
 
 == Backup and restore
 
