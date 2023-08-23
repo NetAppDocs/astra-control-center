@@ -119,7 +119,6 @@ To configure the MetroCluster LIF, refer to Astra Trident documentation for more
 
 * https://docs.netapp.com/us-en/trident/trident-use/ontap-san-examples.html[SAN^]
 * https://docs.netapp.com/us-en/trident/trident-use/ontap-nas-examples.html[NAS^]
-* https://docs.netapp.com/us-en/trident/trident-use/trident-fsx-examples.html[FSx^]
 
 == Image registry
 You must have an existing private Docker image registry to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
