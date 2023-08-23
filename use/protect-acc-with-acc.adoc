@@ -28,52 +28,70 @@ Ensure that you have the following before setting up protection scenarios for As
 
 .About this task
 
-This procedure describes the necessary steps to restore Astra Control Center to a new cluster using backup and restore or replication.I Steps are based on the example configuration depicted here: 
+These procedures describe the necessary steps to restore Astra Control Center to a new cluster using backup and restore or replication. Steps are based on the example configuration depicted here: 
 
-In this example configuration, 
+//<Image>
+
+In this example configuration, the following is shown:
 
 * *A Kubernetes cluster running the primary Astra Control Center instance*: 
 ** OpenShift cluster: ocp-app-qa4
-** Astra Control Center primary instance: https://app-lb-15.rtp.openenglab.netapp.com
+** Astra Control Center primary instance: app-lb-15.rtp.openenglab.netapp.com
 * *The second Kubernetes cluster running the secondary Astra Control Center instance*: 
 ** OpenShift cluster: ocp-app-qa2 
 ** Astra Control Center secondary instance: app-lb-14.rtp.openenglab.netapp.com
+** This cluster will be used for the backup and to provide temporary app data management for ocp-app-qa4 cluster.
 * *A third Kubernetes cluster of the same Kubernetes distribution type as the primary that will be used for restore*: 
-** OpenShift cluster: ocp-app-qa1cluster 
+** OpenShift cluster: ocp-app-qa1cluster
+** This cluster will be used for the restore.
 
-NOTE: Although not depicted in the diagram, all the clusters have ONTAP backends with Trident installed. The Openshift clusters are using Metallb as the load balancer. The snapshot controller and volumeSnapshotClass is also installed on all the clusters as outlined in the prerequisites. Additionally, ocp-app-qa4 could have applications that are being managed by the primary or secondary Astra Control Center instance. They are not shown here for brevity. 
+Not depicted in the diagram:
+
+* All the clusters have ONTAP backends with Trident installed. 
+* OpenShift clusters are using MetalLB as the load balancer. * The snapshot controller and volumeSnapshotClass are also installed on all the clusters as outlined in the prerequisites. 
+
+NOTE: Additionally, ocp-app-qa4 could have applications that are being managed by the primary or secondary Astra Control Center instance. They are not shown here for brevity. 
+
+ 
+== Backup and restore Astra Control Center
+
+This procedure describes the necessary steps to restore Astra Control Center to a new cluster using backup and restore or replication. 
 
 In this example, Astra Control Center is always installed under the `netapp-acc` namespace and the operator is installed under the `netapp-acc-operator` namespace. 
 +
 NOTE: Although not described, Astra Control Center operator can also be deployed in the same namespace as the Astra CR.
 
-The steps in this procedure use the above example setup and backup Astra Control Center on the ocp-app-qa4 cluster and restore Astra Control Center onto the ocp-app-qa1cluster. 
+.Before you begin
 
-== Backup and restore
+* You have installed the primary Astra Control Center on a cluster.
+* You have installed the secondary Astra Control Center on a different cluster.
 
 .Steps
 
-. Manage the primary Astra Control Center application and destination Cluster from secondary Astra Control Center instance:
-.. After the primary and secondary Astra Control Center instances are installed per the documentation, log into the secondary Astra Control Center instance and manage the primary Astra Control Center cluster (ocp-app-qa4 in the below image) and the destination cluster (ocp-app-qa1).
+. Manage the primary Astra Control Center application and destination cluster from the secondary Astra Control Center instance:
+.. Log into the secondary Astra Control Center instance. 
+.. link:../get-started/setup_overview.html#add-cluster[Add the primary Astra Control Center cluster] (ocp-app-qa4). 
+.. link:../get-started/setup_overview.html#add-cluster[Add the destination cluster] (ocp-app-qa1) that will be used for the restore.
 
-. Manage Astra Control Center and the Astra Control Center operator on the secondary ACC:
-.. Click on the "Applications" tab on the left, then click "Define"
-.. Select the cluster that the primary Astra Control Center is on (e.g. ocp-app-qa4)
-.. Enter netapp-acc in the "New application" text box
-.. Find "netapp-acc" in the dropdown
-.. Click on "Next"
+. Manage Astra Control Center and the Astra Control Center operator on the secondary Astra Control Center:
+.. From the Applications page, select *Define*.
+.. In the *Define application* window, enter the app name (`netapp-acc`).
+.. Choose the cluster that is running the primary Astra Control Center (`ocp-app-qa4`) from the *Cluster* drop-down list.
+.. Choose the `netapp-acc` namespace for Astra Control Center from the *Namespace* drop-down list.
+.. Select *Next*.
+.. On the Cluster Resources page, check *Include additional cluster-scoped resources*.
+.. Select *Add include rule*.
+.. Select the entries shown here, and select *Add*:
 
+//<Image>
 
-.. On the "Cluster Resources" page, select the "include additional cluster-scoped resources" checkbox, then click on "+ Add include rule"
-Select the below entries, click "Add"
-
-
-.. Click "Next", confirm the "Review Application Information" screen is correct, then click "Define".
-.. Perform the same steps for the netapp-acc-operator.
+.. Select *Next*.
+.. Confirm the application information.
+.. Select *Define*. 
+. After you select *Define*, repeat the Define App process for netapp-acc-operator and select the `netapp-acc-operator` namespace in the Define Application window.
 
 . Backup Astra Control Center and the operator
-
-On the secondary ACC, navigate to the Applications screen by selecting the Applications tab on the left.
+.. On the secondary Astra Control Center, navigate to the Applications screen by selecting the Applications tab on the left.
 If the user clicks on each application, they can set up a protection policy that includes a backup schedule – which create backups of the Astra Control Center applications on a regular basis.Or the user can create an on-demand backup.
 Backup Astra Control Center (netapp-acc in below screenshot) then the netapp-acc-operator by clicking on the ellipsis on the right side of the Application, and select "Back up" as shown below.
 
@@ -84,12 +102,12 @@ Step 4: Configure the Disaster Recovery (DR) scenario
 
 Now that Astra Control Center and the operator are backed up, to simulate a DR scenario, uninstall the primary Astra Control Center system.
 Procedure here: https://docs.netapp.com/us-en/astra-control-center/use/uninstall_acc.html
-The reason for doing this is because we are going to restore Astra Control Center to a new cluster and use the same DNS/IP addresses for the newly installed ACC.
+The reason for doing this is because we are going to restore Astra Control Center to a new cluster and use the same DNS/IP addresses for the newly installed Astra Control Center.
 
 
 Step 5: Restore Astra Control Center from Backup
 
-Using the secondary ACC, restore the primary Astra Control Center application from the backup as depicted below. The destination namespace must be the same as the source namespace. In the case where Astra Control Center was deleted from the source cluster, the backups will still exist and perform the same steps.
+Using the secondary Astra Control Center, restore the primary Astra Control Center application from the backup as depicted below. The destination namespace must be the same as the source namespace. In the case where Astra Control Center was deleted from the source cluster, the backups will still exist and perform the same steps.
  
 
 
@@ -139,7 +157,7 @@ After the primary and secondary Astra Control Center instances are installed per
 
 
 Step 2: Manage Astra Control Center and the Astra Control Center Operator
-On the secondary ACC:
+On the secondary Astra Control Center:
 
 Click on the "Clusters" tab on the left
 Select the cluster that the primary Astra Control Center is on (e.g. ocp-app-qa4)
@@ -220,7 +238,7 @@ Proceed to the "Restore the Astra Control Center Operator" section below.
 
 Restore the Astra Control Center Operator
 
-Using the secondary ACC, restore the primary Astra Control Center operator from the backup as depicted below. The destination namespace must be the same as the source namespace. In the case where Astra Control Center was deleted from the source cluster, the backups will still exist and perform the same steps.
+Using the secondary Astra Control Center, restore the primary Astra Control Center operator from the backup as depicted below. The destination namespace must be the same as the source namespace. In the case where Astra Control Center was deleted from the source cluster, the backups will still exist and perform the same steps.
 
 
 
