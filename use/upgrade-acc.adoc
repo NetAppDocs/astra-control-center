@@ -98,6 +98,8 @@ kubectl get clusteroperators
 ----
 ====
 // End snippet
+//astradoc-249
+* It is strongly recommended that Astra Control communications channels be secured on the cluster using an Istio service mesh supported by Astra Control.
 
 //Must be updated every quarterly release
 IMPORTANT: As part of this procedure, you will need to <<Install the updated Astra Control Center operator,install the latest operator (`acc-operator`)>> if you are upgrading Astra Control Center. You cannot upgrade to earlier versions of Astra Control Center using this updated operator.
