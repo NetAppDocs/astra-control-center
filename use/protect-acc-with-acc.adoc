@@ -149,30 +149,30 @@ kubectl rollout restart deployment controller -n metallb-system
 
 == Protect Astra Control Center using Replication
 
-This procedure will outline the steps necessary to configure Replication to protect the primary Astra Control Center system.
-Information on configuring replication for Astra Control Center is documented here: https://docs.netapp.com/us-en/astra-control-center/use/replicate_snapmirror.html
-Similar to the above example, Astra Control Center is installed under the netapp-acc namespace and the operator is installed under the netapp-acc-operator namespace.
+This procedure describes the necessary steps to configure link:../use/replicate_snapmirror.html[Astra Control Center replication^] to protect the primary Astra Control Center instance.
 
-Step 1: Manage the Primary Astra Control Center Application and Destination Cluster from Secondary Astra Control Center instance
-After the primary and secondary Astra Control Center instances are installed per the documentation, log into the secondary Astra Control Center instance and manage the primary Astra Control Center cluster (ocp-app-qa4 in the below image) and the destination cluster (ocp-app-qa1).
+In this example, Astra Control Center is always installed under the `netapp-acc` namespace and the operator is installed under the `netapp-acc-operator` namespace. 
 
+.Before you begin
 
+* You have installed the primary Astra Control Center on a cluster.
+* You have installed the secondary Astra Control Center on a different cluster.
 
-Step 2: Manage Astra Control Center and the Astra Control Center Operator
-On the secondary Astra Control Center:
+.Steps
 
-Click on the "Clusters" tab on the left
-Select the cluster that the primary Astra Control Center is on (e.g. ocp-app-qa4)
-Click the "Namespaces" tab
-Search for "netapp-acc"
-Select netapp-acc and netapp-acc-operator
-Click on the Actions dropdown and select "Define as application"
-Click on the "View in applications" button at the bottom of the screen.
+. Manage the primary Astra Control Center application and destination cluster from the secondary Astra Control Center instance:
+.. Log into the secondary Astra Control Center instance. 
+.. link:../get-started/setup_overview.html#add-cluster[Add the primary Astra Control Center cluster] (ocp-app-qa4). 
+.. link:../get-started/setup_overview.html#add-cluster[Add the destination cluster] (ocp-app-qa1) that will be used for the restore.
 
+. Manage Astra Control Center and the Astra Control Center operator on the secondary Astra Control Center:
+.. Select *Clusters* and select the cluster that contains the primary Astra Control Center (`ocp-app-qa4`).
+.. Select the *Namespaces* tab.
+.. Select `netapp-acc` and `netapp-acc-operator` namespaces.
+.. Select the Actions menu for one of these and select *Define as application*.
+.. Select *View in applications* to see the defined application.
 
-
-
-Step 3: Configure Backends for Replication
+. Configure Backends for Replication:
 Replication requires that the primary Astra Control Center cluster and the destination cluster use two different peered ONTAP storage backends assigned to each cluster.
 Once they are peered, they will appear on the Backends page of the UI under the "Discovered" tab.
 
