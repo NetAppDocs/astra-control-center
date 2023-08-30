@@ -525,6 +525,18 @@ a| * `Default` (This is the default value)
 .`additionalValues`
 [%collapsible]
 ====
+//astradoc-245/known issue/23.07 only
+IMPORTANT: Add the following additional values to the Astra Control Center CR to prevent a known issue in the 23.07 installation:
+
+----
+additionalValues: 
+    polaris-keycloak:
+      livenessProbe:
+        initialDelaySeconds: 180
+      readinessProbe:  
+        initialDelaySeconds: 180
+----
+
 * For Astral Control Center and Cloud Insights communication, TLS certificate verification is disabled by default. You can enable TLS certification verification for communication between Cloud Insights and both the Astra Control Center host cluster and managed cluster by adding the following section in `additionalValues`.
 
 ----
@@ -595,7 +607,12 @@ spec:
   ingressType: "Generic"
   scaleSize: "Medium"
   astraResourcesScaler: "Default"
-  additionalValues: {}
+  additionalValues: 
+    polaris-keycloak:
+      livenessProbe:
+        initialDelaySeconds: 180
+      readinessProbe:  
+        initialDelaySeconds: 180
   crds:
     externalTraefik: false
     externalCertManager: false
