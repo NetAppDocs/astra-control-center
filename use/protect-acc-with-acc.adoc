@@ -173,47 +173,38 @@ In this example, Astra Control Center is always installed under the `netapp-acc`
 .. Select *View in applications* to see the defined application.
 
 . Configure Backends for Replication:
-Replication requires that the primary Astra Control Center cluster and the destination cluster use two different peered ONTAP storage backends assigned to each cluster.
-Once they are peered, they will appear on the Backends page of the UI under the "Discovered" tab.
++
+NOTE: Replication requires that the primary Astra Control Center cluster and the destination cluster use different peered ONTAP storage backends.
+After each backend is peered and added to Astra Control, the backend appears in the *Discovered* tab of the Backends page.
 
-Manage both peered backends.
+.. Add a peered backend to Astra Control Center on the primary cluster.
+.. Add a peered backend to Astra Control Center on the destination cluster.
 
+. Configure Replication:
+.. On the Applications screen, select the `netapp-acc` application.
+.. Select *Configure replication policy*.
+.. Select `ocp-app-qa1` as the destination cluster.
+.. Select the storage class.
+.. Enter `netapp-acc` as the destination namespace.
+.. Change the replication frequency if desired.
+.. Select *Next*.
+.. Confirm the configuration is correct, and select *Save*.
 
- Step 4: Configure Replication
-On the Applications screen, click on the "netapp-acc" application.
+The replication transitions from `Establishing` to `Established`. When active, this replication will replicate every 5 minutes until the replication configuration is deleted.
 
- 
-Click on "Configure replication policy"
+. Failover the Replication to the other cluster if the primary system is corrupted or no longer accessible:
++
+NOTE: Make sure the destination cluster does not have Astra Control Center installed to ensure a successful failover.
 
-Select "ocp-app-qa1" as the destination.
-Select the storage class.
-Enter "netapp-acc" as the destination namespace.
-Change the replication frequency if desired.
-Click "Next"
+//Need to confirm this.
 
-Confirm the configuration is correct, click "Save"
+. Select the vertical ellipses icon and select *Fail over*.
+. Confirm the details and select *Fail over* to begin the failover process.
 
-The replication will transition from "Establishing" to "Established".
- 
-While this replication is active it will replicate every 5 minutes until the replication configuration is deleted.
+The application status changes to `Failing over` and then `Failed over` when complete.
 
-Step 5: Failover the Replication
-
-If the primary system is corrupted or no longer accessible, we can now do a failover to the other cluster.
-NOTE: Make sure the destination cluster does not have Astra Control Center installed to ensure a successful failover.?? Need to confirm this.
-Click on the ellipse and select "Fail over".
-
-
-Click the "Fail over" button to start the failover process:
-
-The status will change to "Failing over" and will soon change to "Failed over".
-
-
-
-
-
-Step 6: Complete the failover configuration
-Open a terminal and connect via the new cluster's kubeconfig that has Astra Control Center installed.
+. Complete the failover configuration; 
+.. Open a terminal and connect to the third cluster's kubeconfig that has Astra Control Center installed.
 Run the following command: "kubectl edit acc -n netapp-acc"
 Change the "astraAddress" under the "spec:" section in this configuration file to the destination DNS address
 Re-run "kubectl get acc -n netapp-acc" and confirm that the Address has been updated.
@@ -224,7 +215,8 @@ Go to this page: https://doc.traefik.io/traefik/reference/dynamic-configuration/
 Copy the "Definitions" area into a file.
 Run the following command: "kubectl apply -f <file name>"
 Run this command to restart traefik (this assumes Astra Control Center is deployed in the netapp-acc namespace): "kubectl get pods -n netapp-acc | grep -e "traefik" | awk '{print $1}' | xargs kubectl delete pod -n netapp-acc"
-Ingress configurations
+
+. Ingress configurations
 There are several methods to set up Ingress for load balancing: https://docs.netapp.com/us-en/astra-control-center/get-started/install_acc.html#set-up-ingress-for-load-balancing. 
 
 For this process, the Ingress/Loadbalancer that holds IP address needs to be restarted because the Astra Control Center DNS address was updated.  
@@ -236,34 +228,18 @@ Confirm the IP address in the "spec/addresses:" section is the IP address of the
 Regardless if metallb needed updating, restart metallb: "kubectl rollout restart deployment controller -n metallb-system" 
 Proceed to the "Restore the Astra Control Center Operator" section below.
 
+== Restore the Astra Control Center Operator
 
+Using the secondary Astra Control Center, restore the primary Astra Control Center operator from backup. The destination namespace must be the same as the source namespace. In the case where Astra Control Center was deleted from the source cluster, the backups will still exist and perform the same steps.
 
-Restore the Astra Control Center Operator
-
-Using the secondary Astra Control Center, restore the primary Astra Control Center operator from the backup as depicted below. The destination namespace must be the same as the source namespace. In the case where Astra Control Center was deleted from the source cluster, the backups will still exist and perform the same steps.
-
-
-
-
-Choose the destination cluster and change the namespace to be the same namespace as the source.
-
+.Steps
+. Choose the destination cluster and change the namespace to be the same namespace as the source.
+. Select the backup that was taken earlier:
+. Select *Restore using original storage classes*
+. Select *Restore all resources*
+. Review then click on *Restore* to start the restore process:
  
-
-Select the backup that was taken earlier:
- 
-
-
-Select "Restore using original storage classes"
-
-
-Select "Restore all resources"
-
-
-
-Review then click on "Restore" to start the restore process:
- 
-
-The UI will show the Astra Control Center operator being restored to the destination cluster (ocp-app-qa1) and will eventually become "Available".
+The UI show the Astra Control Center operator being restored to the destination cluster (ocp-app-qa1) and will eventually become `Available`.
 Within ten minutes, the DNS address should resolve in the UI.
 
 
