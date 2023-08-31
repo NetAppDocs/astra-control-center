@@ -11,9 +11,9 @@ summary: You can backup and restore Astra Control Center using a secondary Astra
 :imagesdir: ../media/use/
 
 [.lead]
-You can backup the Astra Control Center application to better ensure resiliency against fatal errors on the Kubernetes cluster where Astra Control Center is running. You can backup and restore Astra Control Center using a secondary Astra Control Center instance or with Astra replication if the underlying storage is using ONTAP.
+ To better ensure resiliency against fatal errors on the Kubernetes cluster where Astra Control Center is running, backup the Astra Control Center application itself. You can backup and restore Astra Control Center using a secondary Astra Control Center instance or use Astra replication if the underlying storage is using ONTAP.
 
-In this scenario, a second instance of Astra Control Center is deployed and configured in a different fault domain and runs on a different second Kubernetes cluster than the primary Astra Control Center instance. The second Astra Control instance is used to back up and potentially restore the primary Astra Control Center instance. A restored Astra Control Center instance will continue to provide application data management for the application cluster applications and restore accessibility to backups and snapshots of those applications.
+In these scenarios, a second instance of Astra Control Center is deployed and configured in a different fault domain and runs on a different second Kubernetes cluster than the primary Astra Control Center instance. The second Astra Control instance is used to back up and potentially restore the primary Astra Control Center instance. A restored or replicated Astra Control Center instance will continue to provide application data management for the application cluster applications and restore accessibility to backups and snapshots of those applications.
 
 .Before you begin
 
@@ -35,21 +35,22 @@ image:backup-or-replicate-acc-w-acc-example-flow.png["A protection workflow imag
 In this example configuration, the following is shown:
 
 * *A Kubernetes cluster running the primary Astra Control Center instance*: 
-** OpenShift cluster: ocp-app-qa4
-** Astra Control Center primary instance: app-lb-15.rtp.openenglab.netapp.com
+** OpenShift cluster: `ocp-app-qa4`
+** Astra Control Center primary instance: `app-lb-15.rtp.openenglab.netapp.com`
+** This cluster manages the application clusters.
 * *The second Kubernetes cluster running the secondary Astra Control Center instance*: 
-** OpenShift cluster: ocp-app-qa2 
-** Astra Control Center secondary instance: app-lb-14.rtp.openenglab.netapp.com
-** This cluster will be used for the backup and to provide temporary app data management for ocp-app-qa4 cluster.
+** OpenShift cluster: `ocp-app-qa2`
+** Astra Control Center secondary instance: `app-lb-14.rtp.openenglab.netapp.com`
+** This cluster will be used for the backup and to provide application data management for `ocp-app-qa4` cluster.
 * *A third Kubernetes cluster of the same Kubernetes distribution type as the primary that will be used for restore*: 
-** OpenShift cluster: ocp-app-qa1
+** OpenShift cluster: `ocp-app-qa1`
 ** This cluster will be used for the restore.
 
 Not depicted in the diagram:
 
 * All the clusters have ONTAP backends with Trident installed. 
 * OpenShift clusters are using MetalLB as the load balancer. 
-* The snapshot controller and volumeSnapshotClass are also installed on all the clusters as outlined in the prerequisites. 
+* The snapshot controller and VolumeSnapshotClass are also installed on all the clusters as outlined in the /get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[prerequisites^]. 
 
 NOTE: Additionally, the primary `ocp-app-qa4` cluster could have applications that are being managed by the primary or secondary Astra Control Center instance. They are not shown here for brevity. 
 
@@ -72,37 +73,41 @@ NOTE: Although not described, Astra Control Center operator can also be deployed
 . Manage the primary Astra Control Center application and destination cluster from the secondary Astra Control Center instance (running on `ocp-app-qa2` cluster):
 .. Log into the secondary Astra Control Center instance. 
 .. link:../get-started/setup_overview.html#add-cluster[Add the primary Astra Control Center cluster] (`ocp-app-qa4`). 
-.. link:../get-started/setup_overview.html#add-cluster[Add the destination cluster] (`ocp-app-qa1`) that will be used for the restore.
+.. link:../get-started/setup_overview.html#add-cluster[Add the destination third cluster] (`ocp-app-qa1`) that will be used for the restore.
 
 . Manage Astra Control Center and the Astra Control Center operator on the secondary Astra Control Center:
 .. From the Applications page, select *Define*.
-.. In the *Define application* window, enter the app name (`netapp-acc`).
+.. In the *Define application* window, enter the new application name (`netapp-acc`).
 .. Choose the cluster that is running the primary Astra Control Center (`ocp-app-qa4`) from the *Cluster* drop-down list.
 .. Choose the `netapp-acc` namespace for Astra Control Center from the *Namespace* drop-down list.
 .. On the Cluster Resources page, check *Include additional cluster-scoped resources*.
 .. Select *Add include rule*.
-.. Select the entries shown here, and select *Add*.
-//<Image>
+.. Select these entries, and select *Add*:
+* Label selector: acc-crds
+* Group: apiextensions.k8s.io
+* Version: v1
+* Kind: CustomResourceDefinition
+
 .. Confirm the application information.
 .. Select *Define*. 
 +
-After you select *Define*, repeat the Define App process for netapp-acc-operator and select the `netapp-acc-operator` namespace in the Define Application window.
+After you select *Define*, repeat the Define Application process for the operator (`netapp-acc-operator`) and select the `netapp-acc-operator` namespace in the Define Application wizard.
 
 . Back up Astra Control Center and the operator:
 .. On the secondary Astra Control Center, navigate to the Applications page by selecting the Applications tab.
-.. Back up the Astra Control Center application (`netapp-acc`).
-.. Back up the operator (`netapp-acc-operator).
+.. link:../use/protect-apps.html#create-a-backup[Back up^] the Astra Control Center application (`netapp-acc`).
+.. link:../use/protect-apps.html#create-a-backup[Back up^] the operator (`netapp-acc-operator).
 
 . After you have backed up Astra Control Center and the operator, simulate a disaster recovery (DR) scenario by link:../use/uninstall_acc.html[uninstalling Astra Control Center^] from the primary cluster.
 +
 NOTE: You will restore Astra Control Center to a new cluster (the third Kubernetes cluster described in this procedure) and use the same DNS or IP addresses for the newly installed Astra Control Center.
 
 . Using the secondary Astra Control Center, link:../use/restore-apps.html[restore^] the primary instance of the Astra Control Center application from its backup:
-.. Select *Applications* and then select the name of an app.
+.. Select *Applications* and then select the name of the Astra Control Center application.
 .. From the Options menu in the Actions column, select *Restore*.
 .. Choose the *Restore to original namespaces* as the restore type.
 .. Enter the restore name (`netapp-acc`).
-.. Choose the destination cluster (`ocp-app-qa1`).
+.. Choose the destination third cluster (`ocp-app-qa1`).
 .. Enter the namespace so that it is the same namespace as the original.
 .. On the Restore Source page, select the application backup that will be used as the restore source.
 .. Select *Restore using original storage classes*.
@@ -132,7 +137,7 @@ nslookup <primary cluster's DNS name>
 
 . Update your ingress configurations so that the primary cluster's IP address is set as the IP address used by your ingress:
 +
-NOTE: There are many ingress methods you might have link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[set up] for load balancing. Updating the IP address may vary from these steps depending on the type of ingress used. This example describes updating the IP address for MetalLB. 
+NOTE: There are many ingress methods you might have link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[set up] for load balancing. Updating the IP address might vary from these steps depending on the type of ingress used. This example describes updating the IP address for MetalLB. 
 
 .. Edit configuration: 
 +
@@ -166,7 +171,7 @@ In this example, Astra Control Center is always installed under the `netapp-acc`
 . Manage the primary Astra Control Center application and destination cluster from the secondary Astra Control Center instance:
 .. Log into the secondary Astra Control Center instance. 
 .. link:../get-started/setup_overview.html#add-cluster[Add the primary Astra Control Center cluster] (`ocp-app-qa4`). 
-.. link:../get-started/setup_overview.html#add-cluster[Add the destination cluster] (`ocp-app-qa1`) that will be used for the replication.
+.. link:../get-started/setup_overview.html#add-cluster[Add the destination third cluster] (`ocp-app-qa1`) that will be used for the replication.
 
 . Manage Astra Control Center and the Astra Control Center operator on the secondary Astra Control Center:
 .. Select *Clusters* and select the cluster that contains the primary Astra Control Center (`ocp-app-qa4`).
@@ -177,7 +182,7 @@ In this example, Astra Control Center is always installed under the `netapp-acc`
 
 . Configure Backends for Replication:
 +
-NOTE: Replication requires that the primary Astra Control Center cluster and the destination cluster use different peered ONTAP storage backends.
+NOTE: Replication requires that the primary Astra Control Center cluster and the destination third cluster use different peered ONTAP storage backends.
 After each backend is peered and added to Astra Control, the backend appears in the *Discovered* tab of the Backends page.
 
 .. link:../get-started/setup_overview.html#add-a-storage-backend[Add a peered backend^] to Astra Control Center on the primary cluster.
@@ -203,6 +208,9 @@ NOTE: Make sure the destination cluster does not have Astra Control Center insta
 //Need to confirm this.
 
 .. Select the vertical ellipses icon and select *Fail over*.
++
+image:acc-to-acc-replication-example.png["An image that shows the 'fail over' option in the replication relationship"]
+
 .. Confirm the details and select *Fail over* to begin the failover process.
 +
 The replication relationship status changes to `Failing over` and then `Failed over` when complete.
@@ -295,7 +303,7 @@ Using the secondary Astra Control Center, restore the primary Astra Control Cent
 .Steps
 . Select *Applications* and then select the name of the operator app (`netapp-acc-operator`).
 . From the Options menu in the Actions column, select *Restore*
-. Choose the *Restore to original namespaces* as the restore type.
+. Choose the *Restore to new namespaces* as the restore type.
 . Choose the destination third cluster (`ocp-app-qa1`).
 . Change the namespace to be the same as the namespace associated with the primary source cluster (`netapp-acc-operator`).
 . Select the backup that was taken earlier as the restore source.
@@ -306,7 +314,7 @@ Using the secondary Astra Control Center, restore the primary Astra Control Cent
 The Applications page shows the Astra Control Center operator being restored to the destination third cluster (`ocp-app-qa1`). When the process is complete, the state shows as `Available`. Within ten minutes, the DNS address should resolve on the page.
 
 .Result
-Astra Control Center, its registered clusters, and managed applications with their snapshots and backups are now available on the destination cluster. Any protection policies you had on the original are also there on the new instance. You can continue to take scheduled or on-demand backups and snapshots.
+Astra Control Center, its registered clusters, and managed applications with their snapshots and backups are now available on the destination third cluster (`ocp-app-qa1`). Any protection policies you had on the original are also there on the new instance. You can continue to take scheduled or on-demand backups and snapshots.
 
 == Troubleshooting
 Determine system health and if protection processes were successful.
