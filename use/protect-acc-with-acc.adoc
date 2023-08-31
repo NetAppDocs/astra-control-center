@@ -11,7 +11,7 @@ summary: You can backup and restore Astra Control Center using a secondary Astra
 :imagesdir: ../media/use/
 
 [.lead]
- To better ensure resiliency against fatal errors on the Kubernetes cluster where Astra Control Center is running, backup the Astra Control Center application itself. You can backup and restore Astra Control Center using a secondary Astra Control Center instance or use Astra replication if the underlying storage is using ONTAP.
+To better ensure resiliency against fatal errors on the Kubernetes cluster where Astra Control Center is running, protect the Astra Control Center application itself. You can backup and restore Astra Control Center using a secondary Astra Control Center instance or use Astra replication if the underlying storage is using ONTAP.
 
 In these scenarios, a second instance of Astra Control Center is deployed and configured in a different fault domain and runs on a different second Kubernetes cluster than the primary Astra Control Center instance. The second Astra Control instance is used to back up and potentially restore the primary Astra Control Center instance. A restored or replicated Astra Control Center instance will continue to provide application data management for the application cluster applications and restore accessibility to backups and snapshots of those applications.
 
