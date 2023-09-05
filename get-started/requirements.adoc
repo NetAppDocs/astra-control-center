@@ -73,6 +73,11 @@ NOTE: These requirements assume that Astra Control Center is the only applicatio
 // ** Disable the TKG or TKGi default storage class enforcement on any application clusters intended to be managed by Astra Control. You can do this by editing the `TanzuKubernetesCluster` resource on the namespace cluster.
 // ** Be aware of specific requirements for Astra Trident when you deploy Astra Control Center in a TKG or TKGi environment. For more information, see the https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html#other-known-configuration-options[Astra Trident documentation^].
 
+== Service mesh requirements
+A supported version of the Istio service mesh is required to be installed on the Astra Control Center host cluster. Refer to https://istio.io/latest/docs/releases/supported-releases/[supported releases^] for more information.
+
+NOTE: At this time, only vanilla Istio service mesh is supported; branded releases of Istio service mesh, such as OpenShift Service Mesh, are not validated with Astra Control Center.
+
 == Astra Trident requirements
 Ensure that you meet the following Astra Trident requirements specific to the needs of your environment:
 
