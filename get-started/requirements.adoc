@@ -15,6 +15,7 @@ Get started by verifying the readiness of your operational environment, applicat
 
 * <<Supported host cluster Kubernetes environments>>
 * <<Host cluster resource requirements>>
+* <<Service mesh requirements>>
 * <<Astra Trident requirements>>
 * <<Storage backends>>
 * <<Image registry>>
@@ -74,9 +75,11 @@ NOTE: These requirements assume that Astra Control Center is the only applicatio
 // ** Be aware of specific requirements for Astra Trident when you deploy Astra Control Center in a TKG or TKGi environment. For more information, see the https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html#other-known-configuration-options[Astra Trident documentation^].
 
 == Service mesh requirements
-A supported version of the Istio service mesh is required to be installed on the Astra Control Center host cluster. Refer to https://istio.io/latest/docs/releases/supported-releases/[supported releases^] for more information.
+A supported vanilla version of the Istio service mesh is strongly recommended to be installed on the Astra Control Center host cluster. Refer to https://istio.io/latest/docs/releases/supported-releases/[supported releases^] for supported versions of Istio. Branded releases of Istio service mesh, such as OpenShift Service Mesh, are not validated with Astra Control Center.
 
-NOTE: At this time, only vanilla Istio service mesh is supported; branded releases of Istio service mesh, such as OpenShift Service Mesh, are not validated with Astra Control Center.
+If you install Istio service mesh on the host cluster, configure generic ingress and provide an alternative ingress service during Astra Control Center installation. Refer to https://docs.netapp.com/us-en/astra-control-center/get-started/install_acc.html#set-up-ingress-for-load-balancing[Set up ingress for load balancing^] for instructions.
+
+NOTE: Installing Astra Control Service without configuring a service mesh on the host cluster has potentially serious security implications.
 
 == Astra Trident requirements
 Ensure that you meet the following Astra Trident requirements specific to the needs of your environment:
