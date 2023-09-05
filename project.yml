@@ -10,6 +10,9 @@ settings:
   versions:
     - name: Astra Control Center
       url: /astra-control-center
+      version-number: "23.10"
+    - name: Astra Control Center
+      url: /astra-control-center-2307
       version-number: "23.07"
     - name: Astra Control Center
       url: /astra-control-center-2304
