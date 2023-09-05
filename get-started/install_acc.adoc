@@ -36,7 +36,7 @@ kubectl get apiservices
 * Ensure the Astra FQDN you plan to use is routable to this cluster. This means that you either have a DNS entry in your internal DNS server or you are using a core URL route that is already registered.
 * If a cert manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps^] so that Astra Control Center does not attempt to install its own cert manager. By default, Astra Control Center installs its own cert manager during installation.
 //astradoc-249
-* It is strongly recommended that Astra Control communications channels be secured on the cluster using an Istio service mesh supported by Astra Control.
+* It is strongly recommended that Astra Control host cluster communications channels be secured using a link:requirements.html#service-mesh-requirements[service mesh^]. If you use an Istio service mesh, you must use a generic ingress rather than the AccTraefik ingress. You will be required to change settings during <<Configure Astra Control Center,Astra Control Center configuration>>.
 
 TIP: Deploy Astra Control Center in a third fault domain or secondary site. This is recommended for app replication and seamless disaster recovery. 
 
@@ -474,6 +474,10 @@ a| * `Retain` (This is the default value)
 *`Generic`* (`ingressType: "Generic"`) (Default)
 Use this option when you have another ingress controller in use or would prefer to use your own ingress controller. After Astra Control Center is deployed, you will need to configure the link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller^] to expose Astra Control Center with a URL.
 
+IMPORTANT: If you intend to use a service mesh with Astra Control Center, you must select `generic` as ingress type and set up your own link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller^].
+
+//astradoc-249
+
 *`AccTraefik`* (`ingressType: "AccTraefik"`)
 Use this option when you would prefer not to configure an ingress controller. This deploys the Astra Control Center `traefik` gateway as a Kubernetes LoadBalancer type service.
 
@@ -631,6 +635,18 @@ spec:
 kubectl create ns [netapp-acc or custom namespace]
 ----
 
+. If you are using a service mesh with Astra Control Center, add the following label to the `netapp-acc` or custom namespace:
++
+IMPORTANT: Your ingress type (`ingressType`) must be set to `Generic` in the Astra Control Center CR before proceeding with this command.
+
++
+[source,console]
+----
+kubectl label ns [netapp-acc or custom namespace] istio-injection: enabled
+----
++
+//astradoc-249
++
 . Install Astra Control Center in the `netapp-acc` (or your custom) namespace:
 +
 [source,console]
