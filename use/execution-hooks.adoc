@@ -14,7 +14,7 @@ summary: An execution hook is a custom script that you can run before or after a
 An execution hook is a custom action that you can configure to run in conjunction with a data protection operation of a managed app. For example, if you have a database app, you can use an execution hook to pause all database transactions before a snapshot, and resume transactions after the snapshot is complete. This ensures application-consistent snapshots.
 
 == Types of execution hooks
-Astra Control supports the following types of execution hooks, based on when they can be run:
+Astra Control Center supports the following types of execution hooks, based on when they can be run:
 
 * Pre-snapshot
 * Post-snapshot
