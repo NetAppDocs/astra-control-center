@@ -1,10 +1,10 @@
 == Download and extract Astra Control Center
-You can choose to download the Astra Control Center bundle from the NetApp Support Site, or use Docker to pull the bundle from the Astra Control Service image repository.
+You can choose to download the Astra Control Center bundle from the NetApp Support Site, or use Docker to pull the bundle from the Astra Control Service image registry.
 
 [role="tabbed-block"]
 ====
 
-.NSS
+.NetApp Support Site
 --
 
 . Download the bundle containing Astra Control Center (`astra-control-center-[version].tar.gz`) from the the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[Astra Control Center downloads page^].
@@ -41,9 +41,26 @@ tar -vxzf astra-control-center-[version].tar.gz
 .Image registry
 --
 
-. Do thing 1
-. Do thing 2
-. Do thing 3
+. Log in to Astra Control Service.
+. On your cluster, log in to the Astra Control Service image repository using your Astra Control Service account ID and API token.
++
+[source,console]
+----
+docker login cr.astra.netapp.io -u <account-id> -p <api-token>
+----
+. Pull the bundle.
++
+[source,console]
+----
+docker pull cr.astra.netapp.io/acc-image:23.10
+----
+. Run the image to extract the Astra Control Center tar bundle to the local filesystem.
++
+[source,console]
+----
+docker run --rm -v "/path/to/desired/directory:/package" cr.astra.netapp.io/acc-image:23.10
+----
+
 
 --
 // end registry tab block
