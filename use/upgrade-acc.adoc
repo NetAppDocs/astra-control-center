@@ -98,6 +98,9 @@ kubectl get clusteroperators
 ----
 ====
 // End snippet
+//astradoc-249
+* It is strongly recommended that Astra Control host cluster communications channels be secured using a link:requirements.html#service-mesh-requirements[service mesh^]. If you already have a service mesh in place, no additional changes are needed for upgrade configuration. If you intend to use an Istio service mesh, you must use a generic ingress rather than the AccTraefik ingress when you upgrade. You will be required to change settings during <<Upgrade Astra Control Center,Astra Control Center configuration>>. 
+//More to come on process to add service mesh and change ingress
 
 //Must be updated every quarterly release
 IMPORTANT: As part of this procedure, you will need to <<Install the updated Astra Control Center operator,install the latest operator (`acc-operator`)>> if you are upgrading Astra Control Center. You cannot upgrade to earlier versions of Astra Control Center using this updated operator.
