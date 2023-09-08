@@ -12,7 +12,7 @@ You can choose to download the Astra Control Center bundle from the NetApp Suppo
 +
 .Expand for details
 [%collapsible]
-====
+=====
 
 [source,console]
 ----
@@ -25,8 +25,8 @@ openssl dgst -sha256 -verify certs/AstraControlCenter-public.pub -signature cert
 ----
 
 The output will show `Verified OK` after successful verification.
-====
-// End snippet
+=====
+// End collapsible
 
 . Extract the images from the Astra Control Center bundle:
 +
