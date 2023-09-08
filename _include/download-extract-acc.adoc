@@ -1,4 +1,11 @@
 == Download and extract Astra Control Center
+You can choose to download the Astra Control Center bundle from the NetApp Support Site, or use Docker to pull the bundle from the Astra Control Service image repository.
+
+[role="tabbed-block"]
+====
+
+.NSS
+--
 
 . Download the bundle containing Astra Control Center (`astra-control-center-[version].tar.gz`) from the the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[Astra Control Center downloads page^].
 . (Recommended but optional) Download the certificates and signatures bundle for Astra Control Center (`astra-control-center-certs-[version].tar.gz`) to verify the signature of the bundle.
@@ -27,3 +34,24 @@ The output will show `Verified OK` after successful verification.
 ----
 tar -vxzf astra-control-center-[version].tar.gz
 ----
+
+--
+// end NSS tab block
+
+.Image registry
+--
+
+. Do thing 1
+. Do thing 2
+. Do thing 3
+
+--
+// end registry tab block
+
+
+
+
+
+
+====
+// end overall tabbed block
