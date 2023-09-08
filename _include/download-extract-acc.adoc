@@ -38,29 +38,12 @@ tar -vxzf astra-control-center-[version].tar.gz
 --
 // end NSS tab block
 
-.Image registry
+.Astra Control Service image registry
 --
 
 . Log in to Astra Control Service.
-. On your cluster, log in to the Astra Control Service image repository using your Astra Control Service account ID and API token.
-+
-[source,console]
-----
-docker login cr.astra.netapp.io -u <account-id> -p <api-token>
-----
-. Pull the bundle.
-+
-[source,console]
-----
-docker pull cr.astra.netapp.io/acc-image:23.10
-----
-. Run the image to extract the Astra Control Center tar bundle to the local filesystem.
-+
-[source,console]
-----
-docker run --rm -v "/path/to/desired/directory:/package" cr.astra.netapp.io/acc-image:23.10
-----
-
+. On the Dashboard, select *Deploy a self-managed instance of Astra Control*.
+. Follow the instructions to log in to the Astra Control Service image registry, pull the Astra Control Center installation image, and extract the image.
 
 --
 // end registry tab block
