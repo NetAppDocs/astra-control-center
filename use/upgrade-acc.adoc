@@ -16,20 +16,31 @@ To upgrade Astra Control Center, download the installation bundle from the NetAp
 .Before you begin
 Before you upgrade, ensure your environment still meets the link:../get-started/requirements.html[minimum requirements for Astra Control Center deployment^]. Your environment should have the following:
 
-* A supported Astra Trident version 
+* A link:../get-started/requirements.html#astra-trident-requirements[supported] Astra Trident version
 +
 [%collapsible]
 ====
-Determine the Trident version you are running:
-
+. Determine the Trident version you are running:
++
 [source,console]
 ----
 kubectl get tridentversion -n trident
 ----
 
-Refer to https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html#determine-the-version-to-upgrade-to[Astra Trident documentation] to upgrade from an older version.
+. (23.07 and earlier) Upgrade your Astra Trident to a supported version, if required. Refer to https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html#determine-the-version-to-upgrade-to[Astra Trident documentation^].
 
-WARNING: You must upgrade to Astra Trident 22.10 *PRIOR* to upgrading to Kubernetes 1.25.
+. (23.10 and later) For access to extended, closed-source Astra Trident functionality, upgrade to Astra Trident 23.10 or later. To enable this functionality using the Astra Control Provisioner, perform the following:
+
+.. Uninstall the existing Trident operator (23.07 or earlier).
+
+.. Update TridentOrchestrator CR with an updated configuration to enable Astra Control Provisioner (`--enable-acp=true`):
++
+----
+./tridentctl -n trident install --debug --enable-acp=true --acp-image=mycustomregistry/trident-acp:v23.10 --acp-port=9100 --image-pull-policy=IfNotPresent
+----
+
+.. Install Trident Operator 23.10.
+
 ====
 // End snippet
 
