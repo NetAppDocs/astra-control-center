@@ -100,7 +100,7 @@ The snapshot process begins. A snapshot is successful when the status is *Health
 
 You can back up an app at any time. 
 
-You can back up applications to immutable buckets. Astra Control Center supports backing up to the following platforms and immutable bucket types:
+You can create immutable backups by backing up applications to immutable buckets. Astra Control Center supports creating immutable backups with the following platforms and immutable bucket types:
 
 * Amazon Elastic Kubernetes Service (EKS) using an immutable Amazon S3 bucket
 * NetApp StorageGRID using an immutable NetApp bucket
