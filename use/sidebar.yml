@@ -59,5 +59,7 @@ entries:
     url: /use/unmanage.html
   - title: Upgrade Astra Control Center
     url: /use/upgrade-acc.html
+  - title: Upgrade Astra Trident
+    url: /use/upgrade-trident.html
   - title: Uninstall Astra Control Center
     url: /use/uninstall_acc.html

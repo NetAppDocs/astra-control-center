@@ -15,29 +15,30 @@ Upgrade your Astra Trident to a version supported for use with Astra Control Cen
 
 link:../get-started/requirements.html[Learn more^] about supported Astra Trident versions and other Astra Control Center requirements.
 
+.Steps
+
+. Determine if the original installation method used an https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html#determine-the-original-installation-method[operator (either manually or with Helm) or `tridentctl`^].
+
+. If you are upgrading to Astra Trident 23.10 and later, use one of these procedures to enable the Astra Control Provisioner for Astra Trident. The Astra Control Provisioner enables access to closed-source Astra Trident functionality that is available to all licensed Astra Control users beginning with Astra Trident 23.10.
++
 [role="tabbed-block"]
 ====
 
-.23.10 and later
+.Astra Trident operator method
 --
-
-For access to advanced, closed-source Astra Trident functionality, upgrade to Astra Trident 23.10 or later. To enable this functionality using the Astra Control Provisioner, perform the following:
-
-.. https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html#determine-the-original-installation-method[Determine if the original installation method was manual or used Helm^].
-
-.. Delete the Trident operator that was used to install the current Astra Trident instance. For example, if you are upgrading from Astra Trident 23.07, run the following command:
+. Delete the Trident operator that was used to install the current Astra Trident instance. For example, if you are upgrading from Astra Trident 23.07, run the following command:
 +
 ----
 kubectl delete -f 23.07/trident-installer/deploy/<bundle-name.yaml> -n trident
 ----
 
-.. Update the TridentOrchestrator CR to enable Astra Control Provisioner (`--enable-acp=true`):
+. Update the TridentOrchestrator CR to enable Astra Control Provisioner (`--enable-acp=true`):
 +
 ----
 ./tridentctl -n trident install --debug --enable-acp=true --acp-image=mycustomregistry/trident-acp:v23.10
 ----
 
-.. Install Trident operator 23.10 or later:
+. Install Trident operator 23.10 or later:
 +
 NOTE: For clusters running Kubernetes 1.24 or earlier, use `bundle_pre_1_25.yaml`. For clusters running Kubernetes 1.25 or later, use `bundle_post_1_25.yaml`.
 +
@@ -45,27 +46,50 @@ NOTE: For clusters running Kubernetes 1.24 or earlier, use `bundle_pre_1_25.yaml
 kubectl create -f deploy/<bundle-name>.yaml
 ----
 
-.. Verify the operator, deployment, and replicasets were created. 
+. Verify the operator, deployment, and replicasets were created. 
 +
 ----
 kubectl get all -n <operator-namespace>
 ----
-
++
 IMPORTANT: There should only be *one instance* of the operator in a Kubernetes cluster. Do not create multiple deployments of the Trident operator.
 
-.. Verify the trident-acp service has been installed:
+. Verify the trident-acp service has been installed:
 +
 ----
 GET <trident-address>/trident/v1/<object-type>/trident-acp
 ----
 --
 
-.23.07 and earlier 
+.Helm method
+--
+. Download the latest Astra Trident release.
+
+. Use the helm upgrade command to upgrade the Astra Trident operator to 23.07 or later:
++
+----
+helm upgrade <name> trident-operator-XX.XX.tgz
+----
+//Need remaining Helm steps
+
 --
 
-Upgrade your Astra Trident to a supported version, if required. Refer to https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html#determine-the-version-to-upgrade-to[Astra Trident documentation^].
+.tridentctl
+--
 
+. https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-tridentctl.html[Uninstall Astra Trident^].
+. Update the TridentOrchestrator CR that is leftover from the uninstall process and enable Astra Control Provisioner (`--enable-acp=true`):
++
+----
+./tridentctl -n trident install --debug --enable-acp=true --acp-image=mycustomregistry/trident-acp:v23.10
+----
+
+. https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy-tridentctl.html[Install Astra Trident again^].
 ====
 // end tabbed block
 
-See the https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-operator-overview.html[Astra Trident documentation^] for more information about Astra Trident upgrades.
+. If you are upgrading to Astra Trident 23.07 or an earlier supported version, refer to https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html[Astra Trident documentation^].
+
+.For more information
+
+* https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-operator-overview.html[Astra Trident upgrades documentation^]
