@@ -18,6 +18,8 @@ link:../get-started/requirements.html[Learn more^] about supported Astra Trident
 .Steps
 
 . Determine if the original installation method used an https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html#determine-the-original-installation-method[operator (either manually or with Helm) or `tridentctl`^].
++
+NOTE: If you used Helm for the original install and you are upgrading to 23.10, you'll need to use either the Trident operator or tridentctl to perform the upgrade.
 
 . If you are upgrading to Astra Trident 23.10 and later, use one of these procedures to enable the Astra Control Provisioner for Astra Trident. The Astra Control Provisioner enables access to closed-source Astra Trident functionality that is available to all licensed Astra Control users beginning with Astra Trident 23.10.
 +
@@ -59,26 +61,6 @@ IMPORTANT: There should only be *one instance* of the operator in a Kubernetes c
 ----
 GET <trident-address>/trident/v1/<object-type>/trident-acp
 ----
---
-
-.Astra Trident operator with Helm
---
-. Download the latest Astra Trident release.
-
-. Update the existing TridentOrchestrator CR to enable Astra Control Provisioner (`--enable-acp=true`):
-+
-----
-helm install <name> netapp-trident/trident-orchestrator --version 23.10  --enable-acp=true --acp-image=mycustomregistry/trident-acp:v23.10  
-----
-//fake command. Needs revision
-
-. Use the helm upgrade command to upgrade the Astra Trident operator to 23.10 or later:
-+
-----
-helm upgrade <name> trident-operator-XX.XX.tgz
-----
-//Need remaining Helm steps
-
 --
 
 .tridentctl
