@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: use/upgrade-trident.html
-keywords: astra trident upgrade, upgrade trident, how to upgrade astra control, update, trident
+keywords: astra trident upgrade, upgrade trident, Astra Control Provisioner, trident
 summary: To upgrade Astra Trident for use with Astra Control Center, you'll follow the steps described to update the bundle from Trident.
 ---
 
@@ -11,7 +11,7 @@ summary: To upgrade Astra Trident for use with Astra Control Center, you'll foll
 :imagesdir: ../media/get-started/
 
 [.lead]
-Upgrade your Astra Trident to a version supported for use with Astra Control Center. 23.10 and later versions of Astra Trident include the Astra Control Provider, which allows licensed Astra users access to closed-source Trident functionality.
+Upgrade your Astra Trident to a version supported for use with Astra Control Center. 23.10 and later versions of Astra Trident include the Astra Control Provisioner, which allows licensed Astra users access to closed-source Trident functionality.
 
 link:../get-started/requirements.html[Learn more^] about supported Astra Trident versions and other Astra Control Center requirements.
 
