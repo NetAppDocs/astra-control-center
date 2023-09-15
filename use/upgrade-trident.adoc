@@ -11,18 +11,37 @@ summary: To upgrade Astra Trident for use with Astra Control Center, you'll foll
 :imagesdir: ../media/get-started/
 
 [.lead]
-Upgrade your Astra Trident to a version supported for use with Astra Control Center. 23.10 and later versions of Astra Trident include the Astra Control Provisioner, which allows licensed Astra users access to closed-source Trident functionality.
+Upgrade your Astra Trident to a version supported for use with Astra Control Center. 23.10 and later versions of Astra Trident include the Astra Control Provisioner, which allows licensed Astra users access to advanced, closed-source Trident functionality. The provisioner is not enabled by default in Astra Trident 23.10 but can be enabled using this process.
 
 link:../get-started/requirements.html[Learn more^] about supported Astra Trident versions and other Astra Control Center requirements.
 
-.Steps
+.About this task
+
+These procedures assume you are upgrading from Astra Trident 23.07.1 or earlier. If you have already installed Astra Trident 23.10 independently, you will still need to follow the <<(Option 1) For upgrades to Astra Trident 23.10 and later,these steps>> to the enable Astra Control Provisioner.
+
+.Before you begin
+
+If you are upgrading to Astra Control Center 23.10 and enabling the Astra Control Provisioner, you need the following:
+
+* An Astra Control license to use Astra Control Provisioner and the functionality it provides.
+* Access to the Astra Control Center area of the NetApp Support Site to obtain the bundle containing Astra Control Provisioner.
+
+See the https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-operator-overview.html[Astra Trident upgrades documentation^] for prerequisite information about upgrades to 23.07.1 and earlier versions.
+
+== (Option 1) For upgrades to Astra Trident 23.10 and later
+
+Use one of these procedures to enable the Astra Control Provisioner for Astra Trident. The Astra Control Provisioner enables access to closed-source Astra Trident functionality that is available to all licensed Astra Control users beginning with Astra Trident 23.10.
+
+. Download the bundle containing Astra Control Center (`astra-control-center-[version].tar.gz`) from the the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[Astra Control Center downloads page^].
+
+. Extract the bundle and locate the `trident-acp:v23.10` image.
+
+. Push the image to your local registry.
 
 . Determine if the original installation method used an https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html#determine-the-original-installation-method[operator (either manually or with Helm) or `tridentctl`^].
 +
 NOTE: If you used Helm for the original install and you are upgrading to 23.10, you'll need to use either the Trident operator or tridentctl to perform the upgrade.
 
-. If you are upgrading to Astra Trident 23.10 and later, use one of these procedures to enable the Astra Control Provisioner for Astra Trident. The Astra Control Provisioner enables access to closed-source Astra Trident functionality that is available to all licensed Astra Control users beginning with Astra Trident 23.10.
-+
 [role="tabbed-block"]
 ====
 
@@ -37,7 +56,7 @@ kubectl delete -f 23.07/trident-installer/deploy/<bundle-name.yaml> -n trident
 . Update the TridentOrchestrator CR to enable Astra Control Provisioner (`--enable-acp=true`):
 +
 ----
-./tridentctl -n trident install --debug --enable-acp=true --acp-image=mycustomregistry/trident-acp:v23.10
+./tridentctl -n trident install --enable-acp=true --acp-image=mycustomregistry/trident-acp:v23.10
 ----
 
 . Install Trident operator 23.10 or later:
@@ -77,7 +96,9 @@ GET <trident-address>/trident/v1/<object-type>/trident-acp
 ====
 // end tabbed block
 
-. If you are upgrading to Astra Trident 23.07 or an earlier supported version, refer to https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html[Astra Trident documentation^].
+== (Option 2) Upgrades to Astra Trident 23.07.1 or an earlier supported version
+
+Refer to https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html[Astra Trident documentation^] for these procedures.
 
 .For more information
 
