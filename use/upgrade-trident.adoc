@@ -17,7 +17,7 @@ link:../get-started/requirements.html[Learn more^] about supported Astra Trident
 
 .About this task
 
-These procedures assume you are upgrading from Astra Trident 23.07.1 or earlier. If you have already installed Astra Trident 23.10 independently, you will still need to follow the <<(Option 1) For upgrades to Astra Trident 23.10 and later,these steps>> to the enable Astra Control Provisioner.
+These procedures assume you are upgrading from Astra Trident 23.07.1 or earlier. If you have already installed Astra Trident 23.10 independently, you will still need to follow the <</(Option 1/) For upgrades to Astra Trident 23.10 and later,these steps>> to the enable Astra Control Provisioner.
 
 .Before you begin
 
@@ -47,16 +47,22 @@ NOTE: If you used Helm for the original install and you are upgrading to 23.10, 
 
 .Astra Trident operator
 --
-. Delete the Trident operator that was used to install the current Astra Trident instance. For example, if you are upgrading from Astra Trident 23.07, run the following command:
-+
-----
-kubectl delete -f 23.07/trident-installer/deploy/<bundle-name.yaml> -n trident
-----
+//. Delete the Trident operator that was used to install the current Astra Trident instance. For example, if you are upgrading from Astra Trident 23.07, run the following command:
+//+
+//----
+//kubectl delete -f 23.07/trident-installer/deploy/<bundle-name.yaml> -n trident
+//----
 
 . Update the TridentOrchestrator CR to enable Astra Control Provisioner (`--enable-acp=true`):
 +
 ----
-./tridentctl -n trident install --enable-acp=true --acp-image=mycustomregistry/trident-acp:v23.10
+./tridentctl -n trident install --enable-acp=true --acp-image=mycustomregistry/trident-acp:v23.10.0
+----
+
+. Apply the changes:
++
+----
+kubectl -n trident apply -f tridentorchestrator_cr.yaml
 ----
 
 . Install Trident operator 23.10 or later:
@@ -64,10 +70,10 @@ kubectl delete -f 23.07/trident-installer/deploy/<bundle-name.yaml> -n trident
 NOTE: For clusters running Kubernetes 1.24 or earlier, use `bundle_pre_1_25.yaml`. For clusters running Kubernetes 1.25 or later, use `bundle_post_1_25.yaml`.
 +
 ----
-kubectl create -f deploy/<bundle-name>.yaml
+kubectl -n trident apply -f trident-installer-23.10.0/deploy/<bundle-name.yaml>
 ----
 
-. Verify the operator, deployment, and replicasets were created. 
+. Verify the operator, deployment, and replicasets were created.
 +
 ----
 kubectl get all -n <operator-namespace>
@@ -75,10 +81,10 @@ kubectl get all -n <operator-namespace>
 +
 IMPORTANT: There should only be *one instance* of the operator in a Kubernetes cluster. Do not create multiple deployments of the Trident operator.
 
-. Verify the trident-acp service has been installed:
+. Verify the `trident-acp` pod is running:
 +
 ----
-GET <trident-address>/trident/v1/<object-type>/trident-acp
+GET kubectl get pods -n trident
 ----
 --
 
@@ -89,7 +95,7 @@ GET <trident-address>/trident/v1/<object-type>/trident-acp
 . Update the TridentOrchestrator CR that is leftover from the uninstall process and enable Astra Control Provisioner (`--enable-acp=true`):
 +
 ----
-./tridentctl -n trident install --debug --enable-acp=true --acp-image=mycustomregistry/trident-acp:v23.10
+./tridentctl -n trident install --enable-acp=true --acp-image=mycustomregistry/trident-acp:v23.10
 ----
 
 . https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy-tridentctl.html[Install Astra Trident again^].
