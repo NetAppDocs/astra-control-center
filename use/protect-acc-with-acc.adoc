@@ -135,22 +135,23 @@ astra 89f4fd47-0cf0-4c7a-a44e-43353dc96ba8 23.07.0-24 app-lb-14.rtp.openenglab.n
 kubectl edit acc -n netapp-acc
 ----
 
-.. Change the `astraAddress` under `spec:` to match the primary cluster's Astra Control Center DNS name.
-.. Confirm that the address has been updated:
+... Change the `astraAddress` under `spec:` to match the primary cluster's Astra Control Center DNS name (`app-lb-14.rtp.openenglab.netapp.com`).
+... Save the configuration.
+... Confirm that the address has been updated:
 +
 ----
 kubectl get acc -n netapp-acc
 ----
+
+. Update your ingress configurations so that the primary cluster's IP address is set as the IP address used by your ingress:
++
+NOTE: There are many ingress methods you might have link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[set up] for load balancing. Updating the IP address might vary from these steps depending on the type of ingress used. This example describes updating the IP address for MetalLB. 
 
 .. Determine the IP address of the primary cluster's Astra Control Center DNS name:
 +
 ----
 nslookup <primary cluster's DNS name>
 ----
-
-. Update your ingress configurations so that the primary cluster's IP address is set as the IP address used by your ingress:
-+
-NOTE: There are many ingress methods you might have link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[set up] for load balancing. Updating the IP address might vary from these steps depending on the type of ingress used. This example describes updating the IP address for MetalLB. 
 
 .. Edit configuration: 
 +
@@ -159,7 +160,7 @@ kubectl edit ipaddresspool.metallb.io/first-pool -n metallb-system
 ----
 
 .. Replace the IP address in the `spec/addresses:` section with the IP address that nslookup returned in the previous step.
-.. Save the deployment (`:wq`).
+.. Save the configuration.
 .. Restart the controller: 
 +
 ----
@@ -293,14 +294,20 @@ kubectl get pods -n netapp-acc | grep -e "traefik" | awk '{print $1}' | xargs ku
 +
 NOTE: There are many ingress methods you might have link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[set up^] for load balancing. Updating the IP address might vary from these steps depending on the type of ingress used. This example describes updating the IP address for MetalLB. 
 
+.. Determine the IP address of the destination cluster's Astra Control Center DNS name:
++
+----
+nslookup <destination cluster's DNS name>
+----
+
 .. Edit configuration: 
 +
 ----
 kubectl edit ipaddresspool.metallb.io/first-pool -n metallb-system
 ----
 
-.. Confirm the IP address in the `spec/addresses:` section is the IP address of the destination cluster.
-.. Save the deployment (`:wq`).
+... Replace the IP address in the `spec/addresses:` section with the destination cluster's IP address that nslookup returned in the previous step.
+... Save the configuration.
 .. Restart the controller: 
 +
 ----
