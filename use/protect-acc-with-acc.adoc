@@ -44,6 +44,7 @@ In this example configuration, the following is shown:
 ** This cluster will be used to back up the primary Astra Control Center instance or configure replication and to provide application data management for `ocp-app-qa4` cluster.
 * *A third Kubernetes cluster of the same Kubernetes distribution type as the primary that will be used for restore operations*: 
 ** OpenShift cluster: `ocp-app-qa1`
+** Astra Control Center third instance: `app-lb-13.rtp.openenglab.netapp.com`
 ** This cluster will be used for Astra Control Center restore or replication failover.
 
 Not depicted in the diagram:
