@@ -20,7 +20,7 @@ In these scenarios, a second instance of Astra Control Center is deployed and co
 Ensure that you have the following before setting up protection scenarios for Astra Control Center:
 
 * *A Kubernetes cluster running the primary Astra Control Center instance*: This cluster hosts the primary Astra Control Center instance which manages application clusters.
-* *A second Kubernetes cluster running the secondary Astra Control Center instance*: This cluster hosts the Astra Control Center instance that manages the primary Astra Control Center instance.
+* *A second Kubernetes cluster of the same Kubernetes distribution type as the primary that is running the secondary Astra Control Center instance*: This cluster hosts the Astra Control Center instance that manages the primary Astra Control Center instance.
 * *A third Kubernetes cluster of the same Kubernetes distribution type as the primary*: This cluster will host the restored or replicated instance of Astra Control Center. It must have the same Astra Control Center namespace available that is currently deployed on the primary. For example, if Astra Control Center is deployed in namespace `netapp-acc` on the source cluster, the namespace `netapp-acc` must be available and not used by any applications on the destination Kubernetes cluster. 
 * *S3-compatible buckets*: Each Astra Control Center instance has an accessible S3-compatible object storage bucket.
 * *A configured load balancer*: The load balancer provides an IP address for Astra and must have network connectivity to the application clusters and both S3 buckets.
@@ -38,19 +38,19 @@ In this example configuration, the following is shown:
 ** OpenShift cluster: `ocp-app-qa4`
 ** Astra Control Center primary instance: `app-lb-15.rtp.openenglab.netapp.com`
 ** This cluster manages the application clusters.
-* *The second Kubernetes cluster running the secondary Astra Control Center instance*: 
+* *The second Kubernetes cluster of the same Kubernetes distribution type as the primary that is running the secondary Astra Control Center instance*: 
 ** OpenShift cluster: `ocp-app-qa2`
 ** Astra Control Center secondary instance: `app-lb-14.rtp.openenglab.netapp.com`
-** This cluster will be used for the backup and to provide application data management for `ocp-app-qa4` cluster.
-* *A third Kubernetes cluster of the same Kubernetes distribution type as the primary that will be used for restore*: 
+** This cluster will be used to back up the primary Astra Control Center instance or configure replication and to provide application data management for `ocp-app-qa4` cluster.
+* *A third Kubernetes cluster of the same Kubernetes distribution type as the primary that will be used for restore operations*: 
 ** OpenShift cluster: `ocp-app-qa1`
-** This cluster will be used for the restore.
+** This cluster will be used for Astra Control Center restore or replication failover.
 
 Not depicted in the diagram:
 
 * All the clusters have ONTAP backends with Trident installed. 
-* OpenShift clusters are using MetalLB as the load balancer. 
-* The snapshot controller and VolumeSnapshotClass are also installed on all the clusters as outlined in the /get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[prerequisites^]. 
+* In this configuration, the Openshift clusters are using MetalLB as the load balancer. 
+* The snapshot controller and VolumeSnapshotClass are also installed on all the clusters as outlined in the link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[prerequisites^]. 
 
 NOTE: Additionally, the primary `ocp-app-qa4` cluster could have applications that are being managed by the primary or secondary Astra Control Center instance. They are not shown here for brevity. 
 
@@ -100,15 +100,15 @@ After you select *Define*, repeat the Define Application process for the operato
 
 . After you have backed up Astra Control Center and the operator, simulate a disaster recovery (DR) scenario by link:../use/uninstall_acc.html[uninstalling Astra Control Center^] from the primary cluster.
 +
-NOTE: You will restore Astra Control Center to a new cluster (the third Kubernetes cluster described in this procedure) and use the same DNS or IP addresses for the newly installed Astra Control Center.
+NOTE: You will restore Astra Control Center to a new cluster (the third Kubernetes cluster described in this procedure) and use the same DNS for the newly installed Astra Control Center.
 
 . Using the secondary Astra Control Center, link:../use/restore-apps.html[restore^] the primary instance of the Astra Control Center application from its backup:
 .. Select *Applications* and then select the name of the Astra Control Center application.
 .. From the Options menu in the Actions column, select *Restore*.
-.. Choose the *Restore to original namespaces* as the restore type.
+.. Choose the *Restore to new namespaces* as the restore type.
 .. Enter the restore name (`netapp-acc`).
 .. Choose the destination third cluster (`ocp-app-qa1`).
-.. Enter the namespace so that it is the same namespace as the original.
+.. Update the destination namespace so that it is the same namespace as the original.
 .. On the Restore Source page, select the application backup that will be used as the restore source.
 .. Select *Restore using original storage classes*.
 .. Select *Restore all resources*.
@@ -116,7 +116,20 @@ NOTE: You will restore Astra Control Center to a new cluster (the third Kubernet
 
 . Configure Astra Control Center on the destination cluster:
 .. Open a terminal and connect using kubeconfig to the destination cluster (`ocp-app-qa1`) that contains the restored Astra Control Center.
-.. Edit the Astra Control Center custom resource (CR):
+.. Confirm that the `ADDRESS` column in the Astra Control Center configuration references the primary system's DNS name:
++
+----
+kubectl get acc -n netapp-acc
+----
++
+Response:
++
+----
+NAME  UUID                                 VERSION    ADDRESS                             READY
+astra 89f4fd47-0cf0-4c7a-a44e-43353dc96ba8 23.07.0-24 app-lb-14.rtp.openenglab.netapp.com True
+----
+
+.. If the DNS name does not reference the primary Astra Control Center DNS, update the configuration:
 +
 ----
 kubectl edit acc -n netapp-acc
@@ -177,12 +190,12 @@ In this example, Astra Control Center is always installed under the `netapp-acc`
 .. Select *Clusters* and select the cluster that contains the primary Astra Control Center (`ocp-app-qa4`).
 .. Select the *Namespaces* tab.
 .. Select `netapp-acc` and `netapp-acc-operator` namespaces.
-.. Select the Actions menu for one of these and select *Define as application*.
-.. Select *View in applications* to see the defined application.
+.. Select the Actions menu and select *Define as applications*.
+.. Select *View in applications* to see the defined applications.
 
 . Configure Backends for Replication:
 +
-NOTE: Replication requires that the primary Astra Control Center cluster and the destination third cluster use different peered ONTAP storage backends.
+NOTE: Replication requires that the primary Astra Control Center cluster and the destination cluster (`ocp-app-qa1`) use different peered ONTAP storage backends.
 After each backend is peered and added to Astra Control, the backend appears in the *Discovered* tab of the Backends page.
 
 .. link:../get-started/setup_overview.html#add-a-storage-backend[Add a peered backend^] to Astra Control Center on the primary cluster.
