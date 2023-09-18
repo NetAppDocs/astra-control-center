@@ -97,7 +97,7 @@ After you select *Define*, repeat the Define Application process for the operato
 . Back up Astra Control Center and the operator:
 .. On the secondary Astra Control Center, navigate to the Applications page by selecting the Applications tab.
 .. link:../use/protect-apps.html#create-a-backup[Back up^] the Astra Control Center application (`netapp-acc`).
-.. link:../use/protect-apps.html#create-a-backup[Back up^] the operator (`netapp-acc-operator).
+.. link:../use/protect-apps.html#create-a-backup[Back up^] the operator (`netapp-acc-operator`).
 
 . After you have backed up Astra Control Center and the operator, simulate a disaster recovery (DR) scenario by link:../use/uninstall_acc.html[uninstalling Astra Control Center^] from the primary cluster.
 +
@@ -148,10 +148,10 @@ kubectl get acc -n netapp-acc
 +
 NOTE: There are many ingress methods you might have link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[set up] for load balancing. Updating the IP address might vary from these steps depending on the type of ingress used. This example describes updating the IP address for MetalLB. 
 
-.. Determine the IP address of the primary cluster's Astra Control Center DNS name:
+.. Determine the IP address of the primary cluster's Astra Control Center:
 +
 ----
-nslookup <primary cluster's DNS name>
+nslookup <primary cluster DNS name>
 ----
 
 .. Edit configuration: 
@@ -295,7 +295,7 @@ kubectl get pods -n netapp-acc | grep -e "traefik" | awk '{print $1}' | xargs ku
 +
 NOTE: There are many ingress methods you might have link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[set up^] for load balancing. Updating the IP address might vary from these steps depending on the type of ingress used. This example describes updating the IP address for MetalLB. 
 
-.. Determine the IP address of the destination cluster's Astra Control Center DNS name:
+.. Determine the IP address of the destination cluster's Astra Control Center:
 +
 ----
 nslookup <destination cluster's DNS name>
