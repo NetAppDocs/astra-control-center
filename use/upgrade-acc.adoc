@@ -97,18 +97,19 @@ kubectl get clusteroperators
 ====
 // End snippet
 //astradoc-249
-* Istio service mesh: It is strongly recommended that Astra Control host cluster communications channels be secured using an link:requirements.html#service-mesh-requirements[Istio service mesh^]. If you already have an existing Astra Control Center instance that is participating in Istio service mesh or you do not intend to install an Istio service mesh for use with Astra Control Center, _no additional changes are needed_ for upgrade configuration. If you intend to install and use an Istio service mesh, _the following steps are required_:
+[#istio-prereq]
+* Istio service mesh: It is strongly recommended that Astra Control host cluster communications channels be secured using an link:../get-started/requirements.html#service-mesh-requirements[Istio service mesh]. If you already have an existing Astra Control Center instance that is participating in Istio service mesh or you do not intend to install an Istio service mesh for use with Astra Control Center, _no additional changes are needed_ for upgrade configuration. If you intend to install and use an Istio service mesh, _the following steps are required_:
 +
 .Istio service mesh prerequisite steps for Astra Control Center upgrades
 [%collapsible]
 ====
 Before upgrading Astra Control Center, perform these steps:
 
-. Install the Istio service mesh. 
+. Install the Istio service mesh on the host cluster. 
 +
-IMPORTANT: Don't attempt to mesh the existing Astra installation. The Istio service mesh must be running in parallel with an existing, un-meshed Astra Control Center installation.
+IMPORTANT: Don't attempt to add the mesh to the existing Astra installation. The Istio service mesh must be running in parallel with an existing, un-meshed Astra Control Center installation.
 
-. Add the following labels to the Astra (netapp-acc or custom namespace) namespace:
+. Add the following labels to the Astra (`netapp-acc` or custom namespace) namespace:
 +
 ----
 astra.netapp.io/istio: on-upgrade
@@ -366,6 +367,13 @@ additionalValues:
         initialDelaySeconds: 180
 ----
 //astradoc-245/known issue/23.07 only
+
+. If you installed a new Istio service mesh on the host cluster according to the <<istio-prereq,prerequisite steps>> described earlier in this procedure, change the ingress setting to `Generic`:
++
+[source,console]
+----
+ingressType: Generic
+----
 
 . Save and exit the file editor. The changes will be applied and the upgrade will begin.
 
