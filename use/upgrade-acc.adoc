@@ -97,9 +97,9 @@ kubectl get clusteroperators
 ====
 // End snippet
 //astradoc-249
-[id=istioprereq]
 * Istio service mesh: It is strongly recommended that Astra Control host cluster communications channels be secured using an link:../get-started/requirements.html#service-mesh-requirements[Istio service mesh]. If you already have an existing Astra Control Center instance that is participating in Istio service mesh or you do not intend to install an Istio service mesh for use with Astra Control Center, _no additional changes are needed_ for upgrade configuration. If you intend to install and use an Istio service mesh, _the following steps are required_:
 +
+[id=istioprereq]
 .Istio service mesh prerequisite steps for Astra Control Center upgrades
 [%collapsible]
 ====
