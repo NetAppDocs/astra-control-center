@@ -29,7 +29,7 @@ kubectl get tridentversion -n trident
 ====
 // End snippet
 +
-NOTE: Upgrade Astra Trident, if required, using these link:../use/upgrade-trident.html[instructions^]. 
+NOTE: Upgrade Astra Trident, if required, using these https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html[instructions^]. 
 
 * A supported Kubernetes distribution
 +
