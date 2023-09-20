@@ -72,7 +72,7 @@ NOTE: You can https://docs.netapp.com/us-en/trident/trident-get-started/kubernet
 ** *Astra Trident volume snapshot controller and volume snapshot class installed and configured*: The volume snapshot controller must be https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[installed^] so that snapshots can be created in Astra Control. At least one Astra Trident `VolumeSnapshotClass` has been https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#step-1-set-up-a-volumesnapshotclass[set up^] by an administrator.
 * *Kubeconfig accessible*: You have access to the https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[default cluster kubeconfig^] that link:../get-started/install_acc.html#set-up-namespace-and-secret-for-registries-with-auth-requirements[you configured during installation^].
 // MW: Removed advice about only one context element, since Hemantha says that applies only for clusters we want to manage with ACC (ASTRADOC-157)
-* *Private CA certificates configured in kubeconfig*: If you are using the cluster's kubeconfig file to add the cluster to Astra Control and the kubeconfig file includes a certificate that is signed by a private Certificate Authority (CA), add the following line to the `cluster` section of the kubeconfig file. This will enable Astra Control to add the cluster:
+* *Private CA certificates configured in kubeconfig*: If you are adding the cluster using a kubeconfig file that references a private Certificate Authority (CA), add the following line to the `cluster` section of the kubeconfig file. This will enable Astra Control to add the cluster:
 +
 ----
 insecure-skip-tls-verify: true
