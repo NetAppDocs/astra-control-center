@@ -63,7 +63,7 @@ You should ensure that the following prerequisite conditions are met before you 
 
 * Ensure that the worker nodes in your cluster are configured with the appropriate storage drivers so that the pods can interact with the backend storage.
 * Your environment meets the link:../get-started/requirements.html[operational environment requirements^] for Astra Trident and Astra Control Center.
-* If you are adding the cluster using a kubeconfig file that references a private Certificate Authority (CA), add the following line to the `cluster` section of the kubeconfig file. This will enable Astra Control to add the cluster:
+* If you are adding the cluster using a kubeconfig file that references a private Certificate Authority (CA), add the following line to the `cluster` section of the kubeconfig file. This enables Astra Control to add the cluster:
 +
 ----
 insecure-skip-tls-verify: true
