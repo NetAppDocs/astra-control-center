@@ -25,6 +25,9 @@ For a demonstration of the Astra Control Center installation process, see https:
 
 .Before you begin
 * *Meet environmental prerequisites*: link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
++
+TIP: Deploy Astra Control Center in a third fault domain or secondary site. This is recommended for app replication and seamless disaster recovery.
+
 * *Consider pod security policies*: If you have configured or want to configure pod security policies in your environment, familiarize yourself with pod security policies and how they affect Astra Control Center installation. Refer to link:../concepts/understand-pod-security.html[pod security restrictions^].
 * *Ensure healthy services*: Check that all API services are in a healthy state and available:
 +
@@ -36,16 +39,14 @@ kubectl get apiservices
 * *Ensure a routable FQDN*: The Astra FQDN you plan to use is able to be routed to the cluster. This means that you either have a DNS entry in your internal DNS server or you are using a core URL route that is already registered.
 * *Configure cert manager*: If a cert manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps^] so that Astra Control Center does not attempt to install its own cert manager. By default, Astra Control Center installs its own cert manager during installation.
 //astradoc-249
-* *Consider a service mesh*: It is strongly recommended that Astra Control host cluster communications channels be secured using an link:requirements.html#service-mesh-requirements[supported service mesh^]. 
+* *Consider a service mesh*: It is strongly recommended that Astra Control host cluster communications channels be secured using a link:requirements.html#service-mesh-requirements[supported service mesh^]. 
 +
 .Istio service mesh details 
 [%collapsible]
 ====
 For Istio service mesh use, you'll be required to add an `istio-injection:enabled` <<Complete Astra Control Center and operator installation,label>> to the Astra namespace as described during this Astra Control Center installation procedure. You'll also need to use the `Generic`  <<Configure Astra Control Center,ingress setting>> and provide an alternative ingress for <<Set up ingress for load balancing,external load balancing>>.
 ====
-// End snippet
-
-TIP: Deploy Astra Control Center in a third fault domain or secondary site. This is recommended for app replication and seamless disaster recovery. 
+// End snippet 
 
 .Steps
 

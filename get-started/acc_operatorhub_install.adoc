@@ -35,12 +35,12 @@ oc get apiservices
 * *Ensure a routable FQDN*: The Astra FQDN you plan to use is able to be routed to the cluster. This means that you either have a DNS entry in your internal DNS server or you are using a core URL route that is already registered.
 * *Obtain Openshift Permissions*: You'll need all necessary permissions and access to the Red Hat OpenShift Container Platform to perform the installation steps described.
 * *Configure a cert manager*: If a cert manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps^] so that Astra Control Center does not install its own cert manager. By default, Astra Control Center installs its own cert manager during installation.
-* *Consider a service mesh*: It is strongly recommended that Astra Control host cluster communications channels be secured using an link:requirements.html#service-mesh-requirements[supported service mesh^]. 
+* *Consider a service mesh*: It is strongly recommended that Astra Control host cluster communications channels be secured using a link:requirements.html#service-mesh-requirements[supported service mesh^]. 
 +
 .Istio service mesh details 
 [%collapsible]
 ====
-For Istio service mesh use, you'll be required to add an `istio-injection:enabled` <<Complete Astra Control Center and operator installation,label>> to the Astra namespace as described during this Astra Control Center installation procedure. You'll also need to use the `Generic`  <<Configure Astra Control Center,ingress setting>> and provide an alternative ingress for <<Set up ingress for load balancing,external load balancing>>.
+For Istio service mesh use, you'll be required to add an `istio-injection:enabled` label to the Astra namespace prior to deploying Astra Control Center. You'll also need to use the `Generic` ingress setting and provide an alternative ingress for link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[external load balancing].
 ====
 // End snippet
 * *Kubernetes ingress controller*: If you have a Kubernetes ingress controller that manages external access to services, such as load balancing in a cluster, you need to set it up for use with Astra Control Center:

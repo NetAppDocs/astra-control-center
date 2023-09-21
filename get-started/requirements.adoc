@@ -77,7 +77,7 @@ NOTE: These requirements assume that Astra Control Center is the only applicatio
 == Service mesh requirements
 A supported vanilla version of the Istio service mesh is strongly recommended to be installed on the Astra Control Center host cluster. Refer to https://istio.io/latest/docs/releases/supported-releases/[supported releases^] for supported versions of Istio. Branded releases of Istio service mesh, such as OpenShift Service Mesh, are not validated with Astra Control Center.
 
-If you install Istio service mesh on the host cluster, you must do so as part of Astra Control Center link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[installation] or link:../use/upgrade-acc.html[upgrade] and not independent of these processes.
+If you install Istio service mesh on the host cluster, you must do so as part of Astra Control Center link:../get-started/install_acc.html[installation] or link:../use/upgrade-acc.html[upgrade] and not independent of these processes.
 
 NOTE: Installing Astra Control Service without configuring a service mesh on the host cluster has potentially serious security implications.
 

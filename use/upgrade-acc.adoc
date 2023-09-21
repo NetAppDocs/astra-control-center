@@ -97,7 +97,7 @@ kubectl get clusteroperators
 ====
 // End snippet
 //astradoc-249
-* Service mesh considerations: It is strongly recommended that Astra Control host cluster communications channels be secured using an link:../get-started/requirements.html#service-mesh-requirements[service mesh]. If you already have an existing Astra Control Center instance that is participating in Istio service mesh or you do not intend to install an Istio service mesh for use with Astra Control Center, _no additional service mesh changes are needed_ for upgrade configuration. If you intend to install and use an Istio service mesh, _the following steps are required_:
+* Service mesh considerations: It is strongly recommended that Astra Control host cluster communications channels be secured using a link:../get-started/requirements.html#service-mesh-requirements[service mesh]. If you already have an existing Astra Control Center instance that is participating in Istio service mesh or you do not intend to install an Istio service mesh for use with Astra Control Center, _no additional service mesh changes are needed_ for upgrade configuration. If you intend to install and use an Istio service mesh, _the following steps are required_:
 +
 [id=istioprereq]
 .Istio service mesh prerequisite steps for Astra Control Center upgrades
@@ -122,7 +122,7 @@ kubectl label ns [netapp-acc or custom namespace]
 astra.netapp.io/istio:on-upgrade
 ----
 
-NOTE: When you perform the upgrade, you will also need to ensure that the `ingressType` you specify in link:../use/upgrade-acc.html#upgrade-astra-control-center[the Astra Control Center CR] is `generic` and not `AccTraefik` or the upgrade will fail.
+NOTE: When you perform the upgrade, you will also need to ensure that the `ingressType` you specify in link:../use/upgrade-acc.html#upgrade-astra-control-center[the Astra Control Center CR] is `Generic` and not `AccTraefik` or the upgrade will fail.
 
 ====
 // End snippet
