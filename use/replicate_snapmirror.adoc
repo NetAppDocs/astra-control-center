@@ -40,25 +40,34 @@ Using Astra Control, you can do the following tasks related to replicating appli
 
 Astra Control application replication requires that the following prerequisites be met before you begin:
 
-* *ONTAP clusters*: 
-** *Astra Trident*: Astra Trident version 22.10 or later must exist on both the source and destination Kubernetes clusters that utilize ONTAP as a backend.
-** *Licenses*: ONTAP SnapMirror asynchronous licenses using the Data Protection bundle must be enabled on both the source and destination ONTAP clusters. Refer to https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html[SnapMirror licensing overview in ONTAP^] for more information.
-* *Peering*: 
-** *Cluster and SVM*: The ONTAP storage backends must be peered. Refer to https://docs.netapp.com/us-en/ontap-sm-classic/peering/index.html[Cluster and SVM peering overview^] for more information.
-** *Astra Trident and SVM*: The peered remote SVMs must be available to Astra Trident on the destination cluster.
-* *Astra Control Center*:
-+
+.ONTAP clusters 
+* *Astra Trident*: Astra Trident version 22.10 or later must exist on both the source and destination Kubernetes clusters that utilize ONTAP as a backend.
+* *Licenses*: ONTAP SnapMirror asynchronous licenses using the Data Protection bundle must be enabled on both the source and destination ONTAP clusters. Refer to https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html[SnapMirror licensing overview in ONTAP^] for more information.
+
+.Peering 
+* *Cluster and SVM*: The ONTAP storage backends must be peered. Refer to https://docs.netapp.com/us-en/ontap-sm-classic/peering/index.html[Cluster and SVM peering overview^] for more information.
+* *Astra Trident and SVM*: The peered remote SVMs must be available to Astra Trident on the destination cluster.
+
+.Astra Control Center
+
 TIP: link:../get-started/install_acc.html[Deploy Astra Control Center^] in a third fault domain or secondary site for seamless disaster recovery.
 
-** *Managed clusters*: The following clusters must be added to and managed by Astra Control, ideally at different failure domains or sites:
-*** Source Kubernetes cluster
-*** Destination Kubernetes cluster
-*** Associated ONTAP clusters
+* *Managed backends*: You need to add and  manage ONTAP as a storage backend in Astra Control to create a replication relationship. 
++
+*_Astra Control Provisioner only_*: Adding an ONTAP storage backend in Astra Control is optional if you have enabled Astra Control Provisioner for Astra Control 23.10 or later.
 
-** *User accounts*: When you add an ONTAP storage backend to Astra Control Center, apply user credentials with the "admin" role. This role has access methods `http` and `ontapi` enabled on both ONTAP source and destination clusters. Refer to https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts in ONTAP documentation^] for more information. 
+* *Managed clusters*: The following clusters must be added to and managed by Astra Control, ideally at different failure domains or sites:
+** Source Kubernetes cluster
+** Destination Kubernetes cluster
+** Associated ONTAP clusters
+
+* *User accounts*: When you add an ONTAP storage backend to Astra Control Center, apply user credentials with the "admin" role. This role has access methods `http` and `ontapi` enabled on both ONTAP source and destination clusters. Refer to https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts in ONTAP documentation^] for more information. 
 // This bullet is duplicated in Add backend
++
+*_Astra Control Provisioner only_*: You do not need an admin role in Astra Control to manage clusters.
 
-* *Astra Trident / ONTAP configuration*: Astra Control Center requires that you configure at least one storage backend that supports replication for both the source and destination clusters. If the source and destination clusters are the same, the destination application should use a different storage backend than the source application for the best resiliency.
+.Astra Trident / ONTAP configuration
+Astra Control Center requires that you configure at least one storage backend that supports replication for both the source and destination clusters. If the source and destination clusters are the same, the destination application should use a different storage backend than the source application for the best resiliency.
 
 IMPORTANT: Astra Control replication supports apps that use a single storage class. When you add an app to a namespace, be sure the app has the same storage class as other apps in the namespace. When you add a PVC to a replicated app, be sure the new PVC has the same storage class as other PVCs in the namespace.
 
