@@ -50,7 +50,7 @@ Astra Control application replication requires that the following prerequisites 
 
 .Astra Control Center
 
-* *Managed backends*: You need to add and manage ONTAP storage backends in Astra Control to create a replication relationship. 
+* *Managed backends*: You need to add and manage ONTAP storage backends in Astra Control Center to create a replication relationship. 
 +
 *_Astra Control Provisioner only_*: Adding and managing ONTAP storage backends in Astra Control Center is optional if you have enabled Astra Control Provisioner for Astra Control Center 23.10 or later.
 
@@ -62,7 +62,7 @@ Astra Control application replication requires that the following prerequisites 
 * *User accounts*: When you add an ONTAP storage backend to Astra Control Center, apply user credentials with the "admin" role. This role has access methods `http` and `ontapi` enabled on both ONTAP source and destination clusters. Refer to https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts in ONTAP documentation^] for more information. 
 // This bullet is duplicated in Add backend
 +
-*_Astra Control Provisioner only_*: You do not need specifically an "admin" role to manage clusters in Astra Control Center. These credentials are no longer required within Astra Control Center.  
+*_Astra Control Provisioner only_*: If you have enabled Astra Control Provisioner functionality, you no longer need to specifically define an "admin" role to manage clusters in Astra Control Center as these credentials are no longer required within Astra Control Center.  
 
 TIP: link:../get-started/install_acc.html[Deploy Astra Control Center^] in a third fault domain or secondary site for seamless disaster recovery.
 
