@@ -34,6 +34,7 @@ sidebar:
     - section: get-started
     - section: concepts
     - section: use
+    - section: use-acp
     - section: rest-api
     #- section: solutions (retired with DOC-4309)
     - section: support
