@@ -5,7 +5,7 @@ keywords: restore app, restoring an app, restore, ontap-nas-economy, disruptive,
 summary: Astra can restore your application configuration and persistent storage from a snapshot or backup. Persistent storage backups are transferred from your object store, so restoring from an existing backup will complete the fastest.
 ---
 
-= Restore applications
+= Restore apps
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/use/
@@ -150,7 +150,7 @@ Astra Control Provisioner provides non-disruptive backup and restore functionali
 [%collapsible]
 ====
 . Do the following in Astra Trident: 
-.. Enable the Snapshot directory for the PVC associated with application:
+.. Enable the snapshot directory for the PVC associated with the application:
 +
 [source,console]
 ----
@@ -172,7 +172,7 @@ SnapshotDirectory: "True"
 
 . Do the following on the ONTAP storage backend:
 .. Find the SVM hosting the volumes for the application.
-.. Log in to a ONTAP terminal where the volumes are created.
+.. Log in to a terminal connected to ONTAP where the volumes are created.
 .. Hide the enabled snapshot directory:
 +
 NOTE: The enabled directory will continue to be accessible. 
@@ -183,7 +183,7 @@ nfs modify -vserver <svm name> -v3-hide-snapshot enabled
 ----
 
 .Result
-The application is ready to backup and restore without any disruptions. The PVC is also available to be used by other applications for non-disruptive backups and restores.
+The application is ready to backup and restore without any disruptions using Astra Control. The PVC is also available to be used by other applications for non-disruptive backups and restores.
 ====
 // End snippet
 
