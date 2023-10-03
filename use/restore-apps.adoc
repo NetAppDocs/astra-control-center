@@ -162,7 +162,7 @@ tridentctl update volume <pv name> --snapshot-dir=true --pool-level=true -n trid
 +
 [source,console]
 ----
-tridentctl get volume <pvc name> -n trident -o yaml | grep snapshotDir
+tridentctl get volume <pv name> -n trident -o yaml | grep snapshotDir
 ----
 +
 Response:
