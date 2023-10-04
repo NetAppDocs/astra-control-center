@@ -24,11 +24,12 @@ You can enable Kerberos encryption on the storage traffic between your managed c
 * Ensure that your environment meets the requirements in the https://learn.microsoft.com/en-us/azure/azure-netapp-files/configure-kerberos-encryption#requirements[Azure NetApp Files documentation^].
 * Ensure that you have prepared the Azure NetApp Files storage backend for Kerberos encryption by following the instructions in https://learn.microsoft.com/en-us/azure/azure-netapp-files/configure-kerberos-encryption[Azure NetApp Files documentation^].
 
+.About this task
+You can create a configuration file that should be applied at the storage backend level, using the `kerberos` key, or at the virtual pool level, using the `storage` key. When you define the configuration at the virtual pool level, the pool is selected using the label in the storage class.
+
 .Steps
 
-. On the managed cluster, create a storage backend configuration file. You can define a configuration file at the storage backend level, using the `kerberos` key, or at the virtual pool level, using the `storage` key. When you define the configuration at the virtual pool level, the pool is selected using the label in the storage class.
-
-Replace values in brackets <> with information from your environment:
+. On the managed cluster, create a storage backend configuration file. Replace values in brackets <> with information from your environment:
 +
 [role="tabbed-block"]
 ====
