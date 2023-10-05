@@ -1,6 +1,6 @@
 ---
 sidebar: sidebar
-permalink: use/acp-snap-restore.html
+permalink: use-acp/acp-snap-restore.html
 keywords: snapshot restore, snapshot, astra control provisioner, TridentActionSnapshotRestore,
 summary: Astra Control Provisioner provides rapid, in-place volume restoration from a snapshot using the `TridentActionSnapshotRestore` (TASR) CR. This CR functions as an imperative Kubernetes action and does not persist after the operation completes. 
 ---
