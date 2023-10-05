@@ -15,8 +15,6 @@ Astra Control Provisioner provides rapid, in-place volume restoration from a sna
 
 Astra Control Provisioner supports snapshot restore on the `ontap-san`, `ontap-san-economy`, `ontap-nas`, `ontap-nas-flexgroup`, `azure-netapp-files`, `gcp-cvs`, and `solidfire-san` drivers. 
 
-NOTE: Snapshot restore is not supported on qtree volumes. 
-
 .Before you begin
 You must have a bound PVC and available volume snapshot. 
 
@@ -85,4 +83,8 @@ metadata:
   resourceVersion: ""
 ----
 
-NOTE: In most cases, Astra Control Provisioner will not automatically retry the operation in case of failure. You will need to perform the operation again. 
+[NOTE]
+====
+* In most cases, Astra Control Provisioner will not automatically retry the operation in case of failure. You will need to perform the operation again. 
+* Kubernetes users without admin access might have to be granted permission by the admin to create a TASR CR in their application namespace.
+====
