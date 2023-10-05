@@ -21,7 +21,7 @@ You can enable Kerberos encryption on the storage traffic between your managed c
 .Before you begin
 
 * Ensure that you have enabled Astra Control Provisioner on the managed Red Hat OpenShift cluster. Refer to link:../use/enable-acp.html[Enable Astra Control Provisioner^] for instructions.
-* Ensure that you have prepared the Azure NetApp Files storage backend for Kerberos encryption by following the instructions in https://learn.microsoft.com/en-us/azure/azure-netapp-files/configure-kerberos-encryption[Azure NetApp Files documentation^].
+* Ensure that you have prepared the Azure NetApp Files storage backend for Kerberos encryption by noting the requirements and following the instructions in https://learn.microsoft.com/en-us/azure/azure-netapp-files/configure-kerberos-encryption[Azure NetApp Files documentation^].
 
 === Create a storage backend
 You can create an Azure NetApp Files storage backend configuration that includes Kerberos encryption capability. 
