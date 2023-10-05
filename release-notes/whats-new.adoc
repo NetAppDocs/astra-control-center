@@ -15,7 +15,32 @@ We're pleased to announce the latest release of Astra Control Center.
 
 == 31 October 2023 (23.10.0)
 
+* *Introducing Astra Control Provisioner*
++
+With the 23.10 release, Astra Control introduces a new software component called Astra Control Provisioner that will be available to all licensed Astra Control users. Astra Control Provisioner provides access to a superset of advanced management and storage provisioning features beyond those that Astra Trident provides today. These features are available to all Astra Control customers at no additional cost.
+
+** *Get started with Astra Control Provisioner*
+You can link:../use/enable-acp.html[enable Astra Control Provisioner^] if you have installed and configured your environment to use Astra Trident 23.10.
+
+** *Astra Control Provisioner functionality*
++
+The following features are available with the Astra Control Provisioner 23.10 release:
+
+*** *Enhanced storage backend security with Kerberos 5 encryption*: You can improve storage security by link:../use-acp/configure-storage-backend-encryption.html[enabling encryption^] for the traffic between your managed cluster and the storage backend. Astra Control Provisioner provides Kerberos 5 encryption over NFSv4.1 connections from Red Hat OpenShift clusters to Azure NetApp Files volumes.
+
+*** *Recover data using a snapshot*: Astra Control Provisioner provides rapid, in-place volume restoration from a snapshot using the `TridentActionSnapshotRestore` (TASR) CR.
+
+*** *SnapMirror enhancements*: Use the app replication feature in environments where Astra Control does not have direct connectivity to an ONTAP cluster or access to ONTAP credentials. 
+//You can also explicitly trigger SnapMirror updates for a particular snapshot and monitor snapshot destination transfer and protection.
+
+*** Read-only clones
+???
+
 .New features and support
+
+* Immutable Backups
+
+* Backup and restore capabilities for applications with `ontap-nas-economy` driver-backed  storage backends
 
 .Known issues and limitations
 
