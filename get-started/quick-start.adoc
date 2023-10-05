@@ -30,7 +30,7 @@ Ensure that your environment meets these requirements:
 
 * link:../get-started/requirements.html#astra-trident-requirements[Ensure your environment includes the Astra Trident supported version^]
 * https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html[Prepare the worker nodes^]
-* https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend[Configure Astra Trident storage backend^]
+* https://docs.netapp.com/us-en/trident/trident-use/backends.html[Configure Astra Trident storage backend^]
 * https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Astra Trident storage classes^]
 * https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[Install Astra Trident volume snapshot controller^]
 * https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[Create a volume snapshot class^]
