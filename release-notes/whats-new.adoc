@@ -13,21 +13,57 @@ summary: NetApp periodically updates Astra Control Center to bring you new featu
 [.lead]
 We're pleased to announce the latest release of Astra Control Center.
 
-== 31 July 2023 (23.07.0)
+== 7 November 2023 (23.10.0)
+
+* *Introducing Astra Control Provisioner*
++
+With the 23.10 release, Astra Control introduces a new software component called Astra Control Provisioner that will be available to all licensed Astra Control users. Astra Control Provisioner provides access to a superset of advanced management and storage provisioning features beyond those that Astra Trident provides today. These features are available to all Astra Control customers at no additional cost.
+
+** *Get started with Astra Control Provisioner*
+You can link:../use/enable-acp.html[enable Astra Control Provisioner^] if you have installed and configured your environment to use Astra Trident 23.10.
+
+** *Astra Control Provisioner functionality*
++
+The following features are available with the Astra Control Provisioner 23.10 release:
+
+*** *Enhanced storage backend security with Kerberos 5 encryption*: You can improve storage security by link:../use-acp/configure-storage-backend-encryption.html[enabling encryption^] for the traffic between your managed cluster and the storage backend. Astra Control Provisioner provides Kerberos 5 encryption over NFSv4.1 connections from Red Hat OpenShift clusters to Azure NetApp Files volumes.
+
+*** *Recover data using a snapshot*: Astra Control Provisioner provides rapid, in-place volume restoration from a snapshot using the `TridentActionSnapshotRestore` (TASR) CR.
+
+*** *SnapMirror enhancements*: Use the app replication feature in environments where Astra Control does not have direct connectivity to an ONTAP cluster or access to ONTAP credentials. 
+//You can also explicitly trigger SnapMirror updates for a particular snapshot and monitor snapshot destination transfer and protection.
+
+*** Read-only clones
+???
 
 .New features and support
 
-* link:../get-started/requirements.html#storage-backends[Support for using NetApp MetroCluster in a stretch configuration as a storage backend^]
-* link:../get-started/requirements.html#storage-backends[Support for using Longhorn as a storage backend^]
-* link:../use/replicate_snapmirror.html#delete-an-application-replication-relationship[Applications can now be replicated between ONTAP backends from the same Kubernetes cluster]
-* link:../use/manage-remote-authentication.html[Astra Control Center now supports 'userPrincipalName' as an alternative login attribute for remote (LDAP) users^]
-* link:../use/execution-hooks.html[New execution hook type 'post-failover' can be run after replication failover with Astra Control Center^]
-* Clone workflows now support live clones only (the current state of managed application). To clone from a snapshot or backup, use the link:../use/restore-apps.html[restore workflow^].
+* *Immutable Backups*: Astra Control now support link:..//concepts/data-protection.html#immutable-backups[unalterable, read-only backups^] as an additional security layer against malware and other threats.
+
+* *Backup and restore capabilities for applications with `ontap-nas-economy` driver-backed storage backends*: Enable backup and restore operations for `ontap-nas-economy` with some link:../use/restore-apps.html#enable-backup-and-restore-for-ontap-nas-economy-operations[simple steps^].
+
+* *Execution hooks turned off by default*: Beginning with this release, execution hooks functionality can be enabled or disabled and is disabled by default. If you have not yet created execution hooks for use with Astra Control, you need to link:../use/execution-hooks.html#enable-the-execution-hooks-feature[enable the execution hooks feature^] to begin creating hooks. If you created execution hooks prior to this release, the execution hooks functionality stays enabled and you can use hooks as you would normally.
 
 .Known issues and limitations
 
 * link:../release-notes/known-issues.html[Known issues for this release^]
 * link:../release-notes/known-limitations.html[Known limitations for this release^]
+
+== 31 July 2023 (23.07.0)
+
+.New features and support
+
+* https://docs.netapp.com/us-en/astra-control-center-2307/get-started/requirements.html#storage-backends[Support for using NetApp MetroCluster in a stretch configuration as a storage backend^]
+* https://docs.netapp.com/us-en/astra-control-center-2307/get-started/requirements.html#storage-backends[Support for using Longhorn as a storage backend^]
+* https://docs.netapp.com/us-en/astra-control-center-2307/use/replicate_snapmirror.html#delete-an-application-replication-relationship[Applications can now be replicated between ONTAP backends from the same Kubernetes cluster]
+* https://docs.netapp.com/us-en/astra-control-center-2307/use/manage-remote-authentication.html[Astra Control Center now supports 'userPrincipalName' as an alternative login attribute for remote (LDAP) users^]
+* https://docs.netapp.com/us-en/astra-control-center-2307/use/execution-hooks.html[New execution hook type 'post-failover' can be run after replication failover with Astra Control Center^]
+* Clone workflows now support live clones only (the current state of managed application). To clone from a snapshot or backup, use the https://docs.netapp.com/us-en/astra-control-center-2307/use/restore-apps.html[restore workflow^].
+
+.Known issues and limitations
+
+* https://docs.netapp.com/us-en/astra-control-center-2307/release-notes/known-issues.html[Known issues for this release^]
+* https://docs.netapp.com/us-en/astra-control-center-2307/release-notes/known-limitations.html[Known limitations for this release^]
 
 == 18 May 2023 (23.04.2)
 .Details
