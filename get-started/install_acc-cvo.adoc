@@ -287,12 +287,8 @@ Example: Astra Control Center images can be pushed to this registry by entering 
 gcloud auth activate-service-account <service account email address>
 --key-file=<GCP Service Account JSON file>
 ----
-
 +
-This script requires an Astra Control Center manifest file and your Google Image Registry location.
-
-+
-Example:
+This script requires an Astra Control Center manifest file and your Google Image Registry location. Example:
 +
 ----
 manifestfile=astra-control-center-<version>.manifest
