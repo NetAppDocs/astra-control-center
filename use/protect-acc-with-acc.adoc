@@ -127,10 +127,10 @@ Response:
 +
 ----
 NAME  UUID                                 VERSION    ADDRESS                             READY
-astra 89f4fd47-0cf0-4c7a-a44e-43353dc96ba8 23.07.0-24 ocp-cluster-2.company.com True
+astra 89f4fd47-0cf0-4c7a-a44e-43353dc96ba8 23.07.0-24 ocp-cluster-2.company.com           True
 ----
 
-.. If the DNS name does not reference the primary Astra Control Center DNS, update the configuration:
+.. Update the configuration to reference the primary Astra Control Center DNS:
 +
 ----
 kubectl edit acc -n netapp-acc
@@ -357,7 +357,7 @@ Response:
 +
 ----
 NAME  UUID                                 VERSION    ADDRESS                             READY
-astra 89f4fd47-0cf0-4c7a-a44e-43353dc96ba8 23.07.0-24 ocp-cluster-1.company.com True
+astra 89f4fd47-0cf0-4c7a-a44e-43353dc96ba8 23.07.0-24 ocp-cluster-1.company.com           True
 ----
 
 * *Confirm deployment status*: Show Astra Control Center deployment information to confirm that `Deployment State` is `Deployed`.
