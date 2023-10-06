@@ -183,8 +183,12 @@ NOTE: The enabled directory will continue to be accessible.
 nfs modify -vserver <svm name> -v3-hide-snapshot enabled
 ----
 
+. In Astra Control, refresh the application after enabling the snapshot directory so that Astra Control recognizes the changed value. 
+
 .Result
+
 The application is ready to backup and restore using Astra Control. The PVC is also available to be used by other applications for backups and restores.
+
 ====
 // End snippet
 
