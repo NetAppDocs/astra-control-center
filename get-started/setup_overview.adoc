@@ -826,11 +826,11 @@ Please enter Certificate: Press <Enter> when done
 -----END CERTIFICATE-----
 
 You should keep a copy of the CA-signed digital certificate for future reference.
-The installed certificate’s CA and serial number for reference:
+The installed certificate's CA and serial number for reference:
 
 CA:
 serial:
-The certificate’s generated name for reference:
+The certificate's generated name for reference:
 
  
 ==
