@@ -28,7 +28,8 @@ Ensure that your environment meets these requirements:
  
 *Storage integration*
 
-* link:../get-started/requirements.html#astra-trident-requirements[Ensure your environment includes the Astra Trident supported version^]
+* link:../get-started/requirements.html#astra-trident-requirements[Ensure your environment includes an Astra Trident supported version^]
+* link:../use/enable-acp.html[Enable Astra Control Provisioner advanced management and storage provisioning features^]
 * https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html[Prepare the worker nodes^]
 * https://docs.netapp.com/us-en/trident/trident-use/backends.html[Configure Astra Trident storage backend^]
 * https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Astra Trident storage classes^]

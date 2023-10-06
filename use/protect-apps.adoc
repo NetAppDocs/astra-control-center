@@ -68,10 +68,6 @@ image:screenshot-config-protection-policy.png[A screenshot of a sample configura
 
 . Select *Review*.
 . Select *Set Protection Policy.*
-//+
-//Here's a video that shows each of these steps.
-//+
-//video::video-set-protection-policy.mp4[width=848, height=480]
 
 .Result
 
@@ -87,8 +83,6 @@ IMPORTANT: If your app uses a storage class backed by the `ontap-nas-economy` dr
 
 . Select *Applications*.
 . From the Options menu in the *Actions* column for the desired app, select *Snapshot*.
-//+
-//image:screenshot-create-snapshot.gif["A screenshot of the app page where you can select the drop-down list in the actions column and select Snapshot."]
 . Customize the name of the snapshot and then select *Next*.
 . Review the snapshot summary and select *Snapshot*.
 
@@ -98,7 +92,9 @@ The snapshot process begins. A snapshot is successful when the status is *Health
 
 == Create a backup
 
-You can also back up an app at any time.
+You can back up an app at any time. 
+
+You can create immutable backups by backing up applications to immutable buckets. Refer to link:../concepts/data-protection.html#immutable-backups[Data protection^] for important information about working with immutable backups.
 
 NOTE: S3 buckets in Astra Control Center do not report available capacity. Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
 
@@ -108,8 +104,6 @@ IMPORTANT: If your app uses a storage class backed by the `ontap-nas-economy` dr
 
 . Select *Applications*.
 . From the Options menu in the *Actions* column for the desired app, select *Back up*.
-//+
-//image:screenshot-create-backup.gif["A screenshot of the app page where you can select the drop-down list in the actions column and select Backup."]
 . Customize the name of the backup.
 . Choose whether to back up the app from an existing snapshot. If you select this option, you can choose from a list of existing snapshots.
 . Choose a destination bucket for the backup from the list of storage buckets.
@@ -136,8 +130,6 @@ You can view the snapshots and backups of an app from the Data Protection tab.
 . Select *Data Protection*.
 +
 The snapshots display by default.
-//+
-//image:screenshot-snapshots.gif[A screenshot of the data protection tab for an app where you can view the list of the current snapshots and backups.]
 
 . Select *Backups* to see the list of backups.
 
@@ -181,7 +173,7 @@ TIP: To cancel a backup, the backup must be in `Running` state. You cannot cance
 
 == Delete backups
 
-Delete the scheduled or on-demand backups that you no longer need.
+Delete the scheduled or on-demand backups that you no longer need. You cannot delete a backup made to an immutable bucket until the bucket's retention policy enables you to do so.
 
 NOTE: If you need to cancel a running backup, use the instructions in <<Cancel backups>>. To delete the backup, wait until it has completed and then use these instructions.
 

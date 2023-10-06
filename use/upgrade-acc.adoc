@@ -16,7 +16,7 @@ To upgrade Astra Control Center, download the installation bundle from the NetAp
 .Before you begin
 Before you upgrade, ensure your environment still meets the link:../get-started/requirements.html[minimum requirements for Astra Control Center deployment^]. Your environment should have the following:
 
-* A supported Astra Trident version 
+* A link:../get-started/requirements.html#astra-trident-requirements[supported] Astra Trident version
 +
 [%collapsible]
 ====
@@ -26,12 +26,10 @@ Determine the Trident version you are running:
 ----
 kubectl get tridentversion -n trident
 ----
-
-Refer to https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html#determine-the-version-to-upgrade-to[Astra Trident documentation] to upgrade from an older version.
-
-WARNING: You must upgrade to Astra Trident 22.10 *PRIOR* to upgrading to Kubernetes 1.25.
 ====
 // End snippet
++
+NOTE: Upgrade Astra Trident, if required, using these https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html[instructions^]. 
 
 * A supported Kubernetes distribution
 +
@@ -98,9 +96,35 @@ kubectl get clusteroperators
 ----
 ====
 // End snippet
-
-//Must be updated every quarterly release
-IMPORTANT: As part of this procedure, you will need to <<Install the updated Astra Control Center operator,install the latest operator (`acc-operator`)>> if you are upgrading Astra Control Center. You cannot upgrade to earlier versions of Astra Control Center using this updated operator.
+//astradoc-249
+//* Service mesh considerations: It is strongly recommended that Astra Control host cluster communications channels be secured using a link:../get-started/requirements.html#service-mesh-requirements[service mesh]. If you already have an existing Astra Control Center instance that is participating in Istio service mesh or you do not intend to install an Istio service mesh for use with Astra Control Center, _no additional service mesh changes are needed_ for upgrade configuration. If you intend to install and use an Istio service mesh, _the following steps are required_:
+//+
+//[id=istioprereq]
+//.Istio service mesh prerequisite steps for Astra Control Center upgrades
+//[%collapsible]
+//====
+//Before upgrading Astra Control Center, perform these steps:
+//
+//. Install the Istio service mesh on the host cluster. 
+//+
+//IMPORTANT: Don't attempt to add the mesh to the existing Astra installation. The Istio service mesh must be running in parallel with an existing, un-meshed Astra Control Center installation.
+//
+//. Add the following labels to the Astra (`netapp-acc` or custom namespace) namespace:
+//+
+//[source,console]
+//----
+//kubectl label ns [netapp-acc or custom namespace] istio-injection:disabled
+//----
+//+
+//[source,console]
+//----
+//kubectl label ns [netapp-acc or custom namespace] astra.netapp.io/istio:on-upgrade
+//----
+//
+//NOTE: When you perform the upgrade, you will also need to ensure that the `ingressType` you specify in link:../use/upgrade-acc.html#upgrade-astra-control-center[the Astra Control Center CR] is `Generic` and not `AccTraefik` or the upgrade will fail.
+//
+//====
+// End snippet
 
 .About this task
 The Astra Control Center upgrade process guides you through the following high-level steps:
@@ -118,9 +142,7 @@ IMPORTANT: Do not delete the Astra Control Center operator (for example, `kubect
 
 TIP: Perform upgrades in a maintenance window when schedules, backups, and snapshots are not running.
 
-include::../_include/download-extract-acc.adoc[lines="1..2"]
-. Go to the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[Astra Control Center product downloads page^] on the NetApp Support Site. You can select the latest version or another version you want from the drop-down menu.
-include::../_include/download-extract-acc.adoc[lines="4..-1"]
+include::../_include/download-extract-acc.adoc[]
 
 == Remove the NetApp Astra kubectl plugin and install it again
 
@@ -350,7 +372,15 @@ additionalValues:
         initialDelaySeconds: 180
 ----
 //astradoc-245/known issue/23.07 only
-
+//
+//astradoc-249
+//. If you installed a new Istio service mesh on the host cluster according to the <<istioprereq,prerequisite steps>> described earlier in this procedure, change the ingress setting to `Generic`:
+//+
+//[source,console]
+//----
+//ingressType: Generic
+//----
+//
 . Save and exit the file editor. The changes will be applied and the upgrade will begin.
 
 . (Optional) Verify that the pods terminate and become available again:
