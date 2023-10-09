@@ -13,20 +13,6 @@ summary: Get started with Astra Control Center by verifying support for your Kub
 [.lead]
 Get started by verifying the readiness of your operational environment, application clusters, applications, licenses, and web browser. Ensure that your environment meets these requirements to deploy and operate Astra Control Center.
 
-* <<Supported host cluster Kubernetes environments>>
-* <<Host cluster resource requirements>>
-* <<Service mesh requirements>>
-* <<Astra Trident requirements>>
-* <<Astra Control Provisioner>>
-* <<Storage backends>>
-* <<Image registry>>
-* <<Astra Control Center license>>
-* <<ONTAP licenses>>
-* <<Networking requirements>>
-* <<Ingress for on-premises Kubernetes clusters>>
-* <<Supported web browsers>>
-* <<Additional requirements for application clusters>>
-
 == Supported host cluster Kubernetes environments
 
 Astra Control Center has been validated with the following Kubernetes host environments:
