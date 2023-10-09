@@ -5,7 +5,7 @@ keywords: what's new, bugs, bug fixes, new features, enhancements
 summary: NetApp periodically updates Astra Control Center to bring you new features, enhancements, and bug fixes.
 ---
 
-= What/'s new in this release of Astra Control Center
+= What’s new in this release of Astra Control Center
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/release-notes/
