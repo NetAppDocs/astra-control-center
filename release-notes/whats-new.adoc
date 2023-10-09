@@ -5,7 +5,7 @@ keywords: what's new, bugs, bug fixes, new features, enhancements
 summary: NetApp periodically updates Astra Control Center to bring you new features, enhancements, and bug fixes.
 ---
 
-= What's new in this release of Astra Control Center
+= What/'s new in this release of Astra Control Center
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/release-notes/
@@ -14,6 +14,8 @@ summary: NetApp periodically updates Astra Control Center to bring you new featu
 We're pleased to announce the latest release of Astra Control Center.
 
 == 7 November 2023 (23.10.0)
+
+.New features and support
 
 * *Introducing Astra Control Provisioner*
 +
@@ -35,8 +37,6 @@ The following features are available with the Astra Control Provisioner 23.10 re
 
 *** Read-only clones
 ???
-
-.New features and support
 
 * *Immutable Backups*: Astra Control now support link:..//concepts/data-protection.html#immutable-backups[unalterable, read-only backups^] as an additional security layer against malware and other threats.
 
