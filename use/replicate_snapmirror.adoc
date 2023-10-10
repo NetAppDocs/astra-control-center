@@ -46,6 +46,9 @@ Astra Control application replication requires that the following prerequisites 
 
 .Peering 
 * *Cluster and SVM*: The ONTAP storage backends must be peered. Refer to https://docs.netapp.com/us-en/ontap-sm-classic/peering/index.html[Cluster and SVM peering overview^] for more information.
++
+IMPORTANT: Ensure that the SVM names used in the replication relationship between two ONTAP clusters are unique.
+
 * *Astra Trident and SVM*: The peered remote SVMs must be available to Astra Trident on the destination cluster.
 
 .Astra Control Center
