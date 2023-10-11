@@ -47,7 +47,7 @@ In this example configuration, the following is shown:
 ** Astra Control Center third instance: `ocp-cluster-3.company.com`
 ** This cluster will be used for Astra Control Center restore or replication failover.
 
-NOTE: The application cluster is ideally situated outside of this three-cluster scenario described here. 
+NOTE: The application cluster should be ideally situated outside of this three-cluster scenario described here. 
 
 Not depicted in the diagram:
 
