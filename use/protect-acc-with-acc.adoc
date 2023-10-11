@@ -47,6 +47,8 @@ In this example configuration, the following is shown:
 ** Astra Control Center third instance: `ocp-cluster-3.company.com`
 ** This cluster will be used for Astra Control Center restore or replication failover.
 
+NOTE: The application cluster is ideally situated outside of this three-cluster scenario described here. 
+
 Not depicted in the diagram:
 
 * All the clusters have ONTAP backends with Trident installed. 
@@ -127,7 +129,7 @@ Response:
 +
 ----
 NAME  UUID                                 VERSION    ADDRESS                             READY
-astra 89f4fd47-0cf0-4c7a-a44e-43353dc96ba8 23.07.0-24 ocp-cluster-2.company.com           True
+astra 89f4fd47-0cf0-4c7a-a44e-43353dc96ba8 23.07.0-24 ocp-cluster-1.company.com           True
 ----
 
 .. Update the configuration to reference the primary Astra Control Center DNS:
@@ -136,7 +138,7 @@ astra 89f4fd47-0cf0-4c7a-a44e-43353dc96ba8 23.07.0-24 ocp-cluster-2.company.com 
 kubectl edit acc -n netapp-acc
 ----
 
-... Change the `astraAddress` under `spec:` to match the primary cluster's Astra Control Center DNS name (`ocp-cluster-2.company.com`).
+... Change the `astraAddress` under `spec:` to match the primary cluster's Astra Control Center DNS name (`ocp-cluster-1.company.com`).
 ... Save the configuration.
 ... Confirm that the address has been updated:
 +
@@ -148,25 +150,15 @@ kubectl get acc -n netapp-acc
 +
 NOTE: There are many ingress methods you might have link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[set up] for load balancing. Updating the IP address might vary from these steps depending on the type of ingress used. This example describes updating the IP address for MetalLB. 
 
-.. Determine the IP address of the primary cluster's Astra Control Center:
+.. Determine the IP address or FQDN of the load balancer on the third cluster (`ocp-cluster-3`).
+.. Update the configuration to reference the Astra Control Center DNS:
 +
 ----
-nslookup <primary cluster DNS name>
+kubectl edit acc -n netapp-acc
 ----
 
-.. Edit configuration: 
-+
-----
-kubectl edit ipaddresspool.metallb.io/first-pool -n metallb-system
-----
-
-.. Replace the IP address in the `spec/addresses:` section with the IP address that nslookup returned in the previous step.
+.. Replace the IP address or FQDN in the `spec.astraAddress` section with the address (`ocp-cluster-3.company.com`) in the previous step.
 .. Save the configuration.
-.. Restart the controller: 
-+
-----
-kubectl rollout restart deployment controller -n metallb-system
-----
 
 .. Go to the <<Step 2: Restore the Astra Control Center Operator,Restore the Astra Control Center Operator>> section of this document to complete the restore process.
 
@@ -290,29 +282,19 @@ kubectl apply -f <file name>
 kubectl get pods -n netapp-acc | grep -e "traefik" | awk '{print $1}' | xargs kubectl delete pod -n netapp-acc"
 ----
 
-. Update your ingress configurations so that the destination cluster's IP address is set as the IP address used by your ingress:
+. Update your ingress configurations so that the primary cluster's IP address is set as the IP address used by your ingress:
 +
-NOTE: There are many ingress methods you might have link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[set up^] for load balancing. Updating the IP address might vary from these steps depending on the type of ingress used. This example describes updating the IP address for MetalLB. 
+NOTE: There are many ingress methods you might have link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[set up] for load balancing. Updating the IP address might vary from these steps depending on the type of ingress used. This example describes updating the IP address for MetalLB. 
 
-.. Determine the IP address of the destination cluster's Astra Control Center:
+.. Determine the IP address or FQDN of the load balancer on the third cluster (`ocp-cluster-3`).
+.. Update the configuration to reference the Astra Control Center DNS:
 +
 ----
-nslookup <destination cluster's DNS name>
-----
-
-.. Edit configuration: 
-+
-----
-kubectl edit ipaddresspool.metallb.io/first-pool -n metallb-system
+kubectl edit acc -n netapp-acc
 ----
 
-... Replace the IP address in the `spec/addresses:` section with the destination cluster's IP address that nslookup returned in the previous step.
-... Save the configuration.
-.. Restart the controller: 
-+
-----
-kubectl rollout restart deployment controller -n metallb-system
-----
+.. Replace the IP address or FQDN in the `spec.astraAddress` section with the cluster address (`ocp-cluster-3.company.com`) in the previous step.
+.. Save the configuration.
 
 .. Go to the <<Step 2: Restore the Astra Control Center Operator,Restore the Astra Control Center Operator>> section of this document to complete the restore process.
 
