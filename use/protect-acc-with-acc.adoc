@@ -28,7 +28,7 @@ Ensure that you have the following before setting up protection scenarios for As
 
 .About this task
 
-These procedures describe the necessary steps to restore Astra Control Center to a new cluster using either <<Backup and restore Astra Control Center,backup and restore>> or <<Protect Astra Control Center using Replication,replication>>. Steps are based on the example configuration depicted here: 
+These procedures describe the necessary steps to restore Astra Control Center to a new cluster using either <<Step 1 option: Backup and restore Astra Control Center,backup and restore>> or <<Step 1 option: Protect Astra Control Center using Replication,replication>>. Steps are based on the example configuration depicted here: 
 
 image:backup-or-replicate-acc-w-acc-example-flow.png["A protection workflow image that shows three Kubernetes clusters and Astra Control Center on two of the three in a Astra Control Center replication or backup example scenario."]
 
@@ -41,22 +41,19 @@ In this example configuration, the following is shown:
 * *The second Kubernetes cluster of the same Kubernetes distribution type as the primary that is running the secondary Astra Control Center instance*: 
 ** OpenShift cluster: `ocp-cluster-2`
 ** Astra Control Center secondary instance: `ocp-cluster-2.company.com`
-** This cluster will be used to back up the primary Astra Control Center instance or configure replication and to provide application data management for `ocp-cluster-1` cluster.
+** This cluster will be used to back up the primary Astra Control Center instance or configure replication to a different cluster (in this example, the `ocp-cluster-3` cluster).
 * *A third Kubernetes cluster of the same Kubernetes distribution type as the primary that will be used for restore operations*: 
 ** OpenShift cluster: `ocp-cluster-3`
 ** Astra Control Center third instance: `ocp-cluster-3.company.com`
 ** This cluster will be used for Astra Control Center restore or replication failover.
 
-NOTE: The application cluster should be ideally situated outside of this three-cluster scenario described here. 
+NOTE: Ideally, the application cluster should be situated outside of the three Astra Control Center clusters as depicted by the kubernetes and rancher clusters in the image above. 
 
 Not depicted in the diagram:
 
 * All the clusters have ONTAP backends with Trident installed. 
 * In this configuration, the Openshift clusters are using MetalLB as the load balancer. 
 * The snapshot controller and VolumeSnapshotClass are also installed on all the clusters as outlined in the link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[prerequisites^]. 
-
-NOTE: Additionally, the primary `ocp-cluster-1` cluster could have applications that are being managed by the primary or secondary Astra Control Center instance. They are not shown here for brevity. 
-
  
 == Step 1 option: Backup and restore Astra Control Center
 
@@ -103,7 +100,7 @@ After you select *Define*, repeat the Define Application process for the operato
 
 . After you have backed up Astra Control Center and the operator, simulate a disaster recovery (DR) scenario by link:../use/uninstall_acc.html[uninstalling Astra Control Center^] from the primary cluster.
 +
-NOTE: You will restore Astra Control Center to a new cluster (the third Kubernetes cluster described in this procedure) and use the same DNS for the newly installed Astra Control Center.
+NOTE: You will restore Astra Control Center to a new cluster (the third Kubernetes cluster described in this procedure) and use the same DNS as the primary cluster for the newly installed Astra Control Center.
 
 . Using the secondary Astra Control Center, link:../use/restore-apps.html[restore^] the primary instance of the Astra Control Center application from its backup:
 .. Select *Applications* and then select the name of the Astra Control Center application.
@@ -132,14 +129,13 @@ NAME  UUID                                 VERSION    ADDRESS                   
 astra 89f4fd47-0cf0-4c7a-a44e-43353dc96ba8 23.07.0-24 ocp-cluster-1.company.com           True
 ----
 
-.. Determine the IP address or FQDN of the load balancer on the third cluster (`ocp-cluster-3`).
-.. Update the configuration to reference the Astra Control Center DNS:
+.. If the `ADDRESS` field in the above response does not have the FQDN of the primary Astra Control Center instance, update the configuration to reference the Astra Control Center DNS:
 +
 ----
 kubectl edit acc -n netapp-acc
 ----
 
-... Change the `astraAddress` under `spec:` with the IP address or FQDN (`ocp-cluster-3.company.com`) from the destination third cluster.
+... Change the `astraAddress` under `spec:` to the FQDN (`ocp-cluster-1.company.com` in this example) of the primary Astra Control Center instance.
 ... Save the configuration.
 ... Confirm that the address has been updated:
 +
@@ -210,15 +206,15 @@ image:acc-to-acc-replication-example.png["An image that shows the 'fail over' op
 The replication relationship status changes to `Failing over` and then `Failed over` when complete.
 
 . Complete the failover configuration:
-.. Open a terminal and connect using the third cluster's kubeconfig (`ocp-cluster-3`). This cluster has Astra Control Center installed.
-.. Determine the IP address or FQDN of the load balancer on the third cluster (`ocp-cluster-3`).
+.. Open a terminal and connect using the third cluster's kubeconfig (`ocp-cluster-3`). This cluster now has Astra Control Center installed.
+.. Determine the Astra Control Center FQDN on the third cluster (`ocp-cluster-3`).
 .. Update the configuration to reference the Astra Control Center DNS:
 +
 ----
 kubectl edit acc -n netapp-acc
 ----
 
-... Change the `astraAddress` under `spec:` with the IP address or FQDN (`ocp-cluster-3.company.com`) from the destination third cluster.
+... Change the `astraAddress` under `spec:` with the FQDN (`ocp-cluster-3.company.com`) of the destination third cluster.
 ... Save the configuration.
 ... Confirm that the address has been updated:
 +
