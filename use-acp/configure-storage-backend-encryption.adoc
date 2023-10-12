@@ -123,7 +123,10 @@ tridentctl create backend -f <backend-file>
 +
 If the backend creation fails, something is wrong with the backend configuration. You can view the logs to determine the cause by running the following command:
 +
+[source,console]
+----
 tridentctl logs
+----
 +
 After you identify and correct the problem with the configuration file, you can run the create command again.
 
