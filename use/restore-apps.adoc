@@ -132,6 +132,7 @@ NOTE: If you use a GVK filter, you must specify Version and Kind.
 TIP: You can create as many resource include and exclude rules as you want. The rules appear in the restore application summary before you initiate the operation. 
 
 == Enable backup and restore for ontap-nas-economy operations
+//Duplicated in ACS
 
 Astra Control Provisioner provides backup and restore functionality that can be enabled for storage backends that are using the `ontap-nas-economy` storage class.
 
@@ -144,6 +145,18 @@ Astra Control Provisioner provides backup and restore functionality that can be 
 .Expand for configuration steps
 [%collapsible]
 ====
+. Do the following on the ONTAP storage backend:
+.. Find the SVM hosting the volumes for the application.
+.. Log in to a terminal connected to ONTAP where the volumes are created.
+.. Hide the enabled snapshot directory:
++
+NOTE: The enabled directory will continue to be accessible. 
++
+[source,console]
+----
+nfs modify -vserver <svm name> -v3-hide-snapshot enabled
+----
+
 . Do the following in Astra Trident: 
 .. Enable the snapshot directory for the PV associated with the application:
 +
@@ -163,18 +176,6 @@ Response:
 +
 ----
 SnapshotDirectory: "true"
-----
-
-. Do the following on the ONTAP storage backend:
-.. Find the SVM hosting the volumes for the application.
-.. Log in to a terminal connected to ONTAP where the volumes are created.
-.. Hide the enabled snapshot directory:
-+
-NOTE: The enabled directory will continue to be accessible. 
-+
-[source,console]
-----
-nfs modify -vserver <svm name> -v3-hide-snapshot enabled
 ----
 
 . In Astra Control, refresh the application after enabling the snapshot directory so that Astra Control recognizes the changed value. 
