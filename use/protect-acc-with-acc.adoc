@@ -222,7 +222,7 @@ kubectl edit acc -n netapp-acc
 kubectl get acc -n netapp-acc
 ----
 
-.. Confirm that all required traefik CRDs are present: 
+.. [id=missing-traefik-crd]Confirm that all required traefik CRDs are present: 
 +
 ----
 kubectl get crds | grep traefik
@@ -252,7 +252,7 @@ traefikservices.traefik.io
 ----
 +
 //NOTE: The containo CRDs might be removed in Astra Control Center 23.08.
-.. [[missing-traefik-crd]]If some of the above CRDs are missing:
+.. If some of the above CRDs are missing:
 ... Go to https://doc.traefik.io/traefik/reference/dynamic-configuration/kubernetes-crd/[traefik documentation^].
 ... Copy the "Definitions" area into a file.
 ... Apply changes:
@@ -319,4 +319,4 @@ astra 89f4fd47-0cf0-4c7a-a44e-43353dc96ba8 23.07.0-24 ocp-cluster-1.company.com 
 kubectl describe acc astra -n netapp-acc
 ----
 
-* *Restored Astra Control Center UI returns a 404 error*: If this happens when you have selected `AccTraefik` as an ingress option, check the link:protect-acc-with-acc.html#missing-traefik-crds[traefik CRDs] to ensure they're all installed.
+* *Restored Astra Control Center UI returns a 404 error*: If this happens when you have selected `AccTraefik` as an ingress option, check the <<missing-traefik-crd,traefik CRDs>> to ensure they're all installed.
