@@ -24,7 +24,9 @@ If you are enabling the Astra Control Provisioner, you need the following:
 NOTE: Refer to https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html[Astra Trident documentation^] for these procedures.
 
 * An Astra Control license to use Astra Control Provisioner and the functionality it provides.
-* Access to the Astra Control Center area of the NetApp Support Site to obtain the bundle containing Astra Control Provisioner.
+* (For Astra Control Center): Access to one of the following to obtain the bundle containing Astra Control Provisioner:
+** The Astra Control Center area of the NetApp Support Site
+** The Astra registry
 
 .Upgrade to Astra Control Provisioner 23.10
 
@@ -51,7 +53,7 @@ NOTE: If you used Helm for the original install and you are upgrading to 23.10, 
 //kubectl delete -f 23.07/trident-installer/deploy/<bundle-name.yaml> -n trident
 //----
 
-. Edit the TridentOrchestrator CR to enable Astra Control Provisioner (`enable-acp=true`) and set the registry location for the Astra Control Provisioner image:
+. Edit the TridentOrchestrator CR to enable Astra Control Provisioner (`enableACP: true`) and set the registry location for the Astra Control Provisioner image:
 +
 [subs=+quotes]
 ----
