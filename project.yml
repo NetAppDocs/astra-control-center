@@ -1,6 +1,6 @@
 ---
 settings:
-  name: Astra Control Center
+  name: Astra Control Center 23.07
   internal:
     pdf_enabled: true
   prod:
