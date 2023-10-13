@@ -31,16 +31,16 @@ A _protection policy_ is a way to protect an app by automatically creating snaps
 CAUTION: _You can't be fully protected until you have a recent backup_. This is important because backups are stored in an object store away from the persistent volumes. If a failure or accident wipes out the cluster and its associated persistent storage, then you need a backup to recover. A snapshot would not enable you to recover.
 
 === Immutable backups
-Astra Control Center supports creating immutable backups with the following platforms and immutable bucket types:
+Astra Control Center supports creating immutable backups with the following platforms and bucket types:
 
-* Amazon Elastic Kubernetes Service (EKS) using an immutable Amazon S3 bucket
-* NetApp StorageGRID using an immutable NetApp bucket
+* Amazon Elastic Kubernetes Service (EKS) using an Amazon S3 bucket with retention policy configured
+* NetApp StorageGRID using an S3 bucket with Object Lock configured
 
 Note the following when working with immutable backups:
 
-* If you back up to an immutable bucket in an unsupported platform or to an unsupported bucket type, you might get unpredictable results, such as backup deletion failing even if the retention time elapses.
-* Astra Control does not support Lifecycle management policies on the buckets you use with immutable backups.
-* In Azure, the terms "bucket level" and "container level" have the same meaning when you configure a time-based retention policy.
+* If you back up to a write once read many (WORM) bucket in an unsupported platform or to an unsupported bucket type, you might get unpredictable results, such as backup deletion failing even if the retention time has elapsed.
+* Astra Control does not support lifecycle management policies on the buckets you use with immutable backups.
+// * In Azure, the terms "bucket level" and "container level" have the same meaning when you configure a time-based retention policy.
 
 == Clones
 

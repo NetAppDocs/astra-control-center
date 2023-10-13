@@ -33,10 +33,6 @@ You can do the following tasks related to protecting your app data:
 * <<Cancel backups>>
 * <<Delete backups>>
 
-
-
-
-
 == Configure a protection policy
 
 A protection policy protects an app by creating snapshots, backups, or both at a defined schedule. You can choose to create snapshots and backups hourly, daily, weekly, and monthly, and you can specify the number of copies to retain.
@@ -90,9 +86,7 @@ The snapshot process begins. A snapshot is successful when the status is *Health
 
 You can back up an app at any time. 
 
-You can create immutable backups by backing up applications to immutable buckets. Refer to link:../concepts/data-protection.html#immutable-backups[Data protection^] for important information about working with immutable backups.
-
-NOTE: S3 buckets in Astra Control Center do not report available capacity. Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
+NOTE: Buckets in Astra Control Center do not report available capacity. Before backing up or cloning apps managed by Astra Control Center, check bucket information in the appropriate storage management system.
 
 IMPORTANT: If your app uses a storage class backed by the `ontap-nas-economy` driver, be sure that you have defined a `backendType` parameter in your https://docs.netapp.com/us-en/trident/trident-reference/objects.html#kubernetes-storageclass-objects[Kubernetes storage object^] with a value of `ontap-nas-economy` before performing any protection operations.
 
@@ -110,11 +104,54 @@ IMPORTANT: If your app uses a storage class backed by the `ontap-nas-economy` dr
 
 Astra Control creates a backup of the app.
 
-NOTE: If your network has an outage or is abnormally slow, a backup operation might time out. This causes the backup to fail.
+[NOTE]
+===============================
+* If your network has an outage or is abnormally slow, a backup operation might time out. This causes the backup to fail.
 
-NOTE: If you need to cancel a running backup, use the instructions in <<Cancel backups>>. To delete the backup, wait until it has completed and then use the instructions in <<Delete backups>>.
+* If you need to cancel a running backup, use the instructions in <<Cancel backups>>. To delete the backup, wait until it has completed and then use the instructions in <<Delete backups>>.
 
-NOTE: After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
+* After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
+===============================
+
+== Create an immutable backup
+You can create immutable backups by backing up applications to buckets that have a retention policy configured. Refer to link:../concepts/data-protection.html#immutable-backups[Data protection^] for important information about working with immutable backups.
+
+IMPORTANT: If your app uses a storage class backed by the `ontap-nas-economy` driver, be sure that you have defined a `backendType` parameter in your https://docs.netapp.com/us-en/trident/trident-reference/objects.html#kubernetes-storageclass-objects[Kubernetes storage object^] with a value of `ontap-nas-economy` before performing any protection operations.
+
+.Before you begin
+You need to configure the destination bucket with a retention policy. How you do this will differ depending on which storage provider you use. Refer to the storage provider documentation for more information:
+
+* *Microsoft Azure*: https://learn.microsoft.com/en-us/azure/storage/blobs/immutable-policy-configure-container-scope?tabs=azure-portal[Configure a blob storage bucket with a time-based retention policy on container-level scope.^].
+* *Google Cloud*: https://cloud.google.com/storage/docs/using-bucket-lock[Configure a bucket with a retention policy and specify a retention period.^].
+* *Amazon Web Services*: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-console.html[Enable Object Lock when creating the bucket and set a default retention mode of "governance" and a default retention period^].
+* *NetApp StorageGRID*: https://docs.netapp.com/us-en/storagegrid-117/tenant/creating-s3-bucket.html[Enable S3 Object Lock when creating the bucket and set a default retention mode of "compliance" and a default retention period^].
+
+NOTE: Buckets in Astra Control Center do not report available capacity. Before backing up or cloning apps managed by Astra Control Center, check bucket information in the appropriate storage management system.
+
+.Steps
+
+. Select *Applications*.
+. From the Options menu in the *Actions* column for the desired app, select *Back up*.
+. Customize the name of the backup.
+. Choose whether to back up the app from an existing snapshot. If you select this option, you can choose from a list of existing snapshots.
+. Choose a destination bucket for the backup from the list of storage buckets.
+. Select *Next*.
+. Review the backup summary and select *Back up*.
+
+.Result
+
+Astra Control creates an immutable backup of the app.
+
+[NOTE]
+===============================
+* If your network has an outage or is abnormally slow, a backup operation might time out. This causes the backup to fail.
+
+* If you try to create two immutable backups of the same app to the same bucket at the same time, Astra Control prevents the second backup from starting. Wait until the first backup is complete before starting another.
+
+* You cannot cancel a running immutable backup.
+
+* After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
+===============================
 
 == View snapshots and backups
 
@@ -154,6 +191,8 @@ Astra Control deletes the snapshot.
 You can cancel a backup that is in progress.
 
 TIP: To cancel a backup, the backup must be in `Running` state. You cannot cancel a backup that is in `Pending` state.
+
+NOTE: You cannot cancel a running immutable backup.
 
 .Steps
 
