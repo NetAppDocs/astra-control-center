@@ -1,6 +1,6 @@
 ---
 settings:
-  name: Astra Control Center 23.07
+  name: Astra Control Center
   internal:
     pdf_enabled: true
   prod:
@@ -22,7 +22,7 @@ settings:
       url: /astra-control-center-2112
 sidebar:
   entries:
-    - title: Astra Control Center docs
+    - title: Astra Control Center 23.07 docs
       url: /index.html
     - section: release-notes
     - section: get-started
