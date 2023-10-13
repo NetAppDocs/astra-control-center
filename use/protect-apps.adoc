@@ -136,6 +136,8 @@ NOTE: Buckets in Astra Control Center do not report available capacity. Before b
 . Customize the name of the backup.
 . Choose whether to back up the app from an existing snapshot. If you select this option, you can choose from a list of existing snapshots.
 . Choose a destination bucket for the backup from the list of storage buckets.
++
+NOTE: If the bucket is an unsupported type, this is indicated when you hover over or select the bucket.
 . Select *Next*.
 . Review the backup summary and select *Back up*.
 
