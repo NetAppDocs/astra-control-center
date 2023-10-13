@@ -108,9 +108,7 @@ Astra Control creates a backup of the app.
 [NOTE]
 ===============================
 * If your network has an outage or is abnormally slow, a backup operation might time out. This causes the backup to fail.
-
 * If you need to cancel a running backup, use the instructions in <<Cancel backups>>. To delete the backup, wait until it has completed and then use the instructions in <<Delete backups>>.
-
 * After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
 ===============================
 
@@ -121,8 +119,8 @@ An immutable backup cannot be modified, deleted, or overwritten as long as the r
 You need to configure the destination bucket with a retention policy. How you do this will differ depending on which storage provider you use. Refer to the storage provider documentation for more information:
 
 * *Amazon Web Services*: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-console.html[Enable S3 Object Lock when creating the bucket and set a default retention mode of "governance" with a default retention period^].
-* *Google Cloud*: https://cloud.google.com/storage/docs/using-bucket-lock[Configure a bucket with a retention policy and specify a retention period^].
-* *Microsoft Azure*: https://learn.microsoft.com/en-us/azure/storage/blobs/immutable-policy-configure-container-scope?tabs=azure-portal[Configure a blob storage bucket with a time-based retention policy on container-level scope^].
+//* *Google Cloud*: https://cloud.google.com/storage/docs/using-bucket-lock[Configure a bucket with a retention policy and specify a retention period^].
+//* *Microsoft Azure*: https://learn.microsoft.com/en-us/azure/storage/blobs/immutable-policy-configure-container-scope?tabs=azure-portal[Configure a blob storage bucket with a time-based retention policy on container-level scope^].
 * *NetApp StorageGRID*: https://docs.netapp.com/us-en/storagegrid-117/tenant/creating-s3-bucket.html[Enable S3 Object Lock when creating the bucket and set a default retention mode of "compliance" with a default retention period^].
 
 NOTE: Buckets in Astra Control do not report available capacity. Before backing up or cloning apps managed by Astra Control, check bucket information in the appropriate storage management system.
@@ -148,11 +146,8 @@ Astra Control creates an immutable backup of the app.
 [NOTE]
 ===============================
 * If your network has an outage or is abnormally slow, a backup operation might time out. This causes the backup to fail.
-
 * If you try to create two immutable backups of the same app to the same bucket at the same time, Astra Control prevents the second backup from starting. Wait until the first backup is complete before starting another.
-
 * You cannot cancel a running immutable backup.
-
 * After a data protection operation (clone, backup, restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
 ===============================
 
