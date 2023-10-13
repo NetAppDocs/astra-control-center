@@ -17,6 +17,8 @@ entries:
         url: /use/clone-apps.html
       - title: Manage app execution hooks
         url: /use/execution-hooks.html
+      - title: Protect Astra Control Center using Astra Control Center
+        url: /use/protect-acc-with-acc.html
   - title: Monitor app and cluster health
     entries:
       - title: Dashboard summary

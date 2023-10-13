@@ -8,27 +8,20 @@ settings:
     harmony_enabled: true
   rss_page: "release-notes/whats-new.html"
   versions:
-    - name: Astra Control Center
+    - version-number: "23.10"
       url: /astra-control-center
-      version-number: "23.10"
-    - name: Astra Control Center
+    - version-number: "23.07"
       url: /astra-control-center-2307
-      version-number: "23.07"
-    - name: Astra Control Center
+    - version-number: "23.04"
       url: /astra-control-center-2304
-      version-number: "23.04"
-    - name: Astra Control Center
+    - version-number: "22.11"
       url: /astra-control-center-2211
-      version-number: "22.11"
-    - name: Astra Control Center
+    - version-number: "22.08"
       url: /astra-control-center-2208
-      version-number: "22.08"
-    - name: Astra Control Center
+    - version-number: "22.04"
       url: /astra-control-center-2204
-      version-number: "22.04"
-    - name: Astra Control Center
+    - version-number: "21.12"
       url: /astra-control-center-2112
-      version-number: "21.12"
 sidebar:
   entries:
     - title: Astra Control Center docs
@@ -48,5 +41,3 @@ sidebar:
 product-family:
   name: Astra
   repo: astra-family
-  sidebar_label: All Astra documentation
-
