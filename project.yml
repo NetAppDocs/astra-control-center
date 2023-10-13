@@ -22,7 +22,7 @@ settings:
       url: /astra-control-center-2112
 sidebar:
   entries:
-    - title: Astra Control Center 23.07 docs
+    - title: Astra Control Center docs
       url: /index.html
     - section: release-notes
     - section: get-started
