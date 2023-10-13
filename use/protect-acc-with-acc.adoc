@@ -222,7 +222,7 @@ kubectl edit acc -n netapp-acc
 kubectl get acc -n netapp-acc
 ----
 
-.. [id=missing-traefik-crd]Confirm that all required traefik CRDs are present: 
+.. [[missing-traefik-crd]]Confirm that all required traefik CRDs are present: 
 +
 ----
 kubectl get crds | grep traefik
