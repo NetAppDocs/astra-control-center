@@ -9,10 +9,12 @@
 
 .Docker
 --
-.. Change to the root directory of the tarball. You should see this file and directory:
+.. Change to the root directory of the tarball. You should see the `acc.manifest.bundle.yaml` file and these directories:
 +
-`acc.manifest.bundle.yaml`
 `acc/`
+`kubectl-astra/`
+`acc.manifest.bundle.yaml`
+
 
 .. Push the package images in the Astra Control Center image directory to your local registry. Make the following substitutions before running the `push-images` command:
 +
