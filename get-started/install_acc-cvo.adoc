@@ -41,7 +41,7 @@ Before you deploy Astra Control Center in AWS, you will need the following items
 * If using OCP, Red Hat OpenShift Container Platform (OCP) permissions (on namespace level to create pods)
 * AWS credentials, Access ID and Secret Key with permissions that enable you to create buckets and connectors
 * AWS account Elastic Container Registry (ECR) access and login
-* AWS hosted zone and Route 53 entry required to access the Astra Control UI
+* AWS hosted zone and Amazon Route 53 entry required to access the Astra Control UI
 
 
 
