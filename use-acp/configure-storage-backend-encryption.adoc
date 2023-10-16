@@ -26,9 +26,6 @@ You can enable Kerberos encryption on the storage traffic between your managed c
 === Create a storage backend
 You can create an Azure NetApp Files storage backend configuration that includes Kerberos encryption capability. 
 
-=== Create a storage backend
-You can create an Azure NetApp Files storage backend configuration that includes Kerberos encryption capability. 
-
 .About this task
 When you create a storage backend configuration file that configures Kerberos encryption, you can define it so that it should be applied at one of two possible levels:
 
