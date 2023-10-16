@@ -65,7 +65,7 @@ Astra Control Center requires the following resources in addition to the environ
 | Worker nodes (AWS EC2 requirement) | At least 3 worker nodes total, with 4 vCPU cores and 12GB RAM each
 | Load balancer | Service type "LoadBalancer" available for ingress traffic to be sent to services in the operational environment cluster
 | FQDN | A method for pointing the FQDN of Astra Control Center to the load balanced IP address
-| Astra Trident (installed as part of the Kubernetes cluster discovery in NetApp BlueXP, formerly Cloud Manager) | Astra Trident 22.10 or newer installed and configured and NetApp ONTAP version 9.8 or newer as a storage backend [[aws-registry]]
+| Astra Trident (installed as part of the Kubernetes cluster discovery in NetApp BlueXP, formerly Cloud Manager) | Astra Trident 23.01 or newer installed and configured and NetApp ONTAP version 9.9.1 or newer as a storage backend [[aws-registry]]
 | Image registry | NetApp provides a registry that you can use to obtain Astra Control Center build images:
 `http://netappdownloads.jfrog.io/docker-astra-control-prod`
 Contact NetApp Support to obtain instructions on using this image registry during the Astra Control Center installation process.
@@ -201,7 +201,7 @@ Astra Control Center requires the following resources in addition to the environ
 | Worker nodes (GCP compute requirement) | At least 3 worker nodes total, with 4 vCPU cores and 12GB RAM each
 | Load balancer | Service type "LoadBalancer" available for ingress traffic to be sent to services in the operational environment cluster
 | FQDN (GCP DNS zone) | A method for pointing the FQDN of Astra Control Center to the load balanced IP address
-| Astra Trident (installed as part of the Kubernetes cluster discovery in NetApp BlueXP, formerly Cloud Manager) | Astra Trident 22.10 or newer installed and configured and NetApp ONTAP version 9.8 or newer as a storage backend [[gcp-registry]]
+| Astra Trident (installed as part of the Kubernetes cluster discovery in NetApp BlueXP, formerly Cloud Manager) | Astra Trident 23.01 or newer installed and configured and NetApp ONTAP version 9.9.1 or newer as a storage backend [[gcp-registry]]
 | Image registry | NetApp provides a registry that you can use to obtain Astra Control Center build images:
 `http://netappdownloads.jfrog.io/docker-astra-control-prod`
 Contact NetApp Support to obtain instructions on using this image registry during the Astra Control Center installation process.
@@ -385,7 +385,7 @@ Refer to link:../get-started/requirements.html[Astra Control Center operational 
 | Worker nodes (Azure compute requirement) | At least 3 worker nodes total, with 4 vCPU cores and 12GB RAM each
 | Load balancer | Service type "LoadBalancer" available for ingress traffic to be sent to services in the operational environment cluster
 | FQDN (Azure DNS zone) | A method for pointing the FQDN of Astra Control Center to the load balanced IP address
-| Astra Trident (installed as part of the Kubernetes cluster discovery in NetApp BlueXP) | Astra Trident 22.10 or newer installed and configured and NetApp ONTAP version 9.8 or newer will be used as a storage backend [[azure-registry]]
+| Astra Trident (installed as part of the Kubernetes cluster discovery in NetApp BlueXP) | Astra Trident 23.01 or newer installed and configured and NetApp ONTAP version 9.9.1 or newer will be used as a storage backend [[azure-registry]]
 | Image registry | NetApp provides a registry that you can use to obtain Astra Control Center build images:
 `http://netappdownloads.jfrog.io/docker-astra-control-prod`
 Contact NetApp Support to obtain instructions on using this image registry during the Astra Control Center installation process.
