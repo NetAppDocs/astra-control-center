@@ -35,7 +35,7 @@ The following features are available with the Astra Control Provisioner 23.10 re
 *** *SnapMirror enhancements*: Use the app replication feature in environments where Astra Control does not have direct connectivity to an ONTAP cluster or access to ONTAP credentials. 
 //You can also explicitly trigger SnapMirror updates for a particular snapshot and monitor snapshot destination transfer and protection.
 
-*** *Backup and restore capabilities for applications with `ontap-nas-economy` driver-backed storage backends*: Enable backup and restore operations for `ontap-nas-economy` with some link:../use/restore-apps.html#enable-backup-and-restore-for-ontap-nas-economy-operations[simple steps^].
+*** *Backup and restore capabilities for applications with `ontap-nas-economy` driver-backed storage backends*: Enable backup and restore operations for `ontap-nas-economy` with some link:../use/protect-apps.html#enable-backup-and-restore-for-ontap-nas-economy-operations[simple steps^].
 
 * *Immutable Backups*: Astra Control now support link:..//concepts/data-protection.html#immutable-backups[unalterable, read-only backups^] as an additional security layer against malware and other threats.
 
