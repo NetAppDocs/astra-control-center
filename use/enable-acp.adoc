@@ -8,7 +8,7 @@ summary: Enable Astra Control Provisioner to access advanced storage provisionin
 = Enable Astra Control Provisioner
 :hardbreaks:
 :icons: font
-:imagesdir: ../media/get-started/
+:imagesdir: ../media/use/
 
 [.lead]
 23.10 and later versions of Astra Trident include the option to enable Astra Control Provisioner, which allows licensed Astra users access to advanced storage provisioning and management functionality in addition to standard Astra Trident CSI-based functionality. The provisioner is not enabled by default in Astra Trident 23.10 but can be enabled using this process.
@@ -111,6 +111,11 @@ kubectl get pod -n trident trident-controller-<uuid> -o yaml/json
 
 ====
 // end tabbed block
+
+.Result
+After Astra Control Provisioner is installed, the host cluster in the Astra Control Center UI will show an `ACP version` rather than `Trident version` field and current installed version number.
+
+image:ac-acp-version.png[A screenshot depicting the ACP version location in UI]
 
 .For more information
 

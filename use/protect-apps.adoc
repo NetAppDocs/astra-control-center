@@ -28,6 +28,7 @@ You can do the following tasks related to protecting your app data:
 * <<Configure a protection policy>>
 * <<Create a snapshot>>
 * <<Create a backup>>
+* <<Enable backup and restore for ontap-nas-economy operations>>
 * <<Create an immutable backup>>
 * <<View snapshots and backups>>
 * <<Delete snapshots>>
@@ -70,7 +71,9 @@ Astra Control implements the data protection policy by creating and retaining sn
 
 == Create a snapshot
 
-You can create an on-demand snapshot at any time. 
+You can create an on-demand snapshot at any time.
+
+IMPORTANT: If your app uses a storage class backed by the `ontap-nas-economy` driver, snapshots can't be created. Use an alternate storage class for snapshots. 
 
 .Steps
 
