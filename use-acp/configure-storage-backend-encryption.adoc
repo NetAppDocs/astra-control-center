@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: use-acp/configure-storage-backend-encryption.html
-keywords: astra control center, acp, astra control provisioner, backend, storage, encryption, kerberos
+keywords: astra control, acp, astra control provisioner, backend, storage, encryption, kerberos
 summary: You can configure encryption to protect the traffic between Astra Control and your storage backend.
 ---
 
