@@ -265,6 +265,8 @@ NOTE: You cannot cancel a running immutable backup.
 
 Delete the scheduled or on-demand backups that you no longer need. You cannot delete a backup made to an immutable bucket until the bucket's retention policy enables you to do so.
 
+NOTE: You cannot delete an immutable backup before the retention period expires.
+
 NOTE: If you need to cancel a running backup, use the instructions in <<Cancel backups>>. To delete the backup, wait until it has completed and then use these instructions.
 
 .Steps
