@@ -20,7 +20,7 @@ Astra Control Provisioner supports Kerberos 5 encryption for two types of storag
 
 You can create, delete, resize, snapshot, clone, read-only clone, and import volumes that use NFS encryption.
 
-== Configure Kerberos encryption with on-premise ONTAP volumes
+== Configure in-flight Kerberos encryption with on-premise ONTAP volumes
 You can enable Kerberos encryption on the storage traffic between your managed cluster and an on-premise ONTAP storage backend.
 
 NOTE: Kerberos encryption for NFS traffic with on-premise ONTAP storage backends is only supported using the `ontap-nas` storage driver.
@@ -236,7 +236,7 @@ ontap-nas-sc    csi.trident.netapp.io   15h
 After you create a storage backend and a storage class, you can now provision a volume. For instructions, refer to https://docs.netapp.com/us-en/trident/trident-use/vol-provision.html[Provision a volume^].
 
 
-== Configure Kerberos encryption with Azure NetApp Files volumes
+== Configure in-flight Kerberos encryption with Azure NetApp Files volumes
 You can enable Kerberos encryption on the storage traffic between your managed cluster and a single Azure NetApp Files storage backend or a virtual pool of Azure NetApp Files storage backends. 
 
 .Before you begin
