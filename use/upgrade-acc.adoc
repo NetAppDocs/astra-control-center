@@ -28,10 +28,13 @@ Determine the Trident version you are running:
 ----
 kubectl get tridentversion -n trident
 ----
+
+NOTE: Upgrade Astra Trident, if required, using these https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html[instructions^]. 
+
 ====
 // End snippet
-+
-NOTE: Upgrade Astra Trident, if required, using these https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html[instructions^]. 
+
+IMPORTANT: The 23.10 release is the last release of Astra Control Center that will support Astra Trident. It is strongly recommended that you link:../use/enable-acp.html[enable Astra Control Provisioner] to access advanced management and storage provisioning features beyond those that Astra Trident provides today. You must both upgrade to Astra Control Center 23.10 and enable Astra Control Provisioner to use this extended functionality. Astra Control Provisioner will not work with earlier releases of Astra Control Center. 
 
 * A supported Kubernetes distribution
 +
