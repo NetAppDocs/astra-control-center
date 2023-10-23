@@ -120,20 +120,10 @@ spec:
   managementLIF:
   dataLIF:
   svm:
-  autoExportPolicy:
-  autoExportCIDRs:
-  labels:
-  clientCertificate:
-  clientPrivateKey:
-  trustedCACertificate:
   username:
   password:
-  storagePrefix:
-  limitAggregateUsage:
-  limitVolumeSize:
-  lunsPerFlexvol:
   nasType: nfs
-  nfsMountOptions: ["sec=krb5i"] #can be krb5, krb5i, or krb5p
+  nfsMountOptions: ["sec=krb5i","sec=krb5p"] #can be krb5, krb5i, or krb5p
   qtreesPerFlexvol:
   credentials:
     name: backend-ontap-nas-secret
@@ -163,23 +153,13 @@ spec:
   managementLIF:
   dataLIF:
   svm:
-  autoExportPolicy:
-  autoExportCIDRs:
-  labels:
-  clientCertificate:
-  clientPrivateKey:
-  trustedCACertificate:
   username:
   password:
-  storagePrefix:
-  limitAggregateUsage:
-  limitVolumeSize:
-  lunsPerFlexvol:
   nasType: nfs
   storage:
     - labels:
         type: encryption
-      kerberos: sec=krb5i #can be krb5, krb5i, or krb5p
+      kerberos: ["sec=krb5i","sec=krb5p"] #can be krb5, krb5i, or krb5p
   credentials:
     name: backend-ontap-nas-secret
 ----
@@ -216,7 +196,7 @@ kind: StorageClass
 metadata:
   name: ontap-nas-sc
 provisioner: csi.trident.netapp.io
-mountOptions: ["sec=krb5i"]
+mountOptions: ["sec=krb5i","sec=krb5p"]
 parameters:
   backendType: "ontap-nas"
   storagePools: "ontapnas_pool"
