@@ -23,7 +23,7 @@ You can create, delete, resize, snapshot, clone, read-only clone, and import vol
 == Configure Kerberos encryption with on-premise ONTAP volumes
 You can enable Kerberos encryption on the storage traffic between your managed cluster and an on-premise ONTAP storage backend.
 
-NOTE: Kerberos encryption for NFS traffic with on-premise ONTAP storage backends is only supported using the ONTAP-NAS storage driver.
+NOTE: Kerberos encryption for NFS traffic with on-premise ONTAP storage backends is only supported using the `ontap-nas` storage driver.
 
 .Before you begin
 
@@ -62,7 +62,7 @@ Refer to https://docs.netapp.com/us-en/ontap/nfs-config/create-export-policy-tas
 Refer to https://docs.netapp.com/us-en/ontap/nfs-config/add-rule-export-policy-task.html[Add a rule to an export policy^] for how to add a rule to an existing ONTAP export policy.
 
 === Create a storage backend
-You can create an Azure NetApp Files storage backend configuration that includes Kerberos encryption capability. 
+You can create an ONTAP storage backend configuration that includes Kerberos encryption capability. 
 
 .About this task
 When you create a storage backend configuration file that configures Kerberos encryption, you can define it so that it should be applied at one of two possible levels:
