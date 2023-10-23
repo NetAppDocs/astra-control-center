@@ -117,11 +117,11 @@ metadata:
 spec:
   version: 1
   storageDriverName: "ontap-nas"
-  managementLIF:
-  dataLIF:
-  svm:
-  username:
-  password:
+  managementLIF: <SVM_MGMT_LIF_ADDRESS>
+  dataLIF: <PROTOCOL_LIF_ADDRESS>
+  svm: <SVM_NAME>
+  username: <SVM_USERNAME_CREDENTIAL>
+  password: <SVM_PASSWORD_CREDENTIAL>
   nasType: nfs
   nfsMountOptions: ["sec=krb5i","sec=krb5p"] #can be krb5, krb5i, or krb5p
   qtreesPerFlexvol:
@@ -150,11 +150,11 @@ metadata:
 spec:
   version: 1
   storageDriverName: "ontap-nas"
-  managementLIF:
-  dataLIF:
-  svm:
-  username:
-  password:
+  managementLIF: <SVM_MGMT_LIF_ADDRESS>
+  dataLIF: <PROTOCOL_LIF_ADDRESS>
+  svm: <SVM_NAME>
+  username: <SVM_USERNAME_CREDENTIAL>
+  password: <SVM_PASSWORD_CREDENTIAL>
   nasType: nfs
   storage:
     - labels:
