@@ -932,9 +932,9 @@ You don't need a bucket in Astra Control if you are cloning your application con
 
 .Before you begin
 
-* A bucket that is reachable from your clusters managed by Astra Control Center.
-* Credentials for the bucket.
-* A bucket of the following types:
+* Ensure you have a bucket that is reachable from your clusters managed by Astra Control Center.
+* Enusre you have credentials for the bucket.
+* Ensure the bucket is one of the following types:
 
 ** NetApp ONTAP S3
 ** NetApp StorageGRID S3
