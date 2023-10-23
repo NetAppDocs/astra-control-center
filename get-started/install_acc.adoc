@@ -73,6 +73,8 @@ EOF
 ====
 // End snippet 
 
+* *ONTAP SAN driver only*: If you are using an ONTAP SAN driver, be sure that multipath is enabled on all your Kubernetes clusters.
+
 .Steps
 
 To install Astra Control Center, do the following steps:

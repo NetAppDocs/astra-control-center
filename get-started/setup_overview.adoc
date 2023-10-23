@@ -574,6 +574,7 @@ TIP: We recommend that Astra Control Center manage the cluster it is deployed on
 .Before you begin
 
 * Before you add a cluster, review and perform the necessary <<Prepare your environment for cluster management using Astra Control,prerequisite tasks>>.
+* If you are using an ONTAP SAN driver, be sure that multipath is enabled on all your Kubernetes clusters.
 
 .Steps
 . Navigate from either the Dashboard or the Clusters menu:

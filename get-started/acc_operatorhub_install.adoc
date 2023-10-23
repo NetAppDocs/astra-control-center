@@ -57,6 +57,8 @@ oc create namespace netapp-acc-operator
 ====
 // End snippet
 
+* *ONTAP SAN driver only*: If you are using an ONTAP SAN driver, be sure that multipath is enabled on all your Kubernetes clusters.
+
 .Steps
 
 * <<Download and extract Astra Control Center>>
