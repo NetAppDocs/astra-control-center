@@ -92,7 +92,7 @@ At either level, you can specify one of three different versions of Kerberos enc
 apiVersion: v1
 kind: Secret
 metadata:
-  name: backend-tbc-anf-secret
+  name: backend-ontap-nas-secret
 type: Opaque
 stringData:
   clientID: <CLIENT_ID>
@@ -101,24 +101,30 @@ stringData:
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
 metadata:
-  name: backend-tbc-anf
+  name: backend-ontap-nas
 spec:
   version: 1
-  storageDriverName: azure-netapp-files
-  subscriptionID: <SUBSCRIPTION_ID>
-  tenantID: <TENANT_ID>
-  location: <AZURE_REGION_LOCATION>
-  serviceLevel: Standard
-  networkFeatures: Standard
-  capacityPools: <CAPACITY_POOL>
-  resourceGroups: <RESOURCE_GROUP>
-  netappAccounts: <NETAPP_ACCOUNT>
-  virtualNetwork: <VIRTUAL_NETWORK>
-  subnet: <SUBNET>
+  storageDriverName: "ontap-nas"
+  managementLIF:
+  dataLIF:
+  svm:
+  autoExportPolicy:
+  autoExportCIDRs:
+  labels:
+  clientCertificate:
+  clientPrivateKey:
+  trustedCACertificate:
+  username:
+  password:
+  storagePrefix:
+  limitAggregateUsage:
+  limitVolumeSize:
+  lunsPerFlexvol:
   nasType: nfs
-  kerberos: sec=krb5i #can be krb5, krb5i, or krb5p
+  nfsMountOptions: ["sec=krb5i"] #can be krb5, krb5i, or krb5p
+  qtreesPerFlexvol:
   credentials:
-    name: backend-tbc-anf-secret
+    name: backend-ontap-nas-secret
 ----
 --
 
@@ -129,7 +135,7 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: backend-tbc-anf-secret
+  name: backend-ontap-nas-secret
 type: Opaque
 stringData:
   clientID: <CLIENT_ID>
@@ -138,27 +144,32 @@ stringData:
 apiVersion: trident.netapp.io/v1
 kind: TridentBackendConfig
 metadata:
-  name: backend-tbc-anf
+  name: backend-ontap-nas
 spec:
   version: 1
-  storageDriverName: azure-netapp-files
-  subscriptionID: <SUBSCRIPTION_ID>
-  tenantID: <TENANT_ID>
-  location: <AZURE_REGION_LOCATION>
-  serviceLevel: Standard
-  networkFeatures: Standard
-  capacityPools: <CAPACITY_POOL>
-  resourceGroups: <RESOURCE_GROUP>
-  netappAccounts: <NETAPP_ACCOUNT>
-  virtualNetwork: <VIRTUAL_NETWORK>
-  subnet: <SUBNET>
+  storageDriverName: "ontap-nas"
+  managementLIF:
+  dataLIF:
+  svm:
+  autoExportPolicy:
+  autoExportCIDRs:
+  labels:
+  clientCertificate:
+  clientPrivateKey:
+  trustedCACertificate:
+  username:
+  password:
+  storagePrefix:
+  limitAggregateUsage:
+  limitVolumeSize:
+  lunsPerFlexvol:
   nasType: nfs
   storage:
     - labels:
         type: encryption
       kerberos: sec=krb5i #can be krb5, krb5i, or krb5p
   credentials:
-    name: backend-tbc-anf-secret
+    name: backend-ontap-nas-secret
 ----
 --
 ====
