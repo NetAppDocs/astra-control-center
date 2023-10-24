@@ -70,9 +70,10 @@ Configure the export policy rule with the appropriate access permissions. For ex
 
 |===
 
-Refer to https://docs.netapp.com/us-en/ontap/nfs-config/create-export-policy-task.html[Create an export policy^] for how to create a new ONTAP export policy.
+Refer to the following documentation for how to create export policies and export policy rules:
 
-Refer to https://docs.netapp.com/us-en/ontap/nfs-config/add-rule-export-policy-task.html[Add a rule to an export policy^] for how to add a rule to an existing ONTAP export policy.
+* https://docs.netapp.com/us-en/ontap/nfs-config/create-export-policy-task.html[Create an export policy^]
+* https://docs.netapp.com/us-en/ontap/nfs-config/add-rule-export-policy-task.html[Add a rule to an export policy^]
 
 === Create a storage backend
 You can create an ONTAP storage backend configuration that includes Kerberos encryption capability. 
