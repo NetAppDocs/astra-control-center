@@ -11,7 +11,7 @@ summary: Enable Astra Control Provisioner to access advanced storage provisionin
 :imagesdir: ../media/use/
 
 [.lead]
-23.10 and later versions of Astra Trident include the option to enable Astra Control Provisioner, which allows licensed Astra users access to advanced storage provisioning and management functionality in addition to standard Astra Trident CSI-based functionality. 
+23.10 and later versions of Astra Trident include the option to enable Astra Control Provisioner, which allows licensed Astra users access to advanced storage provisioning and management functionality that is available only to licensed Astra Control users. This extended functionality is provided in addition to the standard Astra Trident CSI-based functionality that Astra Control Provisioner also provides.
 
 The provisioner is not enabled by default in Astra Trident 23.10 but can be enabled using this process.
 
@@ -108,7 +108,7 @@ IMPORTANT: If you used Helm for the original install and you are upgrading to 23
 //kubectl delete -f 23.07/trident-installer/deploy/<bundle-name.yaml> -n trident
 //----
 
-. Edit the TridentOrchestrator CR to enable Astra Control Provisioner (`enableACP: true`) and set the registry location for the Astra Control Provisioner image:
+. On the cluster that hosts Astra Trident, edit the TridentOrchestrator CR to enable Astra Control Provisioner (`enableACP: true`) and set the registry location for the Astra Control Provisioner image:
 +
 [subs=+quotes]
 ----
@@ -157,7 +157,7 @@ kubectl get pod -n trident trident-controller-<uuid> -o yaml/json
 .tridentctl
 --
 
-. https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-tridentctl.html[Uninstall Astra Trident^].
+. https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-tridentctl.html[Uninstall Astra Trident from the cluster that hosts it^].
 . Install Astra Trident again with Astra Control Provisioner enabled (`--enable-acp=true`):
 +
 ----
