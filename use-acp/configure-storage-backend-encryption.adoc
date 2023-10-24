@@ -34,9 +34,7 @@ NOTE: Kerberos encryption for NFS traffic with on-premise ONTAP storage backends
 * Ensure that you have prepared the ONTAP SVM to support Kerberos encryption for NFS volumes. Refer to https://docs.netapp.com/us-en/ontap/nfs-config/create-kerberos-config-task.html[Enable Kerberos on a data LIF^] for instructions.
 
 === Add or modify ONTAP export policies
-You need to add rules to existing export policies or create new export polices that support Kerberos encryption for the SVM root volume as well as any volumes shared with the upstream Kubernetes cluster.
-
-The export policy rules you add, or new export policies you create, need to support the following access protocols and access permissions:
+You need to add rules to existing export policies or create new export polices that support Kerberos encryption for the SVM root volume as well as any volumes shared with the upstream Kubernetes cluster. The export policy rules you add, or new export policies you create, need to support the following access protocols and access permissions:
 
 .Access protocols
 Configure the export policy with NFS, NFSv3, and NFSv4 access protocols.
