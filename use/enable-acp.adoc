@@ -15,7 +15,7 @@ summary: Enable Astra Control Provisioner to access advanced storage provisionin
 
 The provisioner is not enabled by default in Astra Trident 23.10 but can be enabled using this process.
 
-link:../get-started/requirements.html[Learn more^] about supported Astra Trident versions and other Astra Control Center requirements.
+In coming Astra Control updates, Astra Control Provisioner will replace Astra Trident as storage provisioner and orchestrator in the Astra Control architecture. As such, it's highly recommended that Astra Control users enable Astra Control Provisioner. Astra Trident will continue to remain open source and be released, maintained, supported, and updated with new CSI and other features from NetApp.
 
 .Before you begin
 
@@ -34,7 +34,7 @@ NOTE: Refer to https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrad
 
 //Users  need to register on the ACS Registry and create regcred (image pull secret), and then only they can download ACP image either to internal registry or into their cluster.
 
-* An AMD 64 system architecture. The Astra Control Provisioner image is limited to this architecture type.
+* Confirm that your cluster has an AMD 64 system architecture. The Astra Control Provisioner image is provided in both AMD and ARM architecture types, but only AMD is supported by Astra Control Center.
 
 .Upgrade to Astra Control Provisioner 23.10
 
@@ -168,7 +168,7 @@ kubectl get pod -n trident trident-controller-<uuid> -o yaml/json
 // end tabbed block
 
 .Result
-After Astra Control Provisioner is installed, the host cluster in the Astra Control Center UI will show an `ACP version` rather than `Trident version` field and current installed version number.
+After Astra Control Provisioner is installed, the cluster hosting the provisioner in the Astra Control Center UI will show an `ACP version` rather than `Trident version` field and current installed version number.
 
 image:ac-acp-version.png[A screenshot depicting the ACP version location in UI]
 
