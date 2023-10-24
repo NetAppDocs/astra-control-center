@@ -41,6 +41,8 @@ The following features are available with the Astra Control Provisioner 23.10 re
 
 * *Execution hooks turned off by default*: Beginning with this release, execution hooks functionality can be enabled or disabled and is disabled by default. If you have not yet created execution hooks for use with Astra Control, you need to link:../use/execution-hooks.html#enable-the-execution-hooks-feature[enable the execution hooks feature^] to begin creating hooks. If you created execution hooks prior to this release, the execution hooks functionality stays enabled and you can use hooks as you would normally.
 
+* Astra Control has a new public image Docker registry. You can use this registry to pull Astra Control Provisioner images and other software.
+
 .Known issues and limitations
 
 * link:../release-notes/known-issues.html[Known issues for this release^]
