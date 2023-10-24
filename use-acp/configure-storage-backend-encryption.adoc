@@ -15,8 +15,8 @@ Using Astra Control Provisioner, you can improve data access security by enablin
 
 Astra Control Provisioner supports Kerberos 5 encryption for two types of storage backends:
 
-* *Azure NetApp Files* - Astra Control Provisioner supports Kerberos 5 encryption over NFSv4.1 connections from upstream Kubernetes clusters to Azure NetApp Files volumes.
 * *On-premise ONTAP* - Astra Control Provisioner supports Kerberos 5 encryption over NFSv4.1 connections from Red Hat OpenShift and upstream Kubernetes clusters to on-premise ONTAP volumes.
+* *Azure NetApp Files* - Astra Control Provisioner supports Kerberos 5 encryption over NFSv4.1 connections from upstream Kubernetes clusters to Azure NetApp Files volumes.
 
 You can create, delete, resize, snapshot, clone, read-only clone, and import volumes that use NFS encryption.
 
@@ -31,11 +31,10 @@ NOTE: Kerberos encryption for NFS traffic with on-premise ONTAP storage backends
 * Ensure that you have access to the `tridentctl` utility.
 * Ensure you have administrator access to the ONTAP storage backend.
 * Ensure you know the name of the volume or volumes you will be sharing from the ONTAP storage backend.
+* Ensure that you have prepared the ONTAP SVM to support Kerberos encryption for NFS volumes. Refer to https://docs.netapp.com/us-en/ontap/nfs-config/create-kerberos-config-task.html[Enable Kerberos on a data LIF^] for instructions.
 
 === Add or modify ONTAP export policies
-You need to add rules to existing export policies or create new export polices that support Kerberos encryption for the SVM root volume as well as any volumes shared with the upstream Kubernetes cluster.
-
-The export policy rules you add, or new export policies you create, need to support the following access protocols and access permissions:
+You need to add rules to existing export policies or create new export polices that support Kerberos encryption for the SVM root volume as well as any volumes shared with the upstream Kubernetes cluster. The export policy rules you add, or new export policies you create, need to support the following access protocols and access permissions:
 
 .Access protocols
 Configure the export policy with NFS, NFSv3, and NFSv4 access protocols.
@@ -69,9 +68,10 @@ Configure the export policy rule with the appropriate access permissions. For ex
 
 |===
 
-Refer to https://docs.netapp.com/us-en/ontap/nfs-config/create-export-policy-task.html[Create an export policy^] for how to create a new ONTAP export policy.
+Refer to the following documentation for how to create export policies and export policy rules:
 
-Refer to https://docs.netapp.com/us-en/ontap/nfs-config/add-rule-export-policy-task.html[Add a rule to an export policy^] for how to add a rule to an existing ONTAP export policy.
+* https://docs.netapp.com/us-en/ontap/nfs-config/create-export-policy-task.html[Create an export policy^]
+* https://docs.netapp.com/us-en/ontap/nfs-config/add-rule-export-policy-task.html[Add a rule to an export policy^]
 
 === Create a storage backend
 You can create an ONTAP storage backend configuration that includes Kerberos encryption capability. 
