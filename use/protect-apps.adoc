@@ -125,7 +125,7 @@ Astra Control Provisioner provides backup and restore functionality that can be 
 
 .Before you begin
 
-* You have enabled Astra Control Provisioner.
+* You have link:../use/enable-acp.html[enabled Astra Control Provisioner].
 * You have defined an application in Astra Control. This application will have limited protection functionality until you complete this procedure.
 * You have `ontap-nas-economy` selected as the default storage class for your storage backend.
 
@@ -145,7 +145,7 @@ nfs modify -vserver <svm name> -v3-hide-snapshot enabled
 ----
 
 . Do the following in Astra Trident: 
-.. Enable the snapshot directory for each PV that is ontap-nas-economy based and associated with the application:
+.. Enable the snapshot directory for each PV that is `ontap-nas-economy` based and associated with the application:
 +
 [source,console]
 ----
