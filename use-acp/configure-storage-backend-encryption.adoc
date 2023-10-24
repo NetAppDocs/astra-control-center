@@ -31,7 +31,7 @@ NOTE: Kerberos encryption for NFS traffic with on-premise ONTAP storage backends
 * Ensure that you have access to the `tridentctl` utility.
 * Ensure you have administrator access to the ONTAP storage backend.
 * Ensure you know the name of the volume or volumes you will be sharing from the ONTAP storage backend.
-* Ensure that you have prepared the SVM to support Kerberos encryption for NFS volumes. Refer to https://docs.netapp.com/us-en/ontap/nfs-config/create-kerberos-config-task.html[Enable Kerberos on a data LIF^] for instructions.
+* Ensure that you have prepared the ONTAP SVM to support Kerberos encryption for NFS volumes. Refer to https://docs.netapp.com/us-en/ontap/nfs-config/create-kerberos-config-task.html[Enable Kerberos on a data LIF^] for instructions.
 
 === Add or modify ONTAP export policies
 You need to add rules to existing export policies or create new export polices that support Kerberos encryption for the SVM root volume as well as any volumes shared with the upstream Kubernetes cluster.
