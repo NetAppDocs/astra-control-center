@@ -36,7 +36,7 @@ NOTE: Refer to https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrad
 
 .Upgrade to Astra Control Provisioner 23.10
 
-. Download and extract Astra Control Provisioner from the Astra Control Center bundle:
+. Download and extract Astra Control Provisioner:
 +
 [role="tabbed-block"]
 ====
@@ -56,6 +56,7 @@ tar -vxzf astra-control-center-[version].tar.gz
 . Locate the `trident-acp:v23.10` image.
 
 . Push the image to your local registry
+
 =====
 // End collapsible
 
