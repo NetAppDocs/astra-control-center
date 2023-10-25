@@ -11,7 +11,7 @@ summary: Enable Astra Control Provisioner to access advanced storage provisionin
 :imagesdir: ../media/use/
 
 [.lead]
-23.10 and later versions of Astra Trident include the option to enable Astra Control Provisioner, which allows licensed Astra users access to advanced storage provisioning and management functionality that is available only to licensed Astra Control users. This extended functionality is provided in addition to the standard Astra Trident CSI-based functionality that Astra Control Provisioner also provides.
+23.10 and later versions of Astra Trident include the option to enable Astra Control Provisioner, which allows licensed Astra users access to advanced storage provisioning and management functionality that is available only to licensed Astra Control users. Astra Control Provisioner provides this extended functionality in addition to standard Astra Trident CSI-based functionality.
 
 The provisioner is not enabled by default in Astra Trident 23.10 but can be enabled using this process.
 
@@ -19,7 +19,7 @@ In coming Astra Control updates, Astra Control Provisioner will replace Astra Tr
 
 .Before you begin
 
-If you are enabling the Astra Control Provisioner, the following must be done first:
+If you are enabling the Astra Control Provisioner, do the following first:
 
 * Install or upgrade to Astra Control Center 23.10 if you are planning to use Astra Control Provisioner with Astra Control.
 
@@ -46,7 +46,7 @@ NOTE: Refer to https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrad
 .NetApp Support Site
 --
 
-. Download the Astra Control Center bundle (`astra-control-center-[version].tar.gz`) containing Astra Control Provisioner from the the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[Astra Control Center downloads page^].
+. Download the Astra Control Center bundle (`astra-control-center-[version].tar.gz`) containing Astra Control Provisioner from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[Astra Control Center downloads page^].
 
 . Extract the images from the Astra Control Center bundle:
 +

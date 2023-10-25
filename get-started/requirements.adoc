@@ -76,7 +76,7 @@ Ensure that you meet the following Astra Trident requirements specific to the ne
 //* *For Kubernetes 1.25 or newer support*: Astra Trident 22.10 or newer installed for Kubernetes 1.25 or newer clusters (you must upgrade to Astra Trident 22.10 prior to upgrading to Kubernetes 1.25 or newer)
 * *ONTAP configuration with Astra Trident*: 
 ** *Storage class*: Configure at least one Astra Trident storage class on the cluster. If a default storage class is configured, ensure that it is the only storage class with the default designation.
-** *Storage drivers and worker nodes*: Ensure that the worker nodes in your cluster are configured with the appropriate storage drivers so that the pods can interact with the backend storage. Astra Control Center supports the following ONTAP drivers provided by Astra Trident:
+** *Storage drivers and worker nodes*: Ensure that you configure the worker nodes in your cluster with the appropriate storage drivers so that the pods can interact with the backend storage. Astra Control Center supports the following ONTAP drivers provided by Astra Trident:
 
 *** `ontap-nas`
 *** `ontap-san`

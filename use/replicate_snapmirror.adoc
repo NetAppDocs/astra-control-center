@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: use/replicate_snapmirror.html
 keywords: replicate, replication, disaster, recovery
-summary: Astra can restore your application configuration and persistent storage from a snapshot or backup. Persistent storage backups are transferred from your object store, so restoring from an existing backup will complete the fastest.
+summary: Astra can restore your application configuration and persistent storage from a snapshot or backup. Persistent storage backups are transferred from your object store so restoring from an existing backup will complete the fastest.
 ---
 
 = Replicate apps between storage backends using SnapMirror technology
@@ -57,7 +57,7 @@ IMPORTANT: Ensure that the SVM names used in the replication relationship betwee
 +
 *_Astra Control Provisioner only_*: Adding and managing ONTAP storage backends in Astra Control Center is optional if you have enabled Astra Control Provisioner for Astra Control Center 23.10 or later.
 
-* *Managed clusters*: The following clusters must be added to and managed by Astra Control, ideally at different failure domains or sites:
+* *Managed clusters*: Add and manage the following clusters with Astra Control, ideally at different failure domains or sites:
 ** Source Kubernetes cluster
 ** Destination Kubernetes cluster
 ** Associated ONTAP clusters
