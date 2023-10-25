@@ -77,30 +77,18 @@ Refer to the following documentation for how to create export policies and expor
 You can create an ONTAP storage backend configuration that includes Kerberos encryption capability. 
 
 .About this task
+When you create a storage backend configuration file that configures Kerberos encryption, you can specify one of three different versions of Kerberos encryption using the `spec.nfsMountOptions` parameter:
 
-Explanation of nfsMountOptions here.
-//When you create a storage backend configuration file that configures Kerberos encryption, you can define it so that it should be applied at one of two possible levels:
+* `spec.nfsMountOptions: sec=krb5` (authentication and encryption)
+* `spec.nfsMountOptions: sec=krb5i` (authentication and encryption with identity protection)
+* `spec.nfsMountOptions: sec=krb5p` (authentication and encryption with identity and privacy protection)
 
-//* The *storage backend level* using the `spec.kerberos` field
-//* The *virtual pool level* using the `spec.storage.kerberos` field
-
-//When you define the configuration at the virtual pool level, the pool is selected using the label in the storage class.
-
-//When you create a storage backend configuration file that configures Kerberos encryption, you can specify one of three different versions of Kerberos encryption:
-
-//* `kerberos: sec=krb5` (authentication and encryption)
-//* `kerberos: sec=krb5i` (authentication and encryption with identity protection)
-//* `kerberos: sec=krb5p` (authentication and encryption with identity and privacy protection)
+Specify only one Kerberos level. If you specify more than one Kerberos encryption level in the parameter list, only the first option is used.
 
 .Steps
 
-. On the managed cluster, create a storage backend configuration file using one of the following examples, depending on where you need to define the storage backend (storage backend level or virtual pool level). Replace values in brackets <> with information from your environment:
+. On the managed cluster, create a storage backend configuration file using the following example. Replace values in brackets <> with information from your environment:
 +
-[role="tabbed-block"]
-====
-
-.Storage backend level example
---
 [source,yaml]
 ----
 apiVersion: v1
@@ -119,8 +107,8 @@ metadata:
 spec:
   version: 1
   storageDriverName: "ontap-nas"
-  managementLIF: <STORAGE_VM_MGMT_LIF_ADDRESS_OR_IP>
-  dataLIF: <PROTOCOL_LIF_ADDRESS>
+  managementLIF: <STORAGE_VM_MGMT_LIF_IP_ADDRESS>
+  dataLIF: <PROTOCOL_LIF_FQDN_OR_IP_ADDRESS>
   svm: <SVM_NAME>
   username: <SVM_USERNAME_CREDENTIAL>
   password: <SVM_PASSWORD_CREDENTIAL>
@@ -130,43 +118,6 @@ spec:
   credentials:
     name: backend-ontap-nas-secret
 ----
---
-
-.Virtual pool level example
---
-[source,yaml]
-----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: backend-ontap-nas-secret
-type: Opaque
-stringData:
-  clientID: <CLIENT_ID>
-  clientSecret: <CLIENT_SECRET>
----
-apiVersion: trident.netapp.io/v1
-kind: TridentBackendConfig
-metadata:
-  name: backend-ontap-nas
-spec:
-  version: 1
-  storageDriverName: "ontap-nas"
-  managementLIF: <SVM_MGMT_LIF_ADDRESS>
-  dataLIF: <PROTOCOL_LIF_ADDRESS>
-  svm: <SVM_NAME>
-  username: <SVM_USERNAME_CREDENTIAL>
-  password: <SVM_PASSWORD_CREDENTIAL>
-  nasType: nfs
-  storage:
-    - labels:
-        type: encryption
-      kerberos: ["sec=krb5i","sec=krb5p"] #can be krb5, krb5i, or krb5p
-  credentials:
-    name: backend-ontap-nas-secret
-----
---
-====
 
 . Use the configuration file you created in the previous step to create the backend:
 +
@@ -188,7 +139,13 @@ After you identify and correct the problem with the configuration file, you can 
 You can create a storage class to provision volumes with Kerberos encryption.
 
 .About this task
-Explanation of mountOptions here.
+When you create a storage class object, you can specify one of three different versions of Kerberos encryption using the `mountOptions` parameter:
+
+* `mountOptions: sec=krb5` (authentication and encryption)
+* `mountOptions: sec=krb5i` (authentication and encryption with identity protection)
+* `mountOptions: sec=krb5p` (authentication and encryption with identity and privacy protection)
+
+Specify only one Kerberos level. If you specify more than one Kerberos encryption level in the parameter list, only the first option is used. If the level of encryption you specified in the storage backend configuration is different than the level you specify in the storage class object, the storage class object takes precedence.
 
 .Steps
 
