@@ -78,12 +78,11 @@ Any existing backups or snapshots will be deleted. Applications and data remain 
 
 *Can Astra Control manage an application that is on non-NetApp storage?*
 
-No. While Astra Control can discover applications that are using non-NetApp storage, it can't manage an application that's using non-NetApp storage.
+No. Although Astra Control can discover applications that are using non-NetApp storage, it can't manage an application that's using non-NetApp storage.
 
 *Should I manage Astra Control itself?*
 
-//No, you should not manage Astra Control itself because it is a "system application."
-Astra Control Center is not shown by default as an application that you can manage, but you can back up and restore an Astra Control Center instance using another Astra Control Center instance.
+Astra Control Center is not shown by default as an application that you can manage, but you can link:../use/protect-acc-with-acc.html[back up and restore] an Astra Control Center instance using another Astra Control Center instance.
 
 *Do unhealthy pods affect app management?*
 
@@ -97,7 +96,7 @@ Yes. A snapshot operation on an application by Astra Control includes snapshot o
 
 *Can I manage snapshots taken by Astra Control directly through a different interface or object storage?*
 
-No. Snapshots and backups taken by Astra Control can only be managed with Astra Control.
+No. Snapshots and backups taken by Astra Control can be managed only with Astra Control.
 
 == Astra Control Provisioner
 
@@ -111,7 +110,7 @@ In coming Astra Control updates, Astra Control Provisioner will replace Astra Tr
 
 *Do I have to pay for Astra Trident?*
 
-No, Astra Trident will continue to be open source and free to download.
+No. Astra Trident will continue to be open source and free to download.
 
 *Can I use the storage management and provisioning features in Astra Control without installing and using all of Astra Control?*
 

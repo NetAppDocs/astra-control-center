@@ -62,7 +62,7 @@ You should ensure that the following prerequisite conditions are met before you 
 .Before you begin
 
 * *Meet environmental prerequisites*: Your environment meets the link:../get-started/requirements.html[operational environment requirements^] for Astra Trident and Astra Control Center.
-* *Configure worker nodes*: Ensure that the worker nodes in your cluster are configured with the appropriate storage drivers so that the pods can interact with the backend storage.
+* *Configure worker nodes*: Ensure that you configure the worker nodes in your cluster with the appropriate storage drivers so that the pods can interact with the backend storage.
 * *Make kubeconfig accessible*: You have access to the https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/[default cluster kubeconfig^] that link:../get-started/install_acc.html#set-up-namespace-and-secret-for-registries-with-auth-requirements[you configured during installation^].
 * *Certificate Authority considerations*: If you are adding the cluster using a kubeconfig file that references a private Certificate Authority (CA), add the following line to the `cluster` section of the kubeconfig file. This enables Astra Control to add the cluster:
 +
@@ -934,7 +934,7 @@ You don't need a bucket in Astra Control if you are cloning your application con
 .Before you begin
 
 * Ensure you have a bucket that is reachable from your clusters managed by Astra Control Center.
-* Enusre you have credentials for the bucket.
+* Ensure you have credentials for the bucket.
 * Ensure the bucket is one of the following types:
 
 ** NetApp ONTAP S3
