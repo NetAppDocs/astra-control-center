@@ -27,7 +27,7 @@ NOTE: Kerberos encryption for NFS traffic with on-premise ONTAP storage backends
 
 .Before you begin
 
-//* Ensure that you have enabled Astra Control Provisioner on the managed cluster. Refer to link:../use/enable-acp.html[Enable Astra Control Provisioner^] for instructions.
+* Ensure that you have enabled Astra Control Provisioner on the managed cluster. Refer to link:../use/enable-acp.html[Enable Astra Control Provisioner^] for instructions.
 * Ensure that you have access to the `tridentctl` utility.
 * Ensure you have administrator access to the ONTAP storage backend.
 * Ensure you know the name of the volume or volumes you will be sharing from the ONTAP storage backend.
