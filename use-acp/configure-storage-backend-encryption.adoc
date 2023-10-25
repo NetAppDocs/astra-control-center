@@ -13,10 +13,10 @@ summary: You can configure encryption to protect the traffic between Astra Contr
 [.lead]
 Using Astra Control Provisioner, you can improve data access security by enabling encryption for the traffic between your managed cluster and the storage backend. 
 
-Astra Control Provisioner supports Kerberos 5 encryption for two types of storage backends:
+Astra Control Provisioner supports Kerberos encryption for two types of storage backends:
 
-* *On-premise ONTAP* - Astra Control Provisioner supports Kerberos 5 encryption over NFSv4.1 connections from Red Hat OpenShift and upstream Kubernetes clusters to on-premise ONTAP volumes.
-* *Azure NetApp Files* - Astra Control Provisioner supports Kerberos 5 encryption over NFSv4.1 connections from upstream Kubernetes clusters to Azure NetApp Files volumes.
+* *On-premise ONTAP* - Astra Control Provisioner supports Kerberos encryption over NFSv3 and NFSv4 connections from Red Hat OpenShift and upstream Kubernetes clusters to on-premise ONTAP volumes.
+* *Azure NetApp Files* - Astra Control Provisioner supports Kerberos encryption over NFSv4.1 connections from upstream Kubernetes clusters to Azure NetApp Files volumes.
 
 You can create, delete, resize, snapshot, clone, read-only clone, and import volumes that use NFS encryption.
 
@@ -27,7 +27,7 @@ NOTE: Kerberos encryption for NFS traffic with on-premise ONTAP storage backends
 
 .Before you begin
 
-* Ensure that you have enabled Astra Control Provisioner on the managed cluster. Refer to link:../use/enable-acp.html[Enable Astra Control Provisioner^] for instructions.
+//* Ensure that you have enabled Astra Control Provisioner on the managed cluster. Refer to link:../use/enable-acp.html[Enable Astra Control Provisioner^] for instructions.
 * Ensure that you have access to the `tridentctl` utility.
 * Ensure you have administrator access to the ONTAP storage backend.
 * Ensure you know the name of the volume or volumes you will be sharing from the ONTAP storage backend.
@@ -77,18 +77,20 @@ Refer to the following documentation for how to create export policies and expor
 You can create an ONTAP storage backend configuration that includes Kerberos encryption capability. 
 
 .About this task
-When you create a storage backend configuration file that configures Kerberos encryption, you can define it so that it should be applied at one of two possible levels:
 
-* The *storage backend level* using the `spec.kerberos` field
-* The *virtual pool level* using the `spec.storage.kerberos` field
+Explanation of nfsMountOptions here.
+//When you create a storage backend configuration file that configures Kerberos encryption, you can define it so that it should be applied at one of two possible levels:
 
-When you define the configuration at the virtual pool level, the pool is selected using the label in the storage class.
+//* The *storage backend level* using the `spec.kerberos` field
+//* The *virtual pool level* using the `spec.storage.kerberos` field
 
-At either level, you can specify one of three different versions of Kerberos encryption:
+//When you define the configuration at the virtual pool level, the pool is selected using the label in the storage class.
 
-* `kerberos: sec=krb5` (authentication and encryption)
-* `kerberos: sec=krb5i` (authentication and encryption with identity protection)
-* `kerberos: sec=krb5p` (authentication and encryption with identity and privacy protection)
+//When you create a storage backend configuration file that configures Kerberos encryption, you can specify one of three different versions of Kerberos encryption:
+
+//* `kerberos: sec=krb5` (authentication and encryption)
+//* `kerberos: sec=krb5i` (authentication and encryption with identity protection)
+//* `kerberos: sec=krb5p` (authentication and encryption with identity and privacy protection)
 
 .Steps
 
@@ -117,13 +119,13 @@ metadata:
 spec:
   version: 1
   storageDriverName: "ontap-nas"
-  managementLIF: <SVM_MGMT_LIF_ADDRESS>
+  managementLIF: <STORAGE_VM_MGMT_LIF_ADDRESS_OR_IP>
   dataLIF: <PROTOCOL_LIF_ADDRESS>
   svm: <SVM_NAME>
   username: <SVM_USERNAME_CREDENTIAL>
   password: <SVM_PASSWORD_CREDENTIAL>
   nasType: nfs
-  nfsMountOptions: ["sec=krb5i","sec=krb5p"] #can be krb5, krb5i, or krb5p
+  nfsMountOptions: ["sec=krb5i"] #can be krb5, krb5i, or krb5p
   qtreesPerFlexvol:
   credentials:
     name: backend-ontap-nas-secret
@@ -185,6 +187,9 @@ After you identify and correct the problem with the configuration file, you can 
 === Create a storage class
 You can create a storage class to provision volumes with Kerberos encryption.
 
+.About this task
+Explanation of mountOptions here.
+
 .Steps
 
 . Create a StorageClass Kubernetes object, using the following example:
@@ -196,7 +201,7 @@ kind: StorageClass
 metadata:
   name: ontap-nas-sc
 provisioner: csi.trident.netapp.io
-mountOptions: ["sec=krb5i","sec=krb5p"]
+mountOptions: ["sec=krb5i"] #can be krb5, krb5i, or krb5p
 parameters:
   backendType: "ontap-nas"
   storagePools: "ontapnas_pool"
