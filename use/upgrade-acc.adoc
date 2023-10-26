@@ -20,7 +20,7 @@ Before you upgrade, ensure your environment still meets the link:../get-started/
 
 * *A link:../get-started/requirements.html#astra-trident-requirements[supported] Astra Trident version*
 +
-.Expand for details
+.Expand for steps
 [%collapsible]
 ====
 Determine the Trident version you are running:
@@ -39,7 +39,7 @@ IMPORTANT: The 23.10 release is the last release of Astra Control Center that wi
 
 * *A supported Kubernetes distribution*
 +
-.Expand for details
+.Expand for steps
 [%collapsible]
 ====
 Determine the Kubernetes version you are running:
@@ -53,7 +53,7 @@ kubectl get nodes -o wide
 
 * *Sufficient cluster resources*
 +
-.Expand for details
+.Expand for steps
 [%collapsible]
 ====
 Determine available cluster resources: 
@@ -68,7 +68,7 @@ kubectl describe node <node name>
 * *A registry you can use to push and upload Astra Control Center images*
 * *A default storage class*
 +
-.Expand for details
+.Expand for steps
 [%collapsible]
 ====
 Determine your default storage class:
@@ -82,7 +82,7 @@ kubectl get storageclass
 
 * *Healthy and available API services*
 +
-.Expand for details
+.Expand for steps
 [%collapsible]
 ====
 Ensure all API services are in a healthy state and available:
@@ -96,7 +96,7 @@ kubectl get apiservices
 
 * *(OpenShift only) Healthy and available cluster operators*
 +
-.Expand for details
+.Expand for steps
 [%collapsible]
 ====
 Ensure all cluster operators are in a healthy state and available.
