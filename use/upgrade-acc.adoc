@@ -18,8 +18,9 @@ These instructions describe the upgrade process for Astra Control Center from th
 .Before you begin
 Before you upgrade, ensure your environment still meets the link:../get-started/requirements.html[minimum requirements for Astra Control Center deployment^]. Your environment should have the following:
 
-* A link:../get-started/requirements.html#astra-trident-requirements[supported] Astra Trident version
+* *A link:../get-started/requirements.html#astra-trident-requirements[supported] Astra Trident version*
 +
+.Expand for details
 [%collapsible]
 ====
 Determine the Trident version you are running:
@@ -36,8 +37,9 @@ NOTE: Upgrade Astra Trident, if required, using these https://docs.netapp.com/us
 
 IMPORTANT: The 23.10 release is the last release of Astra Control Center that will support Astra Trident. It is strongly recommended that you link:../use/enable-acp.html[enable Astra Control Provisioner] to access advanced management and storage provisioning features beyond those that Astra Trident provides today. You must both upgrade to Astra Control Center 23.10 and enable Astra Control Provisioner to use this extended functionality. Astra Control Provisioner will not work with earlier releases of Astra Control Center. 
 
-* A supported Kubernetes distribution
+* *A supported Kubernetes distribution*
 +
+.Expand for details
 [%collapsible]
 ====
 Determine the Kubernetes version you are running:
@@ -49,8 +51,9 @@ kubectl get nodes -o wide
 ====
 // End snippet
 
-* Sufficient cluster resources
+* *Sufficient cluster resources*
 +
+.Expand for details
 [%collapsible]
 ====
 Determine available cluster resources: 
@@ -62,9 +65,10 @@ kubectl describe node <node name>
 ====
 // End snippet
 
-* A registry you can use to push and upload Astra Control Center images
-* A default storage class
+* *A registry you can use to push and upload Astra Control Center images*
+* *A default storage class*
 +
+.Expand for details
 [%collapsible]
 ====
 Determine your default storage class:
@@ -76,8 +80,9 @@ kubectl get storageclass
 ====
 // End snippet
 
-* Healthy and available API services
+* *Healthy and available API services*
 +
+.Expand for details
 [%collapsible]
 ====
 Ensure all API services are in a healthy state and available:
@@ -89,8 +94,9 @@ kubectl get apiservices
 ====
 // End snippet
 
-* (OpenShift only) Healthy and available cluster operators
+* *(OpenShift only) Healthy and available cluster operators*
 +
+.Expand for details
 [%collapsible]
 ====
 Ensure all cluster operators are in a healthy state and available.
@@ -101,6 +107,9 @@ kubectl get clusteroperators
 ----
 ====
 // End snippet
+
+include::../_include/access-netapp-image-registry.adoc[]
+
 //astradoc-249
 //* Service mesh considerations: It is strongly recommended that Astra Control host cluster communications channels be secured using a link:../get-started/requirements.html#service-mesh-requirements[service mesh]. If you already have an existing Astra Control Center instance that is participating in Istio service mesh or you do not intend to install an Istio service mesh for use with Astra Control Center, _no additional service mesh changes are needed_ for upgrade configuration. If you intend to install and use an Istio service mesh, _the following steps are required_:
 //+
