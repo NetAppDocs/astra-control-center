@@ -47,7 +47,7 @@ include::../_include/access-netapp-image-registry.adoc[]
 ====
 * For Istio service mesh use, you'll be required to add an `istio-injection:enabled` <<Complete Astra Control Center and operator installation,label>> to the Astra namespace as described during this Astra Control Center installation procedure. You'll also need to use the `Generic`  <<Configure Astra Control Center,ingress setting>> and provide an alternative ingress for <<Set up ingress for load balancing,external load balancing>>.
 
-* For Red Hat OpenShift clusters only, you need to define `NetworkAttachmentDefinition` on all associated Astra Control Center namespaces (`netapp-acc-operator`, `netapp-acc`, and `netapp-monitoring` or any custom namespaces that have been substituted).
+* For Red Hat OpenShift clusters only, you need to define `NetworkAttachmentDefinition` on all associated Astra Control Center namespaces (`netapp-acc-operator`, `netapp-acc`, `netapp-monitoring` for application clusters, or any custom namespaces that have been substituted).
 +
 ----
 cat <<EOF | oc -n netapp-acc-operator create -f -
@@ -683,6 +683,21 @@ kubectl label ns [netapp-acc or custom namespace] istio-injection:enabled
 +
 //astradoc-249
 +
+. (Recommended) https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/[Enable strict MTLs^] for Istio service mesh:
++
+[source,console]
+----
+kubectl apply -n istio-system -f - <<EOF
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+spec:
+  mtls:
+    mode: STRICT
+EOF
+----
+
 . Install Astra Control Center in the `netapp-acc` (or your custom) namespace:
 +
 [source,console]
