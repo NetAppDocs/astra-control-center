@@ -13,25 +13,37 @@ summary: Enable Astra Control Provisioner to access advanced storage provisionin
 [.lead]
 23.10 and later versions of Astra Trident include the option to enable Astra Control Provisioner, which allows licensed Astra users access to advanced storage provisioning and management functionality that is available only to licensed Astra Control users. Astra Control Provisioner provides this extended functionality in addition to standard Astra Trident CSI-based functionality.
 
-The provisioner is not enabled by default in Astra Trident 23.10 but can be enabled using this process.
-
 In coming Astra Control updates, Astra Control Provisioner will replace Astra Trident as storage provisioner and orchestrator in the Astra Control architecture. As such, it's highly recommended that Astra Control users enable Astra Control Provisioner. Astra Trident will continue to remain open source and be released, maintained, supported, and updated with new CSI and other features from NetApp.
+
+.About this task
+
+You can follow this procedure if you are a licensed Astra Control Center user and you are looking to extend Astra functionality. You should also follow this procedure if you are an Astra Trident user and want to use the additional functionality that Astra Control Provisioner provides without also using Astra Control.
+
+For each case, the provisioner functionality is not enabled by default in Astra Trident 23.10 but can be enabled using this process.
 
 .Before you begin
 
 If you are enabling the Astra Control Provisioner, do the following first:
 
+Astra Control Center users only:
+
 * *Install or upgrade to Astra Control Center 23.10*: You'll need this version if you are planning to use Astra Control Provisioner with Astra Control.
+
+* *Confirm that your cluster has an AMD64 system architecture*: The Astra Control Provisioner image is provided in both AMD and ARM architecture types, but only AMD is supported by Astra Control Center.
+
+All Astra Control Provisioner users:
 
 * *Install or upgrade to Astra Trident 23.10*: Refer to https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html[Astra Trident documentation^] for these procedures.
 
 * *Obtain an Astra Control license*: You'll need a license to use Astra Control Provisioner and the functionality it provides.
-* *Confirm that your cluster has an AMD 64 system architecture*: The Astra Control Provisioner image is provided in both AMD and ARM architecture types, but only AMD is supported by Astra Control Center.
+
 include::../_include/access-netapp-image-registry.adoc[]
 
 .Upgrade to Astra Control Provisioner 23.10
 
 . Download and extract Astra Control Provisioner:
++
+NOTE: Astra Control Center users can find the image using either method. For Astra Trident users wanting to use Astra Control Provisioner without Astra Control, use the registry method.
 +
 [role="tabbed-block"]
 ====
@@ -60,7 +72,7 @@ tar -vxzf astra-control-center-[version].tar.gz
 
 . Log into the Astra Control registry:
 +
-NOTE: Docker commands are used in these examples.
+NOTE: Docker commands are used in these examples. Podman commands can also be used.
 +
 ----
 docker login cr.astra.netapp.io -u <account-id> -p <api-token>
@@ -71,8 +83,6 @@ docker login cr.astra.netapp.io -u <account-id> -p <api-token>
 ----
 docker pull cr.astra.netapp.io/trident-acp/:23.10
 ----
-
-. Locate the `trident-acp:v23.10` image.
 
 . Push the image to your custom registry:
 +
@@ -161,7 +171,10 @@ kubectl get pod -n trident trident-controller-<uuid> -o yaml/json
 // end tabbed block
 
 .Result
-After Astra Control Provisioner is installed, the cluster hosting the provisioner in the Astra Control Center UI will show an `ACP version` rather than `Trident version` field and current installed version number.
+
+Astra Control Provisioner functionality is enabled and you can use any features available for the version you are running.
+
+(For Astra Control Center users only) After Astra Control Provisioner is installed, the cluster hosting the provisioner in the Astra Control Center UI will show an `ACP version` rather than `Trident version` field and current installed version number.
 
 image:ac-acp-version.png[A screenshot depicting the ACP version location in UI]
 
