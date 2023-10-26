@@ -11,25 +11,25 @@ summary: Enable Astra Control Provisioner to access advanced storage provisionin
 :imagesdir: ../media/use/
 
 [.lead]
-23.10 and later versions of Astra Trident include the option to enable Astra Control Provisioner, which allows licensed Astra users access to advanced storage provisioning and management functionality that is available only to licensed Astra Control users. Astra Control Provisioner provides this extended functionality in addition to standard Astra Trident CSI-based functionality.
+Astra Trident versions 23.10 and later include the option to use Astra Control Provisioner, which enables licensed Astra Control users to access advanced storage provisioning functionality. Astra Control Provisioner provides this extended functionality in addition to standard Astra Trident CSI-based functionality.
 
 In coming Astra Control updates, Astra Control Provisioner will replace Astra Trident as storage provisioner and orchestrator in the Astra Control architecture. As such, it's highly recommended that Astra Control users enable Astra Control Provisioner. Astra Trident will continue to remain open source and be released, maintained, supported, and updated with new CSI and other features from NetApp.
 
 .About this task
 
-You can follow this procedure if you are a licensed Astra Control Center user and you are looking to extend Astra functionality. You should also follow this procedure if you are an Astra Trident user and want to use the additional functionality that Astra Control Provisioner provides without also using Astra Control.
+You can follow this procedure if you are a licensed Astra Control Center user and you are looking to extend Astra Control functionality. You should also follow this procedure if you are an Astra Trident user and want to use the additional functionality that Astra Control Provisioner provides without also using Astra Control.
 
 For each case, the provisioner functionality is not enabled by default in Astra Trident 23.10 but can be enabled using this process.
 
 .Before you begin
 
-If you are enabling the Astra Control Provisioner, do the following first:
+If you are enabling Astra Control Provisioner, do the following first:
 
 Astra Control Center users only:
 
 * *Install or upgrade to Astra Control Center 23.10*: You'll need this version if you are planning to use Astra Control Provisioner with Astra Control.
 
-* *Confirm that your cluster has an AMD64 system architecture*: The Astra Control Provisioner image is provided in both AMD and ARM architecture types, but only AMD is supported by Astra Control Center.
+* *Confirm that your cluster has an AMD64 system architecture*: The Astra Control Provisioner image is provided in both AMD and ARM CPU architectures, but only AMD is supported by Astra Control Center.
 
 All Astra Control Provisioner users:
 
@@ -98,7 +98,7 @@ docker run --rm -v "<my_custom_registry>:/package" cr.astra.netapp.io/trident-ac
 
 . Determine if the original installation method used an https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html#determine-the-original-installation-method[operator (either manually or with Helm) or `tridentctl`^].
 +
-IMPORTANT: If you used Helm for the original install and you are upgrading to 23.10, you'll need to use either the Trident operator or tridentctl to perform Astra Control Provisioner enablement. Do not use Helm to enable Astra Control Provisioner.
+IMPORTANT: If you used Helm for the original installation and you are upgrading to 23.10, you'll need to use either the Trident operator or tridentctl to perform Astra Control Provisioner enablement. Do not use Helm to enable Astra Control Provisioner.
 
 [role="tabbed-block"]
 ====
