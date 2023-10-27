@@ -35,7 +35,7 @@ All Astra Control Provisioner users:
 
 * *Install or upgrade to Astra Trident 23.10*: Refer to https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html[Astra Trident documentation^] for these procedures.
 
-* *Obtain an Astra Control license*: You'll need a license to use Astra Control Provisioner and the functionality it provides.
+* *Obtain an Astra Control Center license*: Whether you are an existing Astra Control Center user or intend to use Astra Control Provisioner without Astra Control, you'll need an Astra Control Center license to download and enable Astra Control Provisioner and access the functionality it provides.
 
 include::../_include/access-netapp-image-registry.adoc[]
 
@@ -51,13 +51,13 @@ NOTE: Astra Control Center users can find the image using either method. For Ast
 .NetApp Support Site
 --
 
-. Download the Astra Control Center bundle (`astra-control-center-[version].tar.gz`) containing Astra Control Provisioner from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[Astra Control Center downloads page^].
+. Download the Astra Control Provisioner bundle (`astra-control-provisioner-[version].tar.gz`) from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[Astra Control Center downloads page^].
 
-. Extract the images from the Astra Control Center bundle:
+. Extract the Astra Control Provisioner image:
 +
 [source,console]
 ----
-tar -vxzf astra-control-center-[version].tar.gz
+tar -vxzf astra-control-provisioner-[version].tar.gz
 ----
 
 . Locate the `trident-acp:v23.10` image.
@@ -98,8 +98,8 @@ docker run --rm -v "<my_custom_registry>:/package" cr.astra.netapp.io/trident-ac
 
 . Determine if the original installation method used an https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html#determine-the-original-installation-method[operator (either manually or with Helm) or `tridentctl`^].
 +
-IMPORTANT: If you used Helm for the original installation and you are upgrading to 23.10, you'll need to use either the Trident operator or tridentctl to perform Astra Control Provisioner enablement. Do not use Helm to enable Astra Control Provisioner.
-
+WARNING: Do not use Helm to enable Astra Control Provisioner. If you used Helm for the original installation and you are upgrading to 23.10, you'll need to use either the Trident operator or tridentctl to perform Astra Control Provisioner enablement.
++
 [role="tabbed-block"]
 ====
 
