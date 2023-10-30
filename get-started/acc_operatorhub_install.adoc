@@ -33,7 +33,7 @@ oc get apiservices
 ----
 
 * *Ensure a routable FQDN*: The Astra FQDN you plan to use can be routed to the cluster. This means that you either have a DNS entry in your internal DNS server or you are using a core URL route that is already registered.
-* *Obtain Openshift Permissions*: You'll need all necessary permissions and access to the Red Hat OpenShift Container Platform to perform the installation steps described.
+* *Obtain OpenShift Permissions*: You'll need all necessary permissions and access to the Red Hat OpenShift Container Platform to perform the installation steps described.
 * *Configure a cert manager*: If a cert manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps^] so that Astra Control Center does not install its own cert manager. By default, Astra Control Center installs its own cert manager during installation.
 * *Consider a service mesh*: It is strongly recommended that Astra Control host cluster communications channels be secured using a link:requirements.html#service-mesh-requirements[supported service mesh^]. 
 +
@@ -102,7 +102,7 @@ include::../_include/docker-podman-add-images.adoc[]
 == Find the operator install page
 
 . Complete one of the following procedures to access the operator install page:
-* From Red Hat Openshift web console:
+* From Red Hat OpenShift web console:
 .. Log in to the OpenShift Container Platform UI.
 .. From the side menu, select *Operators > OperatorHub*.
 +
@@ -187,7 +187,7 @@ NOTE: If a default storage class is configured, ensure that it is the only stora
 
 == Create a registry secret
 
-If you use a registry that requires authentication, create a secret on the Openshift cluster and enter the secret name in the `Create AstraControlCenter` form field.
+If you use a registry that requires authentication, create a secret on the OpenShift cluster and enter the secret name in the `Create AstraControlCenter` form field.
 
 . Create a namespace for the Astra Control Center operator:
 +

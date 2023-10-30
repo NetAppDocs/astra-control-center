@@ -16,7 +16,7 @@ To install Astra Control Center, download the installation bundle from the NetAp
 .Expand for other installation procedures
 [%collapsible]
 ====
-* *Install with RedHat Openshift OperatorHub*: Use this link:../get-started/acc_operatorhub_install.html[alternative procedure] to install Astra Control Center on Openshift using OperatorHub.
+* *Install with RedHat OpenShift OperatorHub*: Use this link:../get-started/acc_operatorhub_install.html[alternative procedure] to install Astra Control Center on OpenShift using OperatorHub.
 * *Install in the public cloud with Cloud Volumes ONTAP backend*: Use link:../get-started/install_acc-cvo.html[these procedures] to install Astra Control Center in Amazon Web Services (AWS), Google Cloud Platform (GCP), or Microsoft Azure with a Cloud Volumes ONTAP storage backend.
 ====
 // End snippet
