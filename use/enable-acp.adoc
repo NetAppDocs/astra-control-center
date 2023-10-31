@@ -27,7 +27,7 @@ If you are enabling Astra Control Provisioner, do the following first:
 
 Astra Control Center users only:
 
-* *Install or upgrade to Astra Control Center 23.10*: You'll need this version if you are planning to use Astra Control Provisioner with Astra Control. You'll also need the kubectl plugin you used during the installation process if you download the Astra Control Provisioner from the NetApp Support Site.
+* *Install or upgrade to Astra Control Center 23.10*: You'll need this version if you are planning to use Astra Control Provisioner with Astra Control. You'll also need the link:../get-started/install_acc.html#install-the-netapp-astra-kubectl-plugin[kubectl plugin] you used during the installation process if you download the Astra Control Provisioner from the NetApp Support Site.
 
 * *Confirm that your cluster has an AMD64 system architecture*: The Astra Control Provisioner image is provided in both AMD and ARM CPU architectures, but only AMD is supported by Astra Control Center.
 
