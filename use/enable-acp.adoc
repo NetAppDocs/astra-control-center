@@ -17,7 +17,7 @@ In coming Astra Control updates, Astra Control Provisioner will replace Astra Tr
 
 .About this task
 
-You can follow this procedure if you are a licensed Astra Control Center user and you are looking to extend Astra Control functionality. You should also follow this procedure if you are an Astra Trident user and want to use the additional functionality that Astra Control Provisioner provides without also using Astra Control.
+You should follow this procedure if you are a licensed Astra Control Center user and you are looking to use Astra Control functionality. You should also follow this procedure if you are an Astra Trident user and want to use the additional functionality that Astra Control Provisioner provides without also using Astra Control.
 
 For each case, the provisioner functionality is not enabled by default in Astra Trident 23.10 but can be enabled using this process.
 
@@ -25,17 +25,30 @@ For each case, the provisioner functionality is not enabled by default in Astra 
 
 If you are enabling Astra Control Provisioner, do the following first:
 
-Astra Control Center users only:
+[role="tabbed-block"]
+====
+.Astra Control Provisioners users with Astra Control Center
 
-* *Install or upgrade to Astra Control Center 23.10*: You'll need this version if you are planning to use Astra Control Provisioner with Astra Control. You'll also need the link:../get-started/install_acc.html#install-the-netapp-astra-kubectl-plugin[kubectl plugin] you used during the installation process if you download the Astra Control Provisioner from the NetApp Support Site.
+* *Install or upgrade to Astra Control Center 23.10*: You'll need this version if you are planning to use Astra Control Provisioner with Astra Control. 
+** You'll also need the link:../get-started/install_acc.html#install-the-netapp-astra-kubectl-plugin[kubectl plugin] you used during the installation process if you intend to download the Astra Control Provisioner from the NetApp Support Site.
 
-* *Confirm that your cluster has an AMD64 system architecture*: The Astra Control Provisioner image is provided in both AMD and ARM CPU architectures, but only AMD is supported by Astra Control Center.
+* *Confirm that your cluster has an AMD64 system architecture*: The Astra Control Provisioner image is provided in both AMD64 and ARM64 CPU architectures, but only AMD64 is supported by Astra Control Center.
 
-All Astra Control Provisioner users:
+* *Obtain an Astra Control Center license*: You'll need an Astra Control Center license to download and enable Astra Control Provisioner and access the functionality it provides.
 
 * *Confirm that your Astra Trident version is within a four-release window*: You can perform a direct upgrade to Astra Trident 23.10 with Astra Control Provisioner if your Astra Trident is within a four-release window of version 23.10. For example, you can directly upgrade from Astra Trident 22.10 to 23.10.
 
-* *Obtain an Astra Control Center license*: Whether you are an existing Astra Control Center user or intend to use Astra Control Provisioner without Astra Control, you'll need an Astra Control Center license to download and enable Astra Control Provisioner and access the functionality it provides.
+.Astra Control Provisioner only users:
+--
+
+* *Confirm that your Astra Trident version is within a four-release window*: You can perform a direct upgrade to Astra Trident 23.10 with Astra Control Provisioner if your Astra Trident is within a four-release window of version 23.10. For example, you can directly upgrade from Astra Trident 22.10 to 23.10.
+
+* *Get an Astra Control Service account for registry access*: Complete the registration for an https://bluexp.netapp.com/astra-register[Astra Control Service account^]. After you complete and submit the form and create a BlueXP account, you'll receive an Astra Control Service welcome email.
+
+* *Obtain an Astra Control Center license*: Whether you are an existing Astra Control Center user or intend to use Astra Control Provisioner without Astra Control, you'll need an Astra Control Center license to enable Astra Control Provisioner and access the functionality it provides.
+
+--
+// end NSS tab block
 
 .Upgrade to Astra Control Provisioner 23.10
 
@@ -58,24 +71,24 @@ NOTE: Astra Control Center users can find the image using either method. For Ast
 tar -vxzf astra-control-provisioner-[version].tar.gz
 ----
 
-. Add the Astra Control Provisioner image to your local registry:
-+
-NOTE: Docker commands are used in these examples. Podman commands can also be used.
-
-.. Change to the root directory of the tarball.
-
-.. Push the Astra Control Provisioner image to your local registry. Make the following substitutions before running the `push-images` command:
-+
-
-* Replace <BUNDLE_FILE> with the name of the Astra Control Provisioner bundle file (`acp.manifest.bundle.yaml`).
-* Replace <MY_FULL_REGISTRY_PATH> with the URL of the Docker repository; for example, "https://<docker-registry>".
-* Replace <MY_REGISTRY_USER> with the user name.
-* Replace <MY_REGISTRY_TOKEN> with an authorized token for the registry.
-+
-[source,console]
-----
-kubectl astra packages push-images -m <BUNDLE_FILE> -r <MY_FULL_REGISTRY_PATH> -u <MY_REGISTRY_USER> -p <MY_REGISTRY_TOKEN>
-----
+. Add the Astra Control Provisioner image to your local registry.
+//+
+//NOTE: Docker commands are used in these examples. Podman commands can also be used.
+//
+//.. Change to the root directory of the tarball.
+//
+//.. Push the Astra Control Provisioner image to your local registry. Make the following substitutions before running the `push-images` command:
+//+
+//
+//* Replace <BUNDLE_FILE> with the name of the Astra Control Provisioner bundle file (`acp.manifest.bundle.yaml`).
+// Replace <MY_FULL_REGISTRY_PATH> with the URL of the Docker repository; for example, "https://<docker-registry>".
+//* Replace <MY_REGISTRY_USER> with the user name.
+//* Replace <MY_REGISTRY_TOKEN> with an authorized token for the registry.
+//+
+//[source,console]
+//----
+//kubectl astra packages push-images -m <BUNDLE_FILE> -r <MY_FULL_REGISTRY_PATH> -u <MY_REGISTRY_USER> -p <MY_REGISTRY_TOKEN>
+//----
 
 --
 // end NSS tab block
@@ -107,13 +120,13 @@ docker login cr.astra.netapp.io -u <account-id> -p <api-token>
 . Pull the image:
 +
 ----
-docker pull cr.astra.netapp.io/trident-acp/:23.10
+docker pull cr.astra.netapp.io/trident-acp:23.10
 ----
 
 . Push the image to your custom registry:
 +
 ----
-docker run --rm -v "<my_custom_registry>:/package" cr.astra.netapp.io/trident-acp/:23.10
+docker run --rm -v "<my_custom_registry>:/package" cr.astra.netapp.io/trident-acp:23.10
 ----
 --
 // end registry tab block
