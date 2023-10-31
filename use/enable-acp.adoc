@@ -33,11 +33,9 @@ Astra Control Center users only:
 
 All Astra Control Provisioner users:
 
-* *Install or upgrade to Astra Trident 23.10*: Refer to https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html[Astra Trident documentation^] for these procedures.
+* *Confirm that your Astra Trident version is within a four-release window*: You can perform a direct upgrade to Astra Trident 23.10 with Astra Control Provisioner if your Astra Trident is within a four-release window of version 23.10. For example, you can directly upgrade from Astra Trident 22.10 to 23.10.
 
 * *Obtain an Astra Control Center license*: Whether you are an existing Astra Control Center user or intend to use Astra Control Provisioner without Astra Control, you'll need an Astra Control Center license to download and enable Astra Control Provisioner and access the functionality it provides.
-
-include::../_include/access-netapp-image-registry.adoc[]
 
 .Upgrade to Astra Control Provisioner 23.10
 
@@ -84,6 +82,19 @@ kubectl astra packages push-images -m <BUNDLE_FILE> -r <MY_FULL_REGISTRY_PATH> -
 
 .Astra Control image registry
 --
+
+. Record your Astra Control account ID that you'll need to log in to the registry.
++
+You can see your account ID in the Astra Control web UI. Select the figure icon at the top right of the page and select *API access*.
+
+. Get an API token from Astra Control. Refer to the https://docs.netapp.com/us-en/astra-automation/get-started/get_api_token.html[Astra Automation documentation^] for instructions.
+
+. Log into the Astra Control registry:
++
+[source,console]
+----
+docker login cr.astra.netapp.io -u <account-id> -p <api-token>
+----
 
 . Log into the Astra Control registry:
 +
