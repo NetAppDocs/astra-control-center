@@ -107,7 +107,7 @@ You can see your account ID in the Astra Control Service web UI. Select the figu
 
 . Log into the Astra Control registry:
 +
-NOTE: Docker commands are used in these examples. Podman commands can also be used.
+NOTE: You can use Podman instead of Docker for the following commands. If you are using a Windows environment, PowerShell is recommended.
 +
 [source,console]
 ----
