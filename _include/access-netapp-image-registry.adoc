@@ -4,10 +4,10 @@ You have the option to obtain installation images and functionality enhancements
 .Expand for steps
 [%collapsible]
 =====
-. Record your Astra Control account ID.
+. Record your Astra Control account ID that you'll need to log in to the registry.
 +
-You can see your account ID in the Astra Control web UI. Select the figure icon at the top right of the page and select *API access*.
-. Get an API token from Astra Control. Refer to the https://docs.netapp.com/us-en/astra-automation/get-started/get_api_token.html[Astra Automation documentation^] for instructions.
+You can see your account ID in the Astra Control Service web UI. Select the figure icon at the top right of the page, select *API access*, and write down your account ID.
+. From the same page, select *Generate API token* and copy the API token string to the clipboard and save it in your editor.
 . Log into the Astra Control registry:
 +
 [source,console]
