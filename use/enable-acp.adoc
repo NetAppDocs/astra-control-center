@@ -30,7 +30,7 @@ If you are enabling Astra Control Provisioner, do the following first:
 .Astra Control Provisioners users with Astra Control Center
 
 * *Install or upgrade to Astra Control Center 23.10*: You'll need this version if you are planning to use Astra Control Provisioner with Astra Control. 
-** You'll also need the link:../get-started/install_acc.html#install-the-netapp-astra-kubectl-plugin[kubectl plugin] you used during the installation process if you intend to download the Astra Control Provisioner from the NetApp Support Site.
+//** You'll also need the link:../get-started/install_acc.html#install-the-netapp-astra-kubectl-plugin[kubectl plugin] you used during the installation process if you intend to download the Astra Control Provisioner from the NetApp Support Site.
 
 * *Confirm that your cluster has an AMD64 system architecture*: The Astra Control Provisioner image is provided in both AMD64 and ARM64 CPU architectures, but only AMD64 is supported by Astra Control Center.
 
@@ -38,7 +38,7 @@ If you are enabling Astra Control Provisioner, do the following first:
 
 * *Confirm that your Astra Trident version is within a four-release window*: You can perform a direct upgrade to Astra Trident 23.10 with Astra Control Provisioner if your Astra Trident is within a four-release window of version 23.10. For example, you can directly upgrade from Astra Trident 22.10 to 23.10.
 
-.Astra Control Provisioner only users:
+.Astra Control Provisioner only users
 --
 
 * *Confirm that your Astra Trident version is within a four-release window*: You can perform a direct upgrade to Astra Trident 23.10 with Astra Control Provisioner if your Astra Trident is within a four-release window of version 23.10. For example, you can directly upgrade from Astra Trident 22.10 to 23.10.
@@ -74,13 +74,13 @@ NOTE: Astra Control Center users can find the image using either method. For Ast
 tar -vxzf astra-control-provisioner-[version].tar.gz
 ----
 
-. Add the Astra Control Provisioner image to your local registry.
+. Push the Astra Control Provisioner image to your custom registry.
 //+
 //NOTE: Docker commands are used in these examples. Podman commands can also be used.
 //
 //.. Change to the root directory of the tarball.
 //
-//.. Push the Astra Control Provisioner image to your local registry. Make the following substitutions before running the `push-images` command:
+//.. Push the Astra Control Provisioner image to your custom registry. Make the following substitutions before running the `push-images` command:
 //+
 //
 //* Replace <BUNDLE_FILE> with the name of the Astra Control Provisioner bundle file (`acp.manifest.bundle.yaml`).
@@ -101,33 +101,29 @@ tar -vxzf astra-control-provisioner-[version].tar.gz
 
 . Record your Astra Control account ID that you'll need to log in to the registry.
 +
-You can see your account ID in the Astra Control web UI. Select the figure icon at the top right of the page and select *API access*.
+You can see your account ID in the Astra Control Service web UI. Select the figure icon at the top right of the page, select *API access*, and write down your account ID.
 
-. Get an API token from Astra Control. Refer to the https://docs.netapp.com/us-en/astra-automation/get-started/get_api_token.html[Astra Automation documentation^] for instructions.
+. From the same page, select *Generate API token* and copy the API token string to the clipboard and save it in your editor.
 
 . Log into the Astra Control registry:
++
+NOTE: Docker commands are used in these examples. Podman commands can also be used.
 +
 [source,console]
 ----
 docker login cr.astra.netapp.io -u <account-id> -p <api-token>
 ----
 
-. Log into the Astra Control registry:
-+
-NOTE: Docker commands are used in these examples. Podman commands can also be used.
-+
-----
-docker login cr.astra.netapp.io -u <account-id> -p <api-token>
-----
-
 . Pull the image:
 +
+[source,console]
 ----
 docker pull cr.astra.netapp.io/trident-acp:23.10
 ----
 
 . Push the image to your custom registry:
 +
+[source,console]
 ----
 docker run --rm -v "<my_custom_registry>:/package" cr.astra.netapp.io/trident-acp:23.10
 ----
