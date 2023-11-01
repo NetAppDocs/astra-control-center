@@ -45,9 +45,12 @@ include::../_include/access-netapp-image-registry.adoc[]
 .Istio service mesh details 
 [%collapsible]
 ====
-* For Istio service mesh use, you'll be required to add an `istio-injection:enabled` <<Complete Astra Control Center and operator installation,label>> to the Astra namespace as described during this Astra Control Center installation procedure. You'll also need to use the `Generic`  <<Configure Astra Control Center,ingress setting>> and provide an alternative ingress for <<Set up ingress for load balancing,external load balancing>>.
+For Istio service mesh use, you'll need to do the following:
 
-* For Red Hat OpenShift clusters only, you need to define `NetworkAttachmentDefinition` on all associated Astra Control Center namespaces (`netapp-acc-operator`, `netapp-acc`, `netapp-monitoring` for application clusters, or any custom namespaces that have been substituted).
+* Add an `istio-injection:enabled` <<Complete Astra Control Center and operator installation,label>> to the Astra namespace prior to deploying Astra Control Center. 
+* Use the `Generic` <<generic-ingress,ingress setting>> and provide an alternative ingress for <<Set up ingress for load balancing,external load balancing>>.
+
+* For Red Hat OpenShift clusters, you need to define `NetworkAttachmentDefinition` on all associated Astra Control Center namespaces (`netapp-acc-operator`, `netapp-acc`, `netapp-monitoring` for application clusters, or any custom namespaces that have been substituted).
 +
 ----
 cat <<EOF | oc -n netapp-acc-operator create -f -
@@ -498,6 +501,7 @@ a| * `Retain` (This is the default value)
 ====
 // End snippet
 +
+[[generic-ingress]]
 .`ingressType`
 [%collapsible]
 ====
