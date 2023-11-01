@@ -48,7 +48,10 @@ If you are enabling Astra Control Provisioner, do the following first:
 * *Obtain an Astra Control Center license*: Whether you are an existing Astra Control Center user or intend to use Astra Control Provisioner without Astra Control, you'll need an Astra Control Center license to enable Astra Control Provisioner and access the functionality it provides.
 
 --
-// end NSS tab block
+// end registry tab block
+
+====
+// end overall tabbed block
 
 .Upgrade to Astra Control Provisioner 23.10
 
