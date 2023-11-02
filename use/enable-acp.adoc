@@ -13,11 +13,11 @@ summary: Enable Astra Control Provisioner to access advanced storage provisionin
 [.lead]
 Astra Trident versions 23.10 and later include the option to use Astra Control Provisioner, which enables licensed Astra Control users to access advanced storage provisioning functionality. Astra Control Provisioner provides this extended functionality in addition to standard Astra Trident CSI-based functionality.
 
-In coming Astra Control updates, Astra Control Provisioner will replace Astra Trident as storage provisioner and orchestrator in the Astra Control architecture. As such, it's highly recommended that Astra Control users enable Astra Control Provisioner. Astra Trident will continue to remain open source and be released, maintained, supported, and updated with new CSI and other features from NetApp.
+In coming Astra Control updates, Astra Control Provisioner will replace Astra Trident as storage provisioner and orchestrator in the Astra Control architecture. Because of this, it's highly recommended that Astra Control users enable Astra Control Provisioner. Astra Trident will continue to remain open source and be released, maintained, supported, and updated with new CSI and other features from NetApp.
 
 .About this task
 
-You should follow this procedure if you are a licensed Astra Control Center user and you are looking to use Astra Control functionality. You should also follow this procedure if you are an Astra Trident user and want to use the additional functionality that Astra Control Provisioner provides without also using Astra Control.
+You should follow this procedure if you are a licensed Astra Control Center user and you are looking to use Astra Control Provisioner functionality. You should also follow this procedure if you are an Astra Trident user and want to use the additional functionality that Astra Control Provisioner provides without also using Astra Control.
 
 For each case, the provisioner functionality is not enabled by default in Astra Trident 23.10 but can be enabled using this process.
 
@@ -29,23 +29,25 @@ If you are enabling Astra Control Provisioner, do the following first:
 ====
 .Astra Control Provisioners users with Astra Control Center
 
+* *Obtain an Astra Control Center license*: You'll need an link:../concepts/licensing.html[Astra Control Center license] to enable Astra Control Provisioner and access the functionality it provides.
+
 * *Install or upgrade to Astra Control Center 23.10*: You'll need this version if you are planning to use Astra Control Provisioner with Astra Control. 
 //** You'll also need the link:../get-started/install_acc.html#install-the-netapp-astra-kubectl-plugin[kubectl plugin] you used during the installation process if you intend to download the Astra Control Provisioner from the NetApp Support Site.
 
 * *Confirm that your cluster has an AMD64 system architecture*: The Astra Control Provisioner image is provided in both AMD64 and ARM64 CPU architectures, but only AMD64 is supported by Astra Control Center.
 
-* *Obtain an Astra Control Center license*: You'll need an Astra Control Center license to download and enable Astra Control Provisioner and access the functionality it provides.
+* *Get an Astra Control Service account for registry access*: If you intend to use the Astra Control registry rather than the NetApp Support Site to download the Astra Control Provisioner image, complete the registration for an https://bluexp.netapp.com/astra-register[Astra Control Service account^]. After you complete and submit the form and create a BlueXP account, you'll receive an Astra Control Service welcome email.
 
 * *Confirm that your Astra Trident version is within a four-release window*: You can perform a direct upgrade to Astra Trident 23.10 with Astra Control Provisioner if your Astra Trident is within a four-release window of version 23.10. For example, you can directly upgrade from Astra Trident 22.10 to 23.10.
 
 .Astra Control Provisioner only users
 --
 
+* *Obtain an Astra Control Center license*: You'll need an link:../concepts/licensing.html[Astra Control Center license] to enable Astra Control Provisioner and access the functionality it provides.
+
 * *Confirm that your Astra Trident version is within a four-release window*: You can perform a direct upgrade to Astra Trident 23.10 with Astra Control Provisioner if your Astra Trident is within a four-release window of version 23.10. For example, you can directly upgrade from Astra Trident 22.10 to 23.10.
 
-* *Get an Astra Control Service account for registry access*: Complete the registration for an https://bluexp.netapp.com/astra-register[Astra Control Service account^]. After you complete and submit the form and create a BlueXP account, you'll receive an Astra Control Service welcome email.
-
-* *Obtain an Astra Control Center license*: Whether you are an existing Astra Control Center user or intend to use Astra Control Provisioner without Astra Control, you'll need an Astra Control Center license to enable Astra Control Provisioner and access the functionality it provides.
+* *Get an Astra Control Service account for registry access*: You'll need access to the registry to download Astra Control Provisioner images. To get started, complete the registration for an https://bluexp.netapp.com/astra-register[Astra Control Service account^]. After you complete and submit the form and create a BlueXP account, you'll receive an Astra Control Service welcome email.
 
 --
 // end registry tab block
@@ -57,7 +59,8 @@ If you are enabling Astra Control Provisioner, do the following first:
 
 . Download and extract Astra Control Provisioner:
 +
-NOTE: Astra Control Center users can find the image using either method. For Astra Trident users wanting to use Astra Control Provisioner without Astra Control, use the registry method.
+NOTE: Astra Control Center users can download the image using either the NetApp Support Site or Astra Control registry method. 
+Astra Trident users wanting to use Astra Control Provisioner without Astra Control should use the registry method.
 +
 [role="tabbed-block"]
 ====
@@ -99,15 +102,15 @@ tar -vxzf astra-control-provisioner-[version].tar.gz
 .Astra Control image registry
 --
 
-. Record your Astra Control account ID that you'll need to log in to the registry.
-+
-You can see your account ID in the Astra Control Service web UI. Select the figure icon at the top right of the page, select *API access*, and write down your account ID.
+NOTE: You can use Podman instead of Docker for the commands in this procedure. If you are using a Windows environment, PowerShell is recommended.
 
-. From the same page, select *Generate API token* and copy the API token string to the clipboard and save it in your editor.
-
-. Log into the Astra Control registry:
+. Access the NetApp Astra Control image registry:
 +
-NOTE: You can use Podman instead of Docker for the following commands. If you are using a Windows environment, PowerShell is recommended.
+.. Log on to the Astra Control Service web UI and select the figure icon at the top right of the page. 
+.. Select *API access*. 
+.. Write down your account ID.
+.. From the same page, select *Generate API token* and copy the API token string to the clipboard and save it in your editor.
+.. Log into the Astra Control registry:
 +
 [source,console]
 ----
@@ -118,15 +121,23 @@ docker login cr.astra.netapp.io -u <account-id> -p <api-token>
 +
 [source,console]
 ----
-docker pull cr.astra.netapp.io/trident-acp:23.10
+docker pull cr.astra.netapp.io/astra/trident-acp:23.10.0
+----
+
+. Tag the image:
++
+[source,console]
+----
+docker tag cr.astra.netapp.io/astra/trident-acp:23.10.0 <my_custom_registry>/trident-acp:23.10.0
 ----
 
 . Push the image to your custom registry:
 +
 [source,console]
 ----
-docker run --rm -v "<my_custom_registry>:/package" cr.astra.netapp.io/trident-acp:23.10
+docker push <my_custom_registry>/trident-acp:23.10.0
 ----
+
 --
 // end registry tab block
 
@@ -149,7 +160,11 @@ WARNING: Do not use Helm to enable Astra Control Provisioner. If you used Helm f
 //kubectl delete -f 23.07/trident-installer/deploy/<bundle-name.yaml> -n trident
 //----
 
-. On the cluster that hosts Astra Trident, edit the TridentOrchestrator CR to enable Astra Control Provisioner (`enableACP: true`) and set the registry location for the Astra Control Provisioner image:
+. Edit the TridentOrchestrator CR and make the following edits:
++
+* Enable Astra Control Provisioner (`enableACP: true`)
+* Set the registry location for the Astra Control Provisioner image (`acpImage: <my_custom_registry>/trident-acp:v23.10.0`):
+
 +
 [subs=+quotes]
 ----
@@ -163,7 +178,7 @@ spec:
   imagePullPolicy: IfNotPresent
   windows: false
   *enableACP: true*
-  *acpImage: my_custom_registry/trident-acp:v23.10.0*
+  *acpImage: <my_custom_registry>/trident-acp:v23.10.0*
 ----
 
 . Apply the changes:
