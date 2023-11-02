@@ -97,7 +97,7 @@ securityContext:
   runAsUser: 0
   runAsGroup: 0
 ----
-NOTE: When using Kerberos in-flight encryption with NFSv4 volumes, ensure the  NFSv4 volumes are using the correct settings. Refer to the NetApp NFSv4 Domain Configuration section (page 13) of the https://www.netapp.com/media/16398-tr-3580.pdf[NetApp NFSv4 Enhancements and Best Practices Guide^]. 
+NOTE: When using Kerberos in-flight encryption with NFSv4 volumes, ensure that the NFSv4 volumes are using the correct settings. Refer to the NetApp NFSv4 Domain Configuration section (page 13) of the https://www.netapp.com/media/16398-tr-3580.pdf[NetApp NFSv4 Enhancements and Best Practices Guide^]. 
 
 == Find more information
 
