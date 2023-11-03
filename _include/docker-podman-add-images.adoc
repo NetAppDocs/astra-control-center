@@ -91,7 +91,7 @@ done
 NOTE: The image path the script creates should resemble the following, depending on your registry configuration: 
 +
 ----
-https://netappdownloads.jfrog.io/docker-astra-control-prod/netapp/astra/acc/23.07.0-25/image:version
+https://downloads.example.io/docker-astra-control-prod/netapp/astra/acc/23.07.0-25/image:version
 ----
 
 ====
