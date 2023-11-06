@@ -167,6 +167,7 @@ When you perform operations on Postgres pods, you shouldn't connect directly wit
 The Astra Control Activity page can display up to 100,000 events. To view all logged events, retrieve the events using the link:../rest-api/api-intro.html[Astra Control API^].
 
 == SnapMirror does not support applications using NVMe over TCP for storage backends
+// ASTRACTL-30133 and ASTRACTL-30135
 Astra Control Center does not support NetApp SnapMirror replication for storage backends that are using the NVMe over TCP protocol.
 
 == Find more information
