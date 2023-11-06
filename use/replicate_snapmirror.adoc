@@ -69,6 +69,8 @@ IMPORTANT: Ensure that the SVM names used in the replication relationship betwee
 
 TIP: link:../get-started/install_acc.html[Deploy Astra Control Center^] in a third fault domain or secondary site for seamless disaster recovery.
 
+NOTE: Astra Control Center does not support NetApp SnapMirror replication for storage backends that are using the NVMe over TCP protocol.
+
 .Astra Trident / ONTAP configuration
 Astra Control Center requires that you configure at least one storage backend that supports replication for both the source and destination clusters. If the source and destination clusters are the same, the destination application should use a different storage backend than the source application for the best resiliency.
 
