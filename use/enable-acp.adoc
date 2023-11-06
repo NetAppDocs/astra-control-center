@@ -55,20 +55,32 @@ If you are enabling Astra Control Provisioner, do the following first:
 ====
 // end overall tabbed block
 
-.Upgrade to Astra Control Provisioner 23.10
+== Download and extract Astra Control Provisioner
 
-. Download and extract Astra Control Provisioner:
-+
-NOTE: Astra Control Center users can download the image using either the NetApp Support Site or Astra Control registry method. 
-Astra Trident users wanting to use Astra Control Provisioner without Astra Control should use the registry method.
-+
-[role="tabbed-block"]
-====
+Astra Control Center users can download the image using either the NetApp Support Site or Astra Control registry method. Astra Trident users wanting to use Astra Control Provisioner without Astra Control should use the registry method.
 
-.NetApp Support Site
+=== (Option) NetApp Support Site
 --
 
 . Download the Astra Control Provisioner bundle (`trident-acp-[version].tar`) from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[Astra Control Center downloads page^].
+
+. (Recommended but optional) Download the certificates and signatures bundle for Astra Control Center (astra-control-center-certs-[version].tar.gz) to verify the signature of the trident-acp-[version] tar bundle.
++
+.Expand for details
+[%collapsible]
+=====
+
+[source,console]
+----
+tar -vxzf astra-control-center-certs-[version].tar.gz
+----
+
+[source,console]
+----
+openssl dgst -sha256 -verify certs/AstraControlCenterDockerImages-public.pub -signature certs/trident-acp-[version].tar.sig trident-acp-[version].tar
+----
+=====
+// End collapsible
 
 . Load the Astra Control Provisioner image:
 +
@@ -117,8 +129,7 @@ docker push <my_custom_registry>/trident-acp:23.10.0
 --
 // end NSS tab block
 
-.Astra Control image registry
---
+=== (Option) Astra Control image registry
 
 NOTE: You can use Podman instead of Docker for the commands in this procedure. If you are using a Windows environment, PowerShell is recommended.
 
@@ -128,14 +139,30 @@ NOTE: You can use Podman instead of Docker for the commands in this procedure. I
 .. Select *API access*. 
 .. Write down your account ID.
 .. From the same page, select *Generate API token* and copy the API token string to the clipboard and save it in your editor.
-.. Log into the Astra Control registry:
+.. Log into the Astra Control registry using your preferred method:
 +
-[source,console]
+[source,docker]
 ----
 docker login cr.astra.netapp.io -u <account-id> -p <api-token>
 ----
++
+[source,crane]
+----
+crane auth login cr.astra.netapp.io -u <account-id> -p <api-token>
+----
 
-. Pull the image:
+. Follow the steps for your preferred method to move the image to your custom registry. If you aren't using a registry, follow the Trident operator steps to set up a secret. 
++
+NOTE: You can use Podman instead of Docker for the following commands. If you are using a Windows environment, PowerShell is recommended.
++
+[role="tabbed-block"]
+====
+.Docker
+--
+
+. Pull the Astra Control Provisioner image from the registry:
++
+NOTE: The image pulled will not support multiple platforms and will only support the same platform as the host that pulled the image, such as Linux AMD64.
 +
 [source,console]
 ----
@@ -155,12 +182,62 @@ docker tag cr.astra.netapp.io/astra/trident-acp:23.10.0 <my_custom_registry>/tri
 ----
 docker push <my_custom_registry>/trident-acp:23.10.0
 ----
-
 --
-// end registry tab block
+// end docker tab block
+
+.Crane
+--
+
+. Copy the Astra Control Provisioner manifest to your custom registry:
++
+----
+crane copy cr.astra.netapp.io/astra/trident-acp:23.10.0 <my_custom_registry>/trident-acp:23.10.0
+----
+--
+// end crane tab block
+
+.Astra Trident operator
+--
+
+. Ensure this block is present in your Docker configuration:
++
+----
+{
+    "auths": {
+        "https://cr.astra.netapp.io/": {
+            "auth": "c3R...zE2"
+        }
+    }
+}
+----
+
+. [[pull-secrets]]Create a secret in the `trident` namespace:
++
+----
+kubectl create secret -n <trident namespace> generic <secret name> \
+    --from-file=.dockerconfigjson=<path/to/.docker/config.json> \
+    --type=kubernetes.io/dockerconfigjson
+----
+
+. Add the secret to TORC (Astra Trident orchestrator):
++
+----
+apiVersion: trident.netapp.io/v1
+kind: TridentOrchestrator
+metadata:
+  name: trident
+spec:
+  debug: true
+  namespace: trident
+  tridentImage: netapp/trident:23.10.0
+  imagePullSecrets:
+  - <secret name>
+----
+--
+// end trident tab block
 
 ====
-// end overall tabbed block
+// end tabbed block
 
 
 . Determine if the original installation method used an https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html#determine-the-original-installation-method[operator (either manually or with Helm) or `tridentctl`^].
@@ -176,7 +253,9 @@ WARNING: Do not use Helm to enable Astra Control Provisioner. If you used Helm f
 . Edit the TridentOrchestrator CR and make the following edits:
 +
 * Enable Astra Control Provisioner (`enableACP: true`)
-* Set the registry location for the Astra Control Provisioner image (`acpImage: <my_custom_registry>/trident-acp:v23.10.0`):
+* Set the registry location for the Astra Control Provisioner image (`acpImage: <my_custom_registry>/trident-acp:v23.10.0`).
++
+NOTE: If you established <<pull-secrets,image pull secrets>> earlier in this procedure, you can use them here (`cr.astra.netapp.io/astra/trident-acp:23.10.0 imagePullSecrets: - <secret name>`)
 
 +
 [subs=+quotes]
@@ -230,7 +309,6 @@ status:
     acpImage: <my_custom_registry>/trident-acp:v23.10.0
     enableACP: "true"
     ...
-  ,,,
   ...
   status: Installed
 ----
