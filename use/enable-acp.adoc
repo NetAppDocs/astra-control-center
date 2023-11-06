@@ -68,16 +68,34 @@ Astra Trident users wanting to use Astra Control Provisioner without Astra Contr
 .NetApp Support Site
 --
 
-. Download the Astra Control Provisioner bundle (`astra-control-provisioner-[version].tar.gz`) from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[Astra Control Center downloads page^].
+. Download the Astra Control Provisioner bundle (`trident-acp-[version].tar`) from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[Astra Control Center downloads page^].
 
-. Extract the Astra Control Provisioner image:
+. Load the Astra Control Provisioner image:
 +
 [source,console]
 ----
-tar -vxzf astra-control-provisioner-[version].tar.gz
+docker load < trident-acp-23.10.0.tar
+----
++
+Response:
++
+----
+Loaded image: trident-acp:23.10.0-linux-amd64
 ----
 
-. Push the Astra Control Provisioner image to your custom registry.
+. Tag the image:
++
+[source,console]
+----
+docker tag trident-acp:23.10.0-linux-amd64 <my_custom_registry>/trident-acp:23.10.0
+----
+
+. Push the image to your custom registry:
++
+[source,console]
+----
+docker push <my_custom_registry>/trident-acp:23.10.0
+----
 //+
 //NOTE: Docker commands are used in these examples. Podman commands can also be used.
 //
@@ -196,10 +214,25 @@ kubectl get all -n <operator-namespace>
 +
 IMPORTANT: There should only be *one instance* of the operator in a Kubernetes cluster. Do not create multiple deployments of the Trident operator.
 
-. Verify the `trident-acp` container is running:
+. Verify the `trident-acp` container is running and that `acpVersion` is `23.10.0` with a status of `Installed`:
 +
 ----
-kubectl get pod -n trident trident-controller-<uuid> -o yaml/json
+kubectl get torc -o yaml
+----
++
+Response:
++
+----
+status:
+  acpVersion: 23.10.0
+  currentInstallationParams:
+    ...
+    acpImage: <my_custom_registry>/trident-acp:v23.10.0
+    enableACP: "true"
+    ...
+  ,,,
+  ...
+  status: Installed
 ----
 --
 
