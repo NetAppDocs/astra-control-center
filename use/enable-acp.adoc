@@ -154,11 +154,6 @@ WARNING: Do not use Helm to enable Astra Control Provisioner. If you used Helm f
 
 .Astra Trident operator
 --
-//. Delete the Trident operator that was used to install the current Astra Trident instance. For example, if you are upgrading from Astra Trident 23.07, run the following command:
-//+
-//----
-//kubectl delete -f 23.07/trident-installer/deploy/<bundle-name.yaml> -n trident
-//----
 
 . Edit the TridentOrchestrator CR and make the following edits:
 +
