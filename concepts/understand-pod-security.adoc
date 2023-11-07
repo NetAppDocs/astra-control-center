@@ -25,7 +25,7 @@ pod-security.kubernetes.io/enforce: privileged
 ----
 
 == PSPs installed by Astra Control Center
-When you install Astra Control Center on Kubernetes 1.23 or 1.24, several pod security policies are created during installation. Some of these are permanent, and some of them are created during certain operations and are removed once the operation is complete. Astra Control Center does not attempt to install PSPs when the host cluster is running Kubernetes 1.25 or later, as they are not supported on these versions.
+When you install Astra Control Center on Kubernetes 1.24, several pod security policies are created during installation. Some of these are permanent, and some of them are created during certain operations and are removed once the operation is complete. Astra Control Center does not attempt to install PSPs when the host cluster is running Kubernetes 1.25 or later, as they are not supported on these versions.
 
 === PSPs created during installation
 During Astra Control Center installation, the Astra Control Center operator installs a custom pod security policy, a `Role` object, and a `RoleBinding` object to support the deployment of Astra Control Center services in the Astra Control Center namespace.

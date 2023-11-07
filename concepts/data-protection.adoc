@@ -30,6 +30,17 @@ A _protection policy_ is a way to protect an app by automatically creating snaps
 
 CAUTION: _You can't be fully protected until you have a recent backup_. This is important because backups are stored in an object store away from the persistent volumes. If a failure or accident wipes out the cluster and its associated persistent storage, then you need a backup to recover. A snapshot would not enable you to recover.
 
+=== Immutable backups
+Astra Control Center supports creating immutable backups with the following platforms and bucket types:
+
+* Amazon Web Services using an Amazon S3 bucket with S3 Object Lock configured
+* NetApp StorageGRID using an S3 bucket with S3 Object Lock configured
+
+Note the following when working with immutable backups:
+
+* If you back up to a write once read many (WORM) bucket in an unsupported platform or to an unsupported bucket type, you might get unpredictable results, such as backup deletion failing even if the retention time has elapsed.
+* Astra Control does not support data lifecycle management policies or manual deletion of objects on the buckets you use with immutable backups. Make sure that your storage backend is not configured to manage the lifecycle of Astra Control snapshots or backed up data.
+
 == Clones
 
 A _clone_ is an exact duplicate of an app, its configuration, and its persistent data volumes. You can manually create a clone on either the same Kubernetes cluster or on another cluster. Cloning an app can be useful if you need to move applications and storage from one Kubernetes cluster to another.

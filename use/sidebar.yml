@@ -61,5 +61,7 @@ entries:
     url: /use/unmanage.html
   - title: Upgrade Astra Control Center
     url: /use/upgrade-acc.html
+  - title: Enable Astra Control Provisioner
+    url: /use/enable-acp.html
   - title: Uninstall Astra Control Center
     url: /use/uninstall_acc.html

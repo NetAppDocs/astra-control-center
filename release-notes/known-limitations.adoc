@@ -38,6 +38,7 @@ Known limitations identify platforms, devices, or functions that are not support
 * <<Astra Control Center does not validate the details you enter for your proxy server>>
 * <<Existing connections to a Postgres pod causes failures>>
 * <<The Activity page displays up to 100000 events>>
+* <<SnapMirror does not support applications using NVMe over TCP for storage backends>>
 
 
 == The same cluster cannot be managed by two Astra Control Center instances
@@ -89,7 +90,7 @@ A user with namespace RBAC constraints should not be allowed to add or unmanage 
 
 == A member with namespace constraints cannot access the cloned or restored apps until admin adds the namespace to the constraint
 //DOC-4137/ASTRACTL-16344/ASTRACTL-16131/PI5/DOC FIX ONLY
-Any `member` user with RBAC constraints by namespace name/ID can clone or restore an app to a new namespace on the same cluster or to any other cluster in their organization's account. However, the same user cannot access the cloned or restored app in the new namespace. After a new namespace is created by a clone or restore operation, the account admin/owner can edit the `member` user account and update role constraints for the affected user to grant access to the new namespace.
+Any `member` user with RBAC constraints by namespace name/ID can clone or restore an app to a new namespace on the same cluster or to any other cluster in their organization's account. However, the same user cannot access the cloned or restored app in the new namespace. After a clone or restore operation creates a new namespace, the account admin/owner can edit the `member` user account and update role constraints for the affected user to grant access to the new namespace.
 
 == Multiple applications in a single namespace cannot be restored collectively to a different namespace
 If you manage multiple applications in a single namespace (by creating multiple app definitions in Astra Control), you cannot restore all of the applications to a different single namespace. You need to restore each application to its own separate namespace.
@@ -164,6 +165,10 @@ When you perform operations on Postgres pods, you shouldn't connect directly wit
 
 == The Activity page displays up to 100000 events
 The Astra Control Activity page can display up to 100,000 events. To view all logged events, retrieve the events using the link:../rest-api/api-intro.html[Astra Control API^].
+
+== SnapMirror does not support applications using NVMe over TCP for storage backends
+// ASTRACTL-30133 and ASTRACTL-30135
+Astra Control Center does not support NetApp SnapMirror replication for storage backends that are using the NVMe over TCP protocol.
 
 == Find more information
 

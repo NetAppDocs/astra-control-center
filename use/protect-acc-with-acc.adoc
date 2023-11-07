@@ -52,7 +52,7 @@ NOTE: Ideally, the application cluster should be situated outside of the three A
 Not depicted in the diagram:
 
 * All the clusters have ONTAP backends with Trident installed. 
-* In this configuration, the Openshift clusters are using MetalLB as the load balancer. 
+* In this configuration, the OpenShift clusters are using MetalLB as the load balancer. 
 * The snapshot controller and VolumeSnapshotClass are also installed on all the clusters as outlined in the link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[prerequisites^]. 
  
 == Step 1 option: Backup and restore Astra Control Center
@@ -126,7 +126,7 @@ Response:
 +
 ----
 NAME  UUID                                 VERSION    ADDRESS                             READY
-astra 89f4fd47-0cf0-4c7a-a44e-43353dc96ba8 23.07.0-24 ocp-cluster-1.company.com           True
+astra 89f4fd47-0cf0-4c7a-a44e-43353dc96ba8 23.10.0-68 ocp-cluster-1.company.com           True
 ----
 
 .. If the `ADDRESS` field in the above response does not have the FQDN of the primary Astra Control Center instance, update the configuration to reference the Astra Control Center DNS:
@@ -310,7 +310,7 @@ Response:
 +
 ----
 NAME  UUID                                 VERSION    ADDRESS                             READY
-astra 89f4fd47-0cf0-4c7a-a44e-43353dc96ba8 23.07.0-24 ocp-cluster-1.company.com           True
+astra 89f4fd47-0cf0-4c7a-a44e-43353dc96ba8 23.10.0-68 ocp-cluster-1.company.com           True
 ----
 
 * *Confirm deployment status*: Show Astra Control Center deployment information to confirm that `Deployment State` is `Deployed`.
