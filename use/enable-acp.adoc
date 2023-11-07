@@ -55,7 +55,7 @@ If you are enabling Astra Control Provisioner, do the following first:
 ====
 // end overall tabbed block
 
-== Download and extract Astra Control Provisioner
+== (Step 1) Download and extract Astra Control Provisioner
 
 Astra Control Center users can download the image using either the NetApp Support Site or Astra Control registry method. Astra Trident users wanting to use Astra Control Provisioner without Astra Control should use the registry method.
 
@@ -240,10 +240,12 @@ spec:
 // end tabbed block
 
 
-. Determine if the original installation method used an https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html#determine-the-original-installation-method[operator (either manually or with Helm) or `tridentctl`^].
-+
+== (Step 2) Enable Astra Control Provisioner in Astra Trident
+
+Determine if the original installation method used an https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html#determine-the-original-installation-method[operator (either manually or with Helm) or `tridentctl`^] and complete the appropriate steps according to your original method.
+
 WARNING: Do not use Helm to enable Astra Control Provisioner. If you used Helm for the original installation and you are upgrading to 23.10, you'll need to use either the Trident operator or tridentctl to perform Astra Control Provisioner enablement.
-+
+
 [role="tabbed-block"]
 ====
 
@@ -339,7 +341,7 @@ Response:
 ====
 // end tabbed block
 
-.Result
+== Result
 
 Astra Control Provisioner functionality is enabled and you can use any features available for the version you are running.
 
