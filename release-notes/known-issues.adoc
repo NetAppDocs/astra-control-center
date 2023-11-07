@@ -17,20 +17,24 @@ Known issues identify problems that might prevent you from using this release of
 The following known issues affect the current release:
 
 * <<App backups and snapshots fail if the volumesnapshotclass is added after a cluster is managed>>
-* <<App clones fail after an application is deployed with a set storage class>>
+// * <<App clones fail after an application is deployed with a set storage class>>
 * <<Managing a cluster with Astra Control Center fails when kubeconfig file contains more than one context>>
 * <<A monitoring pod can crash in Istio environments>>
 * <<App data management operations fail with Internal Service Error (500) when Astra Trident is offline>>
+* <<In-place restore operations to ontap-nas-economy storage classes fail>>
+* <<Restoring from a backup when using Kerberos in-flight encryption can fail>>
+* <<Backup data remains in bucket after deletion for buckets with expired retention policy>>
+//* <<Retention time for immutable backups is longer than expected>>
 
 
 == App backups and snapshots fail if the volumesnapshotclass is added after a cluster is managed
 //DOC-4419/ASTRACTL-19849
 Backups and snapshots fail with a `UI 500 error` in this scenario. As a workaround, refresh the app list.
 
-== App clones fail after an application is deployed with a set storage class
+// == App clones fail after an application is deployed with a set storage class
 //DOC-3892/ASTRACTL-13183/ASTRACTL-13184/PI4/PI5/DOC FIX ONLY
-After an application is deployed with a storage class explicitly set (for example, `helm install ...-set global.storageClass=netapp-cvs-perf-extreme`), subsequent attempts to clone the application require that the target cluster have the originally specified storage class.
-Cloning an application with an explicitly set storage class to a cluster that does not have the same storage class will fail. There are no recovery steps in this scenario.
+//After an application is deployed with a storage class explicitly set (for example, `helm install ...-set global.storageClass=netapp-cvs-perf-extreme`), subsequent attempts to clone the application require that the target cluster have the originally specified storage class.
+//Cloning an application with an explicitly set storage class to a cluster that does not have the same storage class will fail. There are no recovery steps in this scenario.
 
 == Managing a cluster with Astra Control Center fails when kubeconfig file contains more than one context
 //ASTRACTL-8872/DOC-3612/Q2 and PI4/PI5/DOC FIX ONLY
@@ -80,6 +84,32 @@ telegraf-rs-rrnsb 2/2 Running 0 11s
 == App data management operations fail with Internal Service Error (500) when Astra Trident is offline
 //DOC-3903/ASTRA-13162/PI4/PI5
 If Astra Trident on an app cluster goes offline (and is brought back online) and 500 internal service errors are encountered when attempting app data management, restart all of the Kubernetes nodes in the app cluster to restore functionality.
+
+== In-place restore operations to ontap-nas-economy storage classes fail
+// ASTRADOC-318 / ASTRACTL-29463
+If you perform an in-place restore of an application (restore the app to its original namespace), and the app's storage class uses the `ontap-nas-economy` driver, the restore operation can fail if the snapshot directory is not hidden. Before restoring in-place, follow the instructions in link:../use/protect-apps.html#enable-backup-and-restore-for-ontap-nas-economy-operations[Enable backup and restore for ontap-nas-economy operations^] to hide the snapshot directory.
+
+== Restoring from a backup when using Kerberos in-flight encryption can fail
+// ASTRADOC-316 / ASTRACTL-29854
+When you restore an application from a backup to a storage backend that is using Kerberos in-flight encryption, the restore operation can fail. This issue does not affect restoring from a snapshot or replicating the application data using NetApp SnapMirror.
+
+//To avoid this, when you install an application that you plan to protect with Kerberos in-flight encryption, ensure the application runs with superuser permissions. You can do so by configuring the app to use the following securityContext settings:
+//----
+//securityContext:
+// runAsUser: 0
+//  runAsGroup: 0
+//----
+NOTE: When using Kerberos in-flight encryption with NFSv4 volumes, ensure that the NFSv4 volumes are using the correct settings. Refer to the NetApp NFSv4 Domain Configuration section (page 13) of the https://www.netapp.com/media/16398-tr-3580.pdf[NetApp NFSv4 Enhancements and Best Practices Guide^]. 
+
+== Backup data remains in bucket after deletion for buckets with expired retention policy
+//ASTRADOC-319 / ASTRACTL-30000
+If you delete an app's immutable backup after the bucket's retention policy has expired, the backup is deleted from Astra Control but not from the bucket. As a workaround, if you need to delete the most recent backups or all backups for an application, remove the backups manually from the storage backend.
+
+NOTE: If you have more than one backup for an app, either remove the most recent backups or all of the backups for the app. If you remove any middle incremental backups, you will not be able to recover the app from the latest backup.
+
+//== Retention time for immutable backups is longer than expected
+// ASTRADOC-320 / ASTRACTL-30098
+//The retention time for an immutable backup in Astra Control is calculated from the starting time of the backup instead of the completion time. This means you cannot delete the backup for a longer period than expected. For example, if you configure a 24 hour retention policy and start a backup that takes 12 hours to complete, you cannot delete the backup for 36 hours.
 
 == Find more information
 

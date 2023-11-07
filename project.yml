@@ -8,8 +8,10 @@ settings:
     harmony_enabled: true
   rss_page: "release-notes/whats-new.html"
   versions:
-    - version-number: "23.07"
+    - version-number: "23.10"
       url: /astra-control-center
+    - version-number: "23.07"
+      url: /astra-control-center-2307
     - version-number: "23.04"
       url: /astra-control-center-2304
     - version-number: "22.11"
@@ -28,6 +30,7 @@ sidebar:
     - section: get-started
     - section: concepts
     - section: use
+    - section: use-acp
     - section: rest-api
     #- section: solutions (retired with DOC-4309)
     - section: support
