@@ -13,7 +13,7 @@ summary: Enable Astra Control Provisioner to access advanced storage provisionin
 [.lead]
 Astra Trident versions 23.10 and later include the option to use Astra Control Provisioner, which enables licensed Astra Control users to access advanced storage provisioning functionality. Astra Control Provisioner provides this extended functionality in addition to standard Astra Trident CSI-based functionality.
 
-In coming Astra Control updates, Astra Control Provisioner will replace Astra Trident as storage provisioner and orchestrator in the Astra Control architecture. Because of this, it's highly recommended that Astra Control users enable Astra Control Provisioner. Astra Trident will continue to remain open source and be released, maintained, supported, and updated with new CSI and other features from NetApp.
+In coming Astra Control updates, Astra Control Provisioner will replace Astra Trident as storage provisioner and orchestrator in the Astra Control architecture. Because of this, it's strongly recommended that Astra Control users enable Astra Control Provisioner. Astra Trident will continue to remain open source and be released, maintained, supported, and updated with new CSI and other features from NetApp.
 
 .About this task
 
@@ -27,7 +27,7 @@ If you are enabling Astra Control Provisioner, do the following first:
 
 [role="tabbed-block"]
 ====
-.Astra Control Provisioners users with Astra Control Center
+.Astra Control Provisioner users with Astra Control Center
 
 * *Obtain an Astra Control Center license*: You'll need an link:../concepts/licensing.html[Astra Control Center license] to enable Astra Control Provisioner and access the functionality it provides.
 
