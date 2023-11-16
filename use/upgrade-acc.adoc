@@ -379,7 +379,7 @@ additionalValues:
       startupProbe:
         periodSeconds: 30
         failureThreshold: 600
-    polaris-keycloak:
+    keycloak-operator:
       livenessProbe:
         initialDelaySeconds: 180
       readinessProbe:  
