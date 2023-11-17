@@ -302,7 +302,7 @@ while IFS= read -r image; do
     docker pull $ASTRA_REGISTRY/$image
     docker tag $ASTRA_REGISTRY/$image $GCP_CR_REGISTRY/$image
     docker push $GCP_CR_REGISTRY/$image
-done < astra-control-center-22.04.41.manifest
+done < acc.manifest.bundle.yaml
 ----
 
 . Set up DNS zones.
@@ -475,7 +475,7 @@ while IFS= read -r image; do
     docker pull $ASTRA_REGISTRY/$image
     docker tag $ASTRA_REGISTRY/$image $AZ_ACR_REGISTRY/$image
     docker push $AZ_ACR_REGISTRY/$image
-done < astra-control-center-22.04.41.manifest
+done < acc.manifest.bundle.yaml
 ----
 
 . Set up DNS zones.
