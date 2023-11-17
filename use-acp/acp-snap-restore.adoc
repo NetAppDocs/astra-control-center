@@ -37,7 +37,7 @@ kubectl get vs
 ----
 cat tasr-pvc1-snapshot.yaml
 
-apiVersion: v1
+apiVersion: trident.netapp.io/v1
 kind: TridentActionSnapshotRestore
 metadata:
   name: this-doesnt-matter
@@ -60,7 +60,7 @@ Astra Control Provisioner restores the data from the snapshot. You can verify th
 ----
 kubectl get tasr -o yaml
 
-apiVersion: v1
+apiVersion: trident.netapp.io/v1
 items:
 - apiVersion: trident.netapp.io/v1
   kind: TridentActionSnapshotRestore
