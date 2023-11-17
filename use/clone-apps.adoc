@@ -13,7 +13,7 @@ summary: Clone an existing app to create a duplicate app on the same Kubernetes 
 [.lead]
 You can clone an existing app to create a duplicate app on the same Kubernetes cluster or on another cluster. When Astra Control clones an app, it creates a clone of your application configuration and persistent storage.
 
-Cloning can help if you need to move applications and storage from one Kubernetes cluster to another. For example, you might want to move workloads through a CI/CD pipeline and across Kubernetes namespaces. You can use the Astra Control Center UI or https://docs.netapp.com/us-en/astra-automation/index.html[the Astra Control API^] to clone and migrate apps.
+Cloning can help if you need to move applications and storage from one Kubernetes cluster to another. For example, you might want to move workloads through a CI/CD pipeline and across Kubernetes namespaces. You can use the Astra Control Center UI or https://docs.netapp.com/us-en/astra-automation[Astra Control API^] to clone and migrate apps.
 
 .Before you begin
 
@@ -33,8 +33,8 @@ During app cloning in OpenShift environments, Astra Control Center needs to allo
 .Clone limitations
 
 * *Explicit storage classes*: If you deploy an app with a storage class explicitly set and you need to clone the app, the target cluster must have the originally specified storage class. Cloning an application with an explicitly set storage class to a cluster that does not have the same storage class will fail.
-* *ontap-nas-economy-backed storage class*: If your app uses a storage class backed by the `ontap-nas-economy` driver, the backup portion of a clone operation is disruptive. The source application is not available until the backup is complete. The restore portion of the clone operation is non-disruptive.
-* *Clones and user constraints*: Any member user with namespace constraints by namespace name/ID or by namespace labels can clone or restore an app to a new namespace on the same cluster or to any other cluster in their organization's account. However, the same user cannot access the cloned or restored app in the new namespace. After a new namespace is created by a clone or restore operation, the account admin/owner can edit the member user account and update role constraints for the affected user to grant access to the new namespace.
+* *ontap-nas-economy-backed applications*: You can't use clone operations if your application's storage class is backed by the `ontap-nas-economy` driver. You can, however, link:../use/protect-apps.html#enable-backup-and-restore-for-ontap-nas-economy-operations[enable backup and restore for ontap-nas-economy operations].
+* *Clones and user constraints*: Any member user with namespace constraints by namespace name/ID or by namespace labels can clone or restore an app to a new namespace on the same cluster or to any other cluster in their organization's account. However, the same user cannot access the cloned or restored app in the new namespace. After a clone or restore operation creates a new namespace, the account admin/owner can edit the member user account and update role constraints for the affected user to grant access to the new namespace.
 //DOC-3595/ASTRACTL-10071/Q2 and PI4
 * *Clones use default buckets*: During an app backup or app restore, you can optionally specify a bucket ID. An app clone operation, however, always uses the default bucket that has been defined. There is no option to change buckets for a clone. If you want control over which bucket is used, you can either link:../use/manage-buckets.html#edit-a-bucket[change the bucket default] or do a link:../use/protect-apps.html#create-a-backup[backup] followed by a link:../use/restore-apps.html[restore] separately.
 * *With Jenkins CI*: If you clone an operator-deployed instance of Jenkins CI, you need to manually restore the persistent data. This is a limitation of the app's deployment model.
@@ -74,7 +74,7 @@ NOTE: Astra Control creates new destination namespaces as part of the clone oper
 // ** If you chose to clone from an existing snapshot or backup, choose the snapshot or backup that you'd like to use.
 * Choose to keep the original storage class associated with the app or select a different storage class.
 +
-NOTE: You can migrate an app's storage class to a native cloud provider storage class or other supported storage class, link:../use/restore-apps.html#migrate-from-ontap-nas-economy-storage-to-ontap-nas-storage[migrate an app from a storage class backed by `ontap-nas-economy`^] to a storage class backed by `ontap-nas` on the same cluster, or copy the app to another cluster with a storage class backed by the `ontap-nas-economy` driver.
+NOTE: You can migrate an app's storage class to a native cloud provider storage class or other supported storage class, migrate an app from a storage class backed by `ontap-nas-economy` to a storage class backed by `ontap-nas` on the same cluster, or copy the app to another cluster with a storage class backed by the `ontap-nas-economy` driver.
 +
 NOTE: If you select a different storage class and this storage class doesn't exist at the moment of restore, an error will be returned.
 
@@ -85,6 +85,6 @@ NOTE: If you select a different storage class and this storage class doesn't exi
 
 Astra Control clones the app based on the information that you provided. The clone operation is successful when the new app clone is in `Healthy` state on the *Applications* page.
 
-After a new namespace is created by a clone or restore operation, the account admin/owner can edit the member user account and update role constraints for the affected user to grant access to the new namespace.
+After a clone or restore operation creates a new namespace, the account admin/owner can edit the member user account and update role constraints for the affected user to grant access to the new namespace.
 
 NOTE: After a data protection operation (clone, backup, or restore) and subsequent persistent volume resize, there is up to a twenty-minute delay before the new volume size is shown in the UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.

@@ -13,10 +13,10 @@ summary: To install Astra Control Center after addressing some environmental pre
 [.lead]
 To install Astra Control Center, download the installation bundle from the NetApp Support Site and perform the following steps. You can use this procedure to install Astra Control Center in internet-connected or air-gapped environments.
 
-.Other installation procedures
+.Expand for other installation procedures
 [%collapsible]
 ====
-* *Install with RedHat Openshift OperatorHub*: Use this link:../get-started/acc_operatorhub_install.html[alternative procedure] to install Astra Control Center on Openshift using OperatorHub.
+* *Install with Red Hat OpenShift OperatorHub*: Use this link:../get-started/acc_operatorhub_install.html[alternative procedure] to install Astra Control Center on OpenShift using OperatorHub.
 * *Install in the public cloud with Cloud Volumes ONTAP backend*: Use link:../get-started/install_acc-cvo.html[these procedures] to install Astra Control Center in Amazon Web Services (AWS), Google Cloud Platform (GCP), or Microsoft Azure with a Cloud Volumes ONTAP storage backend.
 ====
 // End snippet
@@ -24,19 +24,60 @@ To install Astra Control Center, download the installation bundle from the NetAp
 For a demonstration of the Astra Control Center installation process, see https://www.youtube.com/watch?v=eurMV80b0Ks&list=PLdXI3bZJEw7mJz13z7YdiGCS6gNQgV_aN&index=5[this video^]. 
 
 .Before you begin
-* link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
-* If you have configured or want to configure pod security policies in your environment, familiarize yourself with pod security policies and how they affect Astra Control Center installation. Refer to link:../concepts/understand-pod-security.html[pod security restrictions^].
-* Ensure all API services are in a healthy state and available:
+* *Meet environmental prerequisites*: link:requirements.html[Before you begin installation, prepare your environment for Astra Control Center deployment].
++
+TIP: Deploy Astra Control Center in a third fault domain or secondary site. This is recommended for app replication and seamless disaster recovery.
+
+* *Consider pod security policies*: If you have configured or want to configure pod security policies in your environment, familiarize yourself with pod security policies and how they affect Astra Control Center installation. Refer to link:../concepts/understand-pod-security.html[pod security restrictions^].
+* *Ensure healthy services*: Check that all API services are in a healthy state and available:
 +
 [source,console]
 ----
 kubectl get apiservices
 ----
 
-* Ensure the Astra FQDN you plan to use is routable to this cluster. This means that you either have a DNS entry in your internal DNS server or you are using a core URL route that is already registered.
-* If a cert manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps^] so that Astra Control Center does not attempt to install its own cert manager. By default, Astra Control Center installs its own cert manager during installation.
+* *Ensure a routable FQDN*: The Astra FQDN you plan to use can be routed to the cluster. This means that you either have a DNS entry in your internal DNS server or you are using a core URL route that is already registered.
+* *Configure cert manager*: If a cert manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps^] so that Astra Control Center does not attempt to install its own cert manager. By default, Astra Control Center installs its own cert manager during installation.
+//astradoc-249
+include::../_include/access-netapp-image-registry.adoc[]
+* *Consider a service mesh*: It is strongly recommended that Astra Control host cluster communications channels be secured using a link:requirements.html#service-mesh-requirements[supported service mesh^]. 
++
+.Istio service mesh details 
+[%collapsible]
+====
+For Istio service mesh use, you'll need to do the following:
 
-TIP: Deploy Astra Control Center in a third fault domain or secondary site. This is recommended for app replication and seamless disaster recovery. 
+* Add an `istio-injection:enabled` <<Complete Astra Control Center and operator installation,label>> to the Astra namespace prior to deploying Astra Control Center. 
+* Use the `Generic` <<generic-ingress,ingress setting>> and provide an alternative ingress for <<Set up ingress for load balancing,external load balancing>>.
+
+* For Red Hat OpenShift clusters, you need to define `NetworkAttachmentDefinition` on all associated Astra Control Center namespaces (`netapp-acc-operator`, `netapp-acc`, `netapp-monitoring` for application clusters, or any custom namespaces that have been substituted).
++
+----
+cat <<EOF | oc -n netapp-acc-operator create -f -
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: istio-cni
+EOF
+ 
+cat <<EOF | oc -n netapp-acc create -f -
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: istio-cni
+EOF
+ 
+cat <<EOF | oc -n netapp-monitoring create -f -
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: istio-cni
+EOF
+----
+====
+// End snippet 
+
+* *ONTAP SAN driver only*: If you are using an ONTAP SAN driver, be sure that multipath is enabled on all your Kubernetes clusters.
 
 .Steps
 
@@ -87,19 +128,18 @@ include::../_include/docker-podman-add-images.adoc[]
 
 == Set up namespace and secret for registries with auth requirements
 
-. Export the KUBECONFIG for the Astra Control Center host cluster:
+. Export the kubeconfig for the Astra Control Center host cluster:
 +
 [source,console]
 ----
 export KUBECONFIG=[file path]
 ----
 +
-NOTE: Before you complete the installation, be sure your KUBECONFIG is pointing to the cluster where you want to install Astra Control Center. The KUBECONFIG can contain only one context.
-
+IMPORTANT: Before you complete the installation, be sure your kubeconfig is pointing to the cluster where you want to install Astra Control Center.
 
 .  If you use a registry that requires authentication, you need to do the following:
 +
-.Steps
+.Expand for steps
 [%collapsible]
 ====
 .. Create the `netapp-acc-operator` namespace:
@@ -111,7 +151,7 @@ kubectl create ns netapp-acc-operator
 
 .. Create a secret for the `netapp-acc-operator` namespace. Add Docker information and run the following command:
 +
-NOTE: The placeholder `your_registry_path` should match the location of the images that you uploaded earlier (for example, `[Registry_URL]/netapp/astra/astracc/23.04.2-7`).
+NOTE: The placeholder `your_registry_path` should match the location of the images that you uploaded earlier (for example, `[Registry_URL]/netapp/astra/astracc/23.10.0-68`).
 +
 [source,console]
 ----
@@ -161,11 +201,11 @@ NOTE: An annotated sample YAML follows these steps.
 imagePullSecrets: [{name: astra-registry-cred}]
 ----
 
-.. Change `[your_registry_path]` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<Add the images to your local registry,previous step>>.
-.. Change `[your_registry_path]` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in a <<Add the images to your local registry,previous step>>.
+.. Change `ASTRA_IMAGE_REGISTRY` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<Add the images to your local registry,previous step>>.
+.. Change `ASTRA_IMAGE_REGISTRY` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in a <<Add the images to your local registry,previous step>>.
 
 +
-.Sample astra_control_center_operator_deploy.yaml
+.Expand for sample astra_control_center_operator_deploy.yaml
 [%collapsible]
 ====
 [subs=+quotes]
@@ -195,7 +235,7 @@ spec:
         - --upstream=http://127.0.0.1:8080/
         - --logtostderr=true
         - --v=10
-        *image: [your_registry_path]/kube-rbac-proxy:v4.8.0*
+        *image: ASTRA_IMAGE_REGISTRY/kube-rbac-proxy:v4.8.0*
         name: kube-rbac-proxy
         ports:
         - containerPort: 8443
@@ -209,7 +249,7 @@ spec:
           value: "2"
         - name: ACCOP_HELM_INSTALLTIMEOUT
           value: 5m
-        *image: [your_registry_path]/acc-operator:23.04.36*
+        *image: ASTRA_IMAGE_REGISTRY/acc-operator:23.10.72*
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -248,7 +288,7 @@ spec:
 kubectl apply -f astra_control_center_operator_deploy.yaml
 ----
 +
-.Sample response:
+.Expand for sample response:
 [%collapsible]
 ====
 ----
@@ -313,7 +353,7 @@ NOTE: An annotated sample YAML follows these steps.
 | `astraVersion`
 | The version of Astra Control Center to deploy. No action is needed for this setting as the value will be pre-populated.
 | string
-| `23.04.2-7`
+| `23.10.0-68`
 |===
 ====
 // End snippet
@@ -461,6 +501,7 @@ a| * `Retain` (This is the default value)
 ====
 // End snippet
 +
+[[generic-ingress]]
 .`ingressType`
 [%collapsible]
 ====
@@ -472,6 +513,10 @@ a| * `Retain` (This is the default value)
 
 *`Generic`* (`ingressType: "Generic"`) (Default)
 Use this option when you have another ingress controller in use or would prefer to use your own ingress controller. After Astra Control Center is deployed, you will need to configure the link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller^] to expose Astra Control Center with a URL.
+
+IMPORTANT: If you intend to use a service mesh with Astra Control Center, you must select `Generic` as ingress type and set up your own link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller^].
+
+//astradoc-249
 
 *`AccTraefik`* (`ingressType: "AccTraefik"`)
 Use this option when you would prefer not to configure an ingress controller. This deploys the Astra Control Center `traefik` gateway as a Kubernetes LoadBalancer type service.
@@ -526,6 +571,18 @@ a| * `Default` (This is the default value)
 .`additionalValues`
 [%collapsible]
 ====
+//astradoc-245/known issue/23.07 only
+IMPORTANT: Add the following additional values to the Astra Control Center CR to prevent a known issue in  installation:
+
+----
+additionalValues: 
+    keycloak-operator:
+      livenessProbe:
+        initialDelaySeconds: 180
+      readinessProbe:  
+        initialDelaySeconds: 180
+----
+
 * For Astral Control Center and Cloud Insights communication, TLS certificate verification is disabled by default. You can enable TLS certification verification for communication between Cloud Insights and both the Astra Control Center host cluster and managed cluster by adding the following section in `additionalValues`.
 
 ----
@@ -570,7 +627,7 @@ CRDs are cluster-wide objects and installing them might have an impact on other 
 
 IMPORTANT: Be sure that you have selected the correct storage class and ingress type for your configuration before completing installation.
 
-.Sample astra_control_center.yaml
+.Expand for sample astra_control_center.yaml
 [%collapsible]
 ====
 [subs=+quotes]
@@ -596,7 +653,12 @@ spec:
   ingressType: "Generic"
   scaleSize: "Medium"
   astraResourcesScaler: "Default"
-  additionalValues: {}
+  additionalValues: 
+    keycloak-operator:
+      livenessProbe:
+        initialDelaySeconds: 180
+      readinessProbe:  
+        initialDelaySeconds: 180
   crds:
     externalTraefik: false
     externalCertManager: false
@@ -611,6 +673,33 @@ spec:
 [source,console]
 ----
 kubectl create ns [netapp-acc or custom namespace]
+----
+
+. If you are using a service mesh with Astra Control Center, add the following label to the `netapp-acc` or custom namespace:
++
+IMPORTANT: Your ingress type (`ingressType`) must be set to `Generic` in the Astra Control Center CR before proceeding with this command.
+
++
+[source,console]
+----
+kubectl label ns [netapp-acc or custom namespace] istio-injection:enabled
+----
++
+//astradoc-249
++
+. (Recommended) https://istio.io/latest/docs/tasks/security/authentication/mtls-migration/[Enable strict MTLs^] for Istio service mesh:
++
+[source,console]
+----
+kubectl apply -n istio-system -f - <<EOF
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: default
+spec:
+  mtls:
+    mode: STRICT
+EOF
 ----
 
 . Install Astra Control Center in the `netapp-acc` (or your custom) namespace:
@@ -650,7 +739,7 @@ kubectl get pods -n [netapp-acc or custom namespace]
 +
 Each pod should have a status of `Running`. It may take several minutes before the system pods are deployed.
 +
-.Sample response
+.Expand for sample response
 [%collapsible]
 ====
 [subs=+quotes]
@@ -769,7 +858,7 @@ Response:
 +
 ----
 NAME    UUID                                  VERSION     ADDRESS         READY
-astra   9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f  23.04.2-7   10.111.111.111  True
+astra   9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f  23.10.0-68   10.111.111.111  True
 ----
 +
 IMPORTANT: Copy the UUID value. The password is `ACC-` followed by the UUID value (`ACC-[UUID]` or, in this example, `ACC-9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f`).

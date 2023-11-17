@@ -18,14 +18,14 @@ Some Kubernetes distributions might have a default pod security configuration th
 You can use the information and examples included here to understand the pod security changes that Astra Control Center makes, and use a pod security approach that provides the protection you need without interfering with Astra Control Center functions.
 
 == PSAs enforced by Astra Control Center
-During installation, Astra Control Center enables the enforcement of a pod security admission by adding the following label to the `netapp-acc` or a custom namespace:
+Astra Control Center enables the enforcement of a pod security admission by adding the following label to the namespace where Astra is installed (netapp-acc or custom namespace) and namespaces created for backups.
 
 ----
 pod-security.kubernetes.io/enforce: privileged
 ----
 
 == PSPs installed by Astra Control Center
-When you install Astra Control Center on Kubernetes 1.23 or 1.24, several pod security policies are created during installation. Some of these are permanent, and some of them are created during certain operations and are removed once the operation is complete. Astra Control Center does not attempt to install PSPs when the host cluster is running Kubernetes 1.25 or later, as they are not supported on these versions.
+When you install Astra Control Center on Kubernetes 1.24, several pod security policies are created during installation. Some of these are permanent, and some of them are created during certain operations and are removed once the operation is complete. Astra Control Center does not attempt to install PSPs when the host cluster is running Kubernetes 1.25 or later, as they are not supported on these versions.
 
 === PSPs created during installation
 During Astra Control Center installation, the Astra Control Center operator installs a custom pod security policy, a `Role` object, and a `RoleBinding` object to support the deployment of Astra Control Center services in the Astra Control Center namespace.

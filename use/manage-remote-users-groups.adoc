@@ -16,9 +16,9 @@ If you have enabled LDAP authentication on your Astra Control system, you can se
 == Add a remote user
 Account Owners and Admins can add remote users to Astra Control. Astra Control Center supports up to 10,000 LDAP remote users.
 
-NOTE: You cannot add remote user if a local user with the same email address already exists on the system. To add the user as a remote user, delete the local user from the system first.
+IMPORTANT: Astra Control Center uses the user login attribute, configured when remote authentication is enabled, to search for and keep track of remote users. An attribute of an email address ("mail") or user principal name ("userPrincipalName") must exist in this field for any remote user you wish to appear in Astra Control Center. This attribute is used as the username in Astra Control Center for authentication and in searches for remote users.
 
-IMPORTANT: Astra Control Center uses the email address in the LDAP "mail" attribute to search for and keep track of remote users. This attribute might be an optional or empty field in your directory. An email address must exist in this field for any remote users you wish to appear in Astra Control Center. This email address is used as the username in Astra Control Center for authentication.
+NOTE: You cannot add a remote user if a local user with the same email address (based on the "mail" or "user principal name" attribute) already exists on the system. To add the user as a remote user, delete the local user from the system first.
 
 .Steps
 
@@ -43,7 +43,9 @@ The new user appears in the list of remote users. In this list, you can see acti
 
 
 == Add a remote group
-To add many remote users at once, account Owners and Admins can add remote groups to Astra Control. When you add a remote group, all remote users in that group are added to Astra Control and inherit the same role. Astra Control Center supports up to 5,000 LDAP remote groups.
+To add many remote users at once, account Owners and Admins can add remote groups to Astra Control. When you add a remote group, all remote users in that group are available to log in to Astra Control and will inherit the same role as the group.
+
+Astra Control Center supports up to 5,000 LDAP remote groups.
 
 .Steps
 
@@ -66,4 +68,4 @@ NOTE: When a user is assigned multiple roles through LDAP group membership, the 
 . Select *Add*.
 
 .Result
-The new group appears in the list of remote groups, and all remote users in this group appear in the list of remote users. In this list, you can see details about the group as well as manage the group from the *Actions* menu.
+The new group appears in the list of remote groups. Remote users in this group don't appear in the list of remote users until each remote user logs in. In this list, you can see details about the group as well as manage the group from the *Actions* menu.

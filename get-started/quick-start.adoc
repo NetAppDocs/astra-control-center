@@ -28,9 +28,10 @@ Ensure that your environment meets these requirements:
  
 *Storage integration*
 
-* link:../get-started/requirements.html#astra-trident-requirements[Ensure your environment includes the Astra Trident supported version^]
+* link:../get-started/requirements.html#astra-trident-requirements[Ensure your environment includes an Astra Trident supported version^]
+* link:../use/enable-acp.html[Enable Astra Control Provisioner advanced management and storage provisioning features^]
 * https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html[Prepare the worker nodes^]
-* https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-postdeployment.html#step-1-create-a-backend[Configure Astra Trident storage backend^]
+* https://docs.netapp.com/us-en/trident/trident-use/backends.html[Configure Astra Trident storage backend^]
 * https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Astra Trident storage classes^]
 * https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[Install Astra Trident volume snapshot controller^]
 * https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[Create a volume snapshot class^]
@@ -78,7 +79,7 @@ Complete some basic tasks to get started:
 
 
 //[role="quick-margin-para"]
-After you finish setting up Astra Control Center, use the Astra Control UI or the https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^] to begin managing and protecting apps:
+After you finish setting up Astra Control Center, use the Astra Control UI or the https://docs.netapp.com/us-en/astra-automation[Astra Control API^] to begin managing and protecting apps:
 
 
 * link:../use/manage-apps.html[Manage apps^]: Define resources to manage.
@@ -90,7 +91,7 @@ After you finish setting up Astra Control Center, use the Astra Control UI or th
 
 == For more information 
 
-* https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^]
+* https://docs.netapp.com/us-en/astra-automation[Use the Astra Control API^]
 * link:../use/upgrade-acc.html[Upgrade Astra Control Center^]
 * link:../support/get-help.html[Get help with Astra Control^]
 

@@ -11,12 +11,14 @@ entries:
         url: /use/protect-apps.html
       - title: Restore apps
         url: /use/restore-apps.html
-      - title: Replicate apps to a remote system
+      - title: Replicate apps between storage backends
         url: /use/replicate_snapmirror.html
       - title: Clone and migrate apps
         url: /use/clone-apps.html
       - title: Manage app execution hooks
         url: /use/execution-hooks.html
+      - title: Protect Astra Control Center using Astra Control Center
+        url: /use/protect-acc-with-acc.html
   - title: Monitor app and cluster health
     entries:
       - title: Dashboard summary
@@ -59,5 +61,7 @@ entries:
     url: /use/unmanage.html
   - title: Upgrade Astra Control Center
     url: /use/upgrade-acc.html
+  - title: Enable Astra Control Provisioner
+    url: /use/enable-acp.html
   - title: Uninstall Astra Control Center
     url: /use/uninstall_acc.html
