@@ -291,7 +291,7 @@ gcloud auth activate-service-account <service account email address>
 This script requires an Astra Control Center manifest file and your Google Image Registry location. Example:
 +
 ----
-manifestfile=astra-control-center-<version>.manifest
+manifestfile=acc.manifest.bundle.yaml
 GCP_CR_REGISTRY=<target GCP image registry>
 ASTRA_REGISTRY=<source Astra Control Center image registry>
 
@@ -464,7 +464,7 @@ This script requires the Astra Control Center manifest file and your Azure ACR l
 *Example*:
 +
 ----
-manifestfile=astra-control-center-<version>.manifest
+manifestfile=acc.manifest.bundle.yaml
 AZ_ACR_REGISTRY=<target Azure ACR image registry>
 ASTRA_REGISTRY=<source Astra Control Center image registry>
 
