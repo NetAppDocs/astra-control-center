@@ -83,7 +83,7 @@ NOTE: Although not described, Astra Control Center operator can also be deployed
 .. On the Cluster Resources page, check *Include additional cluster-scoped resources*.
 .. Select *Add include rule*.
 .. Select these entries, and select *Add*:
-* Label selector: acc-crds
+* Label selector: <label name>
 * Group: apiextensions.k8s.io
 * Version: v1
 * Kind: CustomResourceDefinition

@@ -291,8 +291,8 @@ gcloud auth activate-service-account <service account email address>
 This script requires an Astra Control Center manifest file and your Google Image Registry location. Example:
 +
 ----
-manifestfile=astra-control-center-<version>.manifest
-GCP_CR_REGISTRY=<target image registry>
+manifestfile=acc.manifest.bundle.yaml
+GCP_CR_REGISTRY=<target GCP image registry>
 ASTRA_REGISTRY=<source Astra Control Center image registry>
 
 while IFS= read -r image; do
@@ -302,7 +302,7 @@ while IFS= read -r image; do
     docker pull $ASTRA_REGISTRY/$image
     docker tag $ASTRA_REGISTRY/$image $GCP_CR_REGISTRY/$image
     docker push $GCP_CR_REGISTRY/$image
-done < astra-control-center-22.04.41.manifest
+done < acc.manifest.bundle.yaml
 ----
 
 . Set up DNS zones.
@@ -464,8 +464,8 @@ This script requires the Astra Control Center manifest file and your Azure ACR l
 *Example*:
 +
 ----
-manifestfile=astra-control-center-<version>.manifest
-AZ_ACR_REGISTRY=<target image registry>
+manifestfile=acc.manifest.bundle.yaml
+AZ_ACR_REGISTRY=<target Azure ACR image registry>
 ASTRA_REGISTRY=<source Astra Control Center image registry>
 
 while IFS= read -r image; do
@@ -473,9 +473,9 @@ while IFS= read -r image; do
     root_image=${image%:*}
     echo $root_image
     docker pull $ASTRA_REGISTRY/$image
-    docker tag $ASTRA_REGISTRY/$image $AZ_ACR_REGISTRYY/$image
+    docker tag $ASTRA_REGISTRY/$image $AZ_ACR_REGISTRY/$image
     docker push $AZ_ACR_REGISTRY/$image
-done < astra-control-center-22.04.41.manifest
+done < acc.manifest.bundle.yaml
 ----
 
 . Set up DNS zones.

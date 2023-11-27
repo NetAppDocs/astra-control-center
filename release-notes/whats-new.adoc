@@ -42,6 +42,9 @@ The following features are available with the Astra Control Provisioner 23.10 re
 
 *** *Backup and restore capabilities for applications with `ontap-nas-economy` driver-backed storage backends*: As described <<nas-eco-backup-restore,above>>.
 
+* *Support for managing applications that use NVMe/TCP storage*
+Astra Control can now manage applications backed by persistent volumes that are connected using NVMe/TCP.
+
 * *Execution hooks turned off by default*: Beginning with this release, execution hooks functionality can be link:../use/execution-hooks.html#enable-the-execution-hooks-feature[enabled] or disabled for additional security (it is disabled by default). If you have not yet created execution hooks for use with Astra Control, you need to link:../use/execution-hooks.html#enable-the-execution-hooks-feature[enable the execution hooks feature^] to begin creating hooks. If you created execution hooks prior to this release, the execution hooks functionality stays enabled and you can use hooks as you would normally.
 
 .Known issues and limitations
