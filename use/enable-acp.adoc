@@ -214,7 +214,7 @@ crane copy cr.astra.netapp.io/astra/trident-acp:23.10.0 <my_custom_registry>/tri
 . [[pull-secrets]]Create a secret in the `trident` namespace:
 +
 ----
-kubectl create secret -n <trident namespace> generic <secret name> \
+kubectl create secret -n <trident namespace> generic <secret_name> \
     --from-file=.dockerconfigjson=<path/to/.docker/config.json> \
     --type=kubernetes.io/dockerconfigjson
 ----
@@ -273,7 +273,7 @@ kubectl edit torc trident -n trident
 .. Set the registry location for the Astra Trident image (`tridentImage: <my_custom_registry>/trident:23.10.0`).
 .. Enable Astra Control Provisioner (`enableACP: true`).
 .. Set the registry location for the Astra Control Provisioner image (`acpImage: <my_custom_registry>/trident-acp:23.10.0`).
-.. If you established <<pull-secrets,image pull secrets>> earlier in this procedure, you can set them here (`imagePullSecrets: - <secret name>`). Use the same name secret name you established in the previous steps.
+.. If you established <<pull-secrets,image pull secrets>> earlier in this procedure, you can set them here (`imagePullSecrets: - <secret_name>`). Use the same name secret name you established in the previous steps.
 
 +
 [subs=+quotes]
@@ -289,7 +289,7 @@ spec:
   *enableACP: true*
   *acpImage: <my_custom_registry>/trident-acp:23.10.0*
   *imagePullSecrets:
-  - <secret name>*
+  - <secret_name>*
 ----
 
 . Save and exit the file. The deployment process will begin automatically.
