@@ -47,9 +47,13 @@ a|
 ** Google Persistent Disk
 ** Azure Managed Disks
 ** https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/[Cloud Volumes ONTAP^]
+* On-premise clusters:
+** NetApp ONTAP AFF and FAS systems
+** NetApp ONTAP Select
+** https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/[Cloud Volumes ONTAP^]
 |
-
 * NetApp ONTAP AFF and FAS systems
+* NetApp ONTAP Select
 * https://docs.netapp.com/us-en/cloud-manager-cloud-volumes-ontap/[Cloud Volumes ONTAP^]
 |===
 
