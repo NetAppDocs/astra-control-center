@@ -243,12 +243,25 @@ WARNING: Do not use Helm to enable Astra Control Provisioner. If you used Helm f
 kubectl create -f deploy/crds/trident.netapp.io_tridentorchestrators_crd_post1.16.yaml
 ----
 
-. Update Astra Trident configuration to 23.10.0:
+. Update Astra Trident to 23.10.0:
 +
 NOTE: For clusters running Kubernetes 1.24 or earlier, use `bundle_pre_1_25.yaml`. For clusters running Kubernetes 1.25 or later, use `bundle_post_1_25.yaml`.
 +
 ----
 kubectl -n trident apply -f trident-installer-23.10.0/deploy/<bundle-name.yaml>
+----
+
+. Verify Astra Trident is running:
++
+----
+kubectl get torc -n trident
+----
++
+Response:
++
+----
+NAME      AGE
+trident   21m
 ----
 
 . Edit the TridentOrchestrator CR and make the following edits:
@@ -257,8 +270,8 @@ kubectl -n trident apply -f trident-installer-23.10.0/deploy/<bundle-name.yaml>
 kubectl edit torc trident -n trident
 ----
 +
-.. Enable Astra Control Provisioner (`enableACP: true`).
 .. Set the registry location for the Astra Trident image (`tridentImage: <my_custom_registry>/trident:23.10.0`).
+.. Enable Astra Control Provisioner (`enableACP: true`).
 .. Set the registry location for the Astra Control Provisioner image (`acpImage: <my_custom_registry>/trident-acp:23.10.0`).
 .. If you established <<pull-secrets,image pull secrets>> earlier in this procedure, you can set them here (`imagePullSecrets: - <secret name>`). Use the same name secret name you established in the previous steps.
 
@@ -272,9 +285,9 @@ metadata:
 spec:
   debug: true
   namespace: trident
+  *tridentImage: <my_custom_registry>/trident:23.10.0*
   *enableACP: true*
   *acpImage: <my_custom_registry>/trident-acp:23.10.0*
-  *tridentImage: <my_custom_registry>/trident:23.10.0*
   *imagePullSecrets:
   - <secret name>*
 ----
