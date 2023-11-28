@@ -218,21 +218,6 @@ kubectl create secret -n <trident namespace> generic <secret name> \
     --from-file=.dockerconfigjson=<path/to/.docker/config.json> \
     --type=kubernetes.io/dockerconfigjson
 ----
-
-. Add the secret to the Astra Trident orchestrator:
-+
-----
-apiVersion: trident.netapp.io/v1
-kind: TridentOrchestrator
-metadata:
-  name: trident
-spec:
-  debug: true
-  namespace: trident
-  tridentImage: <custom registry>/trident:23.07.0
-  imagePullSecrets:
-  - <secret name>
-----
 --
 // end trident tab block
 
@@ -252,7 +237,13 @@ WARNING: Do not use Helm to enable Astra Control Provisioner. If you used Helm f
 .Astra Trident operator
 --
 
-. Update Astra Trident configuration so that the new `trident-acp` container is deployed:
+. If you removed the operator from your original deployment, create the Astra Trident orchestrator CRD again:
++
+---- 
+kubectl create -f deploy/crds/trident.netapp.io_tridentorchestrators_crd_post1.16.yaml
+----
+
+. Update Astra Trident configuration to 23.10.0:
 +
 NOTE: For clusters running Kubernetes 1.24 or earlier, use `bundle_pre_1_25.yaml`. For clusters running Kubernetes 1.25 or later, use `bundle_post_1_25.yaml`.
 +
@@ -266,7 +257,7 @@ kubectl -n trident apply -f trident-installer-23.10.0/deploy/<bundle-name.yaml>
 kubectl edit torc trident -n trident
 ----
 +
-.. Enable Astra Control Provisioner (`enableACP: true`)
+.. Enable Astra Control Provisioner (`enableACP: true`).
 .. Set the registry location for the Astra Trident image (`tridentImage: <my_custom_registry>/trident:23.10.0`).
 .. Set the registry location for the Astra Control Provisioner image (`acpImage: <my_custom_registry>/trident-acp:23.10.0`).
 .. If you established <<pull-secrets,image pull secrets>> earlier in this procedure, you can set them here (`imagePullSecrets: - <secret name>`). Use the same name secret name you established in the previous steps.
@@ -288,15 +279,15 @@ spec:
   - <secret name>*
 ----
 
-. Save the file. The deployment process will begin automatically.
+. Save and exit the file. The deployment process will begin automatically.
 
-. Verify the operator, deployment, and replicasets were created.
+. Verify the operator, deployment, and replicasets are created.
 +
 ----
 kubectl get all -n <operator-namespace>
 ----
 +
-IMPORTANT: There should only be *one instance* of the operator in a Kubernetes cluster. Do not create multiple deployments of the Trident operator.
+IMPORTANT: There should only be *one instance* of the operator in a Kubernetes cluster. Do not create multiple deployments of the Astra Trident operator.
 
 . Verify the `trident-acp` container is running and that `acpVersion` is `23.10.0` with a status of `Installed`:
 +
