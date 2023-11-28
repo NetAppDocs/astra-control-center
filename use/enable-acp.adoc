@@ -108,24 +108,6 @@ docker tag trident-acp:23.10.0-linux-amd64 <my_custom_registry>/trident-acp:23.1
 ----
 docker push <my_custom_registry>/trident-acp:23.10.0
 ----
-//+
-//NOTE: Docker commands are used in these examples. Podman commands can also be used.
-//
-//.. Change to the root directory of the tarball.
-//
-//.. Push the Astra Control Provisioner image to your custom registry. Make the following substitutions before running the `push-images` command:
-//+
-//
-//* Replace <BUNDLE_FILE> with the name of the Astra Control Provisioner bundle file (`acp.manifest.bundle.yaml`).
-// Replace <MY_FULL_REGISTRY_PATH> with the URL of the Docker repository; for example, "https://<docker-registry>".
-//* Replace <MY_REGISTRY_USER> with the user name.
-//* Replace <MY_REGISTRY_TOKEN> with an authorized token for the registry.
-//+
-//[source,console]
-//----
-//kubectl astra packages push-images -m <BUNDLE_FILE> -r <MY_FULL_REGISTRY_PATH> -u <MY_REGISTRY_USER> -p <MY_REGISTRY_TOKEN>
-//----
-
 --
 // end NSS tab block
 
@@ -151,12 +133,13 @@ docker login cr.astra.netapp.io -u <account-id> -p <api-token>
 crane auth login cr.astra.netapp.io -u <account-id> -p <api-token>
 ----
 
-. Follow the steps for your preferred method to move the image to your custom registry. If you aren't using a registry, follow the Trident operator steps to set up a secret. 
+. If you have a custom registry, follow these steps for your preferred method to move the image to your custom registry. If you aren't using a registry, follow the Trident operator steps in the next section.
 +
 NOTE: You can use Podman instead of Docker for the following commands. If you are using a Windows environment, PowerShell is recommended.
 +
 [role="tabbed-block"]
 ====
+
 .Docker
 --
 
@@ -195,31 +178,6 @@ crane copy cr.astra.netapp.io/astra/trident-acp:23.10.0 <my_custom_registry>/tri
 ----
 --
 // end crane tab block
-
-.Astra Trident operator
---
-
-. Ensure this block is present in your Docker configuration:
-+
-----
-{
-    "auths": {
-        "cr.astra.netapp.io": {
-            "auth": "c3R...zE2"
-        }
-    }
-}
-----
-
-. [[pull-secrets]]Create a secret in the `trident` namespace:
-+
-----
-kubectl create secret -n <trident namespace> generic <secret_name> \
-    --from-file=.dockerconfigjson=<path/to/.docker/config.json> \
-    --type=kubernetes.io/dockerconfigjson
-----
---
-// end trident tab block
 
 ====
 // end tabbed block
@@ -262,6 +220,12 @@ Response:
 ----
 NAME      AGE
 trident   21m
+----
+
+. If you have a registry that uses secrets, create a secret to use to pull the Astra Control Provisioner image:
++
+----
+kubectl create secret docker-registry <secret-name> -n trident --docker-server=<your_registry> --docker-username=<username> --docker-password=<token>
 ----
 
 . Edit the TridentOrchestrator CR and make the following edits:
