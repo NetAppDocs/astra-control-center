@@ -225,7 +225,7 @@ trident   21m
 . If you have a registry that uses secrets, create a secret to use to pull the Astra Control Provisioner image:
 +
 ----
-kubectl create secret docker-registry <secret-name> -n trident --docker-server=<your_registry> --docker-username=<username> --docker-password=<token>
+kubectl create secret docker-registry <secret_name> -n trident --docker-server=<my_custom_registry> --docker-username=<username> --docker-password=<token>
 ----
 
 . Edit the TridentOrchestrator CR and make the following edits:
@@ -234,9 +234,9 @@ kubectl create secret docker-registry <secret-name> -n trident --docker-server=<
 kubectl edit torc trident -n trident
 ----
 +
-.. Set the registry location for the Astra Trident image (`tridentImage: <my_custom_registry>/trident:23.10.0`).
+.. Set a custom registry location for the Astra Trident image or pull it from the Astra Control registry (`tridentImage: <my_custom_registry>/trident:23.10.0` or `tridentImage: netapp/trident:23.10.0`).
 .. Enable Astra Control Provisioner (`enableACP: true`).
-.. Set the registry location for the Astra Control Provisioner image (`acpImage: <my_custom_registry>/trident-acp:23.10.0`).
+.. Set the custom registry location for the Astra Control Provisioner image or pull it from the Astra Control registry (`acpImage: <my_custom_registry>/trident-acp:23.10.0` or `acpImage: cr.astra.netapp.io/astra/trident-acp:23.10.0`).
 .. If you established <<pull-secrets,image pull secrets>> earlier in this procedure, you can set them here (`imagePullSecrets: - <secret_name>`). Use the same name secret name you established in the previous steps.
 
 +
@@ -279,7 +279,7 @@ status:
   acpVersion: 23.10.0
   currentInstallationParams:
     ...
-    acpImage: <my_custom_registry>/trident-acp:23.10.0
+    acpImage: <registry>/trident-acp:23.10.0
     enableACP: "true"
     ...
   ...
