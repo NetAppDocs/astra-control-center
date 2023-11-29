@@ -249,9 +249,9 @@ metadata:
 spec:
   debug: true
   namespace: trident
-  *tridentImage: <my_custom_registry>/trident:23.10.0*
+  *tridentImage: <registry>/trident:23.10.0*
   *enableACP: true*
-  *acpImage: <my_custom_registry>/trident-acp:23.10.0*
+  *acpImage: <registry>/trident-acp:23.10.0*
   *imagePullSecrets:
   - <secret_name>*
 ----
