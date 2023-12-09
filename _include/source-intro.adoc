@@ -86,7 +86,7 @@ In Azure, Astra Control Service also creates a resource group, a storage account
 
 ** Creates a new admin role and Kubernetes service account on the cluster.
 
-** Uses that new admin role to install https://docs.netapp.com/us-en/trident/index.html[Astra Trident^] on the cluster and to create one or more storage classes.
+** Uses that new admin role to install link../concepts/architecture#astra-control-components[Astra Control Provisioner^] on the cluster and to create one or more storage classes.
 
 +
 ** If you use a NetApp cloud service storage offering as your storage backend, Astra Control Service uses Astra Trident to provision persistent volumes for your apps. If you use Amazon EBS or Azure managed disks as your storage backend, you need to install a provider-specific CSI driver. Installation instructions are provided in https://docs.netapp.com/us-en/astra-control-service/get-started/set-up-amazon-web-services.html[Set up Amazon Web Services^] and https://docs.netapp.com/us-en/astra-control-service/get-started/set-up-microsoft-azure-with-amd.html[Set up Microsoft Azure with Azure managed disks^].
@@ -134,7 +134,6 @@ You can add apps to your cluster. Or, if you have some apps already in the clust
 
 * https://docs.netapp.com/us-en/astra/index.html[Astra Control Service documentation^]
 * https://docs.netapp.com/us-en/astra-control-center/index.html[Astra Control Center documentation^]
-* https://docs.netapp.com/us-en/trident/index.html[Astra Trident documentation^]
 * https://docs.netapp.com/us-en/astra-automation[Use the Astra Control API^]
 * https://docs.netapp.com/us-en/cloudinsights/[Cloud Insights documentation^]
 * https://docs.netapp.com/us-en/ontap/index.html[ONTAP documentation^]

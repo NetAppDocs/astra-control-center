@@ -183,7 +183,7 @@ kubectl get sc ontap-nas-sc
 You should see output similar to the following:
 +
 ----
-NAME         PROVISIONER             AGE
+NAME            PROVISIONER             AGE
 ontap-nas-sc    csi.trident.netapp.io   15h
 ----
 
