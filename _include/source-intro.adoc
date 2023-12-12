@@ -134,6 +134,11 @@ You can add apps to your cluster. Or, if you have some apps already in the clust
 
 * https://docs.netapp.com/us-en/astra/index.html[Astra Control Service documentation^]
 * https://docs.netapp.com/us-en/astra-control-center/index.html[Astra Control Center documentation^]
+<<<<<<< HEAD
 * https://docs.netapp.com/us-en/astra-automation[Use the Astra Control API^]
+=======
+* https://docs.netapp.com/us-en/trident/index.html[Astra Trident documentation^]
+* https://docs.netapp.com/us-en/astra-automation[Astra Control API documentation^]
+>>>>>>> e6edcc6496ae00b578728c79ddbefb31dcba04ac
 * https://docs.netapp.com/us-en/cloudinsights/[Cloud Insights documentation^]
 * https://docs.netapp.com/us-en/ontap/index.html[ONTAP documentation^]
