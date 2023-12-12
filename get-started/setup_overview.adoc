@@ -70,6 +70,17 @@ You should ensure that the following prerequisite conditions are met before you 
 insecure-skip-tls-verify: true
 ----
 
+//astradoc-308 psa edits
+* [[enable-psa]]*Enable PSA restrictions*: If your cluster has pod security admission enforcement enabled, which is standard for Kubernetes 1.25 and later clusters, you need to enable PSA restrictions on the `netapp-acc-operator` and `netapp monitoring` namespaces.
++
+----
+kubectl label --overwrite ns netapp-acc-operator pod-security.kubernetes.io/enforce=privileged
+----
++
+----
+kubectl label --overwrite ns netapp-monitoring pod-security.kubernetes.io/enforce=privileged
+----
+
 * *Astra Trident requirements*:
 **	*Install a supported version*: A version of Astra Trident that is link:../get-started/requirements.html#astra-trident-requirements[supported by Astra Control Center^] is installed:
 +
