@@ -31,10 +31,10 @@ Ensure that your environment meets these requirements:
 * link:../get-started/requirements.html#astra-control-provisioner[Ensure your environment includes Astra Control Provisioner^]
 * link:../use/enable-acp.html[Enable Astra Control Provisioner advanced management and storage provisioning features^]
 * https://docs.netapp.com/us-en/trident/trident-use/worker-node-prep.html[Prepare cluster worker nodes^]
-* https://docs.netapp.com/us-en/trident/trident-use/backends.html[Configure Astra Trident storage backend^]
-* https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure Astra Trident storage classes^]
-* https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploy-a-volume-snapshot-controller[Install Astra Trident volume snapshot controller^]
-* https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html[Create a volume snapshot class^]
+* https://docs.netapp.com/us-en/trident/trident-use/backends.html[Configure storage backends^]
+* https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[Configure storage classes^]
+* https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploy-a-volume-snapshot-controller[Install a volume snapshot controller^]
+* https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#create-a-volume-snapshot[Create a volume snapshot class^]
 
 *ONTAP credentials*
 
