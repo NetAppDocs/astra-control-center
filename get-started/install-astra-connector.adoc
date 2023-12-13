@@ -31,6 +31,7 @@ Astra Connector supports the following types of private clusters:
 //You need to install the older version of the Astra Connector on your private cluster if the cluster is not a ROSA cluster, or is a self-managed cluster. (For ROSA clusters, <<Install the Astra Connector for private ROSA clusters,install the latest version of the Astra Connector>>). 
 
 == Install Astra Connector
+You install Astra Connector using Kubernetes commands and Custom Resource (CR) files.
 
 .About this task
 
@@ -102,14 +103,14 @@ kubectl create ns astra-connector
 //----
 . Create the Astra Connector CR file and name it `astra-connector-cr.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
 +
-* *<ASTRA_CONTROL_SERVICE_URL>*: The web UI URL of Astra Control. For example:
+* *<ASTRA_CONTROL_URL>*: The web UI URL of Astra Control. For example:
 +
 ----
-https://astra.netapp.io
+https://astra.control.url
 ----
-* *<ASTRA_CONTROL_SERVICE_API_TOKEN>*: The Astra Control API token you obtained in the preceding step.
+* *<ASTRA_CONTROL_API_TOKEN>*: The Astra Control API token you obtained in the preceding step.
 * *<PRIVATE_AKS_CLUSTER_NAME>*: (AKS clusters only) - The cluster name of the private Azure Kubernetes Service cluster. Uncomment and populate this line only if you are adding a private AKS cluster.
-* *<ASTRA_CONTROL_ACCOUNT_ID>*: Obtained from the Astra Control web UI. Select the figure icon at the top right of the page and select *API access*.
+* *<ASTRA_CONTROL_ACCOUNT_ID>*: Obtained from the Astra Control web UI. In the web UI, select the figure icon at the top right of the page and select *API access*.
 +
 [source,yaml]
 ----
@@ -120,12 +121,12 @@ metadata:
   namespace: astra-connector
 spec:
   natssync-client:
-    cloud-bridge-url: <ASTRA_CONTROL_SERVICE_URL>
+    cloud-bridge-url: <ASTRA_CONTROL_URL>
   imageRegistry:
     name: theotw
     secret: ""
   astra:
-    token: <ASTRA_CONTROL_SERVICE_API_TOKEN>
+    token: <ASTRA_CONTROL_API_TOKEN>
     #clusterName: <PRIVATE_AKS_CLUSTER_NAME>
     accountId: <ASTRA_CONTROL_ACCOUNT_ID>
     acceptEULA: yes
