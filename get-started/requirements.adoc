@@ -124,7 +124,7 @@ When you use NetApp MetroCluster as a storage backend, you need to do the follow
 * Specify an SVM management LIF as a backend option in the Astra Trident driver that you use
 * Ensure that you have the appropriate ONTAP license
 
-To configure the MetroCluster LIF, refer to Astra Trident documentation for more information about each driver:
+To configure the MetroCluster LIF, refer to these options and examples for each driver:
 
 * https://docs.netapp.com/us-en/trident/trident-use/ontap-san-examples.html[SAN^]
 * https://docs.netapp.com/us-en/trident/trident-use/ontap-nas-examples.html[NAS^]
