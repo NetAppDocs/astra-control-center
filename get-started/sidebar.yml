@@ -21,6 +21,8 @@ entries:
       url: /get-started/install_acc-cvo.html
     - title: Configure Astra Control Center after installation
       url: /get-started/configure-after-install.html
+  - title: Install Astra Connector for managed clusters
+    url: /get-started/install-astra-connector.html
   - title: Set up Astra Control Center
     url: /get-started/setup_overview.html
   - title: FAQ
