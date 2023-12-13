@@ -13,8 +13,6 @@ summary: You can install the Astra Connector on clusters that you want to manage
 [.lead]
 Astra Control Service uses Astra Connector to enable communication between Astra Control Service and clusters that it manages. You need to install Astra Connector on all clusters that you want to manage.
 
-NOTE: If the cluster you want to add has has pod security admission enforcement enabled, which is standard for Kubernetes 1.25 and later clusters, you need to enable PSA restrictions on the appropriate namespaces. Refer to link:setup_overview.html#enable-psa[Enable PSA restrictions] for instructions.
-
 ////
 Astra Connector supports the following types of private clusters:
 
@@ -43,6 +41,7 @@ You install Astra Connector using Kubernetes commands and Custom Resource (CR) f
 
 .Before you begin
 
+* If the cluster you want to add has has pod security admission enforcement enabled, which is the default for Kubernetes 1.25 and later clusters, you need to enable PSA restrictions on the appropriate namespaces. Refer to link:setup_overview.html#enable-psa[Enable PSA restrictions] for instructions.
 * You need access to the cluster you want to manage with Astra Control.
 * You need Kubernetes administrator permissions to install the Astra Connector operator on the cluster.
 
