@@ -154,7 +154,7 @@ This procedure helps you to create a separate kubeconfig if either of the follow
 
 Ensure that you have the following for the cluster you intend to manage before completing the procedure steps:
 
-* kubectl v1.23 or later installed
+* kubectl v1.27 or later installed
 * kubectl access to the cluster that you intend to add and manage with Astra Control Center
 +
 NOTE: For this procedure, you do not need kubectl access to the cluster that is running Astra Control Center.
