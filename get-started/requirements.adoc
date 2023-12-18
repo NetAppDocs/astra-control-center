@@ -179,6 +179,7 @@ NOTE: You can deploy Astra Control Center in a dual-stack Kubernetes cluster, an
 |Astra Control Center
 |Managed Kubernetes cluster
 a|443/6443
+
 NOTE: This port may change depending on the clusters you manage. Refer to the documentation from your cluster software vendor.
 |HTTPS
 |Communication with managed cluster - ensure this port is open both ways between the cluster hosting Astra Control Center and each managed cluster
