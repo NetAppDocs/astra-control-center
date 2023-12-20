@@ -76,7 +76,7 @@ To integrate Astra Control Center with the Istio service mesh installed on the h
 NOTE: Installing Astra Control Service without configuring a service mesh on the host cluster has potentially serious security implications.
 
 == Astra Control Provisioner
-To use Astra Control Provisioner advanced storage functionality, you must install Astra Trident 23.10 or later and enable link:../use/enable-acp.html[Astra Control Provisioner functionality].
+To use Astra Control Provisioner advanced storage functionality, you must install Astra Trident 23.10 or later and enable link:../get-started/enable-acp.html[Astra Control Provisioner functionality].
 
 * *Minimum Astra Control Provisioner version for use with Astra Control Center*: Astra Control Provisioner 23.10 or later installed and configured
 //* *SnapMirror replication*: Astra Trident 22.10 or newer installed for SnapMirror-based application replication

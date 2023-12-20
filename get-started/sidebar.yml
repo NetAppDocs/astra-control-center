@@ -23,5 +23,9 @@ entries:
       url: /get-started/configure-after-install.html
   - title: Set up Astra Control Center
     url: /get-started/setup_overview.html
+    entries:
+      - title: Enable Astra Control Provisioner
+        url: get-started/enable-acp.html
+
   - title: FAQ
     url: /get-started/faq.html

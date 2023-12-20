@@ -81,7 +81,7 @@ export-policy rule modify -vserver <storage virtual machine name> -policyname <p
 
 * *Astra Control Provisioner requirements*:
 
-**	*Enable Astra Control Provisioner functionality*: You'll need to install Astra Trident 23.10 or later and enable link:../use/enable-acp.html[Astra Control Provisioner advanced storage functionality]. Astra Control does not support Astra Trident if the Astra Control Provisioner is not also enabled.
+**	*Enable Astra Control Provisioner functionality*: You'll need to install Astra Trident 23.10 or later and enable link:../get-started/enable-acp.html[Astra Control Provisioner advanced storage functionality]. Astra Control does not support Astra Trident if the Astra Control Provisioner is not also enabled.
 //Prior to installing or upgrading Astra Trident, review the https://docs.netapp.com/us-en/trident/trident-get-started/requirements.html[supported frontends, backends, and host configurations^].
 
 ** *Configure a storage backend*: At least one storage backend must be https://docs.netapp.com/us-en/trident/trident-use/backends.html[configured in Astra Trident^] on the cluster.
