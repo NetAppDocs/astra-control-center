@@ -70,6 +70,21 @@ You should ensure that the following prerequisite conditions are met before you 
 insecure-skip-tls-verify: true
 ----
 
+//astradoc-308 psa edits
+* [[enable-psa]]*Enable PSA restrictions*: If your cluster has pod security admission enforcement enabled, which is standard for Kubernetes 1.25 and later clusters, you need to enable PSA restrictions on these namespaces:
++
+** `netapp-acc-operator` namespace:
++
+----
+kubectl label --overwrite ns netapp-acc-operator pod-security.kubernetes.io/enforce=privileged
+----
+
+** `netapp monitoring` namespace:
++
+----
+kubectl label --overwrite ns netapp-monitoring pod-security.kubernetes.io/enforce=privileged
+----
+
 * *ONTAP credentials*: You need ONTAP credentials and a superuser and user ID set on the backing ONTAP system to back up and restore apps with Astra Control Center. 
 +
 Run the following commands in the ONTAP command line:

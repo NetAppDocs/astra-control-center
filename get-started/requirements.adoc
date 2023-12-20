@@ -154,7 +154,7 @@ NOTE: You can deploy Astra Control Center in a dual-stack Kubernetes cluster, an
 |Astra Control Center
 |443
 |HTTPS
-|UI / API access - Ensure this port is open both ways between the cluster hosting Astra Control Center and each managed cluster
+|UI / API access - Ensure this port is open in both directions between Astra Control Center and the system used to access Astra Control Center
 
 |Metrics consumer
 |Astra Control Center worker node
@@ -179,6 +179,13 @@ NOTE: You can deploy Astra Control Center in a dual-stack Kubernetes cluster, an
 |443
 |HTTPS
 |NetApp AutoSupport communication
+
+|Astra Control Center
+|Managed Kubernetes cluster
+|443/6443
+*NOTE*: The port that the managed cluster uses might vary depending on the cluster. Refer to the documentation from your cluster software vendor.
+|HTTPS
+|Communication with managed cluster - ensure this port is open both ways between the cluster hosting Astra Control Center and each managed cluster
 
 |===
 
