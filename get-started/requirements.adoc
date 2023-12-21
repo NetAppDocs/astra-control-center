@@ -209,7 +209,7 @@ Astra Control Center supports recent versions of Firefox, Safari, and Chrome wit
 == Additional requirements for application clusters
 Keep in mind these requirements if you plan to use these Astra Control Center features:
 
-* *Application cluster requirements*: link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[Cluster management requirements^]
+* *Application cluster requirements*: link:../get-started/prep-for-cluster-management[Cluster management requirements^]
 ** *Managed application requirements*: link:../use/manage-apps.html#application-management-requirements[Application management requirements^]
 ** *Additional requirements for app replication*: link:../use/replicate_snapmirror.html#replication-prerequisites[Replication prerequisites^]
 

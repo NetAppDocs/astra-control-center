@@ -1,0 +1,300 @@
+---
+sidebar: sidebar
+permalink: get-started/enable-auth-ontap-backend.html
+keywords: set up astra control, enable authentication, add backend, ontap
+summary: After you install Astra Control Center, set up a license, and add a cluster, you should consider enabling certificate- or credential-based authentication on your backend.
+---
+
+= Enable authentication on the ONTAP storage backend
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/get-started/
+
+[.lead]
+Astra Control Center offers two modes of authenticating an ONTAP backend:
+
+* *Credential-based authentication*: The username and password to an ONTAP user with the required permissions. You should use a pre-defined security login role, such as admin or vsadmin to ensure maximum compatibility with ONTAP versions.
+
+* *Certificate-based authentication*: Astra Control Center can also communicate with an ONTAP cluster using a certificate installed on the backend. You should use the client certificate, key, and the trusted CA certificate if used (recommended).
+
+You can later update existing backends to move from one type of authentication to another method. Only one authentication method is supported at a time. 
+
+// However, you cannot change from certificate-based authentication to credentials-based authentication.
+
+
+=== Enable credential-based authentication
+
+Astra Control Center requires the credentials to a cluster-scoped `admin` to communicate with the ONTAP backend. You should use standard, pre-defined roles such as `admin`. This ensures forward compatibility with future ONTAP releases that might expose feature APIs to be used by future Astra Control Center releases. 
+
+NOTE: A custom security login role can be created and used with Astra Control Center, but is not recommended.
+
+A sample backend definition looks like this:
+
+----
+{
+  "version": 1,
+  "backendName": "ExampleBackend",
+  "storageDriverName": "ontap-nas",
+  "managementLIF": "10.0.0.1",
+  "dataLIF": "10.0.0.2",
+  "svm": "svm_nfs",
+  "username": "admin",
+  "password": "secret"
+}
+----
+
+The backend definition is the only place the credentials are stored in plain text. The creation or update of a backend is the only step that requires knowledge of the credentials. As such, it is an admin-only operation, to be performed by the Kubernetes or storage administrator.
+
+=== Enable certificate-based authentication 
+
+Astra Control Center can use certificates to communicate with new and existing ONTAP backends. You should enter the following information in the backend definition.
+
+* `clientCertificate`: Client certificate.
+
+* `clientPrivateKey`: Associated private key.
+
+* `trustedCACertificate`: Trusted CA certificate. If using a trusted CA, this parameter must be provided. This can be ignored if no trusted CA is used.
+
+You can use one of the following types of certificates: 
+
+* Self-signed certificate
+* Third-party certificate 
+
+==== Enable authentication with a self-signed certificate 
+
+A typical workflow involves the following steps.
+
+.Steps
+
+. Generate a client certificate and key. When generating, set the Common Name (CN) to the ONTAP user to authenticate as.
+
++
+[source,Console]
+----
+openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -keyout k8senv.key -out k8senv.pem -subj "/C=US/ST=NC/L=RTP/O=NetApp/CN=<common-name>"
+----
+
+. Install the client certificate of type `client-ca` and key on the ONTAP cluster. 
+
++
+[source,Console]
+----
+security certificate install -type client-ca -cert-name <certificate-name> -vserver <vserver-name>
+security ssl modify -vserver <vserver-name> -client-enabled true
+----
+
+
+. Confirm that the ONTAP security login role supports the certificate authentication method.
+
++
+[source,Console]
+----
+security login create -user-or-group-name vsadmin -application ontapi -authentication-method cert -vserver <vserver-name>
+security login create -user-or-group-name vsadmin -application http -authentication-method cert -vserver <vserver-name>
+----
+
+. Test authentication using the generated certificate. Replace <ONTAP Management LIF> and <vserver name> with the Management LIF IP and SVM name. You must ensure the LIF has its service policy set to `default-data-management`.
+
++
+[source,Curl]
+----
+curl -X POST -Lk https://<ONTAP-Management-LIF>/servlets/netapp.servlets.admin.XMLrequest_filer --key k8senv.key --cert ~/k8senv.pem -d '<?xml version="1.0" encoding="UTF-8"?><netapp xmlns=http://www.netapp.com/filer/admin version="1.21" vfiler="<vserver-name>"><vserver-get></vserver-get></netapp>
+----
+
+. Using the values obtained from the previous step, add the storage backend in the Astra Control Center UI.
+
+==== Enable authentication with a third-party certificate
+
+If you have a third-party certificate, you can set up certificate-based authentication with these steps. 
+
+.Steps
+
+. Generate the private key and CSR:
++
+[source,Console]
+----
+openssl req -new -newkey rsa:4096 -nodes -sha256 -subj "/" -outform pem -out ontap_cert_request.csr -keyout ontap_cert_request.key -addext "subjectAltName = DNS:<ONTAP_CLUSTER_FQDN_NAME>,IP:<ONTAP_MGMT_IP>”
+----
+
+. Pass the CSR to the Windows CA (third-party CA) and issue the signed certificate. 
+
+. Download the signed certificate and name it `ontap_signed_cert.crt'
+
+. Export the root certificate from Windows CA (third-party CA). 
+
+. Name this file `ca_root.crt`
++ 
+You now have the following three files:
++
+* *Private key*: `ontap_signed_request.key` (This is the corresponding key for the server certificate in ONTAP. It is needed while installing the server certificate.)
+
+* *Signed certificate*: `ontap_signed_cert.crt` (This is also called the _server certificate_ in ONTAP.)
+
+* *Root CA certificate*: `ca_root.crt` (This is also called the _server-ca certificate_ in ONTAP.)
+
+. Install these certificates in ONTAP. Generate and install `server` and `server-ca` certificates on ONTAP.
++
+.Expand for sample.yaml 
+[%collapsible]
+====
+----
+# Copy the contents of ca_root.crt and use it here.
+  
+security certificate install -type server-ca
+ 
+Please enter Certificate: Press <Enter> when done
+
+-----BEGIN CERTIFICATE-----
+<certificate details>
+-----END CERTIFICATE-----
+ 
+ 
+You should keep a copy of the CA-signed digital certificate for future reference.
+ 
+The installed certificate's CA and serial number for reference:
+
+CA: 
+serial: 
+ 
+The certificate's generated name for reference: 
+
+
+===
+ 
+# Copy the contents of ontap_signed_cert.crt and use it here. For key, use the contents of ontap_cert_request.key file.
+security certificate install -type server
+Please enter Certificate: Press <Enter> when done
+
+-----BEGIN CERTIFICATE-----
+<certificate details>
+-----END CERTIFICATE-----
+
+Please enter Private Key: Press <Enter> when done
+
+-----BEGIN PRIVATE KEY-----
+<private key details>
+-----END PRIVATE KEY-----
+
+Enter certificates of certification authorities (CA) which form the certificate chain of the server certificate. This starts with the issuing CA certificate of the server certificate and can range up to the root CA certificate.
+Do you want to continue entering root and/or intermediate certificates {y|n}: n
+
+The provided certificate does not have a common name in the subject field.
+Enter a valid common name to continue installation of the certificate: <ONTAP_CLUSTER_FQDN_NAME>
+
+You should keep a copy of the private key and the CA-signed digital certificate for future reference.
+The installed certificate's CA and serial number for reference:
+CA:
+serial:
+The certificate's generated name for reference:
+
+ 
+==
+# Modify the vserver settings to enable SSL for the installed certificate
+ 
+ssl modify -vserver <vserver_name> -ca <CA>  -server-enabled true -serial <serial number>       (security ssl modify)
+
+==
+# Verify if the certificate works fine:
+ 
+openssl s_client -CAfile ca_root.crt -showcerts -servername server -connect <ONTAP_CLUSTER_FQDN_NAME>:443
+CONNECTED(00000005)
+depth=1 DC = local, DC = umca, CN = <CA>
+verify return:1
+depth=0
+verify return:1
+write W BLOCK
+---
+Certificate chain
+0 s:
+   i:/DC=local/DC=umca/<CA>
+
+-----BEGIN CERTIFICATE-----
+<Certificate details>
+
+----
+
+====
+
+. Create the client certificate for the same host for passwordless communication. Astra Control Center uses this process to communicate with ONTAP.
+
+. Generate and install the client certificates on ONTAP:
++
+.Expand for sample.yaml 
+[%collapsible]
+====
+----
+# Use /CN=admin or use some other account which has privileges.
+openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -keyout ontap_test_client.key -out ontap_test_client.pem -subj "/CN=admin"
+
+Copy the content of ontap_test_client.pem file and use it in the below command:
+security certificate install -type client-ca -vserver <vserver_name>
+
+Please enter Certificate: Press <Enter> when done
+
+-----BEGIN CERTIFICATE-----
+<Certificate details>
+-----END CERTIFICATE-----
+
+You should keep a copy of the CA-signed digital certificate for future reference.
+The installed certificate's CA and serial number for reference:
+
+CA:
+serial:
+The certificate's generated name for reference:
+
+ 
+==
+ 
+ssl modify -vserver <vserver_name> -client-enabled true
+(security ssl modify)
+
+# Setting permissions for certificates
+security login create -user-or-group-name admin -application ontapi -authentication-method cert -role admin -vserver <vserver_name>
+
+security login create -user-or-group-name admin -application http -authentication-method cert -role admin -vserver <vserver_name>
+
+==
+ 
+#Verify passwordless communication works fine with the use of only certificates:
+
+curl --cacert ontap_signed_cert.crt  --key ontap_test_client.key --cert ontap_test_client.pem https://<ONTAP_CLUSTER_FQDN_NAME>/api/storage/aggregates
+{
+"records": [
+{
+"uuid": "f84e0a9b-e72f-4431-88c4-4bf5378b41bd",
+"name": "<aggr_name>",
+"node": {
+"uuid": "7835876c-3484-11ed-97bb-d039ea50375c",
+"name": "<node_name>",
+"_links": {
+"self": {
+"href": "/api/cluster/nodes/7835876c-3484-11ed-97bb-d039ea50375c"
+}
+}
+},
+"_links": {
+"self": {
+"href": "/api/storage/aggregates/f84e0a9b-e72f-4431-88c4-4bf5378b41bd"
+}
+}
+}
+],
+"num_records": 1,
+"_links": {
+"self": {
+"href": "/api/storage/aggregates"
+}
+}
+}%
+
+
+
+----
+====
+
+
+. Add the storage backend in the Astra Control Center UI and provide the following values: 
++
+* *Client Certificate*: ontap_test_client.pem
+* *Private Key*: ontap_test_client.key
+* *Trusted CA Certificate*: ontap_signed_cert.crt

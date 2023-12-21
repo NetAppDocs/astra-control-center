@@ -845,7 +845,7 @@ vault-controller-88484b454-jktld              1/1     Running     0            9
 kubectl logs deploy/acc-operator-controller-manager -n netapp-acc-operator -c manager -f
 ----
 +
-NOTE: `accHost` cluster registration is one of the last operations, and if it fails it will not cause deployment to fail. In the event of a cluster registration failure indicated in the logs, you can attempt registration again through the link:../get-started/setup_overview.html#add-cluster[Add cluster workflow in the UI^] or API.
+NOTE: `accHost` cluster registration is one of the last operations, and if it fails it will not cause deployment to fail. In the event of a cluster registration failure indicated in the logs, you can attempt registration again through the link:../get-started/add-cluster.html[Add cluster workflow in the UI^] or API.
 
 . When all the pods are running, verify that the installation was successful (`READY` is `True`) and get the initial setup password you will use when you log in to Astra Control Center:
 +
@@ -1069,4 +1069,4 @@ kubectl get acc -n [netapp-acc or custom namespace] -o yaml
 == What's next
 
 * (Optional) Depending on your environment, complete post-installation link:configure-after-install.html[configuration steps].
-* Complete the deployment by performing link:setup_overview.html[setup tasks].
+* link:add-license.html[After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up a license, add clusters, enable authentication, manage storage, and add buckets].

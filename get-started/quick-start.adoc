@@ -38,7 +38,7 @@ Ensure that your environment meets these requirements:
 
 *ONTAP credentials*
 
-* link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[Configure ONTAP credentials^]
+* link:../get-started/prep-for-cluster-management[Configure ONTAP credentials^]
 
 
 .image:https://raw.githubusercontent.com/NetAppDocs/common/main/media/number-2.png[Two] Download and install Astra Control Center
@@ -64,11 +64,11 @@ Complete these installation tasks:
 //[role="quick-margin-para"]
 Complete some basic tasks to get started:
 
-* link:../get-started/setup_overview.html#add-a-license-for-astra-control-center[Add a license^]
-* link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[Prepare your environment for cluster management^]
-* link:../get-started/setup_overview.html#add-cluster[Add a cluster^]
-* link:../get-started/setup_overview.html#add-a-storage-backend[Add a storage backend^]
-* link:../get-started/setup_overview.html#add-a-bucket[Add a bucket^]
+* link:../get-started/add-license.html[Add a license^]
+* link:../get-started/prep-for-cluster-management[Prepare your environment for cluster management^]
+* link:../get-started/add-cluster.html[Add a cluster^]
+* link:../get-started/add-storage-backend.html[Add a storage backend^]
+* link:../get-started/add-bucket[Add a bucket^]
 
 
 
@@ -82,9 +82,10 @@ Complete some basic tasks to get started:
 After you finish setting up Astra Control Center, use the Astra Control UI or the https://docs.netapp.com/us-en/astra-automation[Astra Control API^] to begin managing and protecting apps:
 
 
+* link:../use/manage-local-users-and-roles.html[Manage accounts^]: Users, roles, LDAP, credentials, and more.
+* link:../use/manage-notifications.html[Manage notifications^]
 * link:../use/manage-apps.html[Manage apps^]: Define resources to manage.
 * link:../use/protection-overview.html[Protect apps^]: Configure protection policies and replicate, clone, and migrate apps.  
-* link:../use/manage-local-users-and-roles.html[Manage accounts^]: Users, roles, LDAP, credentials, and more.
 * link:../use/monitor-protect.html#connect-to-cloud-insights[Optionally, connect to Cloud Insights^]: View metrics on the health of your system.
 
 

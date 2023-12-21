@@ -18,7 +18,7 @@ For instructions on how to manage storage backends using the Astra Control API, 
 
 You can complete the following tasks related to managing a storage backend:
 
-* link:../get-started/setup_overview.html#add-a-storage-backend[Add a storage backend]
+* link:../get-started/add-storage-backend.html[Add a storage backend]
 * <<View storage backend details>>
 * <<Edit storage backend authentication details>>
 * <<Manage a discovered storage backend>>
@@ -96,7 +96,7 @@ You can update existing backends to move from one type of authentication to anot
 
 // However, you cannot change from certificate-based authentication to credentials-based authentication.
 
-For details on enabling certificate-based authentication, refer to link:../get-started/setup_overview.html#enable-authentication-on-the-ontap-storage-backend[Enable authentication on the ONTAP storage backend].
+For details on enabling certificate-based authentication, refer to link:../get-started/enable-auth-ontap-backend.html[Enable authentication on the ONTAP storage backend].
 
 .Steps 
 
