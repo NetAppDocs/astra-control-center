@@ -51,11 +51,14 @@ export-policy rule modify -vserver <storage virtual machine name> -policyname <p
 
 * *Astra Control Provisioner requirements*:
 
+** *Review Astra Trident environment requirements*: Prior to installing or upgrading Astra Control Provisioner, review the https://docs.netapp.com/us-en/trident/trident-get-started/requirements.html[supported frontends, backends, and host configurations^].
+
 **	*Enable Astra Control Provisioner functionality*: You'll need to install Astra Trident 23.10 or later and enable link:../get-started/enable-acp.html[Astra Control Provisioner advanced storage functionality]. Astra Control does not support Astra Trident if the Astra Control Provisioner is not also enabled.
-//Prior to installing or upgrading Astra Trident, review the https://docs.netapp.com/us-en/trident/trident-get-started/requirements.html[supported frontends, backends, and host configurations^].
 
 ** *Configure a storage backend*: At least one storage backend must be https://docs.netapp.com/us-en/trident/trident-use/backends.html[configured in Astra Trident^] on the cluster.
+
 ** *Configure a storage class*: At least one storage class must be https://docs.netapp.com/us-en/trident/trident-use/manage-stor-class.html[configured in Astra Trident^] on the cluster. If a default storage class is configured, ensure that it is the *only* storage class that has the default annotation.
+
 ** *Configure a volume snapshot controller and install a volume snapshot class*: https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploy-a-volume-snapshot-controller[Install a volume snapshot controller] so that snapshots can be created in Astra Control. https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#create-a-volume-snapshot[Create^] at least one `VolumeSnapshotClass` using Astra Trident.
 
 * *Rancher only*: When managing application clusters in a Rancher environment, modify the application cluster's default context in the kubeconfig file provided by Rancher to use a control plane context instead of the Rancher API server context. This reduces load on the Rancher API server and improves performance.
@@ -88,7 +91,7 @@ error: the server doesn't have a resource type "tridentversions"
 
 . If you are running Astra Trident 22.10 or earlier, use these https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html[instructions^] to upgrade to a more recent version of Astra Trident before upgrading to the Astra Control Provisioner. You can perform a direct upgrade to Astra Control Provisioner 24.02 if your Astra Trident is within a four-release window of version 24.02. For example, you can directly upgrade from Astra Trident 23.04 to Astra Control Provisioner 24.02.
 
-. If you are running Astra Trident 23.10, verify that Astra Control Provisioner has been https://docs.netapp.com/us-en/astra-control-center/get-started/faq.html#running-acp-check[enabled^]. Astra Control Provisioner will not work with releases of Astra Control Center earlier than 23.10. Upgrade your Astra Control Provisioner so that it has the same version as the Astra Control Center you are upgrading to access the latest functionality.
+. If you are running Astra Trident 23.10 or later, verify that Astra Control Provisioner has been https://docs.netapp.com/us-en/astra-control-center/get-started/faq.html#running-acp-check[enabled^]. Astra Control Provisioner will not work with releases of Astra Control Center earlier than 23.10. Upgrade your Astra Control Provisioner so that it has the same version as the Astra Control Center you are upgrading to access the latest functionality.
 
 . Ensure that all pods (including `trident-acp`) are running:
 +
@@ -111,7 +114,7 @@ NAME                  PROVISIONER            RECLAIMPOLICY  VOLUMEBINDINGMODE  A
 ontap-gold (default)  csi.trident.netapp.io  Delete         Immediate          true                  5d23h
 ----
 
-=== Create a cluster role kubeconfig
+== Create a cluster role kubeconfig
 
 You can optionally create a limited permission or expanded permission administrator role for Astra Control Center. This is not a required procedure for Astra Control Center setup as you already configured a kubeconfig as part of the link:../get-started/install_acc.html#set-up-namespace-and-secret-for-registries-with-auth-requirements[installation process^]. 
 
@@ -529,7 +532,3 @@ source create-kubeconfig.sh
 ----
 mv kubeconfig-sa YOUR_CLUSTER_NAME_kubeconfig
 ----
-
-=== What's next?
-
-Now that you've verified that the prerequisites are met, you're ready to <<Add cluster,add a cluster>>.

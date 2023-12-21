@@ -51,7 +51,7 @@ NOTE: Ideally, the application cluster should be situated outside of the three A
 
 Not depicted in the diagram:
 
-* All the clusters have ONTAP backends with Trident installed. 
+* All the clusters have ONTAP backends with Astra Control Provisioner installed. 
 * In this configuration, the OpenShift clusters are using MetalLB as the load balancer. 
 * The snapshot controller and VolumeSnapshotClass are also installed on all the clusters as outlined in the link:../get-started/prep-for-cluster-management[prerequisites^]. 
  

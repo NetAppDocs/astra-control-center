@@ -5,7 +5,7 @@ keywords: set up astra control, enable authentication, add backend, ontap
 summary: After you install Astra Control Center, set up a license, and add a cluster, you should consider enabling certificate- or credential-based authentication on your backend.
 ---
 
-= Enable authentication on the ONTAP storage backend
+= Enable authentication on an ONTAP storage backend
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/get-started/

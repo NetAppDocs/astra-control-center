@@ -32,10 +32,10 @@ entries:
       - title: Add a cluster  
         url: /get-started/add-cluster.html
       - title: Enable storage backend authentication  
-        url: /get-started/enable-auth-ontap-backend
+        url: /get-started/enable-auth-ontap-backend.html
       - title: Add a storage backend
-        url: /get-started/add-storage-backend
+        url: /get-started/add-storage-backend.html
       - title: Add a bucket
-        url: /get-started/add-bucket
+        url: /get-started/add-bucket.html
   - title: FAQ
     url: /get-started/faq.html

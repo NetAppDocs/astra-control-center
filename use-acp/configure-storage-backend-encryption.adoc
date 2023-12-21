@@ -188,7 +188,7 @@ ontap-nas-sc    csi.trident.netapp.io   15h
 ----
 
 === Provision volumes
-After you create a storage backend and a storage class, you can now provision a volume. For instructions, refer to https://docs.netapp.com/us-en/trident/trident-use/vol-provision.html[Provision a volume^].
+After you create a storage backend and a storage class, you can now provision a volume. Refer to these instructions for https://docs.netapp.com/us-en/trident/trident-use/vol-provision.html[provisioning a volume^].
 
 
 == Configure in-flight Kerberos encryption with Azure NetApp Files volumes
@@ -361,5 +361,5 @@ anf-sc-nfs    csi.trident.netapp.io   15h
 ----
 
 === Provision volumes
-After you create a storage backend and a storage class, you can now provision a volume. For instructions, refer to https://docs.netapp.com/us-en/trident/trident-use/vol-provision.html[Provision a volume^].
+After you create a storage backend and a storage class, you can now provision a volume. Refer to these instructions for https://docs.netapp.com/us-en/trident/trident-use/vol-provision.html[provisioning a volume^].
 

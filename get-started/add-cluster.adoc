@@ -35,7 +35,7 @@ IMPORTANT: If you create your own `kubeconfig` file, you should define only *one
 . Select *Next*.
 . Select the default storage class to be used for this Kubernetes cluster, and select *Next*.
 +
-NOTE: You should select a storage class that is configured in Astra Trident and backed by ONTAP storage.
+NOTE: You should select a storage class that is configured in Astra Control Provisioner and backed by ONTAP storage.
 
 . Review the information, and if everything looks good, select *Add*.
 
