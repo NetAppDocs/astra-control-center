@@ -80,7 +80,7 @@ If Astra Trident exists, you see output similar to the following:
 +
 ----
 NAME      VERSION
-trident   23.XX.X
+trident   23.10.0
 ----
 +
 If Astra Trident does not exist, you see output similar to the following:
