@@ -164,7 +164,7 @@ Ensure that you link:../use/monitor-protect.html#add-a-proxy-server[enter the co
 When you perform operations on Postgres pods, you shouldn't connect directly within the pod to use the psql command. Astra Control requires psql access to freeze and thaw the databases. If there is a pre-existing connection, the snapshot, backup, or clone will fail.
 
 == The Activity page displays up to 100000 events
-The Astra Control Activity page can display up to 100,000 events. To view all logged events, retrieve the events using the link:../rest-api/api-intro.html[Astra Control API^].
+The Astra Control Activity page can display up to 100,000 events. To view all logged events, retrieve the events using the https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^].
 
 == SnapMirror does not support applications using NVMe over TCP for storage backends
 // ASTRACTL-30133 and ASTRACTL-30135

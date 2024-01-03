@@ -28,7 +28,7 @@ For a demonstration of the Astra Control Center installation process, see https:
 +
 TIP: Deploy Astra Control Center in a third fault domain or secondary site. This is recommended for app replication and seamless disaster recovery.
 
-* *Consider pod security policies*: If you have configured or want to configure pod security policies in your environment, familiarize yourself with pod security policies and how they affect Astra Control Center installation. Refer to link:../concepts/understand-pod-security.html[pod security restrictions^].
+* *Consider pod security policies*: If you have configured or want to configure pod security policies in your environment, familiarize yourself with pod security policies and how they affect Astra Control Center installation. Refer to link:../concepts/understand-pod-security.html[pod security restrictions].
 * *Ensure healthy services*: Check that all API services are in a healthy state and available:
 +
 [source,console]
@@ -37,10 +37,10 @@ kubectl get apiservices
 ----
 
 * *Ensure a routable FQDN*: The Astra FQDN you plan to use can be routed to the cluster. This means that you either have a DNS entry in your internal DNS server or you are using a core URL route that is already registered.
-* *Configure cert manager*: If a cert manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps^] so that Astra Control Center does not attempt to install its own cert manager. By default, Astra Control Center installs its own cert manager during installation.
+* *Configure cert manager*: If a cert manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps] so that Astra Control Center does not attempt to install its own cert manager. By default, Astra Control Center installs its own cert manager during installation.
 //astradoc-249
 include::../_include/access-netapp-image-registry.adoc[]
-* *Consider a service mesh*: It is strongly recommended that Astra Control host cluster communications channels be secured using a link:requirements.html#service-mesh-requirements[supported service mesh^]. 
+* *Consider a service mesh*: It is strongly recommended that Astra Control host cluster communications channels be secured using a link:requirements.html#service-mesh-requirements[supported service mesh]. 
 +
 .Istio service mesh details 
 [%collapsible]
@@ -105,7 +105,7 @@ You can use the NetApp Astra kubectl command line plugin to push images to a loc
 .Before you begin
 NetApp provides plugin binaries for different CPU architectures and operating systems. You need to know which CPU and operating system you have before you perform this task. 
 
-If you already have the plugin installed from a previous installation, link:../use/upgrade-acc.html#remove-the-netapp-astra-kubectl-plugin-and-install-it-again[make sure you have the latest version^] before completing these steps.
+If you already have the plugin installed from a previous installation, link:../use/upgrade-acc.html#remove-the-netapp-astra-kubectl-plugin-and-install-it-again[make sure you have the latest version] before completing these steps.
 
 .Steps
 
@@ -365,7 +365,7 @@ NOTE: An annotated sample YAML follows these steps.
 |Setting |Guidance |Type |Example
 
 | `astraAddress`
-| Change the `astraAddress` string to the FQDN (recommended) or IP address you want to use in your browser to access Astra Control Center. This address defines how Astra Control Center will be found in your data center and is the same FQDN or IP address you provisioned from your load balancer when you completed link:requirements.html[Astra Control Center requirements^].
+| Change the `astraAddress` string to the FQDN (recommended) or IP address you want to use in your browser to access Astra Control Center. This address defines how Astra Control Center will be found in your data center and is the same FQDN or IP address you provisioned from your load balancer when you completed link:requirements.html[Astra Control Center requirements].
 
 NOTE: Do not use `http://` or `https://` in the address. Copy this FQDN for use in a <<Log in to the Astra Control Center UI,later step>>.
 | string
@@ -512,9 +512,9 @@ a| * `Retain` (This is the default value)
 | Use one of the following ingress types:
 
 *`Generic`* (`ingressType: "Generic"`) (Default)
-Use this option when you have another ingress controller in use or would prefer to use your own ingress controller. After Astra Control Center is deployed, you will need to configure the link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller^] to expose Astra Control Center with a URL.
+Use this option when you have another ingress controller in use or would prefer to use your own ingress controller. After Astra Control Center is deployed, you will need to configure the link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller] to expose Astra Control Center with a URL.
 
-IMPORTANT: If you intend to use a service mesh with Astra Control Center, you must select `Generic` as ingress type and set up your own link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller^].
+IMPORTANT: If you intend to use a service mesh with Astra Control Center, you must select `Generic` as ingress type and set up your own link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller].
 
 //astradoc-249
 
@@ -523,7 +523,7 @@ Use this option when you would prefer not to configure an ingress controller. Th
 
 Astra Control Center uses a service of the type "LoadBalancer" (`svc/traefik` in the Astra Control Center namespace), and requires that it be assigned an accessible external IP address. If load balancers are permitted in your environment and you don't already have one configured, you can use MetalLB or another external service load balancer to assign an external IP address to the service. In the internal DNS server configuration, you should point the chosen DNS name for Astra Control Center to the load-balanced IP address.
 
-NOTE: For details about the service type of "LoadBalancer" and ingress, refer to link:../get-started/requirements.html[Requirements^].
+NOTE: For details about the service type of "LoadBalancer" and ingress, refer to link:../get-started/requirements.html[Requirements].
 
 | string
 a| * `Generic` (this is the default value)
@@ -709,7 +709,7 @@ EOF
 kubectl apply -f astra_control_center.yaml -n [netapp-acc or custom namespace]
 ----
 
-IMPORTANT: The Astra Control Center operator will run an automatic check for  environment requirements. Missing link:../get-started/requirements.html[requirements^] can cause your installation to fail or Astra Control Center to not operate properly. See the <<Verify system status,next section>> to check for warning messages related to the automatic system check.  
+IMPORTANT: The Astra Control Center operator will run an automatic check for  environment requirements. Missing link:../get-started/requirements.html[requirements] can cause your installation to fail or Astra Control Center to not operate properly. See the <<Verify system status,next section>> to check for warning messages related to the automatic system check.  
 
 == Verify system status
 
@@ -728,7 +728,7 @@ NOTE: Additional warning messages are also reported in the Astra Control Center 
 
 . Correct any issues with your environment that were reported by the automated requirements checks. 
 +
-NOTE: You can correct issues by ensuring that your environment meets the link:../get-started/requirements.html[requirements^] for Astra Control Center.
+NOTE: You can correct issues by ensuring that your environment meets the link:../get-started/requirements.html[requirements] for Astra Control Center.
 
 . Verify that all system components installed successfully.
 +
@@ -845,7 +845,7 @@ vault-controller-88484b454-jktld              1/1     Running     0            9
 kubectl logs deploy/acc-operator-controller-manager -n netapp-acc-operator -c manager -f
 ----
 +
-NOTE: `accHost` cluster registration is one of the last operations, and if it fails it will not cause deployment to fail. In the event of a cluster registration failure indicated in the logs, you can attempt registration again through the link:../get-started/add-cluster.html[Add cluster workflow in the UI^] or API.
+NOTE: `accHost` cluster registration is one of the last operations, and if it fails it will not cause deployment to fail. In the event of a cluster registration failure indicated in the logs, you can attempt registration again through the link:../get-started/add-cluster.html[Add cluster workflow in the UI] or API.
 
 . When all the pods are running, verify that the installation was successful (`READY` is `True`) and get the initial setup password you will use when you log in to Astra Control Center:
 +
@@ -1045,7 +1045,7 @@ NOTE: If you enter an incorrect password three times, the admin account will be 
 +
 NOTE: If this is your first login and you forget the password and no other administrative user accounts have yet been created, contact https://mysupport.netapp.com/site/[NetApp Support] for password recovery assistance.
 
-. (Optional) Remove the existing self-signed TLS certificate and replace it with a link:../get-started/configure-after-install.html#add-a-custom-tls-certificate[custom TLS certificate signed by a Certificate Authority (CA)^].
+. (Optional) Remove the existing self-signed TLS certificate and replace it with a link:../get-started/configure-after-install.html#add-a-custom-tls-certificate[custom TLS certificate signed by a Certificate Authority (CA)].
 
 == Troubleshoot the installation
 

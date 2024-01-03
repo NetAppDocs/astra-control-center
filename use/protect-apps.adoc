@@ -177,7 +177,7 @@ The application is ready to backup and restore using Astra Control. Each PVC is 
 // End snippet
 
 == Create an immutable backup
-An immutable backup cannot be modified, deleted, or overwritten as long as the retention policy on the bucket that stores the backup forbids it. You can create immutable backups by backing up applications to buckets that have a retention policy configured. Refer to link:../concepts/data-protection.html#immutable-backups[Data protection^] for important information about working with immutable backups.
+An immutable backup cannot be modified, deleted, or overwritten as long as the retention policy on the bucket that stores the backup forbids it. You can create immutable backups by backing up applications to buckets that have a retention policy configured. Refer to link:../concepts/data-protection.html#immutable-backups[Data protection] for important information about working with immutable backups.
 
 .Before you begin
 You need to configure the destination bucket with a retention policy. How you do this will differ depending on which storage provider you use. Refer to the storage provider documentation for more information:

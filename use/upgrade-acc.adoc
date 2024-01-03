@@ -13,10 +13,10 @@ summary: To upgrade Astra Control Center, you'll download the bundle and upgrade
 [.lead]
 To upgrade Astra Control Center, download the installation bundle from the NetApp Support Site and complete these instructions. You can use this procedure to upgrade Astra Control Center in internet-connected or air-gapped environments.
 
-These instructions describe the upgrade process for Astra Control Center from the second-most recent release to this current release. You cannot upgrade directly from a version that is two or more releases behind the current release. If your installed Astra Control Center version is many versions behind the latest release, you might need to perform chain upgrades to more recent versions until your installed Astra Control Center is only one version behind the latest release. For a complete list of released versions, see the link:../release-notes/whats-new.html[release notes^].
+These instructions describe the upgrade process for Astra Control Center from the second-most recent release to this current release. You cannot upgrade directly from a version that is two or more releases behind the current release. If your installed Astra Control Center version is many versions behind the latest release, you might need to perform chain upgrades to more recent versions until your installed Astra Control Center is only one version behind the latest release. For a complete list of released versions, see the link:../release-notes/whats-new.html[release notes].
 
 .Before you begin
-Before you upgrade, ensure your environment still meets the link:../get-started/requirements.html[minimum requirements for Astra Control Center deployment^]. Your environment should have the following:
+Before you upgrade, ensure your environment still meets the link:../get-started/requirements.html[minimum requirements for Astra Control Center deployment]. Your environment should have the following:
 
 * *The link:../get-started/requirements.html#astra-control-provisioner[Astra Control Provisioner] is enabled and Astra Trident is running*
 +
@@ -32,7 +32,7 @@ kubectl get tridentversion -n trident
 +
 NOTE: If you are running Astra Trident 22.10 or earlier, use these https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html[instructions^] to upgrade to a more recent version of Astra Trident before upgrading to the Astra Control Provisioner. You can perform a direct upgrade to Astra Control Provisioner 24.02 if your Astra Trident is within a four-release window of version 24.02. For example, you can directly upgrade from Astra Trident 23.04 to Astra Control Provisioner 24.02.
 
-. Verify that Astra Control Provisioner has been https://docs.netapp.com/us-en/astra-control-center/get-started/faq.html#running-acp-check[enabled^]. Astra Control Provisioner will not work with releases of Astra Control Center earlier than 23.10. Upgrade your Astra Control Provisioner so that it has the same version as the Astra Control Center you are upgrading to access the latest functionality.
+. Verify that Astra Control Provisioner has been link:../get-started/faq.html#running-acp-check[enabled]. Astra Control Provisioner will not work with releases of Astra Control Center earlier than 23.10. Upgrade your Astra Control Provisioner so that it has the same version as the Astra Control Center you are upgrading to access the latest functionality.
 
 ====
 // End snippet 
