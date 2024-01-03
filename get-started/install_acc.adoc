@@ -39,6 +39,7 @@ kubectl get apiservices
 * *Ensure a routable FQDN*: The Astra FQDN you plan to use can be routed to the cluster. This means that you either have a DNS entry in your internal DNS server or you are using a core URL route that is already registered.
 * *Configure cert manager*: If a cert manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps] so that Astra Control Center does not attempt to install its own cert manager. By default, Astra Control Center installs its own cert manager during installation.
 //astradoc-249
+* *Get access to the NetApp Astra Control image registry*:
 include::../_include/access-netapp-image-registry.adoc[]
 * *Consider a service mesh*: It is strongly recommended that Astra Control host cluster communications channels be secured using a link:requirements.html#service-mesh-requirements[supported service mesh]. 
 +
@@ -378,7 +379,7 @@ NOTE: Do not use `http://` or `https://` in the address. Copy this FQDN for use 
 .`autoSupport`
 [%collapsible]
 ====
-Your selections in this section determine whether you will participate in NetApp's pro-active support application, NetApp Active IQ, and where data is sent. An internet connection is required (port 442), and all support data is anonymized.
+Your selections in this section determine whether you'll participate in NetApp's pro-active support application, NetApp Active IQ, and where data is sent. An internet connection is required (port 442), and all support data is anonymized.
 |===
 |Setting |Use |Guidance |Type |Example
 
@@ -512,7 +513,7 @@ a| * `Retain` (This is the default value)
 | Use one of the following ingress types:
 
 *`Generic`* (`ingressType: "Generic"`) (Default)
-Use this option when you have another ingress controller in use or would prefer to use your own ingress controller. After Astra Control Center is deployed, you will need to configure the link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller] to expose Astra Control Center with a URL.
+Use this option when you have another ingress controller in use or would prefer to use your own ingress controller. After Astra Control Center is deployed, you'll need to configure the link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller] to expose Astra Control Center with a URL.
 
 IMPORTANT: If you intend to use a service mesh with Astra Control Center, you must select `Generic` as ingress type and set up your own link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller].
 
@@ -847,7 +848,7 @@ kubectl logs deploy/acc-operator-controller-manager -n netapp-acc-operator -c ma
 +
 NOTE: `accHost` cluster registration is one of the last operations, and if it fails it will not cause deployment to fail. In the event of a cluster registration failure indicated in the logs, you can attempt registration again through the link:../get-started/add-cluster.html[Add cluster workflow in the UI] or API.
 
-. When all the pods are running, verify that the installation was successful (`READY` is `True`) and get the initial setup password you will use when you log in to Astra Control Center:
+. When all the pods are running, verify that the installation was successful (`READY` is `True`) and get the initial setup password you'll use when you log in to Astra Control Center:
 +
 [source,console]
 ----
@@ -867,7 +868,7 @@ IMPORTANT: Copy the UUID value. The password is `ACC-` followed by the UUID valu
 
 You can set up a Kubernetes ingress controller that manages external access to services. These procedures give setup examples for an ingress controller if you used the default of `ingressType: "Generic"` in the Astra Control Center custom resource (`astra_control_center.yaml`). You do not need to use this procedure if you specified `ingressType: "AccTraefik"` in the Astra Control Center custom resource (`astra_control_center.yaml`).
 
-After Astra Control Center is deployed, you will need to configure the ingress controller to expose Astra Control Center with a URL.
+After Astra Control Center is deployed, you'll need to configure the ingress controller to expose Astra Control Center with a URL.
 
 Setup steps differ depending on the type of ingress controller you use. Astra Control Center supports many ingress controller types. These setup procedures provide example steps for some common ingress controller types.
 
@@ -1028,7 +1029,7 @@ oc create route edge --service=traefik --port=web -n [netapp-acc or custom names
 
 == Log in to the Astra Control Center UI
 
-After installing Astra Control Center, you will change the password for the default administrator and log in to the Astra Control Center UI dashboard.
+After installing Astra Control Center, you'll change the password for the default administrator and log in to the Astra Control Center UI dashboard.
 
 .Steps
 . In a browser, enter the FQDN (including the `https://` prefix) you used in the `astraAddress` in the `astra_control_center.yaml` CR when <<Configure Astra Control Center,you installed Astra Control Center>>.

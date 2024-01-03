@@ -21,7 +21,7 @@ You obtain a license in one of the following ways:
 
 For details about licenses needed for ONTAP storage backends, refer to link:../get-started/requirements.html[supported storage backends].
 
-NOTE: Make sure that your license enables at least as many CPU units as you need. If the number of CPU units that Astra Control Center is currently managing exceeds the available CPU units in the new license being applied, you will not be able to apply the new license.
+NOTE: Make sure that your license enables at least as many CPU units as you need. If the number of CPU units that Astra Control Center is currently managing exceeds the available CPU units in the new license being applied, you'll not be able to apply the new license.
 
 == Evaluation licenses and full licenses
 An embedded evaluation license is provided with a new Astra Control Center installation. An evaluation license enables the same capabilities and features as a full license for a limited (90 day) period. After the evaluation period, a full license is required to continue with full functionality. 

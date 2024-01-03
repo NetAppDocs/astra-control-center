@@ -139,7 +139,7 @@ You can remove a bucket that is no longer in use or is not healthy. You might wa
 * You should check to ensure that there are no running or completed backups for this bucket before you begin.
 * You should check to ensure that the bucket is not being used in any active protection policy.
 
-If there are, you will not be able to continue.
+If there are, you'll not be able to continue.
 
 
 .Steps

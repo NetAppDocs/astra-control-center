@@ -161,7 +161,7 @@ NOTE: Manual approval is recommended. You should only have a single operator ins
 
 .. Select *Install*.
 +
-NOTE: If you selected a manual approval strategy, you will be prompted to approve the manual install plan for this operator.
+NOTE: If you selected a manual approval strategy, you'll be prompted to approve the manual install plan for this operator.
 
 . From the console, go to the OperatorHub menu and confirm that the operator installed successfully.
 
@@ -187,7 +187,7 @@ NOTE: By default, Astra will use High Availability (HA) `scaleSize` of `Medium`,
 +
 * *`Generic`* (`ingressType: "Generic"`) (Default)
 +
-Use this option when you have another ingress controller in use or would prefer to use your own ingress controller. After Astra Control Center is deployed, you will need to configure the link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller] to expose Astra Control Center with a URL.
+Use this option when you have another ingress controller in use or would prefer to use your own ingress controller. After Astra Control Center is deployed, you'll need to configure the link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller] to expose Astra Control Center with a URL.
 
 * *`AccTraefik`* (`ingressType: "AccTraefik"`)
 +
@@ -236,4 +236,4 @@ NOTE: Astra Control supports Docker registry secrets only.
 
 == What's next
 
-Complete the link:../get-started/install_acc.html#verify-system-status[remaining steps] to verify that Astra Control Center installed successfully, set up an ingress controller (optional), and log in to the UI. Additionally, you will need to perform link:setup_overview.html[setup tasks] after completing installation.
+Complete the link:../get-started/install_acc.html#verify-system-status[remaining steps] to verify that Astra Control Center installed successfully, set up an ingress controller (optional), and log in to the UI. Additionally, you'll need to perform link:setup_overview.html[setup tasks] after completing installation.
