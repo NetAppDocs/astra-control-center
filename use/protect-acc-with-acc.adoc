@@ -53,7 +53,7 @@ Not depicted in the diagram:
 
 * All the clusters have ONTAP backends with Astra Control Provisioner installed. 
 * In this configuration, the OpenShift clusters are using MetalLB as the load balancer. 
-* The snapshot controller and VolumeSnapshotClass are also installed on all the clusters as outlined in the link:../get-started/prep-for-cluster-management[prerequisites^]. 
+* The snapshot controller and VolumeSnapshotClass are also installed on all the clusters as outlined in the link:../get-started/prep-for-cluster-management[prerequisites]. 
  
 == Step 1 option: Backup and restore Astra Control Center
 
@@ -95,14 +95,14 @@ After you select *Define*, repeat the Define Application process for the operato
 
 . Back up Astra Control Center and the operator:
 .. On the secondary Astra Control Center, navigate to the Applications page by selecting the Applications tab.
-.. link:../use/protect-apps.html#create-a-backup[Back up^] the Astra Control Center application (`netapp-acc`).
-.. link:../use/protect-apps.html#create-a-backup[Back up^] the operator (`netapp-acc-operator`).
+.. link:../use/protect-apps.html#create-a-backup[Back up] the Astra Control Center application (`netapp-acc`).
+.. link:../use/protect-apps.html#create-a-backup[Back up] the operator (`netapp-acc-operator`).
 
-. After you have backed up Astra Control Center and the operator, simulate a disaster recovery (DR) scenario by link:../use/uninstall_acc.html[uninstalling Astra Control Center^] from the primary cluster.
+. After you have backed up Astra Control Center and the operator, simulate a disaster recovery (DR) scenario by link:../use/uninstall_acc.html[uninstalling Astra Control Center] from the primary cluster.
 +
 NOTE: You will restore Astra Control Center to a new cluster (the third Kubernetes cluster described in this procedure) and use the same DNS as the primary cluster for the newly installed Astra Control Center.
 
-. Using the secondary Astra Control Center, link:../use/restore-apps.html[restore^] the primary instance of the Astra Control Center application from its backup:
+. Using the secondary Astra Control Center, link:../use/restore-apps.html[restore] the primary instance of the Astra Control Center application from its backup:
 .. Select *Applications* and then select the name of the Astra Control Center application.
 .. From the Options menu in the Actions column, select *Restore*.
 .. Choose the *Restore to new namespaces* as the restore type.
@@ -147,7 +147,7 @@ kubectl get acc -n netapp-acc
 
 == Step 1 option: Protect Astra Control Center using Replication
 
-This procedure describes the necessary steps to configure link:../use/replicate_snapmirror.html[Astra Control Center replication^] to protect the primary Astra Control Center instance.
+This procedure describes the necessary steps to configure link:../use/replicate_snapmirror.html[Astra Control Center replication] to protect the primary Astra Control Center instance.
 
 In this example, Astra Control Center is always installed under the `netapp-acc` namespace and the operator is installed under the `netapp-acc-operator` namespace. 
 
@@ -175,8 +175,8 @@ In this example, Astra Control Center is always installed under the `netapp-acc`
 NOTE: Replication requires that the primary Astra Control Center cluster and the destination cluster (`ocp-cluster-3`) use different peered ONTAP storage backends.
 After each backend is peered and added to Astra Control, the backend appears in the *Discovered* tab of the Backends page.
 
-.. link:../get-started/add-storage-backend.html[Add a peered backend^] to Astra Control Center on the primary cluster.
-.. link:../get-started/add-storage-backend.html[Add a peered backend^] to Astra Control Center on the destination cluster.
+.. link:../get-started/add-storage-backend.html[Add a peered backend] to Astra Control Center on the primary cluster.
+.. link:../get-started/add-storage-backend.html[Add a peered backend] to Astra Control Center on the destination cluster.
 
 . Configure replication:
 .. On the Applications screen, select the `netapp-acc` application.

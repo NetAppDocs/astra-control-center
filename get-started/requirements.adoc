@@ -134,9 +134,9 @@ Astra Control Center requires an Astra Control Center license. When you install 
 
 You can try Astra Control Center by signing up for a free trial. You can sign up by registering link:https://bluexp.netapp.com/astra-register[here^].
 
-To set up the license, refer to link:setup_overview.html[use a 90-day evaluation license^]. 
+To set up the license, refer to link:setup_overview.html[use a 90-day evaluation license]. 
 
-To learn more about how licenses work, refer to link:../concepts/licensing.html[Licensing^].
+To learn more about how licenses work, refer to link:../concepts/licensing.html[Licensing].
 
 == Networking requirements
 Configure your operational environment to ensure Astra Control Center can communicate properly. The following networking configurations are required:
@@ -197,10 +197,10 @@ You can choose the type of network ingress Astra Control Center uses. By default
 
 NOTE: The load balancer should use an IP address located in the same subnet as the Astra Control Center worker node IP addresses.
 
-For more information, refer to link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[Set up ingress for load balancing^].
+For more information, refer to link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[Set up ingress for load balancing].
 
 === Google Anthos ingress requirements
-When hosting Astra Control Center on a Google Anthos cluster, note that Google Anthos includes the MetalLB load balancer and the Istio ingress service by default, enabling you to simply use the generic ingress capabilities of Astra Control Center during installation. Refer to link:install_acc.html#configure-astra-control-center[Configure Astra Control Center^] for details.
+When hosting Astra Control Center on a Google Anthos cluster, note that Google Anthos includes the MetalLB load balancer and the Istio ingress service by default, enabling you to simply use the generic ingress capabilities of Astra Control Center during installation. Refer to link:install_acc.html#configure-astra-control-center[Astra Control Center installation documentation] for details.
 
 == Supported web browsers
 
@@ -209,10 +209,10 @@ Astra Control Center supports recent versions of Firefox, Safari, and Chrome wit
 == Additional requirements for application clusters
 Keep in mind these requirements if you plan to use these Astra Control Center features:
 
-* *Application cluster requirements*: link:../get-started/prep-for-cluster-management[Cluster management requirements^]
-** *Managed application requirements*: link:../use/manage-apps.html#application-management-requirements[Application management requirements^]
-** *Additional requirements for app replication*: link:../use/replicate_snapmirror.html#replication-prerequisites[Replication prerequisites^]
+* *Application cluster requirements*: link:../get-started/prep-for-cluster-management[Cluster management requirements]
+** *Managed application requirements*: link:../use/manage-apps.html#application-management-requirements[Application management requirements]
+** *Additional requirements for app replication*: link:../use/replicate_snapmirror.html#replication-prerequisites[Replication prerequisites]
 
 == What's next
 
-View the link:quick-start.html[quick start^] overview.
+View the link:quick-start.html[quick start] overview.
