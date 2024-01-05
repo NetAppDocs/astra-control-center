@@ -1,0 +1,44 @@
+---
+sidebar: sidebar
+permalink: get-started/add-license.html
+keywords: set up astra control, astra control license
+summary: After you install Astra Control Center, log in to the UI, and change your password, you'll want to set up a license.
+---
+
+= Add a license for Astra Control Center
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/get-started/
+
+[.lead]
+//REFERENCED IN UI and NSS downloads. DO NOT MODIFY WITHOUT NOTIFYING STAKEHOLDERS.
+When you install Astra Control Center, an embedded evaluation license is already installed. If you are evaluating Astra Control Center, you can skip this step.
+
+You can add a new license using the Astra Control UI or https://docs.netapp.com/us-en/astra-automation[Astra Control API^]. 
+
+Astra Control Center licenses measure CPU resources using Kubernetes CPU units and account for the CPU resources assigned to the worker nodes of all the managed Kubernetes clusters. Licenses are based on vCPU usage. For more information on how licenses are calculated, refer to link:../concepts/licensing.html[Licensing].
+
+NOTE: If your installation grows to exceed the licensed number of CPU units, Astra Control Center prevents you from managing new applications. An alert is displayed when capacity is exceeded.
+
+NOTE: To update an existing evaluation or full license, refer to link:../use/update-licenses.html[Update an existing license].
+
+.Before you begin
+
+* Access to a newly installed Astra Control Center instance.
+
+* Administrator role permissions.
+
+* A link:../concepts/licensing.html[NetApp License File] (NLF).  
+
+.Steps
+. Log in to the Astra Control Center UI.
+. Select *Account* > *License*.
+. Select *Add License*.
+. Browse to the license file (NLF) that you downloaded.
+. Select *Add License*.
+
+The *Account* > *License* page displays the license information, expiration date, license serial number, account ID, and CPU units used.
+
+//AD AH review q2
+
+NOTE: If you have an evaluation license and are not sending data to AutoSupport, be sure that you store your account ID to avoid data loss in the event of Astra Control Center failure.

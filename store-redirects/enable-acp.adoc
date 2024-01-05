@@ -1,0 +1,4 @@
+---
+permalink: use/enable-acp.html
+redirect: get-started/enable-acp.html
+---
