@@ -11,7 +11,7 @@ summary: You can install the Astra Connector on clusters that you want to manage
 :imagesdir: ../media/get-started/
 
 [.lead]
-Astra Control Service uses Astra Connector to enable communication between Astra Control Service and clusters that it manages. You need to install Astra Connector on all clusters that you want to manage.
+Astra Control Center uses Astra Connector to enable communication between Astra Control Service and clusters that it manages. You need to install Astra Connector on all clusters that you want to manage.
 
 ////
 Astra Connector supports the following types of private clusters:
