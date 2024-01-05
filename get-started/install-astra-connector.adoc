@@ -304,6 +304,6 @@ spec:
 
 == What's next?
 
-Now that you've installed Astra Connector, you're ready to add your cluster to Astra Control. Refer to link:setup_overview.html[Add a cluster to Astra Control^] for instructions.
+Now that you've installed Astra Connector, you're ready to add your cluster to Astra Control. Refer to link:add-cluster.html[Add a cluster to Astra Control^] for instructions.
 
 
