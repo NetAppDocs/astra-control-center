@@ -25,7 +25,7 @@ Astra Control can restore your application from a snapshot or backup. Restoring 
 `oc adm policy add-scc-to-group anyuid system:serviceaccounts:wordpress`
 `oc adm policy add-scc-to-user privileged -z default -n wordpress`
 
-* *Supported storage class drivers*: Astra Trident and Astra Control Provisioner support restoring backups using storage classes backed by the following drivers:
+* *Supported storage class drivers*: Astra Control supports restoring backups using storage classes backed by the following drivers:
 ** `ontap-nas`
 ** `ontap-nas-economy` (Refer to the following note)
 ** `ontap-san`
