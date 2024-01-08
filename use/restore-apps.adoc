@@ -26,12 +26,11 @@ Astra Control can restore your application from a snapshot or backup. Restoring 
 `oc adm policy add-scc-to-user privileged -z default -n wordpress`
 
 * *Supported storage class drivers*: Astra Trident and Astra Control Provisioner support restoring backups using storage classes backed by the following drivers:
+** `ontap-nas`
+** `ontap-nas-economy` (Refer to the following note)
+** `ontap-san`
+** `ontap-san-economy`
 
-* `ontap-nas`
-* `ontap-nas-economy` (Refer to the following note)
-* `ontap-san`
-* `ontap-san-economy`
-=====
 * *(ontap-nas-economy driver only) Backups and restores*: Before backing up or restoring an app that uses a storage class backed by the `ontap-nas-economy` driver, verify that the link:../use/protect-apps.html#enable-backup-and-restore-for-ontap-nas-economy-operations[snapshot directory on the ONTAP storage backend is hidden]. Failure to hide this directory might lead to loss of access to your application, especially if it is using NFSv3.
 * *Helm deployed apps*: Apps deployed with Helm 3 (or upgraded from Helm 2 to Helm 3) are fully supported. Apps deployed with Helm 2 are not supported.
 
