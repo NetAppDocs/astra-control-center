@@ -126,9 +126,6 @@ To configure the MetroCluster LIF, refer to these options and examples for each 
 * https://docs.netapp.com/us-en/trident/trident-use/ontap-san-examples.html[SAN^]
 * https://docs.netapp.com/us-en/trident/trident-use/ontap-nas-examples.html[NAS^]
 
-== Image registry
-You must have an existing private Docker image registry to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
-
 == Astra Control Center license
 Astra Control Center requires an Astra Control Center license. When you install Astra Control Center, an embedded 90-day evaluation license for 4,800 CPU units is already activated. If you need more capacity or different evaluation terms, or want to upgrade to a full license, you can obtain a different evaluation license or full license from NetApp. You need a license to protect your applications and data.
 
