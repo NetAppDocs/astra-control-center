@@ -27,7 +27,7 @@ Astra Control can restore your application from a snapshot or backup. Restoring 
 
 * *Supported storage class drivers*: Astra Control supports restoring backups using storage classes backed by the following drivers:
 ** `ontap-nas`
-** `ontap-nas-economy` (Refer to the following note)
+** `ontap-nas-economy`
 ** `ontap-san`
 ** `ontap-san-economy`
 
