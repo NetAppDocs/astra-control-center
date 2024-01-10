@@ -35,6 +35,11 @@ Performing an in-place restore operation on an app that shares resources with an
 ====
 
 .Steps
+[role="tabbed-block"]
+====
+.Web UI
+--
+.Steps
 
 . Select *Applications* and then select the name of an app.
 . From the Options menu in the Actions column, select *Restore*.
@@ -75,7 +80,41 @@ NOTE: To learn about configuring include and exclude rules, see <<Filter resourc
 
 . Select *Next*.
 . Review details about the restore action carefully, type "restore" (if prompted), and select *Restore*.
+--
 
+.Custom resource (CR)
+--
+.Steps
+
+. Create the custom resource (CR) file and name it `astra-control-restore-cr.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
++
+* *<RESTORE_SOURCE>*: The location of the backup you need to restore.
+* *<RESTORE_DESTINATION>*: The destination of the restore operation.
++
+[source,yaml]
+----
+apiVersion: astra.netapp.io/v1
+kind: Restore
+metadata:
+  name: restore-sample
+spec:
+  properties:
+    appArchivePath:
+    appVaultRef:
+    namespaceMapping:
+      items:
+        properties:
+          source: <RESTORE_SOURCE>
+          destination: <RESTORE_DESTINATION>
+----
+. After you populate the `astra-control-restore-cr.yaml` file with the correct values, apply the CR:
++
+[source,console]
+----
+kubectl apply -f astra-control-restore-cr.yaml
+----
+--
+====
 .Result
 
 Astra Control restores the app based on the information that you provided. If you restored the app in-place, the content of existing persistent volumes is replaced with the content of persistent volumes from the restored app.
