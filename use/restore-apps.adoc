@@ -88,24 +88,27 @@ NOTE: To learn about configuring include and exclude rules, see <<Filter resourc
 
 . Create the custom resource (CR) file and name it `astra-control-restore-cr.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
 +
-* *<RESTORE_SOURCE>*: The location of the backup you need to restore.
-* *<RESTORE_DESTINATION>*: The destination of the restore operation.
+* *<APPVAULT_NAME>*: The name of the AppVault where the backup contents are stored.
+* *<BACKUP_PATH>*: The path inside AppVault where the backup contents are stored. For example:
++
+----
+minio_1343ff5e-4c41-46b5-af00-7b5bbba63406/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3-a5540f6f54a1
+----
+* *<SOURCE_NAMESPACE>*: The source namespace of the restore operation.
+* *<DESTINATION_NAMESPACE>*: The destination namespace of the restore operation.
 +
 [source,yaml]
 ----
 apiVersion: astra.netapp.io/v1
-kind: Restore
+kind: BackupRestore
 metadata:
-  name: restore-sample
+  labels:
+  name: backuprestore-minio-2
+  namespace: neptune-system
 spec:
-  properties:
-    appArchivePath:
-    appVaultRef:
-    namespaceMapping:
-      items:
-        properties:
-          source: <RESTORE_SOURCE>
-          destination: <RESTORE_DESTINATION>
+  appVaultRef: <APPVAULT_NAME>
+  appArchivePath: <BACKUP_PATH>
+  namespaceMapping: [{"source": "<SOURCE_NAMESPACE>", "target": "<DESTINATION_NAMESPACE>"}] 
 ----
 . After you populate the `astra-control-restore-cr.yaml` file with the correct values, apply the CR:
 +
@@ -121,24 +124,26 @@ kubectl apply -f astra-control-restore-cr.yaml
 
 . Create the custom resource (CR) file and name it `astra-control-restore-cr.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
 +
-* *<RESTORE_SOURCE>*: The location of the backup you need to restore.
-* *<RESTORE_DESTINATION>*: The destination of the restore operation.
+* *<APPVAULT_NAME>*: The name of the AppVault where the backup contents are stored.
+* *<BACKUP_PATH>*: The path inside AppVault where the backup contents are stored.
++
+----
+minio_1343ff5e-4c41-46b5-af00-7b5bbba63406/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3-a5540f6f54a1
+----
+* *<SOURCE_NAMESPACE>*: The source namespace of the restore operation.
+* *<DESTINATION_NAMESPACE>*: The destination namespace of the restore operation.
 +
 [source,yaml]
 ----
 apiVersion: astra.netapp.io/v1
-kind: Restore
+kind: SnapshotRestore
 metadata:
-  name: restore-sample
+  name: snapshotrestore-sample
+  namespace: neptune-system
 spec:
-  properties:
-    appArchivePath:
-    appVaultRef:
-    namespaceMapping:
-      items:
-        properties:
-          source: <RESTORE_SOURCE>
-          destination: <RESTORE_DESTINATION>
+  appArchivePath: <BACKUP_PATH>
+  appVaultRef: <APPVAULT_NAME>
+  namespaceMapping: [{"source": "<SOURCE_NAMESPACE>", "destination": "<DESTINATION_NAMESPACE>"}] 
 ----
 . After you populate the `astra-control-restore-cr.yaml` file with the correct values, apply the CR:
 +
@@ -154,24 +159,25 @@ kubectl apply -f astra-control-restore-cr.yaml
 
 . Create the custom resource (CR) file and name it `astra-control-restore-cr.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
 +
-* *<RESTORE_SOURCE>*: The location of the backup you need to restore.
-* *<RESTORE_DESTINATION>*: The destination of the restore operation.
+* *<APPVAULT_NAME>*: The name of the AppVault where the backup contents are stored.
+* *<BACKUP_PATH>*: The path inside AppVault where the backup contents are stored.
++
+----
+minio_1343ff5e-4c41-46b5-af00-7b5bbba63406/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3-a5540f6f54a1
+----
+* *<SOURCE_NAMESPACE>*: The source namespace of the restore operation.
+* *<DESTINATION_NAMESPACE>*: The destination namespace of the restore operation.
 +
 [source,yaml]
 ----
 apiVersion: astra.netapp.io/v1
-kind: Restore
+kind: SnapshotInplaceRestore
 metadata:
-  name: restore-sample
+  name: snapshotinplacerestore-sample1
+  namespace: neptune-system
 spec:
-  properties:
-    appArchivePath:
-    appVaultRef:
-    namespaceMapping:
-      items:
-        properties:
-          source: <RESTORE_SOURCE>
-          destination: <RESTORE_DESTINATION>
+  appArchivePath: <BACKUP_PATH>
+  appVaultRef: <APPVAULT_NAME> 
 ----
 . After you populate the `astra-control-restore-cr.yaml` file with the correct values, apply the CR:
 +
@@ -187,24 +193,25 @@ kubectl apply -f astra-control-restore-cr.yaml
 
 . Create the custom resource (CR) file and name it `astra-control-restore-cr.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
 +
-* *<RESTORE_SOURCE>*: The location of the backup you need to restore.
-* *<RESTORE_DESTINATION>*: The destination of the restore operation.
+* *<APPVAULT_NAME>*: The name of the AppVault where the backup contents are stored.
+* *<BACKUP_PATH>*: The path inside AppVault where the backup contents are stored.
++
+----
+minio_1343ff5e-4c41-46b5-af00-7b5bbba63406/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3-a5540f6f54a1
+----
+* *<SOURCE_NAMESPACE>*: The source namespace of the restore operation.
+* *<DESTINATION_NAMESPACE>*: The destination namespace of the restore operation.
 +
 [source,yaml]
 ----
 apiVersion: astra.netapp.io/v1
-kind: Restore
+kind: BackupInplaceRestore
 metadata:
-  name: restore-sample
+  name: backupinplacerestore-1
+  namespace: neptune-system
 spec:
-  properties:
-    appArchivePath:
-    appVaultRef:
-    namespaceMapping:
-      items:
-        properties:
-          source: <RESTORE_SOURCE>
-          destination: <RESTORE_DESTINATION>
+  appVaultRef: <APPVAULT_NAME>
+  appArchivePath: <BACKUP_PATH> 
 ----
 . After you populate the `astra-control-restore-cr.yaml` file with the correct values, apply the CR:
 +
