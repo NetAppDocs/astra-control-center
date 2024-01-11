@@ -86,8 +86,9 @@ NOTE: To learn about configuring include and exclude rules, see <<Filter resourc
 --
 .Steps
 
-. Create the custom resource (CR) file and name it `astra-control-restore-cr.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
+. Create the custom resource (CR) file and name it `astra-control-backup-restore-cr.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
 +
+* *<CR_NAME>*: The name of this CR operation; choose a sensible name for your environment.
 * *<ASTRA_CONNECTOR_NAMESPACE>*: The namespace where Astra Connector is installed.
 * *<APPVAULT_NAME>*: The name of the AppVault where the backup contents are stored.
 * *<BACKUP_PATH>*: The path inside AppVault where the backup contents are stored. For example:
@@ -104,18 +105,18 @@ apiVersion: astra.netapp.io/v1
 kind: BackupRestore
 metadata:
   labels:
-  name: backuprestore-minio-2
+  name: <CR_NAME>
   namespace: <ASTRA_CONNECTOR_NAMESPACE>
 spec:
   appVaultRef: <APPVAULT_NAME>
   appArchivePath: <BACKUP_PATH>
   namespaceMapping: [{"source": "<SOURCE_NAMESPACE>", "target": "<DESTINATION_NAMESPACE>"}] 
 ----
-. After you populate the `astra-control-restore-cr.yaml` file with the correct values, apply the CR:
+. After you populate the `astra-control-backup-restore-cr.yaml` file with the correct values, apply the CR:
 +
 [source,console]
 ----
-kubectl apply -f astra-control-restore-cr.yaml
+kubectl apply -f astra-control-backup-restore-cr.yaml
 ----
 --
 
@@ -123,8 +124,9 @@ kubectl apply -f astra-control-restore-cr.yaml
 --
 .Steps
 
-. Create the custom resource (CR) file and name it `astra-control-restore-cr.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
+. Create the custom resource (CR) file and name it `astra-control-snapshot-restore-cr.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
 +
+* *<CR_NAME>*: The name of this CR operation; choose a sensible name for your environment.
 * *<ASTRA_CONNECTOR_NAMESPACE>*: The namespace where Astra Connector is installed.
 * *<APPVAULT_NAME>*: The name of the AppVault where the backup contents are stored.
 * *<BACKUP_PATH>*: The path inside AppVault where the backup contents are stored. For example:
@@ -140,18 +142,18 @@ minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d
 apiVersion: astra.netapp.io/v1
 kind: SnapshotRestore
 metadata:
-  name: snapshotrestore-sample
+  name: <CR_NAME>
   namespace: <ASTRA_CONNECTOR_NAMESPACE>
 spec:
   appArchivePath: <BACKUP_PATH>
   appVaultRef: <APPVAULT_NAME>
   namespaceMapping: [{"source": "<SOURCE_NAMESPACE>", "destination": "<DESTINATION_NAMESPACE>"}] 
 ----
-. After you populate the `astra-control-restore-cr.yaml` file with the correct values, apply the CR:
+. After you populate the `astra-control-snapshot-restore-cr.yaml` file with the correct values, apply the CR:
 +
 [source,console]
 ----
-kubectl apply -f astra-control-restore-cr.yaml
+kubectl apply -f astra-control-snapshot-restore-cr.yaml
 ----
 --
 
@@ -159,8 +161,9 @@ kubectl apply -f astra-control-restore-cr.yaml
 --
 .Steps
 
-. Create the custom resource (CR) file and name it `astra-control-restore-cr.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
+. Create the custom resource (CR) file and name it `astra-control-snapshot-ipr-cr.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
 +
+* *<CR_NAME>*: The name of this CR operation; choose a sensible name for your environment.
 * *<ASTRA_CONNECTOR_NAMESPACE>*: The namespace where Astra Connector is installed.
 * *<APPVAULT_NAME>*: The name of the AppVault where the backup contents are stored.
 * *<BACKUP_PATH>*: The path inside AppVault where the backup contents are stored. For example:
@@ -174,17 +177,17 @@ minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d
 apiVersion: astra.netapp.io/v1
 kind: SnapshotInplaceRestore
 metadata:
-  name: snapshotinplacerestore-sample1
+  name: <CR_NAME>
   namespace: <ASTRA_CONNECTOR_NAMESPACE>
 spec:
   appArchivePath: <BACKUP_PATH>
   appVaultRef: <APPVAULT_NAME> 
 ----
-. After you populate the `astra-control-restore-cr.yaml` file with the correct values, apply the CR:
+. After you populate the `astra-control-snapshot-ipr-cr.yaml` file with the correct values, apply the CR:
 +
 [source,console]
 ----
-kubectl apply -f astra-control-restore-cr.yaml
+kubectl apply -f astra-control-snapshot-ipr-cr.yaml
 ----
 --
 
@@ -192,8 +195,9 @@ kubectl apply -f astra-control-restore-cr.yaml
 --
 .Steps
 
-. Create the custom resource (CR) file and name it `astra-control-restore-cr.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
+. Create the custom resource (CR) file and name it `astra-control-backup-ipr-cr.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
 +
+* *<CR_NAME>*: The name of this CR operation; choose a sensible name for your environment.
 * *<ASTRA_CONNECTOR_NAMESPACE>*: The namespace where Astra Connector is installed.
 * *<APPVAULT_NAME>*: The name of the AppVault where the backup contents are stored.
 * *<BACKUP_PATH>*: The path inside AppVault where the backup contents are stored. For example:
@@ -207,17 +211,17 @@ minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d
 apiVersion: astra.netapp.io/v1
 kind: BackupInplaceRestore
 metadata:
-  name: backupinplacerestore-1
+  name: <CR_NAME>
   namespace: <ASTRA_CONNECTOR_NAMESPACE>
 spec:
   appVaultRef: <APPVAULT_NAME>
   appArchivePath: <BACKUP_PATH> 
 ----
-. After you populate the `astra-control-restore-cr.yaml` file with the correct values, apply the CR:
+. After you populate the `astra-control-backup-ipr-cr.yaml` file with the correct values, apply the CR:
 +
 [source,console]
 ----
-kubectl apply -f astra-control-restore-cr.yaml
+kubectl apply -f astra-control-backup-ipr-cr.yaml
 ----
 --
 ====
