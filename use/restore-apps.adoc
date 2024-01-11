@@ -86,31 +86,20 @@ NOTE: To learn about configuring include and exclude rules, see <<Filter resourc
 --
 .Steps
 
-. Create the custom resource (CR) file and name it `astra-control-backup-restore-cr.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
-+
-* *<CR_NAME>*: The name of this CR operation; choose a sensible name for your environment.
-* *<ASTRA_CONNECTOR_NAMESPACE>*: The namespace where Astra Connector is installed.
-* *<APPVAULT_NAME>*: The name of the AppVault where the backup contents are stored.
-* *<BACKUP_PATH>*: The path inside AppVault where the backup contents are stored. For example:
-+
-----
-minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
-----
-* *<SOURCE_NAMESPACE>*: The source namespace of the restore operation.
-* *<DESTINATION_NAMESPACE>*: The destination namespace of the restore operation.
-+
+. Create the custom resource (CR) file and name it `astra-control-backup-restore-cr.yaml`. Update the values with footnotes to match your Astra Control environment and cluster configuration
+
 [source,yaml]
 ----
 apiVersion: astra.netapp.io/v1
 kind: BackupRestore
 metadata:
   labels:
-  name: <CR_NAME>
-  namespace: <ASTRA_CONNECTOR_NAMESPACE>
+  name: backup-restore-operation-examplefootnote:[The name of this CR operation; choose a sensible name for your environment.]
+  namespace: namespace-namefootnote:[The namespace where Astra Connector is installed.]
 spec:
-  appVaultRef: <APPVAULT_NAME>
-  appArchivePath: <BACKUP_PATH>
-  namespaceMapping: [{"source": "<SOURCE_NAMESPACE>", "target": "<DESTINATION_NAMESPACE>"}] 
+  appVaultRef: AppVault-productionfootnote:[The name of the AppVault where the backup contents are stored.]
+  appArchivePath: minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3footnote:[The path inside AppVault where the backup contents are stored.]
+  namespaceMapping: [{"source": "source-namespacefootnote:[The source namespace of the restore operation.]", "target": "destination-namespacefootnote:[The destination namespace of the restore operation.]"}]
 ----
 . After you populate the `astra-control-backup-restore-cr.yaml` file with the correct values, apply the CR:
 +
