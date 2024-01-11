@@ -86,26 +86,37 @@ NOTE: To learn about configuring include and exclude rules, see <<Filter resourc
 --
 .Steps
 
-. Create the custom resource (CR) file and name it `astra-control-backup-restore-cr.yaml`. Update the values with footnotes to match your Astra Control environment and cluster configuration
-
+. Create the custom resource (CR) file and name it `astra-control-backup-restore-cr.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
++
+* *<CR_NAME>*: The name of this CR operation; choose a sensible name for your environment.
+* *<ASTRA_CONNECTOR_NAMESPACE>*: The namespace where Astra Connector is installed.
+* *<APPVAULT_NAME>*: The name of the AppVault where the backup contents are stored.
+* *<BACKUP_PATH>*: The path inside AppVault where the backup contents are stored. For example:
++
+----
+minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
+----
+* *<SOURCE_NAMESPACE>*: The source namespace of the restore operation.
+* *<DESTINATION_NAMESPACE>*: The destination namespace of the restore operation.
++
 [source,yaml]
 ----
 apiVersion: astra.netapp.io/v1
 kind: BackupRestore
 metadata:
   labels:
-  name: backup-restore-operation-example footnote:[The name of this CR operation; choose a sensible name for your environment.]
-  namespace: namespace-name footnote:[The namespace where Astra Connector is installed.]
+  name: <CR_NAME>
+  namespace: <ASTRA_CONNECTOR_NAMESPACE>
 spec:
-  appVaultRef: AppVault-production footnote:[The name of the AppVault where the backup contents are stored.]
-  appArchivePath: minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3 footnote:[The path inside AppVault where the backup contents are stored.]
-  namespaceMapping: [{"source": "source-namespace footnote:[The source namespace of the restore operation.]", "target": "destination-namespace footnote:[The destination namespace of the restore operation.]"}]
+  appVaultRef: <APPVAULT_NAME>
+  appArchivePath: <BACKUP_PATH>
+  namespaceMapping: [{"source": "<SOURCE_NAMESPACE>", "target": "<DESTINATION_NAMESPACE>"}] 
 ----
 . After you populate the `astra-control-backup-restore-cr.yaml` file with the correct values, apply the CR:
 +
 [source,console]
 ----
-kubectl apply -f astra-control-backup-restore-cr.yaml footnote:[The namespace where Astra Connector is installed.]
+kubectl apply -f astra-control-backup-restore-cr.yaml
 ----
 --
 
@@ -217,7 +228,7 @@ kubectl apply -f astra-control-snapshot-ipr-cr.yaml
 
 Astra Control restores the app based on the information that you provided. If you restored the app in-place, the content of existing persistent volumes is replaced with the content of persistent volumes from the restored app.
 
-NOTE: After a data protection operation (clone, backup, or restore) and subsequent persistent volume resize, there is a delay of up to twenty minutes before the new volume size is shown in the web UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size. footnote:[The namespace where Astra Connector is installed.]
+NOTE: After a data protection operation (clone, backup, or restore) and subsequent persistent volume resize, there is a delay of up to twenty minutes before the new volume size is shown in the web UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
 
 IMPORTANT: Any member user with namespace constraints by namespace name/ID or by namespace labels can clone or restore an app to a new namespace on the same cluster or to any other cluster in their organization's account. However, the same user cannot access the cloned or restored app in the new namespace. After a clone or restore operation creates a new namespace, the account admin/owner can edit the member user account and update role constraints for the affected user to grant access to the new namespace.
 
