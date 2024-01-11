@@ -105,7 +105,7 @@ spec:
 +
 [source,console]
 ----
-kubectl apply -f astra-control-backup-restore-cr.yaml
+kubectl apply -f astra-control-backup-restore-cr.yaml footnote:[The namespace where Astra Connector is installed.]
 ----
 --
 
@@ -217,7 +217,7 @@ kubectl apply -f astra-control-snapshot-ipr-cr.yaml
 
 Astra Control restores the app based on the information that you provided. If you restored the app in-place, the content of existing persistent volumes is replaced with the content of persistent volumes from the restored app.
 
-NOTE: After a data protection operation (clone, backup, or restore) and subsequent persistent volume resize, there is a delay of up to twenty minutes before the new volume size is shown in the web UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size.
+NOTE: After a data protection operation (clone, backup, or restore) and subsequent persistent volume resize, there is a delay of up to twenty minutes before the new volume size is shown in the web UI. The data protection operation is successful within minutes, and you can use the management software for the storage backend to confirm the change in volume size. footnote:[The namespace where Astra Connector is installed.]
 
 IMPORTANT: Any member user with namespace constraints by namespace name/ID or by namespace labels can clone or restore an app to a new namespace on the same cluster or to any other cluster in their organization's account. However, the same user cannot access the cloned or restored app in the new namespace. After a clone or restore operation creates a new namespace, the account admin/owner can edit the member user account and update role constraints for the affected user to grant access to the new namespace.
 
