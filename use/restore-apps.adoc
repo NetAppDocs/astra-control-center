@@ -92,7 +92,7 @@ NOTE: To learn about configuring include and exclude rules, see <<Filter resourc
 * *<BACKUP_PATH>*: The path inside AppVault where the backup contents are stored. For example:
 +
 ----
-minio_1343ff5e-4c41-46b5-af00-7b5bbba63406/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3-a5540f6f54a1
+minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
 ----
 * *<SOURCE_NAMESPACE>*: The source namespace of the restore operation.
 * *<DESTINATION_NAMESPACE>*: The destination namespace of the restore operation.
@@ -128,7 +128,7 @@ kubectl apply -f astra-control-restore-cr.yaml
 * *<BACKUP_PATH>*: The path inside AppVault where the backup contents are stored.
 +
 ----
-minio_1343ff5e-4c41-46b5-af00-7b5bbba63406/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3-a5540f6f54a1
+minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
 ----
 * *<SOURCE_NAMESPACE>*: The source namespace of the restore operation.
 * *<DESTINATION_NAMESPACE>*: The destination namespace of the restore operation.
@@ -163,10 +163,8 @@ kubectl apply -f astra-control-restore-cr.yaml
 * *<BACKUP_PATH>*: The path inside AppVault where the backup contents are stored.
 +
 ----
-minio_1343ff5e-4c41-46b5-af00-7b5bbba63406/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3-a5540f6f54a1
+minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
 ----
-* *<SOURCE_NAMESPACE>*: The source namespace of the restore operation.
-* *<DESTINATION_NAMESPACE>*: The destination namespace of the restore operation.
 +
 [source,yaml]
 ----
@@ -197,10 +195,8 @@ kubectl apply -f astra-control-restore-cr.yaml
 * *<BACKUP_PATH>*: The path inside AppVault where the backup contents are stored.
 +
 ----
-minio_1343ff5e-4c41-46b5-af00-7b5bbba63406/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3-a5540f6f54a1
+minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
 ----
-* *<SOURCE_NAMESPACE>*: The source namespace of the restore operation.
-* *<DESTINATION_NAMESPACE>*: The destination namespace of the restore operation.
 +
 [source,yaml]
 ----
