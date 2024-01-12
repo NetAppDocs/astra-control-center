@@ -86,8 +86,7 @@ EOF
 To install Astra Control Center, do the following steps:
 
 * <<Download and extract Astra Control Center>>
-* <<Install the NetApp Astra kubectl plugin>>
-* <<Add the images to your local registry>>
+* <<Complete additional steps if you use a local registry>>
 * <<Set up namespace and secret for registries with auth requirements>>
 * <<Install the Astra Control Center operator>>
 * <<Configure Astra Control Center>>
@@ -100,9 +99,13 @@ IMPORTANT: Do not delete the Astra Control Center operator (for example, `kubect
 
 include::../_include/download-extract-acc.adoc[]
 
-== Install the NetApp Astra kubectl plugin
+== Complete additional steps if you use a local registry
 
-You can use the NetApp Astra kubectl command line plugin to push images to a local Docker repository.
+If you are planning to push Astra Control Center package images to your local registry, you need to use the NetApp Astra kubectl command line plugin.
+
+=== Install the NetApp Astra kubectl plugin
+
+Complete these steps to install the most recent NetApp Astra kubectl command line plugin.
 
 .Before you begin
 NetApp provides plugin binaries for different CPU architectures and operating systems. You need to know which CPU and operating system you have before you perform this task. 
@@ -126,6 +129,8 @@ ls kubectl-astra/
 cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 ----
 
+=== Add the images to your registry
+
 include::../_include/docker-podman-add-images.adoc[]
 
 == Set up namespace and secret for registries with auth requirements
@@ -144,6 +149,7 @@ IMPORTANT: Before you complete the installation, be sure your kubeconfig is poin
 .Expand for steps
 [%collapsible]
 ====
+
 .. Create the `netapp-acc-operator` namespace:
 +
 [source,console]
@@ -169,9 +175,14 @@ NOTE: If you delete the namespace after the secret is generated, recreate the na
 kubectl create ns [netapp-acc or custom namespace]
 ----
 
-.. Create a secret for the `netapp-acc` (or custom-named) namespace. Add Docker information and run the following command:
+.. Create a secret for the `netapp-acc` (or custom-named) namespace. Add Docker information and run one of the the appropriate command depending on your registry preference:
 +
-[source,console]
+[source,Astra Control registry]
+----
+kubectl create secret docker-registry astra-registry-cred -n [netapp-acc or custom namespace] --docker-server=cr.astra.netapp.io --docker-username=[astra_account_id] --docker-password=[astra_api_token]
+----
++
+[source,local registry]
 ----
 kubectl create secret docker-registry astra-registry-cred -n [netapp-acc or custom namespace] --docker-server=[your_registry_path] --docker-username=[username] --docker-password=[token]
 ----
@@ -180,14 +191,12 @@ kubectl create secret docker-registry astra-registry-cred -n [netapp-acc or cust
 
 == Install the Astra Control Center operator
 
-. Change the directory:
+. Retain the values in `astra_control_center_operator_deploy.yaml` unless you are using a local registry.
 +
-[source,console]
-----
-cd manifests
-----
-
-. Edit the Astra Control Center operator deployment YAML (`astra_control_center_operator_deploy.yaml`) to refer to your local registry and secret.
+.Expand for local registry steps
+[%collapsible]
+====
+.. Open the Astra Control Center operator deployment YAML:
 +
 [source,console]
 ----
@@ -206,10 +215,6 @@ imagePullSecrets: [{name: astra-registry-cred}]
 .. Change `ASTRA_IMAGE_REGISTRY` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<Add the images to your local registry,previous step>>.
 .. Change `ASTRA_IMAGE_REGISTRY` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in a <<Add the images to your local registry,previous step>>.
 
-+
-.Expand for sample astra_control_center_operator_deploy.yaml
-[%collapsible]
-====
 [subs=+quotes]
 ----
 apiVersion: apps/v1
@@ -455,15 +460,16 @@ Your selections in this section define the container image registry that is host
 
 | `imageRegistry.name`
 | Required
-| The name of the image registry where you pushed the images in the <<Install the Astra Control Center operator,previous step>>. Do not use `http://` or `https://` in the registry name.
+| The name of the Astra Control image registry that hosts all images required to deploy Astra Control Center. The value will be pre-populated, and no action is required unless you configured a local registry. For this scenario, replace this existing value with the name of the image registry where you pushed the images in the <<Install the Astra Control Center operator,previous step>>. Do not use `http://` or `https://` in the registry name.
 | string
-| `example.registry.com/astra`
+| `cr.astra.netapp.io` (default)
+`example.registry.com/astra`
 
 | `imageRegistry.secret`
-| Required if the string you entered for `imageRegistry.name' requires a secret.
+| Optional
+| The name of the Kubernetes secret used to authenticate with the image registry. The value will be pre-populated, and no action is required unless you configured a local registry and the string you entered for that registry in `imageRegistry.name` requires a secret.
 
-IMPORTANT: If you are using a registry that does not require authorization, you must delete this `secret` line within `imageRegistry` or the installation will fail.
-| The name of the Kubernetes secret used to authenticate with the image registry.
+IMPORTANT: If you are using a local registry that does not require authorization, you must delete this `secret` line within `imageRegistry` or the installation will fail.
 | string
 | `astra-registry-cred`
 
