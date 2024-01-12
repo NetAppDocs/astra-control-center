@@ -34,7 +34,8 @@ Astra Control can restore your application from a snapshot or backup. Restoring 
 Performing an in-place restore operation on an app that shares resources with another app can have unintended results. Any resources that are shared between the apps are replaced when an in-place restore is performed on one of the apps. For more information, see <<In-place restore complications for an app that shares resources with another app,this example>>. 
 ====
 
-.Steps
+Perform the following steps, depending on the type of archive you want to restore:
+
 [role="tabbed-block"]
 ====
 .Web UI
