@@ -11,7 +11,7 @@ summary: To install Astra Control Center after addressing some environmental pre
 :imagesdir: ../media/get-started/
 
 [.lead]
-To install Astra Control Center, download the installation bundle from the NetApp Support Site and perform the following steps. You can use this procedure to install Astra Control Center in internet-connected or air-gapped environments.
+To install Astra Control Center, download the installation images and perform the following steps. You can use this procedure to install Astra Control Center in internet-connected or air-gapped environments.
 
 .Expand for other installation procedures
 [%collapsible]
@@ -101,7 +101,7 @@ include::../_include/download-extract-acc.adoc[]
 
 == Complete additional steps if you use a local registry
 
-If you are planning to push Astra Control Center package images to your local registry, you need to use the NetApp Astra kubectl command line plugin.
+If you are planning to push the Astra Control Center bundle to your local registry, you need to use the NetApp Astra kubectl command line plugin.
 
 === Install the NetApp Astra kubectl plugin
 
@@ -144,7 +144,7 @@ export KUBECONFIG=[file path]
 +
 IMPORTANT: Before you complete the installation, be sure your kubeconfig is pointing to the cluster where you want to install Astra Control Center.
 
-.  If you use a registry that requires authentication, you need to do the following:
+.  If you use a local registry that requires authentication, you need to do the following:
 +
 .Expand for steps
 [%collapsible]
@@ -460,7 +460,7 @@ Your selections in this section define the container image registry that is host
 
 | `imageRegistry.name`
 | Required
-| The name of the Astra Control image registry that hosts all images required to deploy Astra Control Center. The value will be pre-populated, and no action is required unless you configured a local registry. For this scenario, replace this existing value with the name of the image registry where you pushed the images in the <<Install the Astra Control Center operator,previous step>>. Do not use `http://` or `https://` in the registry name.
+| The name of the Astra Control image registry that hosts all images required to deploy Astra Control Center. The value will be pre-populated, and no action is required unless you configured a local registry. For a local registry, replace this existing value with the name of the image registry where you pushed the images in the <<Install the Astra Control Center operator,previous step>>. Do not use `http://` or `https://` in the registry name.
 | string
 | `cr.astra.netapp.io` (default)
 `example.registry.com/astra`
@@ -654,7 +654,7 @@ spec:
   firstName: "SRE"
   lastName: "Admin"
   imageRegistry:
-    name: "[your_registry_path]"
+    name: "[cr.astra.netapp.io or your_registry_path for local registries]"
     secret: "astra-registry-cred"
   storageClass: "ontap-gold"
   volumeReclaimPolicy: "Retain"

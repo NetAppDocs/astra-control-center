@@ -1,6 +1,6 @@
 //== Add the images to your registry
 
-. If you are planning to push Astra Control Center package images to your local registry, complete the appropriate step sequence for your container engine:
+. If you are planning to push the Astra Control Center bundle to your local registry, complete the appropriate step sequence for your container engine:
 +
 [role="tabbed-block"]
 ====
