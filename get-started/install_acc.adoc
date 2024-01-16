@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: get-started/install_acc.html
-keywords: astra installation, install astra control center, how to install astra control, deploy, download from netapp support
+keywords: astra installation, install astra control center, how to install astra control, deploy, service mesh
 summary: To install Astra Control Center after addressing some environmental prerequisites, you'll download the bundle and install following the steps described.
 ---
 
@@ -77,6 +77,8 @@ EOF
 ----
 ====
 // End snippet 
++
+IMPORTANT: Integrating Astra Control Center with a service mesh can only be done during Astra Control Center link:../get-started/install_acc.html[installation] or link:../use/upgrade-acc.html[upgrade] and not independent of these processes. Changing back from a meshed to an unmeshed environment is not supported.
 
 * *ONTAP SAN driver only*: If you are using an ONTAP SAN driver, be sure that multipath is enabled on all your Kubernetes clusters.
 

@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: get-started/acc_operatorhub_install.html
-keywords: how to install astra control center, operator, operatorhub, openshift, install astra control center operator
+keywords: how to install astra control center, operator, operatorhub, openshift, install astra control center operator, service mesh
 summary: If you use Red Hat OpenShift, you can install the Astra Control Center using an operator.
 ---
 
@@ -70,6 +70,9 @@ EOF
 ----
 ====
 // End snippet
++
+IMPORTANT: Integrating Astra Control Center with a service mesh can only be done during Astra Control Center link:../get-started/acc_operatorhub_install.html[installation] or link:../use/upgrade-acc.html[upgrade] and not independent of these processes. Changing back from a meshed to an unmeshed environment is not supported.
+
 * *Kubernetes ingress controller*: If you have a Kubernetes ingress controller that manages external access to services, such as load balancing in a cluster, you need to set it up for use with Astra Control Center:
 +
 [%collapsible]

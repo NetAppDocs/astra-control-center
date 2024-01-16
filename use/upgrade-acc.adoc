@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: use/upgrade-acc.html
-keywords: astra upgrade, upgrade astra control center, how to upgrade astra control, update
+keywords: astra upgrade, upgrade astra control center, how to upgrade astra control, update, service mesh
 summary: To upgrade Astra Control Center, you'll download the bundle and upgrade following the steps described.
 ---
 
@@ -143,6 +143,8 @@ NOTE: When you perform the upgrade, you'll also need to ensure that the `ingress
 ====
 
 //End snippet
+
+IMPORTANT: Integrating Astra Control Center with a service mesh can only be done during Astra Control Center link:../get-started/install_acc.html[installation] or link:../use/upgrade-acc.html[upgrade] and not independent of these processes. If you integrate the service mesh as part of upgrade, existing application labels will be removed and need to be reapplied. Changing back from a meshed to an unmeshed environment is not supported.
 
 .About this task
 The Astra Control Center upgrade process guides you through the following high-level steps:
