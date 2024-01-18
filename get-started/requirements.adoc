@@ -38,7 +38,7 @@ RKE 2 (v1.24.x) with Rancher 2.6
 RKE 2 (v1.26.x) with Rancher 2.7
 
 |Red Hat OpenShift Container Platform
-|4.11 through 4.13
+|4.11 through 4.14
 
 // |VMware Tanzu Kubernetes Grid
 // |1.6  (See <<Host cluster resource requirements>>)
@@ -69,11 +69,11 @@ NOTE: These requirements assume that Astra Control Center is the only applicatio
 //astradoc-362: make include from old Trident content?
 
 == Service mesh requirements
-A supported vanilla version of the Istio service mesh is strongly recommended to be installed on the Astra Control Center host cluster. Refer to https://istio.io/latest/docs/releases/supported-releases/[supported releases^] for supported versions of Istio. Branded releases of Istio service mesh, such as OpenShift Service Mesh, are not validated with Astra Control Center.
+It's strongly recommended that you install a supported vanilla version of the Istio service mesh on the Astra Control Center host cluster. Refer to https://istio.io/latest/docs/releases/supported-releases/[supported releases^] for supported versions of Istio. Branded releases of Istio service mesh, such as OpenShift Service Mesh, are not validated with Astra Control Center.
 
-To integrate Astra Control Center with the Istio service mesh installed on the host cluster, you must do the integration as part of the Astra Control Center link:../get-started/install_acc.html[installation] process and not independent of this process.
+To integrate Astra Control Center with the Istio service mesh installed on the host cluster, you must do the integration as part of an Astra Control Center link:../get-started/install_acc.html[installation] or link:../use/upgrade-acc.html[upgrade] and not independent of these processes.
 
-NOTE: Installing Astra Control Service without configuring a service mesh on the host cluster has potentially serious security implications.
+NOTE: Installing and using Astra Control Center without configuring a service mesh on the host cluster has potentially serious security implications.
 
 == Astra Control Provisioner
 To use Astra Control Provisioner advanced storage functionality, you must install Astra Trident 23.10 or later and enable link:../get-started/enable-acp.html[Astra Control Provisioner functionality].

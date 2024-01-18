@@ -100,7 +100,7 @@ After you select *Define*, repeat the Define Application process for the operato
 
 . After you have backed up Astra Control Center and the operator, simulate a disaster recovery (DR) scenario by link:../use/uninstall_acc.html[uninstalling Astra Control Center] from the primary cluster.
 +
-NOTE: You will restore Astra Control Center to a new cluster (the third Kubernetes cluster described in this procedure) and use the same DNS as the primary cluster for the newly installed Astra Control Center.
+NOTE: You'll restore Astra Control Center to a new cluster (the third Kubernetes cluster described in this procedure) and use the same DNS as the primary cluster for the newly installed Astra Control Center.
 
 . Using the secondary Astra Control Center, link:../use/restore-apps.html[restore] the primary instance of the Astra Control Center application from its backup:
 .. Select *Applications* and then select the name of the Astra Control Center application.

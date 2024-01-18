@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: get-started/acc_operatorhub_install.html
-keywords: how to install astra control center, operator, operatorhub, openshift, install astra control center operator
+keywords: how to install astra control center, operator, operatorhub, openshift, install astra control center operator, service mesh
 summary: If you use Red Hat OpenShift, you can install the Astra Control Center using an operator.
 ---
 
@@ -70,6 +70,9 @@ EOF
 ----
 ====
 // End snippet
++
+IMPORTANT: Integrating Astra Control Center with a service mesh can only be done during Astra Control Center link:../get-started/acc_operatorhub_install.html[installation] or link:../use/upgrade-acc.html[upgrade] and not independent of these processes. Changing back from a meshed to an unmeshed environment is not supported.
+
 * *Kubernetes ingress controller*: If you have a Kubernetes ingress controller that manages external access to services, such as load balancing in a cluster, you need to set it up for use with Astra Control Center:
 +
 [%collapsible]
@@ -163,7 +166,7 @@ NOTE: Manual approval is recommended. You should only have a single operator ins
 
 .. Select *Install*.
 +
-NOTE: If you selected a manual approval strategy, you will be prompted to approve the manual install plan for this operator.
+NOTE: If you selected a manual approval strategy, you'll be prompted to approve the manual install plan for this operator.
 
 . From the console, go to the OperatorHub menu and confirm that the operator installed successfully.
 
@@ -189,7 +192,7 @@ NOTE: By default, Astra will use High Availability (HA) `scaleSize` of `Medium`,
 +
 * *`Generic`* (`ingressType: "Generic"`) (Default)
 +
-Use this option when you have another ingress controller in use or would prefer to use your own ingress controller. After Astra Control Center is deployed, you will need to configure the link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller] to expose Astra Control Center with a URL.
+Use this option when you have another ingress controller in use or would prefer to use your own ingress controller. After Astra Control Center is deployed, you'll need to configure the link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[ingress controller] to expose Astra Control Center with a URL.
 
 * *`AccTraefik`* (`ingressType: "AccTraefik"`)
 +
@@ -238,4 +241,4 @@ NOTE: Astra Control supports Docker registry secrets only.
 
 == What's next
 
-Complete the link:../get-started/install_acc.html#verify-system-status[remaining steps] to verify that Astra Control Center installed successfully, set up an ingress controller (optional), and log in to the UI. Additionally, you will need to perform link:setup_overview.html[setup tasks] after completing installation.
+Complete the link:../get-started/install_acc.html#verify-system-status[remaining steps] to verify that Astra Control Center installed successfully, set up an ingress controller (optional), and log in to the UI. Additionally, you'll need to perform link:setup_overview.html[setup tasks] after completing installation.

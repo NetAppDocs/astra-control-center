@@ -58,7 +58,7 @@ You can edit the proxy server settings.
 
 === Disable proxy server connection
 
-You can disable the proxy server connection. You will be warned before you disable that potential disruption to other connections might occur.
+You can disable the proxy server connection. You'll be warned before you disable that potential disruption to other connections might occur.
 
 .Steps
 
@@ -106,8 +106,8 @@ You get the tenant URL when you get the Cloud Insights license. If you do not ha
 .. In Cloud Insights, generate both a *Read/Write* and a *Read only* API Access token by clicking *Admin* > *API Access*.
 +
 image:cloud-insights-api.png[This image shows the Cloud Insights API token generation page.]
-.. Copy the *Read only* key. You will need to paste it into the Astra Control Center window for enabling the Cloud Insights connection. For the Read API Access Token key permissions, select: Assets, Alerts, Acquisition Unit, and Data Collection.
-.. Copy the *Read/Write* key. You will need to paste it into the Astra Control Center *Connect Cloud Insights* window. For the Read/Write API Access Token key permissions, select: Data Ingestion, Log Ingestion, Acquisition Unit, and Data Collection.
+.. Copy the *Read only* key. You'll need to paste it into the Astra Control Center window for enabling the Cloud Insights connection. For the Read API Access Token key permissions, select: Assets, Alerts, Acquisition Unit, and Data Collection.
+.. Copy the *Read/Write* key. You'll need to paste it into the Astra Control Center *Connect Cloud Insights* window. For the Read/Write API Access Token key permissions, select: Data Ingestion, Log Ingestion, Acquisition Unit, and Data Collection.
 +
 NOTE: We recommend that you generate a *Read only* key and a *Read/Write* key, and not use the same key for both purposes. By default, the token expiry period is set to one year. We recommend that you keep the default selection to give the token the maximum duration before it expires. If your token expires, the telemetry will stop.
 
