@@ -125,7 +125,9 @@ Before upgrading Astra Control Center, perform these steps:
 
 . Install the Istio service mesh on the host cluster. 
 +
-IMPORTANT: Don't attempt to add the mesh to the existing Astra installation. The Istio service mesh must be running in parallel with an existing, un-meshed Astra Control Center installation.
+IMPORTANT: Don't attempt to add the mesh to the existing Astra installation. The Istio service mesh must be running in parallel with an existing, unmeshed Astra Control Center installation. Existing Istio application labels will be removed and need to be reapplied in the next step.
+
+//last sentence needs verification from Brett
 
 . Add the following labels to the Astra (`netapp-acc` or custom namespace) namespace:
 +
@@ -139,12 +141,12 @@ kubectl label ns [netapp-acc or custom namespace] istio-injection:disabled
 kubectl label ns [netapp-acc or custom namespace] astra.netapp.io/istio:on-upgrade
 ----
 
-NOTE: When you perform the upgrade, you'll also need to ensure that the `ingressType` you specify in link:../use/upgrade-acc.html#upgrade-astra-control-center[the Astra Control Center CR] is `Generic` and not `AccTraefik` or the upgrade will fail.
+. When you perform the upgrade, you'll also need to ensure that the `ingressType` you specify in link:../use/upgrade-acc.html#upgrade-astra-control-center[the Astra Control Center CR] is `Generic` and not `AccTraefik` or the upgrade will fail.
 ====
 
 //End snippet
 
-IMPORTANT: Integrating Astra Control Center with a service mesh can only be done during Astra Control Center link:../get-started/install_acc.html[installation] or link:../use/upgrade-acc.html[upgrade] and not independent of these processes. If you integrate the service mesh as part of upgrade, existing application labels will be removed and need to be reapplied. Changing back from a meshed to an unmeshed environment is not supported.
+IMPORTANT: Integrating Astra Control Center with a service mesh can only be done during Astra Control Center link:../get-started/install_acc.html[installation] or link:../use/upgrade-acc.html[upgrade] and not independent of these processes. Changing back from a meshed to an unmeshed environment is not supported.
 
 .About this task
 The Astra Control Center upgrade process guides you through the following high-level steps:
