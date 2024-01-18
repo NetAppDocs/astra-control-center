@@ -44,7 +44,7 @@ For instructions on how to manage buckets using the Astra Control API, see the l
 
 You can do these tasks related to managing buckets:
 
-* link:../get-started/add-bucket[Add a bucket]
+* link:../get-started/add-bucket.html[Add a bucket]
 * <<Edit a bucket>>
 * <<Set the default bucket>>
 * <<Rotate or remove bucket credentials>>

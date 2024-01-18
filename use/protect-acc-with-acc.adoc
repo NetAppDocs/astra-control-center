@@ -53,7 +53,7 @@ Not depicted in the diagram:
 
 * All the clusters have ONTAP backends with Astra Control Provisioner installed. 
 * In this configuration, the OpenShift clusters are using MetalLB as the load balancer. 
-* The snapshot controller and VolumeSnapshotClass are also installed on all the clusters as outlined in the link:../get-started/prep-for-cluster-management[prerequisites]. 
+* The snapshot controller and VolumeSnapshotClass are also installed on all the clusters as outlined in the link:../get-started/prep-for-cluster-management.html[prerequisites]. 
  
 == Step 1 option: Backup and restore Astra Control Center
 

@@ -92,21 +92,23 @@ oc create namespace netapp-acc-operator
 .Steps
 
 * <<Download and extract Astra Control Center>>
-* <<Install the NetApp Astra kubectl plugin>>
-* <<Add the images to your local registry>>
+* <<(Local registries only) Install the NetApp Astra kubectl plugin>>
+* <<(Local registries only) Add the images to your registry>>
 * <<Find the operator install page>>
 * <<Install the operator>>
 * <<Install Astra Control Center>>
 
 include::../_include/download-extract-acc.adoc[]
 
-== Install the NetApp Astra kubectl plugin
+== (Local registries only) Install the NetApp Astra kubectl plugin
 
-You can use the NetApp Astra kubectl command line plugin to push images to a local Docker repository.
+If you are planning to push Astra Control Center package images to your local registry, you need to use the NetApp Astra kubectl command line plugin.
 
 .Before you begin
 
 NetApp provides plugin binaries for different CPU architectures and operating systems. You need to know which CPU and operating system you have before you perform this task.
+
+If you already have the plugin installed from a previous installation, link:../use/upgrade-acc.html#remove-the-netapp-astra-kubectl-plugin-and-install-it-again[make sure you have the latest version] before completing these steps.
 
 .Steps
 

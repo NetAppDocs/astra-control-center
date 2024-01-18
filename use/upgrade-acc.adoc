@@ -11,7 +11,7 @@ summary: To upgrade Astra Control Center, you'll download the bundle and upgrade
 :imagesdir: ../media/get-started/
 
 [.lead]
-To upgrade Astra Control Center, download the installation bundle from the NetApp Support Site and complete these instructions. You can use this procedure to upgrade Astra Control Center in internet-connected or air-gapped environments.
+To upgrade Astra Control Center, download the installation images and complete these instructions. You can use this procedure to upgrade Astra Control Center in internet-connected or air-gapped environments.
 
 These instructions describe the upgrade process for Astra Control Center from the second-most recent release to this current release. You cannot upgrade directly from a version that is two or more releases behind the current release. If your installed Astra Control Center version is many versions behind the latest release, you might need to perform chain upgrades to more recent versions until your installed Astra Control Center is only one version behind the latest release. For a complete list of released versions, see the link:../release-notes/whats-new.html[release notes].
 
@@ -166,7 +166,7 @@ include::../_include/download-extract-acc.adoc[]
 
 == Remove the NetApp Astra kubectl plugin and install it again
 
-You can use the NetApp Astra kubectl command line plugin to push images to a local Docker repository.
+You need to use the latest version of the NetApp Astra kubectl command line plugin to push images to a local Docker repository.
 
 . Determine if you have the plug-in installed:
 +

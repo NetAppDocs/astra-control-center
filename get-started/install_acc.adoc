@@ -11,7 +11,7 @@ summary: To install Astra Control Center after addressing some environmental pre
 :imagesdir: ../media/get-started/
 
 [.lead]
-To install Astra Control Center, download the installation bundle from the NetApp Support Site and perform the following steps. You can use this procedure to install Astra Control Center in internet-connected or air-gapped environments.
+To install Astra Control Center, download the installation images and perform the following steps. You can use this procedure to install Astra Control Center in internet-connected or air-gapped environments.
 
 .Expand for other installation procedures
 [%collapsible]
@@ -38,12 +38,16 @@ kubectl get apiservices
 
 * *Ensure a routable FQDN*: The Astra FQDN you plan to use can be routed to the cluster. This means that you either have a DNS entry in your internal DNS server or you are using a core URL route that is already registered.
 * *Configure cert manager*: If a cert manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps] so that Astra Control Center does not attempt to install its own cert manager. By default, Astra Control Center installs its own cert manager during installation.
+* *ONTAP SAN driver only*: If you are using an ONTAP SAN driver, be sure that multipath is enabled on all your Kubernetes clusters.
+
+You should also consider the following:
+
 //astradoc-249
 * *Get access to the NetApp Astra Control image registry*:
 include::../_include/access-netapp-image-registry.adoc[]
-* *Consider a service mesh*: It is strongly recommended that Astra Control host cluster communications channels be secured using a link:requirements.html#service-mesh-requirements[supported service mesh]. 
+* *A service mesh for secure communications*: It is strongly recommended that Astra Control host cluster communications channels be secured using a link:requirements.html#service-mesh-requirements[supported service mesh]. 
 +
-.Istio service mesh details 
+.Istio service mesh installation steps 
 [%collapsible]
 ====
 For Istio service mesh use, you'll need to do the following:
@@ -80,15 +84,12 @@ EOF
 +
 IMPORTANT: Integrating Astra Control Center with a service mesh can only be done during Astra Control Center link:../get-started/install_acc.html[installation] or link:../use/upgrade-acc.html[upgrade] and not independent of these processes. Changing back from a meshed to an unmeshed environment is not supported.
 
-* *ONTAP SAN driver only*: If you are using an ONTAP SAN driver, be sure that multipath is enabled on all your Kubernetes clusters.
-
 .Steps
 
 To install Astra Control Center, do the following steps:
 
 * <<Download and extract Astra Control Center>>
-* <<Install the NetApp Astra kubectl plugin>>
-* <<Add the images to your local registry>>
+* <<Complete additional steps if you use a local registry>>
 * <<Set up namespace and secret for registries with auth requirements>>
 * <<Install the Astra Control Center operator>>
 * <<Configure Astra Control Center>>
@@ -101,9 +102,13 @@ IMPORTANT: Do not delete the Astra Control Center operator (for example, `kubect
 
 include::../_include/download-extract-acc.adoc[]
 
-== Install the NetApp Astra kubectl plugin
+== Complete additional steps if you use a local registry
 
-You can use the NetApp Astra kubectl command line plugin to push images to a local Docker repository.
+If you are planning to push the Astra Control Center bundle to your local registry, you need to use the NetApp Astra kubectl command line plugin.
+
+=== Install the NetApp Astra kubectl plugin
+
+Complete these steps to install the most recent NetApp Astra kubectl command line plugin.
 
 .Before you begin
 NetApp provides plugin binaries for different CPU architectures and operating systems. You need to know which CPU and operating system you have before you perform this task. 
@@ -127,6 +132,8 @@ ls kubectl-astra/
 cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 ----
 
+=== Add the images to your registry
+
 include::../_include/docker-podman-add-images.adoc[]
 
 == Set up namespace and secret for registries with auth requirements
@@ -140,11 +147,12 @@ export KUBECONFIG=[file path]
 +
 IMPORTANT: Before you complete the installation, be sure your kubeconfig is pointing to the cluster where you want to install Astra Control Center.
 
-.  If you use a registry that requires authentication, you need to do the following:
+.  If you use a local registry that requires authentication, you need to do the following:
 +
 .Expand for steps
 [%collapsible]
 ====
+
 .. Create the `netapp-acc-operator` namespace:
 +
 [source,console]
@@ -170,9 +178,14 @@ NOTE: If you delete the namespace after the secret is generated, recreate the na
 kubectl create ns [netapp-acc or custom namespace]
 ----
 
-.. Create a secret for the `netapp-acc` (or custom-named) namespace. Add Docker information and run the following command:
+.. Create a secret for the `netapp-acc` (or custom-named) namespace. Add Docker information and run one of the the appropriate command depending on your registry preference:
 +
-[source,console]
+[source,Astra Control registry]
+----
+kubectl create secret docker-registry astra-registry-cred -n [netapp-acc or custom namespace] --docker-server=cr.astra.netapp.io --docker-username=[astra_account_id] --docker-password=[astra_api_token]
+----
++
+[source,local registry]
 ----
 kubectl create secret docker-registry astra-registry-cred -n [netapp-acc or custom namespace] --docker-server=[your_registry_path] --docker-username=[username] --docker-password=[token]
 ----
@@ -181,14 +194,12 @@ kubectl create secret docker-registry astra-registry-cred -n [netapp-acc or cust
 
 == Install the Astra Control Center operator
 
-. Change the directory:
+. Retain the values in `astra_control_center_operator_deploy.yaml` unless you are using a local registry.
 +
-[source,console]
-----
-cd manifests
-----
-
-. Edit the Astra Control Center operator deployment YAML (`astra_control_center_operator_deploy.yaml`) to refer to your local registry and secret.
+.Expand for local registry steps
+[%collapsible]
+====
+.. Open the Astra Control Center operator deployment YAML:
 +
 [source,console]
 ----
@@ -207,10 +218,6 @@ imagePullSecrets: [{name: astra-registry-cred}]
 .. Change `ASTRA_IMAGE_REGISTRY` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<Add the images to your local registry,previous step>>.
 .. Change `ASTRA_IMAGE_REGISTRY` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in a <<Add the images to your local registry,previous step>>.
 
-+
-.Expand for sample astra_control_center_operator_deploy.yaml
-[%collapsible]
-====
 [subs=+quotes]
 ----
 apiVersion: apps/v1
@@ -456,15 +463,16 @@ Your selections in this section define the container image registry that is host
 
 | `imageRegistry.name`
 | Required
-| The name of the image registry where you pushed the images in the <<Install the Astra Control Center operator,previous step>>. Do not use `http://` or `https://` in the registry name.
+| The name of the Astra Control image registry that hosts all images required to deploy Astra Control Center. The value will be pre-populated, and no action is required unless you configured a local registry. For a local registry, replace this existing value with the name of the image registry where you pushed the images in the <<Install the Astra Control Center operator,previous step>>. Do not use `http://` or `https://` in the registry name.
 | string
-| `example.registry.com/astra`
+| `cr.astra.netapp.io` (default)
+`example.registry.com/astra`
 
 | `imageRegistry.secret`
-| Required if the string you entered for `imageRegistry.name' requires a secret.
+| Optional
+| The name of the Kubernetes secret used to authenticate with the image registry. The value will be pre-populated, and no action is required unless you configured a local registry and the string you entered for that registry in `imageRegistry.name` requires a secret.
 
-IMPORTANT: If you are using a registry that does not require authorization, you must delete this `secret` line within `imageRegistry` or the installation will fail.
-| The name of the Kubernetes secret used to authenticate with the image registry.
+IMPORTANT: If you are using a local registry that does not require authorization, you must delete this `secret` line within `imageRegistry` or the installation will fail.
 | string
 | `astra-registry-cred`
 
@@ -649,7 +657,7 @@ spec:
   firstName: "SRE"
   lastName: "Admin"
   imageRegistry:
-    name: "[your_registry_path]"
+    name: "[cr.astra.netapp.io or your_registry_path for local registries]"
     secret: "astra-registry-cred"
   storageClass: "ontap-gold"
   volumeReclaimPolicy: "Retain"
