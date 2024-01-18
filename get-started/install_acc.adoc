@@ -28,7 +28,7 @@ For a demonstration of the Astra Control Center installation process, see https:
 +
 TIP: Deploy Astra Control Center in a third fault domain or secondary site. This is recommended for app replication and seamless disaster recovery.
 
-* *Consider pod security policies*: If you have configured or want to configure pod security policies in your environment, familiarize yourself with pod security policies and how they affect Astra Control Center installation. Refer to link:../concepts/understand-pod-security.html[pod security restrictions].
+// * *Consider pod security policies*: If you have configured or want to configure pod security policies in your environment, familiarize yourself with pod security policies and how they affect Astra Control Center installation. Refer to link:../concepts/understand-pod-security.html[pod security restrictions^].
 * *Ensure healthy services*: Check that all API services are in a healthy state and available:
 +
 [source,console]

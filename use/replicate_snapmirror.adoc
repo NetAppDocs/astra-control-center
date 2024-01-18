@@ -78,7 +78,6 @@ IMPORTANT: Astra Control replication supports apps that use a single storage cla
 
 //astradoc-26
 
-
 == Set up a replication relationship
 
 Setting up a replication relationship involves the following:
