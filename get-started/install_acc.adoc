@@ -194,7 +194,7 @@ kubectl create secret docker-registry astra-registry-cred -n [netapp-acc or cust
 
 == Install the Astra Control Center operator
 
-. (Local registries only) If you unless you are using a local registry, complete these steps: 
+. (Local registries only) If you are using a local registry, complete these steps: 
 +
 .Expand for local registry steps
 [%collapsible]
@@ -466,7 +466,7 @@ Your selections in this section define the container image registry that is host
 | The name of the Astra Control image registry that hosts all images required to deploy Astra Control Center. The value will be pre-populated, and no action is required unless you configured a local registry. For a local registry, replace this existing value with the name of the image registry where you pushed the images in the <<Install the Astra Control Center operator,previous step>>. Do not use `http://` or `https://` in the registry name.
 | string
 | `cr.astra.netapp.io` (default)
-`example.registry.com/astra`
+`example.registry.com/astra` (local registry example)
 
 | `imageRegistry.secret`
 | Optional
