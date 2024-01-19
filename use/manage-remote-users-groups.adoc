@@ -65,8 +65,8 @@ NOTE: The role you select is assigned to all users in this group. If you assign 
 +
 [NOTE]
 ====
-* When a user is assigned multiple roles through LDAP group membership, the constraints from the roles are combined if the resources being accessed are associated with clusters that are using the latest Astra Connector. For example, if a user with a local Viewer role joins three groups that are bound to the Member role, the user now has Viewer role access to the original resources as well as Member role access to the resources gained through group membership.
-* If the cluster does not have Astra Connector installed, the constraints from the most permissive role are the only ones that take effect.
+* If the resources being accessed belong to clusters that have the latest Astra Connector installed, when a user is assigned multiple roles through LDAP group membership, the constraints from the roles are combined. For example, if a user with a local Viewer role joins three groups that are bound to the Member role, the user now has Viewer role access to the original resources as well as Member role access to the resources gained through group membership.
+* If the resources being accessed belong to clusters that do not have Astra Connector installed, the constraints from the most permissive role are the only ones that take effect.
 ====
 
 . Select *Add*.
