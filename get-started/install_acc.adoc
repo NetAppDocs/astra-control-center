@@ -164,7 +164,12 @@ kubectl create ns netapp-acc-operator
 +
 NOTE: The placeholder `your_registry_path` should match the location of the images that you uploaded earlier (for example, `[Registry_URL]/netapp/astra/astracc/23.10.0-68`).
 +
-[source,console]
+[source,Astra_registry]
+----
+kubectl create secret docker-registry astra-registry-cred -n netapp-acc-operator --docker-server=cr.astra.netapp.io --docker-username=[astra_account_id] --docker-password=[astra_api_token]
+----
++
+[source,local_registry]
 ----
 kubectl create secret docker-registry astra-registry-cred -n netapp-acc-operator --docker-server=[your_registry_path] --docker-username=[username] --docker-password=[token]
 ----
