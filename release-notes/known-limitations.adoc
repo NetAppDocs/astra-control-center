@@ -95,7 +95,7 @@ Any `member` user with RBAC constraints by namespace name/ID can clone or restor
 
 == Restrictive role constraints can be ignored for resources on non-connector clusters
 * *If the resources being accessed belong to clusters that have the latest Astra Connector installed*: When a user is assigned multiple roles through LDAP group membership, the constraints from the roles are combined. For example, if a user with a local Viewer role joins three groups that are bound to the Member role, the user now has Viewer role access to the original resources as well as Member role access to the resources gained through group membership.
-* *If the resources being accessed belong to clusters that do not have Astra Connector installed*: The constraints from the most permissive role are the only ones that take effect.
+* *If the resources being accessed belong to clusters that do not have Astra Connector installed*: When a user is assigned multiple roles through LDAP group membership, the constraints from the most permissive role are the only ones that take effect.
 
 == Multiple applications in a single namespace cannot be restored collectively to a different namespace
 If you manage multiple applications in a single namespace (by creating multiple app definitions in Astra Control), you cannot restore all of the applications to a different single namespace. You need to restore each application to its own separate namespace.
