@@ -1,7 +1,7 @@
 == Download and extract Astra Control Center
 Download the Astra Control Center images from one of the following locations:
 
-* *Astra Control Service image registry*: Use this option if you _don't_ use a local registry with the Astra Control Center images. 
+* *Astra Control Service image registry*: Use this option if you don't use a local registry with the Astra Control Center images or if you prefer this method to the bundle download from the NetApp Support Site. 
 * *NetApp Support Site*: Use this option if you use a local registry with the Astra Control Center images. 
 
 [role="tabbed-block"]

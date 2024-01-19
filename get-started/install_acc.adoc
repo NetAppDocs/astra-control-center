@@ -47,7 +47,7 @@ You should also consider the following:
 include::../_include/access-netapp-image-registry.adoc[]
 * *A service mesh for secure communications*: It is strongly recommended that Astra Control host cluster communications channels be secured using a link:requirements.html#service-mesh-requirements[supported service mesh]. 
 +
-.Istio service mesh installation steps 
+.Expand for Istio service mesh installation steps 
 [%collapsible]
 ====
 For Istio service mesh use, you'll need to do the following:
@@ -147,7 +147,7 @@ export KUBECONFIG=[file path]
 +
 IMPORTANT: Before you complete the installation, be sure your kubeconfig is pointing to the cluster where you want to install Astra Control Center.
 
-.  If you use a local registry that requires authentication, you need to do the following:
+.  If you use a registry that requires authentication, you need to do the following:
 +
 .Expand for steps
 [%collapsible]
@@ -180,12 +180,12 @@ kubectl create ns [netapp-acc or custom namespace]
 
 .. Create a secret for the `netapp-acc` (or custom-named) namespace. Add Docker information and run one of the the appropriate command depending on your registry preference:
 +
-[source,Astra Control registry]
+[source,Astra_registry]
 ----
 kubectl create secret docker-registry astra-registry-cred -n [netapp-acc or custom namespace] --docker-server=cr.astra.netapp.io --docker-username=[astra_account_id] --docker-password=[astra_api_token]
 ----
 +
-[source,local registry]
+[source,local_registry]
 ----
 kubectl create secret docker-registry astra-registry-cred -n [netapp-acc or custom namespace] --docker-server=[your_registry_path] --docker-username=[username] --docker-password=[token]
 ----
@@ -194,7 +194,7 @@ kubectl create secret docker-registry astra-registry-cred -n [netapp-acc or cust
 
 == Install the Astra Control Center operator
 
-. Retain the values in `astra_control_center_operator_deploy.yaml` unless you are using a local registry.
+. (Local registries only) If you unless you are using a local registry, complete these steps: 
 +
 .Expand for local registry steps
 [%collapsible]
@@ -657,7 +657,7 @@ spec:
   firstName: "SRE"
   lastName: "Admin"
   imageRegistry:
-    name: "[cr.astra.netapp.io or your_registry_path for local registries]"
+    name: "[cr.astra.netapp.io or your_registry_path]"
     secret: "astra-registry-cred"
   storageClass: "ontap-gold"
   volumeReclaimPolicy: "Retain"
