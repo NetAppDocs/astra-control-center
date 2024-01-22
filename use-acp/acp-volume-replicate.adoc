@@ -249,7 +249,7 @@ Astra Control Provisioner checks for replicated PVCs, and releases the replicati
 
 === Delete a TMR
 
-Deleting a TMR updates the TMR to _promoted_ state before Astra Control Provisioner completes the deletion. If the TMR is already already in the _promoted_ state, it is deleted. otherwise Astra Control Provisioner will promote the local PVC to ReadWrite volume. This releases the SnapMirror metadata of the local volume in ONTAP, requiring future TMRs involving this volume to use the "established" state.
+Deleting a TMR on one side of a mirrored relationship causes the remaining TMR to transition to _promoted_ state before Astra Control Provisioner completes the deletion. If the TMR selected for deletion is already in _promoted_ state, there is no existing mirror relationship and the TMR will be removed and Astra Control Provisioner will promote the local PVC to _ReadWrite_. This deletion releases SnapMirror metadata for the local volume in ONTAP. If this volume is used in a mirror relationship in the future, it must use a new TMR with an _established_ volume replication state when creating the new mirror relationship.
 
 ==  Update mirror relationships when ONTAP is online
 
