@@ -17,8 +17,8 @@ If you have any issues with the uninstall, see <<Troubleshooting uninstall issue
 
 .Before you begin
 
-. link:../use/unmanage.html#unmanage-an-app[Unmanage all apps^] on the clusters.
-. link:../use/unmanage.html#unmanage-a-cluster[Unmanage all clusters^].
+. link:../use/unmanage.html#unmanage-an-app[Unmanage all apps] on the clusters.
+. link:../use/unmanage.html#unmanage-a-cluster[Unmanage all clusters].
 
 .Steps
 

@@ -11,7 +11,7 @@ summary: After you add Kubernetes clusters to Astra Control, you can install app
 :imagesdir: ../media/use/
 
 [.lead]
-After you link:../get-started/setup_overview.html#add-cluster[add a cluster to Astra Control management], you can install apps on the cluster (outside of Astra Control) and then go to the Applications page in Astra Control to define the apps and their resources.
+After you link:../get-started/add-cluster.html[add a cluster to Astra Control management], you can install apps on the cluster (outside of Astra Control) and then go to the Applications page in Astra Control to define the apps and their resources.
 
 You can define and manage apps that include storage resources with running pods, or apps that include storage resources without any running pods. Apps that have no running pods are known as data-only applications.
 
@@ -88,7 +88,7 @@ Astra Control might not be able to clone an operator that is designed with a “
 
 == Install apps on your cluster
 
-After you've link:../get-started/setup_overview.html#add-cluster[added your cluster] to Astra Control, you can install apps or manage existing apps on the cluster. Any app that is scoped to one or more namespaces can be managed.
+After you've link:../get-started/add-cluster.html[added your cluster] to Astra Control, you can install apps or manage existing apps on the cluster. Any app that is scoped to one or more namespaces can be managed.
 
 == Define apps
 

@@ -1,0 +1,4 @@
+---
+permalink: get-started/setup_overview.html#add-cluster
+redirect: get-started/add-cluster.html
+---

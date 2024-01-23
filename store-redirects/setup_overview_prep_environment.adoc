@@ -1,0 +1,4 @@
+---
+permalink: get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control
+redirect: get-started/prep-for-cluster-management.html
+---

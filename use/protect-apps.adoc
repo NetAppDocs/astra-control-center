@@ -142,7 +142,7 @@ Astra Control Provisioner provides backup and restore functionality that can be 
 
 .Before you begin
 
-* You have link:../use/enable-acp.html[enabled Astra Control Provisioner].
+* You have link:../get-started/enable-acp.html[enabled Astra Control Provisioner].
 * You have defined an application in Astra Control. This application will have limited protection functionality until you complete this procedure.
 * You have `ontap-nas-economy` selected as the default storage class for your storage backend.
 
@@ -163,7 +163,7 @@ nfs modify -vserver <svm name> -v3-hide-snapshot enabled
 +
 IMPORTANT: Verify that the snapshot directory on the ONTAP storage backend is hidden. Failure to hide this directory might lead to loss of access to your application, especially if it is using NFSv3.
 
-. Do the following in Astra Trident: 
+. Do the following in Astra Control Provisioner: 
 .. Enable the snapshot directory for each PV that is `ontap-nas-economy` based and associated with the application:
 +
 [source,console]
@@ -194,7 +194,7 @@ The application is ready to backup and restore using Astra Control. Each PVC is 
 // End snippet
 
 == Create an immutable backup
-An immutable backup cannot be modified, deleted, or overwritten as long as the retention policy on the bucket that stores the backup forbids it. You can create immutable backups by backing up applications to buckets that have a retention policy configured. Refer to link:../concepts/data-protection.html#immutable-backups[Data protection^] for important information about working with immutable backups.
+An immutable backup cannot be modified, deleted, or overwritten as long as the retention policy on the bucket that stores the backup forbids it. You can create immutable backups by backing up applications to buckets that have a retention policy configured. Refer to link:../concepts/data-protection.html#immutable-backups[Data protection] for important information about working with immutable backups.
 
 .Before you begin
 You need to configure the destination bucket with a retention policy. How you do this will differ depending on which storage provider you use. Refer to the storage provider documentation for more information:
