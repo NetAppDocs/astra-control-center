@@ -21,6 +21,10 @@ TIP: We recommend that Astra Control Center manage the cluster it is deployed on
 * Before you add a cluster, review and perform the necessary link:../get-started/prep-for-cluster-management.html[prerequisite tasks].
 * If you are using an ONTAP SAN driver, be sure that multipath is enabled on all your Kubernetes clusters.
 
+[role="tabbed-block"]
+====
+.Add the cluster using the Web UI
+--
 .Steps
 . Navigate from either the Dashboard or the Clusters menu:
 * From *Dashboard* in the Resource Summary, select *Add* from the Clusters pane.
@@ -38,6 +42,31 @@ IMPORTANT: If you create your own `kubeconfig` file, you should define only *one
 NOTE: You should select a storage class that is configured in Astra Control Provisioner and backed by ONTAP storage.
 
 . Review the information, and if everything looks good, select *Add*.
+
+--
+
+.Add the cluster using the command line
+--
+.Steps
+
+. Select the *Add manually using command line* check box.
+. *Cluster name*: Provide a name for the cluster. The name is used in the Astra Control web UI to identify the cluster and associate it with a cloud instance.
+. *Cloud instance*: Do one of the following:
++
+* Select a cloud instance from the list.
+* If there are no cloud instances in the list, select *Add cloud instance*. 
++
+.. Provide a name for the new cloud instance that will be created when you add this cluster. Learn more about link:../use/manage-cloud-instances.html[cloud instances].
+.. Select *Add*.
+. Select *Next*.
+. *API token*: You need an https://docs.netapp.com/us-en/astra-automation/get-started/get_api_token.html[Astra Control API token^] to add the cluster using the command line. Do one of the following:
++
+* If you have an existing API token, paste it into the text box.
+* Generate a new Astra Control API token by selecting *Generate*.
+. Follow the command line instructions in the *Add cluster* dialog to finish adding the cluster to Astra Control.
+. When you've finished, select *Exit*.
+--
+====
 
 .Result
 
