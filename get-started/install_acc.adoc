@@ -38,14 +38,14 @@ kubectl get apiservices
 
 * *Ensure a routable FQDN*: The Astra FQDN you plan to use can be routed to the cluster. This means that you either have a DNS entry in your internal DNS server or you are using a core URL route that is already registered.
 * *Configure cert manager*: If a cert manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps] so that Astra Control Center does not attempt to install its own cert manager. By default, Astra Control Center installs its own cert manager during installation.
-* *ONTAP SAN driver only*: If you are using an ONTAP SAN driver, be sure that multipath is enabled on all your Kubernetes clusters.
+* *(ONTAP SAN driver only) Enable multipath*: If you are using an ONTAP SAN driver, be sure that multipath is enabled on all your Kubernetes clusters.
 
 You should also consider the following:
 
 //astradoc-249
 * *Get access to the NetApp Astra Control image registry*:
 include::../_include/access-netapp-image-registry.adoc[]
-* *A service mesh for secure communications*: It is strongly recommended that Astra Control host cluster communications channels be secured using a link:requirements.html#service-mesh-requirements[supported service mesh]. 
+* *Install a service mesh for secure communications*: It is strongly recommended that Astra Control host cluster communications channels be secured using a link:requirements.html#service-mesh-requirements[supported service mesh]. 
 +
 .Expand for Istio service mesh installation steps 
 [%collapsible]
@@ -343,7 +343,7 @@ NOTE: An annotated sample YAML follows these steps.
 
 . Modify or confirm the following settings:
 +
-.`accountName`
+.accountName
 [%collapsible]
 ====
 |===
@@ -359,7 +359,7 @@ NOTE: An annotated sample YAML follows these steps.
 ====
 // End snippet
 +
-.`astraVersion`
+.astraVersion
 [%collapsible]
 ====
 |===
@@ -373,7 +373,7 @@ NOTE: An annotated sample YAML follows these steps.
 ====
 // End snippet
 +
-.`astraAddress`
+.astraAddress
 [%collapsible]
 ====
 |===
@@ -390,7 +390,7 @@ NOTE: Do not use `http://` or `https://` in the address. Copy this FQDN for use 
 ====
 // End snippet
 +
-.`autoSupport`
+.autoSupport
 [%collapsible]
 ====
 Your selections in this section determine whether you'll participate in NetApp's pro-active support application, NetApp Active IQ, and where data is sent. An internet connection is required (port 442), and all support data is anonymized.
@@ -413,7 +413,7 @@ Your selections in this section determine whether you'll participate in NetApp's
 ====
 // End snippet
 +
-.`email`
+.email
 [%collapsible]
 ====
 |===
@@ -428,7 +428,7 @@ Your selections in this section determine whether you'll participate in NetApp's
 ====
 // End snippet
 +
-.`firstName`
+.firstName
 [%collapsible]
 ====
 |===
@@ -443,7 +443,7 @@ Your selections in this section determine whether you'll participate in NetApp's
 ====
 // End snippet
 +
-.`LastName`
+.LastName
 [%collapsible]
 ====
 |===
@@ -458,7 +458,7 @@ Your selections in this section determine whether you'll participate in NetApp's
 ====
 // End snippet
 +
-.`imageRegistry`
+.imageRegistry
 [%collapsible]
 ====
 Your selections in this section define the container image registry that is hosting the Astra application images, Astra Control Center Operator, and Astra Control Center Helm repository.
@@ -485,7 +485,7 @@ IMPORTANT: If you are using a local registry that does not require authorization
 ====
 // End snippet
 +
-.`storageClass`
+.storageClass
 [%collapsible]
 ====
 |===
@@ -502,7 +502,7 @@ NOTE: If a default storage class is configured, ensure that it is the only stora
 ====
 // End snippet
 +
-.`volumeReclaimPolicy`
+.volumeReclaimPolicy
 [%collapsible]
 ====
 |===
@@ -518,7 +518,7 @@ a| * `Retain` (This is the default value)
 // End snippet
 +
 [[generic-ingress]]
-.`ingressType`
+.ingressType
 [%collapsible]
 ====
 |===
@@ -548,7 +548,7 @@ a| * `Generic` (this is the default value)
 ====
 // End snippet
 +
-.`scaleSize`
+.scaleSize
 [%collapsible]
 ====
 |===
@@ -567,7 +567,7 @@ a|* `Small`
 ====
 // End snippet
 +
-.`astraResourcesScaler`
+.astraResourcesScaler
 [%collapsible]
 ====
 |===
@@ -584,7 +584,7 @@ a| * `Default` (This is the default value)
 ====
 // End snippet
 +
-.`additionalValues`
+.additionalValues
 [%collapsible]
 ====
 //astradoc-245/known issue/23.07 only
@@ -618,7 +618,7 @@ additionalValues:
 // End snippet
 
 +
-.`crds`
+.crds
 [%collapsible]
 ====
 Your selections in this section determine how Astra Control Center should handle CRDs.
