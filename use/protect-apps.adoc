@@ -100,27 +100,27 @@ IMPORTANT: If your app uses a storage class backed by the `ontap-nas-economy` dr
 --
 .Steps
 
-. Create the custom resource (CR) file and name it `astra-control-backup-restore-cr.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
+. Create the custom resource (CR) file and name it `astra-control-snapshot-cr.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
 +
-* *<CR_NAME>*: The name of this CR operation; choose a sensible name for your environment.a
+* *<CR_NAME>*: The name of this CR operation; choose a sensible name for your environment.
 * *<APPLICATION_NAME>*: The name of the application to snapshot.
-* *<APPVAULT_NAME>*: The name of the AppVault where the backup contents are stored.
+* *<APPVAULT_NAME>*: The name of the AppVault where the snapshot contents should be stored.
 +
 [source,yaml]
 ----
 apiVersion: astra.netapp.io/v1
 kind: Snapshot
 metadata: 
-  name: <CR_NAME> # The name of this CR operation; choose a sensible name for your environment.
+  name: <CR_NAME>
 spec: 
   applicationRef: <APPLICATION_NAME>
-  appVaultRef: <APPVAULT_NAME> # The name of the AppVault where the backup contents are stored.
+  appVaultRef: <APPVAULT_NAME>
 ----
-. After you populate the `astra-control-backup-restore-cr.yaml` file with the correct values, apply the CR:
+. After you populate the `astra-control-snapshot-cr.yaml` file with the correct values, apply the CR:
 +
 [source,console]
 ----
-kubectl apply -f astra-control-backup-restore-cr.yaml
+kubectl apply -f astra-control-snapshot-cr.yaml
 ----
 --
 ====
