@@ -12,7 +12,7 @@ summary: After you install Astra Control Center, set up a license, and prepare y
 
 [.lead]
 //REFERENCED IN UI. DO NOT MODIFY WITHOUT NOTIFYING UX.
-To begin managing your apps, add a Kubernetes cluster and manage it as a compute resource. You have to add a cluster for Astra Control Center to discover your Kubernetes applications. You can add a cluster using either the Astra Control web UI or the command line. Adding the cluster using the command line is helpful if you need to automate adding more than one cluster at a time.
+To begin managing your apps, add a Kubernetes cluster and manage it as a compute resource. You have to add a cluster for Astra Control Center to discover your Kubernetes applications. You can add a cluster using either the Astra Control web UI or the command line. Adding the cluster using the command line is helpful if you need to automate adding multiple clusters.
 
 TIP: We recommend that Astra Control Center manage the cluster it is deployed on first before you add other clusters to Astra Control Center to manage. Having the initial cluster under management is necessary to send Kubemetrics data and cluster-associated data for metrics and troubleshooting.
 
