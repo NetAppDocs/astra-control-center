@@ -506,4 +506,4 @@ Astra Control Provisioner is automatically installed as part of the import and d
 
 Install Astra Control Center with the standard link:../get-started/install_acc.html[installation instructions].
 
-Using Astra Control Center, add an Azure bucket. Refer to link:../get-started/setup_overview.html[Set up Astra Control Center and add buckets].
+Using Astra Control Center, add an Azure bucket. Refer to link:../get-started/add-bucket.html[Set up Astra Control Center and add buckets].

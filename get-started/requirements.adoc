@@ -131,7 +131,7 @@ Astra Control Center requires an Astra Control Center license. When you install 
 
 You can try Astra Control Center by signing up for a free trial. You can sign up by registering link:https://bluexp.netapp.com/astra-register[here^].
 
-To set up the license, refer to link:setup_overview.html[use a 90-day evaluation license]. 
+To set up the license, refer to link:add-license.html[use a 90-day evaluation license]. 
 
 To learn more about how licenses work, refer to link:../concepts/licensing.html[Licensing].
 

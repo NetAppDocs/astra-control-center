@@ -46,5 +46,5 @@ When you start managing an app on a cluster, all of that cluster's CPU units are
 NOTE: Red Hat OpenShift infrastructure nodes do not consume licenses in Astra Control Center. To mark a node as an infrastructure node, apply the label `node-role.kubernetes.io/infra: ""` to the node.
 
 == Find more information
-* link:../get-started/setup_overview.html#add-a-license-for-astra-control-center[Add a license when you first set up Astra Control Center]
+* link:../get-started/add-license.html[Add a license when you first set up Astra Control Center]
 * link:../use/update-licenses.html[Update an existing license]

@@ -267,4 +267,4 @@ NOTE: Astra Control supports Docker registry secrets only.
 
 == What's next
 
-Complete the link:../get-started/install_acc.html#verify-system-status[remaining steps] to verify that Astra Control Center installed successfully, set up an ingress controller (optional), and log in to the UI. Additionally, you'll need to perform link:setup_overview.html[setup tasks] after completing installation.
+Complete the link:../get-started/install_acc.html#verify-system-status[remaining steps] to verify that Astra Control Center installed successfully, set up an ingress controller (optional), and log in to the UI. Additionally, you'll need to perform link:quick-start.html[setup tasks] after completing installation.
