@@ -1,0 +1,4 @@
+---
+permalink: get-started/setup_overview.html#add-a-storage-backend
+redirect: get-started/add-storage-backend.html
+---

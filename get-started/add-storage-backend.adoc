@@ -1,0 +1,44 @@
+---
+sidebar: sidebar
+permalink: get-started/add-storage-backend.html
+keywords: set up astra control, astra control license, add cluster, add storage backend, import storage, add bucket
+summary: After you enable storage backend authentication, you should select a storage backend to manage.
+---
+
+= Add a storage backend
+:hardbreaks:
+:icons: font
+:imagesdir: ../media/get-started/
+
+[.lead]
+After you set up the credentials or certificate authentication information, you can add an existing ONTAP storage backend to Astra Control Center to manage its resources.
+
+Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend as well as additional storage metrics.
+
+*_Astra Control Provisioner only_*: Adding and managing ONTAP storage backends in Astra Control Center is optional when using NetApp SnapMirror technology if you have enabled Astra Control Provisioner with Astra Control Center 23.10 or later.
+
+.Steps
+
+. From the Dashboard in the left-navigation area, select *Backends*.
+//** *New backends*: Select *Add* to manage an existing backend, select *ONTAP*, and select *Next*.
+//** *Discovered backends*: From the Actions menu, select *Manage* on a discovered backend from the managed cluster.
+. Select *Add*.
+. In the Use Existing section of the Add storage backend page, select *ONTAP*. 
+
+. Select one of the following: 
+
++
+* *Use administrator credentials*: Enter the ONTAP cluster management IP address and admin credentials. The credentials must be cluster-wide credentials. 
++
+NOTE: The user whose credentials you enter here must have the `ontapi` user login access method enabled within ONTAP System Manager on the ONTAP cluster. If you plan to use SnapMirror replication, apply user credentials with the "admin" role, which has the access methods `ontapi` and `http`, on both source and destination ONTAP clusters. Refer to https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts in ONTAP documentation^] for more information.
+
+* *Use a certificate*: Upload the certificate `.pem` file, the certificate key `.key` file, and optionally the certificate authority file.
+
+. Select *Next*.
+. Confirm the backend details and select *Manage*.
+
+
+.Result
+The backend appears in the `online` state in the list with summary information.
+
+NOTE: You might need to refresh the page for the backend to appear.
