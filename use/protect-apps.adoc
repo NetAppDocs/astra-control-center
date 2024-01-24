@@ -84,12 +84,46 @@ Astra Control supports snapshot creation using storage classes backed by the fol
 
 IMPORTANT: If your app uses a storage class backed by the `ontap-nas-economy` driver, snapshots can't be created. Use an alternate storage class for snapshots.
 
+[role="tabbed-block"]
+====
+.Create a snapshot using the Web UI
+--
 .Steps
 
 . Select *Applications*.
 . From the Options menu in the *Actions* column for the desired app, select *Snapshot*.
 . Customize the name of the snapshot and then select *Next*.
 . Review the snapshot summary and select *Snapshot*.
+--
+
+.Create a snapshot using a CR
+--
+.Steps
+
+. Create the custom resource (CR) file and name it `astra-control-backup-restore-cr.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
++
+* *<CR_NAME>*: The name of this CR operation; choose a sensible name for your environment.a
+* *<APPLICATION_NAME>*: The name of the application to snapshot.
+* *<APPVAULT_NAME>*: The name of the AppVault where the backup contents are stored.
++
+[source,yaml]
+----
+apiVersion: astra.netapp.io/v1
+kind: Snapshot
+metadata: 
+  name: <CR_NAME> # The name of this CR operation; choose a sensible name for your environment.
+spec: 
+  applicationRef: <APPLICATION_NAME>
+  appVaultRef: <APPVAULT_NAME> # The name of the AppVault where the backup contents are stored.
+----
+. After you populate the `astra-control-backup-restore-cr.yaml` file with the correct values, apply the CR:
++
+[source,console]
+----
+kubectl apply -f astra-control-backup-restore-cr.yaml
+----
+--
+====
 
 .Result
 
