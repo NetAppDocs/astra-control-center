@@ -11,8 +11,11 @@ summary: After you install Astra Control Center, log in to the UI, and change yo
 :imagesdir: ../media/get-started/
 
 [.lead]
-You should ensure that the following prerequisite conditions are met before you add a cluster. You should also run eligibility checks to ensure that your cluster is ready to be added to Astra Control Center and create roles for cluster management.
-//THIS SECTION REFERENCED IN UI. DO NOT MODIFY TITLE OR URL WITHOUT NOTIFYING UX.
+You should ensure that the following prerequisite conditions are met before you add a cluster. You should also run eligibility checks to ensure that your cluster is ready to be added to Astra Control Center and create kubeconfig cluster roles as needed.
+
+Astra Control allows you to add clusters managed by custom resource (CR) or kubeconfig, depending on your environment and preferences.
+
+//THIS TOPIC IS REFERENCED IN UI. DO NOT MODIFY TITLE OR URL WITHOUT NOTIFYING UX.
 
 .Before you begin
 
