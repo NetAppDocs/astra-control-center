@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: use/manage-apps.html
-keywords: how to manage apps with astra control, discover app, how to define kubernetes apps, astra control, astra
+keywords: how to manage apps with astra control, define app, how to define kubernetes apps, cr, custom resource, astra control
 summary: After you add Kubernetes clusters to Astra Control, you can install apps on that cluster (outside of Astra Control), and then go to the Applications page in Astra Control to start managing the apps.
 ---
 
@@ -117,6 +117,8 @@ TIP: A label is a key/value pair you can assign to Kubernetes objects for identi
 
 * <<Define resources to manage as an app>>
 * <<Define a namespace to manage as an app>>
+* <<Define an application using a Kubernetes custom resource>>
+
 
 === Define resources to manage as an app
 
@@ -217,6 +219,53 @@ After the process completes, the applications that are associated with the names
 // From the Actions menu, select *Rename*.
 //. Enter the new name.
 //. Select *Rename*.
+
+=== Define an application using a Kubernetes custom resource
+
+You can add all Kubernetes resources in a namespace to Astra Control management by defining the resources of that namespace as an application using a custom resource (CR). This method is preferable to defining apps individually if you intend to manage and protect all resources in a particular namespace in a similar way and at common intervals.
+
+.Steps
+
+. Create the custom resource (CR) file and name it `astra_application.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
++
+* *<CR_NAME>*: The name of this CR application; choose a sensible name for your environment.
+* *<APPLICATION_NAMESPACE>*: The namespace that contains the app resources you want to manage with Astra Control.
+
+You also have the option to define label selector attributes:
+
+* *labelSelector.matchLabels*: matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is "key", the operator is "In", and the values array contains only "value". 
+* *labelSelector.matchLabels*: matchExpressions is a list of label selector requirements. The requirements are ANDed.
+
+//* *<APPLICATION_NAME>*: The name of the application to snapshot.
+//* *<APPLICATION_NAME>*: The Kubernetes name of the application to snapshot.
+//* *<APPVAULT_NAME>*: The name of the AppVault where the snapshot contents should be stored.
++
+[source,yaml]
+----
+apiVersion: astra.netapp.io/v1
+kind: Application
+metadata:
+  name: <CR_NAME>
+spec:
+  includedNamespaces:
+    - namespace: <APPLICATION_NAMESPACE>
+      labelSelector:
+        matchLabels:
+          app: nginx
+          env: production
+        matchExpressions:
+          - key: tier
+            operator: In
+            values:
+              - frontend
+              - backend
+----
+. After you populate the `astra_application.yaml` file with the correct values, apply the CR:
++
+[source,console]
+----
+kubectl apply -f astra_application.yaml
+----
 
 == What about system namespaces?
 
