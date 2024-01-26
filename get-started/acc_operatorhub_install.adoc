@@ -112,9 +112,9 @@ include::../_include/download-extract-acc.adoc[]
 
 If you are planning to push the Astra Control Center bundle to your local registry, you need to use the NetApp Astra kubectl command line plugin.
 
-=== (Local registries only) Install the NetApp Astra kubectl plugin
+=== Install the NetApp Astra kubectl plugin
 
-If you are planning to push Astra Control Center package images to your local registry, you need to use the NetApp Astra kubectl command line plugin.
+Complete these steps to install the most recent NetApp Astra kubectl command line plugin.
 
 .Before you begin
 
