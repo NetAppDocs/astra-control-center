@@ -75,7 +75,7 @@ kubectl delete limitrange cpu-limit-range -n [netapp-acc or custom namespace]
 
 == Add a custom TLS certificate
 
-Astra Control Center uses a self-signed TLS certificate by default for ingress controller traffic (only in certain configurations) and web UI authentication with web browsers. You can remove the existing self-signed TLS certificate and replace it with a TLS certificate signed by a Certificate Authority (CA).
+Astra Control Center uses a self-signed TLS certificate by default for ingress controller traffic (only in certain configurations) and web UI authentication with web browsers. For production use, you should remove the existing self-signed TLS certificate and replace it with a TLS certificate signed by a Certificate Authority (CA).
 
 [NOTE]
 ===============================
