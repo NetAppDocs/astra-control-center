@@ -167,6 +167,9 @@ Events:                    <none>
 
 . Create the `certificate.yaml` file using the following example, replacing the placeholder values in brackets <> with appropriate information:
 +
+NOTE: This example uses the the `dnsNames` property to specify the Astra Control Center DNS address. Astra Control Center does not support using the Common Name (CN) property to specify the DNS address.
+
++
 [source,yaml]
 
 [subs=+quotes]
