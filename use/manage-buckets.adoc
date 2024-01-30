@@ -177,18 +177,18 @@ NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket pr
 
 .Steps
 
-. Create the custom resource (CR) file and name it `astra_appvault.yaml`.
+. Create the custom resource (CR) file and name it (for example, `astra_appvault.yaml`).
 
 . Configure the following attributes:
 +
-* *metadata.name*: The name of the AppVault custom resource.
-* *spec.prefix*: An optional path that is prefixed to the names of all entities stored in the AppVault.
-* *spec.providerConfig*: Stores the configuration necessary to access the AppVault using the specified provider. This field is required.
-* *spec.providerCredentials*: Stores references to any credential required to access the AppVault using the specified provider. `valueFromSecret` is required.
-** *spec.valueFromSecret*: Indicates that the credential value should come from a secret. `key` and `name` are required.
-*** *key*: The valid key of the secret to select from.
-*** *name*: Name of the secret containing the value for this field. Must be in the same namespace.
-* *spec.providerType*: Determines what provides the backup, e.g., S3 or FileSystem. This field is required.
+* *metadata.name*: _(Required)_ The name of the AppVault custom resource.
+* *spec.prefix*: _(Optional)_ A path that is prefixed to the names of all entities stored in the AppVault.
+* *spec.providerConfig*: _(Required)_ Stores the configuration necessary to access the AppVault using the specified provider.
+* *spec.providerCredentials*: _(Optional)_ Stores references to any credential required to access the AppVault using the specified provider.
+** *spec.providerCredentials.valueFromSecret*: _(Optional)_ Indicates that the credential value should come from a secret.
+*** *key*: _(Required if valueFromSecret is used)_ The valid key of the secret to select from.
+*** *name*: _(Required if valueFromSecret is used)_ Name of the secret containing the value for this field. Must be in the same namespace.
+* *spec.providerType*: _(Required)_ Determines what provides the backup; for example, S3 or FileSystem.
 +
 Example YAML:
 +
