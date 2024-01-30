@@ -197,7 +197,7 @@ Example YAML:
 apiVersion: astra.netapp.io/v1
 kind: AppVault
 metadata:
-  name: appvault-sample
+  name: astra_appvault
 spec:
   providerType: generic-s3
   providerConfig:
@@ -216,7 +216,7 @@ spec:
         key: secretAccessKey
 ----
 
-. After you populate the `astra_application.yaml` file with the correct values, apply the CR:
+. After you populate the `astra_appvault.yaml` file with the correct values, apply the CR:
 +
 [source,console]
 ----
