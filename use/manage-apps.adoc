@@ -222,23 +222,56 @@ After the process completes, the applications that are associated with the names
 
 === Define an application using a Kubernetes custom resource
 
-You can add all Kubernetes resources in a namespace to Astra Control management by defining the resources of that namespace as an application using a custom resource (CR). This method is preferable to defining apps individually if you intend to manage and protect all resources in a particular namespace in a similar way and at common intervals.
+You can specify the Kubernetes resources that want to manage with Astra Control by defining them as an application using a custom resource (CR). You can add cluster-scoped resources if you want to manage those resources individually or all Kubernetes resources in a namespace if, for example, you intend to manage and protect all resources in a particular namespace in a similar way and at common intervals.
 
 .Steps
 
-. Create the custom resource (CR) file and name it `astra_application.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
+. Create the custom resource (CR) file and name it `astra_application.yaml`.
+
+. Name the application in `metadata.name`.
+
+. Define application resources to be managed:
 +
-* *<CR_NAME>*: The name of this CR application; choose a sensible name for your environment.
-* *<APPLICATION_NAMESPACE>*: The namespace that contains the app resources you want to manage with Astra Control.
+.spec.includedClusterScopedResources
+[%collapsible]
+====
+Include cluster-scoped resource types in addition to those that Astra Control automatically includes:
+//identical to proceeding section
 
-You also have the option to define label selector attributes:
+* *spec.includedClusterScopedResources*: A list of cluster-scoped resource types to be included. 
+** *groupVersionKind*: 
+*** *group*: API group of the resource to include
+*** *version*: API version of the resource to include
+*** *kind*: Kind of the resource to include
+** *labelSelector*: A label query for a set of resources. It's used to retrieve only those resources matching the label. If you don't provide a label, Astra Control collects all instances of the resource kind specified for that cluster. The result of matchLabels and matchExpressions are ANDed.
+*** *matchLabels*: A map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions that has a key field of "key", operator as "In", and values array containing only "value". The requirements are ANDed.
+*** *matchExpressions*: A list of label selector requirements. `key` and `operator` are required. The requirements are ANDed.
+**** *key*: The label key associated with the label selector.
+**** *operator*: Represents a key's relationship to a set of values. Valid operators are `In`, `NotIn`, `Exists` and `DoesNotExist`.
+**** *values*: An array of string values. If the operator is `In` or `NotIn`, the values array must _not_ be empty. If the operator is `Exists` or `DoesNotExist`, the values array must be empty.
+====
+//End snippet
++
+.spec.includedNamespaces
+[%collapsible]
+====
+Include namespaces and resources within those resources in the application:
+//identical to preceding section
 
-* *labelSelector.matchLabels*: matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is "key", the operator is "In", and the values array contains only "value". 
-* *labelSelector.matchLabels*: matchExpressions is a list of label selector requirements. The requirements are ANDed.
-
+* *spec.includedNamespaces*: The namespace that contains the app resources you want to manage with Astra Control.
+** *labelSelector*: A label query for a set of resources. It's used to retrieve only those resources matching the label. If you don't provide a label, Astra Control collects all instances of the resource kind specified for that cluster. The result of matchLabels and matchExpressions are ANDed.
+*** *matchLabels*: A map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions that has a key field of "key", operator as "In", and values array containing only "value". The requirements are ANDed.
+*** *matchExpressions*: A list of label selector requirements. `key` and `operator` are required. The requirements are ANDed.
+**** *key*: The label key associated with the label selector.
+**** *operator*: Represents a key's relationship to a set of values. Valid operators are `In`, `NotIn`, `Exists` and `DoesNotExist`.
+**** *values*: An array of string values. If the operator is `In` or `NotIn`, the values array must _not_ be empty. If the operator is `Exists` or `DoesNotExist`, the values array must be empty.
+====
+//End snippet
 //* *<APPLICATION_NAME>*: The name of the application to snapshot.
 //* *<APPLICATION_NAME>*: The Kubernetes name of the application to snapshot.
 //* *<APPVAULT_NAME>*: The name of the AppVault where the snapshot contents should be stored.
++
+Example YAML:
 +
 [source,yaml]
 ----
@@ -260,11 +293,12 @@ spec:
               - frontend
               - backend
 ----
+
 . After you populate the `astra_application.yaml` file with the correct values, apply the CR:
 +
 [source,console]
 ----
-kubectl apply -f astra_application.yaml
+kubectl apply -f astra_application.yaml -n neptune-system
 ----
 
 == What about system namespaces?

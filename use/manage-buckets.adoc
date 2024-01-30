@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: use/manage-buckets.html
-keywords: how to set up object storage in astra, how to set up astra buckets, s3, astra, setting up astra control, astra control center, kubernetes
+keywords: object storage, astra, buckets, s3, cr, custom resource
 summary: Adding object store bucket providers is essential if you want to back up your applications and persistent storage or if you want to clone applications across clusters.
 ---
 
@@ -154,9 +154,11 @@ NOTE: Astra Control ensures first that there are no schedule policies using the 
 
 == Manage a bucket using a custom resource
 
-You can add a bucket using the an Astra Control custom resource (CR) on the application cluster. Adding object store bucket providers is essential if you want to back up your applications and persistent storage or if you want to clone applications across clusters. Astra Control stores those backups or clones in the object store buckets that you define.
+You can add a bucket using the an Astra Control custom resource (CR) on the application cluster. Adding object store bucket providers is essential if you want to back up your applications and persistent storage or if you want to clone applications across clusters. Astra Control stores those backups or clones in the object store buckets that you define. If you are using the custom resource method, application snapshots functionality requires a bucket.
 
-You don't need a bucket in Astra Control if you are cloning your application configuration and persistent storage to the same cluster. Application snapshots functionality does not require a bucket.
+You don't need a bucket in Astra Control if you are cloning your application configuration and persistent storage to the same cluster. 
+
+The bucket custom resource for Astra Control is known as an AppVault. This CR contains the configurations necessary for a bucket to be used in protection operations.
 
 .Before you begin
 
@@ -175,19 +177,20 @@ NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket pr
 
 .Steps
 
-. Create the custom resource (CR) file and name it `astra_application.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
+. Create the custom resource (CR) file and name it `astra_appvault.yaml`.
+
+. Configure the following attributes:
 +
-* *<CR_NAME>*: The name of this CR application; choose a sensible name for your environment.
-* *<APPLICATION_NAMESPACE>*: The namespace that contains the app resources you want to manage with Astra Control.
-
-You also have the option to define label selector attributes:
-
-* *labelSelector.matchLabels*: matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is "key", the operator is "In", and the values array contains only "value". 
-* *labelSelector.matchLabels*: matchExpressions is a list of label selector requirements. The requirements are ANDed.
-
-//* *<APPLICATION_NAME>*: The name of the application to snapshot.
-//* *<APPLICATION_NAME>*: The Kubernetes name of the application to snapshot.
-//* *<APPVAULT_NAME>*: The name of the AppVault where the snapshot contents should be stored.
+* *metadata.name*: The name of the AppVault custom resource.
+* *spec.prefix*: An optional path that is prefixed to the names of all entities stored in the AppVault.
+* *spec.providerConfig*: Stores the configuration necessary to access the AppVault using the specified provider. This field is required.
+* *spec.providerCredentials*: Stores references to any credential required to access the AppVault using the specified provider. `valueFromSecret` is required.
+** *spec.valueFromSecret*: Indicates that the credential value should come from a secret. `key` and `name` are required.
+*** *key*: The valid key of the secret to select from.
+*** *name*: Name of the secret containing the value for this field. Must be in the same namespace.
+* *spec.providerType*: Determines what provides the backup, e.g., S3 or FileSystem. This field is required.
++
+Example YAML:
 +
 [source,yaml]
 ----
@@ -212,11 +215,12 @@ spec:
         name: s3-creds
         key: secretAccessKey
 ----
+
 . After you populate the `astra_application.yaml` file with the correct values, apply the CR:
 +
 [source,console]
 ----
-kubectl apply -f astra_application.yaml
+kubectl apply -f astra_appvault.yaml
 ----
 +
 NOTE: When you add a bucket, Astra Control marks one bucket with the default bucket indicator. The first bucket that you create becomes the default bucket. As you add buckets, you can later decide to link:../use/manage-buckets.html#set-the-default-bucket[set another default bucket^].
