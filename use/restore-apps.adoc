@@ -83,7 +83,7 @@ NOTE: To learn about configuring include and exclude rules, see <<Filter resourc
 . Review details about the restore action carefully, type "restore" (if prompted), and select *Restore*.
 --
 
-.Restore a backup using a CR
+.Restore from backup using a CR
 --
 .Steps
 
@@ -113,6 +113,31 @@ spec:
   appArchivePath: <BACKUP_PATH>
   namespaceMapping: [{"source": "<SOURCE_NAMESPACE>", "target": "<DESTINATION_NAMESPACE>"}] 
 ----
+
+. (Optional) If need to select only certain resources of the application to restore, add the following fields to `spec`and update the values according to your filtering preference:
++
+* `resourceSelectionCriteria`: Use `include` or `exclude` to include or exclude a resource defined in resourceMatchers.
+* `resourceMatchers`: Parameters for the resources to be included or excluded.
+** `groupKind`: Group and kind of the resource to be filtered. Use the format `<KIND>.<GROUP>`.
+** `version`: _(Optional)_ Version of the resource to be filtered.
+** `name`: _(Optional)_ Name of the resource to be filtered.
+** `namespace`: _(Optional)_ Namespace where the resource exists. 
+** `labelSelector`: _(Optional)_ Label selector string as defined in https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors[Kubernetes documentation^].
++
+Example:
++
+----
+spec:    
+    filter: 
+        resourceSelectionCriteria: "exclude"
+        resourceMatchers:
+        - groupKind: tridentnodes.trident.netapp.io 
+           version: v1
+           name: test-node
+           namespace: trident 
+           labelSelector: "trident.netapp.io/os=linux"
+----
+
 . After you populate the `astra-control-backup-restore-cr.yaml` file with the correct values, apply the CR:
 +
 [source,console]
@@ -121,7 +146,7 @@ kubectl apply -f astra-control-backup-restore-cr.yaml
 ----
 --
 
-.Restore a backup to the original namespace using a CR
+.Restore from backup to the original namespace using a CR
 --
 .Steps
 
@@ -154,7 +179,7 @@ spec:
 kubectl apply -f astra-control-backup-ipr-cr.yaml
 ----
 --
-.Restore a snapshot using a CR
+.Restore from snapshot using a CR
 --
 .Steps
 
@@ -191,7 +216,7 @@ kubectl apply -f astra-control-snapshot-restore-cr.yaml
 ----
 --
 
-.Restore a snapshot to the original namespace using a CR
+.Restore from snapshot to the original namespace using a CR
 --
 .Steps
 
