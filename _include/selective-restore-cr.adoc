@@ -1,0 +1,23 @@
+. (Optional) If you need to select only certain resources of the application to restore, add the following fields to `spec`and update the values according to your filtering preference:
++
+* `resourceSelectionCriteria`: Use `include` or `exclude` to include or exclude a resource defined in resourceMatchers.
+* `resourceMatchers`: Parameters for the resources to be included or excluded.
+** `groupKind`: Group and kind of the resource to be filtered. Use the format `<KIND>.<GROUP>`.
+** `version`: _(Optional)_ Version of the resource to be filtered.
+** `name`: _(Optional)_ Name of the resource to be filtered.
+** `namespace`: _(Optional)_ Namespace where the resource exists. 
+** `labelSelector`: _(Optional)_ Label selector string as defined in https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors[Kubernetes documentation^].
++
+Example:
++
+----
+spec:    
+    filter: 
+        resourceSelectionCriteria: "exclude"
+        resourceMatchers:
+        - groupKind: tridentnodes.trident.netapp.io 
+           version: v1
+           name: test-node
+           namespace: trident 
+           labelSelector: "trident.netapp.io/os=linux"
+----

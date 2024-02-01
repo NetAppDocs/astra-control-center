@@ -114,29 +114,7 @@ spec:
   namespaceMapping: [{"source": "<SOURCE_NAMESPACE>", "target": "<DESTINATION_NAMESPACE>"}] 
 ----
 
-. (Optional) If need to select only certain resources of the application to restore, add the following fields to `spec`and update the values according to your filtering preference:
-+
-* `resourceSelectionCriteria`: Use `include` or `exclude` to include or exclude a resource defined in resourceMatchers.
-* `resourceMatchers`: Parameters for the resources to be included or excluded.
-** `groupKind`: Group and kind of the resource to be filtered. Use the format `<KIND>.<GROUP>`.
-** `version`: _(Optional)_ Version of the resource to be filtered.
-** `name`: _(Optional)_ Name of the resource to be filtered.
-** `namespace`: _(Optional)_ Namespace where the resource exists. 
-** `labelSelector`: _(Optional)_ Label selector string as defined in https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors[Kubernetes documentation^].
-+
-Example:
-+
-----
-spec:    
-    filter: 
-        resourceSelectionCriteria: "exclude"
-        resourceMatchers:
-        - groupKind: tridentnodes.trident.netapp.io 
-           version: v1
-           name: test-node
-           namespace: trident 
-           labelSelector: "trident.netapp.io/os=linux"
-----
+include::../_include/selective-restore-cr.adoc[]
 
 . After you populate the `astra-control-backup-restore-cr.yaml` file with the correct values, apply the CR:
 +
@@ -172,6 +150,9 @@ spec:
   appVaultRef: <APPVAULT_NAME>
   appArchivePath: <BACKUP_PATH> 
 ----
+
+include::../_include/selective-restore-cr.adoc[]
+
 . After you populate the `astra-control-backup-ipr-cr.yaml` file with the correct values, apply the CR:
 +
 [source,console]
@@ -208,6 +189,9 @@ spec:
   appVaultRef: <APPVAULT_NAME>
   namespaceMapping: [{"source": "<SOURCE_NAMESPACE>", "destination": "<DESTINATION_NAMESPACE>"}] 
 ----
+
+include::../_include/selective-restore-cr.adoc[]
+
 . After you populate the `astra-control-snapshot-restore-cr.yaml` file with the correct values, apply the CR:
 +
 [source,console]
@@ -242,6 +226,9 @@ spec:
   appArchivePath: <BACKUP_PATH>
   appVaultRef: <APPVAULT_NAME> 
 ----
+
+include::../_include/selective-restore-cr.adoc[]
+
 . After you populate the `astra-control-snapshot-ipr-cr.yaml` file with the correct values, apply the CR:
 +
 [source,console]
