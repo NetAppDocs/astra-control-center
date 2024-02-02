@@ -102,9 +102,9 @@ IMPORTANT: If your app uses a storage class backed by the `ontap-nas-economy` dr
 
 . Create the custom resource (CR) file and name it `astra-control-snapshot-cr.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
 +
-* *<CR_NAME>*: The name of this CR operation; choose a sensible name for your environment.
-* *<APPLICATION_NAME>*: The Kubernetes name of the application to snapshot.
-* *<APPVAULT_NAME>*: The name of the AppVault where the snapshot contents should be stored.
+* <CR_NAME>: The name of this CR operation; choose a sensible name for your environment.
+* <APPLICATION_NAME>: The Kubernetes name of the application to snapshot.
+* <APPVAULT_NAME>: The name of the AppVault where the snapshot contents should be stored.
 +
 [source,yaml]
 ----
