@@ -48,7 +48,7 @@ TIP: Offset backup and replication schedules to avoid schedule overlaps. For exa
 
 [role="tabbed-block"]
 ====
-.Create a protection policy using the Web UI
+.Configure a protection policy using the Web UI
 --
 .Steps
 
@@ -69,7 +69,7 @@ image:screenshot-config-protection-policy.png[A screenshot of a sample configura
 . Select *Set Protection Policy.*
 --
 
-.Create a protection policy using a CR
+.Configure a protection policy using a CR
 --
 .Steps
 
