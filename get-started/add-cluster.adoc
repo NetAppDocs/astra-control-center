@@ -16,11 +16,14 @@ To begin managing your apps, add a Kubernetes cluster and manage it as a compute
 
 TIP: We recommend that Astra Control Center manage the cluster it is deployed on first before you add other clusters to Astra Control Center to manage. Having the initial cluster under management is necessary to send Kubemetrics data and cluster-associated data for metrics and troubleshooting.
 
-NOTE: If you add a cluster using the command line, keep in mind the following limitations for the cluster:
+[NOTE]
+=====
+If you add a cluster using the command line, keep in mind the following limitations for the cluster:
+
 * You cannot use storage backends connected with the `nas-economy` driver with the cluster.
 * You cannot use SnapMirror replication features with the cluster.
 * You cannot create immutable backups of the cluster's data.
-
+=====
 .Before you begin
 
 * Before you add a cluster, review and perform the necessary link:../get-started/prep-for-cluster-management.html[prerequisite tasks].
