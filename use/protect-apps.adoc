@@ -37,7 +37,7 @@ You can do the following tasks related to protecting your app data:
 
 == Configure a protection policy
 
-A protection policy protects an app by creating snapshots, backups, or both at a defined schedule. You can choose to create snapshots and backups hourly, daily, weekly, and monthly, and you can specify the number of copies to retain.
+A protection policy protects an app by creating snapshots, backups, or both at a defined schedule. You can choose to create snapshots and backups hourly, daily, weekly, and monthly, and you can specify the number of copies to retain. You can define a protection policy using either the Astra Control web UI or a custom resource (CR) file.
 
 If you need backups or snapshots to run more frequently than once per hour, you can https://docs.netapp.com/us-en/astra-automation/workflows/workflows_before.html[use the Astra Control REST API to create snapshots and backups^].
 
@@ -48,7 +48,7 @@ TIP: Offset backup and replication schedules to avoid schedule overlaps. For exa
 
 [role="tabbed-block"]
 ====
-.Create a backup using the Web UI
+.Create a protection policy using the Web UI
 --
 .Steps
 
@@ -69,7 +69,7 @@ image:screenshot-config-protection-policy.png[A screenshot of a sample configura
 . Select *Set Protection Policy.*
 --
 
-.Create a backup using a CR
+.Create a protection policy using a CR
 --
 .Steps
 
