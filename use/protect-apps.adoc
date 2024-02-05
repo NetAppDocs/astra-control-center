@@ -46,14 +46,15 @@ NOTE: If you are defining a protection policy that creates immutable backups to 
 //ASTRADOC-150
 TIP: Offset backup and replication schedules to avoid schedule overlaps. For example, perform backups at the top of the hour every hour and schedule replication to start with a 5-minute offset and a 10-minute interval.
 
+[role="tabbed-block"]
+====
+.Create a backup using the Web UI
+--
 .Steps
 
 . Select *Applications* and then select the name of an app.
 . Select *Data Protection*.
 . Select *Configure Protection Policy*.
-//+
-//image:screenshot-configure-protection-policy.gif[A screenshot of the Data protection tab for an app which enables you to configure a protection policy.]
-
 . Define a protection schedule by choosing the number of snapshots and backups to keep hourly, daily, weekly, and monthly.
 +
 You can define the hourly, daily, weekly, and monthly schedules concurrently. A schedule won't turn active until you set a retention level.
@@ -66,6 +67,52 @@ image:screenshot-config-protection-policy.png[A screenshot of a sample configura
 
 . Select *Review*.
 . Select *Set Protection Policy.*
+--
+
+.Create a backup using a CR
+--
+.Steps
+
+. Create the custom resource (CR) file and name it `astra-control-schedule-cr.yaml`. Update the values in brackets <> to match your Astra Control environment, cluster configuration, and data protection needs:
++
+* <CR_NAME>: The name of this CR operation; choose a sensible name for your environment.
+* <APPLICATION_NAME>: The Kubernetes name of the application to back up.
+* <APPVAULT_NAME>: The name of the AppVault where the backup contents should be stored.
+* <BACKUP_RETENTION_NUMBER>: The number of backups to retain. Zero indicates that no backups should be created.
+* <SNAPSHOT_RETENTION_NUMBER>: The number of snapshots to retain. Zero indicates that no snapshots should be created.
+* <FREQUENCY_OF_SCHEDULE>: The frequency at which the schedule should run. Possible values:
+** hourly
+** daily
+** weekly
+** monthly
+** custom
+* <HOUR_OF_DAY>: The hour of the day (0 - 23) that the schedule should run. This field is required if the granularity is set to "daily", "weekly", or "monthly".
+* <MINUTE_OF_HOUR>: The minute of the hour (0 - 59) that the schedule should run. This field is required if the granularity is set to "hourly", "daily", "weekly", or "monthly".
++
+[source,yaml]
+----
+apiVersion: astra.netapp.io/v1
+kind: Schedule
+metadata:
+  namespace: astra-connector
+  name: <CR_NAME>
+spec:
+  applicationRef: <APPLICATION_NAME>
+  appVaultRef: <APPVAULT_NAME>
+  backupRetention: "<BACKUP_RETENTION_LENGTH>"
+  snapshotRetention: "<SNAPSHOT_RETENTION_LENGTH>"
+  granularity: "<FREQUENCY_OF_SCHEDULE>"
+  hour: "<HOUR_OF_DAY>"
+  minute: "<MINUTE_OF_HOUR>"
+----
+. After you populate the `astra-control-schedule-cr.yaml` file with the correct values, apply the CR:
++
+[source,console]
+----
+kubectl apply -f astra-control-schedule-cr.yaml
+----
+--
+====
 
 .Result
 
