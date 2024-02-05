@@ -85,7 +85,6 @@ image:screenshot-config-protection-policy.png[A screenshot of a sample configura
 ** daily
 ** weekly
 ** monthly
-** custom
 * <HOUR_OF_DAY>: The hour of the day (0 - 23) that the schedule should run. This field is required if the granularity is set to "daily", "weekly", or "monthly".
 * <MINUTE_OF_HOUR>: The minute of the hour (0 - 59) that the schedule should run. This field is required if the granularity is set to "hourly", "daily", "weekly", or "monthly".
 +
