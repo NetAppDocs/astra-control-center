@@ -110,7 +110,8 @@ IMPORTANT: If your app uses a storage class backed by the `ontap-nas-economy` dr
 ----
 apiVersion: astra.netapp.io/v1
 kind: Snapshot
-metadata: 
+metadata:
+  namespace: astra-connector
   name: <CR_NAME>
 spec: 
   applicationRef: <APPLICATION_NAME>
