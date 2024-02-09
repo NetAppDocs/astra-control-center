@@ -136,7 +136,7 @@ Astra Control supports backup creation using storage classes backed by the follo
 
 . Create the custom resource (CR) file and name it `astra-control-backup-cr.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
 +
-* <CR_NAME>: The name of this CR operation; choose a sensible name for your environment.
+* <CR_NAME>: The name of this custom resource; choose a unique and sensible name for your environment.
 * <APPLICATION_NAME>: The Kubernetes name of the application to back up.
 * <APPVAULT_NAME>: The name of the AppVault where the backup contents should be stored.
 +
@@ -144,7 +144,8 @@ Astra Control supports backup creation using storage classes backed by the follo
 ----
 apiVersion: astra.netapp.io/v1
 kind: Backup
-metadata: 
+metadata:
+  namespace: astra-connector
   name: <CR_NAME>
 spec: 
   applicationRef: <APPLICATION_NAME>
