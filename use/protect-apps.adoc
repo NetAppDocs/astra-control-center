@@ -75,7 +75,7 @@ image:screenshot-config-protection-policy.png[A screenshot of a sample configura
 
 . Create the custom resource (CR) file and name it `astra-control-schedule-cr.yaml`. Update the values in brackets <> to match your Astra Control environment, cluster configuration, and data protection needs:
 +
-* <CR_NAME>: The name of this CR operation; choose a sensible name for your environment.
+* <CR_NAME>: The name of this custom resource; choose a unique and sensible name for your environment.
 * <APPLICATION_NAME>: The Kubernetes name of the application to back up.
 * <APPVAULT_NAME>: The name of the AppVault where the backup contents should be stored.
 * <BACKUP_RETENTION_NUMBER>: The number of backups to retain. Zero indicates that no backups should be created.
