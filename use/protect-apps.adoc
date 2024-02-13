@@ -86,7 +86,7 @@ image:screenshot-config-protection-policy.png[A screenshot of a sample configura
 ** `weekly` (requires that you specify `spec.minute`, `spec.hour`, and `spec.dayOfWeek`)
 ** `monthly` (requires that you specify `spec.minute`, `spec.hour`, and `spec.dayOfMonth`)
 * <DAY_OF_MONTH>: _(Optional)_ The day of the month (1 - 31) that the schedule should run. This field is required if the granularity is set to `monthly`.
-* <DAY_OF_WEEK>: _(Optional)_ The day of the week (0 - 7) that the schedule should run. Values of 0 and 7 indicate Sunday. This field is required if the granularity is set to `weekly`.
+* <DAY_OF_WEEK>: _(Optional)_ The day of the week (0 - 7) that the schedule should run. Values of 0 or 7 indicate Sunday. This field is required if the granularity is set to `weekly`.
 * <HOUR_OF_DAY>: _(Optional)_ The hour of the day (0 - 23) that the schedule should run. This field is required if the granularity is set to "daily", "weekly", or "monthly".
 * <MINUTE_OF_HOUR>: _(Optional)_ The minute of the hour (0 - 59) that the schedule should run. This field is required if the granularity is set to "hourly", "daily", "weekly", or "monthly".
 +
