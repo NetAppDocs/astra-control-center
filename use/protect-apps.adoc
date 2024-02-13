@@ -80,13 +80,15 @@ image:screenshot-config-protection-policy.png[A screenshot of a sample configura
 * <APPVAULT_NAME>: The name of the AppVault where the backup contents should be stored.
 * <BACKUP_RETENTION_NUMBER>: The number of backups to retain. Zero indicates that no backups should be created.
 * <SNAPSHOT_RETENTION_NUMBER>: The number of snapshots to retain. Zero indicates that no snapshots should be created.
-* <FREQUENCY_OF_SCHEDULE>: The frequency at which the schedule should run. Possible values:
-** hourly
-** daily
-** weekly
-** monthly
-* <HOUR_OF_DAY>: The hour of the day (0 - 23) that the schedule should run. This field is required if the granularity is set to "daily", "weekly", or "monthly".
-* <MINUTE_OF_HOUR>: The minute of the hour (0 - 59) that the schedule should run. This field is required if the granularity is set to "hourly", "daily", "weekly", or "monthly".
+* <GRANULARITY>: The frequency at which the schedule should run. Possible values, along with required associated fields:
+** `hourly` (requires that you specify `spec.minute`)
+** `daily` (requires that you specify `spec.minute` and `spec.hour`)
+** `weekly` (requires that you specify `spec.minute`, `spec.hour`, and `spec.dayOfWeek`)
+** `monthly` (requires that you specify `spec.minute`, `spec.hour`, and `spec.dayOfMonth`)
+* <DAY_OF_MONTH>: _(Optional)_ The day of the month (1 - 31) that the schedule should run. This field is required if the granularity is set to `monthly`.
+* <DAY_OF_WEEK>: _(Optional)_ The day of the week (1 - 7) that the schedule should run. This field is required if the granularity is set to `weekly`.
+* <HOUR_OF_DAY>: _(Optional)_ The hour of the day (0 - 23) that the schedule should run. This field is required if the granularity is set to "daily", "weekly", or "monthly".
+* <MINUTE_OF_HOUR>: _(Optional)_ The minute of the hour (0 - 59) that the schedule should run. This field is required if the granularity is set to "hourly", "daily", "weekly", or "monthly".
 +
 [source,yaml]
 ----
@@ -100,9 +102,11 @@ spec:
   appVaultRef: <APPVAULT_NAME>
   backupRetention: "<BACKUP_RETENTION_LENGTH>"
   snapshotRetention: "<SNAPSHOT_RETENTION_LENGTH>"
-  granularity: "<FREQUENCY_OF_SCHEDULE>"
-  hour: "<HOUR_OF_DAY>"
-  minute: "<MINUTE_OF_HOUR>"
+  granularity: <GRANULARITY>
+  dayOfMonth: <DAY_OF_MONTH>
+  dayOfWeek: <DAY_OF_WEEK>
+  hour: <HOUR_OF_DAY>
+  minute: <MINUTE_OF_HOUR>
 ----
 . After you populate the `astra-control-schedule-cr.yaml` file with the correct values, apply the CR:
 +
