@@ -105,6 +105,9 @@ IMPORTANT: If your app uses a storage class backed by the `ontap-nas-economy` dr
 * <CR_NAME>: The name of this custom resource; choose a unique and sensible name for your environment.
 * <APPLICATION_NAME>: The Kubernetes name of the application to snapshot.
 * <APPVAULT_NAME>: The name of the AppVault where the snapshot contents should be stored.
+* <RECLAIM_POLICY>: (Optional) Defines what happens to a snapshot when the snapshot CR is deleted. Valid options:
+** `Retain`
+** `Delete` (default)
 +
 [source,yaml]
 ----
@@ -116,6 +119,7 @@ metadata:
 spec: 
   applicationRef: <APPLICATION_NAME>
   appVaultRef: <APPVAULT_NAME>
+  reclaimPolicy: "<RECLAIM_POLICY>"
 ----
 . After you populate the `astra-control-snapshot-cr.yaml` file with the correct values, apply the CR:
 +
