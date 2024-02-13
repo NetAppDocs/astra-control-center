@@ -119,7 +119,7 @@ metadata:
 spec: 
   applicationRef: <APPLICATION_NAME>
   appVaultRef: <APPVAULT_NAME>
-  reclaimPolicy: "<RECLAIM_POLICY>"
+  reclaimPolicy: <RECLAIM_POLICY>
 ----
 . After you populate the `astra-control-snapshot-cr.yaml` file with the correct values, apply the CR:
 +
