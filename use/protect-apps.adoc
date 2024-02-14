@@ -78,8 +78,8 @@ image:screenshot-config-protection-policy.png[A screenshot of a sample configura
 * <CR_NAME>: The name of this custom resource; choose a unique and sensible name for your environment.
 * <APPLICATION_NAME>: The Kubernetes name of the application to back up.
 * <APPVAULT_NAME>: The name of the AppVault where the backup contents should be stored.
-* <BACKUP_RETENTION_NUMBER>: The number of backups to retain. Zero indicates that no backups should be created.
-* <SNAPSHOT_RETENTION_NUMBER>: The number of snapshots to retain. Zero indicates that no snapshots should be created.
+* <BACKUPS_RETAINED>: The number of backups to retain. Zero indicates that no backups should be created.
+* <SNAPSHOTS_RETAINED>: The number of snapshots to retain. Zero indicates that no snapshots should be created.
 * <GRANULARITY>: The frequency at which the schedule should run. Possible values, along with required associated fields:
 ** `hourly` (requires that you specify `spec.minute`)
 ** `daily` (requires that you specify `spec.minute` and `spec.hour`)
@@ -87,8 +87,8 @@ image:screenshot-config-protection-policy.png[A screenshot of a sample configura
 ** `monthly` (requires that you specify `spec.minute`, `spec.hour`, and `spec.dayOfMonth`)
 * <DAY_OF_MONTH>: _(Optional)_ The day of the month (1 - 31) that the schedule should run. This field is required if the granularity is set to `monthly`.
 * <DAY_OF_WEEK>: _(Optional)_ The day of the week (0 - 7) that the schedule should run. Values of 0 or 7 indicate Sunday. This field is required if the granularity is set to `weekly`.
-* <HOUR_OF_DAY>: _(Optional)_ The hour of the day (0 - 23) that the schedule should run. This field is required if the granularity is set to "daily", "weekly", or "monthly".
-* <MINUTE_OF_HOUR>: _(Optional)_ The minute of the hour (0 - 59) that the schedule should run. This field is required if the granularity is set to "hourly", "daily", "weekly", or "monthly".
+* <HOUR_OF_DAY>: _(Optional)_ The hour of the day (0 - 23) that the schedule should run. This field is required if the granularity is set to `daily`, `weekly`, or `monthly`.
+* <MINUTE_OF_HOUR>: _(Optional)_ The minute of the hour (0 - 59) that the schedule should run. This field is required if the granularity is set to `hourly`, `daily`, `weekly`, or `monthly`.
 +
 [source,yaml]
 ----
@@ -100,13 +100,13 @@ metadata:
 spec:
   applicationRef: <APPLICATION_NAME>
   appVaultRef: <APPVAULT_NAME>
-  backupRetention: "<BACKUP_RETENTION_LENGTH>"
-  snapshotRetention: "<SNAPSHOT_RETENTION_LENGTH>"
+  backupRetention: "<BACKUPS_RETAINED>"
+  snapshotRetention: "<SNAPSHOTS_RETAINED>"
   granularity: <GRANULARITY>
-  dayOfMonth: <DAY_OF_MONTH>
-  dayOfWeek: <DAY_OF_WEEK>
-  hour: <HOUR_OF_DAY>
-  minute: <MINUTE_OF_HOUR>
+  dayOfMonth: "<DAY_OF_MONTH>"
+  dayOfWeek: "<DAY_OF_WEEK>"
+  hour: "<HOUR_OF_DAY>"
+  minute: "<MINUTE_OF_HOUR>"
 ----
 . After you populate the `astra-control-schedule-cr.yaml` file with the correct values, apply the CR:
 +
