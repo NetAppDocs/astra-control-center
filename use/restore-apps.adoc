@@ -88,7 +88,7 @@ NOTE: To learn about configuring include and exclude rules, see <<Filter resourc
 . Select *Next*.
 . Review details about the restore action carefully, type "restore" (if prompted), and select *Restore*.
 
-== *Tech preview* Restore from backup using a custom resource (CR)
+== [Tech preview] Restore from backup using a custom resource (CR)
 You can restore data from a backup using a custom resource (CR) file either to a different namespace or the original source namespace.
 
 [role="tabbed-block"]
@@ -173,7 +173,7 @@ kubectl apply -f astra-control-backup-ipr-cr.yaml
 --
 ====
 
-== *Tech preview* Restore from snapshot using a custom resource (CR)
+== [Tech preview] Restore from snapshot using a custom resource (CR)
 You can restore data from a snapshot using a custom resource (CR) file either to a different namespace or the original source namespace.
 
 [role="tabbed-block"]
