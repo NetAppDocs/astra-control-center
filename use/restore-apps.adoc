@@ -108,8 +108,8 @@ You can restore data from a backup using a custom resource (CR) file either to a
 ----
 minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
 ----
-* *<SOURCE_NAMESPACE>*: The source namespace of the restore operation.
-* *<DESTINATION_NAMESPACE>*: The destination namespace of the restore operation.
+* <SOURCE_NAMESPACE>: The source namespace of the restore operation.
+* <DESTINATION_NAMESPACE>: The destination namespace of the restore operation.
 +
 [source,yaml]
 ----
@@ -192,8 +192,8 @@ You can restore data from a snapshot using a custom resource (CR) file either to
 ----
 minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
 ----
-* *<SOURCE_NAMESPACE>*: The source namespace of the restore operation.
-* *<DESTINATION_NAMESPACE>*: The destination namespace of the restore operation.
+* <SOURCE_NAMESPACE>: The source namespace of the restore operation.
+* <DESTINATION_NAMESPACE>: The destination namespace of the restore operation.
 +
 [source,yaml]
 ----
