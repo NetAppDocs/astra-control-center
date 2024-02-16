@@ -130,7 +130,7 @@ Astra Control supports backup creation using storage classes backed by the follo
 . Review the backup summary and select *Back up*.
 --
 
-.Create a backup using a CR
+.[Tech preview] Create a backup using a CR
 --
 .Steps
 
