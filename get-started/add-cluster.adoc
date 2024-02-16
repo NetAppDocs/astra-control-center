@@ -53,7 +53,7 @@ NOTE: You should select a storage class that is configured in Astra Control Prov
 
 --
 
-.Add the cluster using the command line
+.[Tech preview] Add the cluster using the command line
 --
 .Steps
 
