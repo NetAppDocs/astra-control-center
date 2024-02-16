@@ -69,7 +69,7 @@ image:screenshot-config-protection-policy.png[A screenshot of a sample configura
 . Select *Set Protection Policy.*
 --
 
-.Configure a protection policy using a CR
+.[Tech preview] Configure a protection policy using a CR
 --
 .Steps
 
