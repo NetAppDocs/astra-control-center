@@ -96,7 +96,7 @@ IMPORTANT: If your app uses a storage class backed by the `ontap-nas-economy` dr
 . Review the snapshot summary and select *Snapshot*.
 --
 
-.Create a snapshot using a CR
+.[Tech preview] Create a snapshot using a CR
 --
 .Steps
 
