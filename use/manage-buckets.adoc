@@ -49,7 +49,7 @@ You can do these tasks related to managing buckets:
 * <<Set the default bucket>>
 * <<Rotate or remove bucket credentials>>
 * <<Remove a bucket>>
-* <<Manage a bucket using a custom resource>>
+* link:../use/manage-buckets.html#manage-a-bucket-using-a-custom-resource[(Tech preview) Manage a bucket using a custom resource]
 
 NOTE: S3 buckets in Astra Control Center do not report available capacity. Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
 
@@ -152,7 +152,7 @@ NOTE: Astra Control ensures first that there are no schedule policies using the 
 . Type "remove" to confirm the action.
 . Select *Yes, remove bucket*.
 
-== Manage a bucket using a custom resource
+== [Tech preview] Manage a bucket using a custom resource
 
 You can add a bucket using the an Astra Control custom resource (CR) on the application cluster. Adding object store bucket providers is essential if you want to back up your applications and persistent storage or if you want to clone applications across clusters. Astra Control stores those backups or clones in the object store buckets that you define. If you are using the custom resource method, application snapshots functionality requires a bucket.
 

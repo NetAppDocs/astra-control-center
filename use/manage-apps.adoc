@@ -117,7 +117,7 @@ TIP: A label is a key/value pair you can assign to Kubernetes objects for identi
 
 * <<Define resources to manage as an app>>
 * <<Define a namespace to manage as an app>>
-* <<Define an application using a Kubernetes custom resource>>
+* link:../use/manage-apps.html#tech-preview-define-an-application-using-a-kubernetes-custom-resource[(Tech preview) Define an application using a Kubernetes custom resource]
 
 
 === Define resources to manage as an app
@@ -220,7 +220,7 @@ After the process completes, the applications that are associated with the names
 //. Enter the new name.
 //. Select *Rename*.
 
-=== Define an application using a Kubernetes custom resource
+=== [Tech preview] Define an application using a Kubernetes custom resource
 
 You can specify the Kubernetes resources that you want to manage with Astra Control by defining them as an application using a custom resource (CR). You can add cluster-scoped resources if you want to manage those resources individually or all Kubernetes resources in a namespace if, for example, you intend to manage and protect all resources in a particular namespace in a similar way and at common intervals.
 

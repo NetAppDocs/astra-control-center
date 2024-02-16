@@ -5,7 +5,7 @@ keywords: custom resource, cr, manage app, astra
 summary: "Manage your Astra Control applications using Kubernetes custom resources (CR)."
 ---
 
-= Manage Astra Control applications using CRs
+= [Tech preview] Manage Astra Control applications using CRs
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/release-notes/
