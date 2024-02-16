@@ -1,6 +1,6 @@
 . (Optional) If you need to select only certain resources of the application to restore, add filtering that includes or excludes resources marked with particular labels:
 +
-* `<INCLUDE-EXCLUDE>`: _(Required for filtering)_ Use `include` or `exclude` to include or exclude a resource defined in resourceMatchers. Add the following resourceMatchers parameters to define the resources to be included or excluded:
+* "<INCLUDE-EXCLUDE>": _(Required for filtering)_ Use `include` or `exclude` to include or exclude a resource defined in resourceMatchers. Add the following resourceMatchers parameters to define the resources to be included or excluded:
 +
 ** <GROUP>: _(Optional)_ Group and kind of the resource to be filtered.
 ** <KIND>: _(Optional)_ Kind of the resource to be filtered.
