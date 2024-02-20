@@ -14,6 +14,8 @@ summary: After you install Astra Control Center, set up a license, and prepare y
 //REFERENCED IN UI. DO NOT MODIFY WITHOUT NOTIFYING UX.
 To begin managing your apps, add a Kubernetes cluster and manage it as a compute resource. You have to add a cluster for Astra Control Center to discover your Kubernetes applications.
 
+Astra Control allows you to add clusters managed by custom resource (CR) or kubeconfig, depending on your environment and preferences.
+
 TIP: We recommend that Astra Control Center manage the cluster it is deployed on first before you add other clusters to Astra Control Center to manage. Having the initial cluster under management is necessary to send Kubemetrics data and cluster-associated data for metrics and troubleshooting.
 
 .Before you begin
@@ -43,4 +45,4 @@ NOTE: You should select a storage class that is configured in Astra Control Prov
 
 The cluster enters *Discovering* state and then changes to *Healthy*. You are now managing the cluster with Astra Control Center.
 
-IMPORTANT: After you add a cluster to be managed in Astra Control Center, it might take a few minutes to deploy the monitoring operator. Until then, the Notification icon turns red and logs a *Monitoring Agent Status Check Failed* event. You can ignore this, because the issue resolves when Astra Control Center obtains the correct status. If the issue does not resolve in a few minutes, go to the cluster, and run `oc get pods -n netapp-monitoring` as the starting point. You will need to look into the monitoring operator logs to debug the problem.
+IMPORTANT: After you add a cluster to be managed in Astra Control Center, it might take a few minutes to deploy the monitoring operator. Until then, the Notification icon turns red and logs a *Monitoring Agent Status Check Failed* event. You can ignore this, because the issue resolves when Astra Control Center obtains the correct status. If the issue does not resolve in a few minutes, go to the cluster, and run `oc get pods -n netapp-monitoring` as the starting point. You'll need to look into the monitoring operator logs to debug the problem.
