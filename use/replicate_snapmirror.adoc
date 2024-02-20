@@ -41,9 +41,7 @@ Using Astra Control, you can do the following tasks related to replicating appli
 Astra Control application replication requires that the following prerequisites be met before you begin:
 
 .ONTAP clusters 
-* *Astra Control Provisioner*: Astra Control Provisioner must exist on both the source and destination Kubernetes clusters that utilize ONTAP as a backend. Astra Control supports replication with NetApp SnapMirror technology using storage classes backed by the following drivers:
-** `ontap-nas`
-** `ontap-san`
+* *Astra Control Provisioner*: Astra Control Provisioner 22.10 or later must exist on both the source and destination Kubernetes clusters that utilize ONTAP as a backend.
 * *Licenses*: ONTAP SnapMirror asynchronous licenses using the Data Protection bundle must be enabled on both the source and destination ONTAP clusters. Refer to https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html[SnapMirror licensing overview in ONTAP^] for more information.
 
 .Peering 
@@ -55,9 +53,11 @@ IMPORTANT: Ensure that the SVM names used in the replication relationship betwee
 
 .Astra Control Center
 
+TIP: link:../get-started/install_acc.html[Deploy Astra Control Center] in a third fault domain or secondary site for seamless disaster recovery.
+
 * *Managed backends*: You need to add and manage ONTAP storage backends in Astra Control Center to create a replication relationship. 
 +
-*_Astra Control Provisioner only_*: Adding and managing ONTAP storage backends in Astra Control Center is optional if you have enabled Astra Control Provisioner for Astra Control Center 23.10 or later.
+NOTE: Adding and managing ONTAP storage backends in Astra Control Center is optional if you have enabled Astra Control Provisioner.
 
 * *Managed clusters*: Add and manage the following clusters with Astra Control, ideally at different failure domains or sites:
 ** Source Kubernetes cluster
@@ -67,9 +67,7 @@ IMPORTANT: Ensure that the SVM names used in the replication relationship betwee
 * *User accounts*: When you add an ONTAP storage backend to Astra Control Center, apply user credentials with the "admin" role. This role has access methods `http` and `ontapi` enabled on both ONTAP source and destination clusters. Refer to https://docs.netapp.com/us-en/ontap-sm-classic/online-help-96-97/concept_cluster_user_accounts.html#users-list[Manage User Accounts in ONTAP documentation^] for more information. 
 // This bullet is duplicated in Add backend
 +
-*_Astra Control Provisioner only_*: If you have enabled Astra Control Provisioner functionality, you no longer need to specifically define an "admin" role to manage clusters in Astra Control Center as these credentials are no longer required within Astra Control Center.  
-
-TIP: link:../get-started/install_acc.html[Deploy Astra Control Center] in a third fault domain or secondary site for seamless disaster recovery.
+NOTE: With Astra Control Provisioner functionality, you don't need to specifically define an "admin" role to manage clusters in Astra Control Center as these credentials aren't required by Astra Control Center.  
 
 NOTE: Astra Control Center does not support NetApp SnapMirror replication for storage backends that are using the NVMe over TCP protocol.
 

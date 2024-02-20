@@ -69,11 +69,11 @@ NOTE: These requirements assume that Astra Control Center is the only applicatio
 //astradoc-362: make include from old Trident content?
 
 == Service mesh requirements
-A supported vanilla version of the Istio service mesh is strongly recommended to be installed on the Astra Control Center host cluster. Refer to https://istio.io/latest/docs/releases/supported-releases/[supported releases^] for supported versions of Istio. Branded releases of Istio service mesh, such as OpenShift Service Mesh, are not validated with Astra Control Center.
+It's strongly recommended that you install a supported vanilla version of the Istio service mesh on the Astra Control Center host cluster. Refer to https://istio.io/latest/docs/releases/supported-releases/[supported releases^] for supported versions of Istio. Branded releases of Istio service mesh, such as OpenShift Service Mesh, are not validated with Astra Control Center.
 
-To integrate Astra Control Center with the Istio service mesh installed on the host cluster, you must do the integration as part of the Astra Control Center link:../get-started/install_acc.html[installation] process and not independent of this process.
+To integrate Astra Control Center with the Istio service mesh installed on the host cluster, you must do the integration as part of an Astra Control Center link:../get-started/install_acc.html[installation] or link:../use/upgrade-acc.html[upgrade] and not independent of these processes.
 
-NOTE: Installing Astra Control Service without configuring a service mesh on the host cluster has potentially serious security implications.
+NOTE: Installing and using Astra Control Center without configuring a service mesh on the host cluster has potentially serious security implications.
 
 == Astra Control Provisioner
 To use Astra Control Provisioner advanced storage functionality, you must install Astra Trident 23.10 or later and enable link:../get-started/enable-acp.html[Astra Control Provisioner functionality].
@@ -126,15 +126,12 @@ To configure the MetroCluster LIF, refer to these options and examples for each 
 * https://docs.netapp.com/us-en/trident/trident-use/ontap-san-examples.html[SAN^]
 * https://docs.netapp.com/us-en/trident/trident-use/ontap-nas-examples.html[NAS^]
 
-== Image registry
-You must have an existing private Docker image registry to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
-
 == Astra Control Center license
 Astra Control Center requires an Astra Control Center license. When you install Astra Control Center, an embedded 90-day evaluation license for 4,800 CPU units is already activated. If you need more capacity or different evaluation terms, or want to upgrade to a full license, you can obtain a different evaluation license or full license from NetApp. You need a license to protect your applications and data.
 
 You can try Astra Control Center by signing up for a free trial. You can sign up by registering link:https://bluexp.netapp.com/astra-register[here^].
 
-To set up the license, refer to link:setup_overview.html[use a 90-day evaluation license]. 
+To set up the license, refer to link:add-license.html[use a 90-day evaluation license]. 
 
 To learn more about how licenses work, refer to link:../concepts/licensing.html[Licensing].
 
@@ -209,7 +206,7 @@ Astra Control Center supports recent versions of Firefox, Safari, and Chrome wit
 == Additional requirements for application clusters
 Keep in mind these requirements if you plan to use these Astra Control Center features:
 
-* *Application cluster requirements*: link:../get-started/prep-for-cluster-management[Cluster management requirements]
+* *Application cluster requirements*: link:../get-started/prep-for-cluster-management.html[Cluster management requirements]
 ** *Managed application requirements*: link:../use/manage-apps.html#application-management-requirements[Application management requirements]
 ** *Additional requirements for app replication*: link:../use/replicate_snapmirror.html#replication-prerequisites[Replication prerequisites]
 
