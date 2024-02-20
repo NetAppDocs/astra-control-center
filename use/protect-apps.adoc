@@ -125,7 +125,7 @@ Astra Control supports backup creation using storage classes backed by the follo
 . From the Options menu in the *Actions* column for the desired app, select *Back up*.
 . Customize the name of the backup.
 . Choose whether to back up the app from an existing snapshot. If you select this option, you can choose from a list of existing snapshots.
-. Choose a destination bucket for the backup from the list of storage buckets.
+. [*Tech preview*] Choose a destination bucket for the backup from the list of storage buckets.
 . Select *Next*.
 . Review the backup summary and select *Back up*.
 --
