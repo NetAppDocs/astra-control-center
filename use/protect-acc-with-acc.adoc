@@ -264,7 +264,7 @@ kubectl apply -f <file name>
 ... Restart traefik: 
 +
 ----
-kubectl get pods -n netapp-acc | grep -e "traefik" | awk '{print $1}' | xargs kubectl delete pod -n netapp-acc"
+kubectl get pods -n netapp-acc | grep -e "traefik" | awk '{print $1}' | xargs kubectl delete pod -n netapp-acc
 ----
 
 .. Go to the <<Step 2: Restore the Astra Control Center Operator,Restore the Astra Control Center Operator>> section of this document to complete the restore process.
