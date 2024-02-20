@@ -93,6 +93,7 @@ IMPORTANT: If your app uses a storage class backed by the `ontap-nas-economy` dr
 . Select *Applications*.
 . From the Options menu in the *Actions* column for the desired app, select *Snapshot*.
 . Customize the name of the snapshot and then select *Next*.
+. [*Tech preview*] Choose a destination bucket for the snapshot from the list of storage buckets.
 . Review the snapshot summary and select *Snapshot*.
 --
 
