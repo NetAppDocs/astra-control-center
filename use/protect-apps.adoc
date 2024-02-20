@@ -65,6 +65,7 @@ The following example sets four protection schedules: hourly, daily, weekly, and
 +
 image:screenshot-config-protection-policy.png[A screenshot of a sample configuration policy where you can choose to take snapshots and backups on an hourly, daily, weekly, or monthly basis.]
 
+. [*Tech preview*] Choose a destination bucket for the backups or snapshots from the list of storage buckets.
 . Select *Review*.
 . Select *Set Protection Policy.*
 --
