@@ -1,12 +1,9 @@
-== Add the images to your local registry
+//== Add the images to your registry
 
-. Complete the appropriate step sequence for your container engine:
-
-// start tabbed block for docker and podman approaches
-
+. If you are planning to push the Astra Control Center bundle to your local registry, complete the appropriate step sequence for your container engine:
++
 [role="tabbed-block"]
 ====
-
 .Docker
 --
 .. Change to the root directory of the tarball. You should see the `acc.manifest.bundle.yaml` file and these directories:
@@ -95,5 +92,11 @@ https://downloads.example.io/docker-astra-control-prod/netapp/astra/acc/23.10.0-
 ----
 
 ====
-
 // end tabbed block
+
+. Change the directory:
++
+[source,console]
+----
+cd manifests
+----

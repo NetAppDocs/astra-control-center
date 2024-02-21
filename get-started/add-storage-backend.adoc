@@ -15,7 +15,7 @@ After you set up the credentials or certificate authentication information, you 
 
 Managing storage clusters in Astra Control as a storage backend enables you to get linkages between persistent volumes (PVs) and the storage backend as well as additional storage metrics.
 
-*_Astra Control Provisioner only_*: Adding and managing ONTAP storage backends in Astra Control Center is optional when using NetApp SnapMirror technology if you have enabled Astra Control Provisioner with Astra Control Center 23.10 or later.
+Adding and managing ONTAP storage backends in Astra Control Center is optional when using NetApp SnapMirror technology if you have enabled Astra Control Provisioner.
 
 .Steps
 

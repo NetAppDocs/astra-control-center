@@ -15,7 +15,7 @@ NetApp provides support for Astra Control in a variety of ways. Extensive free s
 
 IMPORTANT: If you have an evaluation license for Astra Control Center, you can get technical support. However, case creation via NetApp Support Site (NSS) is not available. You can get in touch with Support via the feedback option or use the Discord channel for self service.
 
-You must first link:../get-started/setup_overview.html[activate support for your NetApp serial number] in order to use these non self-service support options. A NetApp Support Site (NSS) SSO account is required for chat and web ticketing along with case management.
+You must first link:../get-started/add-license.html[activate support for your NetApp serial number] in order to use these non self-service support options. A NetApp Support Site (NSS) SSO account is required for chat and web ticketing along with case management.
 
 == Self-support options
 

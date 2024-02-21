@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: get-started/enable-acp.html
 keywords: Astra Control Provisioner install, acp, enable, astra trident upgrade, upgrade trident
-summary: Enable Astra Control Provisioner to access advanced storage provisioning and management functionality.
+summary: Astra Control Provisioner has replaced Astra Trident as storage provisioner and orchestrator and must be enabled for Astra Control use.
 ---
 
 = Enable Astra Control Provisioner
@@ -11,15 +11,13 @@ summary: Enable Astra Control Provisioner to access advanced storage provisionin
 :imagesdir: ../media/use/
 
 [.lead]
-Astra Trident versions 23.10 and later include the option to use Astra Control Provisioner, which enables licensed Astra Control users to access advanced storage provisioning functionality. Astra Control Provisioner provides this extended functionality in addition to standard Astra Trident CSI-based functionality.
-
-In coming Astra Control updates, Astra Control Provisioner will replace Astra Trident as storage provisioner and orchestrator in the Astra Control architecture. Because of this, it's highly recommended that Astra Control users enable Astra Control Provisioner. Astra Trident will continue to remain open source and be released, maintained, supported, and updated with new CSI and other features from NetApp.
+Beginning with Astra Control Center 24.02, you must enable Astra Control Provisioner, which replaces Astra Trident as storage provisioner and orchestrator in the Astra Control architecture, to use Astra Control. Astra Trident versions 23.10 and later include the option to use Astra Control Provisioner, which enables licensed Astra Control users to access advanced storage provisioning functionality. 
 
 .About this task
 
 You should follow this procedure if you are a licensed Astra Control Center user and you are looking to use Astra Control Provisioner functionality. You should also follow this procedure if you are an Astra Trident user and want to use the additional functionality that Astra Control Provisioner provides without also using Astra Control.
 
-For each case, the provisioner functionality is not enabled by default in Astra Trident 23.10 but can be enabled using this process.
+For each case, the provisioner functionality is not enabled by default in Astra Trident 24.02 and must be enabled.
 
 .Before you begin
 
@@ -57,30 +55,87 @@ If you are enabling Astra Control Provisioner, do the following first:
 
 == (Step 1) Download and extract Astra Control Provisioner
 
-Astra Control Center users can download the image using either the NetApp Support Site or Astra Control registry method. Astra Trident users wanting to use Astra Control Provisioner without Astra Control should use the registry method.
+Astra Control Center users can download the image using either the Astra Control registry or NetApp Support Site method. Astra Trident users wanting to use Astra Control Provisioner without Astra Control should use the registry method.
 
-=== (Option) NetApp Support Site
+[role="tabbed-block"]
+====
+
+.Astra Control image registry
+--
+
+NOTE: You can use Podman instead of Docker for the commands in this procedure. If you are using a Windows environment, PowerShell is recommended.
+
+. Access the NetApp Astra Control image registry:
++
+.. Log on to the Astra Control Service web UI and select the figure icon at the top right of the page. 
+.. Select *API access*. 
+.. Write down your account ID.
+.. From the same page, select *Generate API token* and copy the API token string to the clipboard and save it in your editor.
+.. Log into the Astra Control registry using your preferred method:
++
+[source,docker]
+----
+docker login cr.astra.netapp.io -u <account-id> -p <api-token>
+----
++
+[source,crane]
+----
+crane auth login cr.astra.netapp.io -u <account-id> -p <api-token>
+----
+
+. (Custom registries only) Follow these steps to move the image to your custom registry. If you aren't using a registry, follow the Trident operator steps in the link:../get-started/enable-acp.html#step-2-enable-astra-control-provisioner-in-astra-trident[next section].
+
+.. Pull the Astra Control Provisioner image from the registry:
++
+NOTE: The image pulled will not support multiple platforms and will only support the same platform as the host that pulled the image, such as Linux AMD64.
++
+[source,console]
+----
+docker pull cr.astra.netapp.io/astra/trident-acp:23.10.0 --platform <cluster platform>
+----
++
+Example:
++
+----
+docker pull cr.astra.netapp.io/astra/trident-acp:23.10.0 --platform linux/amd64
+----
+
+.. Tag the image:
++
+[source,console]
+----
+docker tag cr.astra.netapp.io/astra/trident-acp:23.10.0 <my_custom_registry>/trident-acp:23.10.0
+----
+
+.. Push the image to your custom registry:
++
+[source,console]
+----
+docker push <my_custom_registry>/trident-acp:23.10.0
+----
+
+NOTE: You can use Crane copy as an alternative to running these Docker commands:
+`crane copy cr.astra.netapp.io/astra/trident-acp:23.10.0 <my_custom_registry>/trident-acp:23.10.0`
+
+--
+// End ACS registry tab block
+
+.NetApp Support Site
 --
 
 . Download the Astra Control Provisioner bundle (`trident-acp-[version].tar`) from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[Astra Control Center downloads page^].
 
 . (Recommended but optional) Download the certificates and signatures bundle for Astra Control Center (astra-control-center-certs-[version].tar.gz) to verify the signature of the trident-acp-[version] tar bundle.
 +
-.Expand for details
-[%collapsible]
-=====
-
 [source,console]
 ----
 tar -vxzf astra-control-center-certs-[version].tar.gz
 ----
-
++
 [source,console]
 ----
 openssl dgst -sha256 -verify certs/AstraControlCenterDockerImages-public.pub -signature certs/trident-acp-[version].tar.sig trident-acp-[version].tar
 ----
-=====
-// End collapsible
 
 . Load the Astra Control Provisioner image:
 +
@@ -108,83 +163,11 @@ docker tag trident-acp:23.10.0-linux-amd64 <my_custom_registry>/trident-acp:23.1
 ----
 docker push <my_custom_registry>/trident-acp:23.10.0
 ----
+
 --
 // end NSS tab block
 
-=== (Option) Astra Control image registry
 
-NOTE: You can use Podman instead of Docker for the commands in this procedure. If you are using a Windows environment, PowerShell is recommended.
-
-. Access the NetApp Astra Control image registry:
-+
-.. Log on to the Astra Control Service web UI and select the figure icon at the top right of the page. 
-.. Select *API access*. 
-.. Write down your account ID.
-.. From the same page, select *Generate API token* and copy the API token string to the clipboard and save it in your editor.
-.. Log into the Astra Control registry using your preferred method:
-+
-[source,docker]
-----
-docker login cr.astra.netapp.io -u <account-id> -p <api-token>
-----
-+
-[source,crane]
-----
-crane auth login cr.astra.netapp.io -u <account-id> -p <api-token>
-----
-
-. If you have a custom registry, follow these steps for your preferred method to move the image to your custom registry. If you aren't using a registry, follow the Trident operator steps in the link:../get-started/enable-acp.html#step-2-enable-astra-control-provisioner-in-astra-trident[next section].
-+
-NOTE: You can use Podman instead of Docker for the following commands. If you are using a Windows environment, PowerShell is recommended.
-+
-[role="tabbed-block"]
-====
-
-.Docker
---
-
-. Pull the Astra Control Provisioner image from the registry:
-+
-NOTE: The image pulled will not support multiple platforms and will only support the same platform as the host that pulled the image, such as Linux AMD64.
-+
-[source,console]
-----
-docker pull cr.astra.netapp.io/astra/trident-acp:23.10.0 --platform <cluster platform>
-----
-+
-Example:
-+
-----
-docker pull cr.astra.netapp.io/astra/trident-acp:23.10.0 --platform linux/amd64
-----
-
-. Tag the image:
-+
-[source,console]
-----
-docker tag cr.astra.netapp.io/astra/trident-acp:23.10.0 <my_custom_registry>/trident-acp:23.10.0
-----
-
-. Push the image to your custom registry:
-+
-[source,console]
-----
-docker push <my_custom_registry>/trident-acp:23.10.0
-----
---
-// end docker tab block
-
-.Crane
---
-
-. Copy the Astra Control Provisioner manifest to your custom registry:
-+
-[source,crane]
-----
-crane copy cr.astra.netapp.io/astra/trident-acp:23.10.0 <my_custom_registry>/trident-acp:23.10.0
-----
---
-// end crane tab block
 
 ====
 // end tabbed block
@@ -192,9 +175,7 @@ crane copy cr.astra.netapp.io/astra/trident-acp:23.10.0 <my_custom_registry>/tri
 
 == (Step 2) Enable Astra Control Provisioner in Astra Trident
 
-Determine if the original installation method used an https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html#determine-the-original-installation-method[operator (either manually or with Helm) or `tridentctl`^] and complete the appropriate steps according to your original method.
-
-WARNING: Do not use Helm to enable Astra Control Provisioner. If you used Helm for the original installation and you are upgrading to 23.10, you'll need to use either the Trident operator or tridentctl to perform Astra Control Provisioner enablement.
+Determine if the original installation method used an https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html#determine-the-original-installation-method[operator (either manually or with Helm) or tridentctl^] and complete the appropriate steps according to your original method.
 
 [role="tabbed-block"]
 ====
@@ -331,7 +312,52 @@ Response:
 ----
 +----------------+----------------+-------------+ | SERVER VERSION | CLIENT VERSION | ACP VERSION | +----------------+----------------+-------------+ | 23.10.0 | 23.10.0 | 23.10.0. | +----------------+----------------+-------------+
 ----
+--
 
+.Helm
+--
+
+. Add the Astra Trident Helm repository:
++
+----
+helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
+----
+
+. Use `helm install` and run one of the following options that include these settings: 
++
+** A name for your deployment location
+** The Astra Trident version
+** The name of the Astra Control Provisioner image
+** The flag to enable the provisioner
+** (Optional) A local registry path. If you are using a local registry, your https://docs.netapp.com/us-en/trident/trident-get-started/requirements.html#container-images-and-corresponding-kubernetes-versions[Trident images^] can be located in one registry or different registries, but all CSI images must be located in the same registry.
+** The Trident namespace
+
+.Options
+
+* Images without a registry
++
+----
+helm install <name> netapp-trident/trident-operator --version <24.2.0> --set acpImage=<acp image> --set enableACP=true --create-namespace --namespace <trident-namespace>
+----
+* Images in one registry
++
+----
+helm install <name> netapp-trident/trident-operator --version <24.2.0> --set acpImage=<acp image> --set enableACP=true --set imageRegistry=<your-registry> --create-namespace --namespace <trident-namespace>
+----
+
+* Images in different registries
++
+You must append `sig-storage` to the `imageRegistry` to use different registry locations.
++
+----
+helm install <name> netapp-trident/trident-operator --version <24.2.0> --set acpImage=<acp image> --set enableACP=true --set imageRegistry=<your-registry>/sig-storage --set operatorImage=<your-registry>/netapp/trident-operator:23.10.0 --set tridentAutosupportImage=<your-registry>/netapp/trident-autosupport:23.10 --set tridentImage=<your-registry>/netapp/trident:23.10.0 --create-namespace --namespace <trident-namespace>
+----
+
+NOTE: If you already created a namespace for Trident, the `--create-namespace` parameter will not create an additional namespace.
+
+You can use `helm list` to review installation details such as name, namespace, chart, status, app version, and revision number.
+
+--
 ====
 // end tabbed block
 

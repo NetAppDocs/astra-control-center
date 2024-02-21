@@ -24,6 +24,7 @@ Keep in mind the following limitations for any clusters you add using the comman
 * You cannot use SnapMirror replication features with the cluster.
 * You cannot create immutable backups of the cluster's data.
 =====
+
 .Before you begin
 
 * Before you add a cluster, review and perform the necessary link:../get-started/prep-for-cluster-management.html[prerequisite tasks].
@@ -33,6 +34,7 @@ Keep in mind the following limitations for any clusters you add using the comman
 ====
 .Add the cluster using the Web UI
 --
+
 .Steps
 . Navigate from either the Dashboard or the Clusters menu:
 * From *Dashboard* in the Resource Summary, select *Add* from the Clusters pane.
@@ -80,4 +82,4 @@ NOTE: You should select a storage class that is configured in Astra Control Prov
 
 The cluster enters *Discovering* state and then changes to *Healthy*. You are now managing the cluster with Astra Control Center.
 
-IMPORTANT: After you add a cluster to be managed in Astra Control Center, it might take a few minutes to deploy the monitoring operator. Until then, the Notification icon turns red and logs a *Monitoring Agent Status Check Failed* event. You can ignore this, because the issue resolves when Astra Control Center obtains the correct status. If the issue does not resolve in a few minutes, go to the cluster, and run `oc get pods -n netapp-monitoring` as the starting point. You will need to look into the monitoring operator logs to debug the problem.
+IMPORTANT: After you add a cluster to be managed in Astra Control Center, it might take a few minutes to deploy the monitoring operator. Until then, the Notification icon turns red and logs a *Monitoring Agent Status Check Failed* event. You can ignore this, because the issue resolves when Astra Control Center obtains the correct status. If the issue does not resolve in a few minutes, go to the cluster, and run `oc get pods -n netapp-monitoring` as the starting point. You'll need to look into the monitoring operator logs to debug the problem.

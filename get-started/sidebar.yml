@@ -29,6 +29,8 @@ entries:
         url: /get-started/enable-acp.html
       - title: Prepare for cluster management with Astra Control
         url: /get-started/prep-for-cluster-management.html
+      - title: Install Astra Connector for managed clusters
+        url: /get-started/install-astra-connector.html
       - title: Add a cluster  
         url: /get-started/add-cluster.html
       - title: Enable storage backend authentication  
