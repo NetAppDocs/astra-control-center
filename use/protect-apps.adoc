@@ -205,15 +205,51 @@ Astra Control supports backup creation using storage classes backed by the follo
 * `ontap-san-economy`
 =====
 
+[role="tabbed-block"]
+====
+.Create a backup using the Web UI
+--
 .Steps
 
 . Select *Applications*.
+
 . From the Options menu in the *Actions* column for the desired app, select *Back up*.
 . Customize the name of the backup.
 . Choose whether to back up the app from an existing snapshot. If you select this option, you can choose from a list of existing snapshots.
-. Choose a destination bucket for the backup from the list of storage buckets.
+. [*Tech preview*] Choose a destination bucket for the backup from the list of storage buckets.
 . Select *Next*.
 . Review the backup summary and select *Back up*.
+--
+
+.[Tech preview] Create a backup using a CR
+--
+.Steps
+
+. Create the custom resource (CR) file and name it `astra-control-backup-cr.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
++
+* <CR_NAME>: The name of this custom resource; choose a unique and sensible name for your environment.
+* <APPLICATION_NAME>: The Kubernetes name of the application to back up.
+* <APPVAULT_NAME>: The name of the AppVault where the backup contents should be stored.
++
+[source,yaml]
+----
+apiVersion: astra.netapp.io/v1
+kind: Backup
+metadata:
+  namespace: astra-connector
+  name: <CR_NAME>
+spec: 
+  applicationRef: <APPLICATION_NAME>
+  appVaultRef: <APPVAULT_NAME>
+----
+. After you populate the `astra-control-backup-cr.yaml` file with the correct values, apply the CR:
++
+[source,console]
+----
+kubectl apply -f astra-control-backup-cr.yaml
+----
+--
+====
 
 .Result
 
