@@ -202,7 +202,7 @@ NOTE: For clusters running Kubernetes 1.24 or earlier, use `bundle_pre_1_25.yaml
 +
 [source,console]
 ----
-kubectl -n trident apply -f trident-installer-23.10.0/deploy/<bundle-name.yaml>
+kubectl -n trident apply -f trident-installer/deploy/<bundle-name.yaml>
 ----
 
 . Verify Astra Trident is running:
