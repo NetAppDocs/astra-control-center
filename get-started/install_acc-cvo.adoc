@@ -77,7 +77,6 @@ NOTE: The Astra Control Center hosted cluster and the managed cluster must have 
 
 NOTE: These requirements assume that Astra Control Center is the only application running in the operational environment. If the environment is running additional applications, adjust these minimum requirements accordingly.
 ////
-
 NOTE: The AWS registry token expires in 12 hours, after which you'll have to renew the Docker image registry secret.
 
 === Overview of deployment for AWS

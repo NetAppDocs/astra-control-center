@@ -84,12 +84,52 @@ Astra Control supports snapshot creation using storage classes backed by the fol
 
 IMPORTANT: If your app uses a storage class backed by the `ontap-nas-economy` driver, snapshots can't be created. Use an alternate storage class for snapshots.
 
+[role="tabbed-block"]
+====
+.Create a snapshot using the Web UI
+--
 .Steps
 
 . Select *Applications*.
 . From the Options menu in the *Actions* column for the desired app, select *Snapshot*.
 . Customize the name of the snapshot and then select *Next*.
+. [*Tech preview*] Choose a destination bucket for the snapshot from the list of storage buckets.
 . Review the snapshot summary and select *Snapshot*.
+--
+
+.[Tech preview] Create a snapshot using a CR
+--
+.Steps
+
+. Create the custom resource (CR) file and name it `astra-control-snapshot-cr.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
++
+* <CR_NAME>: The name of this custom resource; choose a unique and sensible name for your environment.
+* <APPLICATION_NAME>: The Kubernetes name of the application to snapshot.
+* <APPVAULT_NAME>: The name of the AppVault where the snapshot contents should be stored.
+* <RECLAIM_POLICY>: _(Optional)_ Defines what happens to a snapshot when the snapshot CR is deleted. Valid options:
+** `Retain`
+** `Delete` (default)
++
+[source,yaml]
+----
+apiVersion: astra.netapp.io/v1
+kind: Snapshot
+metadata:
+  namespace: astra-connector
+  name: <CR_NAME>
+spec: 
+  applicationRef: <APPLICATION_NAME>
+  appVaultRef: <APPVAULT_NAME>
+  reclaimPolicy: <RECLAIM_POLICY>
+----
+. After you populate the `astra-control-snapshot-cr.yaml` file with the correct values, apply the CR:
++
+[source,console]
+----
+kubectl apply -f astra-control-snapshot-cr.yaml
+----
+--
+====
 
 .Result
 
