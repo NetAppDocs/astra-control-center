@@ -121,7 +121,7 @@ NOTE: The AWS Elastic Container Registry (ECR) token expires after 12 hours and 
 Here's an example of an AWS deployment:
 
 
-image:acc-cvo-aws2.png["This image shows an example of Astra Control Center with a Cloud Volumes ONTAP deployment"]
+image:acc-cvo-aws3.png["This image shows an example of Astra Control Center with a Cloud Volumes ONTAP deployment"]
 
 
 === Configure NetApp BlueXP for AWS
