@@ -30,7 +30,7 @@ Before you upgrade, ensure your environment still meets the link:../get-started/
 kubectl get tridentversion -n trident
 ----
 +
-NOTE: If you are running Astra Trident 22.10 or earlier, use these https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html[instructions^] to upgrade to a more recent version of Astra Trident before upgrading to the Astra Control Provisioner. You can perform a direct upgrade to Astra Control Provisioner 24.02 if your Astra Trident is within a four-release window of version 24.02. For example, you can directly upgrade from Astra Trident 23.04 to Astra Control Provisioner 24.02.
+NOTE: If you are running Astra Trident 23.01 or earlier, use these https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html[instructions^] to upgrade to a more recent version of Astra Trident before upgrading to the Astra Control Provisioner. You can perform a direct upgrade to Astra Control Provisioner 24.02 if your Astra Trident is within a four-release window of version 24.02. For example, you can directly upgrade from Astra Trident 23.04 to Astra Control Provisioner 24.02.
 
 . Verify that Astra Control Provisioner has been link:../get-started/faq.html#running-acp-check[enabled]. Astra Control Provisioner will not work with releases of Astra Control Center earlier than 23.10. Upgrade your Astra Control Provisioner so that it has the same version as the Astra Control Center you are upgrading to access the latest functionality.
 

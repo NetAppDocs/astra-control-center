@@ -133,7 +133,7 @@ If you don't have access to the UI, you can confirm successful installation usin
 .Astra Trident operator
 --
 
-Verify the `trident-acp` container is running and that `acpVersion` is `23.10.0` (or later) with a status of `Installed`:
+Verify the `trident-acp` container is running and that `acpVersion` is `23.10.0` or later (23.10 is the minimum version) with a status of `Installed`:
 
 ----
 kubectl get torc -o yaml
