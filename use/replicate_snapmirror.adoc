@@ -40,8 +40,10 @@ Using Astra Control, you can do the following tasks related to replicating appli
 
 Astra Control application replication requires that the following prerequisites be met before you begin:
 
-.ONTAP clusters 
-* *Astra Control Provisioner*: Astra Control Provisioner must exist on both the source and destination Kubernetes clusters that utilize ONTAP as a backend. Astra Control supports replication with NetApp SnapMirror technology using storage classes backed by the following drivers:
+.ONTAP clusters
+//acp to trident revert
+
+* *Astra Control Provisioner or Astra Trident*: Astra Control Provisioner or Astra Trident must exist on both the source and destination Kubernetes clusters that utilize ONTAP as a backend. Astra Control supports replication with NetApp SnapMirror technology using storage classes backed by the following drivers:
 ** `ontap-nas`
 ** `ontap-san`
 * *Licenses*: ONTAP SnapMirror asynchronous licenses using the Data Protection bundle must be enabled on both the source and destination ONTAP clusters. Refer to https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-licensing-concept.html[SnapMirror licensing overview in ONTAP^] for more information.
@@ -51,7 +53,8 @@ Astra Control application replication requires that the following prerequisites 
 +
 IMPORTANT: Ensure that the SVM names used in the replication relationship between two ONTAP clusters are unique.
 
-* *Astra Control Provisioner and SVM*: The peered remote SVMs must be available to Astra Control Provisioner on the destination cluster.
+* *Astra Control Provisioner or Astra Trident and SVM*: The peered remote SVMs must be available to Astra Control Provisioner or Astra Trident on the destination cluster.
+//acp to trident revert
 
 .Astra Control Center
 

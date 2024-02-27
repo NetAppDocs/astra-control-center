@@ -50,8 +50,9 @@ In this example configuration, the following is shown:
 NOTE: Ideally, the application cluster should be situated outside of the three Astra Control Center clusters as depicted by the kubernetes and rancher clusters in the image above. 
 
 Not depicted in the diagram:
+//acp to trident revert
 
-* All the clusters have ONTAP backends with Astra Control Provisioner installed. 
+* All the clusters have ONTAP backends with Astra Trident or Astra Control Provisioner installed. 
 * In this configuration, the OpenShift clusters are using MetalLB as the load balancer. 
 * The snapshot controller and VolumeSnapshotClass are also installed on all the clusters as outlined in the link:../get-started/prep-for-cluster-management.html[prerequisites]. 
  

@@ -61,8 +61,9 @@ Removing a cluster from Astra Control will not make any changes to the cluster's
 
 WARNING: Always remove a cluster from Astra Control before you delete it through any other methods. Deleting a cluster using another tool while it's still being managed by Astra Control can cause problems for your Astra Control account.
 
-*Is Astra Control Provisioner automatically uninstalled from a cluster when I unmanage it?*
-When you unmanage a cluster from Astra Control Center, Astra Control Provisioner isn't automatically uninstalled from the cluster. To uninstall Astra Control Provisioner and its components, you'll need to https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html[follow these steps to uninstall the Astra Trident instance that contains the Astra Control Provisioner service^].
+*Is Astra Control Provisioner (or Astra Trident) automatically uninstalled from a cluster when I unmanage it?*
+//acp to trident revert
+When you unmanage a cluster from Astra Control Center, Astra Control Provisioner or Astra Trident isn't automatically uninstalled from the cluster. To uninstall Astra Control Provisioner and its components or Astra Trident, you'll need to https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html[follow these steps to uninstall the Astra Trident instance that contains the Astra Control Provisioner service^].
 
 == Managing applications
 
@@ -104,8 +105,8 @@ No. Snapshots and backups taken by Astra Control can be managed only with Astra 
 Astra Control Provisioner, as part of Astra Control, supports a superset of storage provisioning features that are unavailable in open-source Astra Trident. These features are in addition to all features that are available to the open-source Trident.
 
 *Is Astra Control Provisioner replacing Astra Trident?*
-
-Astra Control Provisioner has replaced Astra Trident as storage provisioner and orchestrator in the Astra Control architecture. Astra Control users need to link:../get-started/enable-acp.html[enable Astra Control Provisioner] to use Astra Control. Astra Trident will continue to remain open source and be released, maintained, supported, and updated with new CSI and other features from NetApp. Only Astra Control Provisioner, however, that contains Astra Trident CSI functionality along with extended storage management capabilities can be used with Astra Control Center 24.02 and later. 
+//acp to trident revert
+Astra Control Provisioner has replaced Astra Trident as storage provisioner and orchestrator in the Astra Control architecture. Astra Control users should link:../get-started/enable-acp.html[enable Astra Control Provisioner] to use Astra Control. Astra Trident will continue to be supported in this release but will not be supported in future releases. Astra Trident will remain open source and be released, maintained, supported, and updated with new CSI and other features from NetApp. Only Astra Control Provisioner, however, that contains Astra Trident CSI functionality along with extended storage management capabilities can be used with coming Astra Control releases. 
 
 *Do I have to pay for Astra Trident?*
 

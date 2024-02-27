@@ -16,7 +16,7 @@ Astra Control Center supports NetApp ONTAP and Longhorn as storage backends.
 == Overview
 Astra Control Center supports the following:
 
-* *Storage classes backed by ONTAP storage*: If you are using an ONTAP backend, Astra Control Center offers the ability to import the ONTAP backend to report various monitoring information.
+* *Storage classes backed by ONTAP storage*: If you are using an ONTAP backend, Astra Control Center offers the ability to import the ONTAP backend to report monitoring information.
 * *CSI-based storage classes backed by Longhorn*: You can use Longhorn with the Longhorn Container Storage Interface (CSI) driver.
 
 NOTE: Storage classes should be https://docs.netapp.com/us-en/trident/trident-use/create-stor-class.html[configured^] using Astra Control Provisioner.
