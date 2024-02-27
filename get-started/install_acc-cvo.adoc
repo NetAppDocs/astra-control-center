@@ -29,7 +29,7 @@ You can deploy Astra Control Center on a self-managed Kubernetes cluster hosted 
 
 === What you'll need for AWS
 
-Before you deploy Astra Control Center in AWS, you will need the following items:
+Before you deploy Astra Control Center in AWS, you'll need the following items:
 
 * Astra Control Center license. Refer to link:../get-started/requirements.html[Astra Control Center licensing requirements].
 * link:../get-started/requirements.html[Meet Astra Control Center requirements].
@@ -62,7 +62,7 @@ Astra Control Center requires specific resources in addition to the environment'
 `http://netappdownloads.jfrog.io/docker-astra-control-prod`
 Contact NetApp Support to obtain instructions on using this image registry during the Astra Control Center installation process.
 
-If you are unable to access the NetApp image registry, you must have an existing private registry, such as AWS Elastic Container Registry (ECR), to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
+If you are unable to access the NetApp image registry, you must have an existing private registry, such as AWS Elastic Container Registry (ECR), to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you'll upload the images.
 
 NOTE: The Astra Control Center hosted cluster and the managed cluster must have access to the same image registry to be able to back up and restore apps using the Restic-based image.
 
@@ -77,8 +77,7 @@ NOTE: The Astra Control Center hosted cluster and the managed cluster must have 
 
 NOTE: These requirements assume that Astra Control Center is the only application running in the operational environment. If the environment is running additional applications, adjust these minimum requirements accordingly.
 ////
-
-NOTE: The AWS registry token expires in 12 hours, after which you will have to renew the Docker image registry secret.
+NOTE: The AWS registry token expires in 12 hours, after which you'll have to renew the Docker image registry secret.
 
 === Overview of deployment for AWS
 Here is an overview of the process to install Astra Control Center for AWS with Cloud Volumes ONTAP as a storage backend.
@@ -102,7 +101,7 @@ Install a RedHat OpenShift Container Platform cluster on AWS.
 For installation instructions, see https://docs.openshift.com/container-platform/4.13/installing/installing_aws/installing-aws-default.html[Installing a cluster on AWS in OpenShift Container Platform^].
 
 === Configure AWS
-Next, configure AWS to create a virtual network, set up EC2 compute instances, and create an AWS S3 bucket. If you cannot access the <<aws-registry,NetApp Astra Control Center image registry>>, you will also need to create an Elastic Container Registry (ECR) to host the Astra Control Center images, and push the images to this registry.
+Next, configure AWS to create a virtual network, set up EC2 compute instances, and create an AWS S3 bucket. If you cannot access the <<aws-registry,NetApp Astra Control Center image registry>>, you'll also need to create an Elastic Container Registry (ECR) to host the Astra Control Center images, and push the images to this registry.
 
 Follow the AWS documentation to complete the following steps. See https://docs.openshift.com/container-platform/4.13/installing/installing_aws/installing-aws-default.html[AWS installation documentation^].
 
@@ -122,7 +121,7 @@ NOTE: The AWS Elastic Container Registry (ECR) token expires after 12 hours and 
 Here's an example of an AWS deployment:
 
 
-image:acc-cvo-aws2.png["This image shows an example of Astra Control Center with a Cloud Volumes ONTAP deployment"]
+image:acc-cvo-aws3.png["This image shows an example of Astra Control Center with a Cloud Volumes ONTAP deployment"]
 
 
 === Configure NetApp BlueXP for AWS
@@ -165,7 +164,7 @@ You can deploy Astra Control Center on a self-managed Kubernetes cluster hosted 
 
 === What you'll need for GCP
 
-Before you deploy Astra Control Center in GCP, you will need the following items:
+Before you deploy Astra Control Center in GCP, you'll need the following items:
 
 * Astra Control Center license. Refer to link:../get-started/requirements.html[Astra Control Center licensing requirements].
 * link:../get-started/requirements.html[Meet Astra Control Center requirements].
@@ -193,7 +192,7 @@ Astra Control Center requires specific resources in addition to the environment'
 `http://netappdownloads.jfrog.io/docker-astra-control-prod`
 Contact NetApp Support to obtain instructions on using this image registry during the Astra Control Center installation process.
 
-If you are unable to access the NetApp image registry, you must have an existing private registry, such as Google Container Registry, to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
+If you are unable to access the NetApp image registry, you must have an existing private registry, such as Google Container Registry, to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you'll upload the images.
 
 NOTE: You need to enable anonymous access to pull Restic images for backups.
 
@@ -246,7 +245,7 @@ Ensure that you have sufficient IAM roles and permissions that enable you to ins
 See https://docs.netapp.com/us-en/cloud-manager-setup-admin/task-creating-connectors-gcp.html#setting-up-permissions[Initial GCP credentials and permissions^].
 
 === Configure GCP
-Next, configure GCP to create a VPC, set up compute instances, and create a Google Cloud Object Storage. If you cannot access the <<gcp-registry,NetApp Astra Control Center image registry>>, you will also need to create a Google Container Registry to host the Astra Control Center images, and push the images to this registry.
+Next, configure GCP to create a VPC, set up compute instances, and create a Google Cloud Object Storage. If you cannot access the <<gcp-registry,NetApp Astra Control Center image registry>>, you'll also need to create a Google Container Registry to host the Astra Control Center images, and push the images to this registry.
 
 Follow the GCP documentation to complete the following steps. See Installing OpenShift cluster in GCP.
 
@@ -338,7 +337,7 @@ You can deploy Astra Control Center on a self-managed Kubernetes cluster hosted 
 
 === What you'll need for Azure
 
-Before you deploy Astra Control Center in Azure, you will need the following items:
+Before you deploy Astra Control Center in Azure, you'll need the following items:
 
 * Astra Control Center license. Refer to link:../get-started/requirements.html[Astra Control Center licensing requirements].
 * link:../get-started/requirements.html[Meet Astra Control Center requirements].
@@ -365,7 +364,7 @@ Astra Control Center requires specific resources in addition to the environment'
 `http://netappdownloads.jfrog.io/docker-astra-control-prod`
 Contact NetApp Support to obtain instructions on using this image registry during the Astra Control Center installation process.
 
-If you are unable to access the NetApp image registry, you must have an existing private registry, such as Azure Container Registry (ACR), to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
+If you are unable to access the NetApp image registry, you must have an existing private registry, such as Azure Container Registry (ACR), to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you'll upload the images.
 
 NOTE: You need to enable anonymous access to pull Restic images for backups.
 
@@ -417,7 +416,7 @@ Ensure that you have sufficient IAM roles and permissions that enable you to ins
 See https://docs.netapp.com/us-en/cloud-manager-setup-admin/concept-accounts-azure.html[Azure credentials and permissions^].
 
 === Configure Azure
-Next, configure Azure to create a virtual network, set up compute instances, and create an Azure Blob container. If you cannot access the <<azure-registry,NetApp Astra Control Center image registry>>, you will also need to create an Azure Container Registry (ACR) to host the Astra Control Center images, and push the images to this registry.
+Next, configure Azure to create a virtual network, set up compute instances, and create an Azure Blob container. If you cannot access the <<azure-registry,NetApp Astra Control Center image registry>>, you'll also need to create an Azure Container Registry (ACR) to host the Astra Control Center images, and push the images to this registry.
 
 Follow the Azure documentation to complete the following steps. See https://docs.openshift.com/container-platform/4.13/installing/installing_azure/preparing-to-install-on-azure.html[Installing OpenShift cluster on Azure^].
 
@@ -425,7 +424,7 @@ Follow the Azure documentation to complete the following steps. See https://docs
 . Review the compute instances. This can be a bare metal server or VMs in Azure.
 . If the instance type does not already match the Astra minimum resource requirements for master and worker nodes, change the instance type in Azure to meet the Astra requirements.  Refer to link:../get-started/requirements.html[Astra Control Center requirements].
 . Create at least one Azure Blob container to store your backups.
-. Create a storage account. You will need a storage account to create a container to be used as a bucket in Astra Control Center.
+. Create a storage account. You'll need a storage account to create a container to be used as a bucket in Astra Control Center.
 . Create a secret, which is required for bucket access.
 . (Optional) If you cannot access the <<azure-registry,NetApp image registry>>, do the following:
 .. Create an Azure Container Registry (ACR) to host the Astra Control Center images.
@@ -506,4 +505,4 @@ Astra Control Provisioner is automatically installed as part of the import and d
 
 Install Astra Control Center with the standard link:../get-started/install_acc.html[installation instructions].
 
-Using Astra Control Center, add an Azure bucket. Refer to link:../get-started/setup_overview.html[Set up Astra Control Center and add buckets].
+Using Astra Control Center, add an Azure bucket. Refer to link:../get-started/add-bucket.html[Set up Astra Control Center and add buckets].

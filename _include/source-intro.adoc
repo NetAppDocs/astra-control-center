@@ -124,7 +124,7 @@ At a high level, Astra Control Center works like this:
 ** Add storage backend that is discovered when you added the cluster.
 ** Add an object store bucket that will store your app backups.
 
-Learn more about how to https://docs.netapp.com/us-en/astra-control-center/get-started/setup_overview.html[set up Astra Control Center^].
+Learn more about how to https://docs.netapp.com/us-en/astra-control-center/get-started/quick-start.html[set up Astra Control Center^].
 
 
 You can add apps to your cluster. Or, if you have some apps already in the cluster being managed, you can use Astra Control Center to manage them. Then, use Astra Control Center to create snapshots, backups, clones and replication relationships.

@@ -23,28 +23,27 @@ NOTE: Ensure that the Kubernetes environment you choose to host Astra Control Ce
 |Kubernetes distribution on host cluster |Supported versions
 
 |Azure Kubernetes Service on Azure Stack HCI
-|Azure Stack HCI 21H2 and 22H2 with AKS 1.24.x and 1.25.x
+|Azure Stack HCI 21H2 and 22H2 with AKS 1.24.11 through 1.26.6
 
 |Google Anthos
 |1.15 through 1.16 (See <<Google Anthos ingress requirements>>)
 
 |Kubernetes (Upstream)
-|1.26 to 1.28
+|1.27 to 1.29
 
 |Rancher Kubernetes Engine (RKE)
-|RKE 1.3 with Rancher Manager 2.6
-RKE 1.4 with Rancher Manager 2.7
-RKE 2 (v1.24.x) with Rancher 2.6
-RKE 2 (v1.26.x) with Rancher 2.7
+|RKE 1: Versions 1.24.17, 1.25.13, 1.26.8 with Rancher Manager 2.7.9
+RKE 2: Versions 1.23.16 and 1.24.13 with Rancher Manager 2.6.13
+RKE 2: Versions 1.24.17, 1.25.14, 1.26.9 with Rancher Manager 2.7.9
 
 |Red Hat OpenShift Container Platform
-|4.11 through 4.14
+|4.12 through 4.14
 
 // |VMware Tanzu Kubernetes Grid
 // |1.6  (See <<Host cluster resource requirements>>)
 
-|VMware Tanzu Kubernetes Grid Integrated Edition
-|1.16.x (See <<Host cluster resource requirements>>)
+// |VMware Tanzu Kubernetes Grid Integrated Edition
+// |1.16.x (See <<Host cluster resource requirements>>)
 |===
 
 == Host cluster resource requirements
@@ -69,16 +68,22 @@ NOTE: These requirements assume that Astra Control Center is the only applicatio
 //astradoc-362: make include from old Trident content?
 
 == Service mesh requirements
-A supported vanilla version of the Istio service mesh is strongly recommended to be installed on the Astra Control Center host cluster. Refer to https://istio.io/latest/docs/releases/supported-releases/[supported releases^] for supported versions of Istio. Branded releases of Istio service mesh, such as OpenShift Service Mesh, are not validated with Astra Control Center.
+It's strongly recommended that you install a supported vanilla version of the Istio service mesh on the Astra Control Center host cluster. Refer to https://istio.io/latest/docs/releases/supported-releases/[supported releases^] for supported versions of Istio. Branded releases of Istio service mesh, such as OpenShift Service Mesh, are not validated with Astra Control Center.
 
-To integrate Astra Control Center with the Istio service mesh installed on the host cluster, you must do the integration as part of the Astra Control Center link:../get-started/install_acc.html[installation] process and not independent of this process.
+To integrate Astra Control Center with the Istio service mesh installed on the host cluster, you must do the integration as part of an Astra Control Center link:../get-started/install_acc.html[installation] or link:../use/upgrade-acc.html[upgrade] and not independent of these processes.
 
-NOTE: Installing Astra Control Service without configuring a service mesh on the host cluster has potentially serious security implications.
+NOTE: Installing and using Astra Control Center without configuring a service mesh on the host cluster has potentially serious security implications.
+
+== Astra Trident
+//acp to trident revert
+If you intend to use Astra Trident instead of Astra Control Provisioner with this release, Astra Trident 22.04 and later versions are supported. Astra Control Center will require <<Astra Control Provisioner>> in future releases.
 
 == Astra Control Provisioner
-To use Astra Control Provisioner advanced storage functionality, you must install Astra Trident 23.10 or later and enable link:../get-started/enable-acp.html[Astra Control Provisioner functionality].
+To use Astra Control Provisioner advanced storage functionality, you must install Astra Trident 23.10 or later and enable link:../get-started/enable-acp.html[Astra Control Provisioner functionality]. To use the latest Astra Control Provisioner functionality, you'll need the most recent versions of Astra Trident and Astra Control Center.
+//acp to trident revert
 
-* *Minimum Astra Control Provisioner version for use with Astra Control Center*: Astra Control Provisioner 23.10 or later installed and configured
+* *Minimum Astra Control Provisioner version for use with Astra Control Center*: Astra Control Provisioner 23.10 or later installed and configured.
+
 //* *SnapMirror replication*: Astra Trident 22.10 or newer installed for SnapMirror-based application replication
 //* *For Kubernetes 1.25 or newer support*: Astra Trident 22.10 or newer installed for Kubernetes 1.25 or newer clusters (you must upgrade to Astra Trident 22.10 prior to upgrading to Kubernetes 1.25 or newer)
 * *ONTAP configuration with Astra Trident*: 
@@ -126,15 +131,12 @@ To configure the MetroCluster LIF, refer to these options and examples for each 
 * https://docs.netapp.com/us-en/trident/trident-use/ontap-san-examples.html[SAN^]
 * https://docs.netapp.com/us-en/trident/trident-use/ontap-nas-examples.html[NAS^]
 
-== Image registry
-You must have an existing private Docker image registry to which you can push Astra Control Center build images. You need to provide the URL of the image registry where you will upload the images.
-
 == Astra Control Center license
 Astra Control Center requires an Astra Control Center license. When you install Astra Control Center, an embedded 90-day evaluation license for 4,800 CPU units is already activated. If you need more capacity or different evaluation terms, or want to upgrade to a full license, you can obtain a different evaluation license or full license from NetApp. You need a license to protect your applications and data.
 
 You can try Astra Control Center by signing up for a free trial. You can sign up by registering link:https://bluexp.netapp.com/astra-register[here^].
 
-To set up the license, refer to link:setup_overview.html[use a 90-day evaluation license]. 
+To set up the license, refer to link:add-license.html[use a 90-day evaluation license]. 
 
 To learn more about how licenses work, refer to link:../concepts/licensing.html[Licensing].
 
@@ -209,7 +211,7 @@ Astra Control Center supports recent versions of Firefox, Safari, and Chrome wit
 == Additional requirements for application clusters
 Keep in mind these requirements if you plan to use these Astra Control Center features:
 
-* *Application cluster requirements*: link:../get-started/prep-for-cluster-management[Cluster management requirements]
+* *Application cluster requirements*: link:../get-started/prep-for-cluster-management.html[Cluster management requirements]
 ** *Managed application requirements*: link:../use/manage-apps.html#application-management-requirements[Application management requirements]
 ** *Additional requirements for app replication*: link:../use/replicate_snapmirror.html#replication-prerequisites[Replication prerequisites]
 
