@@ -18,20 +18,20 @@ We're pleased to announce the latest release of Astra Control Center.
 .New features and support
 
 * Minor bug fixes.
-* Astra Control Center deployment can now be performed without a private registry.
+* Deploy Astra Control Center without a private registry.
 
 .Known issues and limitations
 
-* link:../release-notes/known-issues.html[Known issues for this release^]
-* link:../release-notes/known-limitations.html[Known limitations for this release^]
+* link:../release-notes/known-issues.html[Known issues for this release]
+* link:../release-notes/known-limitations.html[Known limitations for this release]
 
 .(Tech preview) Declarative Kubernetes workflows
-This Astra Control Center release contains declarative Kubernetes functionality that allows you to perform data management from a native Kubernetes custom resource (CR). 
+This Astra Control Center release contains declarative Kubernetes functionality that enables you to perform data management from a native Kubernetes custom resource (CR). 
 [%collapsible]
 ====
-This CR-based data management functionality is provided as a tech preview and can be accessed only when you install the link:../get-started/prep-for-cluster-management.html[Astra Connector] on the cluster you want to manage. After you link:../get-started/add-cluster.html[add the cluster manually] to Astra Control management using the instructions in the UI, you'll be able to perform the following CR-based cluster operations in the UI or from a CR:
+This CR-based data management functionality is provided as a tech preview and can be accessed only when you install the link:../get-started/install-astra-connector.html[Astra Connector] on the cluster you want to manage. After you link:../get-started/add-cluster.html[add the cluster manually] to Astra Control using the instructions in the UI, you'll be able to perform the following CR-based cluster operations in the UI or from a CR:
 
-* link:../manage-apps.html#tech-preview-define-an-application-using-a-kubernetes-custom-resource[Define an application using a custom resource] and link:../use/manage-buckets.html#tech-preview-manage-a-bucket-using-a-custom-resource[define its bucket].
+* link:../use/manage-apps.html#tech-preview-define-an-application-using-a-kubernetes-custom-resource[Define an application using a custom resource] and link:../use/manage-buckets.html#tech-preview-manage-a-bucket-using-a-custom-resource[define its bucket].
 * link:../use/protect-apps.html#create-a-backup[Back up your application].
 * link:../use/protect-apps.html#create-a-snapshot[Create a snapshot].
 * link:../use/protect-apps.html#configure-a-protection-policy[Create schedules for snapshots or backups].
