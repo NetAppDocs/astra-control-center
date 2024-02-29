@@ -57,7 +57,7 @@ entries:
     url: /use/monitor-running-tasks.html
   - title: Manage Astra Control applications using CRs
     url: /use/cr-manage-options.html
-  - title: Monitor infrastructure with Cloud Insights and Fluentd
+  - title: Monitor infrastructure with Prometheus and Fluentd
     url: /use/monitor-protect.html
   - title: Unmanage apps and clusters
     url: /use/unmanage.html

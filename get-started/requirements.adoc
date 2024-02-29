@@ -144,7 +144,7 @@ To learn more about how licenses work, refer to link:../concepts/licensing.html[
 Configure your operational environment to ensure Astra Control Center can communicate properly. The following networking configurations are required:
 
 * *FQDN address*: You must have an FQDN address for Astra Control Center.
-* *Access to the internet*: You should determine whether you have outside access to the internet. If you do not, some functionality might be limited, such as receiving monitoring and metrics data from NetApp Cloud Insights, or sending support bundles to the https://mysupport.netapp.com/site/[NetApp Support Site^].
+* *Access to the internet*: You should determine whether you have outside access to the internet. If you do not, some functionality might be limited, such as sending support bundles to the https://mysupport.netapp.com/site/[NetApp Support Site^].
 * *Port access*: The operational environment that hosts Astra Control Center communicates using the following TCP ports. You should ensure that these ports are allowed through any firewalls, and configure firewalls to allow any HTTPS egress traffic originating from the Astra network. Some ports require connectivity both ways between the environment hosting Astra Control Center and each managed cluster (noted where applicable).
 
 NOTE: You can deploy Astra Control Center in a dual-stack Kubernetes cluster, and Astra Control Center can manage applications and storage backends that have been configured for dual-stack operation. For more information about dual-stack cluster requirements, see the https://kubernetes.io/docs/concepts/services-networking/dual-stack/[Kubernetes documentation^].
@@ -164,11 +164,12 @@ NOTE: You can deploy Astra Control Center in a dual-stack Kubernetes cluster, an
 |HTTPS
 |Metrics data communication - ensure each managed cluster can access this port on the cluster hosting Astra Control Center (two-way communication required)
 
-|Astra Control Center
-|Hosted Cloud Insights service (https://www.netapp.com/cloud-services/cloud-insights/)
-|443
-|HTTPS
-|Cloud Insights communication
+// ASTRADOC-410
+// |Astra Control Center
+// |Hosted Cloud Insights service (https://www.netapp.com/cloud-services/cloud-insights/)
+// |443
+// |HTTPS
+// |Cloud Insights communication
 
 |Astra Control Center
 |Amazon S3 storage bucket provider 

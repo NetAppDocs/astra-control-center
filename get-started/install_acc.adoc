@@ -599,8 +599,8 @@ additionalValues:
         initialDelaySeconds: 180
 ----
 
-* For Astral Control Center and Cloud Insights communication, TLS certificate verification is disabled by default. You can enable TLS certification verification for communication between Cloud Insights and both the Astra Control Center host cluster and managed cluster by adding the following section in `additionalValues`.
-
+// ASTRADOC-410* For Astral Control Center and Cloud Insights communication, TLS certificate verification is disabled by default. You can enable TLS certification verification for communication between Cloud Insights and both the Astra Control Center host cluster and managed cluster by adding the following section in `additionalValues`.
+////
 ----
   additionalValues:
     netapp-monitoring-operator:
@@ -613,7 +613,7 @@ additionalValues:
       config:
         ciSkipTlsVerify: false
 ----
-
+////
 ====
 // End snippet
 
