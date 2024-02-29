@@ -1,29 +1,29 @@
 ---
 sidebar: sidebar
 permalink: use/monitor-protect.html
-keywords: proxy, cloud insights, connections, fluent bit, accounts, protect, security
-summary: You can configure several optional settings to enhance your Astra Control Centre experience. If the network where you're running Astra Control Center requires a proxy for connecting to the Internet, configure that proxy server in Astra Control Center. You can use NetApp Cloud Insights to monitor and gain insight into your complete infrastructure. You can configure several optional settings to enhance your Astra Control Center experience. To monitor and gain insight into your complete infrastructure, create a connection to NetApp Cloud Insights, configure Prometheus, or add a Fluentd connection.
+keywords: proxy, connections, fluent bit, accounts, protect, security
+summary: You can configure several optional settings to enhance your Astra Control Centre experience. If the network where you're running Astra Control Center requires a proxy for connecting to the Internet, configure that proxy server in Astra Control Center. You can configure several optional settings to enhance your Astra Control Center experience. To monitor and gain insight into your complete infrastructure,  configure Prometheus or add a Fluentd connection.
 
 ---
 
-= Monitor infrastructure with Cloud Insights, Prometheus, or Fluentd connections
+= Monitor infrastructure with Prometheus or Fluentd connections
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/use/
 
 [.lead]
-You can configure several optional settings to enhance your Astra Control Center experience. To monitor and gain insight into your complete infrastructure, create a connection to NetApp Cloud Insights, configure Prometheus, or add a Fluentd connection.
+You can configure several optional settings to enhance your Astra Control Center experience. To monitor and gain insight into your complete infrastructure, configure Prometheus or add a Fluentd connection.
 
-If the network where you're running Astra Control Center requires a proxy for connecting to the Internet (to upload support bundles to NetApp Support Site or establish a connection to Cloud Insights), you should configure a proxy server in Astra Control Center.
+If the network where you're running Astra Control Center requires a proxy for connecting to the Internet (to upload support bundles to the NetApp Support Site), you should configure a proxy server in Astra Control Center.
 
-* <<Connect to Cloud Insights>>
+// * <<Connect to Cloud Insights>>
 * <<Connect to Prometheus>>
 * <<Connect to Fluentd>>
 
 
-== Add a proxy server for connections to Cloud Insights or to NetApp Support Site
+== Add a proxy server for connections to the NetApp Support Site
 
-If the network where you're running Astra Control Center requires a proxy for connecting to the Internet (to upload support bundles to NetApp Support Site or establish a connection to Cloud Insights), you should configure a proxy server in Astra Control Center.
+If the network where you're running Astra Control Center requires a proxy for connecting to the Internet (to upload support bundles to the NetApp Support Site), you should configure a proxy server in Astra Control Center.
 
 IMPORTANT: Astra Control Center does not validate the details you enter for your proxy server. Ensure that you enter correct values.
 
@@ -67,8 +67,9 @@ You can disable the proxy server connection. You'll be warned before you disable
 . Select *Disconnect* from the drop-down list to disable the connection.
 . In the dialog box that opens, confirm the operation.
 
-== Connect to Cloud Insights
 
+// ASTRADOC-410 == Connect to Cloud Insights
+////
 To monitor and gain insight into your complete infrastructure, connect NetApp Cloud Insights with your Astra Control Center instance. Cloud Insights is included in your Astra Control Center license.
 
 Cloud Insights should be accessible from the network that Astra Control Center uses, or indirectly via a proxy server.
@@ -166,7 +167,7 @@ You can disable the Cloud Insights connection for a Kubernetes cluster managed b
 . Select *Disconnect* from the drop-down list to disable the connection.
 . In the dialog box that opens, confirm the operation.
 After you confirm the operation, on the *Account* > *Connections* page, the Cloud Insights status changes to *Pending*. It take a few minutes for the status to change to *Disconnected*.
-
+////
 
 == Connect to Prometheus 
 
@@ -231,9 +232,6 @@ You can use Prometheus to view Astra Control Center data.
 . To see sample scraping over time, select *Graph*. 
 +
 NOTE: If multiple cluster data was collected, each cluster's metrics appear in a different color. 
-
-
-
 
 == Connect to Fluentd
 

@@ -85,7 +85,7 @@ After you finish setting up Astra Control Center, use the Astra Control UI or th
 * link:../use/manage-notifications.html[Manage notifications]
 * link:../use/manage-apps.html[Manage apps]: Define resources to manage.
 * link:../use/protection-overview.html[Protect apps]: Configure protection policies and replicate, clone, and migrate apps.  
-* link:../use/monitor-protect.html#connect-to-cloud-insights[Optionally, connect to Cloud Insights]: View metrics on the health of your system.
+// ASTRADOC-410 * link:../use/monitor-protect.html#connect-to-cloud-insights[Optionally, connect to Cloud Insights]: View metrics on the health of your system.
 
 
 

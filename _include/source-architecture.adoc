@@ -25,7 +25,7 @@ image:astra-architecture-diagram-v6.png["A conceptual image that describes the A
 
 
 
-* *Cloud Insights*:  A NetApp cloud infrastructure monitoring tool, Cloud Insights enables you to monitor performance and utilization for your Kubernetes clusters managed by Astra Control Center. Cloud Insights correlates storage usage to workloads. When you enable the Cloud Insights connection in Astra Control Center, telemetry information shows in Astra Control Center UI pages.
+// ASTRADOC-410* *Cloud Insights*:  A NetApp cloud infrastructure monitoring tool, Cloud Insights enables you to monitor performance and utilization for your Kubernetes clusters managed by Astra Control Center. Cloud Insights correlates storage usage to workloads. When you enable the Cloud Insights connection in Astra Control Center, telemetry information shows in Astra Control Center UI pages.
 
 == Astra Control interfaces
 
@@ -42,5 +42,5 @@ Astra Control Center also enables you to manage, migrate, and protect Kubernetes
 * https://docs.netapp.com/us-en/astra/index.html[Astra Control Service documentation^]
 * https://docs.netapp.com/us-en/astra-control-center/index.html[Astra Control Center documentation^]
 * https://docs.netapp.com/us-en/astra-automation[Use the Astra Control API^]
-* https://docs.netapp.com/us-en/cloudinsights/[Cloud Insights documentation^]
+// ASTRADOC-410 * https://docs.netapp.com/us-en/cloudinsights/[Cloud Insights documentation^]
 * https://docs.netapp.com/us-en/ontap/index.html[ONTAP documentation^]
