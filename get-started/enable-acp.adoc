@@ -2,7 +2,7 @@
 sidebar: sidebar
 permalink: get-started/enable-acp.html
 keywords: Astra Control Provisioner install, acp, enable, astra trident upgrade, upgrade trident
-summary: Astra Control Provisioner has replaced Astra Trident as storage provisioner and orchestrator and must be enabled for Astra Control use.
+summary: Enable Astra Control Provisioner to access advanced storage provisioning and management functionality.
 ---
 
 = Enable Astra Control Provisioner
@@ -16,6 +16,8 @@ Astra Trident versions 23.10 and later include the option to use Astra Control P
 In coming Astra Control updates, Astra Control Provisioner will replace Astra Trident as storage provisioner and orchestrator and be mandatory for Astra Control use. Because of this, it's strongly recommended that Astra Control users enable Astra Control Provisioner. Astra Trident will continue to remain open source and be released, maintained, supported, and updated with new CSI and other features from NetApp.
 
 //acp to trident revert
+//Summary: Astra Control Provisioner has replaced Astra Trident as storage provisioner and orchestrator and must be enabled for Astra Control use.
+
 //Beginning with Astra Control Center 24.02, you must enable Astra Control Provisioner, which replaces Astra Trident as storage provisioner and orchestrator in the Astra Control architecture, to use Astra Control. Astra Trident versions 23.10 and later include the option to use Astra Control Provisioner, which enables licensed Astra Control users to access advanced storage provisioning functionality. 
 
 .About this task
