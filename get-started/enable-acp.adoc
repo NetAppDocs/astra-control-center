@@ -373,7 +373,7 @@ Astra Control Provisioner functionality is enabled and you can use any features 
 
 (For Astra Control Center users only) After Astra Control Provisioner is installed, the cluster hosting the provisioner in the Astra Control Center UI will show an `ACP version` rather than `Trident version` field and current installed version number.
 
-image:ac-acp-version.png[A screenshot depicting the ACP version location in UI]
+image:ac-acp-version.png[A screenshot depicting the Astra Control Provisioner version location in UI]
 
 .For more information
 

@@ -124,7 +124,7 @@ If you are an existing Astra Trident user (this includes users of Astra Trident 
 
 After Astra Control Provisioner is installed, the host cluster in the Astra Control UI will show an `ACP version` rather than `Trident version` field and current installed version number.
 
-image:use/ac-acp-version.png[A screenshot depicting the ACP version location in UI]
+image:use/ac-acp-version.png[A screenshot depicting the Astra Control Provisioner version location in UI]
 
 If you don't have access to the UI, you can confirm successful installation using the following methods:
 

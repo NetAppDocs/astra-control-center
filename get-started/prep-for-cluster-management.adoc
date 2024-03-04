@@ -58,7 +58,8 @@ insecure-skip-tls-verify: true
 
 ** *Rancher only*: When managing application clusters in a Rancher environment, modify the application cluster's default context in the kubeconfig file provided by Rancher to use a control plane context instead of the Rancher API server context. This reduces load on the Rancher API server and improves performance.
 
-* *Astra Control Provisioner requirements*: You need a properly configured Astra Control Provisioner, including its Astra Trident components, to be able to manage clusters.
+* *Astra Control Provisioner requirements*: You should have a properly configured Astra Control Provisioner, including its Astra Trident components, to manage clusters.
+//acp to trident revert
 
 ** *Review Astra Trident environment requirements*: Prior to installing or upgrading Astra Control Provisioner, review the https://docs.netapp.com/us-en/trident/trident-get-started/requirements.html[supported frontends, backends, and host configurations^].
 
@@ -101,7 +102,7 @@ error: the server doesn't have a resource type "tridentversions"
 
 * If you are running Astra Trident 23.01 or earlier, use these https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html[instructions^] to upgrade to a more recent version of Astra Trident before upgrading to the Astra Control Provisioner. You can link:../get-started/enable-acp.html[perform a direct upgrade] to Astra Control Provisioner 24.02 if your Astra Trident is within a four-release window of version 24.02. For example, you can directly upgrade from Astra Trident 23.04 to Astra Control Provisioner 24.02.
 
-* If you are running Astra Trident 23.10 or later, verify that Astra Control Provisioner has been https://docs.netapp.com/us-en/astra-control-center/get-started/faq.html#running-acp-check[enabled^]. Astra Control Provisioner will not work with releases of Astra Control Center earlier than 23.10. link:../get-started/enable-acp.html[Upgrade your Astra Control Provisioner] so that it has the same version as the Astra Control Center you are upgrading to access the latest functionality.
+* If you are running Astra Trident 23.10 or later, verify that Astra Control Provisioner has been link:../get-started/faq.html#running-acp-check[enabled]. Astra Control Provisioner will not work with releases of Astra Control Center earlier than 23.10. link:../get-started/enable-acp.html[Upgrade your Astra Control Provisioner] so that it has the same version as the Astra Control Center you are upgrading to access the latest functionality.
 
 . Ensure that all pods (including `trident-acp`) are running:
 +
