@@ -355,7 +355,9 @@ kubectl edit AstraControlCenter -n [netapp-acc or custom namespace]
 +
 NOTE: An annotated sample YAML follows these steps.
 
-. Change the Astra version number (`astraVersion` inside of `spec`) to the version you are upgrading to:
+. Change the Astra version number (`astraVersion` inside of `spec`) from `23.10.0` to `24.02.0`:
++
+NOTE: You cannot upgrade directly from a version that is two or more releases behind the current release. For a complete list of released versions, see the link:../release-notes/whats-new.html[release notes].
 +
 [subs=+quotes]
 ----
