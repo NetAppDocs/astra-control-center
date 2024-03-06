@@ -97,7 +97,7 @@ To use Astra Control Provisioner advanced storage functionality, you must instal
 *** `ontap-nas`
 *** `ontap-san`
 *** `ontap-san-economy` (app replication is not available with this storage class type)
-*** `ontap-nas-economy` (snapshots, replication policies, and protection policies are not available with this storage class type)
+*** `ontap-nas-economy` (snapshots and replication policies are not available with this storage class type)
 
 == Storage backends
 Ensure that you have a supported backend with sufficient capacity.
