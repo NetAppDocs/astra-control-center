@@ -82,7 +82,10 @@ EOF
 ====
 // End snippet 
 +
-IMPORTANT: Integrating Astra Control Center with a service mesh can only be done during Astra Control Center link:../get-started/install_acc.html[installation] or link:../use/upgrade-acc.html[upgrade] and not independent of these processes. Changing back from a meshed to an unmeshed environment is not supported.
+IMPORTANT: Integrating Astra Control Center with a service mesh can only be done during Astra Control Center link:../get-started/acc_operatorhub_install.html[installation] and not independent of this process. Changing back from a meshed to an unmeshed environment is not supported.
+
+//astradoc-305
+//IMPORTANT: Integrating Astra Control Center with a service mesh can only be done during Astra Control Center link:../get-started/acc_operatorhub_install.html[installation] or link:../use/upgrade-acc.html[upgrade] and not independent of these processes. Changing back from a meshed to an unmeshed environment is not supported.
 
 .Steps
 
