@@ -48,32 +48,6 @@ NOTE: If the cluster is configured with pod security admission enforcement, whic
 
 .Steps
 
-////
-
-. Apply the correct Astra Connector operator for your cluster type. When you run this command, the correct namespace for the Astra Connector is created and the configuration is applied to the namespace:
-+
-[role="tabbed-block"]
-====
-
-.23.10 (Private ROSA clusters)
---
-[source,console]
-----
-kubectl apply -f https://github.com/NetApp/astra-connector-operator/release-23.10/download/astraconnector_operator.yaml
-----
---
-
-.23.07 (All other private clusters)
---
-[source,console]
-----
-kubectl apply -f https://github.com/NetApp/astra-connector-operator/release-23.07/download/astraconnector_operator.yaml
-----
---
-====
-
-////
-
 . Install the Astra Connector operator on the cluster you want to manage with Astra Control. When you run this command, the namespace `astra-connector-operator` is created and the configuration is applied to the namespace:
 +
 [source,console]
@@ -87,79 +61,88 @@ kubectl apply -f https://github.com/NetApp/astra-connector-operator/releases/dow
 ----
 kubectl get all -n astra-connector-operator
 ----
+
 . Get an API token from Astra Control. Refer to the https://docs.netapp.com/us-en/astra-automation/get-started/get_api_token.html[Astra Automation documentation^] for instructions.
 
-. Create the astra-connector namespace:
+. Create a secret using the token. Replace <API_TOKEN> with the token you received from Astra Control:
 +
 [source,console]
 ----
-kubectl create ns astra-connector
+kubectl create secret generic astra-token \
+--from-literal=apiToken=<API_TOKEN> \
+-n astra-connector
 ----
-//. (Astra Connector 23.10 only) Create a secret using the token. Replace <API_TOKEN> with the token you received from Astra Control:
-//+
-//[source,console]
-//----
-//kubectl create secret generic astra-token \
-//--from-literal=apiToken=<API_TOKEN> \
-//-n astra-connector
-//----
+
+. Create a Docker secret to use to pull the Astra Connector image. Replace values in brackets <> with information from your environment:
++
+NOTE: You can find the <ASTRA_CONTROL_ACCOUNT_ID> in the Astra Control web UI. In the web UI, select the figure icon at the top right of the page and select *API access*.
+
++
+[source,console]
+----
+kubectl create secret docker-registry regcred \
+--docker-username=<ASTRA_CONTROL_ACCOUNT_ID> \
+--docker-password=<API_TOKEN> \
+-n astra-connector \
+--docker-server=cr.astra.netapp.io
+----
+
 . Create the Astra Connector CR file and name it `astra-connector-cr.yaml`. Update the values in brackets <> to match your Astra Control environment and cluster configuration:
 +
+* <ASTRA_CONTROL_ACCOUNT_ID>: Obtained from the Astra Control web UI during the preceding step.
+* <CLUSTER_NAME>: The name that this cluster should be assigned in Astra Control.
 * <ASTRA_CONTROL_URL>: The web UI URL of Astra Control. For example:
 +
 ----
 https://astra.control.url
 ----
-* <ASTRA_CONTROL_API_TOKEN>: The Astra Control API token you obtained in the preceding step.
-* <PRIVATE_AKS_CLUSTER_NAME>: (AKS clusters only) - The cluster name of the private Azure Kubernetes Service cluster. Uncomment and populate this line only if you are adding a private AKS cluster.
-* <ASTRA_CONTROL_ACCOUNT_ID>: Obtained from the Astra Control web UI. In the web UI, select the figure icon at the top right of the page and select *API access*.
 +
 [source,yaml]
 ----
-apiVersion: netapp.astraconnector.com/v1
+apiVersion: astra.netapp.io/v1
 kind: AstraConnector
 metadata:
   name: astra-connector
   namespace: astra-connector
 spec:
-  natssync-client:
-    cloud-bridge-url: <ASTRA_CONTROL_URL>
-  imageRegistry:
-    name: theotw
-    secret: ""
   astra:
-    token: <ASTRA_CONTROL_API_TOKEN>
-    #Only set `skipTLSValidation` to `true` when using the default self-signed 
-    #certificate in a proof-of-concept environment.
-    skipTLSValidation: false #Should be set to false in production environments
     accountId: <ASTRA_CONTROL_ACCOUNT_ID>
-    acceptEULA: yes
-    #clusterName: <PRIVATE_AKS_CLUSTER_NAME> #For use with AKS clusters only
+    clusterName: <CLUSTER_NAME>
+    skipTLSValidation: false  # Should be set to false in production environments
+    tokenRef: astra-token
+  natsSyncClient:
+    cloudBridgeURL: <ASTRA_CONTROL_HOST_URL>
+  imageRegistry:
+    name: cr.astra.netapp.io/astra
+    secret: regcred
 ----
+
 . After you populate the `astra-connector-cr.yaml` file with the correct values, apply the CR:
 +
 [source,console]
 ----
-kubectl apply -f astra-connector-cr.yaml
+kubectl apply -n astra-connector -f astra-connector-cr.yaml
 ----
+
 . Verify that the Astra Connector is fully deployed:
 +
 [source,console]
 ----
 kubectl get all -n astra-connector
 ----
+
 . Verify that the cluster is registered with Astra Control:
 +
 [source,console]
 ----
-kubectl get astraconnector -n astra-connector
+kubectl get astraconnectors.astra.netapp.io -A
 ----
 +
 You should see output similar to the following:
 +
 ----
-NAME              REGISTERED   ASTRACONNECTORID                       STATUS
-astra-connector   true         be475ae5-1511-4eaa-9b9e-712f09b0d065   Registered with Astra
+NAMESPACE         NAME              REGISTERED   ASTRACONNECTORID                       STATUS
+astra-connector   astra-connector   true         00ac8-2cef-41ac-8777-ed0583e   Registered with Astra
 ----
 +
 TIP: Make note of the ASTRACONNECTORID; you will need it when you add the cluster to Astra Control.
