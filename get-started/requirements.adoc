@@ -81,7 +81,7 @@ Ensure that you meet the following Astra Trident requirements specific to the ne
 *** `ontap-nas`
 *** `ontap-san`
 *** `ontap-san-economy` (app replication is not available with this storage class type)
-*** `ontap-nas-economy` (snapshots, replication policies, and protection policies are not available with this storage class type)
+*** `ontap-nas-economy` (snapshots and replication policies are not available with this storage class type)
 
 == Astra Control Provisioner
 To use Astra Control Provisioner advanced storage functionality, you must install Astra Trident 23.10 or later and enable link:../use/enable-acp.html[Astra Control Provisioner functionality].
