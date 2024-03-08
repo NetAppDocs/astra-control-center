@@ -420,7 +420,7 @@ kubectl apply -f secret-astracontrol-service-account.yaml
 +
 [source,console]
 ----
-kubectl edit sa astracontrol-service-account
+kubectl edit sa astracontrol-service-account -n netapp-acc
 ----
 +
 [source,subs="verbatim,quotes"]
@@ -461,7 +461,9 @@ The end of the output should look similar to the following:
 +
 The indices for each element in the `secrets` array begin with 0. In the above example, the index for `astracontrol-service-account-dockercfg-48xhx` would be 0 and the index for `secret-astracontrol-service-account` would be 1. In your output, make note of the index number for the service account secret. You'll need this index number in the next step.
 . Generate the kubeconfig as follows:
-.. Create a `create-kubeconfig.sh` file. Replace `TOKEN_INDEX` in the beginning of the following script with the correct value.
+.. Create a `create-kubeconfig.sh` file. 
+.. Replace `TOKEN_INDEX` in the beginning of the following script with the correct value.
+.. Replace `NAMESPACE` with the Astra Control Center namespace.
 +
 [source]
 [subs="specialcharacters,quotes"]
