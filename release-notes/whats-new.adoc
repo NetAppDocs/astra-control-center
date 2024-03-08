@@ -17,8 +17,8 @@ We're pleased to announce the latest release of Astra Control Center.
 
 .New features and support
 
-* Minor bug fixes.
-* Deploy Astra Control Center without a private registry.
+* *Deploy Astra Control Center without a private registry*: You no longer need to push Astra Control Center images to a private registry or use one as part of your Astra Control environment.
+* *Minor bug fixes*
 
 .Known issues and limitations
 
