@@ -324,6 +324,69 @@ Response:
 .Helm
 --
 
+. If you have Astra Trident 23.07.1 or earlier installed, delete all components:
+
+.. Delete the Trident orchestrator:
++
+---- 
+kubectl delete -f tridentorchestrator_cr.yaml
+----
+
+.. Delete the bundle:
++
+----
+kubectl delete -f deploy/<bundle_post_1_25.yaml or bundle_pre_1_25.yaml>
+----
+
+.. Delete the Trident orchestrator CRD:
++
+----
+kubectl delete -f deploy/crds/trident.netapp.io_tridentorchestrators_crd_post1.16.yaml
+----
+
+.. Clean up any other artifacts before running Helm install:
++
+----
+helm uninstall trident -n trident 
+----
+
+.. If your Kubernetes cluster is running 1.24 or earlier, delete psp: 
++
+----
+k delete psp tridentoperatorpod
+----
+
+. Update the Helm chart:
++
+----
+helm repo update netapp-trident
+----
++
+Response:
++
+----
+| v1.28.0            | netapp/trident:24.02.0|
+|                    | docker.io/netapp/trident-autosupport:24.02|
+|                    | registry.k8s.io/sig-storage/csi-provisioner:v4.0.0|
+|                    | registry.k8s.io/sig-storage/csi-attacher:v4.5.0|
+|                    | registry.k8s.io/sig-storage/csi-resizer:v1.9.3|
+|                    | registry.k8s.io/sig-storage/csi-snapshotter:v6.3.3|
+|                    | registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.10.0 |
+|                    | netapp/trident-operator:24.02.0 (optional)
+----
+
+. Ensure that trident-operator 24.02.0 is available:
++
+----
+helm search repo netapp-trident/trident-operator --versions
+----
++
+Response:
++
+----
+NAME                            CHART VERSION   APP VERSION     DESCRIPTION                                       
+netapp-trident/trident-operator 100.2402.0      24.02.0         A
+----
 . Add the Astra Trident Helm repository:
 +
 ----
@@ -343,26 +406,44 @@ helm repo add netapp-trident https://netapp.github.io/trident-helm-chart
 
 * Images without a registry
 +
+//----
+//helm install trident netapp-trident/trident-operator --version 100.2402.0 --set acpImage=<acp image> --set enableACP=true --create-namespace --namespace trident
+//----
 ----
-helm install trident netapp-trident/trident-operator --version <24.2.0> --set acpImage=<acp image> --set enableACP=true --create-namespace --namespace trident
+helm install trident netapp-trident/trident-operator --version 100.2402.0 --set acpImage=<acp image> --set enableACP=true --set operatorImage=netapp/trident-operator:24.02.0 --set tridentAutosupportImage=docker.io/netapp/trident-autosupport:24.02 --set tridentImage=netapp/trident:24.02.0 --namespace trident
 ----
 
 * Images in one registry
 +
+//----
+//helm install trident netapp-trident/trident-operator --version 100.2402.0 --set acpImage=<acp image> --set enableACP=true --set imageRegistry=<your-registry>/sig-storage --create-namespace --namespace trident
+//----
 ----
-helm install trident netapp-trident/trident-operator --version <24.2.0> --set acpImage=<acp image> --set enableACP=true --set imageRegistry=<your-registry>/sig-storage --create-namespace --namespace trident
+helm install trident netapp-trident/trident-operator --version 100.2402.0 --set acpImage=<acp image> --set enableACP=true --set imageRegistry=<your-registry>/sig-storage --set operatorImage=netapp/trident-operator:24.02.0 --set tridentAutosupportImage=docker.io/netapp/trident-autosupport:24.02 --set tridentImage=netapp/trident:24.02.0 --namespace trident
 ----
 
 * Images in different registries
 +
+//----
+//helm install trident netapp-trident/trident-operator --version 100.2402.0 --set acpImage=<acp image> --set enableACP=true --set imageRegistry=<your-registry>/sig-storage --set operatorImage=<your-registry>/netapp/trident-operator:24.02.0 --set tridentAutosupportImage=<your-registry>/netapp/trident-autosupport:24.02 --set tridentImage=<your-registry>/netapp/trident:24.02.0 --create-namespace --namespace trident
+//----
 ----
-helm install trident netapp-trident/trident-operator --version <24.2.0> --set acpImage=<acp image> --set enableACP=true --set imageRegistry=<your-registry>/sig-storage --set operatorImage=<your-registry>/netapp/trident-operator:24.02.0 --set tridentAutosupportImage=<your-registry>/netapp/trident-autosupport:24.02 --set tridentImage=<your-registry>/netapp/trident:24.02.0 --create-namespace --namespace trident
+helm install trident netapp-trident/trident-operator --version 100.2402.0 --set acpImage=<acp image> --set enableACP=true --set imageRegistry=<your-registry>/sig-storage --set operatorImage=netapp/trident-operator:24.02.0 --set tridentAutosupportImage=docker.io/netapp/trident-autosupport:24.02 --set tridentImage=netapp/trident:24.02.0 --namespace trident
 ----
 
 NOTE: If you already created a namespace for Trident, the `--create-namespace` parameter will not create an additional namespace.
 
 You can use `helm list` to review installation details such as name, namespace, chart, status, app version, and revision number.
 
+[NOTE]
+=====
+If you have any issues deploying Trident using Helm, run this command to fully uninstall Astra Trident:
+
+----
+./tridentctl uninstall -n trident
+----
+
+*Do not* run the obliviate command: `./tridentctl oblivate crd -n trident` 
 --
 ====
 // end tabbed block

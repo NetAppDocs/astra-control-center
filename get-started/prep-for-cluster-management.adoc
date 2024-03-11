@@ -420,7 +420,7 @@ kubectl apply -f secret-astracontrol-service-account.yaml
 +
 [source,console]
 ----
-kubectl edit sa astracontrol-service-account -n netapp-acc
+kubectl edit sa astracontrol-service-account -n <netapp-acc or custom namespace>
 ----
 +
 [source,subs="verbatim,quotes"]

@@ -79,7 +79,7 @@ NOTE: Installing and using Astra Control Center without configuring a service me
 
 == Astra Trident
 //acp to trident revert
-If you intend to use Astra Trident instead of Astra Control Provisioner with this release, Astra Trident 22.04 and later versions are supported. Astra Control Center will require <<Astra Control Provisioner>> in future releases.
+If you intend to use Astra Trident instead of Astra Control Provisioner with this release, Astra Trident 23.04 and later versions are supported. Astra Control Center will require <<Astra Control Provisioner>> in future releases.
 
 == Astra Control Provisioner
 To use Astra Control Provisioner advanced storage functionality, you must install Astra Trident 23.10 or later and enable link:../get-started/enable-acp.html[Astra Control Provisioner functionality]. To use the latest Astra Control Provisioner functionality, you'll need the most recent versions of Astra Trident and Astra Control Center.
