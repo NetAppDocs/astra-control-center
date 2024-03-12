@@ -13,14 +13,6 @@ summary: To install Astra Control Center after addressing some environmental pre
 [.lead]
 To install Astra Control Center, download the installation images and perform the following steps. You can use this procedure to install Astra Control Center in internet-connected or air-gapped environments.
 
-.Expand for other installation procedures
-[%collapsible]
-====
-* *Install with Red Hat OpenShift OperatorHub*: Use this link:../get-started/acc_operatorhub_install.html[alternative procedure] to install Astra Control Center on OpenShift using OperatorHub.
-* *Install in the public cloud with Cloud Volumes ONTAP backend*: Use link:../get-started/install_acc-cvo.html[these procedures] to install Astra Control Center in Amazon Web Services (AWS), Google Cloud Platform (GCP), or Microsoft Azure with a Cloud Volumes ONTAP storage backend.
-====
-// End snippet
-
 For a demonstration of the Astra Control Center installation process, see https://www.youtube.com/watch?v=eurMV80b0Ks&list=PLdXI3bZJEw7mJz13z7YdiGCS6gNQgV_aN&index=5[this video^]. 
 
 .Before you begin
@@ -1099,6 +1091,11 @@ kubectl logs deploy/acc-operator-controller-manager -n netapp-acc-operator -c ma
 ----
 kubectl get acc -n [netapp-acc or custom namespace] -o yaml
 ----
+
+== Alterative installation procedures
+
+* *Install with Red Hat OpenShift OperatorHub*: Use this link:../get-started/acc_operatorhub_install.html[alternative procedure] to install Astra Control Center on OpenShift using OperatorHub.
+* *Install in the public cloud with Cloud Volumes ONTAP backend*: Use link:../get-started/install_acc-cvo.html[these procedures] to install Astra Control Center in Amazon Web Services (AWS), Google Cloud Platform (GCP), or Microsoft Azure with a Cloud Volumes ONTAP storage backend.
 
 == What's next
 
