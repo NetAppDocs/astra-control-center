@@ -37,17 +37,17 @@ You should also consider the following:
 //astradoc-249
 * *Get access to the NetApp Astra Control image registry*:
 include::../_include/access-netapp-image-registry.adoc[]
+
 * *Install a service mesh for secure communications*: It is strongly recommended that Astra Control host cluster communications channels be secured using a link:requirements.html#service-mesh-requirements[supported service mesh]. 
 +
-.Expand for Istio service mesh installation steps 
-[%collapsible]
-====
+IMPORTANT: Integrating Astra Control Center with a service mesh can only be done during Astra Control Center link:../get-started/acc_operatorhub_install.html[installation] and not independent of this process. Changing back from a meshed to an unmeshed environment is not supported.
++
 For Istio service mesh use, you'll need to do the following:
++
+** Add an `istio-injection:enabled` <<Complete Astra Control Center and operator installation,label>> to the Astra namespace prior to deploying Astra Control Center. 
+** Use the `Generic` <<generic-ingress,ingress setting>> and provide an alternative ingress for <<Set up ingress for load balancing,external load balancing>>.
 
-* Add an `istio-injection:enabled` <<Complete Astra Control Center and operator installation,label>> to the Astra namespace prior to deploying Astra Control Center. 
-* Use the `Generic` <<generic-ingress,ingress setting>> and provide an alternative ingress for <<Set up ingress for load balancing,external load balancing>>.
-
-* For Red Hat OpenShift clusters, you need to define `NetworkAttachmentDefinition` on all associated Astra Control Center namespaces (`netapp-acc-operator`, `netapp-acc`, `netapp-monitoring` for application clusters, or any custom namespaces that have been substituted).
+** For Red Hat OpenShift clusters, you need to define `NetworkAttachmentDefinition` on all associated Astra Control Center namespaces (`netapp-acc-operator`, `netapp-acc`, `netapp-monitoring` for application clusters, or any custom namespaces that have been substituted).
 +
 ----
 cat <<EOF | oc -n netapp-acc-operator create -f -
@@ -71,10 +71,6 @@ metadata:
   name: istio-cni
 EOF
 ----
-====
-// End snippet 
-+
-IMPORTANT: Integrating Astra Control Center with a service mesh can only be done during Astra Control Center link:../get-started/acc_operatorhub_install.html[installation] and not independent of this process. Changing back from a meshed to an unmeshed environment is not supported.
 
 //astradoc-305
 //IMPORTANT: Integrating Astra Control Center with a service mesh can only be done during Astra Control Center link:../get-started/acc_operatorhub_install.html[installation] or link:../use/upgrade-acc.html[upgrade] and not independent of these processes. Changing back from a meshed to an unmeshed environment is not supported.
@@ -143,10 +139,6 @@ export KUBECONFIG=[file path]
 IMPORTANT: Before you complete the installation, be sure your kubeconfig is pointing to the cluster where you want to install Astra Control Center.
 
 .  If you use a registry that requires authentication, you need to do the following:
-+
-.Expand for steps
-[%collapsible]
-====
 
 .. Create the `netapp-acc-operator` namespace:
 +
@@ -189,16 +181,11 @@ kubectl create secret docker-registry astra-registry-cred -n [netapp-acc or cust
 ----
 kubectl create secret docker-registry astra-registry-cred -n [netapp-acc or custom namespace] --docker-server=[your_registry_path] --docker-username=[username] --docker-password=[token]
 ----
-====
-// End snippet
 
 == Install the Astra Control Center operator
 
 . (Local registries only) If you are using a local registry, complete these steps: 
-+
-.Expand for local registry steps
-[%collapsible]
-====
+
 .. Open the Astra Control Center operator deployment YAML:
 +
 [source,console]
@@ -218,6 +205,7 @@ imagePullSecrets: [{name: astra-registry-cred}]
 .. Change `ASTRA_IMAGE_REGISTRY` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<Add the images to your local registry,previous step>>.
 .. Change `ASTRA_IMAGE_REGISTRY` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in a <<Add the images to your local registry,previous step>>.
 
++
 [subs=+quotes]
 ----
 apiVersion: apps/v1
@@ -288,8 +276,6 @@ spec:
         runAsUser: 65532
       terminationGracePeriodSeconds: 10
 ----
-====
-// End snippet
 
 . Install the Astra Control Center operator:
 +
@@ -638,9 +624,7 @@ CRDs are cluster-wide objects and installing them might have an impact on other 
 
 IMPORTANT: Be sure that you have selected the correct storage class and ingress type for your configuration before completing installation.
 
-.Expand for sample astra_control_center.yaml
-[%collapsible]
-====
+.sample astra_control_center.yaml
 [subs=+quotes]
 ----
 apiVersion: astra.netapp.io/v1
@@ -674,8 +658,6 @@ spec:
     externalTraefik: false
     externalCertManager: false
 ----
-====
-// End snippet
 
 == Complete Astra Control Center and operator installation
 
@@ -903,9 +885,7 @@ Setup steps differ depending on the type of ingress controller you use. Astra Co
 * The https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class[ingress class] corresponding to the ingress controller should already be created.
 
 
-.Steps for Istio ingress
-[%collapsible]
-====
+=== Steps for Istio ingress
 
 . Configure Istio ingress.
 +
@@ -990,12 +970,8 @@ ingress istio astra.example.com 172.16.103.248  80, 443 1h
 ----
 
 . <<Configure Astra Control Center,Finish Astra Control Center installation>>.
-====
-// End snippet
 
-.Steps for Nginx ingress controller
-[%collapsible]
-====
+=== Steps for Nginx ingress controller
 
 . Create a secret of type `kubernetes.io/tls` for a TLS private key and certificate in `netapp-acc` (or custom-named) namespace as described in https://kubernetes.io/docs/concepts/configuration/secret/#tls-secrets[TLS secrets].
 . Deploy an ingress resource in `netapp-acc` (or custom-named) namespace using the v1 resource type for a schema (`nginx-Ingress.yaml` is used in this example):
@@ -1035,12 +1011,7 @@ kubectl apply -f nginx-Ingress.yaml
 
 WARNING: NetApp recommends installing the nginx controller as a deployment rather than a `daemonSet`.
 
-====
-// End snippet
-
-.Steps for OpenShift ingress controller
-[%collapsible]
-====
+=== Steps for OpenShift ingress controller
 
 . Procure your certificate and get the key, certificate, and CA files ready for use by the OpenShift route.
 . Create the OpenShift route:
@@ -1049,8 +1020,6 @@ WARNING: NetApp recommends installing the nginx controller as a deployment rathe
 ----
 oc create route edge --service=traefik --port=web -n [netapp-acc or custom namespace] --insecure-policy=Redirect --hostname=<ACC address> --cert=cert.pem --key=key.pem
 ----
-====
-// End snippet
 
 == Log in to the Astra Control Center UI
 
@@ -1092,7 +1061,7 @@ kubectl logs deploy/acc-operator-controller-manager -n netapp-acc-operator -c ma
 kubectl get acc -n [netapp-acc or custom namespace] -o yaml
 ----
 
-== Alterative installation procedures
+== Alternative installation procedures
 
 * *Install with Red Hat OpenShift OperatorHub*: Use this link:../get-started/acc_operatorhub_install.html[alternative procedure] to install Astra Control Center on OpenShift using OperatorHub.
 * *Install in the public cloud with Cloud Volumes ONTAP backend*: Use link:../get-started/install_acc-cvo.html[these procedures] to install Astra Control Center in Amazon Web Services (AWS), Google Cloud Platform (GCP), or Microsoft Azure with a Cloud Volumes ONTAP storage backend.
