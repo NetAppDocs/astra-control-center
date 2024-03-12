@@ -431,8 +431,6 @@ helm install trident netapp-trident/trident-operator --version 100.2402.0 --set 
 helm install trident netapp-trident/trident-operator --version 100.2402.0 --set acpImage=<acp image> --set enableACP=true --set imageRegistry=<your-registry>/sig-storage --set operatorImage=netapp/trident-operator:24.02.0 --set tridentAutosupportImage=docker.io/netapp/trident-autosupport:24.02 --set tridentImage=netapp/trident:24.02.0 --namespace trident
 ----
 
-NOTE: If you already created a namespace for Trident, the `--create-namespace` parameter will not create an additional namespace.
-
 You can use `helm list` to review installation details such as name, namespace, chart, status, app version, and revision number.
 
 [NOTE]
@@ -444,6 +442,8 @@ If you have any issues deploying Trident using Helm, run this command to fully u
 ----
 
 *Do not* run the obliviate command: `./tridentctl oblivate crd -n trident` 
+=====
+
 --
 ====
 // end tabbed block

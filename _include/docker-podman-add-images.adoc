@@ -90,6 +90,7 @@ NOTE: The image path the script creates should resemble the following, depending
 ----
 https://downloads.example.io/docker-astra-control-prod/netapp/astra/acc/23.10.0-68/image:version
 ----
+--
 
 ====
 // end tabbed block
