@@ -273,9 +273,8 @@ Astra Control Provisioner provides backup and restore functionality that can be 
 * You have defined an application in Astra Control. This application will have limited protection functionality until you complete this procedure.
 * You have `ontap-nas-economy` selected as the default storage class for your storage backend.
 
-.Expand for configuration steps
-[%collapsible]
-====
+.Steps
+
 . Do the following on the ONTAP storage backend:
 .. Find the SVM that is hosting the `ontap-nas-economy`-based volumes of the application.
 .. Log in to a terminal connected to ONTAP where the volumes are created.
@@ -316,9 +315,6 @@ snapshotDirectory: "true"
 .Result
 
 The application is ready to backup and restore using Astra Control. Each PVC is also available to be used by other applications for backups and restores.
-
-====
-// End snippet
 
 == Create an immutable backup
 An immutable backup cannot be modified, deleted, or overwritten as long as the retention policy on the bucket that stores the backup forbids it. You can create immutable backups by backing up applications to buckets that have a retention policy configured. Refer to link:../concepts/data-protection.html#immutable-backups[Data protection] for important information about working with immutable backups.

@@ -172,12 +172,15 @@ kubectl apply -f astracontrol-service-account.yaml
 ----
 
 . Create one of the following cluster roles with sufficient permissions for a cluster to be managed by Astra Control:
-* *Limited cluster role*: This role contains the minimum permissions necessary for a cluster to be managed by Astra Control:
 +
-.Expand for steps
-[%collapsible]
+[role="tabbed-block"]
 ====
-.. Create a `ClusterRole` file called, for example, `astra-admin-account.yaml`.
+
+.Limited cluster role
+--
+This role contains the minimum permissions necessary for a cluster to be managed by Astra Control:
+
+. Create a `ClusterRole` file called, for example, `astra-admin-account.yaml`.
 +
 Adjust the name and namespace as needed. If changes are made here, you should apply the same changes in the following steps.
 +
@@ -288,7 +291,7 @@ rules:
   - use
 ----
 
-.. (For OpenShift clusters only) Append the following at the end of the `astra-admin-account.yaml` file or after the `# Use PodSecurityPolicies` section:
+. (For OpenShift clusters only) Append the following at the end of the `astra-admin-account.yaml` file or after the `# Use PodSecurityPolicies` section:
 +
 [source,console]
 ----
@@ -301,24 +304,22 @@ rules:
   - use
 ----
 
-.. Apply the cluster role:
+. Apply the cluster role:
 +
 [source,console]
 ----
 kubectl apply -f astra-admin-account.yaml
 ----
 
-====
-// End snippet
+--
 
-* *Expanded cluster role*: This role contains expanded permissions for a cluster to be managed by Astra Control. You might use this role if you use multiple contexts and cannot use the default Astra Control kubeconfig configured during installation or a limited role with a single context won't work in your environment:
-+
+.Expanded cluster role
+--
+This role contains expanded permissions for a cluster to be managed by Astra Control. You might use this role if you use multiple contexts and cannot use the default Astra Control kubeconfig configured during installation or a limited role with a single context won't work in your environment:
+
 NOTE: The following `ClusterRole` steps are a general Kubernetes example. Refer to the documentation for your Kubernetes distribution for instructions specific to your environment.
-+
-.Expand for steps
-[%collapsible]
-====
-.. Create a `ClusterRole` file called, for example, `astra-admin-account.yaml`.
+
+. Create a `ClusterRole` file called, for example, `astra-admin-account.yaml`.
 +
 Adjust the name and namespace as needed. If changes are made here, you should apply the same changes in the following steps.
 +
@@ -347,14 +348,16 @@ rules:
   - '*'
 ----
 
-.. Apply the cluster role:
+. Apply the cluster role:
 +
 [source,console]
 ----
 kubectl apply -f astra-admin-account.yaml
 ----
+
+--
+
 ====
-// End snippet
 
 . Create the cluster role binding for the cluster role to the service account:
 .. Create a `ClusterRoleBinding` file called `astracontrol-clusterrolebinding.yaml`.

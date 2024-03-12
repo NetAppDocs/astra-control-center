@@ -232,9 +232,10 @@ You can specify the Kubernetes resources that you want to manage with Astra Cont
 
 . Define application resources to be managed:
 +
-.spec.includedClusterScopedResources
-[%collapsible]
+[role="tabbed-block"]
 ====
+.spec.includedClusterScopedResources
+--
 Include cluster-scoped resource types in addition to those that Astra Control automatically includes:
 //identical to proceeding section
 
@@ -249,12 +250,10 @@ Include cluster-scoped resource types in addition to those that Astra Control au
 **** *key*: _(Required if matchExpressions is used)_ The label key associated with the label selector.
 **** *operator*: _(Required if matchExpressions is used)_ Represents a key's relationship to a set of values. Valid operators are `In`, `NotIn`, `Exists` and `DoesNotExist`.
 **** *values*: _(Required if matchExpressions is used)_An array of string values. If the operator is `In` or `NotIn`, the values array must _not_ be empty. If the operator is `Exists` or `DoesNotExist`, the values array must be empty.
-====
-//End snippet
-+
+--
+
 .spec.includedNamespaces
-[%collapsible]
-====
+--
 Include namespaces and resources within those resources in the application:
 //identical to preceding section
 
@@ -266,8 +265,9 @@ Include namespaces and resources within those resources in the application:
 **** *key*: _(Required if matchExpressions is used)_ The label key associated with the label selector.
 **** *operator*: _(Required if matchExpressions is used)_ Represents a key's relationship to a set of values. Valid operators are `In`, `NotIn`, `Exists` and `DoesNotExist`.
 **** *values*: _(Required if matchExpressions is used)_ An array of string values. If the operator is `In` or `NotIn`, the values array must _not_ be empty. If the operator is `Exists` or `DoesNotExist`, the values array must be empty.
+--
+
 ====
-//End snippet
 +
 Example YAML:
 +
