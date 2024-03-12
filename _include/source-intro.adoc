@@ -41,11 +41,6 @@ a|
 ** Rancher Kubernetes Engine (RKE)
 ** Red Hat OpenShift Container Platform
 * *On-premise clusters*
-** Amazon Elastic Kubernetes Service (EKS)
-** Azure Kubernetes Service (AKS)
-** Google Kubernetes Engine (GKE)
-** Red Hat OpenShift Service on AWS (ROSA)
-** ROSA with AWS PrivateLink
 ** Red Hat OpenShift Container Platform on-premise
 a|
 * Azure Kubernetes Service on Azure Stack HCI
