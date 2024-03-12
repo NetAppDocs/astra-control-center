@@ -87,7 +87,7 @@ include::../_include/access-netapp-image-registry.adoc[]
 
 //astradoc-249 and astradoc-305
 * *Istio service mesh deployments*
-If you installed an Istio service mesh during Astra Control Center installation, this upgrade of Astra Control Center will include Istio service mesh. If you do not yet have a service mesh, you can only install one during an initial deployment of Astra Control Center.
+If you installed an Istio service mesh during Astra Control Center installation, this upgrade of Astra Control Center will include Istio service mesh. If you do not yet have a service mesh, you can only install one during an link:../get-started/install_acc.html[initial deployment] of Astra Control Center.
 
 //astradoc-249 and astradoc-305
 //* *A service mesh for secure communications*:
@@ -120,7 +120,7 @@ If you installed an Istio service mesh during Astra Control Center installation,
 
 //End snippet
 
-IMPORTANT: Integrating Astra Control Center with a service mesh can only be done during Astra Control Center link:../get-started/install_acc.html[installation] or link:../use/upgrade-acc.html[upgrade] and not independent of these processes. Changing back from a meshed to an unmeshed environment is not supported.
+//IMPORTANT: Integrating Astra Control Center with a service mesh can only be done during Astra Control Center link:../get-started/install_acc.html[installation] or link:../use/upgrade-acc.html[upgrade] and not independent of these processes. Changing back from a meshed to an unmeshed environment is not supported.
 
 .About this task
 The Astra Control Center upgrade process guides you through the following high-level steps:
