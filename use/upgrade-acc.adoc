@@ -18,11 +18,8 @@ These instructions describe the upgrade process for Astra Control Center from th
 .Before you begin
 Before you upgrade, ensure your environment still meets the link:../get-started/requirements.html[minimum requirements for Astra Control Center deployment]. Your environment should have the following:
 
-* *The link:../get-started/requirements.html#astra-control-provisioner[Astra Control Provisioner] is enabled and Astra Trident is running*
+* *An enabled link:../get-started/requirements.html#astra-control-provisioner[Astra Control Provisioner] with Astra Trident running*
 +
-.Expand for steps
-[%collapsible]
-====
 . Determine the Astra Trident version you are running:
 +
 [source,console]
@@ -34,80 +31,52 @@ NOTE: If you are running Astra Trident 23.01 or earlier, use these https://docs.
 
 . Verify that Astra Control Provisioner has been link:../get-started/faq.html#running-acp-check[enabled]. Astra Control Provisioner will not work with releases of Astra Control Center earlier than 23.10. Upgrade your Astra Control Provisioner so that it has the same version as the Astra Control Center you are upgrading to access the latest functionality.
 
-====
-// End snippet 
-
 * *A supported Kubernetes distribution*
 +
-.Expand for steps
-[%collapsible]
-====
 Determine the Kubernetes version you are running:
-
++
 [source,console]
 ----
 kubectl get nodes -o wide
 ----
-====
-// End snippet
 
 * *Sufficient cluster resources*
 +
-.Expand for steps
-[%collapsible]
-====
 Determine available cluster resources: 
-
++
 [source,console]
 ----
 kubectl describe node <node name>
 ----
-====
-// End snippet
 
 * *A default storage class*
 +
-.Expand for steps
-[%collapsible]
-====
 Determine your default storage class:
-
++
 [source,console]
 ----
 kubectl get storageclass
 ----
-====
-// End snippet
 
 * *Healthy and available API services*
 +
-.Expand for steps
-[%collapsible]
-====
 Ensure all API services are in a healthy state and available:
-
++
 [source,console]
 ----
 kubectl get apiservices
 ----
-====
-// End snippet
 
 * *(Local registries only) A local registry you can use to push and upload Astra Control Center images*
 
 * *(OpenShift only) Healthy and available cluster operators*
 +
-.Expand for steps
-[%collapsible]
-====
 Ensure all cluster operators are in a healthy state and available.
-
++
 [source,console]
 ----
 kubectl get clusteroperators
 ----
-====
-// End snippet
 
 You should also consider the following:
 
@@ -211,10 +180,7 @@ include::../_include/docker-podman-add-images.adoc[]
 == Install the updated Astra Control Center operator
 
 . (Local registries only) If you are using a local registry, complete these steps: 
-+
-.Expand for local registry steps
-[%collapsible]
-====
+
 .. Open the Astra Control Center operator deployment YAML:
 +
 [source,console]
@@ -242,6 +208,7 @@ imagePullSecrets: [{name: astra-registry-cred}]
   value: 300m
 ----
 
++
 [subs=+quotes]
 ----
 apiVersion: apps/v1
@@ -312,8 +279,6 @@ spec:
         runAsUser: 65532
       terminationGracePeriodSeconds: 10
 ----
-====
-// End snippet
 
 . Install the updated Astra Control Center operator:
 +
