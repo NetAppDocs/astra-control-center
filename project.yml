@@ -24,6 +24,8 @@ settings:
       url: /astra-control-center-2204
     - version-number: "21.12"
       url: /astra-control-center-2112
+    - version-number: "21.08"
+      url: /astra-control-center-2108
 sidebar:
   entries:
     - title: Astra Control Center docs
