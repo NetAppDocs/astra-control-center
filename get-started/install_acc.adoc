@@ -202,8 +202,8 @@ NOTE: An annotated sample YAML follows these steps.
 imagePullSecrets: [{name: astra-registry-cred}]
 ----
 
-.. Change `ASTRA_IMAGE_REGISTRY` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<Add the images to your local registry,previous step>>.
-.. Change `ASTRA_IMAGE_REGISTRY` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in a <<Add the images to your local registry,previous step>>.
+.. Change `ASTRA_IMAGE_REGISTRY` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<Add the images to your registry,previous step>>.
+.. Change `ASTRA_IMAGE_REGISTRY` for the `acc-operator-controller-manager` image to the registry path where you pushed the images in a <<Add the images to your registry,previous step>>.
 
 +
 [subs=+quotes]

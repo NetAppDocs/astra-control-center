@@ -115,7 +115,7 @@ spec:
   natsSyncClient:
     cloudBridgeURL: <ASTRA_CONTROL_HOST_URL>
   imageRegistry:
-    name: cr.astra.netapp.io/astra
+    name: cr.astra.netapp.io
     secret: regcred
 ----
 

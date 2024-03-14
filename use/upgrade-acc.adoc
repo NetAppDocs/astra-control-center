@@ -197,8 +197,8 @@ NOTE: An annotated sample YAML follows these steps.
 imagePullSecrets: [{name: astra-registry-cred}]
 ----
 
-.. Change `ASTRA_IMAGE_REGISTRY` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<Add the images to your local registry,previous step>>.
-.. Change `ASTRA_IMAGE_REGISTRY` for the `acc-operator` image to the registry path where you pushed the images in a <<Add the images to your local registry,previous step>>.
+.. Change `ASTRA_IMAGE_REGISTRY` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<Add the images to your registry,previous step>>.
+.. Change `ASTRA_IMAGE_REGISTRY` for the `acc-operator` image to the registry path where you pushed the images in a <<Add the images to your registry,previous step>>.
 //DOC-4167/ASTRACTL-16917/PI5
 .. Add the following values to the `env` section:
 +
@@ -337,7 +337,7 @@ spec:
 ----
 
 . Change the image registry:
-** (Local registries only) If you are using a local registry, verify that your image registry path matches the registry path you pushed the images to in a <<Add the images to your local registry,previous step>>. Update `imageRegistry` inside of `spec` if the local registry has changed since your last installation.
+** (Local registries only) If you are using a local registry, verify that your image registry path matches the registry path you pushed the images to in a <<Add the images to your registry,previous step>>. Update `imageRegistry` inside of `spec` if the local registry has changed since your last installation.
 
 ** (Astra Control image registry) Use the Astra Control image registry (`cr.astra.netapp.io`) you used to download the updated Astra Control bundle.
 +
