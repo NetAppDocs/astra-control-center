@@ -57,10 +57,10 @@ You should also consider the following:
 IMPORTANT: Integrating Astra Control Center with a service mesh can only be done during Astra Control Center link:../get-started/acc_operatorhub_install.html[installation] and not independent of this process. Changing back from a meshed to an unmeshed environment is not supported.
 +
 For Istio service mesh use, you'll need to do the following:
-
-* Add an `istio-injection:enabled` label to the Astra namespace prior to deploying Astra Control Center. 
-* Use the `Generic` <<generic-ingress,ingress setting>> and provide an alternative ingress for link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[external load balancing].
-* For Red Hat OpenShift clusters, you'll need to define `NetworkAttachmentDefinition` on all associated Astra Control Center namespaces (`netapp-acc-operator`, `netapp-acc`, `netapp-monitoring` for application clusters, or any custom namespaces that have been substituted).
++
+** Add an `istio-injection:enabled` label to the Astra namespace prior to deploying Astra Control Center. 
+** Use the `Generic` <<generic-ingress,ingress setting>> and provide an alternative ingress for link:../get-started/install_acc.html#set-up-ingress-for-load-balancing[external load balancing].
+** For Red Hat OpenShift clusters, you'll need to define `NetworkAttachmentDefinition` on all associated Astra Control Center namespaces (`netapp-acc-operator`, `netapp-acc`, `netapp-monitoring` for application clusters, or any custom namespaces that have been substituted).
 +
 ----
 cat <<EOF | oc -n netapp-acc-operator create -f -

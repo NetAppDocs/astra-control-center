@@ -36,6 +36,7 @@ You should also consider the following:
 
 //astradoc-249
 * *Get access to the NetApp Astra Control image registry*:
++
 include::../_include/access-netapp-image-registry.adoc[]
 
 * *Install a service mesh for secure communications*: It is strongly recommended that Astra Control host cluster communications channels be secured using a link:requirements.html#service-mesh-requirements[supported service mesh]. 
