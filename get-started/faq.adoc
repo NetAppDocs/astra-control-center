@@ -143,10 +143,10 @@ Response:
 
 ----
 status:
-  acpVersion: 23.10.0
+  acpVersion: 24.10.0
   currentInstallationParams:
     ...
-    acpImage: <my_custom_registry>/trident-acp:23.10.0
+    acpImage: <my_custom_registry>/trident-acp:24.10.0
     enableACP: "true"
     ...
   ...
@@ -166,7 +166,7 @@ Confirm that Astra Control Provisioner has been enabled:
 Response:
 
 ----
-+----------------+----------------+-------------+ | SERVER VERSION | CLIENT VERSION | ACP VERSION | +----------------+----------------+-------------+ | 23.10.0 | 23.10.0 | 23.10.0. | +----------------+----------------+-------------+
++----------------+----------------+-------------+ | SERVER VERSION | CLIENT VERSION | ACP VERSION | +----------------+----------------+-------------+ | 24.10.0 | 24.10.0 | 24.10.0. | +----------------+----------------+-------------+
 ----
 --
 

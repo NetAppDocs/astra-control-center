@@ -250,7 +250,7 @@ spec:
           value: "2"
         *- name: ACCOP_HELM_UPGRADETIMEOUT*
           *value: 300m*
-        *image: ASTRA_IMAGE_REGISTRY/acc-operator:23.10.72*
+        *image: ASTRA_IMAGE_REGISTRY/acc-operator:24.02.64*
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -399,7 +399,7 @@ Response:
 +
 ----
 NAME    UUID                                      VERSION     ADDRESS         READY
-astra   9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f      23.10.0-68   10.111.111.111  True
+astra   9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f      24.02.0-65   10.111.111.111  True
 ----
 +
 NOTE: To monitor upgrade status during the operation, run the following command: `kubectl get AstraControlCenter -o yaml -n [netapp-acc or custom namespace]`

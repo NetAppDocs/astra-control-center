@@ -54,7 +54,7 @@ podman login <YOUR_REGISTRY>
 ----
 export REGISTRY=<MY_FULL_REGISTRY_PATH>
 export PACKAGENAME=acc
-export PACKAGEVERSION=23.10.0-68
+export PACKAGEVERSION=24.02.0-65
 export DIRECTORYNAME=acc
 for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do 
 astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image: //')
@@ -74,7 +74,7 @@ done
 ----
 export REGISTRY=<MY_FULL_REGISTRY_PATH>
 export PACKAGENAME=acc
-export PACKAGEVERSION=23.10.0-68
+export PACKAGEVERSION=24.02.0-65
 export DIRECTORYNAME=acc
 for astraImageFile in $(ls ${DIRECTORYNAME}/images/*.tar) ; do 
 astraImage=$(podman load --input ${astraImageFile} | sed 's/Loaded image: //')
@@ -88,7 +88,7 @@ done
 NOTE: The image path the script creates should resemble the following, depending on your registry configuration: 
 +
 ----
-https://downloads.example.io/docker-astra-control-prod/netapp/astra/acc/23.10.0-68/image:version
+https://downloads.example.io/docker-astra-control-prod/netapp/astra/acc/24.02.0-65/image:version
 ----
 --
 
