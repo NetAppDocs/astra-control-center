@@ -250,7 +250,7 @@ spec:
           value: "2"
         *- name: ACCOP_HELM_UPGRADETIMEOUT*
           *value: 300m*
-        *image: ASTRA_IMAGE_REGISTRY/acc-operator:24.02.64*
+        *image: ASTRA_IMAGE_REGISTRY/acc-operator:24.02.68*
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:

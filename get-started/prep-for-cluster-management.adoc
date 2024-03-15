@@ -302,6 +302,7 @@ rules:
   - securitycontextconstraints
   verbs:
   - use
+  - update
 ----
 
 . Apply the cluster role:
@@ -466,7 +467,7 @@ The indices for each element in the `secrets` array begin with 0. In the above e
 . Generate the kubeconfig as follows:
 .. Create a `create-kubeconfig.sh` file. 
 .. Replace `TOKEN_INDEX` in the beginning of the following script with the correct value.
-.. Replace `NAMESPACE` with the Astra Control Center namespace.
+.. Replace `NAMESPACE` with the Astra Control Center or custom namespace.
 +
 [source]
 [subs="specialcharacters,quotes"]
