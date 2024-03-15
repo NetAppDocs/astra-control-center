@@ -280,15 +280,6 @@ rules:
   - imagetags
   verbs:
   - update
- 
-# Use PodSecurityPolicies
-- apiGroups:
-  - extensions
-  - policy
-  resources:
-  - podsecuritypolicies
-  verbs:
-  - use
 ----
 
 . (For OpenShift clusters only) Append the following at the end of the `astra-admin-account.yaml` file or after the `# Use PodSecurityPolicies` section:
@@ -303,6 +294,20 @@ rules:
   verbs:
   - use
   - update
+----
+
+. (For Kubernetes 1.25 and later) Append the following at the end of the `astra-admin-account.yaml` file if you intend to use pod security policies (PSP):
++
+[source,console]
+----
+# Use PodSecurityPolicies
+- apiGroups:
+  - extensions
+  - policy
+  resources:
+  - podsecuritypolicies
+  verbs:
+  - use
 ----
 
 . Apply the cluster role:
