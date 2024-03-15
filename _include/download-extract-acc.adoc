@@ -1,8 +1,22 @@
 == Download and extract Astra Control Center
-You can choose to download the Astra Control Center bundle from the NetApp Support Site or use Docker to pull the bundle from the Astra Control Service image registry.
+Download the Astra Control Center images from one of the following locations:
+
+* *Astra Control Service image registry*: Use this option if you don't use a local registry with the Astra Control Center images or if you prefer this method to the bundle download from the NetApp Support Site. 
+* *NetApp Support Site*: Use this option if you use a local registry with the Astra Control Center images. 
 
 [role="tabbed-block"]
 ====
+
+.Astra Control image registry
+--
+
+. Log in to Astra Control Service.
+. On the Dashboard, select *Deploy a self-managed instance of Astra Control*.
+. Follow the instructions to log in to the Astra Control image registry, pull the Astra Control Center installation image, and extract the image.
+
+--
+
+// end registry tab block
 
 .NetApp Support Site
 --
@@ -10,23 +24,17 @@ You can choose to download the Astra Control Center bundle from the NetApp Suppo
 . Download the bundle containing Astra Control Center (`astra-control-center-[version].tar.gz`) from the https://mysupport.netapp.com/site/products/all/details/astra-control-center/downloads-tab[Astra Control Center downloads page^].
 . (Recommended but optional) Download the certificates and signatures bundle for Astra Control Center (`astra-control-center-certs-[version].tar.gz`) to verify the signature of the bundle.
 +
-.Expand for details
-[%collapsible]
-=====
-
 [source,console]
 ----
 tar -vxzf astra-control-center-certs-[version].tar.gz
 ----
-
++
 [source,console]
 ----
 openssl dgst -sha256 -verify certs/AstraControlCenter-public.pub -signature certs/astra-control-center-[version].tar.gz.sig astra-control-center-[version].tar.gz
 ----
-
++
 The output will show `Verified OK` after successful verification.
-=====
-// End collapsible
 
 . Extract the images from the Astra Control Center bundle:
 +
@@ -37,20 +45,6 @@ tar -vxzf astra-control-center-[version].tar.gz
 
 --
 // end NSS tab block
-
-.Astra Control image registry
---
-
-. Log in to Astra Control Service.
-. On the Dashboard, select *Deploy a self-managed instance of Astra Control*.
-. Follow the instructions to log in to the Astra Control image registry, pull the Astra Control Center installation image, and extract the image.
-
---
-// end registry tab block
-
-
-
-
 
 
 ====

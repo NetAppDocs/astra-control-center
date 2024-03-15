@@ -20,6 +20,7 @@ Known limitations identify platforms, devices, or functions that are not support
 .Role-based Access Control (RBAC) limitations
 * <<A user with namespace RBAC constraints can add and unmanage a cluster>>
 * <<A member with namespace constraints cannot access the cloned or restored apps until admin adds the namespace to the constraint>>
+* <<Restrictive role constraints can be ignored for resources on non-connector clusters>>
 
 .App management limitations
 * <<Multiple applications in a single namespace cannot be restored collectively to a different namespace>>
@@ -92,6 +93,10 @@ A user with namespace RBAC constraints should not be allowed to add or unmanage 
 //DOC-4137/ASTRACTL-16344/ASTRACTL-16131/PI5/DOC FIX ONLY
 Any `member` user with RBAC constraints by namespace name/ID can clone or restore an app to a new namespace on the same cluster or to any other cluster in their organization's account. However, the same user cannot access the cloned or restored app in the new namespace. After a clone or restore operation creates a new namespace, the account admin/owner can edit the `member` user account and update role constraints for the affected user to grant access to the new namespace.
 
+== Restrictive role constraints can be ignored for resources on non-connector clusters
+* *If the resources being accessed belong to clusters that have the latest Astra Connector installed*: When a user is assigned multiple roles through LDAP group membership, the constraints from the roles are combined. For example, if a user with a local Viewer role joins three groups that are bound to the Member role, the user now has Viewer role access to the original resources as well as Member role access to the resources gained through group membership.
+* *If the resources being accessed belong to clusters that do not have Astra Connector installed*: When a user is assigned multiple roles through LDAP group membership, the constraints from the most permissive role are the only ones that take effect.
+
 == Multiple applications in a single namespace cannot be restored collectively to a different namespace
 If you manage multiple applications in a single namespace (by creating multiple app definitions in Astra Control), you cannot restore all of the applications to a different single namespace. You need to restore each application to its own separate namespace.
 
@@ -137,7 +142,7 @@ As a workaround, do the following when upgrading existing Kubernetes 1.25 or lat
 
 . Remove any existing Snapshot CRDs and any existing snapshot controller.
 . https://docs.netapp.com/us-en/trident/trident-managing-k8s/uninstall-trident.html[Uninstall Astra Trident^].
-. https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploying-a-volume-snapshot-controller[Install the snapshot CRDs and the snapshot controller^].
+. https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#deploy-a-volume-snapshot-controller[Install the snapshot CRDs and the snapshot controller^].
 . https://docs.netapp.com/us-en/trident/trident-get-started/kubernetes-deploy.html[Install the latest Astra Trident version^].
 . https://docs.netapp.com/us-en/trident/trident-use/vol-snapshots.html#step-1-create-a-volumesnapshotclass[Create a VolumeSnapshotClass^].
 
@@ -164,7 +169,7 @@ Ensure that you link:../use/monitor-protect.html#add-a-proxy-server[enter the co
 When you perform operations on Postgres pods, you shouldn't connect directly within the pod to use the psql command. Astra Control requires psql access to freeze and thaw the databases. If there is a pre-existing connection, the snapshot, backup, or clone will fail.
 
 == The Activity page displays up to 100000 events
-The Astra Control Activity page can display up to 100,000 events. To view all logged events, retrieve the events using the link:../rest-api/api-intro.html[Astra Control API^].
+The Astra Control Activity page can display up to 100,000 events. To view all logged events, retrieve the events using the https://docs.netapp.com/us-en/astra-automation/index.html[Astra Control API^].
 
 == SnapMirror does not support applications using NVMe over TCP for storage backends
 // ASTRACTL-30133 and ASTRACTL-30135

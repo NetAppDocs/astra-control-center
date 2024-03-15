@@ -1,0 +1,4 @@
+---
+permalink: get-started/setup_overview.html#add-a-license-for-astra-control-center
+redirect: get-started/add-license.html
+---

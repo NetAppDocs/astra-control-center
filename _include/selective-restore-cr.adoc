@@ -1,0 +1,26 @@
+. (Optional) If you need to select only certain resources of the application to restore, add filtering that includes or excludes resources marked with particular labels:
++
+* "<INCLUDE-EXCLUDE>": _(Required for filtering)_ Use `include` or `exclude` to include or exclude a resource defined in resourceMatchers. Add the following resourceMatchers parameters to define the resources to be included or excluded:
++
+** <GROUP>: _(Optional)_ Group of the resource to be filtered.
+** <KIND>: _(Optional)_ Kind of the resource to be filtered.
+** <VERSION>: _(Optional)_ Version of the resource to be filtered.
+** <NAMES>: _(Optional)_ Names in the Kubernetes metadata.name field of the resource to be filtered.
+** <NAMESPACES>: _(Optional)_ Namespaces in the Kubernetes metadata.name field of the resource to be filtered. 
+** <SELECTORS>: _(Optional)_ Label selector string in the Kubernetes metadata.name field of the resource as defined in https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors[Kubernetes documentation^]. Example: `"trident.netapp.io/os=linux"`.
++
+Example:
++
+[source,yaml]
+----
+spec:    
+    resourceFilter: 
+        resourceSelectionCriteria: "<INCLUDE-EXCLUDE>"
+        resourceMatchers:
+           group: <GROUP>
+           kind: <KIND>
+           version: <VERSION>
+           names: <NAMES>
+           namespaces: <NAMESPACES>
+           labelSelectors: <SELECTORS>
+----

@@ -63,7 +63,11 @@ NOTE: The role you select is assigned to all users in this group. If you assign 
 
 . Optionally, assign one or more namespace constraints to this group, and select *Restrict role to constraints* to enforce them. You can add a new namespace constraint by selecting *Add constraint*.
 +
-NOTE: When a user is assigned multiple roles through LDAP group membership, the constraints in the most permissive role are the only ones that take effect. For example, if a user with a local Viewer role joins three groups that are bound to the Member role, the sum of the constraints from the Member roles take effect, and any constraints from the Viewer role are ignored.
+[NOTE]
+====
+* *If the resources being accessed belong to clusters that have the latest Astra Connector installed*: When a user is assigned multiple roles through LDAP group membership, the constraints from the roles are combined. For example, if a user with a local Viewer role joins three groups that are bound to the Member role, the user now has Viewer role access to the original resources as well as Member role access to the resources gained through group membership.
+* *If the resources being accessed belong to clusters that do not have Astra Connector installed*: When a user is assigned multiple roles through LDAP group membership, the constraints from the most permissive role are the only ones that take effect.
+====
 
 . Select *Add*.
 
