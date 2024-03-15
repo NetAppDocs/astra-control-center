@@ -439,7 +439,7 @@ metadata:
       {"apiVersion":"v1","kind":"ServiceAccount","metadata":{"annotations":{},"name":"astracontrol-service-account","namespace":"default"}}
   creationTimestamp: "2023-06-14T15:25:45Z"
   name: astracontrol-service-account
-  namespace: default
+  *namespace: <netapp-acc or custom namespace>*
   resourceVersion: "2767069"
   uid: 2ce068c4-810e-4a96-ada3-49cbf9ec3f89
 secrets:
@@ -475,7 +475,7 @@ The indices for each element in the `secrets` array begin with 0. In the above e
 *create-kubeconfig.sh*
 ----
 +
-[source,console]
+[source,subs="verbatim,quotes"]
 ----
 # Update these to match your environment.
 # Replace TOKEN_INDEX with the correct value
@@ -484,7 +484,7 @@ The indices for each element in the `secrets` array begin with 0. In the above e
 # anything else here.
 
 SERVICE_ACCOUNT_NAME=astracontrol-service-account
-NAMESPACE=default
+*NAMESPACE=<netapp-acc or custom namespace>*
 NEW_CONTEXT=astracontrol
 KUBECONFIG_FILE='kubeconfig-sa'
 
@@ -493,7 +493,7 @@ CONTEXT=$(kubectl config current-context)
 SECRET_NAME=$(kubectl get serviceaccount ${SERVICE_ACCOUNT_NAME} \
   --context ${CONTEXT} \
   --namespace ${NAMESPACE} \
-  -o jsonpath='{.secrets[TOKEN_INDEX].name}')
+  *-o jsonpath='{.secrets[TOKEN_INDEX].name}')*
 TOKEN_DATA=$(kubectl get secret ${SECRET_NAME} \
   --context ${CONTEXT} \
   --namespace ${NAMESPACE} \
