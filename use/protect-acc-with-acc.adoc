@@ -50,10 +50,11 @@ In this example configuration, the following is shown:
 NOTE: Ideally, the application cluster should be situated outside of the three Astra Control Center clusters as depicted by the kubernetes and rancher clusters in the image above. 
 
 Not depicted in the diagram:
+//acp to trident revert
 
-* All the clusters have ONTAP backends with Trident installed. 
+* All the clusters have ONTAP backends with Astra Trident or Astra Control Provisioner installed. 
 * In this configuration, the OpenShift clusters are using MetalLB as the load balancer. 
-* The snapshot controller and VolumeSnapshotClass are also installed on all the clusters as outlined in the link:../get-started/setup_overview.html#prepare-your-environment-for-cluster-management-using-astra-control[prerequisites^]. 
+* The snapshot controller and VolumeSnapshotClass are also installed on all the clusters as outlined in the link:../get-started/prep-for-cluster-management.html[prerequisites]. 
  
 == Step 1 option: Backup and restore Astra Control Center
 
@@ -72,8 +73,8 @@ NOTE: Although not described, Astra Control Center operator can also be deployed
 
 . Manage the primary Astra Control Center application and destination cluster from the secondary Astra Control Center instance (running on `ocp-cluster-2` cluster):
 .. Log into the secondary Astra Control Center instance. 
-.. link:../get-started/setup_overview.html#add-cluster[Add the primary Astra Control Center cluster] (`ocp-cluster-1`). 
-.. link:../get-started/setup_overview.html#add-cluster[Add the destination third cluster] (`ocp-cluster-3`) that will be used for the restore.
+.. link:../get-started/add-cluster.html[Add the primary Astra Control Center cluster] (`ocp-cluster-1`). 
+.. link:../get-started/add-cluster.html[Add the destination third cluster] (`ocp-cluster-3`) that will be used for the restore.
 
 . Manage Astra Control Center and the Astra Control Center operator on the secondary Astra Control Center:
 .. From the Applications page, select *Define*.
@@ -95,14 +96,14 @@ After you select *Define*, repeat the Define Application process for the operato
 
 . Back up Astra Control Center and the operator:
 .. On the secondary Astra Control Center, navigate to the Applications page by selecting the Applications tab.
-.. link:../use/protect-apps.html#create-a-backup[Back up^] the Astra Control Center application (`netapp-acc`).
-.. link:../use/protect-apps.html#create-a-backup[Back up^] the operator (`netapp-acc-operator`).
+.. link:../use/protect-apps.html#create-a-backup[Back up] the Astra Control Center application (`netapp-acc`).
+.. link:../use/protect-apps.html#create-a-backup[Back up] the operator (`netapp-acc-operator`).
 
-. After you have backed up Astra Control Center and the operator, simulate a disaster recovery (DR) scenario by link:../use/uninstall_acc.html[uninstalling Astra Control Center^] from the primary cluster.
+. After you have backed up Astra Control Center and the operator, simulate a disaster recovery (DR) scenario by link:../use/uninstall_acc.html[uninstalling Astra Control Center] from the primary cluster.
 +
-NOTE: You will restore Astra Control Center to a new cluster (the third Kubernetes cluster described in this procedure) and use the same DNS as the primary cluster for the newly installed Astra Control Center.
+NOTE: You'll restore Astra Control Center to a new cluster (the third Kubernetes cluster described in this procedure) and use the same DNS as the primary cluster for the newly installed Astra Control Center.
 
-. Using the secondary Astra Control Center, link:../use/restore-apps.html[restore^] the primary instance of the Astra Control Center application from its backup:
+. Using the secondary Astra Control Center, link:../use/restore-apps.html[restore] the primary instance of the Astra Control Center application from its backup:
 .. Select *Applications* and then select the name of the Astra Control Center application.
 .. From the Options menu in the Actions column, select *Restore*.
 .. Choose the *Restore to new namespaces* as the restore type.
@@ -126,7 +127,7 @@ Response:
 +
 ----
 NAME  UUID                                 VERSION    ADDRESS                             READY
-astra 89f4fd47-0cf0-4c7a-a44e-43353dc96ba8 23.10.0-68 ocp-cluster-1.company.com           True
+astra 89f4fd47-0cf0-4c7a-a44e-43353dc96ba8 24.02.0-65 ocp-cluster-1.company.com           True
 ----
 
 .. If the `ADDRESS` field in the above response does not have the FQDN of the primary Astra Control Center instance, update the configuration to reference the Astra Control Center DNS:
@@ -147,7 +148,7 @@ kubectl get acc -n netapp-acc
 
 == Step 1 option: Protect Astra Control Center using Replication
 
-This procedure describes the necessary steps to configure link:../use/replicate_snapmirror.html[Astra Control Center replication^] to protect the primary Astra Control Center instance.
+This procedure describes the necessary steps to configure link:../use/replicate_snapmirror.html[Astra Control Center replication] to protect the primary Astra Control Center instance.
 
 In this example, Astra Control Center is always installed under the `netapp-acc` namespace and the operator is installed under the `netapp-acc-operator` namespace. 
 
@@ -160,8 +161,8 @@ In this example, Astra Control Center is always installed under the `netapp-acc`
 
 . Manage the primary Astra Control Center application and destination cluster from the secondary Astra Control Center instance:
 .. Log into the secondary Astra Control Center instance. 
-.. link:../get-started/setup_overview.html#add-cluster[Add the primary Astra Control Center cluster] (`ocp-cluster-1`). 
-.. link:../get-started/setup_overview.html#add-cluster[Add the destination third cluster] (`ocp-cluster-3`) that will be used for the replication.
+.. link:../get-started/add-cluster.html[Add the primary Astra Control Center cluster] (`ocp-cluster-1`). 
+.. link:../get-started/add-cluster.html[Add the destination third cluster] (`ocp-cluster-3`) that will be used for the replication.
 
 . Manage Astra Control Center and the Astra Control Center operator on the secondary Astra Control Center:
 .. Select *Clusters* and select the cluster that contains the primary Astra Control Center (`ocp-cluster-1`).
@@ -175,8 +176,8 @@ In this example, Astra Control Center is always installed under the `netapp-acc`
 NOTE: Replication requires that the primary Astra Control Center cluster and the destination cluster (`ocp-cluster-3`) use different peered ONTAP storage backends.
 After each backend is peered and added to Astra Control, the backend appears in the *Discovered* tab of the Backends page.
 
-.. link:../get-started/setup_overview.html#add-a-storage-backend[Add a peered backend^] to Astra Control Center on the primary cluster.
-.. link:../get-started/setup_overview.html#add-a-storage-backend[Add a peered backend^] to Astra Control Center on the destination cluster.
+.. link:../get-started/add-storage-backend.html[Add a peered backend] to Astra Control Center on the primary cluster.
+.. link:../get-started/add-storage-backend.html[Add a peered backend] to Astra Control Center on the destination cluster.
 
 . Configure replication:
 .. On the Applications screen, select the `netapp-acc` application.
@@ -310,7 +311,7 @@ Response:
 +
 ----
 NAME  UUID                                 VERSION    ADDRESS                             READY
-astra 89f4fd47-0cf0-4c7a-a44e-43353dc96ba8 23.10.0-68 ocp-cluster-1.company.com           True
+astra 89f4fd47-0cf0-4c7a-a44e-43353dc96ba8 24.02.0-65 ocp-cluster-1.company.com           True
 ----
 
 * *Confirm deployment status*: Show Astra Control Center deployment information to confirm that `Deployment State` is `Deployed`.

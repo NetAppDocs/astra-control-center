@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar
 permalink: use/upgrade-acc.html
-keywords: astra upgrade, upgrade astra control center, how to upgrade astra control, update
+keywords: astra upgrade, upgrade astra control center, how to upgrade astra control, update, service mesh
 summary: To upgrade Astra Control Center, you'll download the bundle and upgrade following the steps described.
 ---
 
@@ -11,119 +11,99 @@ summary: To upgrade Astra Control Center, you'll download the bundle and upgrade
 :imagesdir: ../media/get-started/
 
 [.lead]
-To upgrade Astra Control Center, download the installation bundle from the NetApp Support Site and complete these instructions. You can use this procedure to upgrade Astra Control Center in internet-connected or air-gapped environments.
+To upgrade Astra Control Center, download the installation images and complete these instructions. You can use this procedure to upgrade Astra Control Center in internet-connected or air-gapped environments.
 
-These instructions describe the upgrade process for Astra Control Center from the second-most recent release to this current release. You cannot upgrade directly from a version that is two or more releases behind the current release. If your installed Astra Control Center version is many versions behind the latest release, you might need to perform chain upgrades to more recent versions until your installed Astra Control Center is only one version behind the latest release. For a complete list of released versions, see the link:../release-notes/whats-new.html[release notes^].
+These instructions describe the upgrade process for Astra Control Center from the second-most recent release to this current release. You cannot upgrade directly from a version that is two or more releases behind the current release. If your installed Astra Control Center version is many versions behind the latest release, you might need to perform chain upgrades to more recent versions until your installed Astra Control Center is only one version behind the latest release. For a complete list of released versions, see the link:../release-notes/whats-new.html[release notes].
 
 .Before you begin
-Before you upgrade, ensure your environment still meets the link:../get-started/requirements.html[minimum requirements for Astra Control Center deployment^]. Your environment should have the following:
+Before you upgrade, ensure your environment still meets the link:../get-started/requirements.html[minimum requirements for Astra Control Center deployment]. Your environment should have the following:
 
-* *A link:../get-started/requirements.html#astra-trident-requirements[supported] Astra Trident version*
+* *An enabled link:../get-started/requirements.html#astra-control-provisioner[Astra Control Provisioner] with Astra Trident running*
 +
-.Expand for steps
-[%collapsible]
-====
-Determine the Trident version you are running:
-
+. Determine the Astra Trident version you are running:
++
 [source,console]
 ----
 kubectl get tridentversion -n trident
 ----
++
+NOTE: If you are running Astra Trident 23.01 or earlier, use these https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html[instructions^] to upgrade to a more recent version of Astra Trident before upgrading to the Astra Control Provisioner. You can perform a direct upgrade to Astra Control Provisioner 24.02 if your Astra Trident is within a four-release window of version 24.02. For example, you can directly upgrade from Astra Trident 23.04 to Astra Control Provisioner 24.02.
 
-NOTE: Upgrade Astra Trident, if required, using these https://docs.netapp.com/us-en/trident/trident-managing-k8s/upgrade-trident.html[instructions^]. 
-
-====
-// End snippet
-
-IMPORTANT: The 23.10 release is the last release of Astra Control Center that will support Astra Trident. It is strongly recommended that you link:../use/enable-acp.html[enable Astra Control Provisioner] to access advanced management and storage provisioning features beyond those that Astra Trident provides. You must both upgrade to Astra Control Center 23.10 and enable Astra Control Provisioner to use this extended functionality. Astra Control Provisioner will not work with earlier releases of Astra Control Center. 
+. Verify that Astra Control Provisioner has been link:../get-started/faq.html#running-acp-check[enabled]. Astra Control Provisioner will not work with releases of Astra Control Center earlier than 23.10. Upgrade your Astra Control Provisioner so that it has the same version as the Astra Control Center you are upgrading to access the latest functionality.
 
 * *A supported Kubernetes distribution*
 +
-.Expand for steps
-[%collapsible]
-====
 Determine the Kubernetes version you are running:
-
++
 [source,console]
 ----
 kubectl get nodes -o wide
 ----
-====
-// End snippet
 
 * *Sufficient cluster resources*
 +
-.Expand for steps
-[%collapsible]
-====
 Determine available cluster resources: 
-
++
 [source,console]
 ----
 kubectl describe node <node name>
 ----
-====
-// End snippet
 
-* *A registry you can use to push and upload Astra Control Center images*
 * *A default storage class*
 +
-.Expand for steps
-[%collapsible]
-====
 Determine your default storage class:
-
++
 [source,console]
 ----
 kubectl get storageclass
 ----
-====
-// End snippet
 
 * *Healthy and available API services*
 +
-.Expand for steps
-[%collapsible]
-====
 Ensure all API services are in a healthy state and available:
-
++
 [source,console]
 ----
 kubectl get apiservices
 ----
-====
-// End snippet
+
+* *(Local registries only) A local registry you can use to push and upload Astra Control Center images*
 
 * *(OpenShift only) Healthy and available cluster operators*
 +
-.Expand for steps
-[%collapsible]
-====
 Ensure all cluster operators are in a healthy state and available.
-
++
 [source,console]
 ----
 kubectl get clusteroperators
 ----
-====
-// End snippet
 
+You should also consider the following:
+
+TIP: Perform upgrades in a maintenance window when schedules, backups, and snapshots are not running.
+
+* *Access to the NetApp Astra Control image registry*:
 include::../_include/access-netapp-image-registry.adoc[]
 
-//astradoc-249
-//* Service mesh considerations: It is strongly recommended that Astra Control host cluster communications channels be secured using a link:../get-started/requirements.html#service-mesh-requirements[service mesh]. If you already have an existing Astra Control Center instance that is participating in Istio service mesh or you do not intend to install an Istio service mesh for use with Astra Control Center, _no additional service mesh changes are needed_ for upgrade configuration. If you intend to install and use an Istio service mesh, _the following steps are required_:
+//astradoc-249 and astradoc-305
+* *Istio service mesh deployments*
+If you installed an Istio service mesh during Astra Control Center installation, this upgrade of Astra Control Center will include Istio service mesh. If you do not yet have a service mesh, you can only install one during an link:../get-started/install_acc.html[initial deployment] of Astra Control Center.
+
+//astradoc-249 and astradoc-305
+//* *A service mesh for secure communications*:
+//It's strongly recommended that you secure Astra Control host cluster communications channels using a link:../get-started/requirements.html#service-mesh-requirements[service mesh]. If you already have an existing Astra Control Center instance that is participating in Istio service mesh or you do not intend to install an Istio service mesh for use with Astra Control Center, _no additional service mesh changes are needed_ for upgrade configuration. If you intend to install and use an Istio service mesh, _the following steps are required_:
 //+
 //[id=istioprereq]
-//.Istio service mesh prerequisite steps for Astra Control Center upgrades
+//.Expand for Istio service mesh prerequisite steps for Astra Control Center upgrades
 //[%collapsible]
 //====
 //Before upgrading Astra Control Center, perform these steps:
 //
 //. Install the Istio service mesh on the host cluster. 
 //+
-//IMPORTANT: Don't attempt to add the mesh to the existing Astra installation. The Istio service mesh must be running in parallel with an existing, un-meshed Astra Control Center installation.
+//IMPORTANT: Don't attempt to add the mesh to the existing Astra installation. The Istio service mesh must be running in parallel with an existing, unmeshed Astra Control Center installation.
 //
-//. Add the following labels to the Astra (`netapp-acc` or custom namespace) namespace:
+//. Add the following temporary labels to the Astra (`netapp-acc` or custom namespace) namespace. These labels will be removed during the Astra Control Center upgrade process:
 //+
 //[source,console]
 //----
@@ -135,10 +115,12 @@ include::../_include/access-netapp-image-registry.adoc[]
 //kubectl label ns [netapp-acc or custom namespace] astra.netapp.io/istio:on-upgrade
 //----
 //
-//NOTE: When you perform the upgrade, you will also need to ensure that the `ingressType` you specify in link:../use/upgrade-acc.html#upgrade-astra-control-center[the Astra Control Center CR] is `Generic` and not `AccTraefik` or the upgrade will fail.
-//
+//. When you perform the upgrade, you'll also need to ensure that the `ingressType` you specify in link:../use/upgrade-acc.html#upgrade-astra-control-center[the Astra Control Center CR] is `Generic` and not `AccTraefik` or the upgrade will fail.
 //====
-// End snippet
+
+//End snippet
+
+//IMPORTANT: Integrating Astra Control Center with a service mesh can only be done during Astra Control Center link:../get-started/install_acc.html[installation] or link:../use/upgrade-acc.html[upgrade] and not independent of these processes. Changing back from a meshed to an unmeshed environment is not supported.
 
 .About this task
 The Astra Control Center upgrade process guides you through the following high-level steps:
@@ -146,21 +128,22 @@ The Astra Control Center upgrade process guides you through the following high-l
 NOTE: Log out of your Astra Control Center UI before you begin the upgrade.
 
 * <<Download and extract Astra Control Center>>
-* <<Remove the NetApp Astra kubectl plugin and install it again>>
-* <<Add the images to your local registry>>
+* <<Complete additional steps if you use a local registry>>
 * <<Install the updated Astra Control Center operator>>
 * <<Upgrade Astra Control Center>>
 * <<Verify system status>>
 
 IMPORTANT: Do not delete the Astra Control Center operator (for example, `kubectl delete -f astra_control_center_operator_deploy.yaml`) at any time during the Astra Control Center upgrade or operation to avoid deleting pods.
 
-TIP: Perform upgrades in a maintenance window when schedules, backups, and snapshots are not running.
-
 include::../_include/download-extract-acc.adoc[]
 
-== Remove the NetApp Astra kubectl plugin and install it again
+== Complete additional steps if you use a local registry
 
-You can use the NetApp Astra kubectl command line plugin to push images to a local Docker repository.
+If you are planning to push the Astra Control Center bundle to your local registry, you need to use the NetApp Astra kubectl command line plugin.
+
+=== Remove the NetApp Astra kubectl plugin and install it again
+
+You need to use the latest version of the NetApp Astra kubectl command line plugin to push images to a local Docker repository.
 
 . Determine if you have the plug-in installed:
 +
@@ -170,6 +153,7 @@ kubectl astra
 ----
 
 . Take one of these actions:
+
 ** If the plugin is installed, the command should return the kubectl plugin help and you can remove the existing version of kubectl-astra: `delete /usr/local/bin/kubectl-astra`. 
 ** If the command returns an error, the plugin is not installed and you can proceed to the next step to install it.
 
@@ -189,23 +173,22 @@ ls kubectl-astra/
 cp kubectl-astra/<binary-name> /usr/local/bin/kubectl-astra
 ----
 
+=== Add the images to your registry
+
 include::../_include/docker-podman-add-images.adoc[]
 
 == Install the updated Astra Control Center operator
 
-. Change the directory:
-+
-[source,console]
-----
-cd manifests
-----
+. (Local registries only) If you are using a local registry, complete these steps: 
 
-. Edit the Astra Control Center operator deployment yaml (`astra_control_center_operator_deploy.yaml`) to refer to your local registry and secret.
+.. Open the Astra Control Center operator deployment YAML:
 +
 [source,console]
 ----
 vim astra_control_center_operator_deploy.yaml
 ----
++
+NOTE: An annotated sample YAML follows these steps.
 
 .. If you use a registry that requires authentication, replace or edit the default line of `imagePullSecrets: []` with the following:
 +
@@ -214,8 +197,8 @@ vim astra_control_center_operator_deploy.yaml
 imagePullSecrets: [{name: astra-registry-cred}]
 ----
 
-.. Change `ASTRA_IMAGE_REGISTRY` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<Add the images to your local registry,previous step>>.
-.. Change `ASTRA_IMAGE_REGISTRY` for the `acc-operator` image to the registry path where you pushed the images in a <<Add the images to your local registry,previous step>>.
+.. Change `ASTRA_IMAGE_REGISTRY` for the `kube-rbac-proxy` image to the registry path where you pushed the images in a <<Add the images to your registry,previous step>>.
+.. Change `ASTRA_IMAGE_REGISTRY` for the `acc-operator` image to the registry path where you pushed the images in a <<Add the images to your registry,previous step>>.
 //DOC-4167/ASTRACTL-16917/PI5
 .. Add the following values to the `env` section:
 +
@@ -226,10 +209,6 @@ imagePullSecrets: [{name: astra-registry-cred}]
 ----
 
 +
-.Sample astra_control_center_operator_deploy.yaml:
-[%collapsible]
-====
-
 [subs=+quotes]
 ----
 apiVersion: apps/v1
@@ -271,7 +250,7 @@ spec:
           value: "2"
         *- name: ACCOP_HELM_UPGRADETIMEOUT*
           *value: 300m*
-        *image: ASTRA_IMAGE_REGISTRY/acc-operator:23.10.72*
+        *image: ASTRA_IMAGE_REGISTRY/acc-operator:24.02.64*
         imagePullPolicy: IfNotPresent
         livenessProbe:
           httpGet:
@@ -300,8 +279,6 @@ spec:
         runAsUser: 65532
       terminationGracePeriodSeconds: 10
 ----
-====
-// End snippet
 
 . Install the updated Astra Control Center operator:
 +
@@ -345,8 +322,12 @@ kubectl get pods -n netapp-acc-operator
 ----
 kubectl edit AstraControlCenter -n [netapp-acc or custom namespace]
 ----
++
+NOTE: An annotated sample YAML follows these steps.
 
-. Change the Astra version number (`astraVersion` inside of `spec`) to the version you are upgrading to:
+. Change the Astra version number (`astraVersion` inside of `spec`) from `23.10.0` to `24.02.0`:
++
+NOTE: You cannot upgrade directly from a version that is two or more releases behind the current release. For a complete list of released versions, see the link:../release-notes/whats-new.html[release notes].
 +
 [subs=+quotes]
 ----
@@ -355,11 +336,14 @@ spec:
   *astraVersion: "[Version number]"*
 ----
 
-. Verify that your image registry path matches the registry path you pushed the images to in a <<Add the images to your local registry,previous step>>. Update `imageRegistry` inside of `spec` if the registry has changed since your last installation.
+. Change the image registry:
+** (Local registries only) If you are using a local registry, verify that your image registry path matches the registry path you pushed the images to in a <<Add the images to your registry,previous step>>. Update `imageRegistry` inside of `spec` if the local registry has changed since your last installation.
+
+** (Astra Control image registry) Use the Astra Control image registry (`cr.astra.netapp.io`) you used to download the updated Astra Control bundle.
 +
 ----
   imageRegistry:
-    name: "[your_registry_path]"
+    name: "[cr.astra.netapp.io or your_registry_path]"
 ----
 
 . Add the following to your `crds` configuration inside of `spec`:
@@ -387,14 +371,14 @@ additionalValues:
 ----
 //astradoc-245/known issue/23.07 only
 //
-//astradoc-249
-//. If you installed a new Istio service mesh on the host cluster according to the <<istioprereq,prerequisite steps>> described earlier in this procedure, change the ingress setting to `Generic`:
+//astradoc-249 and astradoc-305
+//. (Service mesh only) If you installed a new Istio service mesh on the host cluster according to the <<istioprereq,prerequisite steps>> described earlier in this procedure, change the ingress setting to `Generic`:
 //+
 //[source,console]
 //----
 //ingressType: Generic
 //----
-//
+
 . Save and exit the file editor. The changes will be applied and the upgrade will begin.
 
 . (Optional) Verify that the pods terminate and become available again:
@@ -415,7 +399,7 @@ Response:
 +
 ----
 NAME    UUID                                      VERSION     ADDRESS         READY
-astra   9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f      23.10.0-68   10.111.111.111  True
+astra   9aa5fdae-4214-4cb7-9976-5d8b4c0ce27f      24.02.0-65   10.111.111.111  True
 ----
 +
 NOTE: To monitor upgrade status during the operation, run the following command: `kubectl get AstraControlCenter -o yaml -n [netapp-acc or custom namespace]`

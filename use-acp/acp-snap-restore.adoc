@@ -85,6 +85,6 @@ metadata:
 
 [NOTE]
 ====
-* In most cases, Astra Control Provisioner will not automatically retry the operation in case of failure. You will need to perform the operation again. 
+* In most cases, Astra Control Provisioner will not automatically retry the operation in case of failure. You'll need to perform the operation again. 
 * Kubernetes users without admin access might have to be granted permission by the admin to create a TASR CR in their application namespace.
 ====

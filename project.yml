@@ -8,8 +8,10 @@ settings:
     harmony_enabled: true
   rss_page: "release-notes/whats-new.html"
   versions:
-    - version-number: "23.10"
+    - version-number: "24.02"
       url: /astra-control-center
+    - version-number: "23.10"
+      url: /astra-control-center-2310
     - version-number: "23.07"
       url: /astra-control-center-2307
     - version-number: "23.04"
@@ -22,6 +24,8 @@ settings:
       url: /astra-control-center-2204
     - version-number: "21.12"
       url: /astra-control-center-2112
+    - version-number: "21.08"
+      url: /astra-control-center-2108
 sidebar:
   entries:
     - title: Astra Control Center docs
