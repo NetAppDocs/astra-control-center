@@ -147,8 +147,8 @@ NOTE: For this procedure, you do not need kubectl access to the cluster that is 
 .Steps
 . Create a service account:
 .. Create a service account file called `astracontrol-service-account.yaml`.
-+
-Adjust the name and namespace as needed. If changes are made here, you should apply the same changes in the following steps.
+//+
+//Adjust the name and namespace as needed. If changes are made here, you should apply the same changes in the following steps.
 +
 [source]
 [subs="specialcharacters,quotes"]
