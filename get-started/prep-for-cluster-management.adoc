@@ -238,7 +238,6 @@ rules:
   - poddisruptionbudgets
   - pods
   - podtemplates
-  - podsecuritypolicies
   - replicasets
   - replicationcontrollers
   - replicationcontrollers/scale
@@ -280,18 +279,9 @@ rules:
   - imagetags
   verbs:
   - update
- 
-# Use PodSecurityPolicies
-- apiGroups:
-  - extensions
-  - policy
-  resources:
-  - podsecuritypolicies
-  verbs:
-  - use
 ----
 
-. (For OpenShift clusters only) Append the following at the end of the `astra-admin-account.yaml` file or after the `# Use PodSecurityPolicies` section:
+. (For OpenShift clusters only) Append the following at the end of the `astra-admin-account.yaml` file:
 +
 [source,console]
 ----
