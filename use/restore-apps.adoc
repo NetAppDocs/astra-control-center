@@ -106,7 +106,7 @@ You can restore data from a backup using a custom resource (CR) file either to a
 * <BACKUP_PATH>: The path inside AppVault where the backup contents are stored. For example:
 +
 ----
-minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
+ONTAP-S3_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
 ----
 * <SOURCE_NAMESPACE>: The source namespace of the restore operation.
 * <DESTINATION_NAMESPACE>: The destination namespace of the restore operation.
@@ -116,13 +116,12 @@ minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d
 apiVersion: astra.netapp.io/v1
 kind: BackupRestore
 metadata:
-  labels:
   name: <CR_NAME>
   namespace: <ASTRA_CONNECTOR_NAMESPACE>
 spec:
   appVaultRef: <APPVAULT_NAME>
   appArchivePath: <BACKUP_PATH>
-  namespaceMapping: [{"source": "<SOURCE_NAMESPACE>", "target": "<DESTINATION_NAMESPACE>"}] 
+  namespaceMapping: [{"source": "<SOURCE_NAMESPACE>", "destination": "<DESTINATION_NAMESPACE>"}] 
 ----
 
 include::../_include/selective-restore-cr.adoc[]
@@ -147,7 +146,7 @@ kubectl apply -f astra-control-backup-restore-cr.yaml
 * <BACKUP_PATH>: The path inside AppVault where the backup contents are stored. For example:
 +
 ----
-minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
+ONTAP-S3_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
 ----
 +
 [source,yaml]
@@ -190,7 +189,7 @@ You can restore data from a snapshot using a custom resource (CR) file either to
 * <BACKUP_PATH>: The path inside AppVault where the backup contents are stored. For example:
 +
 ----
-minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
+ONTAP-S3_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
 ----
 * <SOURCE_NAMESPACE>: The source namespace of the restore operation.
 * <DESTINATION_NAMESPACE>: The destination namespace of the restore operation.
@@ -230,7 +229,7 @@ kubectl apply -f astra-control-snapshot-restore-cr.yaml
 * <BACKUP_PATH>: The path inside AppVault where the backup contents are stored. For example:
 +
 ----
-minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
+ONTAP-S3_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
 ----
 +
 [source,yaml]
