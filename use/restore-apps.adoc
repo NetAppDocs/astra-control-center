@@ -116,7 +116,6 @@ minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d
 apiVersion: astra.netapp.io/v1
 kind: BackupRestore
 metadata:
-  labels:
   name: <CR_NAME>
   namespace: <ASTRA_CONNECTOR_NAMESPACE>
 spec:
