@@ -238,7 +238,6 @@ rules:
   - poddisruptionbudgets
   - pods
   - podtemplates
-  - podsecuritypolicies
   - replicasets
   - replicationcontrollers
   - replicationcontrollers/scale
@@ -294,20 +293,6 @@ rules:
   verbs:
   - use
   - update
-----
-
-. (For Kubernetes 1.25 and later) Append the following at the end of the `astra-admin-account.yaml` file if you intend to use pod security policies (PSP):
-+
-[source,console]
-----
-# Use PodSecurityPolicies
-- apiGroups:
-  - extensions
-  - policy
-  resources:
-  - podsecuritypolicies
-  verbs:
-  - use
 ----
 
 . Apply the cluster role:
