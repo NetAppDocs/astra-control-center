@@ -296,7 +296,7 @@ spec:
 +
 [source,console]
 ----
-kubectl apply -f astra_mysql_app.yaml -n neptune-system
+kubectl apply -f astra_mysql_app.yaml -n astra-connector
 ----
 
 == What about system namespaces?
