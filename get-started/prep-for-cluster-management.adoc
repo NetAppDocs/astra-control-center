@@ -281,7 +281,7 @@ rules:
   - update
 ----
 
-. (For OpenShift clusters only) Append the following at the end of the `astra-admin-account.yaml` file or after the `# Use PodSecurityPolicies` section:
+. (For OpenShift clusters only) Append the following at the end of the `astra-admin-account.yaml` file:
 +
 [source,console]
 ----
