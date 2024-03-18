@@ -106,7 +106,7 @@ You can restore data from a backup using a custom resource (CR) file either to a
 * <BACKUP_PATH>: The path inside AppVault where the backup contents are stored. For example:
 +
 ----
-minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
+ONTAP_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
 ----
 * <SOURCE_NAMESPACE>: The source namespace of the restore operation.
 * <DESTINATION_NAMESPACE>: The destination namespace of the restore operation.
@@ -146,7 +146,7 @@ kubectl apply -f astra-control-backup-restore-cr.yaml
 * <BACKUP_PATH>: The path inside AppVault where the backup contents are stored. For example:
 +
 ----
-minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
+ONTAP_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
 ----
 +
 [source,yaml]
@@ -189,7 +189,7 @@ You can restore data from a snapshot using a custom resource (CR) file either to
 * <BACKUP_PATH>: The path inside AppVault where the backup contents are stored. For example:
 +
 ----
-minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
+ONTAP_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
 ----
 * <SOURCE_NAMESPACE>: The source namespace of the restore operation.
 * <DESTINATION_NAMESPACE>: The destination namespace of the restore operation.
@@ -229,7 +229,7 @@ kubectl apply -f astra-control-snapshot-restore-cr.yaml
 * <BACKUP_PATH>: The path inside AppVault where the backup contents are stored. For example:
 +
 ----
-minio_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
+ONTAP_1343ff5e-4c41-46b5-af00/backups/schedule-20231213023800_94347756-9d9b-401d-a0c3
 ----
 +
 [source,yaml]
