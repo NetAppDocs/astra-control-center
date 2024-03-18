@@ -220,7 +220,7 @@ spec:
 +
 [source,console]
 ----
-kubectl apply -f astra_appvault.yaml -n neptune-system
+kubectl apply -f astra_appvault.yaml -n astra-connector
 ----
 +
 NOTE: When you add a bucket, Astra Control marks one bucket with the default bucket indicator. The first bucket that you create becomes the default bucket. As you add buckets, you can later decide to link:../use/manage-buckets.html#set-the-default-bucket[set another default bucket^].
