@@ -162,7 +162,7 @@ image:openshift_operatorhub.png["This image shows the Astra Control Center insta
 .Red Hat Ecosystem Catalog
 --
 . Select the NetApp Astra Control Center https://catalog.redhat.com/software/operators/detail/611fd22aaf489b8bb1d0f274[operator^].
-. Select *Deploy and Use*.
+. Select *Deploy and use*.
 +
 image:red_hat_catalog.png["This image shows the Astra Control Center overview page that is available from the RedHat Ecosystem Catalog"]
 
