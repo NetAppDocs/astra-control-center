@@ -52,6 +52,10 @@ oc create namespace netapp-acc-operator
 
 You should also consider the following:
 
+* *Get access to the NetApp Astra Control image registry*:
++
+include::../_include/access-netapp-image-registry.adoc[]
+
 * *Install a service mesh for secure communications*: It is strongly recommended that Astra Control host cluster communications channels be secured using a link:requirements.html#service-mesh-requirements[supported service mesh]. 
 +
 IMPORTANT: Integrating Astra Control Center with a service mesh can only be done during Astra Control Center link:../get-started/acc_operatorhub_install.html[installation] and not independent of this process. Changing back from a meshed to an unmeshed environment is not supported.
@@ -152,7 +156,7 @@ include::../_include/docker-podman-add-images.adoc[]
 //Must be updated every quarterly release
 NOTE: You can upgrade only to the current version of Astra Control Center using this operator.
 
-. Search for and select the NetApp Astra Control Center operator.
+. Search for `netapp-acc` and select the NetApp Astra Control Center operator.
 
 +
 image:openshift_operatorhub.png["This image shows the Astra Control Center install page from the OpenShift Container Platform UI"]
