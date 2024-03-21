@@ -47,6 +47,12 @@ oc get apiservices
 * *OpenShift permissions*: You have all necessary permissions and access to the Red Hat OpenShift Container Platform to perform the upgrade steps described.
 * *(ONTAP SAN driver only) Enable multipath*: If you are using an ONTAP SAN driver, be sure that multipath is enabled on all your Kubernetes clusters.
 
+You should also consider the following:
+
+* *Get access to the NetApp Astra Control image registry*:
++
+include::../_include/access-netapp-image-registry.adoc[]
+
 .Steps
 
 * <<Access the operator install page>>
@@ -130,7 +136,7 @@ image:../use/operatorhub-upgrade-yaml-edit.png["This image shows the edit option
 NOTE: Do not enter `http://` or `https://` in the address field.
 .. Update the `imageRegistry.secret` as needed.
 +
-NOTE: The operator uninstall process does not remove previously retained secrets. If you created a new secret as part of Astra Control registry access to obtain the latest Astra Control Center image, you might need to update this field.
+NOTE: The operator uninstall process does not remove existing secrets. If you create a new secret as part of Astra Control registry access to obtain the latest Astra Control Center image, you might need to update this field.
 
 .. Add the following to your `crds` configuration:
 +
