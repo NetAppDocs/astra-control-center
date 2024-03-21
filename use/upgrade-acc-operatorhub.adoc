@@ -136,7 +136,7 @@ image:../use/operatorhub-upgrade-yaml-edit.png["This image shows the edit option
 NOTE: Do not enter `http://` or `https://` in the address field.
 .. Update the `imageRegistry.secret` as needed.
 +
-NOTE: The operator uninstall process does not remove existing secrets. If you create a new secret as part of Astra Control registry access to obtain the latest Astra Control Center image, you might need to update this field.
+NOTE: The operator uninstall process does not remove existing secrets. You only need to update this field if you create a new secret with a different name from the existing secret.
 
 .. Add the following to your `crds` configuration:
 +
