@@ -63,5 +63,7 @@ entries:
     url: /use/unmanage.html
   - title: Upgrade Astra Control Center
     url: /use/upgrade-acc.html
+  - title: Upgrade Astra Control Center using OpenShift OperatorHub
+    url: /use/upgrade-acc-operatorhub.html
   - title: Uninstall Astra Control Center
     url: /use/uninstall_acc.html
