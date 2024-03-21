@@ -36,7 +36,7 @@ oc get apiservices
 ----
 
 * *Ensure a routable FQDN*: The Astra FQDN you plan to use can be routed to the cluster. This means that you either have a DNS entry in your internal DNS server or you are using a core URL route that is already registered.
-* *Obtain OpenShift Permissions*: You'll need all necessary permissions and access to the Red Hat OpenShift Container Platform to perform the installation steps described.
+* *Obtain OpenShift permissions*: You'll need all necessary permissions and access to the Red Hat OpenShift Container Platform to perform the installation steps described.
 * *Configure a cert manager*: If a cert manager already exists in the cluster, you need to perform some link:../get-started/cert-manager-prereqs.html[prerequisite steps] so that Astra Control Center does not install its own cert manager. By default, Astra Control Center installs its own cert manager during installation.
 * *Set up Kubernetes ingress controller*: If you have a Kubernetes ingress controller that manages external access to services, such as load balancing in a cluster, you need to set it up for use with Astra Control Center:
 +
@@ -51,6 +51,10 @@ oc create namespace netapp-acc-operator
 * *(ONTAP SAN driver only) Enable multipath*: If you are using an ONTAP SAN driver, be sure that multipath is enabled on all your Kubernetes clusters.
 
 You should also consider the following:
+
+* *Get access to the NetApp Astra Control image registry*:
++
+include::../_include/access-netapp-image-registry.adoc[]
 
 * *Install a service mesh for secure communications*: It is strongly recommended that Astra Control host cluster communications channels be secured using a link:requirements.html#service-mesh-requirements[supported service mesh]. 
 +
@@ -152,7 +156,7 @@ include::../_include/docker-podman-add-images.adoc[]
 //Must be updated every quarterly release
 NOTE: You can upgrade only to the current version of Astra Control Center using this operator.
 
-. Search for and select the NetApp Astra Control Center operator.
+. Search for `netapp-acc` and select the NetApp Astra Control Center operator.
 
 +
 image:openshift_operatorhub.png["This image shows the Astra Control Center install page from the OpenShift Container Platform UI"]
@@ -162,7 +166,7 @@ image:openshift_operatorhub.png["This image shows the Astra Control Center insta
 .Red Hat Ecosystem Catalog
 --
 . Select the NetApp Astra Control Center https://catalog.redhat.com/software/operators/detail/611fd22aaf489b8bb1d0f274[operator^].
-. Select *Deploy and Use*.
+. Select *Deploy and use*.
 +
 image:red_hat_catalog.png["This image shows the Astra Control Center overview page that is available from the RedHat Ecosystem Catalog"]
 
