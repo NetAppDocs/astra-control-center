@@ -56,7 +56,7 @@ kubectl edit torc trident -n trident
 +
 .. Set a custom registry location for the Astra Trident image or pull it from the Astra Control registry (`tridentImage: <my_custom_registry>/trident:24.02.0` or `tridentImage: netapp/trident:24.02.0`).
 .. Enable Astra Control Provisioner (`enableACP: true`).
-.. Set the custom registry location for the Astra Control Provisioner image or pull it from the Astra Control registry (`acpImage: <my_custom_registry>/trident-acp:24.02.0` or `acpImage: cr.astra.netapp.io/trident-acp:24.02.0`).
+.. Set the custom registry location for the Astra Control Provisioner image or pull it from the Astra Control registry (`acpImage: <my_custom_registry>/trident-acp:24.02.0` or `acpImage: cr.astra.netapp.io/astra/trident-acp:24.02.0`).
 .. If you established <<pull-secrets,image pull secrets>> earlier in this procedure, you can set them here (`imagePullSecrets: - <secret_name>`). Use the same name secret name you established in the previous steps.
 
 +
@@ -215,7 +215,7 @@ netapp-trident/trident-operator 100.2402.0      24.02.0         A
 //helm install trident netapp-trident/trident-operator --version 100.2402.0 --set acpImage=<acp image> --set enableACP=true --create-namespace --namespace trident
 //----
 ----
-helm install trident netapp-trident/trident-operator --version 100.2402.0 --set acpImage=cr.astra.netapp.io/trident-acp:24.02.0 --set enableACP=true --set operatorImage=netapp/trident-operator:24.02.0 --set tridentAutosupportImage=docker.io/netapp/trident-autosupport:24.02 --set tridentImage=netapp/trident:24.02.0 --namespace trident
+helm install trident netapp-trident/trident-operator --version 100.2402.0 --set acpImage=cr.astra.netapp.io/astra/trident-acp:24.02.0 --set enableACP=true --set operatorImage=netapp/trident-operator:24.02.0 --set tridentAutosupportImage=docker.io/netapp/trident-autosupport:24.02 --set tridentImage=netapp/trident:24.02.0 --namespace trident
 ----
 
 * Images in one or more registries
