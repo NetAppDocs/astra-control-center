@@ -171,7 +171,7 @@ The bucket custom resource for Astra Control is known as an AppVault. This CR co
 ** Microsoft Azure
 ** Generic S3
 
-NOTE: Amazon Web Services (AWS) and Google Cloud Platform (GCP) use the Generic S3 bucket type.
+NOTE: Amazon Web Services (AWS) uses the Generic S3 bucket type.
 
 NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon's S3 support.
 
@@ -197,7 +197,7 @@ Example YAML:
 apiVersion: astra.netapp.io/v1
 kind: AppVault
 metadata:
-  name: astra_appvault
+  name: astra-appvault
 spec:
   providerType: generic-s3
   providerConfig:
@@ -216,11 +216,11 @@ spec:
         key: secretAccessKey
 ----
 
-. After you populate the `astra_appvault.yaml` file with the correct values, apply the CR:
+. After you populate the `astra-appvault.yaml` file with the correct values, apply the CR:
 +
 [source,console]
 ----
-kubectl apply -f astra_appvault.yaml -n astra-connector
+kubectl apply -f astra-appvault.yaml -n astra-connector
 ----
 +
 NOTE: When you add a bucket, Astra Control marks one bucket with the default bucket indicator. The first bucket that you create becomes the default bucket. As you add buckets, you can later decide to link:../use/manage-buckets.html#set-the-default-bucket[set another default bucket^].
