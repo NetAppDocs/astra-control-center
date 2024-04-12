@@ -279,8 +279,8 @@ You can create scheduled backups of all namespaces on a cluster using the full c
 .Steps
 . Download the following files to a machine that has network access to your cluster:
 +
-* https://github.com/NetApp/netapp-astra-toolkits/blob/main/examples/fullcluster-backup/components.yaml[components.yaml CRD file]
-* https://github.com/NetApp/netapp-astra-toolkits/blob/main/examples/fullcluster-backup/protectCluster.py[protectCluster.py Python script]
+* https://raw.githubusercontent.com/NetApp/netapp-astra-toolkits/main/examples/fullcluster-backup/components.yaml[components.yaml CRD file]
+* https://raw.githubusercontent.com/NetApp/netapp-astra-toolkits/main/examples/fullcluster-backup/protectCluster.py[protectCluster.py Python script]
 
 . To configure and install the toolkit, https://github.com/NetApp/netapp-astra-toolkits/blob/main/examples/fullcluster-backup/README.md[follow the included instructions^].
 
@@ -290,8 +290,8 @@ You can create scheduled backups of specific namespaces by their labels using th
 .Steps
 . Download the following files to a machine that has network access to your cluster:
 +
-* https://github.com/NetApp/netapp-astra-toolkits/blob/main/examples/labelbased-backup/components.yaml[components.yaml CRD file]
-* https://github.com/NetApp/netapp-astra-toolkits/blob/main/examples/labelbased-backup/protectCluster.py[protectCluster.py Python script]
+* https://raw.githubusercontent.com/NetApp/netapp-astra-toolkits/main/examples/labelbased-backup/components.yaml[components.yaml CRD file]
+* https://raw.githubusercontent.com/NetApp/netapp-astra-toolkits/main/examples/labelbased-backup/protectCluster.py[protectCluster.py Python script]
 
 . To configure and install the toolkit, https://github.com/NetApp/netapp-astra-toolkits/blob/main/examples/labelbased-backup/README.md[follow the included instructions^].
 
