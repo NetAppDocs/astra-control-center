@@ -17,10 +17,10 @@ For a comparison between backups/restores and replication, refer to link:../conc
 
 You can replicate apps in different scenarios, such as the following on-premises only, hybrid, and multi-cloud scenarios:
 
-* On-premise site A to on-premise site A
-* On-premise site A to on-premise site B
-* On-premise to cloud with Cloud Volumes ONTAP
-* Cloud with Cloud Volumes ONTAP to on-premise
+* On-premises site A to on-premises site A
+* On-premises site A to on-premises site B
+* On-premises to cloud with Cloud Volumes ONTAP
+* Cloud with Cloud Volumes ONTAP to on-premises
 * Cloud with Cloud Volumes ONTAP to cloud (between different regions in the same cloud provider or to different cloud providers)
 
 Astra Control can replicate apps across on-premises clusters, on-premises to cloud (using Cloud Volumes ONTAP) or between clouds (Cloud Volumes ONTAP to Cloud Volumes ONTAP).
