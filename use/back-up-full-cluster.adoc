@@ -5,7 +5,7 @@ keywords: backup, back up, backup apps, back up apps, take a backup, schedule ba
 summary: Protect your apps by scheduling a full-cluster backup so that all namespaces on the cluster are protected.
 ---
 
-= [Tech preview] Create a full cluster backup
+= [Tech preview] Protect an entire cluster
 :hardbreaks:
 :icons: font
 :imagesdir: ../media/use/

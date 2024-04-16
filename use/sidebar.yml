@@ -9,7 +9,7 @@ entries:
         url: /use/protection-overview.html
       - title: Protect apps
         url: /use/protect-apps.html
-      - title: Protect all namespaces
+      - title: Protect an entire cluster
         url: /use/back-up-full-cluster.html
       - title: Restore apps
         url: /use/restore-apps.html
