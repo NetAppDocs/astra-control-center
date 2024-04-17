@@ -59,7 +59,7 @@ You can https://docs.netapp.com/us-en/astra-control-center-2310/use/enable-acp.h
 +
 The following features are available with the Astra Control Provisioner 23.10 release:
 
-*** *Enhanced storage backend security with Kerberos 5 encryption*: You can improve storage security by https://docs.netapp.com/us-en/astra-control-center-2310/use-acp/configure-storage-backend-encryption.html[enabling encryption^] for the traffic between your managed cluster and the storage backend. Astra Control Provisioner supports Kerberos 5 encryption over NFSv4.1 connections from Red Hat OpenShift clusters to Azure NetApp Files and on-premise ONTAP volumes
+*** *Enhanced storage backend security with Kerberos 5 encryption*: You can improve storage security by https://docs.netapp.com/us-en/astra-control-center-2310/use-acp/configure-storage-backend-encryption.html[enabling encryption^] for the traffic between your managed cluster and the storage backend. Astra Control Provisioner supports Kerberos 5 encryption over NFSv4.1 connections from Red Hat OpenShift clusters to Azure NetApp Files and on-premises ONTAP volumes
 
 *** *Recover data using a snapshot*: Astra Control Provisioner provides rapid, in-place volume restoration from a snapshot using the `TridentActionSnapshotRestore` (TASR) CR.
 
