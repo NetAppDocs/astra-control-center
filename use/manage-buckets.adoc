@@ -49,7 +49,7 @@ You can do these tasks related to managing buckets:
 * <<Set the default bucket>>
 * <<Rotate or remove bucket credentials>>
 * <<Remove a bucket>>
-* link:../use/manage-buckets.html#manage-a-bucket-using-a-custom-resource[(Tech preview) Manage a bucket using a custom resource]
+* link:../use/manage-buckets.html#tech-preview-manage-a-bucket-using-a-custom-resource[[Tech preview\] Manage a bucket using a custom resource]
 
 NOTE: S3 buckets in Astra Control Center do not report available capacity. Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
 
@@ -171,24 +171,24 @@ The bucket custom resource for Astra Control is known as an AppVault. This CR co
 ** Microsoft Azure
 ** Generic S3
 
-NOTE: Amazon Web Services (AWS) and Google Cloud Platform (GCP) use the Generic S3 bucket type.
+NOTE: Amazon Web Services (AWS) uses the Generic S3 bucket type.
 
 NOTE: Although Astra Control Center supports Amazon S3 as a Generic S3 bucket provider, Astra Control Center might not support all object store vendors that claim Amazon's S3 support.
 
 .Steps
 
-. Create the custom resource (CR) file and name it (for example, `astra_appvault.yaml`).
+. Create the custom resource (CR) file and name it (for example, `astra-appvault.yaml`).
 
 . Configure the following attributes:
 +
 * *metadata.name*: _(Required)_ The name of the AppVault custom resource.
 * *spec.prefix*: _(Optional)_ A path that is prefixed to the names of all entities stored in the AppVault.
 * *spec.providerConfig*: _(Required)_ Stores the configuration necessary to access the AppVault using the specified provider.
-* *spec.providerCredentials*: _(Optional)_ Stores references to any credential required to access the AppVault using the specified provider.
+* *spec.providerCredentials*: _(Required)_ Stores references to any credential required to access the AppVault using the specified provider.
 ** *spec.providerCredentials.valueFromSecret*: _(Optional)_ Indicates that the credential value should come from a secret.
 *** *key*: _(Required if valueFromSecret is used)_ The valid key of the secret to select from.
 *** *name*: _(Required if valueFromSecret is used)_ Name of the secret containing the value for this field. Must be in the same namespace.
-* *spec.providerType*: _(Required)_ Determines what provides the backup; for example, S3 or FileSystem.
+* *spec.providerType*: _(Required)_ Determines what provides the backup; for example, NetApp ONTAP S3 or Microsoft Azure.
 +
 Example YAML:
 +
@@ -197,7 +197,7 @@ Example YAML:
 apiVersion: astra.netapp.io/v1
 kind: AppVault
 metadata:
-  name: astra_appvault
+  name: astra-appvault
 spec:
   providerType: generic-s3
   providerConfig:
@@ -216,11 +216,11 @@ spec:
         key: secretAccessKey
 ----
 
-. After you populate the `astra_appvault.yaml` file with the correct values, apply the CR:
+. After you populate the `astra-appvault.yaml` file with the correct values, apply the CR:
 +
 [source,console]
 ----
-kubectl apply -f astra_appvault.yaml -n astra-connector
+kubectl apply -f astra-appvault.yaml -n astra-connector
 ----
 +
 NOTE: When you add a bucket, Astra Control marks one bucket with the default bucket indicator. The first bucket that you create becomes the default bucket. As you add buckets, you can later decide to link:../use/manage-buckets.html#set-the-default-bucket[set another default bucket^].
