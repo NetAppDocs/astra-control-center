@@ -1,5 +1,5 @@
 indexpage:
-  lead: Astra Control Center software provides application-aware data management of Kubernetes clusters in your on-premise environment. Easily back up Kubernetes apps, migrate data to a different cluster, and instantly create working application clones. If you need to manage Kubernetes apps running in a public cloud, go to the docs for Astra Control Service.
+  lead: Astra Control Center software provides application-aware data management of Kubernetes clusters in your on-premises environment. Easily back up Kubernetes apps, migrate data to a different cluster, and instantly create working application clones. If you need to manage Kubernetes apps running in a public cloud, go to the docs for Astra Control Service.
   tiles:
   - title: Get started with Astra Control Center
     #image: ./media/outline_directions_run_black_18dp.png
