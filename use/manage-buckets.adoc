@@ -49,7 +49,7 @@ You can do these tasks related to managing buckets:
 * <<Set the default bucket>>
 * <<Rotate or remove bucket credentials>>
 * <<Remove a bucket>>
-* link:../use/manage-buckets.html#manage-a-bucket-using-a-custom-resource[[Tech preview\] Manage a bucket using a custom resource]
+* link:../use/manage-buckets.html#tech-preview-manage-a-bucket-using-a-custom-resource[[Tech preview\] Manage a bucket using a custom resource]
 
 NOTE: S3 buckets in Astra Control Center do not report available capacity. Before backing up or cloning apps managed by Astra Control Center, check bucket information in the ONTAP or StorageGRID management system.
 
