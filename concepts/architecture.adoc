@@ -13,4 +13,5 @@ summary: Here is an overview of the various components of the Astra Control envi
 [.lead]
 Here is an overview of the various components of the Astra Control environment.
 
-include::../_include/source-architecture.adoc[]
+include::../_include/source-architecture-v2.adoc[]
+
