@@ -237,6 +237,8 @@ NOTE: If multiple cluster data was collected, each cluster's metrics appear in a
 
 You can send logs (Kubernetes events) from a system monitored by Astra Control Center to your Fluentd endpoint. The Fluentd connection is disabled by default.
 
+NOTE: Fluentd connections are not supported for clusters managed with declarative Kubernetes workflows. You can only connect Fluentd to clusters managed with non-Kubernetes-native workflows.
+
 image:fluentbit.png[This is a conceptual diagram of event logs going from Astra to Fluentd.]
 
 NOTE: Only the event logs from managed clusters are forwarded to Fluentd.
