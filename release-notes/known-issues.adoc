@@ -21,7 +21,6 @@ The following known issues affect the current release:
 * <<Managing a cluster with Astra Control Center fails when kubeconfig file contains more than one context>>
 // ASTRADOC-410 * <<A monitoring pod can crash in Istio environments>>
 * <<App data management operations fail with Internal Service Error (500) when Astra Trident is offline>>
-* <<In-place restore operations to ontap-nas-economy storage classes fail>>
 * <<Restoring from a backup when using Kerberos in-flight encryption can fail>>
 * <<Backup data remains in bucket after deletion for buckets with expired retention policy>>
 //* <<Retention time for immutable backups is longer than expected>>
@@ -85,10 +84,6 @@ telegraf-rs-rrnsb 2/2 Running 0 11s
 == App data management operations fail with Internal Service Error (500) when Astra Trident is offline
 //DOC-3903/ASTRA-13162/PI4/PI5
 If Astra Trident on an app cluster goes offline (and is brought back online) and 500 internal service errors are encountered when attempting app data management, restart all of the Kubernetes nodes in the app cluster to restore functionality.
-
-== In-place restore operations to ontap-nas-economy storage classes fail
-// ASTRADOC-318 / ASTRACTL-29463
-If you perform an in-place restore of an application (restore the app to its original namespace), and the app's storage class uses the `ontap-nas-economy` driver, the restore operation can fail if the snapshot directory is not hidden. Before restoring in-place, follow the instructions in link:../use/protect-apps.html#enable-backup-and-restore-for-ontap-nas-economy-operations[Enable backup and restore for ontap-nas-economy operations] to hide the snapshot directory.
 
 == Restoring from a backup when using Kerberos in-flight encryption can fail
 // ASTRADOC-316 / ASTRACTL-29854
