@@ -375,7 +375,7 @@ NOTE: Do not use `http://` or `https://` in the address. Copy this FQDN for use 
 .autoSupport
 [%collapsible]
 ====
-Your selections in this section determine whether you'll participate in NetApp's pro-active support application, NetApp Digital Advisor, and where data is sent. An internet connection is required (port 442), and all support data is anonymized.
+Your selections in this section determine whether you'll participate in NetApp's pro-active support application, Digital Advisor, and where data is sent. An internet connection is required (port 442), and all support data is anonymized.
 |===
 |Setting |Use |Guidance |Type |Example
 
