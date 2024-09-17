@@ -81,7 +81,7 @@ You can use one of the following methods to do this:
 
 * Use https://upload.netapp.com/sg[NetApp Authenticated File Upload (login required)^].
 * Attach the bundle to the case directly on NSS.
-* Use NetApp Active IQ.
+* Use Digital Advisor.
 
 [discrete]
 == Find more information
