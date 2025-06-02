@@ -16,7 +16,7 @@ Astra offerings include:
 ////
 
 //== Astra Control
-Astra Control is a Kubernetes application data lifecycle management solution that simplifies operations for stateful applications, and helps you store, protect, and move your Kubernetes workloads across hybrid and multi-cloud environments.
+Astra Control is a Kubernetes application data lifecycle management solution that simplifies operations for stateful applications, and helps you store, protect, and move your Kubernetes workloads across hybrid environments.
 
 
 == Capabilities
@@ -64,8 +64,8 @@ Astra Control is Kubernetes-native, enabling data protection workflows that util
 
 Astra Control is built on four complementary components:
 
-* *Astra Control*: Astra Control is the centralized management service for all managed clusters, providing orchestrated workloads for application protection and mobility in the cloud and on-premises as well as the following capabilities:
-** Combined view of multiple clusters and clouds
+* *Astra Control*: Astra Control is the centralized management service for all managed clusters, providing orchestrated workloads for application protection and mobility for on-premises as well as the following capabilities:
+** Combined view of multiple clusters
 ** Protection of orchestrated workflows
 ** Granular resource visualization and selection
 * *Astra Connector*: Astra Connector teams with Astra Control to provide a secure connection to each managed cluster, offering local execution of scheduled operations regardless of connection status as well as the following capabilities:
