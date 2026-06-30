@@ -92,9 +92,9 @@ At a high level, Astra Control Service works like this:
 
 * You get started with Astra Control Service by setting up your cloud provider and by registering for an Astra account.
 +
-** For GKE clusters, Astra Control Service uses https://cloud.netapp.com/cloud-volumes-service-for-gcp[NetApp Cloud Volumes Service for Google Cloud^] or Google Persistent Disks as the storage backend for your persistent volumes.
+** For GKE clusters, Astra Control Service uses https://www.netapp.com/google-cloud/netapp-volumes/[NetApp Cloud Volumes Service for Google Cloud^] or Google Persistent Disks as the storage backend for your persistent volumes.
 +
-** For AKS clusters, Astra Control Service uses https://cloud.netapp.com/azure-netapp-files[Azure NetApp Files^] or Azure managed disks as the storage backend for your persistent volumes.
+** For AKS clusters, Astra Control Service uses https://www.netapp.com/azure/azure-netapp-files/[Azure NetApp Files^] or Azure managed disks as the storage backend for your persistent volumes.
 +
 ** For Amazon EKS clusters, Astra Control Service uses https://docs.aws.amazon.com/ebs/[Amazon Elastic Block Store^] or https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/what-is-fsx-ontap.html[Amazon FSx for NetApp ONTAP^] as the storage backend for your persistent volumes.
 
