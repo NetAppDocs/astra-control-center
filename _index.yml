@@ -52,11 +52,11 @@ indexpage:
       - title: Discord channel
         url: https://discord.gg/NetApp
       - title: Astra Control blog
-        url: https://cloud.netapp.com/blog/topic/astra
+        url: https://www.netapp.com/blog/astra-control-selective-restore/
       - title: NetApp Community
         url: https://community.netapp.com/
       - title: Kubernetes Hub
-        url: https://cloud.netapp.com/kubernetes-hub
+        url: https://www.netapp.com/kubernetes/
       - title: Where to get help
         url: /support/get-help.html
 
