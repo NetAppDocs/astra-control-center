@@ -52,7 +52,7 @@ New worker nodes can be added to existing pools. These will be automatically dis
 .How do I properly unmanage a cluster?
 
 .	link:../use/unmanage.html[Unmanage the applications from Astra Control].
-.	link:../use/unmanage.html#stop-managing-compute[Unmanage the cluster from Astra Control].
+.	link:../use/unmanage.html#unmanage-a-cluster[Unmanage the cluster from Astra Control].
 
 
 .What happens to my applications and data after removing the Kubernetes cluster from Astra Control?

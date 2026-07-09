@@ -226,7 +226,7 @@ The first step is to install a RedHat OpenShift cluster on GCP.
 
 For installation instructions, see the following:
 
-* https://access.redhat.com/documentation/en-us/openshift_container_platform/4.13/html/installing/index#installing-on-gcp[Installing an OpenShift cluster in GCP^]
+* https://docs.redhat.com/en/documentation/openshift_container_platform/4.13/html/installing_on_google_cloud/index[Installing an OpenShift cluster in GCP^]
 
 * https://cloud.google.com/iam/docs/creating-managing-service-accounts#creating_a_service_account[Creating a GCP Service Account^]
 
